@@ -1,0 +1,59 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: IR001
+    category: ontology
+    rule: A Suspensão impede a conclusão de mortes e nascimentos; não cura, rejuvenesce, ressuscita nem elimina dor.
+    blocking: true
+  - id: IR002
+    category: causality
+    rule: A causa última da Suspensão nunca é confirmada pelo narrador nem por evidência conclusiva.
+    blocking: true
+  - id: IR003
+    category: child
+    rule: A criança de Joana é humana e comum; não é a Morte, não é escolhida e não possui missão ou poder.
+    blocking: true
+  - id: IR004
+    category: ending
+    rule: O nascimento e a primeira morte posterior à Suspensão ocorrem próximos no tempo, mas nenhuma relação causal é provada.
+    blocking: true
+  - id: IR005
+    category: ethics
+    rule: Nenhuma vida é oferecida, trocada ou sacrificada para restaurar a morte.
+    blocking: true
+  - id: IR006
+    category: bodily_autonomy
+    rule: Joana mantém consentimento e poder decisório sobre parto, intervenções e presença de acompanhantes.
+    blocking: true
+  - id: IR007
+    category: care
+    rule: Olívia permanece pessoa completa e agente; seu sofrimento não pode existir apenas para transformar Ester.
+    blocking: true
+  - id: IR008
+    category: medicine
+    rule: Cuidados paliativos, analgesia, sedação, parto e deterioração corporal devem ser tratados com coerência e sem promessa milagrosa.
+    blocking: true
+  - id: IR009
+    category: politics
+    rule: A Comissão de Permanência explora e encobre o fenômeno, mas não o criou e não controla seus mecanismos.
+    blocking: true
+  - id: IR010
+    category: point_of_view
+    rule: A narração permanece em terceira pessoa limitada a Ester, Joana ou Damião, sem acesso oportunista à mente de outros personagens.
+    blocking: true
+  - id: IR011
+    category: tone
+    rule: Deterioração corporal não pode ser erotizada, fetichizada nem usada como espetáculo de horror.
+    blocking: true
+  - id: IR012
+    category: ending
+    rule: Olívia morre de sua condição quando a Suspensão cessa; Ester, Joana e a criança não causam sua morte.
+    blocking: true
+  - id: IR013
+    category: title
+    rule: A expressão "a morte ainda não nasceu" pode aparecer no máximo duas vezes no manuscrito e nunca como explicação definitiva.
+    blocking: true
+  - id: IR014
+    category: prose
+    rule: Nenhuma beleza verbal compensa violação de agência, continuidade física ou ambiguidade causal.
+    blocking: true

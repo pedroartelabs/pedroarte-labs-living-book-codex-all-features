@@ -1,0 +1,297 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: LivingBookEngineGraph
+metadata:
+  engine_id: pedro-arte-living-book-engine
+  version: 1.1.0
+spec:
+  execution_policy:
+    mode: AUTONOMOUS
+    continue_without_user_confirmation: true
+    explicit_subagent_spawning: true
+    stop_and_fix:
+      enabled: true
+      rule: If any blocking validation or gate fails, repair, revalidate, then continue.
+    max_parallel_tasks: 8
+    max_parallel_writers: 4
+    max_parallel_critics: 8
+    max_parallel_image_tasks: 6
+    max_parallel_sound_tasks: 6
+    never_skip_dependencies: true
+    never_skip_blocking_gates: true
+    reviewer_write_access:
+      manuscript: false
+      canon: false
+      reports: true
+    merge_policy:
+      destructive_merge: false
+      merge_log_required: true
+    canon_write_policy:
+      concurrent_write: false
+      exclusive_owner: CANON_GUARDIAN
+    final_manuscript_write_policy:
+      concurrent_write: false
+      exclusive_owner: LEAD_NOVELIST
+  task_states:
+  - PENDING
+  - READY
+  - SPAWNING
+  - RUNNING
+  - WAITING_DEPENDENCIES
+  - UNDER_REVIEW
+  - REVISION_REQUIRED
+  - BLOCKED
+  - FAILED
+  - APPROVED
+  - CANON_APPROVED
+  - FINAL
+  success_states:
+  - APPROVED
+  - CANON_APPROVED
+  - FINAL
+  generic_rejection_states:
+  - CANON_CONFLICT
+  - EMOTIONAL_MANIPULATION
+  - WORLD_RULES_FAILURE
+  - FACE_IDENTITY_FAILURE
+  - VISUAL_REJECTED
+  - SOUND_BIOME_FAILURE
+  - CONTINUITY_FAILURE
+  - KDP_VALIDATION_FAILURE
+  - MEDIA_ASSET_VALIDATION_FAILURE
+  - CAPABILITY_BLOCKER
+  locks:
+    CANON_WRITE:
+      mode: EXCLUSIVE
+    STORY_BIBLE_WRITE:
+      mode: EXCLUSIVE
+    CHARACTER_BIBLE_WRITE:
+      mode: EXCLUSIVE
+    TIMELINE_WRITE:
+      mode: EXCLUSIVE
+    MANUSCRIPT_FINAL_WRITE:
+      mode: EXCLUSIVE
+    MANUSCRIPT_MERGE:
+      mode: EXCLUSIVE
+    FACE_CANON_WRITE:
+      mode: EXCLUSIVE
+    DOCX_BUILD:
+      mode: EXCLUSIVE
+    DELIVERY_BUILD:
+      mode: EXCLUSIVE
+  agents:
+    MASTER_ORCHESTRATOR:
+      profile: /engine/agents/master_orchestrator.toml
+    EXECUTIVE_EDITOR:
+      profile: /engine/agents/executive_editor.toml
+    CANON_GUARDIAN:
+      profile: /engine/agents/canon_guardian.toml
+    BRIEFING_ARCHITECT:
+      profile: /engine/agents/briefing_architect.toml
+    SPEC_ARCHITECT:
+      profile: /engine/agents/spec_architect.toml
+    NARRATIVE_ARCHITECT:
+      profile: /engine/agents/narrative_architect.toml
+    PLOT_ENGINEER:
+      profile: /engine/agents/plot_engineer.toml
+    SCENE_ARCHITECT:
+      profile: /engine/agents/scene_architect.toml
+    SYMBOLISM_ARCHITECT:
+      profile: /engine/agents/symbolism_architect.toml
+    TEMPORAL_ARCHITECT:
+      profile: /engine/agents/temporal_architect.toml
+    WORLD_ARCHITECT:
+      profile: /engine/agents/world_architect.toml
+    CHARACTER_PSYCHOLOGIST:
+      profile: /engine/agents/character_psychologist.toml
+    CHILD_VOICE_GUARDIAN:
+      profile: /engine/agents/child_voice_guardian.toml
+    EMOTIONAL_PHYSIOLOGY_ARCHITECT:
+      profile: /engine/agents/emotional_physiology_architect.toml
+    REALISM_ENGINEER:
+      profile: /engine/agents/realism_engineer.toml
+    PHYSICALITY_AND_BODY_AGENT:
+      profile: /engine/agents/physicality_and_body_agent.toml
+    SENSORY_AGENT:
+      profile: /engine/agents/sensory_agent.toml
+    GENRE_GUARDIAN:
+      profile: /engine/agents/genre_guardian.toml
+    ANTI_MANIPULATION_GUARDIAN:
+      profile: /engine/agents/anti_manipulation_guardian.toml
+    LEAD_NOVELIST:
+      profile: /engine/agents/lead_novelist.toml
+    CHAPTER_WRITER:
+      profile: /engine/agents/chapter_writer.toml
+    DIALOGUE_DIRECTOR:
+      profile: /engine/agents/dialogue_director.toml
+    LITERARY_STYLE_GUARDIAN:
+      profile: /engine/agents/literary_style_guardian.toml
+    SUBTEXT_EDITOR:
+      profile: /engine/agents/subtext_editor.toml
+    EMOTIONAL_REPETITION_AUDITOR:
+      profile: /engine/agents/emotional_repetition_auditor.toml
+    READER_VITALS_AGENT:
+      profile: /engine/agents/reader_vitals_agent.toml
+    PAGE_BREATHING_ARCHITECT:
+      profile: /engine/agents/page_breathing_architect.toml
+    VISUAL_DIRECTOR:
+      profile: /engine/agents/visual_director.toml
+    FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT:
+      profile: /engine/agents/facial_identity_expert.toml
+    CHAPTER_IMAGE_DIRECTOR:
+      profile: /engine/agents/chapter_image_director.toml
+    IMAGE_GENERATOR:
+      profile: /engine/agents/image_generator.toml
+    IMAGE_CONTINUITY_QA:
+      profile: /engine/agents/image_continuity_qa.toml
+    LIVING_SOUNDTRACK_ARCHITECT:
+      profile: /engine/agents/living_soundtrack_architect.toml
+    SOUND_BIOME_ARCHITECT:
+      profile: /engine/agents/sound_biome_architect.toml
+    ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT:
+      profile: /engine/agents/environment_acoustic_evolution_agent.toml
+    LIVING_SOUND_PROMPT_ENGINEER:
+      profile: /engine/agents/living_sound_prompt_engineer.toml
+    LEGAL_EDITOR_BR:
+      profile: /engine/agents/legal_editor_br.toml
+    LEGAL_EDITOR_GLOBAL:
+      profile: /engine/agents/legal_editor_global.toml
+    COPYRIGHT_ORIGINALITY_AUDITOR:
+      profile: /engine/agents/originality_auditor.toml
+    DEVELOPMENTAL_EDITOR:
+      profile: /engine/agents/developmental_editor.toml
+    PLOT_CONTINUITY_REVIEWER:
+      profile: /engine/agents/plot_continuity_reviewer.toml
+    CHARACTER_CONTINUITY_REVIEWER:
+      profile: /engine/agents/character_continuity_reviewer.toml
+    WORLD_RULES_REVIEWER:
+      profile: /engine/agents/world_rules_reviewer.toml
+    EMOTIONAL_EDITOR:
+      profile: /engine/agents/emotional_editor.toml
+    PTBR_GRAMMAR_EDITOR:
+      profile: /engine/agents/ptbr_grammar_editor.toml
+    TYPOGRAPHY_TEXT_REVIEWER:
+      profile: /engine/agents/typography_text_reviewer.toml
+    REDUNDANCY_REVIEWER:
+      profile: /engine/agents/redundancy_reviewer.toml
+    CLICHE_REVIEWER:
+      profile: /engine/agents/cliche_reviewer.toml
+    FINAL_PROOFREADER:
+      profile: /engine/agents/final_proofreader.toml
+    MERGE_COORDINATOR:
+      profile: /engine/agents/merge_coordinator.toml
+    MASTER_INTEGRATOR:
+      profile: /engine/agents/master_integrator.toml
+    PROTECTED_SCENE_AUDITOR:
+      profile: /engine/agents/protected_scene_auditor.toml
+    LITERARY_CRITIC:
+      profile: /engine/agents/literary_critic.toml
+    CINEMA_CRITIC:
+      profile: /engine/agents/cinema_critic.toml
+    COMMERCIAL_EDITOR_CRITIC:
+      profile: /engine/agents/commercial_editor_critic.toml
+    CLICHE_HUNTER:
+      profile: /engine/agents/cliche_hunter.toml
+    BOOK_LAYOUT_ARCHITECT:
+      profile: /engine/agents/book_layout_architect.toml
+    TABLE_OF_CONTENTS_AGENT:
+      profile: /engine/agents/table_of_contents_agent.toml
+    IMAGE_LAYOUT_AGENT:
+      profile: /engine/agents/image_layout_agent.toml
+    KDP_FORMATTER:
+      profile: /engine/agents/kdp_formatter.toml
+    KDP_REQUIREMENTS_RESEARCHER:
+      profile: /engine/agents/kdp_requirements_researcher.toml
+    TRANSLATION_ARCHITECT:
+      profile: /engine/agents/translation_architect.toml
+    LITERARY_TRANSLATOR_EN:
+      profile: /engine/agents/literary_translator_en.toml
+    ENGLISH_CHILD_VOICE_GUARDIAN:
+      profile: /engine/agents/english_child_voice_guardian.toml
+    ENGLISH_LITERARY_EDITOR:
+      profile: /engine/agents/english_literary_editor.toml
+    CULTURAL_ADAPTATION_GUARDIAN:
+      profile: /engine/agents/cultural_adaptation_guardian.toml
+    MEDIA_AND_KDP_AGENT:
+      profile: /engine/agents/media_kdp_agent.toml
+    DELIVERY_AGENT:
+      profile: /engine/agents/delivery_agent.toml
+  protocols:
+    BASE_WAVE_REVIEW_PROTOCOL:
+      reviewer_policy:
+        manuscript_write: FORBIDDEN
+        report_write: REQUIRED
+      severity:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - BLOCKER
+      report_schema:
+        finding_id: REQUIRED
+        chapter: REQUIRED
+        severity: REQUIRED
+        category: REQUIRED
+        evidence: REQUIRED
+        recommended_action: REQUIRED
+      review_synthesis:
+        owner: EXECUTIVE_EDITOR
+      revision_owner:
+        agent: LEAD_NOVELIST
+      final_approval:
+        agent: EXECUTIVE_EDITOR
+    PROTECTED_SCENE_PROTOCOL:
+      owner: PROTECTED_SCENE_AUDITOR
+      blocking: true
+      criteria_source: /book/protected_scenes.yaml
+    CANON_PROPOSAL_PROTOCOL:
+      proposal_location: CANON_PROPOSALS
+      mutation_owner: CANON_GUARDIAN
+      unapproved_facts_are_canon: false
+  quality_defaults:
+    chapter_scores:
+      authenticity_of_characters: 8
+      scene_strength: 7
+      subtext: 7
+      sensory_concreteness: 7
+      coherence: 8
+      emotional_impact: 7
+    risk_maximums:
+      sentimentalism: 6
+      effect_phrase_overuse: 5
+      abstraction: 6
+      continuity: 2
+  artifact_contracts:
+    CANON_CORE:
+    - MASTER_BRIEF.md
+    - STORY_BIBLE.md
+    - CHARACTER_BIBLE.md
+    - WORLD_BIBLE.md
+    - TIMELINE.md
+    - WORLD_RULES.md
+    - SYMBOL_BIBLE.md
+    - PLOT_DEPENDENCY_MAP.md
+    - CANON_REGISTRY.yaml
+    LIVING_BOOK_CORE:
+    - LIVING_BOOK_BIBLE.md
+    - LIVRO_BIOME.md
+    - READER_VITALS.md
+    - EMOTIONAL_RESPIRATION_MAP.md
+    - PAGE_BIBLE.md
+    - MEMORY_MOTIF_MAP.md
+    - VISUAL_LIFE_SPEC.md
+    - IMAGE_BIOME.md
+    VISUAL_CANON:
+    - FACE_CANON.md
+    - CHARACTER_VISUAL_BIBLE.md
+    SOUND_CANON:
+    - LIVING_SOUNDTRACK_BIBLE.md
+    - SOUND_BIOME.md
+    - CHAPTER_SOUND_MAP.md
+    MEDIA_DELIVERY_CORE:
+    - media/outputs/cover/BOOK_COVER_KDP.jpg
+    - media/outputs/instagram_stories/story_01.jpg
+    - media/outputs/instagram_stories/story_02.jpg
+    - media/outputs/instagram_stories/story_03.jpg
+    - media/outputs/instagram_stories/story_04.jpg
+    - media/outputs/instagram_stories/story_05.jpg
+    - media/outputs/MEDIA_ASSET_MANIFEST.md

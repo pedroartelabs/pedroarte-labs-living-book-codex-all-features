@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CanonProposal",
+  "type": "object",
+  "required": [
+    "proposal_id",
+    "source_chapter",
+    "fact",
+    "reason",
+    "status"
+  ],
+  "properties": {
+    "proposal_id": {
+      "type": "string"
+    },
+    "source_chapter": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "fact": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "ACCEPTED",
+        "REJECTED"
+      ]
+    },
+    "canon_id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,73 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: OLIVIA_FIRST_REQUEST
+    chapters: [12]
+    auditor: CONSENT_AND_CARE_GUARDIAN
+    purpose: Olívia pede que não confundam cuidado com prolongamento.
+    must_preserve:
+      - pedido formulado dentro dos limites de sua respiração e lucidez;
+      - discordância de Ester sem anular a agência de Olívia;
+      - ausência de solução médica ou legal instantânea;
+      - Olívia não se descreve como fardo.
+    reject_if:
+      - discurso perfeito de despedida;
+      - pedido usado como choque;
+      - coerção explícita ou implícita;
+      - romantização da morte.
+  - id: RETAINED_BODY_DIGNITY
+    chapters: [15]
+    auditor: CONSENT_AND_CARE_GUARDIAN
+    purpose: Mostrar o custo material da Suspensão sem converter um paciente em espetáculo.
+    must_preserve:
+      - linguagem clínica suficiente e não voyeurística;
+      - ação de cuidado executada por Damião;
+      - identidade do paciente além do corpo;
+      - consequência política verificável.
+    reject_if:
+      - gore ornamental;
+      - piada corporal;
+      - falsa cura;
+      - perda conveniente de consciência.
+  - id: JOANA_LABOR_CONSENT
+    chapters: [19, 20, 21]
+    auditor: CONSENT_AND_CARE_GUARDIAN
+    purpose: Manter Joana como sujeito do trabalho de parto durante a crise da cidade.
+    must_preserve:
+      - consentimento renovável;
+      - decisões comunicadas a Joana;
+      - dor e exaustão sem apagar competência;
+      - Ester acompanha sem assumir controle automático.
+    reject_if:
+      - resgate masculino;
+      - intervenção sem consentimento tratada como heroica;
+      - parto punitivo;
+      - criança sobrenatural.
+  - id: TWO_THRESHOLDS
+    chapters: [21, 22, 23]
+    auditor: LIMINALITY_GUARDIAN
+    purpose: Preservar a proximidade entre nascimento e morte sem instaurar troca causal.
+    must_preserve:
+      - cronologia verificável;
+      - separação espacial entre os eventos;
+      - ausência de percepção sobrenatural compartilhada;
+      - incerteza explícita nas interpretações posteriores.
+    reject_if:
+      - luz, pulso ou sinal transferido entre corpos;
+      - morte de Olívia causada pelo nascimento;
+      - criança como chave;
+      - narrador confirma mecanismo metafísico.
+  - id: FIRST_CERTIFICATE
+    chapters: [23]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: Ester registra a primeira morte sem converter burocracia em redenção total.
+    must_preserve:
+      - dados concretos da certidão;
+      - dificuldade manual e emocional de Ester;
+      - irreversibilidade do registro;
+      - coexistência de alívio e luto.
+    reject_if:
+      - frase triunfal;
+      - documento tratado como prova de cura moral;
+      - apagamento da ambivalência;
+      - fechamento absoluto do fenômeno.

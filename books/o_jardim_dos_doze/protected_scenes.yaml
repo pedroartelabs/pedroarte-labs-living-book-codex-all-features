@@ -1,0 +1,19 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: FIRST_GROWTH_EVIDENCE
+    chapters: [4, 5]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: Nina encontra evidência física inequívoca de maturação sem tratamento sensacionalista do corpo.
+  - id: ANILINA_REVEAL
+    chapters: [8, 13, 17]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A Anilina-12 passa de suspeita a mecanismo estatal comprovado.
+  - id: ABEL_CONFRONTATION
+    chapters: [14, 20]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: Abel age por convicção política coerente, não como vilão vazio.
+  - id: AMBIGUOUS_REVOLUTION
+    chapters: [23, 24]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A esperança existe, mas o poder já tenta capturá-la e comercializá-la.

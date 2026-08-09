@@ -1,0 +1,7 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata: {slug: o_jardim_dos_doze, version: 1.0.0}
+spec:
+  custom_validators: []
+  gate_extensions: {}
+  additional_tasks: []

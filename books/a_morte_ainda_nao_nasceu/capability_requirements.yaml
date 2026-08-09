@@ -1,0 +1,36 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  long_form_text:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Produção e revisão do manuscrito em português brasileiro.
+  deterministic_validation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Validação de pacote, grafo, gates e artefatos.
+  image_generation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Uma imagem primária por capítulo com continuidade facial.
+  image_inspection:
+    required: true
+    blocker_if_unavailable: true
+    purpose: QA de identidade facial, continuidade e adequação ética.
+  audio_prompt_design:
+    required: true
+    blocker_if_unavailable: false
+    purpose: Arquitetura e prompts de Living Sound.
+  docx_generation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Entrega KDP com layout validado.
+  web_research:
+    required: true
+    blocker_if_unavailable: true
+    freshness_required: true
+    purpose: Atualização dos requisitos oficiais da Amazon KDP.
+  medical_fact_checking:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Verificar cuidados paliativos, fisiologia do parto e linguagem clínica.

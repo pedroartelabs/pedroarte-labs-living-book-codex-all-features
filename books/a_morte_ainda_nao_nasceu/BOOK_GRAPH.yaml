@@ -1,0 +1,14 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: a_morte_ainda_nao_nasceu
+  version: 0.1.0
+spec:
+  custom_validators:
+    - id: VAL_BOOK_DNA
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_book_dna.py'
+  gate_extensions:
+    GATE_CANON:
+      validators:
+        - VAL_BOOK_DNA
+  additional_tasks: []

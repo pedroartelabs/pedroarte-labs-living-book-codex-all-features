@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskResult",
+  "type": "object",
+  "required": [
+    "task_id",
+    "state",
+    "outputs",
+    "summary",
+    "acceptance_checked"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "APPROVED",
+        "CANON_APPROVED",
+        "FINAL",
+        "REVISION_REQUIRED",
+        "FAILED",
+        "BLOCKED"
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "acceptance_checked": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ImageApproval",
+  "type": "object",
+  "required": [
+    "chapter",
+    "visual_status",
+    "face_status",
+    "approved_file"
+  ],
+  "properties": {
+    "chapter": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "visual_status": {
+      "enum": [
+        "VISUAL_APPROVED",
+        "VISUAL_REJECTED"
+      ]
+    },
+    "face_status": {
+      "enum": [
+        "FACE_APPROVED",
+        "FACE_IDENTITY_FAILURE",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "approved_file": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

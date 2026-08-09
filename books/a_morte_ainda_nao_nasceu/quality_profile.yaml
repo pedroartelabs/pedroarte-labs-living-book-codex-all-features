@@ -1,0 +1,42 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters:
+    minimum: 9
+  scene_strength:
+    minimum: 8
+  subtext:
+    minimum: 8
+  sensory_concreteness:
+    minimum: 8
+  coherence:
+    minimum: 9
+  emotional_impact:
+    minimum: 8
+  bodily_agency:
+    minimum: 9
+  causal_ambiguity:
+    minimum: 9
+risk_scores:
+  sentimentalism:
+    maximum: 3
+  effect_phrase_overuse:
+    maximum: 3
+  abstraction:
+    maximum: 4
+  continuity:
+    maximum: 1
+  medical_incoherence:
+    maximum: 2
+  metaphysical_overexplanation:
+    maximum: 1
+  coercion_framed_as_care:
+    maximum: 1
+  body_horror_spectacle:
+    maximum: 1
+required_checks:
+  - every scene changes relationship, information or physical condition
+  - every medical claim is scoped to character knowledge
+  - every Joana birth scene records consent status
+  - every Olívia scene preserves a desire unrelated to dying
+  - title phrase count does not exceed two

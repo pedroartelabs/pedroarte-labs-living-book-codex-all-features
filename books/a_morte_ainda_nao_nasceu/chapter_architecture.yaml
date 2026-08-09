@@ -1,0 +1,434 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: O Livro dos Óbitos
+    movement: I — A Suspensão
+    pov: Ester
+    time: Dia 117, manhã
+    location: Cartório de Vila do Sal
+    function: Apresentar a ausência de mortes por meio do trabalho concreto de Ester e estabelecer o vazio burocrático como conflito.
+    dramatic_question: O que faz uma oficial de óbitos quando ninguém consegue terminar de morrer?
+    irreversible_turn: Ester recebe a notificação clínica de que Olívia entrou na Ala Leste.
+    continuity:
+      - A Suspensão começou às 04h17 de 117 dias antes.
+      - Nenhum óbito foi registrado desde então.
+      - Ester trabalhou como parteira antes do cartório.
+    living_book_vitals:
+      pressure: contida
+      breath: regular demais
+      sensory_anchor: almofada de carimbo ressecada
+
+  - number: 2
+    title: Cento e Dezessete Dias
+    movement: I — A Suspensão
+    pov: Ester
+    time: Dia 117, fim da manhã
+    location: Prefeitura e praça cívica
+    function: Mostrar como Raul e a Comissão convertem a crise em narrativa pública de vitória.
+    dramatic_question: Ester aceitará emprestar a autoridade do cartório à propaganda da Permanência?
+    irreversible_turn: Ela se recusa a assinar a declaração de que Vila do Sal venceu a morte.
+    continuity:
+      - Raul coordena a Comissão de Permanência.
+      - A recusa de Ester passa a ser conhecida pela prefeitura.
+    living_book_vitals:
+      pressure: crescente
+      breath: comprimida por alto-falantes
+      sensory_anchor: microfone com gosto de metal e sal
+
+  - number: 3
+    title: A Ala Leste
+    movement: I — A Suspensão
+    pov: Damião
+    time: Dia 117, tarde
+    location: Hospital Municipal, Ala Leste
+    function: Materializar o custo clínico da morte inconclusa e apresentar Olívia fora do olhar defensivo de Ester.
+    dramatic_question: Como cuidar quando estabilizar já não significa melhorar?
+    irreversible_turn: Olívia pede a Damião que chame Ester antes que sua lucidez diminua.
+    continuity:
+      - Damião é enfermeiro-chefe.
+      - Olívia tem fibrose pulmonar avançada.
+      - Analgesia e sedação aliviam, mas não encerram a condição.
+    living_book_vitals:
+      pressure: física
+      breath: curta e irregular
+      sensory_anchor: tecido dobrado sob um ombro
+
+  - number: 4
+    title: A Filha na Estrada
+    movement: I — A Suspensão
+    pov: Joana
+    time: Dia 117, fim da tarde
+    location: Rodovia costeira e entrada de Vila do Sal
+    function: Introduzir Joana como sujeito competente, grávida e portadora de um arquivo sonoro do mundo em suspensão.
+    dramatic_question: Por que Joana retorna justamente ao lugar e à mãe de que se afastou?
+    irreversible_turn: Uma contração prolongada e inconclusa a obriga a procurar Ester.
+    continuity:
+      - Joana está com trinta e nove semanas de gestação.
+      - Trabalha com captação e arquivo sonoro.
+      - Não vê Ester há onze meses.
+    living_book_vitals:
+      pressure: itinerante
+      breath: medida entre contrações
+      sensory_anchor: espuma gasta do fone de ouvido
+
+  - number: 5
+    title: Permanência
+    movement: I — A Suspensão
+    pov: Ester
+    time: Dia 117, noite
+    location: Cartório e transmissão pública
+    function: Colidir o retorno de Joana, a internação de Olívia e a máquina política num mesmo espaço decisório.
+    dramatic_question: Ester pode manter família, trabalho e crise em compartimentos separados?
+    irreversible_turn: Ela percebe, numa tabela projetada pela Comissão, que os dados de nascimento desapareceram junto com os de óbito.
+    continuity:
+      - A palavra Permanência é marca da Comissão, não termo neutro.
+      - Joana ainda não entrou em trabalho de parto ativo.
+    living_book_vitals:
+      pressure: tripla
+      breath: interrompida
+      sensory_anchor: luz amarela do telão sobre papel branco
+
+  - number: 6
+    title: O Quarto sem Alta
+    movement: I — A Suspensão
+    pov: Ester
+    time: Dia 117, noite avançada
+    location: Quarto de Olívia na Ala Leste
+    function: Reunir as três gerações e estabelecer que amor não produz consenso sobre cuidado.
+    dramatic_question: O que cada mulher entende quando usa a palavra ficar?
+    irreversible_turn: Joana decide permanecer na cidade e exige participar das decisões sobre Olívia.
+    continuity:
+      - Olívia alterna períodos de lucidez e exaustão.
+      - Ester tenta controlar informações clínicas.
+      - Joana rejeita ser tratada como paciente antes de precisar.
+    living_book_vitals:
+      pressure: familiar
+      breath: compartilhada sem sincronia
+      sensory_anchor: copo de água morna na mesa
+
+  - number: 7
+    title: Linha de Base
+    movement: II — Os Retidos
+    pov: Joana
+    time: Dia 118, manhã
+    location: Hospital e orla
+    function: Fazer Joana mapear acusticamente a cidade e distinguir padrão observável de interpretação.
+    dramatic_question: Um som recorrente registra a Suspensão ou apenas a infraestrutura sob pressão?
+    irreversible_turn: Joana encontra no arquivo uma gravação das 04h17 que contradiz o áudio oficial da Comissão.
+    continuity:
+      - A gravação contém falha e ruído, não prova causal.
+      - Joana preserva metadados do arquivo.
+    living_book_vitals:
+      pressure: investigativa
+      breath: escuta prolongada
+      sensory_anchor: giro irregular de uma fita
+
+  - number: 8
+    title: Nome Provisório
+    movement: II — Os Retidos
+    pov: Joana
+    time: Dia 118, meio-dia
+    location: Casa de Olívia
+    function: Dar espessura cotidiana a Joana e Olívia sem reduzir as duas a gestante e moribunda.
+    dramatic_question: É possível preparar lugar para alguém quando nenhum nascimento se completa?
+    irreversible_turn: Joana revela que guardou o nome da criança até de Ester e se recusa a usá-lo como promessa.
+    continuity:
+      - Olívia deixou uma costura incompleta sobre a mesa.
+      - O nome definitivo ainda não aparece ao leitor.
+    living_book_vitals:
+      pressure: baixa com fissuras
+      breath: doméstica
+      sensory_anchor: linha presa no olho da agulha
+
+  - number: 9
+    title: Os Formulários Rasurados
+    movement: II — Os Retidos
+    pov: Ester
+    time: Dia 118, tarde
+    location: Arquivo morto do cartório
+    function: Transformar suspeita em evidência administrativa de encobrimento.
+    dramatic_question: Quem ordenou que partos inconclusos desaparecessem das estatísticas?
+    irreversible_turn: Ester encontra formulários recolhidos pela Comissão desde o primeiro dia da Suspensão.
+    continuity:
+      - Os formulários registram trabalhos de parto sem nascimento completo.
+      - Uma rubrica de Raul autoriza a centralização dos dados.
+    living_book_vitals:
+      pressure: documental
+      breath: poeira e contenção
+      sensory_anchor: carbono azul nos dedos
+
+  - number: 10
+    title: A Cidade Imortal
+    movement: II — Os Retidos
+    pov: Ester
+    time: Dia 118, fim da tarde
+    location: Comércio, praça e filas de serviço
+    function: Expor efeitos civis e econômicos da falsa imortalidade fora do hospital.
+    dramatic_question: Quanto tempo a propaganda resiste ao custo cotidiano da retenção?
+    irreversible_turn: Uma fila de famílias interrompe a celebração oficial e exige acesso aos registros.
+    continuity:
+      - Heranças, benefícios e guardas legais estão suspensos.
+      - A Comissão mantém a expressão cidade imortal em material público.
+    living_book_vitals:
+      pressure: coletiva
+      breath: multidão sem coro
+      sensory_anchor: pulseiras de atendimento grudadas de suor
+
+  - number: 11
+    title: Manual para um Corpo Retido
+    movement: II — Os Retidos
+    pov: Damião
+    time: Dia 118, noite
+    location: Posto de enfermagem da Ala Leste
+    function: Mostrar protocolos improvisados, limites de recurso e a ética prática do cuidado.
+    dramatic_question: Que regra pode proteger pacientes quando todas as categorias clínicas falharam?
+    irreversible_turn: Damião entrega a Ester uma cópia do protocolo interno que a Comissão mandou destruir.
+    continuity:
+      - O protocolo prioriza conforto e prevenção de lesões.
+      - A falta de insumos é documentada.
+      - Damião não promete reversão.
+    living_book_vitals:
+      pressure: operacional
+      breath: exausta
+      sensory_anchor: fita adesiva com horários reescritos
+
+  - number: 12
+    title: O Primeiro Pedido
+    movement: II — Os Retidos
+    pov: Ester
+    time: Dia 118, noite avançada
+    location: Quarto de Olívia
+    function: Fazer Olívia formular sua vontade e romper a equivalência de Ester entre amar e impedir qualquer fim.
+    dramatic_question: Ester consegue ouvir um pedido que não pode cumprir sem transformá-lo em abandono?
+    irreversible_turn: Olívia registra, diante de Damião e Joana, que deseja apenas medidas de conforto e nomeia Joana como interlocutora se perder a fala.
+    continuity:
+      - Não existe intervenção capaz de causar uma morte conclusiva durante a Suspensão.
+      - Joana aceita a responsabilidade sem prometer controle.
+    living_book_vitals:
+      pressure: íntima e bloqueante
+      breath: cara
+      sensory_anchor: caneta apoiada entre os dedos de Olívia
+    protected_scene: OLIVIA_FIRST_REQUEST
+
+  - number: 13
+    title: Vozes de Arquivo
+    movement: III — O Direito ao Limiar
+    pov: Joana
+    time: Dia 119, manhã
+    location: Estúdio comunitário improvisado
+    function: Reunir testemunhos sem transformar dor em conteúdo e preparar uma ruptura informacional.
+    dramatic_question: Como tornar o encobrimento audível sem roubar a voz dos retidos e cuidadores?
+    irreversible_turn: Joana obtém consentimento para transmitir depoimentos e inclui as recusas no próprio arquivo.
+    continuity:
+      - Nem todo paciente pode ou quer falar.
+      - A gravação das 04h17 continua inconclusiva.
+    living_book_vitals:
+      pressure: ética
+      breath: vozes espaçadas
+      sensory_anchor: clique de autorização antes de gravar
+
+  - number: 14
+    title: A Lista dos Inconclusos
+    movement: III — O Direito ao Limiar
+    pov: Ester
+    time: Dia 119, tarde
+    location: Cartório fechado ao público
+    function: Construir um registro paralelo que restitua identidade civil às pessoas apagadas pela Comissão.
+    dramatic_question: Nomear os inconclusos protege ou expõe suas famílias?
+    irreversible_turn: Ester e Damião vinculam os formulários rasurados aos prontuários e provam que Raul conhecia a dimensão da crise.
+    continuity:
+      - A lista não declara ninguém morto.
+      - Dados sensíveis são separados do conjunto destinado à divulgação.
+    living_book_vitals:
+      pressure: metódica
+      breath: concentrada
+      sensory_anchor: régua alinhando nomes e números
+
+  - number: 15
+    title: Matéria que Continua
+    movement: III — O Direito ao Limiar
+    pov: Damião
+    time: Dia 119, noite
+    location: Leito de Agenor, Ala Leste
+    function: Dar consequência corporal incontornável à Suspensão preservando identidade e dignidade do paciente.
+    dramatic_question: Como manter cuidado quando o corpo ultrapassa os protocolos sem deixar de pertencer a alguém?
+    irreversible_turn: Damião documenta uma complicação ocultada e decide anexá-la à lista de Ester.
+    continuity:
+      - Agenor é ex-mecânico naval e reconhece a própria música por movimentos mínimos.
+      - A cena evita certeza conveniente sobre seu grau de consciência.
+    living_book_vitals:
+      pressure: corporal
+      breath: assistida
+      sensory_anchor: graxa antiga sob a aliança guardada
+    protected_scene: RETAINED_BODY_DIGNITY
+
+  - number: 16
+    title: A Praça da Permanência
+    movement: III — O Direito ao Limiar
+    pov: Joana
+    time: Dia 120, manhã
+    location: Praça cívica
+    function: Colocar arquivo, propaganda e experiência coletiva em confronto público.
+    dramatic_question: A cidade ouvirá testemunhos que destroem a fantasia de vitória?
+    irreversible_turn: Joana transmite as vozes após a Comissão cortar o discurso de Ester; a praça deixa de obedecer ao roteiro oficial.
+    continuity:
+      - Joana usa somente gravações autorizadas.
+      - Raul ordena restrição de acesso ao hospital e ao cartório.
+    living_book_vitals:
+      pressure: pública
+      breath: amplificada e falha
+      sensory_anchor: retorno microfônico sobre o mar
+
+  - number: 17
+    title: Consentimento
+    movement: III — O Direito ao Limiar
+    pov: Ester
+    time: Dia 120, tarde
+    location: Hospital sob restrição
+    function: Obrigar Ester a praticar, e não apenas defender em abstrato, a autonomia de Joana e Olívia.
+    dramatic_question: Ester abrirá mão do papel de quem sempre sabe o que fazer?
+    irreversible_turn: Ela entrega a Joana o plano de parto, reconhece sua autoridade e confirma a diretiva de conforto de Olívia.
+    continuity:
+      - Joana pode alterar o plano a qualquer momento.
+      - Ester será acompanhante, não profissional responsável pelo parto.
+    living_book_vitals:
+      pressure: relacional
+      breath: desacelerada com esforço
+      sensory_anchor: duas assinaturas em linhas diferentes
+
+  - number: 18
+    title: Quando o Mar Recua
+    movement: III — O Direito ao Limiar
+    pov: Ester
+    time: Dia 120, noite
+    location: Orla, prefeitura e hospital
+    function: Desmontar a unidade da Comissão e preparar o confinamento físico do clímax.
+    dramatic_question: Raul protegerá a doutrina da Permanência mesmo quando sua própria equipe admite o dano?
+    irreversible_turn: Ester publica a lista protegida e Raul fecha a Ala Leste; uma maré excepcional interrompe a via costeira.
+    continuity:
+      - A maré é fenômeno meteorológico, não sinal sobrenatural.
+      - Raul revela que o marido morreu antes da Suspensão, sem ser absolvido por isso.
+      - Joana inicia contrações ritmadas no fim do capítulo.
+    living_book_vitals:
+      pressure: de cerco
+      breath: vento antes da chuva
+      sensory_anchor: marca de água subindo no muro
+
+  - number: 19
+    title: Trabalho
+    movement: IV — O Que Consegue Terminar
+    pov: Joana
+    time: Dia 121, madrugada
+    location: Trajeto até o hospital e sala obstétrica
+    function: Iniciar o trabalho de parto ativo sob agência de Joana e sem convertê-lo em mecanismo metafísico.
+    dramatic_question: O corpo de Joana poderá atravessar um limiar que falhou por 120 dias?
+    irreversible_turn: Joana escolhe permanecer no hospital apesar do bloqueio e autoriza Ester como acompanhante.
+    continuity:
+      - Contrações, dilatação e sinais maternos são acompanhados de forma plausível.
+      - A equipe explica opções e limites.
+      - Olívia permanece na Ala Leste.
+    living_book_vitals:
+      pressure: muscular
+      breath: ritmada por Joana
+      sensory_anchor: piso frio sob os pés descalços
+    protected_scene: JOANA_LABOR_CONSENT
+
+  - number: 20
+    title: A Porta da Ala
+    movement: IV — O Que Consegue Terminar
+    pov: Damião
+    time: Dia 121, madrugada
+    location: Entrada da Ala Leste
+    function: Fazer o conflito institucional atingir o acesso físico ao cuidado sem transformar Damião em salvador individual.
+    dramatic_question: Quem entra, quem cuida e quem decide quando a Comissão controla as portas?
+    irreversible_turn: Funcionários e familiares abrem a ala por decisão coletiva; Damião perde o cargo de chefia.
+    continuity:
+      - A abertura não depende de violência letal.
+      - Damião mantém separação entre a ala obstétrica e Olívia.
+      - Ester permanece com Joana conforme consentido.
+    living_book_vitals:
+      pressure: mecânica e coletiva
+      breath: contida atrás de máscaras
+      sensory_anchor: chave que não gira até o fim
+    protected_scene: JOANA_LABOR_CONSENT
+
+  - number: 21
+    title: O Minuto sem Margens
+    movement: IV — O Que Consegue Terminar
+    pov: Joana
+    time: Dia 121, antes do amanhecer
+    location: Sala obstétrica
+    function: Levar o parto ao ponto em que protocolos da Suspensão e fisiologia comum deixam de oferecer previsão.
+    dramatic_question: Joana poderá continuar decidindo quando exaustão e urgência estreitam as opções?
+    irreversible_turn: Depois de receber alternativas e riscos, Joana escolhe a intervenção necessária para completar o parto.
+    continuity:
+      - Consentimento é renovado e pode ser interrompido.
+      - Ester não assume o comando clínico.
+      - Nenhum sinal conecta a sala a Olívia.
+    living_book_vitals:
+      pressure: máxima e focal
+      breath: escolhida, não coreografada
+      sensory_anchor: borda da cama sob a mão de Joana
+    protected_scene:
+      - JOANA_LABOR_CONSENT
+      - TWO_THRESHOLDS
+
+  - number: 22
+    title: Duas Respirações
+    movement: IV — O Que Consegue Terminar
+    pov: Damião
+    time: Dia 121, amanhecer
+    location: Ala Leste, com informações posteriores da obstetrícia
+    function: Registrar dois eventos próximos sem visão onisciente, transferência ou causalidade confirmada.
+    dramatic_question: O que Damião pode afirmar quando os instrumentos finalmente aceitam um fim?
+    irreversible_turn: Olívia morre de forma conclusiva; segundos antes, em outra ala, a criança de Joana nasceu.
+    continuity:
+      - Damião presencia somente a morte de Olívia.
+      - O horário do nascimento chega por registro clínico.
+      - Outros monitores começam a apresentar desfechos conclusivos depois.
+    living_book_vitals:
+      pressure: queda abrupta sem alívio completo
+      breath: duas cronologias separadas
+      sensory_anchor: segundo contínuo do relógio clínico
+    protected_scene: TWO_THRESHOLDS
+
+  - number: 23
+    title: Certidão Número Um
+    movement: IV — O Que Consegue Terminar
+    pov: Ester
+    time: Dia 121, manhã
+    location: Cartório reaberto
+    function: Tornar a morte de Olívia pública e irreversível por meio do ofício de Ester.
+    dramatic_question: Como registrar a mãe sem transformar o documento em explicação ou consolo?
+    irreversible_turn: Ester assina a primeira certidão de óbito pós-Suspensão e envia cópia à lista pública.
+    continuity:
+      - A causa clínica de Olívia é compatível com sua condição.
+      - A proximidade com o nascimento é registrada, não interpretada como mecanismo.
+      - Mortes e nascimentos começam a ser confirmados em outros locais.
+    living_book_vitals:
+      pressure: precisa e ambivalente
+      breath: manual
+      sensory_anchor: tinta nova absorvida pelo papel
+    protected_scene:
+      - TWO_THRESHOLDS
+      - FIRST_CERTIFICATE
+
+  - number: 24
+    title: O Dia Seguinte
+    movement: IV — O Que Consegue Terminar
+    pov: Ester
+    time: Dia 122, manhã
+    location: Casa de Olívia, cartório e orla
+    function: Mostrar consequências ordinárias, luto incompleto e continuidade sem tese conclusiva.
+    dramatic_question: O que muda quando terminar volta a ser possível, mas nada é reparado?
+    irreversible_turn: Joana registra a filha como Mila Vilar; Ester arquiva nascimento e morte em livros diferentes e sai para o trabalho do dia.
+    continuity:
+      - Mila não apresenta atributo sobrenatural.
+      - Raul enfrenta investigação, não punição espetacular.
+      - A cidade continua com falta de recursos e decisões acumuladas.
+      - A causa da Suspensão permanece desconhecida.
+    living_book_vitals:
+      pressure: residual
+      breath: irregular e possível
+      sensory_anchor: sal secando na capa de dois livros

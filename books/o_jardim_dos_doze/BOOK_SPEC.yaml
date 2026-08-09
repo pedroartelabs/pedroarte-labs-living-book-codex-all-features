@@ -1,0 +1,69 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: o_jardim_dos_doze
+  title: O Jardim dos Doze
+  subtitle: Onde ninguém cresce, ninguém é inocente.
+  author: Pedro Arte
+  language: pt-BR
+  genre: distopia adulta / horror psicológico / thriller político
+  chapter_count: 24
+  version: 1.0.0
+spec:
+  creative_sources: [CREATIVE_BRIEF.md, BOOK_CONSTITUTION.md, PROJECT_SPEC.md]
+  chapter_titles:
+    1: A Praça dos Balões Murchos
+    2: O Ministério da Alegria Cívica
+    3: A Festa da Escolha
+    4: A Casa de Helena
+    5: A Escola Modelo Girassol
+    6: Atividade Educativa
+    7: O Homem que Escrevia Canções
+    8: O Espelho sem Futuro
+    9: Jardim Fechado
+    10: Os Doze Puros
+    11: A Confissão do Dr. Silas
+    12: O Suplemento Azul
+    13: A Fuga pela Cidade Doce
+    14: A Professora que Acreditava
+    15: O Primeiro Recreio
+    16: A Cidade sem Adultos
+    17: Antes, Durante, Sem Conclusão
+    18: O Pronunciamento de Abel
+    19: O Dia Nacional do Jardim
+    20: A Mãe no Telão
+    21: A Verdade Cantada
+    22: A Esperança Interrompida
+    23: O Corpo de Bento
+    24: O Último Recreio
+  movements:
+    - {name: Ato I — A Cerca, chapters: [1,2,3,4,5,6,7,8]}
+    - {name: Ato II — As Raízes, chapters: [9,10,11,12,13,14,15,16,17,18]}
+    - {name: Ato III — A Colheita, chapters: [19,20,21,22,23,24]}
+  writing_waves: [[1,2,3,4,5,6,7,8], [9,10,11,12,13], [14,15,16,17,18], [19,20,21,22,23,24]]
+  voice_calibration_chapters: [1, 2]
+  lead_novelist_owned_chapters: [1, 24]
+  features:
+    living_book: {enabled: true}
+    images: {enabled: true, primary_per_chapter: 1, face_consistency_required: true}
+    living_sound: {enabled: true}
+    translation_preparation: {enabled: false, target: en}
+    kdp_docx: {enabled: true}
+    media_package: {enabled: true}
+  agent_packs:
+    book_agents: {}
+    character_support: [ANTI_MANIPULATION_GUARDIAN]
+    canon_guardians: [REALISM_ENGINEER, GENRE_GUARDIAN]
+    wave_reviewers: [PLOT_CONTINUITY_REVIEWER, CHARACTER_CONTINUITY_REVIEWER, WORLD_RULES_REVIEWER, EMOTIONAL_EDITOR, GENRE_GUARDIAN, ANTI_MANIPULATION_GUARDIAN]
+    voice_reviewers: [LITERARY_STYLE_GUARDIAN, DIALOGUE_DIRECTOR, PHYSICALITY_AND_BODY_AGENT, ANTI_MANIPULATION_GUARDIAN]
+    critic_panel: [LITERARY_CRITIC, CINEMA_CRITIC, COMMERCIAL_EDITOR_CRITIC, CLICHE_HUNTER, DEVELOPMENTAL_EDITOR, PLOT_CONTINUITY_REVIEWER]
+    line_reviewers: [DIALOGUE_DIRECTOR, LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, SENSORY_AGENT, PHYSICALITY_AND_BODY_AGENT, TYPOGRAPHY_TEXT_REVIEWER, REDUNDANCY_REVIEWER, CLICHE_REVIEWER]
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities: [jardim, azul-anil, brinquedos, broches, sementes, portas]
+  acoustic_environment_organism: A cantiga cívica deteriora-se de caixa de música limpa para pulso industrial e, ao final, incorpora respiração humana.
+  book_specific_rejection_states: [ETHICAL_SAFETY_FAILURE, INFANTILE_BODY_SEXUALIZATION, POLITICAL_COHERENCE_FAILURE, SCIENTIFIC_COHERENCE_FAILURE]

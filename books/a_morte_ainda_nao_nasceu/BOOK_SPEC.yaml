@@ -1,0 +1,135 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: a_morte_ainda_nao_nasceu
+  title: A Morte Ainda Não Nasceu
+  subtitle: Permanecer não é o mesmo que viver.
+  author: Pedro Arte
+  language: pt-BR
+  genre: romance literário especulativo / drama metafísico / ficção social
+  chapter_count: 24
+  version: 0.1.0
+spec:
+  creative_sources:
+    - CREATIVE_BRIEF.md
+    - BOOK_CONSTITUTION.md
+  chapter_titles:
+    1: O Livro dos Óbitos
+    2: Cento e Dezessete Dias
+    3: A Ala Leste
+    4: A Filha na Estrada
+    5: Permanência
+    6: O Quarto sem Alta
+    7: Linha de Base
+    8: Nome Provisório
+    9: Os Formulários Rasurados
+    10: A Cidade Imortal
+    11: Manual para um Corpo Retido
+    12: O Primeiro Pedido
+    13: Vozes de Arquivo
+    14: A Lista dos Inconclusos
+    15: Matéria que Continua
+    16: A Praça da Permanência
+    17: Consentimento
+    18: Quando o Mar Recua
+    19: Trabalho
+    20: A Porta da Ala
+    21: O Minuto sem Margens
+    22: Duas Respirações
+    23: Certidão Número Um
+    24: O Dia Seguinte
+  movements:
+    - name: I — A Suspensão
+      chapters: [1, 2, 3, 4, 5, 6]
+    - name: II — Os Retidos
+      chapters: [7, 8, 9, 10, 11, 12]
+    - name: III — O Direito ao Limiar
+      chapters: [13, 14, 15, 16, 17, 18]
+    - name: IV — O Que Consegue Terminar
+      chapters: [19, 20, 21, 22, 23, 24]
+  writing_waves:
+    - [1, 2, 3, 4, 5, 6]
+    - [7, 8, 9, 10, 11, 12]
+    - [13, 14, 15, 16, 17, 18]
+    - [19, 20, 21, 22, 23, 24]
+  voice_calibration_chapters: [1, 3]
+  lead_novelist_owned_chapters: [1, 12, 19, 20, 21, 22, 23, 24]
+  features:
+    living_book:
+      enabled: true
+    images:
+      enabled: true
+      primary_per_chapter: 1
+      face_consistency_required: true
+    living_sound:
+      enabled: true
+    translation_preparation:
+      enabled: true
+      target: en
+    kdp_docx:
+      enabled: true
+    media_package:
+      enabled: true
+  agent_packs:
+    book_agents:
+      LIMINALITY_GUARDIAN:
+        profile: /book/agents/liminality_guardian.toml
+      CONSENT_AND_CARE_GUARDIAN:
+        profile: /book/agents/consent_and_care_guardian.toml
+    character_support:
+      - CONSENT_AND_CARE_GUARDIAN
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+    canon_guardians:
+      - LIMINALITY_GUARDIAN
+      - CONSENT_AND_CARE_GUARDIAN
+      - REALISM_ENGINEER
+    wave_reviewers:
+      - PLOT_CONTINUITY_REVIEWER
+      - CHARACTER_CONTINUITY_REVIEWER
+      - WORLD_RULES_REVIEWER
+      - EMOTIONAL_EDITOR
+      - LIMINALITY_GUARDIAN
+      - CONSENT_AND_CARE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+    voice_reviewers:
+      - LITERARY_STYLE_GUARDIAN
+      - DIALOGUE_DIRECTOR
+      - PHYSICALITY_AND_BODY_AGENT
+      - CONSENT_AND_CARE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+    critic_panel:
+      - LITERARY_CRITIC
+      - CINEMA_CRITIC
+      - COMMERCIAL_EDITOR_CRITIC
+      - CLICHE_HUNTER
+      - DEVELOPMENTAL_EDITOR
+      - LIMINALITY_GUARDIAN
+    line_reviewers:
+      - DIALOGUE_DIRECTOR
+      - LITERARY_STYLE_GUARDIAN
+      - SUBTEXT_EDITOR
+      - SENSORY_AGENT
+      - PHYSICALITY_AND_BODY_AGENT
+      - TYPOGRAPHY_TEXT_REVIEWER
+      - REDUNDANCY_REVIEWER
+      - CLICHE_REVIEWER
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities:
+    - livro de registros
+    - linha de costura
+    - sal
+    - fita magnética
+    - respiração
+    - maré
+  acoustic_environment_organism: A cidade respira por máquinas, maré e fita magnética; o pulso mecânico cresce quando corpos são retidos e se fragmenta em respirações individuais quando os limiares voltam a funcionar.
+  book_specific_rejection_states:
+    - TRANSITION_CAUSALITY_FAILURE
+    - BODILY_AUTONOMY_FAILURE
+    - CARE_COERCION_FAILURE
+    - FALSE_IMMORTALITY_FAILURE
+    - METAPHYSICAL_OVEREXPLANATION

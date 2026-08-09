@@ -1,0 +1,27 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - {number: 1, title: A Praça dos Balões Murchos, movement: Ato I — A Cerca, function: Nina presencia falha em transmissão pública e recebe ordem para eliminar a imagem proibida de um adulto.}
+  - {number: 2, title: O Ministério da Alegria Cívica, movement: Ato I — A Cerca, function: Nina suaviza a notícia de uma repressão fatal e encontra o nome de Ícaro Vale.}
+  - {number: 3, title: Festa da Escolha, movement: Ato I — A Cerca, function: A eleição-espetáculo revela vigilância biológica e aproxima Nina de Bento.}
+  - {number: 4, title: A Casa de Helena, movement: Ato I — A Cerca, function: Helena tenta impedir a investigação; uma fotografia adulta e a verdade sobre Ícaro rompem a versão familiar.}
+  - {number: 5, title: A Escola Modelo Girassol, movement: Ato I — A Cerca, function: Bento enfrenta exame biológico escolar e recebe o mesmo código de Ícaro.}
+  - {number: 6, title: Atividade Educativa, movement: Ato I — A Cerca, function: Uma execução é apresentada como educação e o condenado aponta os Crescidos desaparecidos.}
+  - {number: 7, title: O Homem que Escrevia Canções, movement: Ato I — A Cerca, function: Caio revela condicionamento nos jingles e a passagem de Ícaro pelo Jardim Fechado.}
+  - {number: 8, title: O Espelho sem Futuro, movement: Ato I — A Cerca, function: Nina descobre que seu broche contém um rastreador biológico que alerta o Ministério.}
+  - {number: 9, title: Jardim Fechado, movement: Ato II — As Raízes, function: Uma invasão subterrânea revela vídeos de pessoas amadurecendo e uma mensagem de Ícaro.}
+  - {number: 10, title: Os Doze Puros, movement: Ato II — As Raízes, function: A investigação dos cidadãos-modelo revela tratamentos contínuos e uma morte em campanha.}
+  - {number: 11, title: A Confissão do Dr. Silas, movement: Ato II — As Raízes, function: Silas confirma que o Projeto Recreio prolongou a Síndrome e entrega parte da fórmula.}
+  - {number: 12, title: O Suplemento Azul, movement: Ato II — As Raízes, function: Helena admite participação nas primeiras aplicações; Guardiões cercam a casa.}
+  - {number: 13, title: A Fuga pela Cidade Doce, movement: Ato II — As Raízes, function: A investigação vira perseguição; Tomás permite a fuga e Helena é capturada.}
+  - {number: 14, title: A Professora que Acreditava, movement: Ato II — As Raízes, function: Lídia denuncia Bento; Nina descobre que exames oficiais foram adulterados.}
+  - {number: 15, title: O Primeiro Recreio, movement: Ato II — As Raízes, function: Nina infiltra um culto e descobre que a Igreja conhece o Projeto Recreio.}
+  - {number: 16, title: A Cidade sem Adultos, movement: Ato II — As Raízes, function: Arquivos proibidos mostram que imagens adultas foram apagadas para eliminar o desejo de crescer.}
+  - {number: 17, title: Antes, Durante, Sem Conclusão, movement: Ato II — As Raízes, function: O testemunho de Ícaro confirma crescimento após abandonar Anilina-12 e aponta Bento como próxima prova.}
+  - {number: 18, title: O Pronunciamento de Abel, movement: Ato II — As Raízes, function: Nina é declarada terrorista e Abel anuncia dose nacional para o Dia do Jardim.}
+  - {number: 19, title: O Dia Nacional do Jardim, movement: Ato III — A Colheita, function: A operação final infiltra o sistema; Helena será usada na transmissão.}
+  - {number: 20, title: A Mãe no Telão, movement: Ato III — A Colheita, function: Nina escolhe liberar os arquivos; Helena fornece o código e conclui seu arco.}
+  - {number: 21, title: A Verdade Cantada, movement: Ato III — A Colheita, function: O jingle carrega os arquivos enquanto Nina e Caio mantêm o sinal.}
+  - {number: 22, title: A Esperança Interrompida, movement: Ato III — A Colheita, function: O Protocolo Berço reprime a revolta e Bento cai afirmando que não é doença.}
+  - {number: 23, title: O Corpo de Bento, movement: Ato III — A Colheita, function: Nina resgata a prova viva; Tomás fecha a porta e fica para trás.}
+  - {number: 24, title: O Último Recreio, movement: Ato III — A Colheita, function: Bento amadurece enquanto o regime lança Crescimento Seguro e captura a linguagem da revolução.}

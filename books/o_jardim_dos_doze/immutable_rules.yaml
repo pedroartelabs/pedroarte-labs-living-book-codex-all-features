@@ -1,0 +1,21 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: ETHICAL_ABSOLUTE
+    rule: Jamais erotizar, fetichizar ou sexualizar personagens com aparência infantil.
+    blocking: true
+  - id: ADULT_NARRATIVE
+    rule: A obra é adulta por suas ideias e consequências, nunca por sexualização corporal.
+    blocking: true
+  - id: CORE_PREMISE
+    rule: A humanidade parece estabilizada aos doze anos; o Estado suprime a possibilidade de crescimento com Anilina-12 e o Projeto Recreio.
+    blocking: true
+  - id: REQUIRED_CAST
+    rule: Nina, Bento, Ícaro, Helena, Abel e Caio não podem ser eliminados da arquitetura narrativa.
+    blocking: true
+  - id: AMBIGUOUS_ENDING
+    rule: O final não pode ser completamente feliz; crescer não é solução simples e o poder aprende a vender a revolução.
+    blocking: true
+  - id: FORM
+    rule: Exatamente 24 capítulos em português do Brasil e no mínimo 60000 palavras.
+    blocking: true

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Living Book BOOK_SPEC",
+  "type": "object",
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "pedroarte.livingbooks/v1"
+    },
+    "kind": {
+      "const": "BookSpec"
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "slug",
+        "title",
+        "author",
+        "language",
+        "chapter_count"
+      ]
+    },
+    "spec": {
+      "type": "object",
+      "required": [
+        "chapter_titles",
+        "writing_waves",
+        "features",
+        "agent_packs",
+        "immutable_rules_file",
+        "protected_scenes_file"
+      ]
+    }
+  }
+}
