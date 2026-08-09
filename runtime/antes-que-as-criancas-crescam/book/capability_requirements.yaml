@@ -1,0 +1,17 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  image_generation:
+    required_for_gate: GATE_VISUAL
+    on_missing: CAPABILITY_BLOCKER_IMAGE_GENERATION
+    forbid_fake_placeholders: true
+  image_inspection:
+    required_for_gate: GATE_VISUAL
+    on_missing: CAPABILITY_BLOCKER_IMAGE_INSPECTION
+  current_kdp_research:
+    required_for_task: T699_KDP_REQUIREMENTS_REFRESH
+    on_missing: CAPABILITY_BLOCKER_CURRENT_KDP_REQUIREMENTS
+    official_sources_only: true
+  docx_build:
+    required_for_gate: GATE_KDP
+    on_missing: CAPABILITY_BLOCKER_DOCX_BUILD

@@ -1,0 +1,123 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+- number: 1
+  title: Café requentado
+  movement: M1
+  function: Apresentar a vida dos Ferraz, o caos doméstico e o hábito do depois sem magia dominante.
+- number: 2
+  title: Vinte e três dias
+  movement: M1
+  function: Chuva, carro, Bento dormindo, peso e primeiro número.
+- number: 3
+  title: Os braços
+  movement: M1
+  function: Número reaparece; pedido de colo; associação entre comportamento e número.
+- number: 4
+  title: Nina já não fazia isso
+  movement: M1
+  function: Mateus compara Bento e Nina e percebe últimas vezes já perdidas.
+- number: 5
+  title: Última vez que pedirá colo
+  movement: M1
+  function: A legenda do contador torna-se compreensível.
+- number: 6
+  title: Hoje
+  movement: M1
+  function: Elisa vê HOJE e Bento entra na cama dos pais.
+- number: 7
+  title: O portão da escola
+  movement: M2
+  function: Relatos discretos no portão da escola.
+- number: 8
+  title: Números que não saem nas fotografias
+  movement: M2
+  function: Descoberta de que câmeras não capturam os números.
+- number: 9
+  title: Mil oitocentos e quarenta e dois vídeos
+  movement: M2
+  function: Joana, Clara e o medo de esquecer por excesso de vídeos.
+- number: 10
+  title: Fim de semana
+  movement: M2
+  function: Rafael e Davi; escassez do pai separado.
+- number: 11
+  title: Trinta e oito segundos
+  movement: M2
+  function: Helipóptero e trinta e oito segundos.
+- number: 12
+  title: Café quente
+  movement: M2
+  function: Casa de Teresa e Álvaro; café quente e o depois.
+- number: 13
+  title: O desenho
+  movement: M2
+  function: O contador do desenho de Nina; Mateus começa a interferir.
+- number: 14
+  title: Mil pequenos adeuses
+  movement: M2
+  function: Primeira onda luminosa da cidade e parques cheios.
+- number: 15
+  title: Mais uma vez
+  movement: M3
+  function: Adultos começam a pedir repetições e mais uma vez.
+- number: 16
+  title: Quatro minutos
+  movement: M3
+  function: Reunião realmente importante; quatro minutos; Bento chama para brincar.
+- number: 17
+  title: Depois
+  movement: M3
+  function: Mateus oferece brincar; Bento responde depois.
+- number: 18
+  title: Natural
+  movement: M3
+  function: Ações forçadas não alteram contadores.
+- number: 19
+  title: A porta
+  movement: M3
+  function: Mateus tenta recriar Bento correndo até a porta.
+- number: 20
+  title: Quer que eu peça colo?
+  movement: M3
+  function: Bento pergunta se o pai quer que ele peça colo.
+- number: 21
+  title: Como se eu já tivesse ido embora
+  movement: M3
+  function: Nina acusa Mateus de olhar como se eles já tivessem ido embora.
+- number: 22
+  title: Não olhar
+  movement: M4
+  function: Mateus tenta não olhar e descobre que negação também é obsessão.
+- number: 23
+  title: Batatas
+  movement: M4
+  function: Rafael e Davi comem batatas num posto; o banal ganha densidade.
+- number: 24
+  title: Sem câmera
+  movement: M4
+  function: Joana abaixa o celular.
+- number: 25
+  title: O nó
+  movement: M4
+  function: Bento amarra o sapato; perda e conquista coexistem.
+- number: 26
+  title: A cama
+  movement: M4
+  function: Última noite de Bento na cama; Elisa levanta o cobertor.
+- number: 27
+  title: Um dia
+  movement: M4
+  function: Mateus vê um dia para o último pedido de colo.
+- number: 28
+  title: O peso
+  movement: M5
+  function: Clímax do peso e do último colo; Mateus fecha os olhos.
+- number: 29
+  title: Soltar
+  movement: M5
+  function: Meses depois; novas autonomias e novas linguagens de intimidade.
+- number: 30
+  title: Café frio
+  movement: M5
+  function: Manhã comum, Bento chama, Mateus vai, café frio.

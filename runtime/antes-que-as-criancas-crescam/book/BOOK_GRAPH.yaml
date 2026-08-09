@@ -1,0 +1,42 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: antes-que-as-criancas-crescam
+  version: 1.0.0
+spec:
+  custom_validators:
+  - id: COUNTER_RULES
+    command: python book/validators/validate_book_rules.py counter-rules
+    phases:
+    - canon
+    - manuscript
+  - id: COUNTER_DISTRIBUTION
+    command: python book/validators/validate_book_rules.py counter-distribution
+    phases:
+    - briefs
+    - manuscript
+  - id: FINAL_LINE
+    command: python book/validators/validate_book_rules.py final-line
+    phases:
+    - manuscript
+    - kdp
+    - delivery
+  gate_extensions:
+    GATE_CANON:
+      validators:
+      - COUNTER_RULES
+    GATE_CHAPTER_BRIEFS:
+      validators:
+      - COUNTER_DISTRIBUTION
+    GATE_FULL_MANUSCRIPT:
+      validators:
+      - COUNTER_RULES
+      - COUNTER_DISTRIBUTION
+      - FINAL_LINE
+    GATE_KDP:
+      validators:
+      - FINAL_LINE
+    GATE_DELIVERY:
+      validators:
+      - FINAL_LINE
+  additional_tasks: []

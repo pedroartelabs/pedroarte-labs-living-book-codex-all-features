@@ -1,0 +1,3356 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: LiteraryTaskGraph
+metadata:
+  project_id: antes-que-as-criancas-crescam
+  title: Antes que as Crianças Cresçam
+  author: Pedro Arte
+  language: pt-BR
+  chapter_count: 30
+  engine_version: 1.0.0
+  book_version: 1.0.0
+spec:
+  execution_policy:
+    mode: AUTONOMOUS
+    continue_without_user_confirmation: true
+    explicit_subagent_spawning: true
+    stop_and_fix:
+      enabled: true
+      rule: If any blocking validation or gate fails, repair, revalidate, then continue.
+    max_parallel_tasks: 8
+    max_parallel_writers: 4
+    max_parallel_critics: 8
+    max_parallel_image_tasks: 6
+    max_parallel_sound_tasks: 6
+    never_skip_dependencies: true
+    never_skip_blocking_gates: true
+    reviewer_write_access:
+      manuscript: false
+      canon: false
+      reports: true
+    merge_policy:
+      destructive_merge: false
+      merge_log_required: true
+    canon_write_policy:
+      concurrent_write: false
+      exclusive_owner: CANON_GUARDIAN
+    final_manuscript_write_policy:
+      concurrent_write: false
+      exclusive_owner: LEAD_NOVELIST
+  task_states:
+  - PENDING
+  - READY
+  - SPAWNING
+  - RUNNING
+  - WAITING_DEPENDENCIES
+  - UNDER_REVIEW
+  - REVISION_REQUIRED
+  - BLOCKED
+  - FAILED
+  - APPROVED
+  - CANON_APPROVED
+  - FINAL
+  success_states:
+  - APPROVED
+  - CANON_APPROVED
+  - FINAL
+  rejection_states:
+  - CANON_CONFLICT
+  - EMOTIONAL_MANIPULATION
+  - WORLD_RULES_FAILURE
+  - FACE_IDENTITY_FAILURE
+  - VISUAL_REJECTED
+  - SOUND_BIOME_FAILURE
+  - CONTINUITY_FAILURE
+  - KDP_VALIDATION_FAILURE
+  - CAPABILITY_BLOCKER
+  - DYSTOPIA_CONTAMINATION
+  - PARENTAL_GUILT_FAILURE
+  - COUNTER_LOGIC_FAILURE
+  - CHILD_VOICE_FAILURE
+  - COFFEE_MOTIF_UNDERDEVELOPED
+  locks:
+    CANON_WRITE:
+      mode: EXCLUSIVE
+    STORY_BIBLE_WRITE:
+      mode: EXCLUSIVE
+    CHARACTER_BIBLE_WRITE:
+      mode: EXCLUSIVE
+    TIMELINE_WRITE:
+      mode: EXCLUSIVE
+    MANUSCRIPT_FINAL_WRITE:
+      mode: EXCLUSIVE
+    MANUSCRIPT_MERGE:
+      mode: EXCLUSIVE
+    FACE_CANON_WRITE:
+      mode: EXCLUSIVE
+    DOCX_BUILD:
+      mode: EXCLUSIVE
+    DELIVERY_BUILD:
+      mode: EXCLUSIVE
+  agents:
+    MASTER_ORCHESTRATOR:
+      profile: /engine/agents/master_orchestrator.toml
+    EXECUTIVE_EDITOR:
+      profile: /engine/agents/executive_editor.toml
+    CANON_GUARDIAN:
+      profile: /engine/agents/canon_guardian.toml
+    BRIEFING_ARCHITECT:
+      profile: /engine/agents/briefing_architect.toml
+    SPEC_ARCHITECT:
+      profile: /engine/agents/spec_architect.toml
+    NARRATIVE_ARCHITECT:
+      profile: /engine/agents/narrative_architect.toml
+    PLOT_ENGINEER:
+      profile: /engine/agents/plot_engineer.toml
+    SCENE_ARCHITECT:
+      profile: /engine/agents/scene_architect.toml
+    SYMBOLISM_ARCHITECT:
+      profile: /engine/agents/symbolism_architect.toml
+    TEMPORAL_ARCHITECT:
+      profile: /engine/agents/temporal_architect.toml
+    WORLD_ARCHITECT:
+      profile: /engine/agents/world_architect.toml
+    CHARACTER_PSYCHOLOGIST:
+      profile: /engine/agents/character_psychologist.toml
+    CHILD_VOICE_GUARDIAN:
+      profile: /engine/agents/child_voice_guardian.toml
+    EMOTIONAL_PHYSIOLOGY_ARCHITECT:
+      profile: /engine/agents/emotional_physiology_architect.toml
+    REALISM_ENGINEER:
+      profile: /engine/agents/realism_engineer.toml
+    PHYSICALITY_AND_BODY_AGENT:
+      profile: /engine/agents/physicality_and_body_agent.toml
+    SENSORY_AGENT:
+      profile: /engine/agents/sensory_agent.toml
+    GENRE_GUARDIAN:
+      profile: /engine/agents/genre_guardian.toml
+    ANTI_MANIPULATION_GUARDIAN:
+      profile: /engine/agents/anti_manipulation_guardian.toml
+    LEAD_NOVELIST:
+      profile: /engine/agents/lead_novelist.toml
+    CHAPTER_WRITER:
+      profile: /engine/agents/chapter_writer.toml
+    DIALOGUE_DIRECTOR:
+      profile: /engine/agents/dialogue_director.toml
+    LITERARY_STYLE_GUARDIAN:
+      profile: /engine/agents/literary_style_guardian.toml
+    SUBTEXT_EDITOR:
+      profile: /engine/agents/subtext_editor.toml
+    EMOTIONAL_REPETITION_AUDITOR:
+      profile: /engine/agents/emotional_repetition_auditor.toml
+    READER_VITALS_AGENT:
+      profile: /engine/agents/reader_vitals_agent.toml
+    PAGE_BREATHING_ARCHITECT:
+      profile: /engine/agents/page_breathing_architect.toml
+    VISUAL_DIRECTOR:
+      profile: /engine/agents/visual_director.toml
+    FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT:
+      profile: /engine/agents/facial_identity_expert.toml
+    CHAPTER_IMAGE_DIRECTOR:
+      profile: /engine/agents/chapter_image_director.toml
+    IMAGE_GENERATOR:
+      profile: /engine/agents/image_generator.toml
+    IMAGE_CONTINUITY_QA:
+      profile: /engine/agents/image_continuity_qa.toml
+    LIVING_SOUNDTRACK_ARCHITECT:
+      profile: /engine/agents/living_soundtrack_architect.toml
+    SOUND_BIOME_ARCHITECT:
+      profile: /engine/agents/sound_biome_architect.toml
+    ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT:
+      profile: /engine/agents/environment_acoustic_evolution_agent.toml
+    LIVING_SOUND_PROMPT_ENGINEER:
+      profile: /engine/agents/living_sound_prompt_engineer.toml
+    LEGAL_EDITOR_BR:
+      profile: /engine/agents/legal_editor_br.toml
+    LEGAL_EDITOR_GLOBAL:
+      profile: /engine/agents/legal_editor_global.toml
+    COPYRIGHT_ORIGINALITY_AUDITOR:
+      profile: /engine/agents/originality_auditor.toml
+    DEVELOPMENTAL_EDITOR:
+      profile: /engine/agents/developmental_editor.toml
+    PLOT_CONTINUITY_REVIEWER:
+      profile: /engine/agents/plot_continuity_reviewer.toml
+    CHARACTER_CONTINUITY_REVIEWER:
+      profile: /engine/agents/character_continuity_reviewer.toml
+    WORLD_RULES_REVIEWER:
+      profile: /engine/agents/world_rules_reviewer.toml
+    EMOTIONAL_EDITOR:
+      profile: /engine/agents/emotional_editor.toml
+    PTBR_GRAMMAR_EDITOR:
+      profile: /engine/agents/ptbr_grammar_editor.toml
+    TYPOGRAPHY_TEXT_REVIEWER:
+      profile: /engine/agents/typography_text_reviewer.toml
+    REDUNDANCY_REVIEWER:
+      profile: /engine/agents/redundancy_reviewer.toml
+    CLICHE_REVIEWER:
+      profile: /engine/agents/cliche_reviewer.toml
+    FINAL_PROOFREADER:
+      profile: /engine/agents/final_proofreader.toml
+    MERGE_COORDINATOR:
+      profile: /engine/agents/merge_coordinator.toml
+    MASTER_INTEGRATOR:
+      profile: /engine/agents/master_integrator.toml
+    PROTECTED_SCENE_AUDITOR:
+      profile: /engine/agents/protected_scene_auditor.toml
+    LITERARY_CRITIC:
+      profile: /engine/agents/literary_critic.toml
+    CINEMA_CRITIC:
+      profile: /engine/agents/cinema_critic.toml
+    COMMERCIAL_EDITOR_CRITIC:
+      profile: /engine/agents/commercial_editor_critic.toml
+    CLICHE_HUNTER:
+      profile: /engine/agents/cliche_hunter.toml
+    BOOK_LAYOUT_ARCHITECT:
+      profile: /engine/agents/book_layout_architect.toml
+    TABLE_OF_CONTENTS_AGENT:
+      profile: /engine/agents/table_of_contents_agent.toml
+    IMAGE_LAYOUT_AGENT:
+      profile: /engine/agents/image_layout_agent.toml
+    KDP_FORMATTER:
+      profile: /engine/agents/kdp_formatter.toml
+    KDP_REQUIREMENTS_RESEARCHER:
+      profile: /engine/agents/kdp_requirements_researcher.toml
+    TRANSLATION_ARCHITECT:
+      profile: /engine/agents/translation_architect.toml
+    LITERARY_TRANSLATOR_EN:
+      profile: /engine/agents/literary_translator_en.toml
+    ENGLISH_CHILD_VOICE_GUARDIAN:
+      profile: /engine/agents/english_child_voice_guardian.toml
+    ENGLISH_LITERARY_EDITOR:
+      profile: /engine/agents/english_literary_editor.toml
+    CULTURAL_ADAPTATION_GUARDIAN:
+      profile: /engine/agents/cultural_adaptation_guardian.toml
+    MEDIA_AND_KDP_AGENT:
+      profile: /engine/agents/media_kdp_agent.toml
+    DELIVERY_AGENT:
+      profile: /engine/agents/delivery_agent.toml
+    SPECULATIVE_HOPE_GUARDIAN:
+      profile: /book/agents/speculative_hope_guardian.toml
+    ANTI_DYSTOPIA_GUARDIAN:
+      profile: /book/agents/anti_dystopia_guardian.toml
+    ANTI_SENTIMENTALISM_GUARDIAN:
+      profile: /book/agents/anti_sentimentalism_guardian.toml
+    PARENTAL_GUILT_GUARDIAN:
+      profile: /book/agents/parental_guilt_guardian.toml
+    PARENTING_RELATIONSHIP_EXPERT:
+      profile: /book/agents/parenting_relationship_expert.toml
+    MEMORY_NOSTALGIA_EXPERT:
+      profile: /book/agents/memory_nostalgia_expert.toml
+    DOMESTIC_REALISM_ENGINEER:
+      profile: /book/agents/domestic_realism_engineer.toml
+    DOMESTIC_SENSORY_AGENT:
+      profile: /book/agents/domestic_sensory_agent.toml
+    COUNTER_LOGIC_REVIEWER:
+      profile: /book/agents/counter_logic_reviewer.toml
+    PARENT_READER_CRITIC:
+      profile: /book/agents/parent_reader_critic.toml
+    ADULT_WITHOUT_CHILDREN_CRITIC:
+      profile: /book/agents/adult_without_children_critic.toml
+    GROWN_CHILD_CRITIC:
+      profile: /book/agents/grown_child_critic.toml
+    GRANDPARENT_CRITIC:
+      profile: /book/agents/grandparent_critic.toml
+    COFFEE_MOTIF_AUDITOR:
+      profile: /book/agents/coffee_motif_auditor.toml
+    FINAL_CARRY_SCENE_AUDITOR:
+      profile: /book/agents/final_carry_scene_auditor.toml
+  protocols:
+    BASE_WAVE_REVIEW_PROTOCOL:
+      reviewer_policy:
+        manuscript_write: FORBIDDEN
+        report_write: REQUIRED
+      severity:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - BLOCKER
+      report_schema:
+        finding_id: REQUIRED
+        chapter: REQUIRED
+        severity: REQUIRED
+        category: REQUIRED
+        evidence: REQUIRED
+        recommended_action: REQUIRED
+      review_synthesis:
+        owner: EXECUTIVE_EDITOR
+      revision_owner:
+        agent: LEAD_NOVELIST
+      final_approval:
+        agent: EXECUTIVE_EDITOR
+    PROTECTED_SCENE_PROTOCOL:
+      owner: PROTECTED_SCENE_AUDITOR
+      blocking: true
+      criteria_source: /book/protected_scenes.yaml
+    CANON_PROPOSAL_PROTOCOL:
+      proposal_location: CANON_PROPOSALS
+      mutation_owner: CANON_GUARDIAN
+      unapproved_facts_are_canon: false
+  quality_defaults:
+    chapter_scores:
+      authenticity_of_characters: 8
+      scene_strength: 7
+      subtext: 7
+      sensory_concreteness: 7
+      coherence: 8
+      emotional_impact: 7
+    risk_maximums:
+      sentimentalism: 6
+      effect_phrase_overuse: 5
+      abstraction: 6
+      continuity: 2
+  quality_profile:
+    apiVersion: pedroarte.livingbooks/v1
+    kind: BookQualityProfile
+    chapter_scores:
+      authenticity_of_characters:
+        minimum: 8
+      scene_strength:
+        minimum: 7
+      subtext:
+        minimum: 7
+      sensory_concreteness:
+        minimum: 7
+      coherence:
+        minimum: 8
+      child_voice:
+        minimum_when_applicable: 8
+      speculative_hope:
+        minimum: 8
+      emotional_impact:
+        minimum: 7
+    risk_scores:
+      dystopia:
+        maximum: 2
+      sentimentalism:
+        maximum: 5
+      destructive_parental_guilt:
+        maximum: 3
+      counter_overuse:
+        maximum: 4
+      effect_phrase_overuse:
+        maximum: 4
+      abstraction:
+        maximum: 5
+  immutable_rules:
+    apiVersion: pedroarte.livingbooks/v1
+    kind: ImmutableRules
+    rules:
+    - id: IMMUTABLE_001
+      rule: The book contains exactly 30 chapters.
+    - id: IMMUTABLE_002
+      rule: Children cannot see counters.
+    - id: IMMUTABLE_003
+      rule: Counters never predict death, disease, accidents or tragedy.
+    - id: IMMUTABLE_004
+      rule: Forced behavior does not alter a counter.
+    - id: IMMUTABLE_005
+      rule: The counter phenomenon is never definitively explained.
+    - id: IMMUTABLE_006
+      rule: The novel must not become dystopian.
+    - id: IMMUTABLE_007
+      rule: Growth must also be depicted as achievement and new beginning.
+    - id: IMMUTABLE_008
+      rule: Mateus never sees the final carry counter reach zero.
+    - id: IMMUTABLE_009
+      rule: No epilogue follows chapter 30.
+    - id: IMMUTABLE_010
+      rule: 'The final manuscript sentence is exactly: Quando Mateus voltou, o café estava frio.'
+    - id: IMMUTABLE_011
+      rule: Exactly one approved primary editorial image exists per chapter.
+    - id: IMMUTABLE_012
+      rule: Recurring characters preserve canonical facial identity.
+    - id: IMMUTABLE_013
+      rule: Living Sound is physiological, not generic background music.
+    - id: IMMUTABLE_014
+      rule: Literature has precedence over viral marketing.
+    - id: IMMUTABLE_015
+      rule: The story must show rather than teach.
+  custom_validators:
+  - id: COUNTER_RULES
+    command: python book/validators/validate_book_rules.py counter-rules
+    phases:
+    - canon
+    - manuscript
+  - id: COUNTER_DISTRIBUTION
+    command: python book/validators/validate_book_rules.py counter-distribution
+    phases:
+    - briefs
+    - manuscript
+  - id: FINAL_LINE
+    command: python book/validators/validate_book_rules.py final-line
+    phases:
+    - manuscript
+    - kdp
+    - delivery
+  gates:
+    GATE_BOOTSTRAP:
+      blocking: true
+      requires:
+      - T000_INITIALIZE_RUNTIME
+      - T001_VALIDATE_CAPABILITIES
+      - T002_REGISTER_AGENTS
+    GATE_CANON:
+      blocking: true
+      requires:
+      - T010_MASTER_BRIEF
+      - T011_STORY_BIBLE
+      - T012_WORLD_RULES
+      - T013_CHARACTER_BIBLE
+      - T014_WORLD_BIBLE
+      - T015_SYMBOL_BIBLE
+      - T016_PLOT_DEPENDENCY_MAP
+      - T017_TIMELINE
+      - T018_CANON_REGISTRY
+      - T019_CANON_REVIEW
+      custom_validators:
+      - COUNTER_RULES
+    GATE_LIVING_BOOK:
+      blocking: true
+      requires:
+      - T030_LIVING_BOOK_BIBLE
+      - T031_LIVRO_BIOME
+      - T032_READER_VITALS
+      - T033_EMOTIONAL_RESPIRATION
+      - T034_PAGE_BIBLE
+      - T035_MEMORY_MOTIF_MAP
+      - T036_VISUAL_LIFE_SPEC
+      - T037_IMAGE_BIOME
+      - T038_FACE_CANON
+      - T039_CHARACTER_VISUAL_BIBLE
+      - T040_SOUND_BIOME_DRAFT
+      - T041_LIVING_BOOK_REVIEW
+    GATE_CHAPTER_BRIEFS:
+      blocking: true
+      requires:
+      - T101_BRIEF_CHAPTER
+      - T102_BRIEF_CHAPTER
+      - T103_BRIEF_CHAPTER
+      - T104_BRIEF_CHAPTER
+      - T105_BRIEF_CHAPTER
+      - T106_BRIEF_CHAPTER
+      - T107_BRIEF_CHAPTER
+      - T108_BRIEF_CHAPTER
+      - T109_BRIEF_CHAPTER
+      - T110_BRIEF_CHAPTER
+      - T111_BRIEF_CHAPTER
+      - T112_BRIEF_CHAPTER
+      - T113_BRIEF_CHAPTER
+      - T114_BRIEF_CHAPTER
+      - T115_BRIEF_CHAPTER
+      - T116_BRIEF_CHAPTER
+      - T117_BRIEF_CHAPTER
+      - T118_BRIEF_CHAPTER
+      - T119_BRIEF_CHAPTER
+      - T120_BRIEF_CHAPTER
+      - T121_BRIEF_CHAPTER
+      - T122_BRIEF_CHAPTER
+      - T123_BRIEF_CHAPTER
+      - T124_BRIEF_CHAPTER
+      - T125_BRIEF_CHAPTER
+      - T126_BRIEF_CHAPTER
+      - T127_BRIEF_CHAPTER
+      - T128_BRIEF_CHAPTER
+      - T129_BRIEF_CHAPTER
+      - T130_BRIEF_CHAPTER
+      custom_validators:
+      - COUNTER_DISTRIBUTION
+    GATE_VOICE:
+      blocking: true
+      requires:
+      - T151C_REVISE_CHAPTER_01
+      - T152C_REVISE_CHAPTER_02
+      - T156_BUILD_VOICE_REFERENCE
+      - T157_APPROVE_VOICE
+    GATE_WAVE_1:
+      blocking: true
+      requires:
+      - T201_PREFLIGHT
+      - T201_WRITE
+      - T201_MERGE
+      - T201_REVIEW
+      - T201_REVISION
+      - T201_CANON_UPDATE
+      - T201_APPROVAL
+    GATE_WAVE_2:
+      blocking: true
+      requires:
+      - T202_PREFLIGHT
+      - T202_WRITE
+      - T202_MERGE
+      - T202_REVIEW
+      - T202_REVISION
+      - T202_CANON_UPDATE
+      - T202_APPROVAL
+    GATE_WAVE_3:
+      blocking: true
+      requires:
+      - T203_PREFLIGHT
+      - T203_WRITE
+      - T203_MERGE
+      - T203_REVIEW
+      - T203_REVISION
+      - T203_CANON_UPDATE
+      - T203_APPROVAL
+    GATE_WAVE_4:
+      blocking: true
+      requires:
+      - T204_PREFLIGHT
+      - T204_WRITE
+      - T204_MERGE
+      - T204_REVIEW
+      - T204_REVISION
+      - T204_CANON_UPDATE
+      - T204_APPROVAL
+    GATE_WAVE_5:
+      blocking: true
+      requires:
+      - T205_PREFLIGHT
+      - T205_WRITE
+      - T205_MERGE
+      - T205_REVIEW
+      - T205_REVISION
+      - T205_CANON_UPDATE
+      - T205_APPROVAL
+    GATE_FULL_MANUSCRIPT:
+      blocking: true
+      requires:
+      - T300_ASSEMBLE_FULL_MANUSCRIPT
+      - T301_WHOLE_BOOK_INTEGRATION
+      - T302_CRITIC_PANEL
+      - T3201_PROTECTED_FINAL_CARRY
+      - T3202_PROTECTED_COFFEE_MOTIF
+      - T303_REVIEW_SYNTHESIS
+      - T304_LEAD_NOVELIST_REVISION
+      - T305_DEVELOPMENTAL_REVIEW
+      - T306_LINE_REVIEW
+      - T307_FINAL_LITERARY_REVISION
+      - T308_PTBR_REVIEW
+      - T309_FINAL_PROOF
+      - T310_FREEZE_MANUSCRIPT
+      custom_validators:
+      - COUNTER_RULES
+      - COUNTER_DISTRIBUTION
+      - FINAL_LINE
+    GATE_VISUAL:
+      blocking: true
+      requires:
+      - T401_IMAGE_APPROVE
+      - T402_IMAGE_APPROVE
+      - T403_IMAGE_APPROVE
+      - T404_IMAGE_APPROVE
+      - T405_IMAGE_APPROVE
+      - T406_IMAGE_APPROVE
+      - T407_IMAGE_APPROVE
+      - T408_IMAGE_APPROVE
+      - T409_IMAGE_APPROVE
+      - T410_IMAGE_APPROVE
+      - T411_IMAGE_APPROVE
+      - T412_IMAGE_APPROVE
+      - T413_IMAGE_APPROVE
+      - T414_IMAGE_APPROVE
+      - T415_IMAGE_APPROVE
+      - T416_IMAGE_APPROVE
+      - T417_IMAGE_APPROVE
+      - T418_IMAGE_APPROVE
+      - T419_IMAGE_APPROVE
+      - T420_IMAGE_APPROVE
+      - T421_IMAGE_APPROVE
+      - T422_IMAGE_APPROVE
+      - T423_IMAGE_APPROVE
+      - T424_IMAGE_APPROVE
+      - T425_IMAGE_APPROVE
+      - T426_IMAGE_APPROVE
+      - T427_IMAGE_APPROVE
+      - T428_IMAGE_APPROVE
+      - T429_IMAGE_APPROVE
+      - T430_IMAGE_APPROVE
+    GATE_SOUND:
+      blocking: true
+      requires:
+      - T500_SOUNDTRACK_BIBLE_FINAL
+      - T501_CHAPTER_SOUND_MAP_FINAL
+      - T502_ENVIRONMENT_ACOUSTIC_EVOLUTION
+      - T503_SOUND_PROMPTS
+      - T504_SOUND_REVIEW
+    GATE_LEGAL:
+      blocking: true
+      requires:
+      - T600_LEGAL_BR
+      - T601_LEGAL_GLOBAL
+      - T602_ORIGINALITY_AUDIT
+      - T603_LEGAL_SYNTHESIS
+      - T604_BLOCKING_LEGAL_FIXES
+    GATE_TRANSLATION_PREP:
+      blocking: false
+      requires:
+      - T650_TRANSLATION_ARCHITECTURE
+      - T651_ENGLISH_STYLE_BIBLE
+      - T652_TRANSLATION_GLOSSARY
+    GATE_KDP:
+      blocking: true
+      requires:
+      - T699_KDP_REQUIREMENTS_REFRESH
+      - T700_LAYOUT_BIBLE
+      - T701_TABLE_OF_CONTENTS
+      - T702_IMAGE_PLACEMENT
+      - T703_BUILD_DOCX
+      - T704_KDP_QA
+      - T705_DOCX_FINAL_FIXES
+      - T706_APPROVE_KDP
+      custom_validators:
+      - FINAL_LINE
+    GATE_DELIVERY:
+      blocking: true
+      requires:
+      - T800_MEDIA_PACKAGE
+      - T801_DELIVERY_MANIFEST
+      - T802_FINAL_ARTIFACT_AUDIT
+      - T803_FINAL_DELIVERY
+      custom_validators:
+      - FINAL_LINE
+  tasks:
+  - id: T000_INITIALIZE_RUNTIME
+    phase: BOOTSTRAP
+    owner: MASTER_ORCHESTRATOR
+    depends_on: []
+    outputs:
+    - /project_state/PROJECT_STATUS.yaml
+    - /logs/ORCHESTRATION_LOG.md
+    - /integration/MERGE_LOG.md
+  - id: T001_VALIDATE_CAPABILITIES
+    phase: BOOTSTRAP
+    owner: SPEC_ARCHITECT
+    depends_on:
+    - T000_INITIALIZE_RUNTIME
+    outputs:
+    - /project_state/CAPABILITY_STATUS.yaml
+  - id: T002_REGISTER_AGENTS
+    phase: BOOTSTRAP
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T000_INITIALIZE_RUNTIME
+    outputs:
+    - /project_state/AGENT_REGISTRY.yaml
+  - id: T010_MASTER_BRIEF
+    phase: CANON
+    owner: BRIEFING_ARCHITECT
+    depends_on:
+    - GATE_BOOTSTRAP
+    inputs:
+    - /book/CREATIVE_BRIEF.md
+    - /book/BOOK_CONSTITUTION.md
+    outputs:
+    - /specs/MASTER_BRIEF.md
+  - id: T011_STORY_BIBLE
+    phase: CANON
+    owner: NARRATIVE_ARCHITECT
+    depends_on:
+    - T010_MASTER_BRIEF
+    locks:
+    - STORY_BIBLE_WRITE
+    inputs:
+    - /book/chapter_architecture.yaml
+    outputs:
+    - /specs/STORY_BIBLE.md
+  - id: T012_WORLD_RULES
+    phase: CANON
+    owner: WORLD_ARCHITECT
+    depends_on:
+    - T010_MASTER_BRIEF
+    inputs:
+    - /book/seeds/COUNTER_RULES_SEED.md
+    outputs:
+    - /specs/WORLD_RULES.md
+  - id: T013_CHARACTER_BIBLE
+    phase: CANON
+    owner: CHARACTER_PSYCHOLOGIST
+    depends_on:
+    - T011_STORY_BIBLE
+    locks:
+    - CHARACTER_BIBLE_WRITE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - PARENTING_RELATIONSHIP_EXPERT
+      - CHILD_VOICE_GUARDIAN
+      - MEMORY_NOSTALGIA_EXPERT
+      wait_for_all: true
+    outputs:
+    - /specs/CHARACTER_BIBLE.md
+  - id: T014_WORLD_BIBLE
+    phase: CANON
+    owner: WORLD_ARCHITECT
+    depends_on:
+    - T011_STORY_BIBLE
+    - T012_WORLD_RULES
+    outputs:
+    - /specs/WORLD_BIBLE.md
+  - id: T015_SYMBOL_BIBLE
+    phase: CANON
+    owner: SYMBOLISM_ARCHITECT
+    depends_on:
+    - T011_STORY_BIBLE
+    outputs:
+    - /specs/SYMBOL_BIBLE.md
+  - id: T016_PLOT_DEPENDENCY_MAP
+    phase: CANON
+    owner: PLOT_ENGINEER
+    depends_on:
+    - T011_STORY_BIBLE
+    - T013_CHARACTER_BIBLE
+    - T015_SYMBOL_BIBLE
+    outputs:
+    - /specs/PLOT_DEPENDENCY_MAP.md
+  - id: T017_TIMELINE
+    phase: CANON
+    owner: TEMPORAL_ARCHITECT
+    depends_on:
+    - T011_STORY_BIBLE
+    - T016_PLOT_DEPENDENCY_MAP
+    locks:
+    - TIMELINE_WRITE
+    outputs:
+    - /specs/TIMELINE.md
+  - id: T018_CANON_REGISTRY
+    phase: CANON
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T012_WORLD_RULES
+    - T013_CHARACTER_BIBLE
+    - T014_WORLD_BIBLE
+    - T015_SYMBOL_BIBLE
+    - T016_PLOT_DEPENDENCY_MAP
+    - T017_TIMELINE
+    locks:
+    - CANON_WRITE
+    outputs:
+    - /canon/CANON_REGISTRY.yaml
+  - id: T019_CANON_REVIEW
+    phase: CANON
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T018_CANON_REGISTRY
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - CANON_GUARDIAN
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      - SPECULATIVE_HOPE_GUARDIAN
+      - ANTI_DYSTOPIA_GUARDIAN
+      - ANTI_SENTIMENTALISM_GUARDIAN
+      - PARENTAL_GUILT_GUARDIAN
+      wait_for_all: true
+    outputs:
+    - /reviews/CANON_REVIEW.md
+  - id: T030_LIVING_BOOK_BIBLE
+    phase: LIVING_BOOK
+    owner: EMOTIONAL_PHYSIOLOGY_ARCHITECT
+    depends_on:
+    - GATE_CANON
+    outputs:
+    - /living_book/LIVING_BOOK_BIBLE.md
+  - id: T031_LIVRO_BIOME
+    phase: LIVING_BOOK
+    owner: EMOTIONAL_PHYSIOLOGY_ARCHITECT
+    depends_on:
+    - GATE_CANON
+    outputs:
+    - /living_book/LIVRO_BIOME.md
+  - id: T032_READER_VITALS
+    phase: LIVING_BOOK
+    owner: READER_VITALS_AGENT
+    depends_on:
+    - GATE_CANON
+    outputs:
+    - /living_book/READER_VITALS.md
+  - id: T033_EMOTIONAL_RESPIRATION
+    phase: LIVING_BOOK
+    owner: EMOTIONAL_PHYSIOLOGY_ARCHITECT
+    depends_on:
+    - T032_READER_VITALS
+    outputs:
+    - /living_book/EMOTIONAL_RESPIRATION_MAP.md
+  - id: T034_PAGE_BIBLE
+    phase: LIVING_BOOK
+    owner: PAGE_BREATHING_ARCHITECT
+    depends_on:
+    - T032_READER_VITALS
+    - T033_EMOTIONAL_RESPIRATION
+    outputs:
+    - /living_book/PAGE_BIBLE.md
+  - id: T035_MEMORY_MOTIF_MAP
+    phase: LIVING_BOOK
+    owner: SYMBOLISM_ARCHITECT
+    depends_on:
+    - GATE_CANON
+    outputs:
+    - /living_book/MEMORY_MOTIF_MAP.md
+  - id: T036_VISUAL_LIFE_SPEC
+    phase: LIVING_BOOK
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - GATE_CANON
+    - T035_MEMORY_MOTIF_MAP
+    inputs:
+    - /book/visual_profile.md
+    outputs:
+    - /living_book/VISUAL_LIFE_SPEC.md
+  - id: T037_IMAGE_BIOME
+    phase: LIVING_BOOK
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T036_VISUAL_LIFE_SPEC
+    outputs:
+    - /living_book/IMAGE_BIOME.md
+  - id: T038_FACE_CANON
+    phase: LIVING_BOOK
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T013_CHARACTER_BIBLE
+    locks:
+    - FACE_CANON_WRITE
+    outputs:
+    - /images/canon/FACE_CANON.md
+  - id: T039_CHARACTER_VISUAL_BIBLE
+    phase: LIVING_BOOK
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T038_FACE_CANON
+    - T037_IMAGE_BIOME
+    locks:
+    - FACE_CANON_WRITE
+    outputs:
+    - /images/canon/CHARACTER_VISUAL_BIBLE.md
+  - id: T040_SOUND_BIOME_DRAFT
+    phase: LIVING_BOOK
+    owner: SOUND_BIOME_ARCHITECT
+    depends_on:
+    - GATE_CANON
+    - T032_READER_VITALS
+    inputs:
+    - /book/sound_profile.md
+    outputs:
+    - /sound/SOUND_BIOME_DRAFT.md
+  - id: T041_LIVING_BOOK_REVIEW
+    phase: LIVING_BOOK
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T030_LIVING_BOOK_BIBLE
+    - T031_LIVRO_BIOME
+    - T032_READER_VITALS
+    - T033_EMOTIONAL_RESPIRATION
+    - T034_PAGE_BIBLE
+    - T035_MEMORY_MOTIF_MAP
+    - T036_VISUAL_LIFE_SPEC
+    - T037_IMAGE_BIOME
+    - T038_FACE_CANON
+    - T039_CHARACTER_VISUAL_BIBLE
+    - T040_SOUND_BIOME_DRAFT
+    outputs:
+    - /reviews/LIVING_BOOK_ARCHITECTURE_REVIEW.md
+  - id: T101_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_01_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T102_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_02_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T103_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_03_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T104_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_04_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T105_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_05_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T106_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_06_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T107_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_07_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T108_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_08_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T109_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_09_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T110_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_10_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T111_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_11_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T112_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_12_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T113_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_13_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T114_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_14_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T115_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_15_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T116_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_16_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T117_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_17_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T118_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_18_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T119_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_19_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T120_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_20_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T121_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_21_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T122_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_22_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T123_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_23_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T124_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_24_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T125_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_25_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T126_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_26_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T127_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_27_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T128_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_28_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T129_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_29_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T130_BRIEF_CHAPTER
+    phase: CHAPTER_BRIEFS
+    owner: SCENE_ARCHITECT
+    depends_on:
+    - GATE_LIVING_BOOK
+    inputs:
+    - /book/chapter_architecture.yaml
+    - /specs/STORY_BIBLE.md
+    - /specs/CHARACTER_BIBLE.md
+    - /specs/PLOT_DEPENDENCY_MAP.md
+    - /specs/TIMELINE.md
+    - /living_book/READER_VITALS.md
+    outputs:
+    - /briefs/chapters/CHAPTER_30_BRIEF.md
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - EMOTIONAL_PHYSIOLOGY_ARCHITECT
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+      wait_for_all: true
+  - id: T151A_WRITE_CHAPTER_01
+    phase: VOICE_CALIBRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - GATE_CHAPTER_BRIEFS
+    outputs:
+    - /manuscript/raw/chapter_01.md
+  - id: T151B_REVIEW_CHAPTER_01
+    phase: VOICE_CALIBRATION
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T151A_WRITE_CHAPTER_01
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: &id001
+      - LITERARY_STYLE_GUARDIAN
+      - DIALOGUE_DIRECTOR
+      - CHILD_VOICE_GUARDIAN
+      - DOMESTIC_REALISM_ENGINEER
+      - PHYSICALITY_AND_BODY_AGENT
+      - ANTI_SENTIMENTALISM_GUARDIAN
+      wait_for_all: true
+    outputs:
+    - /reviews/chapter_01_voice_review.md
+  - id: T151C_REVISE_CHAPTER_01
+    phase: VOICE_CALIBRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T151B_REVIEW_CHAPTER_01
+    outputs:
+    - /manuscript/approved/chapter_01.md
+  - id: T152A_WRITE_CHAPTER_02
+    phase: VOICE_CALIBRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T151C_REVISE_CHAPTER_01
+    outputs:
+    - /manuscript/raw/chapter_02.md
+  - id: T152B_REVIEW_CHAPTER_02
+    phase: VOICE_CALIBRATION
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T152A_WRITE_CHAPTER_02
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: *id001
+      wait_for_all: true
+    outputs:
+    - /reviews/chapter_02_voice_review.md
+  - id: T152C_REVISE_CHAPTER_02
+    phase: VOICE_CALIBRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T152B_REVIEW_CHAPTER_02
+    outputs:
+    - /manuscript/approved/chapter_02.md
+  - id: T156_BUILD_VOICE_REFERENCE
+    phase: VOICE_CALIBRATION
+    owner: LITERARY_STYLE_GUARDIAN
+    depends_on:
+    - T151C_REVISE_CHAPTER_01
+    - T152C_REVISE_CHAPTER_02
+    outputs:
+    - /specs/VOICE_REFERENCE.md
+  - id: T157_APPROVE_VOICE
+    phase: VOICE_CALIBRATION
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T156_BUILD_VOICE_REFERENCE
+    outputs:
+    - /reviews/VOICE_APPROVAL.md
+  - id: T201_PREFLIGHT
+    phase: WRITING_WAVE_1
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - GATE_VOICE
+    parameters:
+      chapters:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+  - id: T201_WRITE
+    phase: WRITING_WAVE_1
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T201_PREFLIGHT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      jobs:
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 3
+        - 4
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 5
+        - 6
+      shared_inputs:
+      - /specs/VOICE_REFERENCE.md
+      - /canon/CANON_REGISTRY.yaml
+      wait_for_all: true
+  - id: T201_MERGE
+    phase: WRITING_WAVE_1
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - T201_WRITE
+    locks:
+    - MANUSCRIPT_MERGE
+  - id: T201_REVIEW
+    phase: WRITING_WAVE_1
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T201_MERGE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: &id002
+      - PLOT_CONTINUITY_REVIEWER
+      - CHARACTER_CONTINUITY_REVIEWER
+      - COUNTER_LOGIC_REVIEWER
+      - CHILD_VOICE_GUARDIAN
+      - EMOTIONAL_EDITOR
+      - SPECULATIVE_HOPE_GUARDIAN
+      - ANTI_DYSTOPIA_GUARDIAN
+      - ANTI_SENTIMENTALISM_GUARDIAN
+      wait_for_all: true
+    outputs:
+    - /reviews/WAVE_01_REVIEW.md
+  - id: T201_REVISION
+    phase: WRITING_WAVE_1
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T201_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T201_CANON_UPDATE
+    phase: WRITING_WAVE_1
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T201_REVISION
+    locks:
+    - CANON_WRITE
+  - id: T201_APPROVAL
+    phase: WRITING_WAVE_1
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T201_CANON_UPDATE
+  - id: T202_PREFLIGHT
+    phase: WRITING_WAVE_2
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - GATE_WAVE_1
+    parameters:
+      chapters:
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+  - id: T202_WRITE
+    phase: WRITING_WAVE_2
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T202_PREFLIGHT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      jobs:
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 7
+        - 8
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 9
+        - 10
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 11
+        - 12
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 13
+        - 14
+      shared_inputs:
+      - /specs/VOICE_REFERENCE.md
+      - /canon/CANON_REGISTRY.yaml
+      wait_for_all: true
+  - id: T202_MERGE
+    phase: WRITING_WAVE_2
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - T202_WRITE
+    locks:
+    - MANUSCRIPT_MERGE
+  - id: T202_REVIEW
+    phase: WRITING_WAVE_2
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T202_MERGE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: *id002
+      wait_for_all: true
+    outputs:
+    - /reviews/WAVE_02_REVIEW.md
+  - id: T202_REVISION
+    phase: WRITING_WAVE_2
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T202_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T202_CANON_UPDATE
+    phase: WRITING_WAVE_2
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T202_REVISION
+    locks:
+    - CANON_WRITE
+  - id: T202_APPROVAL
+    phase: WRITING_WAVE_2
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T202_CANON_UPDATE
+  - id: T203_PREFLIGHT
+    phase: WRITING_WAVE_3
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - GATE_WAVE_2
+    parameters:
+      chapters:
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+  - id: T203_WRITE
+    phase: WRITING_WAVE_3
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T203_PREFLIGHT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      jobs:
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 15
+        - 16
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 17
+        - 18
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 19
+        - 20
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 21
+      shared_inputs:
+      - /specs/VOICE_REFERENCE.md
+      - /canon/CANON_REGISTRY.yaml
+      wait_for_all: true
+  - id: T203_MERGE
+    phase: WRITING_WAVE_3
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - T203_WRITE
+    locks:
+    - MANUSCRIPT_MERGE
+  - id: T203_REVIEW
+    phase: WRITING_WAVE_3
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T203_MERGE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: *id002
+      wait_for_all: true
+    outputs:
+    - /reviews/WAVE_03_REVIEW.md
+  - id: T203_REVISION
+    phase: WRITING_WAVE_3
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T203_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T203_CANON_UPDATE
+    phase: WRITING_WAVE_3
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T203_REVISION
+    locks:
+    - CANON_WRITE
+  - id: T203_APPROVAL
+    phase: WRITING_WAVE_3
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T203_CANON_UPDATE
+  - id: T204_PREFLIGHT
+    phase: WRITING_WAVE_4
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - GATE_WAVE_3
+    parameters:
+      chapters:
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+  - id: T204_WRITE
+    phase: WRITING_WAVE_4
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T204_PREFLIGHT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      jobs:
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 22
+        - 23
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 24
+        - 25
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 26
+        - 27
+      shared_inputs:
+      - /specs/VOICE_REFERENCE.md
+      - /canon/CANON_REGISTRY.yaml
+      wait_for_all: true
+  - id: T204_MERGE
+    phase: WRITING_WAVE_4
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - T204_WRITE
+    locks:
+    - MANUSCRIPT_MERGE
+  - id: T204_REVIEW
+    phase: WRITING_WAVE_4
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T204_MERGE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: *id002
+      wait_for_all: true
+    outputs:
+    - /reviews/WAVE_04_REVIEW.md
+  - id: T204_REVISION
+    phase: WRITING_WAVE_4
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T204_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T204_CANON_UPDATE
+    phase: WRITING_WAVE_4
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T204_REVISION
+    locks:
+    - CANON_WRITE
+  - id: T204_APPROVAL
+    phase: WRITING_WAVE_4
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T204_CANON_UPDATE
+  - id: T205_PREFLIGHT
+    phase: WRITING_WAVE_5
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - GATE_WAVE_4
+    parameters:
+      chapters:
+      - 28
+      - 29
+      - 30
+  - id: T205_WRITE
+    phase: WRITING_WAVE_5
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T205_PREFLIGHT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      jobs:
+      - agent: LEAD_NOVELIST
+        chapters:
+        - 28
+      - agent: CHAPTER_WRITER
+        chapters:
+        - 29
+      - agent: LEAD_NOVELIST
+        chapters:
+        - 30
+      shared_inputs:
+      - /specs/VOICE_REFERENCE.md
+      - /canon/CANON_REGISTRY.yaml
+      wait_for_all: true
+  - id: T205_MERGE
+    phase: WRITING_WAVE_5
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - T205_WRITE
+    locks:
+    - MANUSCRIPT_MERGE
+  - id: T205_REVIEW
+    phase: WRITING_WAVE_5
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T205_MERGE
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents: *id002
+      wait_for_all: true
+    outputs:
+    - /reviews/WAVE_05_REVIEW.md
+  - id: T205_REVISION
+    phase: WRITING_WAVE_5
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T205_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T205_CANON_UPDATE
+    phase: WRITING_WAVE_5
+    owner: CANON_GUARDIAN
+    depends_on:
+    - T205_REVISION
+    locks:
+    - CANON_WRITE
+  - id: T205_APPROVAL
+    phase: WRITING_WAVE_5
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T205_CANON_UPDATE
+  - id: T300_ASSEMBLE_FULL_MANUSCRIPT
+    phase: INTEGRATION
+    owner: MERGE_COORDINATOR
+    depends_on:
+    - GATE_WAVE_5
+    locks:
+    - MANUSCRIPT_MERGE
+    outputs:
+    - /manuscript/revised/FULL_MANUSCRIPT_PRE_INTEGRATION.md
+  - id: T301_WHOLE_BOOK_INTEGRATION
+    phase: INTEGRATION
+    owner: MASTER_INTEGRATOR
+    depends_on:
+    - T300_ASSEMBLE_FULL_MANUSCRIPT
+    outputs:
+    - /integration/INTEGRATION_REPORT.md
+  - id: T302_CRITIC_PANEL
+    phase: INTEGRATION
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T300_ASSEMBLE_FULL_MANUSCRIPT
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - LITERARY_CRITIC
+      - PARENT_READER_CRITIC
+      - ADULT_WITHOUT_CHILDREN_CRITIC
+      - GROWN_CHILD_CRITIC
+      - GRANDPARENT_CRITIC
+      - CINEMA_CRITIC
+      - COMMERCIAL_EDITOR_CRITIC
+      - CLICHE_HUNTER
+      - DEVELOPMENTAL_EDITOR
+      - SPECULATIVE_HOPE_GUARDIAN
+      - ANTI_DYSTOPIA_GUARDIAN
+      - ANTI_SENTIMENTALISM_GUARDIAN
+      - CHILD_VOICE_GUARDIAN
+      - EMOTIONAL_REPETITION_AUDITOR
+      - PLOT_CONTINUITY_REVIEWER
+      wait_for_all: true
+    outputs:
+    - /reviews/CRITIC_PANEL/
+  - id: T3201_PROTECTED_FINAL_CARRY
+    phase: INTEGRATION
+    owner: FINAL_CARRY_SCENE_AUDITOR
+    depends_on:
+    - T300_ASSEMBLE_FULL_MANUSCRIPT
+    inputs:
+    - /book/protected_scenes.yaml
+    parameters:
+      scene_id: FINAL_CARRY
+      chapters:
+      - 28
+    outputs:
+    - /reviews/PROTECTED_FINAL_CARRY_AUDIT.md
+  - id: T3202_PROTECTED_COFFEE_MOTIF
+    phase: INTEGRATION
+    owner: COFFEE_MOTIF_AUDITOR
+    depends_on:
+    - T300_ASSEMBLE_FULL_MANUSCRIPT
+    inputs:
+    - /book/protected_scenes.yaml
+    parameters:
+      scene_id: COFFEE_MOTIF
+      chapters:
+      - 1
+      - 12
+      - 30
+    outputs:
+    - /reviews/PROTECTED_COFFEE_MOTIF_AUDIT.md
+  - id: T303_REVIEW_SYNTHESIS
+    phase: INTEGRATION
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T301_WHOLE_BOOK_INTEGRATION
+    - T302_CRITIC_PANEL
+    - T3201_PROTECTED_FINAL_CARRY
+    - T3202_PROTECTED_COFFEE_MOTIF
+    outputs:
+    - /reviews/MASTER_REVISION_DIRECTIVE.md
+  - id: T304_LEAD_NOVELIST_REVISION
+    phase: INTEGRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T303_REVIEW_SYNTHESIS
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T305_DEVELOPMENTAL_REVIEW
+    phase: INTEGRATION
+    owner: DEVELOPMENTAL_EDITOR
+    depends_on:
+    - T304_LEAD_NOVELIST_REVISION
+  - id: T306_LINE_REVIEW
+    phase: INTEGRATION
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T304_LEAD_NOVELIST_REVISION
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - DIALOGUE_DIRECTOR
+      - LITERARY_STYLE_GUARDIAN
+      - SUBTEXT_EDITOR
+      - DOMESTIC_SENSORY_AGENT
+      - PHYSICALITY_AND_BODY_AGENT
+      - TYPOGRAPHY_TEXT_REVIEWER
+      - REDUNDANCY_REVIEWER
+      - CLICHE_REVIEWER
+      wait_for_all: true
+  - id: T307_FINAL_LITERARY_REVISION
+    phase: INTEGRATION
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T305_DEVELOPMENTAL_REVIEW
+    - T306_LINE_REVIEW
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+  - id: T308_PTBR_REVIEW
+    phase: INTEGRATION
+    owner: PTBR_GRAMMAR_EDITOR
+    depends_on:
+    - T307_FINAL_LITERARY_REVISION
+  - id: T309_FINAL_PROOF
+    phase: INTEGRATION
+    owner: FINAL_PROOFREADER
+    depends_on:
+    - T308_PTBR_REVIEW
+  - id: T310_FREEZE_MANUSCRIPT
+    phase: INTEGRATION
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T309_FINAL_PROOF
+    locks:
+    - MANUSCRIPT_FINAL_WRITE
+    outputs:
+    - /manuscript/final/MANUSCRIPT_FINAL_PTBR.md
+    - /manuscript/final/MANUSCRIPT_FINAL_PTBR.txt
+  - id: T401_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_01_IMAGE_BRIEF.md
+  - id: T401_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T401_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_01/
+  - id: T401_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T401_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_01/FACE_QA.md
+  - id: T401_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T401_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_01/CONTINUITY_QA.md
+  - id: T401_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T401_FACE_QA
+    - T401_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_01.jpg
+  - id: T402_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_02_IMAGE_BRIEF.md
+  - id: T402_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T402_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_02/
+  - id: T402_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T402_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_02/FACE_QA.md
+  - id: T402_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T402_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_02/CONTINUITY_QA.md
+  - id: T402_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T402_FACE_QA
+    - T402_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_02.jpg
+  - id: T403_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_03_IMAGE_BRIEF.md
+  - id: T403_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T403_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_03/
+  - id: T403_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T403_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_03/FACE_QA.md
+  - id: T403_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T403_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_03/CONTINUITY_QA.md
+  - id: T403_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T403_FACE_QA
+    - T403_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_03.jpg
+  - id: T404_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_04_IMAGE_BRIEF.md
+  - id: T404_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T404_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_04/
+  - id: T404_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T404_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_04/FACE_QA.md
+  - id: T404_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T404_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_04/CONTINUITY_QA.md
+  - id: T404_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T404_FACE_QA
+    - T404_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_04.jpg
+  - id: T405_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_05_IMAGE_BRIEF.md
+  - id: T405_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T405_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_05/
+  - id: T405_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T405_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_05/FACE_QA.md
+  - id: T405_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T405_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_05/CONTINUITY_QA.md
+  - id: T405_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T405_FACE_QA
+    - T405_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_05.jpg
+  - id: T406_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_06_IMAGE_BRIEF.md
+  - id: T406_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T406_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_06/
+  - id: T406_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T406_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_06/FACE_QA.md
+  - id: T406_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T406_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_06/CONTINUITY_QA.md
+  - id: T406_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T406_FACE_QA
+    - T406_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_06.jpg
+  - id: T407_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_07_IMAGE_BRIEF.md
+  - id: T407_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T407_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_07/
+  - id: T407_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T407_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_07/FACE_QA.md
+  - id: T407_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T407_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_07/CONTINUITY_QA.md
+  - id: T407_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T407_FACE_QA
+    - T407_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_07.jpg
+  - id: T408_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_08_IMAGE_BRIEF.md
+  - id: T408_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T408_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_08/
+  - id: T408_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T408_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_08/FACE_QA.md
+  - id: T408_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T408_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_08/CONTINUITY_QA.md
+  - id: T408_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T408_FACE_QA
+    - T408_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_08.jpg
+  - id: T409_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_09_IMAGE_BRIEF.md
+  - id: T409_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T409_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_09/
+  - id: T409_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T409_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_09/FACE_QA.md
+  - id: T409_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T409_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_09/CONTINUITY_QA.md
+  - id: T409_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T409_FACE_QA
+    - T409_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_09.jpg
+  - id: T410_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_10_IMAGE_BRIEF.md
+  - id: T410_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T410_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_10/
+  - id: T410_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T410_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_10/FACE_QA.md
+  - id: T410_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T410_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_10/CONTINUITY_QA.md
+  - id: T410_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T410_FACE_QA
+    - T410_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_10.jpg
+  - id: T411_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_11_IMAGE_BRIEF.md
+  - id: T411_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T411_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_11/
+  - id: T411_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T411_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_11/FACE_QA.md
+  - id: T411_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T411_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_11/CONTINUITY_QA.md
+  - id: T411_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T411_FACE_QA
+    - T411_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_11.jpg
+  - id: T412_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_12_IMAGE_BRIEF.md
+  - id: T412_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T412_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_12/
+  - id: T412_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T412_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_12/FACE_QA.md
+  - id: T412_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T412_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_12/CONTINUITY_QA.md
+  - id: T412_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T412_FACE_QA
+    - T412_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_12.jpg
+  - id: T413_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_13_IMAGE_BRIEF.md
+  - id: T413_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T413_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_13/
+  - id: T413_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T413_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_13/FACE_QA.md
+  - id: T413_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T413_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_13/CONTINUITY_QA.md
+  - id: T413_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T413_FACE_QA
+    - T413_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_13.jpg
+  - id: T414_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_14_IMAGE_BRIEF.md
+  - id: T414_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T414_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_14/
+  - id: T414_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T414_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_14/FACE_QA.md
+  - id: T414_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T414_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_14/CONTINUITY_QA.md
+  - id: T414_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T414_FACE_QA
+    - T414_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_14.jpg
+  - id: T415_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_15_IMAGE_BRIEF.md
+  - id: T415_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T415_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_15/
+  - id: T415_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T415_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_15/FACE_QA.md
+  - id: T415_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T415_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_15/CONTINUITY_QA.md
+  - id: T415_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T415_FACE_QA
+    - T415_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_15.jpg
+  - id: T416_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_16_IMAGE_BRIEF.md
+  - id: T416_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T416_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_16/
+  - id: T416_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T416_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_16/FACE_QA.md
+  - id: T416_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T416_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_16/CONTINUITY_QA.md
+  - id: T416_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T416_FACE_QA
+    - T416_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_16.jpg
+  - id: T417_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_17_IMAGE_BRIEF.md
+  - id: T417_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T417_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_17/
+  - id: T417_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T417_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_17/FACE_QA.md
+  - id: T417_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T417_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_17/CONTINUITY_QA.md
+  - id: T417_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T417_FACE_QA
+    - T417_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_17.jpg
+  - id: T418_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_18_IMAGE_BRIEF.md
+  - id: T418_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T418_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_18/
+  - id: T418_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T418_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_18/FACE_QA.md
+  - id: T418_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T418_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_18/CONTINUITY_QA.md
+  - id: T418_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T418_FACE_QA
+    - T418_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_18.jpg
+  - id: T419_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_19_IMAGE_BRIEF.md
+  - id: T419_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T419_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_19/
+  - id: T419_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T419_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_19/FACE_QA.md
+  - id: T419_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T419_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_19/CONTINUITY_QA.md
+  - id: T419_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T419_FACE_QA
+    - T419_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_19.jpg
+  - id: T420_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_20_IMAGE_BRIEF.md
+  - id: T420_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T420_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_20/
+  - id: T420_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T420_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_20/FACE_QA.md
+  - id: T420_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T420_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_20/CONTINUITY_QA.md
+  - id: T420_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T420_FACE_QA
+    - T420_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_20.jpg
+  - id: T421_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_21_IMAGE_BRIEF.md
+  - id: T421_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T421_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_21/
+  - id: T421_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T421_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_21/FACE_QA.md
+  - id: T421_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T421_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_21/CONTINUITY_QA.md
+  - id: T421_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T421_FACE_QA
+    - T421_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_21.jpg
+  - id: T422_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_22_IMAGE_BRIEF.md
+  - id: T422_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T422_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_22/
+  - id: T422_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T422_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_22/FACE_QA.md
+  - id: T422_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T422_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_22/CONTINUITY_QA.md
+  - id: T422_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T422_FACE_QA
+    - T422_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_22.jpg
+  - id: T423_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_23_IMAGE_BRIEF.md
+  - id: T423_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T423_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_23/
+  - id: T423_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T423_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_23/FACE_QA.md
+  - id: T423_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T423_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_23/CONTINUITY_QA.md
+  - id: T423_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T423_FACE_QA
+    - T423_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_23.jpg
+  - id: T424_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_24_IMAGE_BRIEF.md
+  - id: T424_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T424_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_24/
+  - id: T424_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T424_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_24/FACE_QA.md
+  - id: T424_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T424_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_24/CONTINUITY_QA.md
+  - id: T424_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T424_FACE_QA
+    - T424_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_24.jpg
+  - id: T425_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_25_IMAGE_BRIEF.md
+  - id: T425_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T425_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_25/
+  - id: T425_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T425_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_25/FACE_QA.md
+  - id: T425_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T425_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_25/CONTINUITY_QA.md
+  - id: T425_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T425_FACE_QA
+    - T425_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_25.jpg
+  - id: T426_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_26_IMAGE_BRIEF.md
+  - id: T426_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T426_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_26/
+  - id: T426_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T426_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_26/FACE_QA.md
+  - id: T426_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T426_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_26/CONTINUITY_QA.md
+  - id: T426_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T426_FACE_QA
+    - T426_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_26.jpg
+  - id: T427_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_27_IMAGE_BRIEF.md
+  - id: T427_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T427_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_27/
+  - id: T427_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T427_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_27/FACE_QA.md
+  - id: T427_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T427_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_27/CONTINUITY_QA.md
+  - id: T427_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T427_FACE_QA
+    - T427_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_27.jpg
+  - id: T428_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_28_IMAGE_BRIEF.md
+  - id: T428_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T428_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_28/
+  - id: T428_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T428_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_28/FACE_QA.md
+  - id: T428_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T428_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_28/CONTINUITY_QA.md
+  - id: T428_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T428_FACE_QA
+    - T428_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_28.jpg
+  - id: T429_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_29_IMAGE_BRIEF.md
+  - id: T429_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T429_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_29/
+  - id: T429_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T429_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_29/FACE_QA.md
+  - id: T429_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T429_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_29/CONTINUITY_QA.md
+  - id: T429_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T429_FACE_QA
+    - T429_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_29.jpg
+  - id: T430_IMAGE_BRIEF
+    phase: VISUAL_PRODUCTION
+    owner: CHAPTER_IMAGE_DIRECTOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /images/prompts/CHAPTER_30_IMAGE_BRIEF.md
+  - id: T430_IMAGE_GENERATE
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_GENERATOR
+    depends_on:
+    - T430_IMAGE_BRIEF
+    outputs:
+    - /images/chapters/chapter_30/
+  - id: T430_FACE_QA
+    phase: VISUAL_PRODUCTION
+    owner: FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    depends_on:
+    - T430_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_30/FACE_QA.md
+  - id: T430_CONTINUITY_QA
+    phase: VISUAL_PRODUCTION
+    owner: IMAGE_CONTINUITY_QA
+    depends_on:
+    - T430_IMAGE_GENERATE
+    outputs:
+    - /images/chapters/chapter_30/CONTINUITY_QA.md
+  - id: T430_IMAGE_APPROVE
+    phase: VISUAL_PRODUCTION
+    owner: VISUAL_DIRECTOR
+    depends_on:
+    - T430_FACE_QA
+    - T430_CONTINUITY_QA
+    outputs:
+    - /images/approved/chapter_30.jpg
+  - id: T500_SOUNDTRACK_BIBLE_FINAL
+    phase: LIVING_SOUND
+    owner: LIVING_SOUNDTRACK_ARCHITECT
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /sound/LIVING_SOUNDTRACK_BIBLE.md
+  - id: T501_CHAPTER_SOUND_MAP_FINAL
+    phase: LIVING_SOUND
+    owner: LIVING_SOUNDTRACK_ARCHITECT
+    depends_on:
+    - T500_SOUNDTRACK_BIBLE_FINAL
+    outputs:
+    - /sound/CHAPTER_SOUND_MAP.md
+  - id: T502_ENVIRONMENT_ACOUSTIC_EVOLUTION
+    phase: LIVING_SOUND
+    owner: ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT
+    depends_on:
+    - T500_SOUNDTRACK_BIBLE_FINAL
+    parameters:
+      environment_organism: a casa Ferraz
+    outputs:
+    - /sound/ENVIRONMENT_ACOUSTIC_EVOLUTION.md
+  - id: T503_SOUND_PROMPTS
+    phase: LIVING_SOUND
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T501_CHAPTER_SOUND_MAP_FINAL
+    - T502_ENVIRONMENT_ACOUSTIC_EVOLUTION
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      template_agent: LIVING_SOUND_PROMPT_ENGINEER
+      foreach_chapter: 1..30
+      max_parallel: 6
+      wait_for_all: true
+    outputs:
+    - /sound/prompts/CHAPTER_{chapter:02d}_SOUND_PROMPT.md
+  - id: T504_SOUND_REVIEW
+    phase: LIVING_SOUND
+    owner: SOUND_BIOME_ARCHITECT
+    depends_on:
+    - T503_SOUND_PROMPTS
+    outputs:
+    - /reviews/LIVING_SOUND_REVIEW.md
+  - id: T600_LEGAL_BR
+    phase: LEGAL
+    owner: LEGAL_EDITOR_BR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /legal/LEGAL_REVIEW_BR.md
+  - id: T601_LEGAL_GLOBAL
+    phase: LEGAL
+    owner: LEGAL_EDITOR_GLOBAL
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /legal/LEGAL_REVIEW_GLOBAL.md
+  - id: T602_ORIGINALITY_AUDIT
+    phase: LEGAL
+    owner: COPYRIGHT_ORIGINALITY_AUDITOR
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /legal/ORIGINALITY_REPORT.md
+  - id: T603_LEGAL_SYNTHESIS
+    phase: LEGAL
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T600_LEGAL_BR
+    - T601_LEGAL_GLOBAL
+    - T602_ORIGINALITY_AUDIT
+    outputs:
+    - /legal/LEGAL_BLOCKERS.md
+  - id: T604_BLOCKING_LEGAL_FIXES
+    phase: LEGAL
+    owner: LEAD_NOVELIST
+    depends_on:
+    - T603_LEGAL_SYNTHESIS
+    condition: LEGAL_BLOCKERS contains blocking findings
+  - id: T650_TRANSLATION_ARCHITECTURE
+    phase: TRANSLATION
+    owner: TRANSLATION_ARCHITECT
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /translation/TRANSLATION_PLAN.md
+  - id: T651_ENGLISH_STYLE_BIBLE
+    phase: TRANSLATION
+    owner: ENGLISH_LITERARY_EDITOR
+    depends_on:
+    - T650_TRANSLATION_ARCHITECTURE
+    outputs:
+    - /translation/ENGLISH_STYLE_BIBLE.md
+  - id: T652_TRANSLATION_GLOSSARY
+    phase: TRANSLATION
+    owner: CULTURAL_ADAPTATION_GUARDIAN
+    depends_on:
+    - T650_TRANSLATION_ARCHITECTURE
+    outputs:
+    - /translation/PTBR_EN_GLOSSARY.md
+  - id: T699_KDP_REQUIREMENTS_REFRESH
+    phase: KDP
+    owner: KDP_REQUIREMENTS_RESEARCHER
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /layout/KDP_CURRENT_REQUIREMENTS.md
+  - id: T700_LAYOUT_BIBLE
+    phase: KDP
+    owner: BOOK_LAYOUT_ARCHITECT
+    depends_on:
+    - GATE_FULL_MANUSCRIPT
+    outputs:
+    - /layout/PAGE_BIBLE.md
+  - id: T701_TABLE_OF_CONTENTS
+    phase: KDP
+    owner: TABLE_OF_CONTENTS_AGENT
+    depends_on:
+    - T700_LAYOUT_BIBLE
+    outputs:
+    - /layout/TABLE_OF_CONTENTS_SPEC.md
+  - id: T702_IMAGE_PLACEMENT
+    phase: KDP
+    owner: IMAGE_LAYOUT_AGENT
+    depends_on:
+    - GATE_VISUAL
+    - T700_LAYOUT_BIBLE
+    outputs:
+    - /layout/IMAGE_PLACEMENT_REPORT.md
+  - id: T703_BUILD_DOCX
+    phase: KDP
+    owner: KDP_FORMATTER
+    depends_on:
+    - GATE_LEGAL
+    - GATE_VISUAL
+    - GATE_SOUND
+    - T699_KDP_REQUIREMENTS_REFRESH
+    - T701_TABLE_OF_CONTENTS
+    - T702_IMAGE_PLACEMENT
+    locks:
+    - DOCX_BUILD
+    outputs:
+    - /outputs/KDP_DRAFT.docx
+  - id: T704_KDP_QA
+    phase: KDP
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T703_BUILD_DOCX
+    spawn:
+      mode: PARALLEL_SUBAGENTS
+      agents:
+      - BOOK_LAYOUT_ARCHITECT
+      - TABLE_OF_CONTENTS_AGENT
+      - IMAGE_LAYOUT_AGENT
+      - FINAL_PROOFREADER
+      wait_for_all: true
+    outputs:
+    - /reviews/KDP_QA_REPORT.md
+  - id: T705_DOCX_FINAL_FIXES
+    phase: KDP
+    owner: KDP_FORMATTER
+    depends_on:
+    - T704_KDP_QA
+    locks:
+    - DOCX_BUILD
+    outputs:
+    - /outputs/BOOK_KDP_FINAL.docx
+  - id: T706_APPROVE_KDP
+    phase: KDP
+    owner: EXECUTIVE_EDITOR
+    depends_on:
+    - T705_DOCX_FINAL_FIXES
+  - id: T800_MEDIA_PACKAGE
+    phase: DELIVERY
+    owner: MEDIA_AND_KDP_AGENT
+    depends_on:
+    - GATE_KDP
+    outputs:
+    - /media/KDP_DESCRIPTION_4000.txt
+    - /media/KDP_DESCRIPTION_SHORT.txt
+    - /media/KDP_KEYWORDS.md
+    - /media/COVER_BRIEF.md
+    - /media/SHAREABLE_EXCERPTS.md
+    - /media/INSTAGRAM_STORIES_IDEAS.md
+  - id: T801_DELIVERY_MANIFEST
+    phase: DELIVERY
+    owner: DELIVERY_AGENT
+    depends_on:
+    - T800_MEDIA_PACKAGE
+    outputs:
+    - /outputs/DELIVERY_MANIFEST.md
+  - id: T802_FINAL_ARTIFACT_AUDIT
+    phase: DELIVERY
+    owner: MASTER_ORCHESTRATOR
+    depends_on:
+    - T801_DELIVERY_MANIFEST
+    outputs:
+    - /reviews/FINAL_ARTIFACT_AUDIT.md
+  - id: T803_FINAL_DELIVERY
+    phase: DELIVERY
+    owner: DELIVERY_AGENT
+    depends_on:
+    - T802_FINAL_ARTIFACT_AUDIT
+    locks:
+    - DELIVERY_BUILD
+    outputs:
+    - /project_state/FINAL_DELIVERY_APPROVED

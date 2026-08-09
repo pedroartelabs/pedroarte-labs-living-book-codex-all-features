@@ -1,0 +1,30 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+- id: FINAL_CARRY
+  title: O último colo
+  chapters:
+  - 28
+  auditor: FINAL_CARRY_SCENE_AUDITOR
+  blocking: true
+  criteria:
+  - Bento remains physically and verbally consistent with age six.
+  - The request for carry is spontaneous.
+  - Mateus does not manipulate the day to produce the request.
+  - The bodily weight and adjustment are materially present.
+  - Mateus closes his eyes rather than monitoring the counter.
+  - Mateus never sees zero.
+  - No explanatory speech weakens the silence.
+- id: COFFEE_MOTIF
+  title: Motivo do café e última frase
+  chapters:
+  - 1
+  - 12
+  - 30
+  auditor: COFFEE_MOTIF_AUDITOR
+  blocking: true
+  criteria:
+  - Coffee motif is planted before the ending.
+  - The motif evolves through domestic meaning rather than repeated explanation.
+  - The final line feels earned.
+  - No text follows the exact final sentence.

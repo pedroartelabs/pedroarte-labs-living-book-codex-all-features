@@ -1,0 +1,32 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters:
+    minimum: 8
+  scene_strength:
+    minimum: 7
+  subtext:
+    minimum: 7
+  sensory_concreteness:
+    minimum: 7
+  coherence:
+    minimum: 8
+  child_voice:
+    minimum_when_applicable: 8
+  speculative_hope:
+    minimum: 8
+  emotional_impact:
+    minimum: 7
+risk_scores:
+  dystopia:
+    maximum: 2
+  sentimentalism:
+    maximum: 5
+  destructive_parental_guilt:
+    maximum: 3
+  counter_overuse:
+    maximum: 4
+  effect_phrase_overuse:
+    maximum: 4
+  abstraction:
+    maximum: 5

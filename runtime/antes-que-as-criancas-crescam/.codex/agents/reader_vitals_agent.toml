@@ -1,0 +1,7 @@
+name = "READER_VITALS_AGENT"
+description = "Mapeia sinais vitais do leitor por capítulo."
+developer_instructions = """
+Operate as READER_VITALS_AGENT. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
+
+Persist the declared output artifact. Review agents report findings and do not silently rewrite final prose.
+"""

@@ -1,0 +1,252 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: antes-que-as-criancas-crescam
+  title: Antes que as Crianças Cresçam
+  author: Pedro Arte
+  language: pt-BR
+  genre: Esperança Especulativa
+  chapter_count: 30
+  version: 1.0.0
+spec:
+  creative_sources:
+  - CREATIVE_BRIEF.md
+  - BOOK_CONSTITUTION.md
+  chapter_titles:
+    1: Café requentado
+    2: Vinte e três dias
+    3: Os braços
+    4: Nina já não fazia isso
+    5: Última vez que pedirá colo
+    6: Hoje
+    7: O portão da escola
+    8: Números que não saem nas fotografias
+    9: Mil oitocentos e quarenta e dois vídeos
+    10: Fim de semana
+    11: Trinta e oito segundos
+    12: Café quente
+    13: O desenho
+    14: Mil pequenos adeuses
+    15: Mais uma vez
+    16: Quatro minutos
+    17: Depois
+    18: Natural
+    19: A porta
+    20: Quer que eu peça colo?
+    21: Como se eu já tivesse ido embora
+    22: Não olhar
+    23: Batatas
+    24: Sem câmera
+    25: O nó
+    26: A cama
+    27: Um dia
+    28: O peso
+    29: Soltar
+    30: Café frio
+  movements:
+  - id: M1
+    title: ANTES DE SABER
+    chapters:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+  - id: M2
+    title: QUANDO A CIDADE COMEÇOU A CONTAR
+    chapters:
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+  - id: M3
+    title: O VÍCIO DE DESPEDIR-SE
+    chapters:
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+  - id: M4
+    title: O QUE COMEÇA ENQUANTO TERMINA
+    chapters:
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+  - id: M5
+    title: ANTES QUE CRESÇAM
+    chapters:
+    - 28
+    - 29
+    - 30
+  writing_waves:
+  - - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+  - - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+  - - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+  - - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+  - - 28
+    - 29
+    - 30
+  voice_calibration_chapters:
+  - 1
+  - 2
+  lead_novelist_owned_chapters:
+  - 1
+  - 2
+  - 28
+  - 30
+  final_sentence_exact: Quando Mateus voltou, o café estava frio.
+  no_text_after_final_sentence: true
+  features:
+    living_book:
+      enabled: true
+    images:
+      enabled: true
+      primary_per_chapter: 1
+      face_consistency_required: true
+    living_sound:
+      enabled: true
+    translation_preparation:
+      enabled: true
+      target: en
+    kdp_docx:
+      enabled: true
+    media_package:
+      enabled: true
+  agent_packs:
+    book_agents:
+      SPECULATIVE_HOPE_GUARDIAN:
+        profile: /book/agents/speculative_hope_guardian.toml
+      ANTI_DYSTOPIA_GUARDIAN:
+        profile: /book/agents/anti_dystopia_guardian.toml
+      ANTI_SENTIMENTALISM_GUARDIAN:
+        profile: /book/agents/anti_sentimentalism_guardian.toml
+      PARENTAL_GUILT_GUARDIAN:
+        profile: /book/agents/parental_guilt_guardian.toml
+      PARENTING_RELATIONSHIP_EXPERT:
+        profile: /book/agents/parenting_relationship_expert.toml
+      MEMORY_NOSTALGIA_EXPERT:
+        profile: /book/agents/memory_nostalgia_expert.toml
+      DOMESTIC_REALISM_ENGINEER:
+        profile: /book/agents/domestic_realism_engineer.toml
+      DOMESTIC_SENSORY_AGENT:
+        profile: /book/agents/domestic_sensory_agent.toml
+      COUNTER_LOGIC_REVIEWER:
+        profile: /book/agents/counter_logic_reviewer.toml
+      PARENT_READER_CRITIC:
+        profile: /book/agents/parent_reader_critic.toml
+      ADULT_WITHOUT_CHILDREN_CRITIC:
+        profile: /book/agents/adult_without_children_critic.toml
+      GROWN_CHILD_CRITIC:
+        profile: /book/agents/grown_child_critic.toml
+      GRANDPARENT_CRITIC:
+        profile: /book/agents/grandparent_critic.toml
+      COFFEE_MOTIF_AUDITOR:
+        profile: /book/agents/coffee_motif_auditor.toml
+      FINAL_CARRY_SCENE_AUDITOR:
+        profile: /book/agents/final_carry_scene_auditor.toml
+    character_support:
+    - PARENTING_RELATIONSHIP_EXPERT
+    - CHILD_VOICE_GUARDIAN
+    - MEMORY_NOSTALGIA_EXPERT
+    canon_guardians:
+    - SPECULATIVE_HOPE_GUARDIAN
+    - ANTI_DYSTOPIA_GUARDIAN
+    - ANTI_SENTIMENTALISM_GUARDIAN
+    - PARENTAL_GUILT_GUARDIAN
+    wave_reviewers:
+    - PLOT_CONTINUITY_REVIEWER
+    - CHARACTER_CONTINUITY_REVIEWER
+    - COUNTER_LOGIC_REVIEWER
+    - CHILD_VOICE_GUARDIAN
+    - EMOTIONAL_EDITOR
+    - SPECULATIVE_HOPE_GUARDIAN
+    - ANTI_DYSTOPIA_GUARDIAN
+    - ANTI_SENTIMENTALISM_GUARDIAN
+    voice_reviewers:
+    - LITERARY_STYLE_GUARDIAN
+    - DIALOGUE_DIRECTOR
+    - CHILD_VOICE_GUARDIAN
+    - DOMESTIC_REALISM_ENGINEER
+    - PHYSICALITY_AND_BODY_AGENT
+    - ANTI_SENTIMENTALISM_GUARDIAN
+    critic_panel:
+    - LITERARY_CRITIC
+    - PARENT_READER_CRITIC
+    - ADULT_WITHOUT_CHILDREN_CRITIC
+    - GROWN_CHILD_CRITIC
+    - GRANDPARENT_CRITIC
+    - CINEMA_CRITIC
+    - COMMERCIAL_EDITOR_CRITIC
+    - CLICHE_HUNTER
+    - DEVELOPMENTAL_EDITOR
+    - SPECULATIVE_HOPE_GUARDIAN
+    - ANTI_DYSTOPIA_GUARDIAN
+    - ANTI_SENTIMENTALISM_GUARDIAN
+    - CHILD_VOICE_GUARDIAN
+    - EMOTIONAL_REPETITION_AUDITOR
+    - PLOT_CONTINUITY_REVIEWER
+    line_reviewers:
+    - DIALOGUE_DIRECTOR
+    - LITERARY_STYLE_GUARDIAN
+    - SUBTEXT_EDITOR
+    - DOMESTIC_SENSORY_AGENT
+    - PHYSICALITY_AND_BODY_AGENT
+    - TYPOGRAPHY_TEXT_REVIEWER
+    - REDUNDANCY_REVIEWER
+    - CLICHE_REVIEWER
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/COUNTER_RULES_SEED.md
+  symbol_priorities:
+  - café
+  - mãos
+  - portas
+  - sapatos
+  - banco traseiro
+  - copos
+  - desenhos
+  - peso
+  acoustic_environment_organism: a casa Ferraz
+  book_specific_rejection_states:
+  - DYSTOPIA_CONTAMINATION
+  - PARENTAL_GUILT_FAILURE
+  - COUNTER_LOGIC_FAILURE
+  - CHILD_VOICE_FAILURE
+  - COFFEE_MOTIF_UNDERDEVELOPED
