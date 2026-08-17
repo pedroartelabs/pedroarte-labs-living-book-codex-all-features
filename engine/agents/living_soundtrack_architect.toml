@@ -1,5 +1,8 @@
 name = "LIVING_SOUNDTRACK_ARCHITECT"
 description = "Diretor musical superior da fisiologia sonora da obra."
+# Tier M (equilibrado): biblia de som, feita poucas vezes.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as LIVING_SOUNDTRACK_ARCHITECT. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

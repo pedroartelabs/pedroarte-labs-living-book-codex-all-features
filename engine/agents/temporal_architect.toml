@@ -1,5 +1,8 @@
 name = "TEMPORAL_ARCHITECT"
 description = "Controla cronologia, saltos e consistência temporal."
+# Tier M (equilibrado): consistencia de fatos, mais logica que voz literaria.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as TEMPORAL_ARCHITECT. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

@@ -19,6 +19,15 @@ def get_book(path: str|Path) -> Path:
 
 def agent_filename(profile: str) -> str: return Path(profile).name
 
+VALID_MODEL_TIERS = {'S', 'M', 'XS'}
+
+# (task-id fnmatch pattern, override tier) -- applied after the per-owner
+# tagging pass in build_standard_graph(). See discovery-books/
+# 04-plano-desenvolvimento-custo.md, secao 6.4, para a justificativa.
+TASK_TIER_OVERRIDES = [
+    ('T4??_FACE_QA', 'XS'),
+]
+
 def validate_profiles(profile_dir: Path):
     errors=[]; count=0
     for p in sorted(profile_dir.glob('*.toml')):
@@ -27,7 +36,32 @@ def validate_profiles(profile_dir: Path):
         except Exception as e: errors.append(f'{p}: invalid TOML: {e}'); continue
         for k in ['name','description','developer_instructions']:
             if not d.get(k): errors.append(f'{p}: missing {k}')
+        # model_tier is optional during the phased cost-tiering rollout (see
+        # discovery-books/04-plano-desenvolvimento-custo.md, Fase 2): an agent
+        # without it simply has no declared dosage yet. When present, it must
+        # be one of the three tiers defined in MODEL_TIERS.yaml.
+        tier = d.get('model_tier')
+        if tier is not None and tier not in VALID_MODEL_TIERS:
+            errors.append(f"{p}: invalid model_tier {tier!r} (must be one of {sorted(VALID_MODEL_TIERS)})")
     return errors,count
+
+def load_agent_tiers(*profile_dirs: Path) -> dict[str, str]:
+    """Scan agent .toml files and return {AGENT_NAME: model_tier} for those
+    that declare a tier. Agents without model_tier are simply absent from the
+    result — callers must not assume every agent has an entry."""
+    tiers: dict[str, str] = {}
+    for profile_dir in profile_dirs:
+        if not profile_dir.exists():
+            continue
+        for p in sorted(profile_dir.glob('*.toml')):
+            try:
+                d = tomllib.loads(p.read_text(encoding='utf-8'))
+            except Exception:
+                continue
+            tier = d.get('model_tier')
+            if tier in VALID_MODEL_TIERS:
+                tiers[d.get('name', p.stem.upper())] = tier
+    return tiers
 
 def validate_engine_data(g):
     errors=[]
@@ -76,6 +110,7 @@ def build_standard_graph(book: Path):
     md=s['metadata']; sp=s['spec']; count=md['chapter_count']; packs=sp['agent_packs']
     agents=copy.deepcopy(e['spec']['agents']); agents.update(packs.get('book_agents',{}))
     rejections=e['spec']['generic_rejection_states']+sp.get('book_specific_rejection_states',[])
+    tiers=load_agent_tiers(ENGINE/'agents', book/'agents')
     tasks=[]; gates={}
     # Bootstrap
     tasks += [
@@ -211,6 +246,35 @@ def build_standard_graph(book: Path):
     for gid,gx in ext.get('spec',{}).get('gate_extensions',{}).items():
         if gid in gates:
             gates[gid].setdefault('custom_validators',[]).extend(gx.get('validators',[]))
+    # Cost dosage: annotate each task with the model_tier of its owner (and,
+    # for tasks that spawn subagents, a per-subagent tier map) whenever that
+    # tier is declared. Tasks whose owner has no declared tier are left
+    # untouched — see discovery-books/04-plano-desenvolvimento-custo.md.
+    for t in tasks:
+        owner_tier = tiers.get(t.get('owner'))
+        if owner_tier:
+            t['model_tier'] = owner_tier
+        spawn_block = t.get('spawn')
+        if spawn_block:
+            sub_tiers = {}
+            for a in spawn_block.get('agents', []):
+                if a in tiers: sub_tiers[a] = tiers[a]
+            for j in spawn_block.get('jobs', []):
+                ag = j.get('agent')
+                if ag in tiers: sub_tiers[ag] = tiers[ag]
+            ta = spawn_block.get('template_agent')
+            if ta and ta in tiers: sub_tiers[ta] = tiers[ta]
+            if sub_tiers:
+                spawn_block['model_tiers'] = sub_tiers
+    # Per-task tier overrides: a handful of tasks are cheaper than their
+    # owner agent's usual work (e.g. FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT
+    # defines the face canon at Tier M once, but the 1-per-chapter identity
+    # QA against that already-approved canon is a repetitive comparison, not
+    # fresh judgment). Matched by fnmatch pattern against the task id.
+    for pattern, override_tier in TASK_TIER_OVERRIDES:
+        for t in tasks:
+            if fnmatch.fnmatch(t['id'], pattern):
+                t['model_tier'] = override_tier
     engine_validators=[{'id':'V_MEDIA_ASSET_PACKAGE','command':'python scripts/validate_media_assets.py'}]
     return {'apiVersion':'pedroarte.livingbooks/v1','kind':'LiteraryTaskGraph','metadata':{'project_id':md['slug'],'title':md['title'],'author':md['author'],'language':md['language'],'chapter_count':count,'engine_version':e['metadata']['version'],'book_version':md.get('version','1.0.0')},'spec':{'execution_policy':e['spec']['execution_policy'],'task_states':e['spec']['task_states'],'success_states':e['spec']['success_states'],'rejection_states':rejections,'locks':e['spec']['locks'],'agents':agents,'protocols':e['spec']['protocols'],'quality_defaults':e['spec']['quality_defaults'],'quality_profile':load_yaml(book/sp['quality_profile_file']),'immutable_rules':load_yaml(book/sp['immutable_rules_file']),'custom_validators':engine_validators+ext.get('spec',{}).get('custom_validators',[]),'gates':gates,'tasks':tasks}}
 
@@ -266,8 +330,18 @@ def copy_runtime(book: Path, runtime: Path, graph):
     save_yaml(runtime/'TASK_GRAPH.yaml',graph)
     shutil.copy2(ENGINE/'IMPLEMENT.md',runtime/'IMPLEMENT.md')
     # copy CLI helper for state operations
-    shutil.copy2(ENGINE/'scripts/runtime_taskgraph.py',runtime/'scripts/runtime_taskgraph.py')
-    shutil.copy2(ENGINE/'scripts/validate_media_assets.py',runtime/'scripts/validate_media_assets.py')
+    # Ferramentas determinísticas do motor. Cada uma destas substitui trabalho
+    # que, numa execução real, foi reconstruído do zero dentro do runtime com
+    # centenas de linhas de script ad hoc (ver discovery-books/07).
+    for script in ('runtime_taskgraph.py','validate_media_assets.py','cost_report.py',
+                   '_layout_config.py','build_kdp_docx.py','check_render_capability.py','build_cover_and_stories.py',
+                   'generate_image.py'):
+        shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
+    shutil.copy2(ENGINE/'MODEL_TIERS.yaml',runtime/'MODEL_TIERS.yaml')
+    # _layout_config.py resolve os defaults como <raiz>/templates/, então o
+    # template precisa acompanhar os scripts no runtime.
+    (runtime/'templates').mkdir(parents=True,exist_ok=True)
+    shutil.copy2(ENGINE/'templates/KDP_LAYOUT_DEFAULTS.yaml',runtime/'templates/KDP_LAYOUT_DEFAULTS.yaml')
     # custom validators
     if (book/'validators').exists(): shutil.copytree(book/'validators',runtime/'book/validators',dirs_exist_ok=True)
     # AGENTS
@@ -279,6 +353,22 @@ def copy_runtime(book: Path, runtime: Path, graph):
     (runtime/'sound/AGENTS.md').write_text('Living Sound is physiological. Derive sound from the frozen manuscript, reader vitals and the active book sound profile. Do not default to generic sentimental music.\n',encoding='utf-8')
     (runtime/'media/AGENTS.md').write_text('The media package is incomplete until the actual KDP JPEG cover and exactly five commercial Instagram Story JPEGs exist and GATE_MEDIA_ASSETS passes. Briefs or ideas never substitute for final pixel assets. Obey canon, legal positioning, KDP requirements and platform-safe typography.\n',encoding='utf-8')
     (runtime/'outputs/AGENTS.md').write_text('Reader-facing outputs must contain no prompts, agent names, task metadata, markdown artifacts or internal review comments.\n',encoding='utf-8')
+    (runtime/'logs/COST_LEDGER.md').write_text(
+        '# Cost Ledger\n\n'
+        'Uma linha por tarefa concluida. Nao reordene as colunas -- '
+        '`scripts/cost_report.py` depende da posicao fixa.\n\n'
+        '| task_id | phase | owner | model_tier | model_actual | tokens_in | tokens_out | cost_usd | wall_seconds | state |\n'
+        '|---|---|---|---|---|---|---|---|---|---|\n',
+        encoding='utf-8')
+    (runtime/'logs/AGENTS.md').write_text(
+        'Ao marcar uma tarefa como concluida (`scripts/runtime_taskgraph.py mark`), adicione tambem uma linha a '
+        'COST_LEDGER.md com o custo real dessa chamada: task_id, phase, owner, model_tier (o mesmo declarado no '
+        'TASK_GRAPH.yaml para essa tarefa, quando presente), model_actual (o modelo de fato usado), tokens_in, '
+        'tokens_out, cost_usd, wall_seconds e state. Use `MODEL_TIERS.yaml` para resolver o modelo concreto de um '
+        'model_tier. Nao pule esse registro: sem ele, `scripts/cost_report.py` nao consegue medir se a dosagem de '
+        'modelo esta economizando de verdade. Rode `python scripts/cost_report.py` a qualquer momento para ver o '
+        'total acumulado por fase, por agente e por tier.\n',
+        encoding='utf-8')
 
 def cmd_validate_engine(a):
     g=load_yaml(ENGINE/'ENGINE_GRAPH.yaml'); errors=validate_engine_data(g); pe,c=validate_profiles(ENGINE/'agents'); errors+=pe

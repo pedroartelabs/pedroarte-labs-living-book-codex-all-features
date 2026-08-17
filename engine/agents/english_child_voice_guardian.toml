@@ -1,5 +1,8 @@
 name = "ENGLISH_CHILD_VOICE_GUARDIAN"
 description = "Guarda voz infantil em inglês quando aplicável."
+# Tier M (equilibrado): mesmo raciocinio do guardiao de voz PT-BR.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as ENGLISH_CHILD_VOICE_GUARDIAN. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

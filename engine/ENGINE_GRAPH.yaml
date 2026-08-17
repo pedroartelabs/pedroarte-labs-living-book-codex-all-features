@@ -247,6 +247,55 @@ spec:
       proposal_location: CANON_PROPOSALS
       mutation_owner: CANON_GUARDIAN
       unapproved_facts_are_canon: false
+  known_capabilities:
+    # Capacidades que o motor reconhece por nome. Um pacote de livro as declara
+    # como obrigatórias em capability_requirements.yaml; T001_VALIDATE_CAPABILITIES
+    # checa cada uma antes de qualquer trabalho caro começar.
+    ptbr_literary_generation:
+      description: Geração de prosa literária em português do Brasil.
+      blocking_phase: WRITING_WAVE_1
+    raster_image_generation:
+      description: >
+        Produção de JPEG a partir de prompt visual. Não é nativa de todo host:
+        o Codex tem ferramenta de imagem embutida; no Claude Code a rota é
+        engine/scripts/generate_image.py chamando uma API externa, o que exige
+        credencial em OPENAI_API_KEY e acesso de rede.
+      blocking_phase: VISUAL_PRODUCTION
+    docx_generation:
+      description: >
+        Construção do DOCX de interior. Atendida deterministicamente por
+        engine/scripts/build_kdp_docx.py (python-docx); não exige agente.
+      blocking_phase: KDP
+    docx_pdf_rendering:
+      description: >
+        Renderização do DOCX em PDF/PNG para a inspeção visual do GATE_KDP.
+        Esta é a capacidade que mais custou tempo numa execução real: seis dias
+        e um reinício de sistema operacional, por falta de cadeia de
+        renderização confiável (ver discovery-books/07). Declará-la aqui
+        transforma essa crise numa checagem de bootstrap.
+      blocking_phase: KDP
+      resolution_by_host:
+        claude_code: >
+          Agent Skill nativa de docx/pdf. Não depende de instalar LibreOffice,
+          alterar runtime C++ nem reiniciar o sistema.
+        codex_or_local: >
+          LibreOffice (soffice) no PATH, ou Word via automação. ATENÇÃO: pode
+          exigir Microsoft Visual C++ Redistributable atualizado, e o
+          instalador pode retornar código 3010 (requer reinício). Verificar
+          ANTES de escrever o livro, não no gate final.
+      preflight_check: >
+        Converter um DOCX mínimo de controle. Se o arquivo de controle falhar,
+        o problema é ambiental e não será resolvido ajustando o livro.
+    docx_visual_render_qa:
+      description: Inspeção humana ou automatizada das páginas renderizadas.
+      blocking_phase: KDP
+      depends_on: docx_pdf_rendering
+    zip_packaging:
+      description: Empacotamento final da entrega (biblioteca padrão).
+      blocking_phase: DELIVERY
+    current_kdp_research:
+      description: Consulta às exigências vigentes da Amazon KDP.
+      blocking_phase: KDP
   quality_defaults:
     chapter_scores:
       authenticity_of_characters: 8
@@ -295,3 +344,26 @@ spec:
     - media/outputs/instagram_stories/story_04.jpg
     - media/outputs/instagram_stories/story_05.jpg
     - media/outputs/MEDIA_ASSET_MANIFEST.md
+  artifact_contract_rules:
+    MEDIA_DELIVERY_CORE:
+      filenames_are_contractual: true
+      filename_note: >
+        Os nomes acima são o contrato, não sugestões. V_MEDIA_ASSET_PACKAGE
+        reprova nomes descritivos alternativos (story_01_o_gancho.jpg,
+        <TITULO>_KDP_COVER.jpg). Nomes fixos são o que torna a validação
+        determinística e o empacotamento previsível.
+      manifest_requires_sha256: true
+      manifest_note: >
+        MEDIA_ASSET_MANIFEST.md deve declarar o SHA-256 de cada artefato de
+        entrega. O validador extrai qualquer hash de 64 caracteres do
+        documento e confere contra o arquivo real, então a formatação do
+        manifesto (tabela, lista ou seções) permanece livre — o que é
+        obrigatório é o fato, não o layout. Um hash ausente ou divergente
+        significa manifesto desatualizado ou artefato alterado após a geração.
+      interior_image_dpi_rule: >
+        Imagens de miolo (images/approved/chapter_NN.jpg) são validadas por
+        DPI EFETIVO na colocação (pixels ÷ polegadas de inserção declaradas em
+        KDP_LAYOUT), não por DPI de metadado. Geradores de imagem gravam 96 DPI
+        por padrão; exigir 300 no metadado reprovaria imagens que imprimem
+        acima de 300 na colocação real, e aceitaria imagens de baixa resolução
+        cujo metadado foi apenas reetiquetado.

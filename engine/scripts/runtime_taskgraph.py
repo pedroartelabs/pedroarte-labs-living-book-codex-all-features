@@ -47,11 +47,16 @@ def ready():
     refresh(); g=load(GRAPH); s=load(STATE)
     xs=[t['id'] for t in g['spec']['tasks'] if s['tasks'][t['id']]['state']=='READY']
     print('\n'.join(xs) if xs else 'NO_READY_TASKS'); return 0
+SUCCESS_MARKS={'APPROVED','CANON_APPROVED','FINAL'}
+
 def mark(a):
     if not STATE.exists(): init()
     s=load(STATE)
     if a.node not in s['tasks']: print('Unknown task',a.node,file=sys.stderr); return 2
-    s['tasks'][a.node]['state']=a.state; save(STATE,s); refresh(); return 0
+    s['tasks'][a.node]['state']=a.state; save(STATE,s); refresh()
+    if a.state in SUCCESS_MARKS:
+        print(f'Lembrete: registre o custo real de {a.node} em logs/COST_LEDGER.md (ver logs/AGENTS.md).',file=sys.stderr)
+    return 0
 def validate_gate(a):
     if not STATE.exists(): init()
     g=load(GRAPH); s=load(STATE); refresh(); s=load(STATE)
@@ -63,7 +68,14 @@ def validate_gate(a):
         cfg=validators.get(vid)
         if not cfg:
             s.setdefault('validator_results',{})[vid]={'status':'FAIL','error':'validator not registered'}; failed=True; continue
-        r=subprocess.run(cfg['command'],cwd=ROOT,shell=True,text=True,capture_output=True)
+        # Um validador declarado como "python scripts/x.py" seria executado
+        # pelo Python do PATH, que pode nao ter as dependencias do motor
+        # (Pillow, PyYAML) instaladas. Usar sys.executable garante o mesmo
+        # interpretador que esta rodando este script — tipicamente o venv.
+        command=cfg['command']
+        if command.startswith('python '):
+            command=f'"{sys.executable}" '+command[len('python '):]
+        r=subprocess.run(command,cwd=ROOT,shell=True,text=True,capture_output=True)
         status='PASS' if r.returncode==0 else 'FAIL'
         s.setdefault('validator_results',{})[vid]={'status':status,'command':cfg['command'],'stdout':r.stdout[-8000:],'stderr':r.stderr[-8000:]}
         print(f'{vid}: {status}')

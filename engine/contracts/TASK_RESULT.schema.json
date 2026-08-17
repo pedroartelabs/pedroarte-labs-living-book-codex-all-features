@@ -43,6 +43,30 @@
       "items": {
         "type": "string"
       }
+    },
+    "model_tier": {
+      "description": "Dosage tier declared for this task's owner in the composed TASK_GRAPH.yaml (S, M or XS), when known. See engine/MODEL_TIERS.yaml.",
+      "enum": ["S", "M", "XS"]
+    },
+    "model_actual": {
+      "description": "The concrete model that actually executed this task (e.g. claude-sonnet-5, gpt-5-mini).",
+      "type": "string"
+    },
+    "tokens_in": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tokens_out": {
+      "type": "number",
+      "minimum": 0
+    },
+    "cost_usd": {
+      "type": "number",
+      "minimum": 0
+    },
+    "wall_seconds": {
+      "type": "number",
+      "minimum": 0
     }
   },
   "additionalProperties": true

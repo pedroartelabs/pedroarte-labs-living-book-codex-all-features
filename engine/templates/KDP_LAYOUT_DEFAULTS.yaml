@@ -1,0 +1,109 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: KdpLayoutDefaults
+metadata:
+  version: 1.0.0
+  provenance: >
+    Valores extraídos de layout/PAGE_BIBLE.md do runtime a_morte_ainda_nao_nasceu,
+    cujo build passou em 71 PASS / 0 FAIL na auditoria estrutural e teve as 263
+    páginas renderizadas inspecionadas. Não são valores inventados: são a
+    configuração de um interior 6x9 que já foi verificado ponta a ponta.
+spec:
+  # PAGE_BIBLE.md continua sendo a autoridade legível por humanos, escrita pelo
+  # BOOK_LAYOUT_ARCHITECT. Este YAML é o contrato de máquina equivalente. Um
+  # livro pode sobrescrever qualquer chave criando layout/KDP_LAYOUT.yaml no
+  # runtime; o build faz merge (defaults <- overrides do livro).
+
+  page:
+    width_in: 6.0
+    height_in: 9.0
+    # Margens espelhadas: "inner" é a lombada, "outer" a borda externa.
+    margin_inner_in: 0.625   # faixa 301-500 páginas; acima de 500, elevar p/ 0.75
+    margin_outer_in: 0.50
+    margin_top_in: 0.625
+    margin_bottom_in: 0.75
+    header_distance_in: 0.30
+    footer_distance_in: 0.35
+
+  typography:
+    family: Georgia
+    language: pt-BR
+    body_pt: 10.5
+    body_leading_pt: 14
+    body_first_line_indent_in: 0.22
+    chapter_number_pt: 9
+    chapter_title_pt: 18
+    front_matter_title_pt: 16
+    title_page_title_pt: 22
+    title_page_author_pt: 11
+    half_title_pt: 18
+    copyright_pt: 8.5
+    copyright_leading_pt: 10.5
+    fiction_notice_pt: 9.5
+    fiction_notice_leading_pt: 13
+    toc_heading_pt: 16
+    toc_entry_pt: 10
+    toc_tab_position_in: 4.86
+    running_header_pt: 8
+    folio_pt: 8.5
+    # OOXML só representa tamanho em meios-pontos: o token 9,25 pt do Page Bible
+    # é arredondado para cima, decisão registrada no build original.
+    document_block_pt: 9.5
+    document_block_leading_pt: 12
+    document_block_indent_in: 0.25
+
+  scene_break:
+    glyph: "⁂"
+    size_pt: 9
+    space_before_pt: 8
+    space_after_pt: 8
+    # Marcadores no manuscrito congelado que viram o glifo acima.
+    source_markers: ["* * *"]
+
+  images:
+    width_in: 3.25
+    height_in: 4.875
+    source_dir: images/approved
+    filename_pattern: "chapter_{chapter:02d}.jpg"
+    # Espaço antes da imagem na página dedicada (centralização óptica).
+    space_before_pt: 58
+    alt_text_prefix: "Ilustração do capítulo {chapter:02d} — "
+    long_description_prefix: " Descrição longa: "
+
+  chapter_opening:
+    space_before_pt: 37.8       # ~1,15 pol. do topo
+    number_label: "CAPÍTULO {chapter}"
+    start_on_recto: true
+
+  front_matter:
+    half_title_space_before_pt: 190
+    title_page_space_before_pt: 155
+    copyright_space_before_pt: 330
+    toc_heading: SUMÁRIO
+    fiction_notice_heading: AVISO DE FICÇÃO
+    # {author} é substituído a partir de BOOK_SPEC.yaml. Nada de ISBN, editora,
+    # cidade ou ano inventados: o Page Bible proíbe explicitamente.
+    copyright_text: "Copyright © {author}. Todos os direitos reservados."
+    fiction_notice_text: >-
+      Esta é uma obra de ficção. Personagens, instituições e acontecimentos são
+      construções ficcionais. O livro não oferece orientação médica ou jurídica.
+
+  running_headers:
+    # Verso (par) e recto (ímpar). {title} e {author} vêm do BOOK_SPEC.
+    verso: "{author}"
+    recto: "{title}"
+    uppercase: true
+
+  manuscript:
+    source: manuscript/final/MANUSCRIPT_FINAL_PTBR.md
+    # Regex do cabeçalho de capítulo no manuscrito congelado.
+    chapter_heading_pattern: '^# (\d+)\. (.+)$'
+    # Linhas ignoradas na conversão (separadores de capítulo do Markdown).
+    ignore_lines: ["---"]
+
+  output:
+    path: outputs/KDP_DRAFT.docx
+    # Impede que o Word recomprima os JPGs aprovados.
+    prevent_image_compression: true
+    embed_fonts: true
+    mirror_margins: true
+    auto_hyphenation: true

@@ -1,5 +1,8 @@
 name = "CHILD_VOICE_GUARDIAN"
 description = "Revisa voz e comportamento infantil por idade quando aplicável."
+# Tier M (equilibrado): guardrail contra criterio de voz ja declarado.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as CHILD_VOICE_GUARDIAN. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

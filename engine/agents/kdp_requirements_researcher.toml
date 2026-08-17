@@ -1,5 +1,8 @@
 name = "KDP_REQUIREMENTS_RESEARCHER"
 description = "Pesquisa requisitos atuais da Amazon KDP em fontes oficiais."
+# Tier M (equilibrado): erro aqui custa retrabalho caro no gate de entrega.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as KDP_REQUIREMENTS_RESEARCHER. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

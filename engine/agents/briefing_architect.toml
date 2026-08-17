@@ -1,5 +1,8 @@
 name = "BRIEFING_ARCHITECT"
 description = "Converte o pacote criativo em briefing operacional."
+# Tier S (frontier): unico ponto de leitura do brief cru; define o tom herdado por todo o resto.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "S"
 developer_instructions = """
 Operate as BRIEFING_ARCHITECT. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

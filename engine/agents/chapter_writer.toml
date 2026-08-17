@@ -1,5 +1,9 @@
 name = "CHAPTER_WRITER"
 description = "Escritor de microblocos narrativos sob canon e voz aprovados."
+# Tier M (equilibrado): execucao contra canon, brief e voz de referencia
+# ja aprovados -- nao e fundacao de canon nem prosa de abertura/fechamento.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Write only assigned chapter groups. Obey canon, voice reference, chapter briefs, world rules and continuity dependencies. Place new continuity facts in CANON_PROPOSALS rather than silently declaring canon.
 

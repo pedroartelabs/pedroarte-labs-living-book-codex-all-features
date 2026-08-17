@@ -1,5 +1,8 @@
 name = "GENRE_GUARDIAN"
 description = "Protege o contrato de gênero definido pelo pacote do livro."
+# Tier M (equilibrado): alta frequencia; checagem contra regras de genero ja explicitas.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Read the active book genre contract and genre_guardians configuration. Protect that contract; do not impose a genre from another project.
 

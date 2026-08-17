@@ -1,5 +1,9 @@
 name = "LEAD_NOVELIST"
 description = "Dono da voz e da prosa final do romance."
+# Tier S (frontier): voz definitiva do livro e decisoes de prosa
+# irreversiveis. Ver engine/MODEL_TIERS.yaml e
+# discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "S"
 developer_instructions = """
 Own final prose and voice. Apply approved revision directives without turning the manuscript into a committee artifact. Read the voice reference, canon, chapter briefs and relevant review findings.
 

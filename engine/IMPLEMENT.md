@@ -70,6 +70,51 @@ After both tasks are approved, run `python scripts/runtime_taskgraph.py validate
 
 The KDP JPEG is the eBook marketing/front-cover asset. A paperback or hardcover print wrap remains a separate PDF whose back cover, spine and bleed depend on final production parameters.
 
+## Deterministic tools — use these instead of reasoning
+
+Some tasks in this graph describe work that is fully mechanical: assembling a
+DOCX, composing a cover, checking pixel dimensions, converting a document.
+The engine ships scripts for those. **Run the script; do not reproduce its work
+with an agent.** A previous real execution rebuilt this tooling from scratch
+inside the runtime — over 1,100 lines of ad hoc script — for problems that are
+identical in every book. Reasoning through them burns tokens and days to
+produce something a script produces identically, every time, for free.
+
+| Script | Substitui |
+|---|---|
+| `scripts/check_render_capability.py` | Descobrir só no GATE_KDP que o ambiente não renderiza DOCX. Rode no bootstrap. |
+| `scripts/build_kdp_docx.py` | Montar o DOCX de interior à mão. Lê `book/BOOK_SPEC.yaml`, `layout/KDP_LAYOUT.yaml` e `layout/IMAGE_PLACEMENT.yaml`. |
+| `scripts/validate_media_assets.py` | Conferir dimensões, DPI e proveniência de mídia por inspeção visual. |
+| `scripts/generate_image.py` | Chamar API de imagem ad hoc; já entrega nas dimensões exatas do contrato. |
+| `scripts/cost_report.py` | Estimar custo; lê a telemetria real do ledger. |
+
+`T001_VALIDATE_CAPABILITIES` deve executar `check_render_capability.py` e
+registrar o resultado em `project_state/CAPABILITY_STATUS.yaml`. Se ele
+reprovar, isso não bloqueia a escrita — bloqueia o `GATE_KDP`, e a decisão
+(instalar cadeia de renderização, ou usar a rota nativa do host) precisa ser
+tomada antes de a fase KDP começar, não depois do livro pronto.
+
+## Cost dosage (model tiering)
+
+Some tasks in TASK_GRAPH.yaml carry a `model_tier` field (`S`, `M` or `XS`),
+and some `spawn` blocks carry a `spawn.model_tiers` map for their subagents.
+This is a declared dosage, not a suggestion: when spawning an agent for a
+task that declares a tier, select the model mapped to that tier in
+`MODEL_TIERS.yaml` (resolve via the field matching your own provider). Never
+silently upgrade a task to a more expensive model than its declared tier;
+if a tier genuinely seems insufficient for a specific task, say so as a
+blocker instead of overriding it quietly.
+
+Tasks without a declared `model_tier` have no dosage decision yet (the
+rollout across all agents is incremental — see
+`discovery-books/04-plano-desenvolvimento-custo.md`). Use your default model
+for those until they are tagged.
+
+After completing a task, append one row to `logs/COST_LEDGER.md` with the
+real cost of that call (tokens, model actually used, wall time). This is
+mandatory, not optional bookkeeping: `scripts/cost_report.py` can only prove
+that dosage is saving money if the ledger is kept current.
+
 ## Stop-and-fix
 
 A blocking failure is not a note. It is a stop condition.

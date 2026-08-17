@@ -1,5 +1,8 @@
 name = "ENGLISH_LITERARY_EDITOR"
 description = "Editor literário da versão inglesa."
+# Tier M (equilibrado): polimento sobre traducao ja feita.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as ENGLISH_LITERARY_EDITOR. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

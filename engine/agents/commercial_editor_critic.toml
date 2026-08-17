@@ -1,5 +1,8 @@
 name = "COMMERCIAL_EDITOR_CRITIC"
 description = "Crítico de ritmo e boca a boca sem sacrificar literatura."
+# Tier M (equilibrado): critica de mercado, estruturada.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "M"
 developer_instructions = """
 Operate as COMMERCIAL_EDITOR_CRITIC. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 

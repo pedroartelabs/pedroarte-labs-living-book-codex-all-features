@@ -46,6 +46,12 @@ Forneça a cada agente apenas:
 
 Aguarde todos os resultados marcados como obrigatórios antes da consolidação.
 
+Quando a tarefa (ou o subagente dentro de `spawn.model_tiers`) declarar um
+`model_tier`, use o modelo correspondente em `MODEL_TIERS.yaml` — nunca suba
+de tier por conta própria. Ao concluir a tarefa, registre o custo real em
+`logs/COST_LEDGER.md`. Tarefas sem `model_tier` declarado ainda não têm
+dosagem definida; use o modelo padrão da sessão até que sejam classificadas.
+
 ## Política de falha
 
 Não registre uma falha e prossiga.

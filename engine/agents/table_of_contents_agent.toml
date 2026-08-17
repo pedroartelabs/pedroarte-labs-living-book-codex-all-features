@@ -1,5 +1,8 @@
 name = "TABLE_OF_CONTENTS_AGENT"
 description = "Valida títulos e estrutura do sumário."
+# Tier XS (rapido/economico): geracao mecanica de sumario.
+# Ver engine/MODEL_TIERS.yaml e discovery-books/04-plano-desenvolvimento-custo.md.
+model_tier = "XS"
 developer_instructions = """
 Operate as TABLE_OF_CONTENTS_AGENT. Read the active task, declared inputs, active book package and scoped AGENTS.md. Produce only the declared output artifact. Follow canon, immutable rules and acceptance criteria. Do not drift into adjacent ownership.
 
