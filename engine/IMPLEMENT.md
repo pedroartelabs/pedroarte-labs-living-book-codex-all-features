@@ -90,6 +90,35 @@ produce something a script produces identically, every time, for free.
 | `scripts/detect_repetition.py` | Reler o manuscrito atrás de repetição e clichê. Localiza os trechos; o agente só julga. |
 | `scripts/check_typography.py` | Varrer o texto atrás de aspas, reticências, espaços e travessões inconsistentes. |
 | `scripts/check_canon_continuity.py` | Inventariar entidades da prosa contra o canon e conferir o mapa de ponto de vista. |
+| `scripts/build_canon_digest.py` | Reler as bíblias inteiras em tarefa de conferência. Destila o canon a ~11% do tamanho. |
+
+## Digest de canon — quem lê o quê
+
+As bíblias de um livro real somam ~25 mil palavras e são relidas por dezenas
+de tarefas, o que faz o custo de contexto crescer perto de O(capítulos²).
+Rode `build_canon_digest.py` depois do `GATE_CANON` e use o resultado assim:
+
+- **lê o digest** (`canon/CANON_DIGEST.md`, ou o recorte `--chapter N`):
+  revisores de wave, painel de crítica, revisores de linha, auditores de
+  continuidade — toda tarefa de CONFERÊNCIA;
+- **continua lendo as bíblias completas**: `LEAD_NOVELIST` e `CHAPTER_WRITER`
+  compondo cena nova, e `CANON_GUARDIAN` mutando canon. Resumo não substitui
+  material de composição.
+
+## Perfis de execução — a torneira de velocidade
+
+`BOOK_SPEC.yaml → spec.execution_profile` aceita `DRAFT`, `STANDARD` ou
+`PREMIUM` (padrão `PREMIUM`, para não alterar livros existentes sem decisão
+explícita; livros novos nascem em `STANDARD`).
+
+O perfil controla tamanho dos painéis de revisão (com **rotação**, para que o
+livro inteiro receba cobertura completa mesmo pagando menos por wave), se a
+calibração de voz roda, se as revisões de integração são consolidadas numa
+passada, e quais gates registram sem interromper.
+
+O que o perfil **nunca** toca: regras imutáveis, cenas protegidas, revisão
+legal, guardiões éticos e o contrato de mídia. Economia sai de repetição de
+revisão, não de proteção.
 
 Os dois últimos são **pré-filtros**: rode-os antes de acionar
 `REPETITION_AND_CLICHE_REVIEWER`, `TYPOGRAPHY_TEXT_REVIEWER` e

@@ -105,12 +105,47 @@ def validate_book_data(book: Path, s, x):
 def task(id,phase,owner,deps=None,**kw):
     d={'id':id,'phase':phase,'owner':owner,'depends_on':deps or []}; d.update(kw); return d
 
+def load_execution_profile(name: str|None):
+    """Carrega o perfil de execucao (a 'torneira' velocidade x qualidade).
+
+    O padrao e PREMIUM: nenhum livro existente muda de comportamento sem
+    declarar spec.execution_profile explicitamente."""
+    path = ENGINE/'templates/EXECUTION_PROFILES.yaml'
+    if not path.exists():
+        return {}, 'PREMIUM'
+    data = load_yaml(path).get('spec', {})
+    chosen = (name or data.get('default') or 'PREMIUM').upper()
+    profiles = data.get('profiles', {})
+    if chosen not in profiles:
+        raise SystemExit(
+            f"execution_profile desconhecido: {chosen!r}. "
+            f"Disponiveis: {sorted(profiles)}")
+    return profiles[chosen], chosen
+
+def rotate_pack(names, limit, index):
+    """Seleciona `limit` revisores do pack, ROTACIONANDO conforme a wave.
+
+    Truncar sempre nos mesmos deixaria parte do pack sem nunca ler o livro.
+    Rotacionando, cada wave paga por menos revisores e a obra inteira ainda
+    recebe a cobertura completa do pack."""
+    if not names or not limit or limit >= len(names):
+        return list(names or [])
+    start = (index * limit) % len(names)
+    doubled = list(names) + list(names)
+    return doubled[start:start + limit]
+
 def build_standard_graph(book: Path):
     e=load_yaml(ENGINE/'ENGINE_GRAPH.yaml'); s=load_yaml(book/'BOOK_SPEC.yaml'); ext=load_yaml(book/'BOOK_GRAPH.yaml')
     md=s['metadata']; sp=s['spec']; count=md['chapter_count']; packs=sp['agent_packs']
     agents=copy.deepcopy(e['spec']['agents']); agents.update(packs.get('book_agents',{}))
     rejections=e['spec']['generic_rejection_states']+sp.get('book_specific_rejection_states',[])
     tiers=load_agent_tiers(ENGINE/'agents', book/'agents')
+    profile, profile_name = load_execution_profile(sp.get('execution_profile'))
+    # O perfil pode desligar features inteiras (som, traducao) para um rascunho.
+    for feature in profile.get('disable_features') or []:
+        if feature in sp.get('features', {}):
+            sp['features'][feature] = dict(sp['features'][feature])
+            sp['features'][feature]['enabled'] = False
     tasks=[]; gates={}
     # Bootstrap
     tasks += [
@@ -151,7 +186,12 @@ def build_standard_graph(book: Path):
         tasks.append(task(f'T1{ch:02d}_BRIEF_CHAPTER','CHAPTER_BRIEFS','SCENE_ARCHITECT',['GATE_LIVING_BOOK'],inputs=['/book/chapter_architecture.yaml','/specs/STORY_BIBLE.md','/specs/CHARACTER_BIBLE.md','/specs/PLOT_DEPENDENCY_MAP.md','/specs/TIMELINE.md','/living_book/READER_VITALS.md'],outputs=[f'/briefs/chapters/CHAPTER_{ch:02d}_BRIEF.md'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':['EMOTIONAL_PHYSIOLOGY_ARCHITECT','GENRE_GUARDIAN','ANTI_MANIPULATION_GUARDIAN'],'wait_for_all':True}))
     gates['GATE_CHAPTER_BRIEFS']={'blocking':True,'requires':[f'T1{ch:02d}_BRIEF_CHAPTER' for ch in range(1,count+1)]}
     # voice calibration
-    cal=sp.get('voice_calibration_chapters',[1,2]); voice_ids=[]
+    # Em DRAFT ela e pulada: calibrar voz e serial por natureza (escreve,
+    # revisa, reescreve, so entao o proximo capitulo) e nao vale o tempo numa
+    # leitura de teste. O VOICE_REFERENCE ainda e produzido, a partir do guia
+    # de estilo, para as waves nao ficarem sem referencia.
+    cal=sp.get('voice_calibration_chapters',[1,2]) if profile.get('voice_calibration',True) else []
+    voice_ids=[]
     for ch in cal:
         wid=f'T15{ch}A_WRITE_CHAPTER_{ch:02d}'; rid=f'T15{ch}B_REVIEW_CHAPTER_{ch:02d}'; vid=f'T15{ch}C_REVISE_CHAPTER_{ch:02d}'
         dep=['GATE_CHAPTER_BRIEFS'] if not voice_ids else [voice_ids[-1]]
@@ -159,7 +199,11 @@ def build_standard_graph(book: Path):
         tasks.append(task(rid,'VOICE_CALIBRATION','EXECUTIVE_EDITOR',[wid],spawn={'mode':'PARALLEL_SUBAGENTS','agents':packs.get('voice_reviewers',[]),'wait_for_all':True},outputs=[f'/reviews/chapter_{ch:02d}_voice_review.md']))
         tasks.append(task(vid,'VOICE_CALIBRATION','LEAD_NOVELIST',[rid],outputs=[f'/manuscript/approved/chapter_{ch:02d}.md']))
         voice_ids.append(vid)
-    tasks.append(task('T156_BUILD_VOICE_REFERENCE','VOICE_CALIBRATION','LITERARY_STYLE_GUARDIAN',voice_ids,outputs=['/specs/VOICE_REFERENCE.md']))
+    # Sem calibracao (perfil DRAFT), voice_ids fica vazio: a referencia de voz
+    # passa a depender dos briefs, senao ficaria sem dependencia nenhuma e
+    # viraria READY ja no bootstrap, antes de existir qualquer prosa.
+    voice_ref_deps=voice_ids if voice_ids else ['GATE_CHAPTER_BRIEFS']
+    tasks.append(task('T156_BUILD_VOICE_REFERENCE','VOICE_CALIBRATION','LITERARY_STYLE_GUARDIAN',voice_ref_deps,outputs=['/specs/VOICE_REFERENCE.md'],parameters=({'derive_from':'style_guide_only','reason':'calibracao pulada pelo perfil de execucao'} if not voice_ids else {})))
     tasks.append(task('T157_APPROVE_VOICE','VOICE_CALIBRATION','EXECUTIVE_EDITOR',['T156_BUILD_VOICE_REFERENCE'],outputs=['/reviews/VOICE_APPROVAL.md']))
     gates['GATE_VOICE']={'blocking':True,'requires':voice_ids+['T156_BUILD_VOICE_REFERENCE','T157_APPROVE_VOICE']}
     # waves
@@ -180,7 +224,8 @@ def build_standard_graph(book: Path):
                 groups.append({'agent':'CHAPTER_WRITER','chapters':grp})
         tasks.append(task(wr,f'WRITING_WAVE_{wi}','MASTER_ORCHESTRATOR',[pre],spawn={'mode':'PARALLEL_SUBAGENTS','jobs':groups,'shared_inputs':['/specs/VOICE_REFERENCE.md','/canon/CANON_REGISTRY.yaml'],'wait_for_all':True}))
         tasks.append(task(mg,f'WRITING_WAVE_{wi}','MERGE_COORDINATOR',[wr],locks=['MANUSCRIPT_MERGE']))
-        tasks.append(task(rv,f'WRITING_WAVE_{wi}','EXECUTIVE_EDITOR',[mg],spawn={'mode':'PARALLEL_SUBAGENTS','agents':packs.get('wave_reviewers',[]),'wait_for_all':True},outputs=[f'/reviews/WAVE_{wi:02d}_REVIEW.md']))
+        wave_pack=rotate_pack(packs.get('wave_reviewers',[]),profile.get('wave_reviewers_limit'),wi-1)
+        tasks.append(task(rv,f'WRITING_WAVE_{wi}','EXECUTIVE_EDITOR',[mg],spawn={'mode':'PARALLEL_SUBAGENTS','agents':wave_pack,'wait_for_all':True},outputs=[f'/reviews/WAVE_{wi:02d}_REVIEW.md']))
         tasks.append(task(rev,f'WRITING_WAVE_{wi}','LEAD_NOVELIST',[rv],locks=['MANUSCRIPT_FINAL_WRITE']))
         tasks.append(task(cu,f'WRITING_WAVE_{wi}','CANON_GUARDIAN',[rev],locks=['CANON_WRITE']))
         tasks.append(task(ap,f'WRITING_WAVE_{wi}','EXECUTIVE_EDITOR',[cu]))
@@ -190,21 +235,33 @@ def build_standard_graph(book: Path):
     # integration + protected scene audits
     tasks.append(task('T300_ASSEMBLE_FULL_MANUSCRIPT','INTEGRATION','MERGE_COORDINATOR',[prev_gate],locks=['MANUSCRIPT_MERGE'],outputs=['/manuscript/revised/FULL_MANUSCRIPT_PRE_INTEGRATION.md']))
     tasks.append(task('T301_WHOLE_BOOK_INTEGRATION','INTEGRATION','MASTER_INTEGRATOR',['T300_ASSEMBLE_FULL_MANUSCRIPT'],outputs=['/integration/INTEGRATION_REPORT.md']))
-    tasks.append(task('T302_CRITIC_PANEL','INTEGRATION','MASTER_ORCHESTRATOR',['T300_ASSEMBLE_FULL_MANUSCRIPT'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':packs.get('critic_panel',[]),'wait_for_all':True},outputs=['/reviews/CRITIC_PANEL/']))
+    critic_pack=rotate_pack(packs.get('critic_panel',[]),profile.get('critic_panel_limit'),0)
+    tasks.append(task('T302_CRITIC_PANEL','INTEGRATION','MASTER_ORCHESTRATOR',['T300_ASSEMBLE_FULL_MANUSCRIPT'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':critic_pack,'wait_for_all':True},outputs=['/reviews/CRITIC_PANEL/']))
     protected=load_yaml(book/sp['protected_scenes_file']).get('scenes',[]); audit_ids=[]
     for idx,scene in enumerate(protected,1):
         tid=f'T32{idx:02d}_PROTECTED_{scene["id"]}'; audit_ids.append(tid)
         tasks.append(task(tid,'INTEGRATION',scene.get('auditor','PROTECTED_SCENE_AUDITOR'),['T300_ASSEMBLE_FULL_MANUSCRIPT'],inputs=['/book/protected_scenes.yaml'],parameters={'scene_id':scene['id'],'chapters':scene['chapters']},outputs=[f'/reviews/PROTECTED_{scene["id"]}_AUDIT.md']))
     tasks += [
       task('T303_REVIEW_SYNTHESIS','INTEGRATION','EXECUTIVE_EDITOR',['T301_WHOLE_BOOK_INTEGRATION','T302_CRITIC_PANEL']+audit_ids,outputs=['/reviews/MASTER_REVISION_DIRECTIVE.md']),
-      task('T304_LEAD_NOVELIST_REVISION','INTEGRATION','LEAD_NOVELIST',['T303_REVIEW_SYNTHESIS'],locks=['MANUSCRIPT_FINAL_WRITE']),
-      task('T305_DEVELOPMENTAL_REVIEW','INTEGRATION','DEVELOPMENTAL_EDITOR',['T304_LEAD_NOVELIST_REVISION']),
-      task('T306_LINE_REVIEW','INTEGRATION','MASTER_ORCHESTRATOR',['T304_LEAD_NOVELIST_REVISION'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':packs.get('line_reviewers',[]),'wait_for_all':True}),
-      task('T307_FINAL_LITERARY_REVISION','INTEGRATION','LEAD_NOVELIST',['T305_DEVELOPMENTAL_REVIEW','T306_LINE_REVIEW'],locks=['MANUSCRIPT_FINAL_WRITE']),
+      task('T304_LEAD_NOVELIST_REVISION','INTEGRATION','LEAD_NOVELIST',['T303_REVIEW_SYNTHESIS'],locks=['MANUSCRIPT_FINAL_WRITE'])]
+    line_pack=rotate_pack(packs.get('line_reviewers',[]),profile.get('line_reviewers_limit'),0)
+    if profile.get('consolidate_integration_reviews'):
+        # Uma passada de polimento em vez de tres barreiras sequenciais
+        # (desenvolvimento -> linha -> revisao literaria final). Os mesmos
+        # revisores participam; o que desaparece e a espera entre elas.
+        tasks.append(task('T307_FINAL_LITERARY_REVISION','INTEGRATION','LEAD_NOVELIST',['T304_LEAD_NOVELIST_REVISION'],locks=['MANUSCRIPT_FINAL_WRITE'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':sorted(set(line_pack+['DEVELOPMENTAL_EDITOR'])),'wait_for_all':True},parameters={'consolidated':True,'replaces':['T305_DEVELOPMENTAL_REVIEW','T306_LINE_REVIEW']}))
+        integration_review_ids=['T307_FINAL_LITERARY_REVISION']
+    else:
+        tasks += [
+          task('T305_DEVELOPMENTAL_REVIEW','INTEGRATION','DEVELOPMENTAL_EDITOR',['T304_LEAD_NOVELIST_REVISION']),
+          task('T306_LINE_REVIEW','INTEGRATION','MASTER_ORCHESTRATOR',['T304_LEAD_NOVELIST_REVISION'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':line_pack,'wait_for_all':True}),
+          task('T307_FINAL_LITERARY_REVISION','INTEGRATION','LEAD_NOVELIST',['T305_DEVELOPMENTAL_REVIEW','T306_LINE_REVIEW'],locks=['MANUSCRIPT_FINAL_WRITE'])]
+        integration_review_ids=['T305_DEVELOPMENTAL_REVIEW','T306_LINE_REVIEW','T307_FINAL_LITERARY_REVISION']
+    tasks += [
       task('T308_PTBR_REVIEW','INTEGRATION','PTBR_GRAMMAR_EDITOR',['T307_FINAL_LITERARY_REVISION']),
       task('T309_FINAL_PROOF','INTEGRATION','FINAL_PROOFREADER',['T308_PTBR_REVIEW']),
       task('T310_FREEZE_MANUSCRIPT','INTEGRATION','EXECUTIVE_EDITOR',['T309_FINAL_PROOF'],locks=['MANUSCRIPT_FINAL_WRITE'],outputs=['/manuscript/final/MANUSCRIPT_FINAL_PTBR.md','/manuscript/final/MANUSCRIPT_FINAL_PTBR.txt'])]
-    gates['GATE_FULL_MANUSCRIPT']={'blocking':True,'requires':['T300_ASSEMBLE_FULL_MANUSCRIPT','T301_WHOLE_BOOK_INTEGRATION','T302_CRITIC_PANEL']+audit_ids+['T303_REVIEW_SYNTHESIS','T304_LEAD_NOVELIST_REVISION','T305_DEVELOPMENTAL_REVIEW','T306_LINE_REVIEW','T307_FINAL_LITERARY_REVISION','T308_PTBR_REVIEW','T309_FINAL_PROOF','T310_FREEZE_MANUSCRIPT']}
+    gates['GATE_FULL_MANUSCRIPT']={'blocking':True,'requires':['T300_ASSEMBLE_FULL_MANUSCRIPT','T301_WHOLE_BOOK_INTEGRATION','T302_CRITIC_PANEL']+audit_ids+['T303_REVIEW_SYNTHESIS','T304_LEAD_NOVELIST_REVISION']+integration_review_ids+['T308_PTBR_REVIEW','T309_FINAL_PROOF','T310_FREEZE_MANUSCRIPT']}
     # visual matrix
     if sp['features']['images']['enabled']:
       image_ids=[]
@@ -275,8 +332,15 @@ def build_standard_graph(book: Path):
         for t in tasks:
             if fnmatch.fnmatch(t['id'], pattern):
                 t['model_tier'] = override_tier
+    # Gates rebaixados pelo perfil: registram achados sem interromper. Canon,
+    # manuscrito, legal, midia e entrega nunca entram nessa lista -- economia
+    # sai de repeticao de revisao, nao de protecao.
+    for gid in profile.get('non_blocking_gates') or []:
+        if gid in gates:
+            gates[gid]['blocking']=False
+            gates[gid]['downgraded_by_profile']=profile_name
     engine_validators=[{'id':'V_MEDIA_ASSET_PACKAGE','command':'python scripts/validate_media_assets.py'}]
-    return {'apiVersion':'pedroarte.livingbooks/v1','kind':'LiteraryTaskGraph','metadata':{'project_id':md['slug'],'title':md['title'],'author':md['author'],'language':md['language'],'chapter_count':count,'engine_version':e['metadata']['version'],'book_version':md.get('version','1.0.0')},'spec':{'execution_policy':e['spec']['execution_policy'],'task_states':e['spec']['task_states'],'success_states':e['spec']['success_states'],'rejection_states':rejections,'locks':e['spec']['locks'],'agents':agents,'protocols':e['spec']['protocols'],'quality_defaults':e['spec']['quality_defaults'],'quality_profile':load_yaml(book/sp['quality_profile_file']),'immutable_rules':load_yaml(book/sp['immutable_rules_file']),'custom_validators':engine_validators+ext.get('spec',{}).get('custom_validators',[]),'gates':gates,'tasks':tasks}}
+    return {'apiVersion':'pedroarte.livingbooks/v1','kind':'LiteraryTaskGraph','metadata':{'project_id':md['slug'],'title':md['title'],'author':md['author'],'language':md['language'],'chapter_count':count,'engine_version':e['metadata']['version'],'book_version':md.get('version','1.0.0'),'execution_profile':profile_name},'spec':{'execution_policy':e['spec']['execution_policy'],'task_states':e['spec']['task_states'],'success_states':e['spec']['success_states'],'rejection_states':rejections,'locks':e['spec']['locks'],'agents':agents,'protocols':e['spec']['protocols'],'quality_defaults':e['spec']['quality_defaults'],'quality_profile':load_yaml(book/sp['quality_profile_file']),'immutable_rules':load_yaml(book/sp['immutable_rules_file']),'custom_validators':engine_validators+ext.get('spec',{}).get('custom_validators',[]),'gates':gates,'tasks':tasks}}
 
 def validate_graph(g, root: Path):
     errors=[]; tasks=g['spec']['tasks']; gates=g['spec']['gates']; agents=g['spec']['agents']; tids=[t['id'] for t in tasks]
@@ -335,7 +399,7 @@ def copy_runtime(book: Path, runtime: Path, graph):
     # centenas de linhas de script ad hoc (ver discovery-books/07).
     for script in ('runtime_taskgraph.py','validate_media_assets.py','cost_report.py',
                    '_layout_config.py','build_kdp_docx.py','check_render_capability.py','build_cover_and_stories.py',
-                   'generate_image.py','detect_repetition.py','check_typography.py','check_canon_continuity.py'):
+                   'generate_image.py','detect_repetition.py','check_typography.py','check_canon_continuity.py','build_canon_digest.py'):
         shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
     shutil.copy2(ENGINE/'MODEL_TIERS.yaml',runtime/'MODEL_TIERS.yaml')
     # _layout_config.py resolve os defaults como <raiz>/templates/, então o
@@ -344,6 +408,7 @@ def copy_runtime(book: Path, runtime: Path, graph):
     shutil.copy2(ENGINE/'templates/KDP_LAYOUT_DEFAULTS.yaml',runtime/'templates/KDP_LAYOUT_DEFAULTS.yaml')
     shutil.copy2(ENGINE/'templates/TEXT_QUALITY_DEFAULTS.yaml',runtime/'templates/TEXT_QUALITY_DEFAULTS.yaml')
     shutil.copy2(ENGINE/'templates/FACE_CANON_TEMPLATE.md',runtime/'templates/FACE_CANON_TEMPLATE.md')
+    shutil.copy2(ENGINE/'templates/EXECUTION_PROFILES.yaml',runtime/'templates/EXECUTION_PROFILES.yaml')
     # custom validators
     if (book/'validators').exists(): shutil.copytree(book/'validators',runtime/'book/validators',dirs_exist_ok=True)
     # AGENTS
@@ -431,7 +496,7 @@ def cmd_new_book(a):
     # reasonable 5 waves
     import math
     size=math.ceil(a.chapters/5); waves=[list(range(i,min(i+size,a.chapters+1))) for i in range(1,a.chapters+1,size)]
-    sp={'apiVersion':'pedroarte.livingbooks/v1','kind':'BookSpec','metadata':{'slug':a.slug,'title':a.title,'author':'Pedro Arte','language':'pt-BR','genre':'TO_DEFINE','chapter_count':a.chapters,'version':'0.1.0'},'spec':{'creative_sources':['CREATIVE_BRIEF.md','BOOK_CONSTITUTION.md'],'chapter_titles':titles,'movements':[],'writing_waves':waves,'voice_calibration_chapters':[1,2] if a.chapters>=2 else [1],'lead_novelist_owned_chapters':[1,a.chapters],'features':{'living_book':{'enabled':True},'images':{'enabled':True,'primary_per_chapter':1,'face_consistency_required':True},'living_sound':{'enabled':True},'translation_preparation':{'enabled':True,'target':'en'},'kdp_docx':{'enabled':True},'media_package':{'enabled':True}},'agent_packs':{'book_agents':{},'character_support':['CHILD_VOICE_GUARDIAN'],'canon_guardians':[],'wave_reviewers':['PLOT_CONTINUITY_REVIEWER','CHARACTER_CONTINUITY_REVIEWER','WORLD_RULES_REVIEWER','EMOTIONAL_EDITOR','GENRE_GUARDIAN','ANTI_MANIPULATION_GUARDIAN'],'voice_reviewers':['LITERARY_STYLE_GUARDIAN','DIALOGUE_DIRECTOR','PHYSICALITY_AND_BODY_AGENT','ANTI_MANIPULATION_GUARDIAN'],'critic_panel':['LITERARY_CRITIC','CINEMA_CRITIC','COMMERCIAL_EDITOR_CRITIC','REPETITION_AND_CLICHE_REVIEWER','DEVELOPMENTAL_EDITOR','PLOT_CONTINUITY_REVIEWER'],'line_reviewers':['DIALOGUE_DIRECTOR','LITERARY_STYLE_GUARDIAN','SUBTEXT_EDITOR','SENSORY_AGENT','PHYSICALITY_AND_BODY_AGENT','TYPOGRAPHY_TEXT_REVIEWER','REPETITION_AND_CLICHE_REVIEWER']},'immutable_rules_file':'immutable_rules.yaml','protected_scenes_file':'protected_scenes.yaml','chapter_architecture_file':'chapter_architecture.yaml','quality_profile_file':'quality_profile.yaml','capability_requirements_file':'capability_requirements.yaml','world_rules_seed':'seeds/WORLD_RULES_SEED.md','symbol_priorities':[],'acoustic_environment_organism':'TO_DEFINE','book_specific_rejection_states':[]}}
+    sp={'apiVersion':'pedroarte.livingbooks/v1','kind':'BookSpec','metadata':{'slug':a.slug,'title':a.title,'author':'Pedro Arte','language':'pt-BR','genre':'TO_DEFINE','chapter_count':a.chapters,'version':'0.1.0'},'spec':{'execution_profile':'STANDARD','creative_sources':['CREATIVE_BRIEF.md','BOOK_CONSTITUTION.md'],'chapter_titles':titles,'movements':[],'writing_waves':waves,'voice_calibration_chapters':[1,2] if a.chapters>=2 else [1],'lead_novelist_owned_chapters':[1,a.chapters],'features':{'living_book':{'enabled':True},'images':{'enabled':True,'primary_per_chapter':1,'face_consistency_required':True},'living_sound':{'enabled':True},'translation_preparation':{'enabled':True,'target':'en'},'kdp_docx':{'enabled':True},'media_package':{'enabled':True}},'agent_packs':{'book_agents':{},'character_support':['CHILD_VOICE_GUARDIAN'],'canon_guardians':[],'wave_reviewers':['PLOT_CONTINUITY_REVIEWER','CHARACTER_CONTINUITY_REVIEWER','WORLD_RULES_REVIEWER','EMOTIONAL_EDITOR','GENRE_GUARDIAN','ANTI_MANIPULATION_GUARDIAN'],'voice_reviewers':['LITERARY_STYLE_GUARDIAN','DIALOGUE_DIRECTOR','PHYSICALITY_AND_BODY_AGENT','ANTI_MANIPULATION_GUARDIAN'],'critic_panel':['LITERARY_CRITIC','CINEMA_CRITIC','COMMERCIAL_EDITOR_CRITIC','REPETITION_AND_CLICHE_REVIEWER','DEVELOPMENTAL_EDITOR','PLOT_CONTINUITY_REVIEWER'],'line_reviewers':['DIALOGUE_DIRECTOR','LITERARY_STYLE_GUARDIAN','SUBTEXT_EDITOR','SENSORY_AGENT','PHYSICALITY_AND_BODY_AGENT','TYPOGRAPHY_TEXT_REVIEWER','REPETITION_AND_CLICHE_REVIEWER']},'immutable_rules_file':'immutable_rules.yaml','protected_scenes_file':'protected_scenes.yaml','chapter_architecture_file':'chapter_architecture.yaml','quality_profile_file':'quality_profile.yaml','capability_requirements_file':'capability_requirements.yaml','world_rules_seed':'seeds/WORLD_RULES_SEED.md','symbol_priorities':[],'acoustic_environment_organism':'TO_DEFINE','book_specific_rejection_states':[]}}
     save_yaml(b/'BOOK_SPEC.yaml',sp); save_yaml(b/'BOOK_GRAPH.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'BookGraphExtensions','metadata':{'slug':a.slug,'version':'0.1.0'},'spec':{'custom_validators':[],'gate_extensions':{},'additional_tasks':[]}}); save_yaml(b/'immutable_rules.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'ImmutableRules','rules':[]}); save_yaml(b/'protected_scenes.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'ProtectedScenes','scenes':[]}); save_yaml(b/'quality_profile.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'BookQualityProfile','chapter_scores':{},'risk_scores':{}}); save_yaml(b/'capability_requirements.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'CapabilityRequirements','capabilities':{}}); save_yaml(b/'chapter_architecture.yaml',{'apiVersion':'pedroarte.livingbooks/v1','kind':'ChapterArchitecture','chapters':[{'number':i,'title':titles[i],'movement':'TO_DEFINE','function':'TO_DEFINE'} for i in range(1,a.chapters+1)]})
     (b/'CREATIVE_BRIEF.md').write_text('# Creative Brief\n\nTO_DEFINE\n',encoding='utf-8'); (b/'BOOK_CONSTITUTION.md').write_text('# Book Constitution\n\nTO_DEFINE\n',encoding='utf-8'); (b/'seeds/WORLD_RULES_SEED.md').write_text('# World Rules Seed\n\nTO_DEFINE\n',encoding='utf-8'); (b/'visual_profile.md').write_text('# Visual Profile\n\nTO_DEFINE\n',encoding='utf-8'); (b/'sound_profile.md').write_text('# Sound Profile\n\nTO_DEFINE\n',encoding='utf-8'); (b/'AGENTS.md').write_text(f'# Book package: {a.title}\n\nBook-specific literary DNA only.\n',encoding='utf-8')
     print(f'CREATED {rel(b)}'); return 0

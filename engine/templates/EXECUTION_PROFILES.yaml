@@ -1,0 +1,79 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ExecutionProfiles
+metadata:
+  version: 1.0.0
+spec:
+  # A "torneira" de velocidade × qualidade.
+  #
+  # Um livro escolhe o perfil em BOOK_SPEC.yaml -> spec.execution_profile.
+  # O padrão é PREMIUM, para que nenhum livro existente mude de comportamento
+  # sem uma decisão explícita. Livros novos criados por `new-book` nascem em
+  # STANDARD.
+  #
+  # O que o perfil NÃO faz: não mexe em regras imutáveis, cenas protegidas,
+  # revisão legal, guardiões éticos nem no contrato de mídia. Economia nunca
+  # sai desses lugares — sai de repetição de revisão, não de proteção.
+
+  default: PREMIUM
+
+  profiles:
+    DRAFT:
+      description: >
+        Iteração rápida para leitura de teste. Serve para descobrir se a
+        história funciona antes de pagar pela produção completa.
+      voice_calibration: false
+      wave_reviewers_limit: 2
+      critic_panel_limit: 2
+      line_reviewers_limit: 2
+      consolidate_integration_reviews: true
+      # Gates que passam a registrar achados sem interromper. Note quais NÃO
+      # estão aqui: canon, manuscrito completo, legal, mídia e entrega
+      # continuam bloqueando em todo perfil.
+      non_blocking_gates:
+        - GATE_LIVING_BOOK
+        - GATE_SOUND
+        - GATE_TRANSLATION_PREP
+      disable_features:
+        - living_sound
+        - translation_preparation
+        # Num rascunho você está testando a história, não a arte. As 24
+        # imagens de capítulo são metade das tarefas do grafo e a parte mais
+        # cara por artefato do pipeline visual — e nenhuma delas ajuda a
+        # responder "esta história funciona?".
+        - images
+
+    STANDARD:
+      description: >
+        Perfil recomendado para produção corrente. Mantém a espinha dorsal de
+        revisão e corta a repetição: painéis menores com rotação de foco e
+        uma passada consolidada de polimento em vez de três sequenciais.
+      voice_calibration: true
+      wave_reviewers_limit: 3
+      critic_panel_limit: 3
+      line_reviewers_limit: 4
+      consolidate_integration_reviews: true
+      non_blocking_gates:
+        - GATE_TRANSLATION_PREP
+      disable_features: []
+
+    PREMIUM:
+      description: >
+        Tudo ligado, como o motor sempre executou. Para o lançamento
+        comercial definitivo.
+      voice_calibration: true
+      wave_reviewers_limit: null      # null = usa o pack inteiro
+      critic_panel_limit: null
+      line_reviewers_limit: null
+      consolidate_integration_reviews: false
+      non_blocking_gates: []
+      disable_features: []
+
+  # Ao limitar um pack, o motor ROTACIONA os revisores entre as waves em vez
+  # de truncar sempre nos mesmos. Com 6 revisores e limite 3, a wave 1 usa os
+  # três primeiros, a wave 2 os três seguintes, e assim por diante: o livro
+  # inteiro recebe a cobertura completa do pack, mas cada wave paga por
+  # metade. Truncar fixo deixaria três revisores nunca lendo o livro.
+  rotation_note: >
+    A rotação é o que separa "revisar menos" de "revisar pela metade". Cada
+    capítulo é lido por menos revisores, mas todos os tipos de revisão
+    acontecem em algum ponto da obra.
