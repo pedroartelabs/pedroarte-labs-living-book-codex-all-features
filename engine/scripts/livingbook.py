@@ -335,7 +335,7 @@ def copy_runtime(book: Path, runtime: Path, graph):
     # centenas de linhas de script ad hoc (ver discovery-books/07).
     for script in ('runtime_taskgraph.py','validate_media_assets.py','cost_report.py',
                    '_layout_config.py','build_kdp_docx.py','check_render_capability.py','build_cover_and_stories.py',
-                   'generate_image.py','detect_repetition.py','check_typography.py'):
+                   'generate_image.py','detect_repetition.py','check_typography.py','check_canon_continuity.py'):
         shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
     shutil.copy2(ENGINE/'MODEL_TIERS.yaml',runtime/'MODEL_TIERS.yaml')
     # _layout_config.py resolve os defaults como <raiz>/templates/, então o

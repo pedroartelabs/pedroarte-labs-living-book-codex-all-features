@@ -89,6 +89,7 @@ produce something a script produces identically, every time, for free.
 | `scripts/cost_report.py` | Estimar custo; lê a telemetria real do ledger. |
 | `scripts/detect_repetition.py` | Reler o manuscrito atrás de repetição e clichê. Localiza os trechos; o agente só julga. |
 | `scripts/check_typography.py` | Varrer o texto atrás de aspas, reticências, espaços e travessões inconsistentes. |
+| `scripts/check_canon_continuity.py` | Inventariar entidades da prosa contra o canon e conferir o mapa de ponto de vista. |
 
 Os dois últimos são **pré-filtros**: rode-os antes de acionar
 `REPETITION_AND_CLICHE_REVIEWER`, `TYPOGRAPHY_TEXT_REVIEWER` e
