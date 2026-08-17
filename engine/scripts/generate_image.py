@@ -28,12 +28,16 @@ import os
 import sys
 import urllib.error
 import urllib.request
+import uuid
 from io import BytesIO
 from pathlib import Path
 
 from PIL import Image
 
 API_URL = "https://api.openai.com/v1/images/generations"
+# Endpoint de edição: recebe imagem(ns) de referência e devolve uma nova.
+# É por aqui que a ancoragem de identidade acontece.
+API_EDIT_URL = "https://api.openai.com/v1/images/edits"
 ENV_VAR = "OPENAI_API_KEY"
 
 
@@ -151,6 +155,99 @@ def request_image(api_key: str, model: str, prompt: str, size: str, quality: str
         raise SystemExit(f"IMAGE GENERATION FAILED: resposta inesperada da API ({exc})")
 
 
+MIME_BY_SUFFIX = {".png": "image/png", ".jpg": "image/jpeg",
+                  ".jpeg": "image/jpeg", ".webp": "image/webp"}
+
+
+def encode_multipart(fields: dict[str, str], files: list[tuple[str, Path]]) -> tuple[bytes, str]:
+    """Monta um corpo multipart/form-data com biblioteca padrão.
+
+    A API de edição de imagem não aceita JSON: precisa de upload de arquivo.
+    Fazer isso sem `requests` custa este helper, e evita adicionar dependência
+    a um motor que hoje roda com stdlib + PyYAML + Pillow + python-docx.
+    """
+    boundary = uuid.uuid4().hex
+    body = bytearray()
+    for name, value in fields.items():
+        body += f"--{boundary}\r\n".encode()
+        body += f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode()
+        body += f"{value}\r\n".encode()
+    for name, path in files:
+        mime = MIME_BY_SUFFIX.get(path.suffix.lower(), "application/octet-stream")
+        body += f"--{boundary}\r\n".encode()
+        body += (f'Content-Disposition: form-data; name="{name}"; '
+                 f'filename="{path.name}"\r\n').encode()
+        body += f"Content-Type: {mime}\r\n\r\n".encode()
+        body += path.read_bytes()
+        body += b"\r\n"
+    body += f"--{boundary}--\r\n".encode()
+    return bytes(body), f"multipart/form-data; boundary={boundary}"
+
+
+def request_image_edit(api_key: str, model: str, prompt: str, size: str,
+                       references: list[Path], mask: Path | None = None,
+                       quality: str | None = None) -> tuple[bytes, dict]:
+    """Gera a partir de imagem(ns) de referência.
+
+    É este o mecanismo que resolveu a consistência facial na execução real do
+    Codex: quando o rosto de uma personagem derivou entre capítulos, a correção
+    não foi tentar de novo por prompt textual — foi regenerar ancorando numa
+    imagem já aprovada. Redescrever um rosto em palavras não converge; mostrar
+    o rosto converge.
+
+    Serve aos dois modos do CLI:
+      --reference  cena nova, identidade ancorada em imagem aprovada;
+      --edit       correção pontual de uma imagem existente.
+    """
+    for path in references:
+        if not path.is_file():
+            raise SystemExit(f"IMAGE EDIT FAILED: referência ausente: {path}")
+
+    fields = {"model": model, "prompt": prompt, "size": size, "n": "1"}
+    if quality and quality != "auto":
+        fields["quality"] = quality
+
+    # gpt-image-* aceita múltiplas referências em `image[]`; os modelos
+    # anteriores aceitam uma única imagem em `image`.
+    if model.startswith("gpt-image"):
+        files = [("image[]", p) for p in references]
+    else:
+        files = [("image", references[0])]
+        if len(references) > 1:
+            print(f"AVISO: {model} aceita uma referência; usando apenas "
+                  f"{references[0].name}.", file=sys.stderr)
+    if mask:
+        if not mask.is_file():
+            raise SystemExit(f"IMAGE EDIT FAILED: máscara ausente: {mask}")
+        files.append(("mask", mask))
+
+    data, content_type = encode_multipart(fields, files)
+    request = urllib.request.Request(
+        API_EDIT_URL, data=data,
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": content_type},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=600) as response:
+            body = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:2000]
+        hint = ""
+        if "billing" in detail.lower():
+            hint = ("\nCAPABILITY_BLOCKER: credencial válida, mas a conta atingiu o "
+                    "limite de faturamento. Nenhum crédito foi gasto nesta tentativa.")
+        elif exc.code == 401:
+            hint = f"\nA chave em {ENV_VAR} é inválida ou foi revogada."
+        raise SystemExit(f"IMAGE EDIT FAILED: HTTP {exc.code}\n{detail}{hint}")
+    except urllib.error.URLError as exc:
+        raise SystemExit(f"IMAGE EDIT FAILED: sem acesso a rede ({exc.reason}).")
+
+    try:
+        return base64.b64decode(body["data"][0]["b64_json"]), body.get("usage", {}) or {}
+    except (KeyError, IndexError, TypeError) as exc:
+        raise SystemExit(f"IMAGE EDIT FAILED: resposta inesperada da API ({exc})")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Gera um JPEG editorial nas dimensoes exatas exigidas pelo motor."
@@ -170,6 +267,23 @@ def main() -> int:
              "Use 'high' so em artefato comercialmente critico (capa).",
     )
     parser.add_argument(
+        "--reference", type=Path, action="append", metavar="IMG",
+        help="Imagem aprovada usada como ancora de IDENTIDADE ao gerar uma cena "
+             "nova. Repita a flag para varias referencias. Este e o mecanismo "
+             "que faz um rosto recorrente sobreviver entre capitulos: "
+             "redescrever um rosto em palavras nao converge, mostrar converge.",
+    )
+    parser.add_argument(
+        "--edit", type=Path, metavar="IMG",
+        help="Corrige pontualmente uma imagem existente em vez de regerar do "
+             "zero. Mais barato e nao reintroduz problemas ja resolvidos em "
+             "outras partes da imagem.",
+    )
+    parser.add_argument(
+        "--mask", type=Path,
+        help="Mascara PNG opcional: area transparente e a regiao a alterar.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Verifica credencial e parametros sem chamar a API (nao gasta creditos).",
@@ -179,13 +293,32 @@ def main() -> int:
     api_key = os.environ.get(ENV_VAR)
     size = nearest_size(args.model, args.width, args.height)
 
+    references = list(args.reference or [])
+    if args.edit:
+        references.insert(0, args.edit)
+    if args.edit and args.reference:
+        print("AVISO: --edit e --reference juntos; a imagem de --edit e a base, "
+              "as demais entram como referencia de identidade.", file=sys.stderr)
+    mode = "EDIT" if args.edit else ("REFERENCE" if references else "GENERATE")
+
     if args.dry_run:
         print("DRY RUN — nenhuma chamada de API feita, nenhum credito gasto.")
         print(f"- credencial {ENV_VAR}: {'PRESENTE' if api_key else 'AUSENTE'}")
+        print(f"- modo: {mode}")
         print(f"- modelo: {args.model}")
         print(f"- qualidade de API: {args.api_quality}")
         print(f"- tamanho pedido a API: {size}")
         print(f"- pos-processamento ate: {args.width}x{args.height} @ {args.dpi} DPI (cover-fit)")
+        if references:
+            print(f"- endpoint: {API_EDIT_URL}")
+            for ref in references:
+                mark = "OK " if ref.is_file() else "AUSENTE"
+                print(f"  [{mark}] {ref}")
+            if args.mask:
+                print(f"  mascara: {args.mask} "
+                      f"({'OK' if args.mask.is_file() else 'AUSENTE'})")
+        else:
+            print(f"- endpoint: {API_URL}")
         if not api_key:
             print(
                 f"\nDefina a credencial antes de gerar. PowerShell:\n"
@@ -208,7 +341,13 @@ def main() -> int:
         print("Erro: --prompt e --out sao obrigatorios fora do --dry-run.", file=sys.stderr)
         return 2
 
-    raw, usage = request_image(api_key, args.model, args.prompt, size, args.api_quality)
+    if references:
+        raw, usage = request_image_edit(
+            api_key, args.model, args.prompt, size, references,
+            mask=args.mask, quality=args.api_quality,
+        )
+    else:
+        raw, usage = request_image(api_key, args.model, args.prompt, size, args.api_quality)
     with Image.open(BytesIO(raw)) as generated:
         image = generated.convert("RGB")
         final = cover_fit(image, args.width, args.height)

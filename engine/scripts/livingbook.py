@@ -343,6 +343,7 @@ def copy_runtime(book: Path, runtime: Path, graph):
     (runtime/'templates').mkdir(parents=True,exist_ok=True)
     shutil.copy2(ENGINE/'templates/KDP_LAYOUT_DEFAULTS.yaml',runtime/'templates/KDP_LAYOUT_DEFAULTS.yaml')
     shutil.copy2(ENGINE/'templates/TEXT_QUALITY_DEFAULTS.yaml',runtime/'templates/TEXT_QUALITY_DEFAULTS.yaml')
+    shutil.copy2(ENGINE/'templates/FACE_CANON_TEMPLATE.md',runtime/'templates/FACE_CANON_TEMPLATE.md')
     # custom validators
     if (book/'validators').exists(): shutil.copytree(book/'validators',runtime/'book/validators',dirs_exist_ok=True)
     # AGENTS

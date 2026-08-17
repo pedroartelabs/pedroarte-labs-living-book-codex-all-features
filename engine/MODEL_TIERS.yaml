@@ -51,6 +51,50 @@ spec:
     # devolvido pela API em cost_usd quando disponivel.
     gpt-image-1: {input: 5.00, output: 40.00}
     gpt-image-1-mini: {input: 2.00, output: 8.00}
+  # ------------------------------------------------------------------
+  # Eixo de IMAGEM — independente do tier de texto acima.
+  # ------------------------------------------------------------------
+  # A tabela S/M/XS dosa modelo de TEXTO por tarefa. Geração de pixel é outra
+  # dimensão: o CHAPTER_IMAGE_DIRECTOR pode continuar em Tier M (o brief que
+  # ele escreve já sai quase pronto) enquanto a imagem final é gerada no melhor
+  # modelo disponível. Misturar os dois eixos levaria a rebaixar a geração de
+  # pixel junto com o texto, que é exatamente o erro a evitar: uma imagem
+  # barata reprovada em FACE_QA custa mais caro que a imagem boa, porque
+  # dispara o laço STOP -> FIX -> REVALIDATE depois do manuscrito já pago.
+  image_generation:
+    # Artefato comercial: capa e Stories são a vitrine do livro na loja.
+    commercial:
+      model: gpt-image-1
+      api_quality: high
+      note: Capa KDP e Instagram Stories. Nunca economizar aqui.
+    # Imagem de miolo aprovada, que vai impressa no livro.
+    chapter_final:
+      model: gpt-image-1
+      api_quality: medium
+      note: >
+        Uma por capítulo. Use --reference apontando para uma imagem já
+        aprovada sempre que houver rosto recorrente: na execução real, foi
+        isso que fez a identidade sobreviver entre capítulos, depois de a
+        regeneração por prompt textual ter falhado.
+    # Candidato descartável, para testar enquadramento antes de gastar.
+    draft:
+      model: gpt-image-1-mini
+      api_quality: low
+      note: >
+        Exploração de composição. A execução real gastou 43 candidatos para
+        24 imagens aprovadas (~1,8x); rodar essa exploração no modelo barato
+        é a economia mais direta do pipeline visual.
+    # Correção pontual: mais barata que regerar, e não reintroduz problemas
+    # já resolvidos no resto da imagem.
+    fix:
+      model: gpt-image-1
+      api_quality: medium
+      note: Use --edit, não --prompt do zero.
+  image_note: >
+    Modelos confirmados como disponíveis nesta conta: gpt-image-1,
+    gpt-image-1-mini, gpt-image-1.5, gpt-image-2. Ao adotar uma geração mais
+    nova, atualize também pricing_usd_per_mtok — cost_report.py deixa o custo
+    em branco para modelo não cadastrado, em vez de estimar errado.
   pricing_note: >
     Precos de referencia em USD por milhao de tokens, conferidos na
     documentacao publica de cada fornecedor no momento em que este arquivo foi
