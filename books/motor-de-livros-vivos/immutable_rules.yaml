@@ -1,0 +1,51 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: CORE_PREMISE
+    rule: >
+      Livro vivo é um sistema de produção editorial multiagente que entrega
+      texto, canon, imagens, mídia comercial e arquivo pronto para KDP a
+      partir de um briefing — não é uma metáfora nem um recurso de
+      formatação.
+    blocking: true
+  - id: FACTUAL_INTEGRITY
+    rule: >
+      Nenhuma afirmação técnica sobre o motor pode ser inventada. Toda
+      afirmação precisa ser rastreável à arquitetura real (camadas, ciclo de
+      vida de tarefa, agentes, dosagem de modelo) ou às fontes públicas
+      (universopedroarte.com.br, pedroarte.com.br/Amazon). Onde não houver
+      confirmação, o texto deve dizer "em desenvolvimento" ou equivalente, não
+      apresentar como concluído.
+    blocking: true
+  - id: ORIGIN_CLAIM_HONESTY
+    rule: >
+      A afirmação de que "livro vivo" é um conceito novo na literatura
+      mundial, criado no Brasil, deve ser apresentada como tese e convicção
+      do autor — uma afirmação de autoria e prioridade, não como consenso
+      acadêmico incontestável.
+    blocking: true
+  - id: MEASURED_VS_ROADMAP
+    rule: >
+      O livro deve distinguir com clareza o que já foi implementado e medido
+      (por exemplo, a dosagem de modelo por tier, testada e validada) do que é
+      visão de futuro (por exemplo, os motores irmãos ainda em
+      desenvolvimento ou conceito no Laboratório das Engines).
+    blocking: true
+  - id: KDP_DELIVERY_HONESTY
+    rule: >
+      O processo de entrega não deve ser descrito como concluído sem capa KDP
+      real e mídia comercial — briefs, mockups ou descrições de imagem nunca
+      substituem o artefato final no texto do livro.
+    blocking: true
+  - id: NO_SENTIENCE_CLAIM
+    rule: >
+      Quando o texto usar linguagem viva/orgânica para descrever o motor ou
+      os agentes ("respira", "aprende", "guardião"), isso deve ficar claro
+      como metáfora editorial. O livro nunca afirma que o motor ou seus
+      agentes têm consciência, intenção ou senciência real.
+    blocking: true
+  - id: FORM
+    rule: >
+      Exatamente 4 capítulos, em português do Brasil, no mínimo 6000 palavras
+      no total.
+    blocking: true

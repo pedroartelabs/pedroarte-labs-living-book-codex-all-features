@@ -1,0 +1,43 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: A Faísca e o Sistema
+    movement: Parte I — Origem
+    function: >
+      Conta por que Pedro Arte deixou de escrever cada livro como um artefato
+      isolado e passou a construir um motor. Contrasta o modelo antigo de
+      "Super Prompt" (um prompt gigante por livro, misturando DNA criativo e
+      orquestração) com o modelo atual de engine + pacote de livro. Ancora a
+      tese central do livro na frase do próprio Universo Pedro Arte: "E se o
+      livro fosse o começo de um sistema, não o fim de um texto?"
+  - number: 2
+    title: A Máquina por Dentro
+    movement: Parte II — Arquitetura
+    function: >
+      Explica, em linguagem acessível, as três camadas do motor (engine,
+      pacote de livro, runtime gerado), o ciclo de vida de uma tarefa no grafo
+      (READY, spawn de subagentes, gates bloqueantes), a taxonomia de mais de
+      sessenta agentes especialistas, e como o motor aprendeu a dosar modelos
+      diferentes por tarefa — modelos mais caros só onde o julgamento é
+      irredutível, modelos mais baratos onde a tarefa é checagem estruturada.
+  - number: 3
+    title: O Livro que Respira
+    movement: Parte III — Filosofia
+    function: >
+      Define o que separa um "livro vivo" de um livro comum: canon vivo,
+      cenas protegidas, identidade visual consistente, trilha sonora derivada
+      do próprio texto. Situa o conceito no catálogo real do Universo Pedro
+      Arte (obras como O Jardim dos Doze e Antes que as Crianças Cresçam) e
+      argumenta, como tese autoral, por que este é um território novo na
+      produção literária — nascido no Brasil.
+  - number: 4
+    title: Depois do Livro
+    movement: Parte IV — Futuro
+    function: >
+      Fecha o livro no resultado concreto — a entrega para a Amazon KDP, capa
+      e mídia comercial como parte obrigatória do pacote, não um extra — e
+      abre para o ecossistema de motores irmãos já em desenvolvimento no
+      Laboratório das Engines (áudio, aplicativo interativo, vídeo, governança
+      pública, trabalhos acadêmicos), deixando claro o que já existe e o que
+      ainda é direção.

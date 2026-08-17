@@ -1,0 +1,10 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  ptbr_literary_generation: {required: true}
+  raster_image_generation: {required: true, count: 4, format: jpg}
+  docx_generation: {required: true}
+  docx_visual_render_qa: {required: true}
+  zip_packaging: {required: true}
+  current_kdp_research: {required: true, source: official_amazon}
+  external_reference_grounding: {required: true, sources: [pedroarte.com.br, universopedroarte.com.br]}

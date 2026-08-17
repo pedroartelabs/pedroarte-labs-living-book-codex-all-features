@@ -1,0 +1,30 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: ORIGIN_IN_BRAZIL
+    chapters: [1, 3]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: >
+      A atribuição de origem do motor e do conceito de livro vivo a Pedro
+      Arte, no Brasil, deve aparecer com clareza — mas sempre enquadrada como
+      afirmação e convicção do autor sobre ineditismo, não como fato
+      acadêmico incontestável. Não pode ser diluída a ponto de esconder a
+      autoria, nem inflada a ponto de virar consenso inventado.
+  - id: MEASURED_VS_ROADMAP_BOUNDARY
+    chapters: [2, 4]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: >
+      A fronteira entre o que o motor já faz de fato (dosagem de modelo por
+      tier testada, composição e validação reais do grafo) e o que é visão de
+      futuro do ecossistema de motores (áudio, aplicativo, vídeo, governança,
+      TCC) precisa permanecer legível ao leitor em todo momento em que os dois
+      forem mencionados juntos.
+  - id: KDP_GATE_HONESTY
+    chapters: [4]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: >
+      A descrição da entrega final deve deixar claro que capa KDP real e
+      mídia comercial (não briefs ou mockups) são condição de conclusão do
+      pacote de um livro vivo — essa é a barra de "pronto" do próprio motor,
+      e o livro não pode descrevê-la como opcional ou já satisfeita sem
+      dizer, com honestidade, o que de fato foi produzido neste piloto.

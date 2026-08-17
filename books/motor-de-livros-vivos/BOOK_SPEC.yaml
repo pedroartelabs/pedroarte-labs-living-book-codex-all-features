@@ -1,0 +1,93 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: motor-de-livros-vivos
+  title: Motor de Livros Vivos
+  author: Pedro Arte
+  language: pt-BR
+  genre: não-ficção — engenharia editorial e literatura viva
+  chapter_count: 4
+  version: 0.1.0
+spec:
+  creative_sources:
+  - CREATIVE_BRIEF.md
+  - BOOK_CONSTITUTION.md
+  chapter_titles:
+    1: A Faísca e o Sistema
+    2: A Máquina por Dentro
+    3: O Livro que Respira
+    4: Depois do Livro
+  movements:
+  - {name: Parte I — Origem, chapters: [1]}
+  - {name: Parte II — Arquitetura, chapters: [2]}
+  - {name: Parte III — Filosofia, chapters: [3]}
+  - {name: Parte IV — Futuro, chapters: [4]}
+  writing_waves:
+  - - 1
+  - - 2
+  - - 3
+  - - 4
+  voice_calibration_chapters:
+  - 1
+  - 2
+  lead_novelist_owned_chapters:
+  - 1
+  - 4
+  features:
+    living_book:
+      enabled: true
+    images:
+      enabled: true
+      primary_per_chapter: 1
+      face_consistency_required: false
+    living_sound:
+      enabled: false
+    translation_preparation:
+      enabled: false
+      target: en
+    kdp_docx:
+      enabled: true
+    media_package:
+      enabled: true
+  agent_packs:
+    book_agents: {}
+    character_support:
+    - CHILD_VOICE_GUARDIAN
+    canon_guardians: []
+    wave_reviewers:
+    - PLOT_CONTINUITY_REVIEWER
+    - CHARACTER_CONTINUITY_REVIEWER
+    - WORLD_RULES_REVIEWER
+    - EMOTIONAL_EDITOR
+    - GENRE_GUARDIAN
+    - ANTI_MANIPULATION_GUARDIAN
+    voice_reviewers:
+    - LITERARY_STYLE_GUARDIAN
+    - DIALOGUE_DIRECTOR
+    - PHYSICALITY_AND_BODY_AGENT
+    - ANTI_MANIPULATION_GUARDIAN
+    critic_panel:
+    - LITERARY_CRITIC
+    - CINEMA_CRITIC
+    - COMMERCIAL_EDITOR_CRITIC
+    - CLICHE_HUNTER
+    - DEVELOPMENTAL_EDITOR
+    - PLOT_CONTINUITY_REVIEWER
+    line_reviewers:
+    - DIALOGUE_DIRECTOR
+    - LITERARY_STYLE_GUARDIAN
+    - SUBTEXT_EDITOR
+    - SENSORY_AGENT
+    - PHYSICALITY_AND_BODY_AGENT
+    - TYPOGRAPHY_TEXT_REVIEWER
+    - REDUNDANCY_REVIEWER
+    - CLICHE_REVIEWER
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities: [faísca, grafo, portas, raízes, capa]
+  acoustic_environment_organism: N/A — living_sound desabilitado neste piloto (ver sound_profile.md)
+  book_specific_rejection_states: [FACTUAL_OVERCLAIM, ORIGIN_CLAIM_DILUTION, MEASURED_VS_ROADMAP_CONFLATION]

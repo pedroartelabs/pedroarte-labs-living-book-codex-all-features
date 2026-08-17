@@ -1,0 +1,17 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters: 6
+  scene_strength: 6
+  subtext: 6
+  sensory_concreteness: 7
+  coherence: 9
+  emotional_impact: 7
+risk_scores:
+  sentimentalism: 4
+  effect_phrase_overuse: 5
+  abstraction: 5
+  continuity: 1
+  ethical_safety: 0
+  unverified_claims: 0
+  hype_without_evidence: 2

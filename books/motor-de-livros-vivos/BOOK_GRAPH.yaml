@@ -1,0 +1,9 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: motor-de-livros-vivos
+  version: 0.1.0
+spec:
+  custom_validators: []
+  gate_extensions: {}
+  additional_tasks: []
