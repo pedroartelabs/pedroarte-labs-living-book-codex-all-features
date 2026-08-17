@@ -28,6 +28,17 @@ TASK_TIER_OVERRIDES = [
     ('T4??_FACE_QA', 'XS'),
 ]
 
+# Tarefas 100% mecanicas -> comando que as resolve sem nenhuma chamada de LLM.
+# `{runtime}` vira a raiz do runtime e `{python}` vira o interpretador que
+# executa o runner. Usar `python` puro aqui seria um bug: em ambiente com venv,
+# o `python` do PATH e outro interpretador, sem as dependencias do motor.
+TOOL_BY_TASK = {
+    'T020_CANON_DIGEST': '{python} scripts/build_canon_digest.py --runtime {runtime}',
+    'T703_BUILD_DOCX': '{python} scripts/build_kdp_docx.py --runtime {runtime}',
+    'T801_KDP_BOOK_COVER': '{python} scripts/build_cover_and_stories.py --runtime {runtime}',
+}
+TOOL_BY_PATTERN: list[tuple[str,str]] = []
+
 def validate_profiles(profile_dir: Path):
     errors=[]; count=0
     for p in sorted(profile_dir.glob('*.toml')):
@@ -120,7 +131,9 @@ def load_execution_profile(name: str|None):
         raise SystemExit(
             f"execution_profile desconhecido: {chosen!r}. "
             f"Disponiveis: {sorted(profiles)}")
-    return profiles[chosen], chosen
+    profile = dict(profiles[chosen])
+    profile['human_checkpoints'] = (data.get('human_checkpoints') or {}).get(chosen, [])
+    return profile, chosen
 
 def rotate_pack(names, limit, index):
     """Seleciona `limit` revisores do pack, ROTACIONANDO conforme a wave.
@@ -166,6 +179,12 @@ def build_standard_graph(book: Path):
       task('T018_CANON_REGISTRY','CANON','CANON_GUARDIAN',['T012_WORLD_RULES','T013_CHARACTER_BIBLE','T014_WORLD_BIBLE','T015_SYMBOL_BIBLE','T016_PLOT_DEPENDENCY_MAP','T017_TIMELINE'],locks=['CANON_WRITE'],outputs=['/canon/CANON_REGISTRY.yaml']),
       task('T019_CANON_REVIEW','CANON','EXECUTIVE_EDITOR',['T018_CANON_REGISTRY'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':['CANON_GUARDIAN','GENRE_GUARDIAN','ANTI_MANIPULATION_GUARDIAN']+packs.get('canon_guardians',[]),'wait_for_all':True},outputs=['/reviews/CANON_REVIEW.md'])]
     gates['GATE_CANON']={'blocking':True,'requires':[f'T01{i}_'+x for i,x in []] + ['T010_MASTER_BRIEF','T011_STORY_BIBLE','T012_WORLD_RULES','T013_CHARACTER_BIBLE','T014_WORLD_BIBLE','T015_SYMBOL_BIBLE','T016_PLOT_DEPENDENCY_MAP','T017_TIMELINE','T018_CANON_REGISTRY','T019_CANON_REVIEW']}
+    # Digest de canon: destila o CANON_REGISTRY a ~11% do tamanho das biblias,
+    # para as tarefas de CONFERENCIA lerem no lugar do corpo completo. E
+    # deterministico (le YAML, escreve Markdown), entao roda sem LLM.
+    tasks.append(task('T020_CANON_DIGEST','CANON','CANON_GUARDIAN',['GATE_CANON'],
+                      inputs=['/canon/CANON_REGISTRY.yaml'],
+                      outputs=['/canon/CANON_DIGEST.md']))
     # Living book
     tasks += [
       task('T030_LIVING_BOOK_BIBLE','LIVING_BOOK','EMOTIONAL_PHYSIOLOGY_ARCHITECT',['GATE_CANON'],outputs=['/living_book/LIVING_BOOK_BIBLE.md']),
@@ -332,6 +351,20 @@ def build_standard_graph(book: Path):
         for t in tasks:
             if fnmatch.fnmatch(t['id'], pattern):
                 t['model_tier'] = override_tier
+    # Ferramentas deterministicas: tarefas cujo trabalho e inteiramente
+    # mecanico e nao exige nenhuma chamada de modelo. run_deterministic.py
+    # executa estas sozinho, marca o estado e registra custo zero no ledger.
+    # O criterio para entrar aqui e estrito: se a tarefa exige QUALQUER
+    # julgamento (escolher uma palavra, aprovar uma imagem, decidir se uma
+    # repeticao e deliberada), ela NAO recebe tool -- continua com o agente.
+    for t in tasks:
+        tool = TOOL_BY_TASK.get(t['id'])
+        if tool is None:
+            for pattern, candidate in TOOL_BY_PATTERN:
+                if fnmatch.fnmatch(t['id'], pattern):
+                    tool = candidate; break
+        if tool:
+            t['tool'] = tool
     # Gates rebaixados pelo perfil: registram achados sem interromper. Canon,
     # manuscrito, legal, midia e entrega nunca entram nessa lista -- economia
     # sai de repeticao de revisao, nao de protecao.
@@ -339,6 +372,13 @@ def build_standard_graph(book: Path):
         if gid in gates:
             gates[gid]['blocking']=False
             gates[gid]['downgraded_by_profile']=profile_name
+    # Checkpoints humanos: o gate so passa quando existir o arquivo de
+    # aprovacao. O motor NUNCA cria esse arquivo -- e o unico ponto do
+    # pipeline em que a decisao nao e automatizavel por desenho.
+    for gid in profile.get('human_checkpoints') or []:
+        if gid in gates:
+            gates[gid]['requires_human_approval']=True
+            gates[gid]['approval_file']=f'/project_state/APPROVALS/{gid}.md'
     engine_validators=[{'id':'V_MEDIA_ASSET_PACKAGE','command':'python scripts/validate_media_assets.py'}]
     return {'apiVersion':'pedroarte.livingbooks/v1','kind':'LiteraryTaskGraph','metadata':{'project_id':md['slug'],'title':md['title'],'author':md['author'],'language':md['language'],'chapter_count':count,'engine_version':e['metadata']['version'],'book_version':md.get('version','1.0.0'),'execution_profile':profile_name},'spec':{'execution_policy':e['spec']['execution_policy'],'task_states':e['spec']['task_states'],'success_states':e['spec']['success_states'],'rejection_states':rejections,'locks':e['spec']['locks'],'agents':agents,'protocols':e['spec']['protocols'],'quality_defaults':e['spec']['quality_defaults'],'quality_profile':load_yaml(book/sp['quality_profile_file']),'immutable_rules':load_yaml(book/sp['immutable_rules_file']),'custom_validators':engine_validators+ext.get('spec',{}).get('custom_validators',[]),'gates':gates,'tasks':tasks}}
 
@@ -399,7 +439,8 @@ def copy_runtime(book: Path, runtime: Path, graph):
     # centenas de linhas de script ad hoc (ver discovery-books/07).
     for script in ('runtime_taskgraph.py','validate_media_assets.py','cost_report.py',
                    '_layout_config.py','build_kdp_docx.py','check_render_capability.py','build_cover_and_stories.py',
-                   'generate_image.py','detect_repetition.py','check_typography.py','check_canon_continuity.py','build_canon_digest.py'):
+                   'generate_image.py','detect_repetition.py','check_typography.py','check_canon_continuity.py','build_canon_digest.py',
+                   'run_deterministic.py'):
         shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
     shutil.copy2(ENGINE/'MODEL_TIERS.yaml',runtime/'MODEL_TIERS.yaml')
     # _layout_config.py resolve os defaults como <raiz>/templates/, então o

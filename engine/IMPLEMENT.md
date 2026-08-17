@@ -92,6 +92,33 @@ produce something a script produces identically, every time, for free.
 | `scripts/check_canon_continuity.py` | Inventariar entidades da prosa contra o canon e conferir o mapa de ponto de vista. |
 | `scripts/build_canon_digest.py` | Reler as bíblias inteiras em tarefa de conferência. Destila o canon a ~11% do tamanho. |
 
+## Antes de qualquer coisa: rode o runner determinístico
+
+```
+python scripts/run_deterministic.py --runtime . --loop
+```
+
+Ele executa as tarefas `READY` que declaram `tool` no grafo — construir o
+DOCX, compor capa e Stories, destilar o digest de canon — sem nenhuma chamada
+de modelo, marca o estado e registra custo zero no ledger. Rode-o sempre que
+um gate abrir: o que for mecânico se resolve sozinho, e você fica só com o que
+exige julgamento.
+
+Uma tarefa determinística que falha é defeito de **ambiente ou de entrada**,
+nunca de julgamento. Não tente contornar com um agente: corrija a causa.
+
+## Checkpoints humanos
+
+Alguns gates declaram `requires_human_approval`. Eles só passam quando existir
+`project_state/APPROVALS/<GATE_ID>.md`. **O motor nunca escreve esse arquivo** —
+é o único ponto do pipeline em que a decisão não é automatizável por desenho.
+
+Ao chegar num gate desses, pare e diga ao autor o que ele precisa avaliar.
+Descobrir no `GATE_KDP` que a arquitetura de capítulos estava errada significa
+ter pago o livro inteiro para aprender isso; um punhado de aprovações humanas
+nos pontos certos pega uma classe de erro que nenhum agente pega, porque só o
+autor sabe se é o livro que ele quer.
+
 ## Digest de canon — quem lê o quê
 
 As bíblias de um livro real somam ~25 mil palavras e são relidas por dezenas

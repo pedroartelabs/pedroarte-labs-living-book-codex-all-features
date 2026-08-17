@@ -68,6 +68,34 @@ spec:
       non_blocking_gates: []
       disable_features: []
 
+  # ------------------------------------------------------------------
+  # Checkpoints humanos
+  # ------------------------------------------------------------------
+  # O motor roda em modo autônomo, e por padrão não para nunca. Isso é bom
+  # para as centenas de tarefas mecânicas e ruim para as poucas decisões que
+  # definem se o livro está indo na direção certa: descobrir no GATE_KDP que a
+  # arquitetura de capítulos estava errada significa ter pago o livro inteiro
+  # para aprender isso.
+  #
+  # Um punhado de aprovações humanas de alto valor custa menos que um painel
+  # de agentes simulando consenso em cada estágio — e pega uma classe de erro
+  # que nenhum agente pega, porque só o autor sabe se é o livro que ele quer.
+  #
+  # Como funciona: com o checkpoint ativo, o gate correspondente só passa
+  # depois que existir `project_state/APPROVALS/<GATE_ID>.md`. O arquivo é
+  # escrito por uma pessoa; o motor não o cria sozinho em hipótese alguma.
+  human_checkpoints:
+    DRAFT: []
+    STANDARD:
+      - GATE_CANON            # a arquitetura da obra, antes de escrever
+      - GATE_VOICE            # a voz do livro, antes das waves
+      - GATE_FULL_MANUSCRIPT  # o texto completo, antes de imagem e KDP
+    PREMIUM:
+      - GATE_CANON
+      - GATE_VOICE
+      - GATE_FULL_MANUSCRIPT
+      - GATE_KDP              # a prova final, antes da entrega
+
   # Ao limitar um pack, o motor ROTACIONA os revisores entre as waves em vez
   # de truncar sempre nos mesmos. Com 6 revisores e limite 3, a wave 1 usa os
   # três primeiros, a wave 2 os três seguintes, e assim por diante: o livro

@@ -19,6 +19,10 @@ def gate_states(g,states,validator_results):
                 statuses=[validator_results.get(v,{}).get('status') for v in vids]
                 if any(x=='FAIL' for x in statuses): val='BLOCKED'
                 elif vids and not all(x=='PASS' for x in statuses): val='VALIDATION_REQUIRED'
+                elif gd.get('requires_human_approval') and not (ROOT/gd.get('approval_file','').lstrip('/')).exists():
+                    # O motor nunca escreve este arquivo. E o unico ponto do
+                    # pipeline em que a decisao e humana por desenho.
+                    val='AWAITING_HUMAN_APPROVAL'
                 else: val='APPROVED'
             if out.get(gid)!=val: out[gid]=val; changed=True
         if not changed: break
