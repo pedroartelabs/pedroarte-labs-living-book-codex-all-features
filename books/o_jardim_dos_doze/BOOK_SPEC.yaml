@@ -37,10 +37,10 @@ spec:
     23: O Corpo de Bento
     24: O Último Recreio
   movements:
-    - {name: Ato I — A Cerca, chapters: [1,2,3,4,5,6,7,8]}
-    - {name: Ato II — As Raízes, chapters: [9,10,11,12,13,14,15,16,17,18]}
-    - {name: Ato III — A Colheita, chapters: [19,20,21,22,23,24]}
-  writing_waves: [[1,2,3,4,5,6,7,8], [9,10,11,12,13], [14,15,16,17,18], [19,20,21,22,23,24]]
+    - {name: Ato I — A Cerca, chapters: [1, 2, 3, 4, 5, 6, 7, 8]}
+    - {name: Ato II — As Raízes, chapters: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}
+    - {name: Ato III — A Colheita, chapters: [19, 20, 21, 22, 23, 24]}
+  writing_waves: [[1, 2, 3, 4, 5, 6, 7, 8], [9,10,11,12,13], [14,15,16,17,18], [19,20,21,22,23,24]]
   voice_calibration_chapters: [1, 2]
   lead_novelist_owned_chapters: [1, 24]
   features:
@@ -56,8 +56,8 @@ spec:
     canon_guardians: [REALISM_ENGINEER, GENRE_GUARDIAN]
     wave_reviewers: [PLOT_CONTINUITY_REVIEWER, CHARACTER_CONTINUITY_REVIEWER, WORLD_RULES_REVIEWER, EMOTIONAL_EDITOR, GENRE_GUARDIAN, ANTI_MANIPULATION_GUARDIAN]
     voice_reviewers: [LITERARY_STYLE_GUARDIAN, DIALOGUE_DIRECTOR, PHYSICALITY_AND_BODY_AGENT, ANTI_MANIPULATION_GUARDIAN]
-    critic_panel: [LITERARY_CRITIC, CINEMA_CRITIC, COMMERCIAL_EDITOR_CRITIC, CLICHE_HUNTER, DEVELOPMENTAL_EDITOR, PLOT_CONTINUITY_REVIEWER]
-    line_reviewers: [DIALOGUE_DIRECTOR, LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, SENSORY_AGENT, PHYSICALITY_AND_BODY_AGENT, TYPOGRAPHY_TEXT_REVIEWER, REDUNDANCY_REVIEWER, CLICHE_REVIEWER]
+    critic_panel: [LITERARY_CRITIC, CINEMA_CRITIC, COMMERCIAL_EDITOR_CRITIC, DEVELOPMENTAL_EDITOR, PLOT_CONTINUITY_REVIEWER, REPETITION_AND_CLICHE_REVIEWER]
+    line_reviewers: [DIALOGUE_DIRECTOR, LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, SENSORY_AGENT, PHYSICALITY_AND_BODY_AGENT, TYPOGRAPHY_TEXT_REVIEWER, REPETITION_AND_CLICHE_REVIEWER]
   immutable_rules_file: immutable_rules.yaml
   protected_scenes_file: protected_scenes.yaml
   chapter_architecture_file: chapter_architecture.yaml

@@ -87,6 +87,15 @@ produce something a script produces identically, every time, for free.
 | `scripts/validate_media_assets.py` | Conferir dimensões, DPI e proveniência de mídia por inspeção visual. |
 | `scripts/generate_image.py` | Chamar API de imagem ad hoc; já entrega nas dimensões exatas do contrato. |
 | `scripts/cost_report.py` | Estimar custo; lê a telemetria real do ledger. |
+| `scripts/detect_repetition.py` | Reler o manuscrito atrás de repetição e clichê. Localiza os trechos; o agente só julga. |
+| `scripts/check_typography.py` | Varrer o texto atrás de aspas, reticências, espaços e travessões inconsistentes. |
+
+Os dois últimos são **pré-filtros**: rode-os antes de acionar
+`REPETITION_AND_CLICHE_REVIEWER`, `TYPOGRAPHY_TEXT_REVIEWER` e
+`PTBR_GRAMMAR_EDITOR`, e entregue o relatório ao agente em vez do manuscrito
+inteiro. Eles encontram repetição de formulação e desvio tipográfico; **não**
+encontram repetição de ideia com outras palavras, clichê fora da lista, nem
+erro de concordância ou regência — isso continua exigindo o agente.
 
 `T001_VALIDATE_CAPABILITIES` deve executar `check_render_capability.py` e
 registrar o resultado em `project_state/CAPABILITY_STATUS.yaml`. Se ele

@@ -1,0 +1,113 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: TextQualityDefaults
+metadata:
+  version: 1.0.0
+spec:
+  # Um livro sobrescreve qualquer chave criando book/text_quality.yaml.
+  # Limiares calibrados contra um manuscrito literário real de ~77 mil palavras
+  # que já havia passado por todos os revisores do motor: o objetivo é que um
+  # texto aprovado produza poucos achados, senão o detector vira ruído e a
+  # equipe aprende a ignorá-lo.
+
+  ngram_repetition:
+    enabled: true
+    # Tamanho da sequência de palavras analisada.
+    size: 5
+    # A partir de quantas ocorrências vira achado.
+    min_occurrences: 3
+    # Sequências compostas só de palavras funcionais são ruído estrutural da
+    # língua ("de que ela não tinha"), não repetição autoral.
+    max_stopword_ratio: 0.8
+    # Datas e horarios por extenso sao fato da cena, nao formulacao
+    # autoral. Calibrado contra um livro cuja trama gira em torno de
+    # registros horarios, onde isso gerava falso positivo em massa.
+    max_number_ratio: 0.4
+    severity: LOW
+
+  near_duplicate_paragraphs:
+    enabled: true
+    # Similaridade de Jaccard sobre shingles de palavras. LIMITE CONHECIDO:
+    # isto captura repetição de FORMULAÇÃO, não repetição de IDEIA com outras
+    # palavras. A repetição semântica continua sendo trabalho do agente
+    # revisor — o script só tira dele o volume mecânico.
+    shingle_size: 4
+    threshold: 0.42
+    min_words: 25
+    severity: MEDIUM
+
+  cliches:
+    enabled: true
+    severity: MEDIUM
+    # Lista inicial de lugares-comuns da prosa literária em PT-BR. Deve crescer
+    # com o que os revisores efetivamente flagram em cada obra.
+    patterns:
+      - coração disparado
+      - coração aos pulos
+      - coração na boca
+      - lágrimas escorriam
+      - lágrimas rolaram
+      - olhos marejados
+      - marejaram os olhos
+      - um arrepio percorreu
+      - arrepio na espinha
+      - gelou a espinha
+      - sangue gelou
+      - silêncio ensurdecedor
+      - sorriso amarelo
+      - nó na garganta
+      - peso no peito
+      - friozinho na barriga
+      - borboletas no estômago
+      - o tempo parou
+      - o tempo pareceu parar
+      - o mundo desabou
+      - como se o mundo
+      - respirou fundo e
+      - suspirou fundo
+      - engoliu em seco
+      - ficou sem palavras
+      - não era mais o mesmo
+      - naquele exato momento
+      - por um breve instante
+      - mal sabia ele
+      - mal sabia ela
+      - só o tempo diria
+
+  adverbs_mente:
+    enabled: true
+    # Advérbios em -mente por mil palavras. Acima disso, a prosa tende a
+    # explicar em vez de mostrar.
+    max_per_1000_words: 12
+    # Dois advérbios em -mente no mesmo parágrafo curto já pesam.
+    max_per_paragraph: 3
+    severity: LOW
+
+  sentence_openings:
+    enabled: true
+    # Frases consecutivas começando com a mesma palavra.
+    max_consecutive_same: 3
+    severity: LOW
+
+  dialogue_tags:
+    enabled: true
+    # Verbos de fala exóticos: em prosa literária moderna, "disse" some na
+    # leitura; os substitutos chamam atenção para si.
+    exotic_tags:
+      - vociferou
+      - bradou
+      - exclamou
+      - retrucou
+      - redarguiu
+      - asseverou
+      - proferiu
+      - ciciou
+      - balbuciou
+      - gaguejou
+      - guinchou
+    max_exotic_ratio: 0.15
+    severity: LOW
+
+  # Achados acima deste nível reprovam o validador (exit != 0). O padrão é
+  # não bloquear: este script é PRÉ-FILTRO, e a decisão editorial continua
+  # sendo do EXECUTIVE_EDITOR sobre o relatório do agente revisor.
+  blocking_severity: BLOCKER

@@ -171,10 +171,8 @@ spec:
       profile: /engine/agents/ptbr_grammar_editor.toml
     TYPOGRAPHY_TEXT_REVIEWER:
       profile: /engine/agents/typography_text_reviewer.toml
-    REDUNDANCY_REVIEWER:
-      profile: /engine/agents/redundancy_reviewer.toml
-    CLICHE_REVIEWER:
-      profile: /engine/agents/cliche_reviewer.toml
+    REPETITION_AND_CLICHE_REVIEWER:
+      profile: /engine/agents/repetition_and_cliche_reviewer.toml
     FINAL_PROOFREADER:
       profile: /engine/agents/final_proofreader.toml
     MERGE_COORDINATOR:
@@ -189,8 +187,6 @@ spec:
       profile: /engine/agents/cinema_critic.toml
     COMMERCIAL_EDITOR_CRITIC:
       profile: /engine/agents/commercial_editor_critic.toml
-    CLICHE_HUNTER:
-      profile: /engine/agents/cliche_hunter.toml
     BOOK_LAYOUT_ARCHITECT:
       profile: /engine/agents/book_layout_architect.toml
     TABLE_OF_CONTENTS_AGENT:

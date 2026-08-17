@@ -70,7 +70,6 @@ spec:
     - LITERARY_CRITIC
     - CINEMA_CRITIC
     - COMMERCIAL_EDITOR_CRITIC
-    - CLICHE_HUNTER
     - DEVELOPMENTAL_EDITOR
     - PLOT_CONTINUITY_REVIEWER
     line_reviewers:
@@ -80,8 +79,7 @@ spec:
     - SENSORY_AGENT
     - PHYSICALITY_AND_BODY_AGENT
     - TYPOGRAPHY_TEXT_REVIEWER
-    - REDUNDANCY_REVIEWER
-    - CLICHE_REVIEWER
+    - REPETITION_AND_CLICHE_REVIEWER
   immutable_rules_file: immutable_rules.yaml
   protected_scenes_file: protected_scenes.yaml
   chapter_architecture_file: chapter_architecture.yaml
