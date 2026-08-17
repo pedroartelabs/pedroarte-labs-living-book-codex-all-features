@@ -1,0 +1,30 @@
+# Segredos — NUNCA comitar credenciais neste repositório.
+# Este pacote é distribuível (ver DISTRIBUTION_MANIFEST.md) e tem remote
+# público: qualquer chave commitada aqui viaja em cada cópia do motor e
+# permanece no histórico do git para sempre.
+.env
+.env.*
+!.env.example
+*.key
+secrets.yaml
+credentials.json
+
+# Runtimes gerados — NÃO fazem parte da estrutura core do motor.
+# Cada runtime/<slug>/ é produzido por `livingbook.py compose` a partir de
+# engine/ + books/<slug>/ e pode ser recriado a qualquer momento. Manuscritos,
+# imagens, mídia e estado de execução vivem aqui e não devem entrar no pacote
+# distribuível.
+runtime/
+
+# Saídas de teste — artefatos gerados, recriáveis rodando a suíte.
+tests/outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Sistema
+.DS_Store
+Thumbs.db

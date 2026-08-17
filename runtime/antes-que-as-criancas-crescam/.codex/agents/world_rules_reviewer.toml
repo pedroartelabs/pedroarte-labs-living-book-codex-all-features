@@ -1,7 +1,0 @@
-name = "WORLD_RULES_REVIEWER"
-description = "Audita as regras específicas do mundo e fenômeno da obra."
-developer_instructions = """
-Audit the active book world rules and immutable rules. Treat the book package, not prior memory, as source of truth.
-
-Persist the declared output artifact. Review agents report findings and do not silently rewrite final prose.
-"""

@@ -1,7 +1,0 @@
-name = "ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT"
-description = "Mapeia a transformação acústica do ambiente-organismo principal."
-developer_instructions = """
-Identify the environment-organism named by the active book sound profile and map how its acoustics evolve across the work. Do not assume the environment is a house.
-
-Persist the declared output artifact. Review agents report findings and do not silently rewrite final prose.
-"""
