@@ -1,0 +1,69 @@
+# Snapshot aprovado do ledger causal do MVP, capturado imediatamente após o
+# capítulo 5 — antes da revelação do capítulo 6 (EV-06). Usado por
+# check_baseline_immutability() / --baseline para provar L10/INV-08/INV-10:
+# nada aqui pode mudar depois de aprovado, mesmo quando uma revelação
+# posterior recontextualiza o SIGNIFICADO destes eventos.
+#
+# `facts`, `caused_by` e `consent` precisam bater byte a byte com
+# tests/fixtures/causal_ledger/mvp_ledger.yaml para os eventos EV-01..EV-05.
+# Se editar um, edite o outro.
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedgerSnapshot
+metadata:
+  project_id: causal-ledger-mvp
+  through_chapter: 5
+  wave: 1
+
+events:
+  - id: EV-01
+    facts:
+      - Diante de outras pessoas, A recusa o convite de B e a dispensa com frieza.
+    caused_by: [GT-A-02]
+    consent: null
+
+  - id: EV-02
+    facts:
+      - B procura A de novo e o confronta com ironia diante de quem trabalha para ele.
+    caused_by: [GT-B-01, EV-01]
+    consent: null
+
+  - id: EV-03
+    facts:
+      - A diz a B que passou a noite fora da cidade; na verdade, vigiava a rua onde ela mora.
+    caused_by: [GT-A-02, EV-01]
+    consent: null
+
+  - id: EV-04
+    facts:
+      - B se fere num acidente; A a leva para casa e cuida do ferimento sem chamar ninguém.
+    caused_by: [GT-A-01, EV-03]
+    consent: null
+
+  - id: EV-05
+    facts:
+      - B pede que A fique; os dois passam a noite juntos, por escolha explícita de ambos.
+    caused_by: [EV-02, EV-04]
+    consent:
+      canonical: CONSENSUAL
+      manipulation_present: false
+      power_imbalance_present: true
+      ability_to_refuse: FULL
+      boundary_state: NEGOTIATED
+      perceived:
+        CHR-A: Ele sente que finalmente parou de fugir.
+        CHR-B: Ela sente que decidiu por si mesma, sem pressão de ninguém.
+        READER: Duas pessoas escolhendo isso de olhos abertos.
+
+characters:
+  - id: CHR-A
+    ground_truth:
+      - id: GT-A-01
+        statement: Anos atrás, uma pessoa próxima de A foi ferida por inimigos dele depois de ser vista ao seu lado.
+      - id: GT-A-02
+        statement: A teme que qualquer pessoa associada publicamente a ele vire alvo.
+  - id: CHR-B
+    ground_truth:
+      - id: GT-B-01
+        statement: B acredita que ser ignorada é pior do que ser odiada.
+      - id: GT-B-02
+        statement: B não tem para onde voltar se perder o lugar onde está.

@@ -1,0 +1,23 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: A Casa do Lago
+    pov: Isadora
+    irreversible_turn: "Isadora chega à casa do lago e vê o cisne negro pela primeira vez."
+  - number: 3
+    title: O Roseiral
+    pov: Isadora
+    irreversible_turn: "Isadora assina o contrato no roseiral da mãe morta e arranca uma rosa."
+  - number: 9
+    title: As Cinco Herdeiras
+    pov: Isadora
+    irreversible_turn: "Isadora encontra a cópia do contrato com os nomes das cinco herdeiras anteriores."
+  - number: 19
+    title: A Coroa Partida
+    pov: Isadora
+    irreversible_turn: "Isadora quebra a coroa diante da família."
+  - number: 27
+    title: O Incêndio
+    pov: Dante
+    irreversible_turn: "Isadora incendeia a casa do lago."

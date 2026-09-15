@@ -1,0 +1,237 @@
+# CAUSAL_LEDGER — template do contrato v0.1
+#
+# Arquivo de canon:  runtime/<slug>/canon/CAUSAL_LEDGER.yaml
+# Dono exclusivo:    CANON_GUARDIAN (lock CANON_WRITE). Os demais agentes
+#                    propõem mudanças em canon/CANON_PROPOSALS; nada proposto
+#                    é canon antes de aprovado.
+# Validador:         scripts/check_causal_ledger.py
+# Desenho:           docs/sdd/DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md
+#
+# Princípios
+# - Eventos são a única fonte de verdade temporal. Estado atual de relação
+#   NUNCA é escrito aqui: ele é projetado a partir de baseline + deltas.
+# - Causa é sempre um id: GT-* de quem participa, ou EV-* anterior. Trope,
+#   arquétipo, rótulo de gênero, alvo de experiência do leitor ou texto livre
+#   não são causa.
+# - Atração é propriedade da relação (delta direcional A->B), nunca atributo
+#   de personagem. Estados são categorias em texto, nunca números.
+# - O motor conhece a causalidade; o leitor recebe evidência.
+#
+# Registre só personagens maiores (e quem participa de evento estrutural) e
+# só eventos estruturais. O ledger não substitui as bíblias em prosa.
+#
+# Este template é validado pela suíte de testes: um campo que mudar aqui
+# precisa mudar no validador, e vice-versa.
+
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata:
+  project_id: slug-do-livro
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+
+characters:
+  - id: CHR-A                 # reutilize o id do CANON_REGISTRY quando existir
+    major: true               # personagem maior exige as três camadas abaixo
+    age: 35                   # inteiro canônico; null = DESCONHECIDA, que NÃO
+                              # equivale a adulto: qualquer sedução, erotismo ou
+                              # intimidade com idade desconhecida reprova.
+    age_source: /specs/CHARACTER_BIBLE.md#chr-a
+    ground_truth:             # SÓ O MOTOR: nunca entregue ao leitor por padrão
+      - id: GT-A-01
+        # FORMATIVE_HISTORY | WOUND | CORE_BELIEF | WORLDVIEW | CONSCIOUS_WANT |
+        # UNCONSCIOUS_WANT | FEAR | NEED | CONTRADICTION | DEFENSE |
+        # ATTACHMENT_PATTERN | BOUNDARY | TABOO | SECRET | VULNERABILITY |
+        # TRIGGER | CONDITION | MOTIVE
+        kind: FEAR
+        statement: O que A de fato teme — a causa que ele não admite nem para si.
+        # NEVER | OPEN | {from_event: EV-xx}. Ausente = engine-only por padrão
+        # (nunca chega ao leitor). Ver LAW 04 / INV-12.
+        reader_access: {from_event: EV-05}
+    self_model:               # como o personagem explica a si mesmo
+      - id: SM-A-01
+        statement: Como A explica o próprio comportamento.
+        diverges_from: [GT-A-01]   # onde a autoimagem diverge da verdade
+    social_persona:           # o que o personagem mostra aos outros
+      - id: SP-A-01
+        statement: O que A mostra em público.
+        conceals: [GT-A-01]
+
+  - id: CHR-B
+    major: true
+    age: 33
+    age_source: /specs/CHARACTER_BIBLE.md#chr-b
+    ground_truth:
+      - id: GT-B-01
+        kind: CORE_BELIEF
+        statement: A crença de B que produz o comportamento dela.
+    self_model:
+      - id: SM-B-01
+        statement: Como B explica o próprio comportamento.
+        diverges_from: [GT-B-01]
+    social_persona:
+      - id: SP-B-01
+        statement: O que B mostra em público.
+        conceals: [GT-B-01]
+
+relationships:
+  # Uma entrada por direção. baseline = estado em t0 de TODA dimensão que algum
+  # delta vier a usar. Vocabulário de dimensões e estados é da obra.
+  - pair: CHR-A->CHR-B
+    baseline: {desire: LATENT}
+  - pair: CHR-B->CHR-A
+    baseline: {trust: NONE, intimacy: NONE}
+
+loops:
+  # Dívida narrativa: guarda só a pergunta. Abertura, alimentação e resolução
+  # moram nos eventos. kind: INTIMACY | EROTIC | VULNERABILITY | VERBAL |
+  # POWER | RELATIONAL | PLOT. INTIMACY e EROTIC exigem idade adulta do par e
+  # payoff de horizonte longo.
+  - id: LP-01
+    kind: INTIMACY
+    pair: CHR-A<->CHR-B
+    question: A pergunta íntima que o livro deixa em aberto entre A e B.
+  - id: LP-02
+    kind: RELATIONAL
+    pair: CHR-A<->CHR-B
+    question: A pergunta que o payoff abre no lugar da anterior.
+
+beliefs:
+  # Crença do leitor: FACT -> INTERPRETATION -> BELIEF -> CONFIDENCE ->
+  # EXPECTATION (LAW 04). `truth` e `disclosed_by_revision` são SÓ DO MOTOR —
+  # nunca exibidos ao leitor antes da revisão (nem pelas consultas de
+  # observabilidade, a menos que --engine-view seja passado explicitamente).
+  - id: RB-01
+    about: [EV-01]              # eventos que formaram esta crença no leitor
+    interpretation: A interpretação (incompleta ou incorreta) que o leitor forma a partir de EV-01.
+    confidence: MEDIUM          # LOW | MEDIUM | HIGH
+    expectation: O que o leitor passa a esperar por causa desta crença.
+    # "TRUE" | "INCOMPLETE" | "FALSE" — SEMPRE entre aspas: YAML 1.1 resolve
+    # TRUE/FALSE (em qualquer capitalização) como booleano, não como string.
+    truth: "FALSE"
+    disclosed_by_revision: [GT-A-01]   # GT cuja revelação revisa esta crença
+    left_open: false            # true = ambiguidade deliberadamente sem revisão (SOFT-03)
+
+events:
+  # Ordem do arquivo = ordem da história (capítulo não decrescente).
+  - id: EV-01
+    status: PLANNED           # PLANNED | REALIZED
+    chapter: 1
+    structural: true          # estrutural deixa estado: delta de relação ou efeito em loop
+    kind: [REJECTION]         # vocabulário aberto, MAIÚSCULAS; nunca é causa
+    actor: CHR-A
+    participants: [CHR-A, CHR-B]
+    facts:                    # verdade canônica do que ocorre, inclusive fora da página
+      - O que objetivamente acontece.
+    caused_by: [GT-A-01]      # só ids: GT-* de participante ou EV-* anterior
+    self_attribution: SM-A-01 # opcional: como o ator explica o próprio ato
+    interpretations:          # percepção, nunca verdade
+      - by: CHR-B
+        reads_as: Como B lê o ato de A.
+    relationship_delta:       # `from` precisa ser o estado projetado anterior
+      - {pair: CHR-B->CHR-A, dimension: trust, from: NONE, to: WARY, because: opcional}
+    evidence_to_reader:       # o que a página mostra; câmera muda isto, nunca `facts`
+      - O que o leitor vê.
+    loops:
+      opens: [LP-01]
+    beliefs:
+      establishes: [RB-01]    # esta cena é a origem factual da crença acima
+
+  - id: EV-02
+    status: PLANNED
+    chapter: 2
+    structural: true
+    kind: [PROVOCATION]
+    actor: CHR-B
+    participants: [CHR-B, CHR-A]
+    facts:
+      - O que objetivamente acontece.
+    caused_by: [GT-B-01, EV-01]
+    relationship_delta:
+      - {pair: CHR-A->CHR-B, dimension: desire, from: LATENT, to: ACTIVE}
+    loops:
+      feeds: [LP-01]
+
+  - id: EV-03
+    status: PLANNED
+    chapter: 3
+    structural: true
+    kind: [CONFRONTATION]
+    actor: CHR-A
+    participants: [CHR-A, CHR-B]
+    facts:
+      - O que objetivamente acontece.
+    caused_by: [GT-A-01, EV-02]
+    relationship_delta:
+      - {pair: CHR-B->CHR-A, dimension: trust, from: WARY, to: TESTED}
+    loops:
+      feeds: [LP-01]
+
+  - id: EV-04
+    status: PLANNED
+    chapter: 4
+    structural: true
+    kind: [INTIMACY]
+    actor: CHR-B
+    participants: [CHR-B, CHR-A]
+    facts:
+      - O que objetivamente acontece.
+    caused_by: [EV-02, EV-03]
+    relationship_delta:       # aftermath é parte do payoff
+      - {pair: CHR-B->CHR-A, dimension: intimacy, from: NONE, to: ESTABLISHED}
+    # Todo evento ADULT_KINDS (SEDUCTION/EROTIC_VERBAL/INTIMACY/SEXUAL) ou
+    # COERCION exige este bloco completo (INV-07). `perceived` nunca contém a
+    # chave `canonical` — a percepção de alguém não é o fato canônico
+    # (CANONICAL_CONSENT ≠ CHARACTER_A_PERCEPTION ≠ ... ≠ READER_PERCEPTION).
+    consent:
+      canonical: CONSENSUAL         # CONSENSUAL | DUBIOUS | COERCIVE | NON_CONSENSUAL
+      manipulation_present: false
+      power_imbalance_present: false
+      ability_to_refuse: FULL       # FULL | CONSTRAINED | NONE
+      boundary_state: NEGOTIATED    # RESPECTED | NEGOTIATED | PUSHED | VIOLATED
+      perceived:
+        CHR-A: Como A vive este momento por dentro.
+        CHR-B: Como B vive este momento por dentro.
+    loops:
+      opens: [LP-02]
+      resolves:
+        # Payoff de loop INTIMACY/EROTIC exige: loop aberto em capítulo
+        # anterior, alimentado em ao menos 2 capítulos anteriores distintos,
+        # why_now resolvível e delta de relação neste evento. TRANSFORMED
+        # exige `into` aberto por este mesmo evento; CLOSED não tem `into`.
+        # Consentimento COERCIVE/NON_CONSENSUAL nunca pode resolver um loop
+        # INTIMACY/EROTIC (INV-09) — só CONSENSUAL ou DUBIOUS o fazem aqui.
+        - loop: LP-01
+          mode: TRANSFORMED
+          into: LP-02
+          why_now: [EV-03]
+
+  - id: EV-05
+    status: PLANNED
+    chapter: 5
+    structural: true
+    kind: [REVELATION]
+    actor: CHR-A
+    participants: [CHR-A, CHR-B]
+    facts:
+      - O que objetivamente acontece na revelação.
+    caused_by: [EV-04]        # anterior a este evento, existe e resolve
+    relationship_delta:
+      - {pair: CHR-B->CHR-A, dimension: trust, from: TESTED, to: REBUILDING}
+    knowledge_delta:          # quem passa a saber o quê, e a partir de quando
+      - {knower: READER, learns: [GT-A-01]}
+      - {knower: CHR-B, learns: [GT-A-01]}
+    beliefs:
+      revises: [RB-01]        # a GT divulgada (GT-A-01) já estava na
+                               # ancestralidade de EV-01, que formou RB-01—
+                               # sem isso seria RETCON_DISGUISED_AS_TWIST (INV-11)
+
+mutation_log:
+  # Uma entrada por escrita de CANON_GUARDIAN. Não é um segundo estado — é o
+  # histórico de por que o arquivo mudou, no mesmo espírito do mutation_log
+  # já usado em CANON_REGISTRY.yaml. Uma correção a um evento REALIZED vira
+  # uma NOVA entrada aqui, nunca uma edição silenciosa do evento em si.
+  - version: 0.1.0
+    task: T018_CANON_REGISTRY
+    owner: CANON_GUARDIAN
+    action: Consolidação inicial do ledger a partir das propostas aprovadas em CANON_PROPOSALS.

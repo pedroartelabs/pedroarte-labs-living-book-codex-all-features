@@ -1,0 +1,19 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: eva-a-ultima-mulher-da-terra
+  version: 0.1.0
+spec:
+  custom_validators:
+    - id: VAL_BOOK_DNA
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_book_dna.py'
+    - id: VAL_ENDING_INTEGRITY
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_final_manuscript.py'
+  gate_extensions:
+    GATE_CANON:
+      validators:
+        - VAL_BOOK_DNA
+    GATE_FULL_MANUSCRIPT:
+      validators:
+        - VAL_ENDING_INTEGRITY
+  additional_tasks: []

@@ -1,0 +1,3 @@
+# Perfil visual
+
+Realismo sombrio contaminado por um brilho artificial e frio, quase clínico, sempre que a loja aparece em cena. Priorizar portas, vitrines vazias, relógios, mãos, espelhos e a arquitetura urbana comum (becos, shoppings, estações) que hospeda a loja de forma discreta. Fora da loja, a paleta é naturalista e contemporânea; dentro da loja, luz uniforme sem sombra própria, sem letreiro, sem produto visível. Evitar horror gráfico explícito — o efeito colateral é sugerido por postura, expressão e ambiente, não por gore. Recorrência facial exige canon consistente para o elenco recorrente (Davi, Marisa, Yuri, Elenice, Rafael, Cecília e o Lojista).

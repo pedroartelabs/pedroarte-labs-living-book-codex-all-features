@@ -69,10 +69,40 @@ spec:
     alt_text_prefix: "Ilustração do capítulo {chapter:02d} — "
     long_description_prefix: " Descrição longa: "
 
+  illustrations:
+    # Pranchas por id (docs/sdd/NARCISO_CANONICAL_SDD_v0.1.md, 28.3): só
+    # consultado quando layout/IMAGE_PLACEMENT.yaml declara illustrations[] —
+    # sem a lista, nenhum destes valores é lido.
+    source_dir: images/approved
+    filename_pattern: "{id}.jpg"
+    # spread (pair_with: SPREAD): metades explícitas, senão a imagem inteira cortada ao meio
+    spread_filename_pattern: "{id}_{side}.jpg"
+    space_before_pt: 58
+    alt_text_prefix: "Ilustração {id} — "
+    sizes:
+      DEFAULT: {width_in: 3.25, height_in: 4.875}
+      HERO: {width_in: 4.25, height_in: 6.375}
+      SYMBOL: {width_in: 3.0, height_in: 3.0}
+      SPREAD: {width_in: 4.25, height_in: 6.375}   # por metade
+
   chapter_opening:
     space_before_pt: 37.8       # ~1,15 pol. do topo
     number_label: "CAPÍTULO {chapter}"
     start_on_recto: true
+    # BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM, Slice 6 (seção 18.3-18.4 da SDD):
+    # só consultado quando layout/editions/<target>/EDITION_PLAN.yaml declara
+    # chapter_openers[] com um asset existente — sem plano, nenhum destes
+    # valores é lido (INV-VN-02).
+    sigil:
+      width_in: 0.4              # ~10 mm, acima do piso de legibilidade (8 mm)
+      space_before_pt: 24
+      space_after_pt: 8
+    # Recursos de exibição abaixo do título (NARCISO SDD, 18.3): só consultado
+    # quando o EDITION_PLAN de impressão traz chapter_display[] INCLUDED.
+    display_asset:
+      width_in: 2.2
+      space_before_pt: 0
+      space_after_pt: 12
 
   front_matter:
     half_title_space_before_pt: 190

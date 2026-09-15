@@ -1,0 +1,162 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: LAST_GIRL_REVEAL
+    chapters: [4]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: A identidade pública de Eva como a última menina nascida se estabelece sem transformá-la, mesmo aos dois anos, em símbolo abstrato.
+    must_preserve:
+      - Eva de dois anos permanece criança concreta, não conceito;
+      - o ponto de vista de Vicente mantém confusão e medo comuns de um pai, não discurso;
+      - a coincidência do nome é observada por terceiros sem confirmação sobrenatural do narrador;
+      - a reação da família é de proteção, não de orgulho ou exploração da situação.
+    reject_if:
+      - narrador confirma significado sobrenatural do nome;
+      - Eva descrita em linguagem de manchete dentro da cena íntima da família;
+      - pais retratados como ingênuos ou incompetentes por efeito cômico.
+
+  - id: NO_PEERS_LEFT
+    chapters: [13]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: A crise existencial adolescente de Eva ao perceber que não terá colegas do próprio sexo permanece pessoal, não palestra sobre demografia.
+    must_preserve:
+      - a percepção nasce de observação concreta da formatura, não de exposição estatística;
+      - Eva mantém voz adolescente específica, incluindo irritação e sarcasmo além da tristeza;
+      - a cena termina sem resolução ou conforto fácil.
+    reject_if:
+      - discurso interno de Eva que soa como relatório demográfico;
+      - adulto presente resolve a crise de Eva com uma frase de sabedoria;
+      - sentimentalismo explicado em vez de mostrado.
+
+  - id: MAJORITY_REFUSAL
+    chapters: [17]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: A recusa legal de Eva a qualquer programa reprodutivo compulsório ou voluntário-sob-pressão precisa ler-se como vitória real e também parcial.
+    must_preserve:
+      - Eva fala por si mesma no momento decisivo, sem intermediário legal substituindo sua voz;
+      - Amos Weller aceita a derrota sem abandonar a própria convicção;
+      - a cláusula de emergência civilizacional permanece aberta, sem fechamento total do conflito.
+    reject_if:
+      - vitória tratada como resolução definitiva do conflito Eva Livre × Continuacionistas;
+      - Weller ridicularizado ou reduzido a vilão sem nuance;
+      - discurso triunfalista de Eva que soa a manifesto.
+
+  - id: NOAH_BREAKUP
+    chapters: [20]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: O fim da relação entre Eva e Noah precisa expor o custo estrutural da fama de Eva sem culpar nenhum dos dois individualmente.
+    must_preserve:
+      - Noah não vendeu nem autorizou o vazamento das fotos;
+      - a pergunta do título do capítulo permanece sem resposta definitiva dentro do texto;
+      - ambos os personagens mantêm dignidade e mágoa reais, não vilania nem vitimismo puro.
+    reject_if:
+      - Noah revelado como oportunista ou traidor;
+      - Eva descrita como incapaz de amar por causa do próprio status;
+      - cena resolve a pergunta "ele gosta de mim ou da última mulher" de forma explícita.
+
+  - id: BOY_BIRTH_PIVOT
+    chapters: [26]
+    auditor: MYSTERY_AMBIGUITY_GUARDIAN
+    purpose: O nascimento de Theo como menino, apesar do cariótipo XX documentado, precisa devastar a esperança científica sem oferecer explicação e sem culpar Renata Sobral.
+    must_preserve:
+      - a discrepância genética permanece tecnicamente plausível e não resolvida;
+      - Renata recebe e ama Theo sem ser tratada como fracasso;
+      - a mudança de pergunta ("por que Eva") emerge como reação humana, não como afirmação do narrador.
+    reject_if:
+      - qualquer explicação definitiva da discrepância genética é oferecida, mesmo que depois contestada;
+      - Theo tratado como monstro, erro ou decepção pela própria narrativa;
+      - Renata culpada, explícita ou implicitamente, pelo resultado.
+
+  - id: WRONG_QUESTION_PIVOT
+    chapters: [27]
+    auditor: MYSTERY_AMBIGUITY_GUARDIAN
+    purpose: A descoberta de Eva sobre a própria anomalia genética precisa ler-se como ciência real, não como revelação bombástica ou confirmação do mistério final.
+    must_preserve:
+      - a anomalia é descrita com linguagem científica plausível e escala modesta dentro da cena;
+      - Eva decide não reportar o achado por razão pessoal compreensível, não por conspiração;
+      - a cena não conecta explicitamente esta descoberta ao desfecho do Capítulo 42.
+    reject_if:
+      - a anomalia é apresentada como resposta ao mistério central;
+      - linguagem de revelação profética ou destino;
+      - qualquer personagem verbaliza a hipótese do "verdadeiro plot twist" descrita em BOOK_CONSTITUTION.md, seção 12.
+
+  - id: LONGEVITY_RECORD
+    chapters: [31]
+    auditor: LONGEVITY_PARADOX_AUDITOR
+    purpose: A longevidade de Eva se torna publicamente perturbadora antes de parecer sobrenatural, mantendo sinais físicos visíveis de idade avançada.
+    must_preserve:
+      - Eva apresenta fragilidade física real e específica na cena;
+      - a reação institucional é de perturbação e estudo, não de celebração messiânica;
+      - a pista do pesquisador aposentado é mencionada de forma discreta, sem ênfase estrutural.
+    reject_if:
+      - a palavra "imortal" usada pelo narrador como fato sobre Eva;
+      - Eva descrita como fisicamente jovem ou intocada pelo tempo;
+      - a pista de releitura é sublinhada como significativa dentro da própria cena.
+
+  - id: ACCUMULATED_GRIEF
+    chapters: [33]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: O luto de Eva por mulheres que conheceu pessoalmente precisa permanecer específico e individual mesmo enquanto o mundo trata a mesma perda como estatística.
+    must_preserve:
+      - ao menos uma mulher morta neste capítulo foi apresentada em partes anteriores da obra;
+      - o luto de Eva é mostrado por ação e sensação física, não por resumo narrado;
+      - o contraste entre luto pessoal e estatística coletiva é sentido, não explicado.
+    reject_if:
+      - lista de mortes tratada apenas como recurso de contagem regressiva sem peso individual;
+      - sentimentalismo explicado em discurso interno de Eva;
+      - Kai Almeida ou outro personagem de apoio resolve o luto de Eva com uma frase definitiva.
+
+  - id: LAST_WOMAN_THRESHOLD
+    chapters: [34]
+    auditor: DEMOGRAPHIC_REALISM_ARCHITECT
+    purpose: A morte da penúltima mulher viva e a transição de Eva para "a última mulher da Terra" precisam ser tratadas com peso histórico sem retórica grandiloquente.
+    must_preserve:
+      - a notificação chega a Eva por meio institucional plausível, não por presságio;
+      - Eva reage como pessoa específica, não como personificação da humanidade;
+      - o contador de população feminina é atualizado exatamente conforme seeds/WORLD_RULES_SEED.md.
+    reject_if:
+      - discurso do narrador declarando o significado histórico do momento;
+      - Eva descrita em linguagem messiânica ou de destino cumprido;
+      - a penúltima mulher reduzida a nome sem qualquer humanidade na menção.
+
+  - id: LAST_MAN_DEATH
+    chapters: [39]
+    auditor: EVA_PERSONHOOD_GUARDIAN
+    purpose: A morte de Tomás Rocha e sua pergunta sobre medo precisam permanecer humanas e contidas, nunca melodramáticas.
+    must_preserve:
+      - o diálogo sobre medo mantém ambiguidade entre medo da morte e medo da solidão de Eva;
+      - a morte de Tomás é de causa natural, sem sinal sobrenatural explícito;
+      - a cena preserva silêncio e contenção em vez de discurso de despedida elaborado.
+    reject_if:
+      - discurso de despedida longo e retoricamente perfeito;
+      - qualquer sugestão de que a morte de Tomás é causada por, ou conectada mecanicamente a, o fenômeno demográfico;
+      - Eva descrita como salva ou redimida pela morte de Tomás.
+
+  - id: DESERT_INCIDENT
+    chapters: [41]
+    auditor: MYSTERY_AMBIGUITY_GUARDIAN
+    purpose: A dor, náusea e a fala "Não..." de Eva no deserto precisam sustentar múltiplas interpretações simultâneas sem confirmar nenhuma.
+    must_preserve:
+      - ambiguidade total entre falha corporal da idade e qualquer outra possibilidade;
+      - nenhuma palavra da lista proibida em immutable_rules.yaml (IR005) aparece em nenhuma forma;
+      - a fala "Não..." permanece sem objeto explícito declarado pelo narrador.
+    reject_if:
+      - qualquer vocabulário técnico ou eufemístico de gravidez, gestação, feto, embrião, bebê, chute fetal, útero, contração de parto, atraso menstrual ou movimento fetal;
+      - o narrador declara o que Eva reconhece ou teme;
+      - a cena resolve a ambiguidade em qualquer direção.
+
+  - id: FINAL_AMBIGUITY
+    chapters: [42]
+    auditor: MYSTERY_AMBIGUITY_GUARDIAN
+    purpose: A imagem final e os contadores de encerramento precisam terminar o livro sem confirmar morte, sobrevivência, gravidez, causa do fenômeno ou significado dos pássaros.
+    must_preserve:
+      - o contador de população humana estimada termina em exatamente 1;
+      - o contador de nascimentos humanos no último ano termina em exatamente 0;
+      - a palavra "esperando" aplicada aos pássaros aparece apenas na última linha do livro;
+      - ausência total de epílogo, nota do autor ou parágrafo explicativo após a imagem final.
+    reject_if:
+      - qualquer confirmação, direta ou por eufemismo, de que Eva morreu;
+      - qualquer confirmação, direta ou por eufemismo, de que Eva sobreviveu ou se recuperou;
+      - qualquer vocabulário da lista proibida em immutable_rules.yaml (IR005);
+      - contador final diferente de 1, ou contador de nascimentos diferente de 0;
+      - qualquer frase que nomeie ou confirme conexão com outra obra.

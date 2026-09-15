@@ -1,0 +1,121 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: narciso
+  title: Narciso
+  subtitle: Ele nunca tinha visto o próprio rosto.
+  author: Bea Halden
+  language: pt-BR
+  genre: dark romance psicológico / gótico / horror de identidade / tensão erótica adulta
+  chapter_count: 33
+  version: 0.1.0
+spec:
+  # STANDARD até GATE_VOICE (recomendação OQ-N14 da SDD); promover a PREMIUM
+  # antes das waves de escrita.
+  execution_profile: STANDARD
+  creative_sources:
+    - CREATIVE_BRIEF.md
+    - BOOK_CONSTITUTION.md
+    - planning/01_SOURCE_CANON.md
+    - planning/02_ADAPTATION_DELTA.md
+    - planning/VOICE_PROFILE.md
+  chapter_titles:
+    1: Nós o Vimos Primeiro
+    2: A Casa dos Espelhos Cobertos
+    3: Repetir
+    4: O Cego que Esculpe pelo Toque
+    5: A Recusa
+    6: Água Proibida
+    7: Através das Paredes
+    8: O Rosto que Atrasa
+    9: O Arquivo de Lia
+    10: Ouro em Folha
+    11: O Que Vimos na Superfície
+    12: Descoberta
+    13: A Voz Guardada
+    14: Mármore Negro
+    15: Prazer
+    16: A Dívida Paga
+    17: O Centro
+    18: Uma Noite sem Palavras
+    19: Rito
+    20: O Segundo Respirar
+    21: Cópias
+    22: Necessidade
+    23: O Que Vimos no Fundo
+    24: A Fotografia que Ficou
+    25: O Que Lia Cobriu
+    26: Ciúme do Vidro
+    27: Degradação
+    28: A Última Água
+    29: A Segunda Recusa
+    30: Tirésias Toca o Mármore
+    31: Quase Nada
+    32: A Casa dos Espelhos Descobertos
+    33: Nós Ainda Olhamos
+  movements:
+    - {name: I — A Superfície, chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+    - {name: II — O Espelho, chapters: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]}
+    - {name: III — O Fundo, chapters: [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]}
+  writing_waves:
+    - [1, 2, 3, 4, 5, 6]
+    - [7, 8, 9, 10, 11]
+    - [12, 13, 14, 15, 16, 17]
+    - [18, 19, 20, 21, 22]
+    - [23, 24, 25, 26, 27, 28]
+    - [29, 30, 31, 32, 33]
+  voice_calibration_chapters: [1, 6, 17, 18]
+  lead_novelist_owned_chapters: [1, 6, 11, 12, 17, 18, 23, 26, 29, 31, 32, 33]
+  features:
+    living_book: {enabled: true}
+    # Slice 4: illustration_slots liga as pranchas por slot
+    # (chapter_architecture.illustration_slots) no lugar da imagem única por
+    # capítulo. primary_per_chapter segue sem consumidor (SDD D-N1).
+    images: {enabled: true, primary_per_chapter: 1, face_consistency_required: true, illustration_slots: true}
+    living_sound: {enabled: false}
+    translation_preparation: {enabled: false, target: en}
+    kdp_docx: {enabled: true}
+    media_package: {enabled: true}
+    causal_ledger:
+      enabled: true
+      min_payoff_feeds: 2
+      max_monotonic_run: 3
+      max_loop_silence: 6
+    visual_narrative:
+      enabled: true
+      author_profile: bea_halden
+      author_dna_version: 1
+      edition_targets: [kindle_ebook, kdp_paperback, kdp_hardcover, collector]
+      budget: COLLECTOR
+      sigils: true
+  agent_packs:
+    book_agents:
+      NARCISSUS_AMBIGUITY_GUARDIAN: {profile: /book/agents/narcissus_ambiguity_guardian.toml}
+      DESIRE_DECAY_GUARDIAN: {profile: /book/agents/desire_decay_guardian.toml}
+    character_support: [CHARACTER_PSYCHOLOGIST, ANTI_MANIPULATION_GUARDIAN, DESIRE_DECAY_GUARDIAN]
+    canon_guardians: [CANON_GUARDIAN, NARCISSUS_AMBIGUITY_GUARDIAN, ANTI_MANIPULATION_GUARDIAN, DESIRE_DECAY_GUARDIAN]
+    # Guardiões intercalados: com o limite de rotação de STANDARD (3 por wave),
+    # toda wave recebe ao menos um guardião da obra. PREMIUM usa o pack inteiro
+    # (recomendação da SDD antes das waves).
+    wave_reviewers: [NARCISSUS_AMBIGUITY_GUARDIAN, CHARACTER_CONTINUITY_REVIEWER, ANTI_MANIPULATION_GUARDIAN, DESIRE_DECAY_GUARDIAN, SUBTEXT_EDITOR, PLOT_CONTINUITY_REVIEWER]
+    voice_reviewers: [LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, PHYSICALITY_AND_BODY_AGENT, ANTI_MANIPULATION_GUARDIAN]
+    critic_panel: [LITERARY_CRITIC, COMMERCIAL_EDITOR_CRITIC, DEVELOPMENTAL_EDITOR, NARCISSUS_AMBIGUITY_GUARDIAN]
+    line_reviewers: [LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, SENSORY_AGENT, PHYSICALITY_AND_BODY_AGENT, TYPOGRAPHY_TEXT_REVIEWER, REPETITION_AND_CLICHE_REVIEWER, EMOTIONAL_REPETITION_AUDITOR]
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities: [espelho, água, narciso, ouro, mármore, rachadura, gota]
+  acoustic_environment_organism: A casa escuta pela água parada da cava; fitas antigas, respirações e ecos mudam de fase quando alguém olha demais.
+  book_specific_rejection_states:
+    - ONTOLOGY_CONFIRMED_FAILURE
+    - LOVE_RESOLVED_FAILURE
+    - EXPLANATORY_CLOSURE_FAILURE
+    - EXPLICITNESS_ESCALATION_FAILURE
+    - DECAY_GLAMOUR_FAILURE
+    - TABOO_INTENT_FAILURE
+    - MYTH_DNA_FAILURE
+    - REFLECTION_FACE_RESOLVED_FAILURE
+    - CHILDHOOD_PROXIMITY_FAILURE

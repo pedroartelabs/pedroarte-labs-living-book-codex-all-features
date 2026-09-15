@@ -1,0 +1,51 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  long_form_text:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Produção e revisão do manuscrito em português brasileiro ao longo de oito partes e trinta e quatro capítulos.
+  deterministic_validation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Validação de pacote, grafo, gates e artefatos.
+  demographic_modeling:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Sustentar um modelo demográfico interno coerente (natalidade, mortalidade, expectativa de vida, bancos genéticos) ao longo de séculos de linha do tempo.
+  image_generation:
+    required: false
+    blocker_if_unavailable: false
+    purpose: >
+      Desabilitado por decisão autoral explícita nesta execução. A direção
+      visual completa é produzida em texto (VISUAL_LIFE_SPEC, IMAGE_BIOME,
+      FACE_CANON, CHARACTER_VISUAL_BIBLE, visual_profile.md) e consolidada
+      em um prompt de geração para uso posterior, fora deste runtime.
+  image_inspection:
+    required: false
+    blocker_if_unavailable: false
+    purpose: Não aplicável nesta execução — geração de imagem desabilitada.
+  audio_prompt_design:
+    required: false
+    blocker_if_unavailable: false
+    purpose: Não aplicável nesta execução — Living Sound desabilitado por não constar do briefing autoral.
+  docx_generation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Entrega KDP com layout validado.
+  typographic_media_composition:
+    required: true
+    blocker_if_unavailable: true
+    purpose: >
+      Compor capa KDP e cinco Stories de Instagram por tipografia
+      determinística (sem imagem base gerada por IA), satisfazendo
+      GATE_MEDIA_ASSETS sem violar a restrição de não gerar imagens.
+  web_research:
+    required: false
+    blocker_if_unavailable: false
+    freshness_required: true
+    purpose: Atualização dos requisitos oficiais da Amazon KDP, quando disponível; na ausência, registrar CAPABILITY_BLOCKER e prosseguir com o layout padrão documentado.
+  demographic_fact_checking:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Verificar plausibilidade de projeções populacionais, tecnologias reprodutivas e cronologia geracional.

@@ -1,0 +1,70 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata:
+  project_id: cisne_negro_fixture
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+characters:
+  - id: CHR-ISADORA
+    major: true
+    age: 29
+    ground_truth:
+      - id: GT-A-01
+        kind: SECRET
+        statement: >-
+          Isadora foi educada pela família Vane para ser a "herdeira
+          perfeita" — a quinta noiva por contrato de uma linhagem.
+        reader_access: {from_event: EV-19}
+    self_model: []
+    social_persona: []
+  - id: CHR-DANTE
+    major: true
+    age: 37
+    ground_truth: []
+    self_model: []
+    social_persona: []
+relationships: []
+loops: []
+beliefs: []
+events:
+  - id: EV-03
+    status: REALIZED
+    chapter: 3
+    structural: true
+    kind: [CONTRACT_SIGNED]
+    actor: CHR-ISADORA
+    participants: [CHR-ISADORA]
+    facts:
+      - "Isadora assina o contrato de noivado no roseiral da mãe morta e arranca uma rosa."
+    caused_by: [GT-A-01]
+  - id: EV-09
+    status: REALIZED
+    chapter: 9
+    structural: true
+    kind: [DISCOVERY]
+    actor: CHR-ISADORA
+    participants: [CHR-ISADORA]
+    facts:
+      - "Isadora encontra a cópia do contrato com os nomes das cinco herdeiras anteriores."
+    caused_by: [GT-A-01, EV-03]
+  - id: EV-19
+    status: REALIZED
+    chapter: 19
+    structural: true
+    kind: [REVELATION]
+    actor: CHR-ISADORA
+    participants: [CHR-ISADORA, CHR-DANTE]
+    facts:
+      - "Isadora quebra a coroa diante da família."
+    caused_by: [GT-A-01, EV-09]
+  - id: EV-27
+    status: REALIZED
+    chapter: 27
+    structural: true
+    kind: [TRANSFORMATION]
+    actor: CHR-ISADORA
+    participants: [CHR-ISADORA]
+    facts:
+      - "Isadora incendeia a casa do lago."
+    caused_by: [EV-19]
+mutation_log: []

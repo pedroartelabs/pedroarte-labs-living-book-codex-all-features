@@ -1,0 +1,33 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+# Métricas são diagnóstico, nunca aprovação (SDD, seção 27).
+chapter_scores:
+  authenticity_of_characters: {minimum: 9}
+  scene_strength: {minimum: 8}
+  subtext: {minimum: 9}
+  sensory_concreteness: {minimum: 9}
+  coherence: {minimum: 9}
+  emotional_impact: {minimum: 8}
+  reflection_ambiguity: {minimum: 9}
+  love_ambiguity: {minimum: 9}
+  eco_agency: {minimum: 9}
+  symbol_evolution: {minimum: 8}
+  rereadability: {minimum: 8}
+risk_scores:
+  sentimentalism: {maximum: 2}
+  effect_phrase_overuse: {maximum: 2}
+  cliche: {maximum: 2}
+  continuity: {maximum: 1}
+  ontology_overexplanation: {maximum: 0}
+  motive_declaration: {maximum: 0}
+  explicitness_escalation: {maximum: 0}
+  decay_glamorization: {maximum: 0}
+  generic_male_beauty: {maximum: 1}
+  psychological_self_explanation: {maximum: 1}
+required_checks:
+  - toda evidência sobre o que olha de volta sustenta ao menos duas hipóteses
+  - nenhum pensamento de Narciso declara o próprio motivo
+  - toda ocorrência compulsiva tem função nova e consequência
+  - todo capítulo do Coro fica fora da mente de Narciso
+  - toda cena adulta registra consentimento e idades
+  - todo símbolo destacado muda de significado ao mudar de estado

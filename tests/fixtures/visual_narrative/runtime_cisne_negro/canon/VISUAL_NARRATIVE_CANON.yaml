@@ -1,0 +1,267 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: VisualNarrativeCanon
+metadata:
+  project_id: cisne_negro_fixture
+  version: 0.1.0
+  owner: VISUAL_DIRECTOR
+  author_dna: {author_id: bea_halden_fixture, version: 1, sha256: null}
+  narrative_canon_refs:
+    canon_registry_version: 0.1.0
+    causal_ledger_version: 0.1.0
+
+book_dna:
+  visual_thesis: "A perfeição é uma jaula com forma de ave."
+  duality:
+    outer_truth: "O cisne perfeito que a família exibe."
+    hidden_truth: "A coroa que ela quebra."
+    anchors: ["LEDGER:GT-A-01", "SCENE:CROWN_REFUSAL"]
+  palette:
+    GROUND: "#121113"
+    INK: "#E6DCCB"
+    METAL: {material: AGED_GOLD, hex: "#8C6A3C"}
+    PULSE: "#5A0E1C"
+  role_overrides: []
+
+vetoes:
+  - id: VETO-01
+    match: [skull, caveira]
+    source: "DOC:/specs/SYMBOL_BIBLE.md#motif-1-black-swan"
+    rule_kind: CANONICAL
+    rationale: "O livro não usa iconografia de morte explícita."
+
+elements:
+  - id: SYM-SWAN
+    label: black swan
+    class: MOTIF
+    meaning: "A persona perfeita que Isadora foi treinada para ser."
+    functions:
+      - {function: CHARACTER, anchors: ["LEDGER:GT-A-01", "DOC:/specs/SYMBOL_BIBLE.md#motif-1-black-swan"]}
+      - {function: TRANSFORMATION, anchors: ["SCENE:CROWN_REFUSAL"]}
+      - {function: PROGRESSION, anchors: ["LEDGER:EV-27"]}
+    count: 1
+    prominence: DOMINANT
+    first_appearance: "TURN:1"
+    exposure: {spoiler_level: NONE, reveal: null}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 8
+      text_alternative: "Cisne negro sobre água escura."
+    cost_class: ESSENTIAL
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+    status: PLANNED
+
+  - id: SYM-CROWN
+    label: broken crown
+    class: MOTIF
+    meaning: "O ouro da linhagem que Isadora recusa carregar."
+    functions:
+      - {function: WORLD, anchors: ["CANON:OBJ-003", "SCENE:CROWN_REFUSAL"]}
+      - {function: TRANSFORMATION, anchors: ["LEDGER:EV-09"]}
+    count: 1
+    prominence: SECONDARY
+    # LOW, não MEDIUM: na capa ela aparece só como reflexo na água (30.4 do
+    # SDD) — mostra que existe uma coroa, não QUEM a usou nem por quê. A
+    # revelação em si (LEDGER:EV-19) é MEDIUM e mora só na composição
+    # semiescondida (COMP-CASE-HIDDEN mais abaixo), nunca na capa pública.
+    exposure: {spoiler_level: LOW}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 8
+      text_alternative: "Coroa de ouro envelhecido, parcialmente partida."
+    cost_class: ESSENTIAL
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+    status: PLANNED
+
+  - id: SYM-ROSE
+    label: single rose
+    class: MOTIF
+    meaning: "A única lembrança que Isadora guarda do dia em que assinou o próprio destino."
+    functions:
+      - {function: MEMORY, anchors: ["LEDGER:EV-03"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 6
+      text_alternative: "Uma única rosa arrancada."
+    cost_class: OPTIONAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+
+  # --- Slice 2: sigil de capítulo com progressão ancorada (seção 14) ------
+  - id: SIG-SWAN
+    label: swan sigil
+    class: SIGIL
+    meaning: "O selo do capítulo que acompanha a jaula de Isadora, capítulo a capítulo."
+    scope: BOOK
+    assignment: {mode: ALL_CHAPTERS}
+    functions:
+      - {function: PROGRESSION, anchors: ["LEDGER:GT-A-01"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: LOW}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 8
+      text_alternative: "Selo do cisne; a forma muda conforme o capítulo."
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - id: PRISTINE
+        initial: true
+        visual_description: "Cisne de perfil, contorno contínuo, sem fraturas."
+        render: {mode: GLYPH}
+      - id: CRACKED
+        memory_state: T
+        visual_description: "Mesmo contorno, uma fratura fina atravessa a asa."
+        render: {mode: GLYPH}
+      - id: CROWNLESS
+        memory_state: P
+        visual_description: "Coroa partida ao lado do cisne, fora da cabeça."
+        render: {mode: GLYPH}
+    transitions:
+      - from: PRISTINE
+        to: CRACKED
+        trigger: "LEDGER:EV-09"
+        because: "Isadora encontra a cópia do contrato com as cinco herdeiras."
+        display_from: NEXT_CHAPTER
+      - from: CRACKED
+        to: CROWNLESS
+        trigger: "SCENE:CROWN_REFUSAL"
+        because: "Recusa pública da coroa."
+        display_from: NEXT_CHAPTER
+
+  # --- Slice 2: artefato narrativo (seção 19.2) ---------------------------
+  - id: ART-CONTRACT
+    label: cinco heranças
+    class: NARRATIVE_ARTIFACT
+    artifact_type: CONTRACT
+    meaning: "O documento que prova que Isadora é a quinta de uma linhagem, não uma escolha única."
+    functions:
+      - {function: REVELATION, anchors: ["LEDGER:EV-09"]}
+    count: 1
+    prominence: SUPPORTING
+    canon_ref: "LEDGER:EV-09"
+    in_world_owner: "CHR-ISADORA"
+    source: "Gaveta da própria Isadora"
+    first_appearance: 'TEXT:9:"cópia do contrato"'
+    content:
+      mode: QUOTED
+      quotes: ['TEXT:9:"cláusula quinta"']
+    canon_status: REALIZED
+    exposure: {spoiler_level: MEDIUM, reveal: "LEDGER:EV-09"}
+    placement:
+      surface: INTERIOR_PLATE
+      mode: AFTER
+      anchor: 'TEXT:9:"cláusula quinta"'
+      chapter: 9
+    accessibility:
+      text_alternative: "Cópia de contrato com a cláusula quinta sublinhada a lápis."
+      min_text_pt: 8
+      transcription_in_body: true
+    cost_class: OPTIONAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+
+compositions:
+  - id: COMP-FRONT
+    surface: FRONT_COVER
+    reading_layer: OUTER_TRUTH
+    elements:
+      # zone: retângulo normalizado [x0,y0,x1,y1] — usado pelo Thumbnail
+      # Gate (23.5) para medir foco/silhueta do elemento DOMINANT.
+      - {element: SYM-SWAN, prominence: DOMINANT, zone: [0.10, 0.28, 0.90, 0.82]}
+      - {element: SYM-CROWN, prominence: SECONDARY}
+    atmosphere: "Água escura, luz fria, silêncio antes da tempestade."
+    forbidden_elements: [VETO-01]
+    # typography/thumbnail_intent: contrato de 12.2, consumido pelo
+    # Thumbnail Gate (Slice 4) — zonas idênticas ao exemplo da própria SDD.
+    typography:
+      - {role: TITLE, text_source: "BOOK_SPEC.metadata.title", zone: [0.08, 0.06, 0.92, 0.22]}
+      - {role: AUTHOR, text_source: "AUTHOR_DNA.metadata.public_name", zone: [0.20, 0.86, 0.80, 0.93]}
+    thumbnail_intent: {focal_element: SYM-SWAN, silhouette_readable: true}
+    approval: {policy: REQUIRE_APPROVAL, id: APR-01}
+
+  # Camada escondida da capa dura (case laminate sob sobrecapa — 19.5/DJ-05
+  # promove isto a público quando o alvo NÃO tem sobrecapa física; essa
+  # promoção é decisão de edição, Slice 3). Compartilha SYM-CROWN e
+  # SYM-SWAN com COMP-FRONT — a dualidade é do MESMO símbolo (DJ-03).
+  - id: COMP-CASE-HIDDEN
+    surface: CASE_FRONT
+    reading_layer: HIDDEN_TRUTH
+    elements:
+      - {element: SYM-CROWN, prominence: DOMINANT}
+      - {element: SYM-SWAN, prominence: SECONDARY}
+    atmosphere: "Metal frio, sem água, sem reflexo — só o objeto."
+
+  # Artefato interno, inserido só depois do parágrafo-âncora do capítulo 9.
+  - id: COMP-CONTRACT-PLATE
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 9
+    elements:
+      - {element: ART-CONTRACT, prominence: SUPPORTING}
+    atmosphere: "Gaveta entreaberta, luz de fim de tarde sobre o papel."
+
+  # --- Slice 3: superfícies só de edição impressa (seções 15, 21, 22) -----
+  - id: COMP-EDGE
+    surface: EDGE_FORE
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-SWAN, prominence: SUPPORTING}
+    atmosphere: "Penas em stencil sobre a borda dianteira — só existe no collector."
+
+  - id: COMP-SPINE
+    surface: SPINE
+    reading_layer: NEUTRAL
+    elements:
+      # zone: fração normalizada [x0,y0,x1,y1] do painel da lombada; usada
+      # por ZONE_COLLIDES_WITH_MANUFACTURING contra fold_variance_in (21.4).
+      - {element: SYM-SWAN, prominence: SUPPORTING, zone: [0.15, 0.08, 0.85, 0.092]}
+    atmosphere: "Faixa fina de metal sobre o fundo escuro da lombada."
+
+finish_intents:
+  # Acabamento do título: premium, só simula fora do collector (20.2/16.2).
+  - id: FI-TITLE
+    target: {composition: COMP-FRONT, role: TITLE}
+    semantic_material: AGED_GOLD
+    meaning_element: SYM-CROWN
+    preferred_effect: METALLIC_FOIL
+    fallbacks: [SIMULATED_METALLIC_PRINT, FLAT_ROLE_COLOR]
+    cost_class: PREMIUM
+    must_survive_grayscale: false
+    layer_name: L_FOIL_TITLE
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+
+  # Penas do cisne: opcional, simula em todo alvo impresso, físico só com
+  # gráfica confirmando (collector).
+  - id: FI-FEATHERS
+    target: {composition: COMP-FRONT, element: SYM-SWAN, part: FEATHERS}
+    semantic_material: OBSIDIAN_GLOSS
+    meaning_element: SYM-SWAN
+    preferred_effect: SPOT_UV
+    fallbacks: [CONTRAST_SIMULATION, FLAT_ROLE_COLOR]
+    cost_class: OPTIONAL
+    layer_name: L_SPOT_UV_FEATHERS
+    approval: {policy: SUGGEST}
+
+  # Borda: exclusiva de collector (cost_class COLLECTOR_ONLY) — sem
+  # fallback, porque não existe simulação honesta de borda pintada em KDP
+  # (19.4: "imprimir bordas falsas na capa seria gimmick").
+  - id: FI-EDGE
+    target: {composition: COMP-EDGE}
+    semantic_material: OBSIDIAN_GLOSS
+    meaning_element: SYM-SWAN
+    preferred_effect: STENCILED_EDGE
+    fallbacks: []
+    cost_class: COLLECTOR_ONLY
+    layer_name: L_EDGE_FEATHERS
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+
+approvals: []
+releases: []
+mutation_log:
+  - {version: 0.1.0, task: T043_VISUAL_NARRATIVE_CANON, owner: VISUAL_DIRECTOR,
+     action: "Fixture de teste — Slice 1."}

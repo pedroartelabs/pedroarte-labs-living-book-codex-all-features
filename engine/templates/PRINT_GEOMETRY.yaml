@@ -1,0 +1,70 @@
+# PRINT_GEOMETRY — fatos de fabricação por alvo de edição impressa
+#
+# Arquivo:    engine/templates/PRINT_GEOMETRY.yaml (motor; neutro de gênero)
+# Consumido:  engine/scripts/check_visual_canon.py (compute_cover_geometry)
+# Desenho:    docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md (seção 21.3)
+#
+# Estes são fatos do FABRICANTE (constantes de processo de impressão), não
+# do livro — contraste com layout/PRINT_SPEC.yaml, que é fato do LIVRO
+# (trim escolhido, contagem de páginas, papel). T707_PRINT_GEOMETRY combina
+# os dois para projetar layout/editions/<target>/COVER_GEOMETRY.yaml.
+#
+# Chaves marcadas `status: TO_VERIFY` são FATOS NÃO CONFIRMADOS nesta
+# sessão — o validador RECUSA calcular geometria com elas
+# (MANUFACTURING_FACT_UNVERIFIED) em vez de inventar um número. Isso não é
+# uma lacuna temporária esquecida: é a diferença entre "não sei" e "chutei".
+
+apiVersion: pedroarte.livingbooks/v1
+kind: PrintGeometry
+metadata:
+  version: 1.0.0
+  verified_on: "2026-09-14"
+  verified_by: SDD
+
+kdp_paperback:
+  bleed_in: 0.125                     # topo, base e bordas externas
+  safe_from_trim_in: 0.125
+  spine_text_min_pages: 79
+  spine_text_clearance_in: 0.0625
+  fold_variance_in: 0.0625            # variação de produção documentada em cada lado das dobras
+  # Fator de lombada por combinação tinta/papel — polegadas por página.
+  spine_in_per_page:
+    BLACK/WHITE: 0.002252
+    BLACK/CREAM: 0.0025
+    PREMIUM_COLOR: 0.002347
+    STANDARD_COLOR: 0.002252
+  color_space_required: CMYK
+  min_image_dpi: 300
+  file: {format: PDF, single_spread: true, recommended_max_mb: 40}
+  # OQ-8: posição/tamanho exatos da zona de código de barras dependem do
+  # gerador oficial (KDP Cover Calculator); não medidos nesta sessão.
+  barcode_zone: {status: TO_VERIFY, source: KDP_COVER_TEMPLATE}
+  sources:
+    - https://kdp.amazon.com/en_US/help/topic/G201953020
+    - https://kdp.amazon.com/en_US/help/topic/G201834180
+
+kdp_hardcover:
+  construction: CASE_LAMINATE
+  wrap_in: 0.51                       # extensão da arte além da borda da capa, colada na parte interna
+  hinge_in: 0.4                       # espaço entre lombada e área segura, onde o livro dobra
+  safe_from_edge_in: 0.635
+  # OQ-8/D-V8: fator de lombada e faixa de páginas de hardcover não foram
+  # confirmados em fonte oficial nesta sessão (só fontes não oficiais, que
+  # o SDD marca explicitamente como "a verificar" — ver Apêndice A).
+  spine_in_per_page: {status: TO_VERIFY, rule: "obter do KDP Cover Calculator (Hardcover / case-laminate)"}
+  page_range: {status: TO_VERIFY}
+  sources:
+    - https://kdp.amazon.com/en_US/help/topic/GDTKFJPNQCBTMRV6
+    - https://kdp.amazon.com/en_US/help/topic/G201834180
+
+kindle_ebook:
+  marketing_cover_px: {width: 1600, height: 2560}
+  color_space_required: RGB
+  min_dpi: 300
+  # D-V4: a página oficial consultada indica 5 MB; o validador de mídia
+  # existente (engine/scripts/validate_media_assets.py) aceita até 50 MB —
+  # divergência registrada na SDD, não corrigida aqui (fora de escopo desta
+  # capability; ver OQ-9).
+  max_mb: {value: 5, status: TO_VERIFY_AGAINST_ENGINE_50MB}
+  sources:
+    - https://kdp.amazon.com/en_US/help/topic/G6GTK3T3NUHKLEFX

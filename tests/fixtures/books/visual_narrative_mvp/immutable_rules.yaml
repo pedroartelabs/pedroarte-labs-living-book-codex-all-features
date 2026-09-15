@@ -1,0 +1,12 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: ADULT_CONFIRMED
+    rule: Todo personagem participante de sedução, erotismo ou intimidade tem idade canônica confirmada >= 18. Idade desconhecida não equivale a adulto.
+    blocking: true
+  - id: NO_TROPE_AS_CAUSE
+    rule: Nenhuma ação estruturalmente relevante pode ser explicada apenas por arquétipo de gênero (mafioso, stalker, etc.); a causa precisa ser a Ground Truth do personagem.
+    blocking: true
+  - id: FORM
+    rule: Exatamente 6 capítulos, em português do Brasil.
+    blocking: true

@@ -1,0 +1,7 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  ptbr_literary_generation: {required: true}
+  deterministic_validation: {required: true}
+  docx_generation: {required: true}
+  zip_packaging: {required: true}

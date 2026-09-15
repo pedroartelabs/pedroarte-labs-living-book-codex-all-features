@@ -1,0 +1,19 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - {id: IR-N01, category: ontology, blocking: true, rule: A natureza do que olha de volta nunca é confirmada por narrador, personagem, documento, imagem ou paratexto.}
+  - {id: IR-N02, category: ontology_evidence, blocking: true, rule: Toda evidência sobre o que olha de volta sustenta ao menos duas hipóteses e nenhuma exclui todas menos uma.}
+  - {id: IR-N03, category: love, blocking: true, rule: O manuscrito nunca afirma, por narração ou pensamento de Narciso, que ele amou ou que nunca amou alguém; motivos são mostrados por gesto, nunca declarados.}
+  - {id: IR-N04, category: diagnosis, blocking: true, rule: Nenhum diagnóstico clínico, laudo ou termo psiquiátrico é usado como resposta para o que olha de volta ou para o comportamento de Narciso.}
+  - {id: IR-N05, category: adults, blocking: true, rule: Todo personagem com presença erótica ou de sedução tem 18 anos ou mais canonicamente; Narciso tem 27; o que olha de volta nunca aparenta idade diferente da de Narciso; nenhuma hipótese implica menor de idade.}
+  - {id: IR-N06, category: childhood, blocking: true, rule: Material de infância (fitas, lembranças, diário) nunca aparece em cena com conteúdo erótico ou sensual.}
+  - {id: IR-N07, category: desire_curve, blocking: true, rule: O estágio de desejo nunca regride sem âncora declarada; as ocorrências compulsivas têm funções únicas e teto decrescente de explicitude a partir da quarta.}
+  - {id: IR-N08, category: decay_dignity, blocking: true, rule: Definhamento nunca é apresentado como ideal de beleza corporal; nenhuma medida corporal, peso ou magreza é celebrada.}
+  - {id: IR-N09, category: closure, blocking: true, rule: Não há prólogo, epílogo, nota do autor ou glossário interpretativo; paratexto não interpretativo fica antes do capítulo 1.}
+  - {id: IR-N10, category: final, blocking: true, rule: Narciso não tem morte nem sobrevivência confirmadas; nenhum ato de autolesão é narrado; o último capítulo acrescenta exatamente uma evidência.}
+  - {id: IR-N11, category: taboo, blocking: true, rule: O tabu da obra é o desejo pela própria imagem. Não existe hipótese de gêmeo, irmão ou duplo biológico e nenhum texto, documento, imagem, brief ou prompt a introduz.}
+  - {id: IR-N12, category: consent, blocking: true, rule: Silêncio, beleza, dívida, gratidão ou compulsão nunca são narrados como consentimento.}
+  - {id: IR-N13, category: myth, blocking: true, rule: Todo elemento do DNA mítico permanece reconhecível e transformado; nenhuma adaptação moderna é referência.}
+  - {id: IR-N14, category: pov, blocking: true, rule: O Coro nunca acessa a mente de Narciso; nenhum capítulo tem acesso oportunista a outra mente.}
+  - {id: IR-N15, category: eco_agency, blocking: true, rule: Eco é personagem causal completa, com decisões irreversíveis próprias; nunca existe apenas para refletir Narciso.}
+  - {id: IR-N16, category: amintas, blocking: true, rule: O destino de Amintas nunca é confirmado; nenhum método de morte ou autolesão é descrito.}

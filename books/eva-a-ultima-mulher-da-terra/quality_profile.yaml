@@ -1,0 +1,62 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters:
+    minimum: 9
+  scene_strength:
+    minimum: 8
+  subtext:
+    minimum: 8
+  sensory_concreteness:
+    minimum: 8
+  coherence:
+    minimum: 9
+  emotional_impact:
+    minimum: 8
+  personhood_of_eva:
+    minimum: 9
+  mystery_expansion:
+    minimum: 8
+  demographic_concreteness:
+    minimum: 8
+  philosophical_balance:
+    minimum: 8
+risk_scores:
+  sentimentalism:
+    maximum: 3
+  effect_phrase_overuse:
+    maximum: 3
+  cliche:
+    maximum: 3
+  sermonizing:
+    maximum: 1
+  caricature:
+    maximum: 1
+  premature_mystery_resolution:
+    maximum: 0
+  pregnancy_confirmation:
+    maximum: 0
+  death_confirmation:
+    maximum: 0
+  immortality_confirmation:
+    maximum: 0
+  metaphysical_overexplanation:
+    maximum: 1
+  bird_overexplanation:
+    maximum: 0
+  autopsy_crossover_explicitness:
+    maximum: 0
+  eroticization_of_scarcity:
+    maximum: 0
+  continuity:
+    maximum: 1
+required_checks:
+  - every chapter changes a relationship, a piece of operational information, a physical condition or the demographic counter state
+  - every institutional claim about Eva ("patrimônio genético", "missão", "Nova Eva") is followed, in the same or an adjacent scene, by its concrete effect on her as a person
+  - every speculative technology follows the four-step protocol (principle, hope, limit, new question) from BOOK_CONSTITUTION.md
+  - every Eva Livre / Continuacionista confrontation gives both sides their strongest argument before showing consequences
+  - chapters 41 and 42 contain zero words from the IR005 forbidden pregnancy vocabulary list
+  - chapter 42 ends with population counter exactly 1 and births counter exactly 0
+  - the word "imortal" never appears as narrator assertion of fact about Eva
+  - the word "esperando" applied to birds appears only in the final line of chapter 42
+  - no chapter names or confirms a connection to another literary work

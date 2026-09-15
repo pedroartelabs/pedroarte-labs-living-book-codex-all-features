@@ -1,0 +1,468 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+# Campos da obra (docs/sdd/NARCISO_CANONICAL_SDD_v0.1.md, 7.4):
+#   desire_stage        CONTEMPLATION..WITHERING, não decrescente
+#   mirror_of           34 - number (palíndromo)
+#   reflection_presence NONE | TRACE | PRESENT
+#   reflection_evidence ids RFX-* (plano; o suporte a hipóteses mora no canon interpretativo, Slice 2)
+#   love_evidence       ids LOVE-E* (plano)
+#   illustration_slots  ids IL-* (pranchas; materializadas no Slice 4)
+#   childhood_material  true quando o capítulo usa fitas, diário ou lembranças de infância
+#   adult_content       {kind: SOLO_COMPULSION|PARTNERED, ...} com teto de explicitude
+#   emotional_movement  {from, to, intensity} — lido por check_causal_ledger.py (L6)
+chapters:
+  - number: 1
+    title: Nós o Vimos Primeiro
+    movement: I — A Superfície
+    pov: Coro
+    desire_stage: CONTEMPLATION
+    mirror_of: 33
+    reflection_presence: NONE
+    illustration_slots: [IL-01]
+    emotional_movement: {from: ADMIRATION, to: UNEASE, intensity: MEDIUM}
+    function: Na apresentação da estátua inacabada de Amintas, no terraço da cava, o Coro descreve Narciso e nota que ele nunca olha vidro.
+    dramatic_question: O que vemos quando olhamos para ele?
+    irreversible_turn: Narciso sai sem olhar a estátua e Amintas é dado como desaparecido.
+    continuity: [estátua de mármore negro velada no terraço, o Coro nunca acessa a mente de Narciso, Narciso de costas para superfícies refletoras]
+  - number: 2
+    title: A Casa dos Espelhos Cobertos
+    movement: I — A Superfície
+    pov: Narciso
+    desire_stage: CONTEMPLATION
+    mirror_of: 32
+    reflection_presence: TRACE
+    illustration_slots: [IL-02]
+    emotional_movement: {from: RETURN, to: CONFINEMENT, intensity: LOW}
+    function: Narciso volta à casa; Lia mantém os lençóis negros sobre os espelhos; Eco chega para digitalizar o arquivo sonoro.
+    dramatic_question: Do que esta casa o protege?
+    irreversible_turn: O carro de Amintas é encontrado na estrada da pedreira.
+    continuity: [espelhos cobertos por lençóis negros, fissura fina num espelho do corredor, bulbos de narciso na estufa de Lia]
+  - number: 3
+    title: Repetir
+    movement: I — A Superfície
+    pov: Eco
+    desire_stage: CONTEMPLATION
+    mirror_of: 31
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-01]
+    childhood_material: true
+    emotional_movement: {from: CURIOSITY, to: UNEASE, intensity: MEDIUM}
+    function: Eco digitaliza fitas antigas; numa gravação da infância de Narciso, a voz dele fala e o silêncio seguinte tem ritmo de resposta.
+    dramatic_question: Quem responde numa fita em que só há uma voz?
+    irreversible_turn: Eco decide estender o contrato.
+    continuity: [fita sem data na caixa de Lia, Eco fala pouco e responde mais do que inicia, nenhuma segunda voz audível]
+  - number: 4
+    title: O Cego que Esculpe pelo Toque
+    movement: I — A Superfície
+    pov: Narciso
+    desire_stage: CURIOSITY
+    mirror_of: 30
+    reflection_presence: NONE
+    illustration_slots: [IL-03]
+    emotional_movement: {from: CALM, to: DREAD, intensity: LOW}
+    function: Teodoro toca a estátua de Amintas e diz que o rosto está inacabado do lado errado.
+    dramatic_question: O que o toque conhece que a visão não conhece?
+    irreversible_turn: Narciso ouve a frase da profecia, viverá muito se não se conhecer.
+    continuity: [oficina com pó de mármore, Teodoro cego há décadas, a frase é dita uma única vez]
+  - number: 5
+    title: A Recusa
+    movement: I — A Superfície
+    pov: Eco
+    desire_stage: CURIOSITY
+    mirror_of: 29
+    reflection_presence: NONE
+    love_evidence: [LOVE-E1]
+    emotional_movement: {from: HOPE, to: HUMILIATION, intensity: HIGH}
+    function: Eco se aproxima e Narciso a rejeita em público com precisão cruel.
+    dramatic_question: A crueldade dele é proteção ou desprezo?
+    irreversible_turn: Eco é humilhada diante do Coro e decide não ir embora.
+    continuity: [rejeição sem violência física, Coro presente, Eco mantém agência]
+  - number: 6
+    title: Água Proibida
+    movement: I — A Superfície
+    pov: Narciso
+    desire_stage: CURIOSITY
+    mirror_of: 28
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-02]
+    illustration_slots: [IL-04]
+    emotional_movement: {from: RESTRAINT, to: FASCINATION, intensity: HIGH}
+    function: Primeira descida adulta à cava; na água noturna, uma figura parece olhar de volta.
+    dramatic_question: O que acontece quando ele finalmente olha?
+    irreversible_turn: Narciso volta à água na noite seguinte, quebrando a regra da mãe.
+    continuity: [lua e vento parado, figura nunca nítida, nenhuma fala]
+  - number: 7
+    title: Através das Paredes
+    movement: I — A Superfície
+    pov: Eco
+    desire_stage: ATTRACTION
+    mirror_of: 27
+    reflection_presence: TRACE
+    emotional_movement: {from: CURIOSITY, to: COMPLICITY, intensity: LOW}
+    function: Eco ouve Narciso falar à noite; o gravador registra só a voz dele.
+    dramatic_question: Ouvir sem permissão já é possuir alguém?
+    irreversible_turn: Eco escolhe continuar gravando e esconde isso.
+    continuity: [gravação sem consentimento tem consequência futura, só uma voz na fita]
+  - number: 8
+    title: O Rosto que Atrasa
+    movement: I — A Superfície
+    pov: Narciso
+    desire_stage: ATTRACTION
+    mirror_of: 26
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-03]
+    illustration_slots: [IL-05]
+    emotional_movement: {from: DOUBT, to: DESIRE, intensity: HIGH}
+    function: Na janela noturna, a figura pisca um instante depois e a pinta parece estar do lado errado.
+    dramatic_question: O que ele vê é espelho ou outra coisa?
+    irreversible_turn: Narciso descobre o primeiro espelho da casa.
+    continuity: [pinta sob o olho direito, uma única anomalia, espelho do corredor descoberto]
+  - number: 9
+    title: O Arquivo de Lia
+    movement: I — A Superfície
+    pov: Eco
+    desire_stage: ATTRACTION
+    mirror_of: 25
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-04]
+    illustration_slots: [IL-06]
+    childhood_material: true
+    emotional_movement: {from: SEARCH, to: SECRET, intensity: MEDIUM}
+    function: Eco encontra no diário de Lia a frase cobri os espelhos para que ele não o visse.
+    dramatic_question: A quem se refere cada pronome?
+    irreversible_turn: Eco arranca e guarda a página.
+    continuity: [pronome ambíguo preservado, diário escrito na infância de Narciso, Eco esconde a página]
+  - number: 10
+    title: Ouro em Folha
+    movement: I — A Superfície
+    pov: Narciso
+    desire_stage: ATTRACTION
+    mirror_of: 24
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-05]
+    illustration_slots: [IL-07]
+    emotional_movement: {from: VANITY, to: UNEASE, intensity: MEDIUM}
+    function: Íris fotografa Narciso coberto de ouro em folha para a campanha de restauro; as fotos não concordam entre si.
+    dramatic_question: Uma imagem dele pode ser verdadeira?
+    irreversible_turn: Narciso destrói as fotos, menos uma.
+    continuity: [câmera com modo espelho possivelmente ligado, ouro sobre ombro e pescoço, uma foto guardada]
+  - number: 11
+    title: O Que Vimos na Superfície
+    movement: I — A Superfície
+    pov: Coro
+    desire_stage: ATTRACTION
+    mirror_of: 23
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-06]
+    illustration_slots: [IL-08]
+    emotional_movement: {from: FASCINATION, to: VIGILANCE, intensity: LOW}
+    function: O Coro nota que ele está mais belo; um de nós o seguiu até a água e o viu conversando.
+    dramatic_question: O que nós vimos, e o que quisemos ver?
+    irreversible_turn: O Coro passa a vigiar a pedreira.
+    continuity: [testemunha do Coro não confiável, ângulo parcial, sem acesso à mente de Narciso]
+  - number: 12
+    title: Descoberta
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: EXCITATION
+    mirror_of: 22
+    reflection_presence: PRESENT
+    illustration_slots: [IL-09]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-1, function: DISCOVERY, pleasure: HIGH, explicitness_ceiling: SENSUAL}
+    emotional_movement: {from: CONTEMPLATION, to: AROUSAL, intensity: PEAK}
+    function: Primeira ocorrência erótica diante da superfície refletora; o desejo descobre um objeto.
+    dramatic_question: O que ele deseja quando deseja o que vê?
+    irreversible_turn: Ele não consegue não voltar.
+    continuity: [Narciso sozinho, teto de explicitude declarado, consequência na cena seguinte]
+  - number: 13
+    title: A Voz Guardada
+    movement: II — O Espelho
+    pov: Eco
+    desire_stage: EXCITATION
+    mirror_of: 21
+    reflection_presence: NONE
+    love_evidence: [LOVE-E2]
+    emotional_movement: {from: DISCOVERY, to: CONFRONTATION, intensity: MEDIUM}
+    function: Eco descobre que Narciso guarda e ouve à noite as gravações dela.
+    dramatic_question: Ele ouve a voz dela ou as falas dele na voz dela?
+    irreversible_turn: Confronto sem confissão.
+    continuity: [as gravações incluem falas dele repetidas por Eco no trabalho, nenhum motivo declarado]
+  - number: 14
+    title: Mármore Negro
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: EXCITATION
+    mirror_of: 20
+    reflection_presence: TRACE
+    love_evidence: [LOVE-E3]
+    illustration_slots: [IL-10]
+    emotional_movement: {from: JEALOUSY, to: RUPTURE, intensity: HIGH}
+    function: Na base da estátua aparece a inscrição de Amintas; quando Eco toca o rosto de pedra, Narciso o quebra.
+    dramatic_question: Ciúme, proteção ou posse?
+    irreversible_turn: O rosto da estátua racha.
+    continuity: [inscrição parafraseia a maldição do mito, rachadura permanente, Eco não é ferida]
+  - number: 15
+    title: Prazer
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: RITUAL
+    mirror_of: 19
+    reflection_presence: PRESENT
+    illustration_slots: [IL-11]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-2, function: PLEASURE, pleasure: HIGH, explicitness_ceiling: FRANK}
+    emotional_movement: {from: AROUSAL, to: INDULGENCE, intensity: HIGH}
+    function: Segunda ocorrência; o prazer se instala e os espelhos migram para o quarto.
+    dramatic_question: Quando o prazer vira hábito?
+    irreversible_turn: A ala de Narciso fica sem nenhum espelho coberto.
+    continuity: [três espelhos no quarto, consequência corporal leve, Lia percebe a ausência dos lençóis]
+  - number: 16
+    title: A Dívida Paga
+    movement: II — O Espelho
+    pov: Eco
+    desire_stage: RITUAL
+    mirror_of: 18
+    reflection_presence: NONE
+    love_evidence: [LOVE-E4]
+    emotional_movement: {from: GRATITUDE, to: SUSPICION, intensity: LOW}
+    function: Eco descobre que foi Narciso quem pagou anonimamente a internação da mãe dela.
+    dramatic_question: Cuidado ou compra?
+    irreversible_turn: Eco fica, por gratidão ou por escolha.
+    continuity: [pagamento documentado, Narciso nega sem negar]
+  - number: 17
+    title: O Centro
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: RITUAL
+    mirror_of: 17
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-07]
+    illustration_slots: [IL-12]
+    emotional_movement: {from: LONGING, to: HORROR, intensity: PEAK}
+    function: Narciso tenta tocar o que olha de volta; as mãos não chegam juntas à superfície e uma gota cai.
+    dramatic_question: O que acontece quando o desejo encontra a superfície?
+    irreversible_turn: O espelho quebra e a cicatriz da palma esquerda reabre.
+    continuity: [centro do palíndromo, uma única gota, a figura nunca fala]
+  - number: 18
+    title: Uma Noite sem Palavras
+    movement: II — O Espelho
+    pov: Eco
+    desire_stage: RITUAL
+    mirror_of: 16
+    reflection_presence: TRACE
+    love_evidence: [LOVE-E5]
+    illustration_slots: [IL-13]
+    adult_content: {kind: PARTNERED, participants: [CHR-NARCISO, CHR-ECO], consent: EXPLICIT_REVOCABLE, explicitness_ceiling: SENSUAL}
+    emotional_movement: {from: DESIRE, to: DISQUIET, intensity: HIGH}
+    function: Narciso pede que Eco fique e não fale; os dois negociam termos, sinal de parada e revogabilidade antes da intimidade.
+    dramatic_question: Ele quer Eco ou quer silêncio?
+    irreversible_turn: Eco diz uma palavra depois e ele se afasta.
+    continuity: [consentimento verbal prévio, silêncio não é consentimento, olhar dele para a janela]
+  - number: 19
+    title: Rito
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: COMPULSION
+    mirror_of: 15
+    reflection_presence: PRESENT
+    illustration_slots: [IL-14]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-3, function: RITUAL, pleasure: MEDIUM, explicitness_ceiling: FRANK}
+    emotional_movement: {from: DESIRE, to: COMPULSION, intensity: HIGH}
+    function: Terceira ocorrência com hora marcada, bacia de água, velas e ouro.
+    dramatic_question: O ritual o controla ou ele controla o ritual?
+    irreversible_turn: Narciso cancela o mundo de fora.
+    continuity: [água em bacias pela casa, prazer já menor, Coro sem notícias]
+  - number: 20
+    title: O Segundo Respirar
+    movement: II — O Espelho
+    pov: Eco
+    desire_stage: COMPULSION
+    mirror_of: 14
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-08]
+    emotional_movement: {from: SUSPICION, to: FEAR, intensity: MEDIUM}
+    function: A gravação do quarto mostra duas respirações fora de fase.
+    dramatic_question: O que respira junto com ele?
+    irreversible_turn: Eco decide ir embora e não vai.
+    continuity: [artefato de gravação possível, acústica do quarto, Eco guarda a fita]
+  - number: 21
+    title: Cópias
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: COMPULSION
+    mirror_of: 13
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-10]
+    emotional_movement: {from: CONTROL, to: DISSOLUTION, intensity: HIGH}
+    function: Narciso ensaia as falas de Eco; as fitas dela passam a responder às dele.
+    dramatic_question: Quem está repetindo quem?
+    irreversible_turn: Eco se ouve repetida e deixa de reconhecer a própria voz.
+    continuity: [inversão do mito de Eco, montagem de fitas explicável e inexplicável]
+  - number: 22
+    title: Necessidade
+    movement: II — O Espelho
+    pov: Narciso
+    desire_stage: DEPENDENCE
+    mirror_of: 12
+    reflection_presence: PRESENT
+    illustration_slots: [IL-15]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-4, function: NEED, pleasure: LOW, explicitness_ceiling: SENSUAL}
+    emotional_movement: {from: COMPULSION, to: NEED, intensity: PEAK}
+    function: Quarta ocorrência com menos prazer e mais custo.
+    dramatic_question: O que resta quando o desejo vira necessidade?
+    irreversible_turn: Narciso tranca-se na sala de espelhos e entrega a chave a Eco.
+    continuity: [unhas roídas, a chave com Eco, fome começando]
+  - number: 23
+    title: O Que Vimos no Fundo
+    movement: III — O Fundo
+    pov: Coro
+    desire_stage: DEPENDENCE
+    mirror_of: 11
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-11]
+    illustration_slots: [IL-16]
+    emotional_movement: {from: OBSESSION, to: PILGRIMAGE, intensity: LOW}
+    function: Uma foto de longe mostra a margem com uma figura e um reflexo em ângulo impossível, ou apenas granulação.
+    dramatic_question: Por que continuamos olhando?
+    irreversible_turn: A obsessão do Coro vira peregrinação à cava.
+    continuity: [foto granulada, o Coro discorda entre si, nenhuma confirmação]
+  - number: 24
+    title: A Fotografia que Ficou
+    movement: III — O Fundo
+    pov: Narciso
+    desire_stage: DEPENDENCE
+    mirror_of: 10
+    reflection_presence: TRACE
+    love_evidence: [LOVE-E9]
+    illustration_slots: [IL-17]
+    emotional_movement: {from: ATTACHMENT, to: RELINQUISHMENT, intensity: MEDIUM}
+    function: Narciso entrega a Eco a única foto que guardava.
+    dramatic_question: Presente ou descarte?
+    irreversible_turn: Não resta imagem dele fora da água.
+    continuity: [ouro da foto descascando, anel frouxo no dedo]
+  - number: 25
+    title: O Que Lia Cobriu
+    movement: III — O Fundo
+    pov: Lia
+    desire_stage: DEPENDENCE
+    mirror_of: 9
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-12]
+    childhood_material: true
+    emotional_movement: {from: SECRECY, to: CONFESSION, intensity: LOW}
+    function: Lia apresenta três versões incompatíveis da origem das regras da casa, doença de família, lenda da água da cava e profecia do autoconhecimento, cada uma com um documento.
+    dramatic_question: Qual proteção foi verdadeira?
+    irreversible_turn: Lia queima o diário.
+    continuity: [nenhuma versão privilegiada, três documentos distintos]
+  - number: 26
+    title: Ciúme do Vidro
+    movement: III — O Fundo
+    pov: Narciso
+    desire_stage: DEGRADATION
+    mirror_of: 8
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-13]
+    love_evidence: [LOVE-E6]
+    emotional_movement: {from: INTIMACY, to: EXCLUSION, intensity: HIGH}
+    function: Quando o reflexo de Eco surge ao lado do dele, a figura parece olhá-la; Narciso a tira do quadro.
+    dramatic_question: Ele a protege ou não divide o que vê?
+    irreversible_turn: Eco deixa a casa.
+    continuity: [nenhuma violência física, Eco sai por decisão própria]
+  - number: 27
+    title: Degradação
+    movement: III — O Fundo
+    pov: Narciso
+    desire_stage: DEGRADATION
+    mirror_of: 7
+    reflection_presence: PRESENT
+    illustration_slots: [IL-18]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-5, function: DEGRADATION, pleasure: LOW, explicitness_ceiling: SUGGESTED}
+    emotional_movement: {from: NEED, to: EXHAUSTION, intensity: HIGH}
+    function: Quinta ocorrência com fome, frio e compulsão sem gozo; os espelhos ficam frente a frente.
+    dramatic_question: O que o corpo ainda quer?
+    irreversible_turn: Narciso para de dormir e de responder.
+    continuity: [perda de luz na pele sem magreza exibida, espelhos frente a frente]
+  - number: 28
+    title: A Última Água
+    movement: III — O Fundo
+    pov: Eco
+    desire_stage: DEGRADATION
+    mirror_of: 6
+    reflection_presence: PRESENT
+    illustration_slots: [IL-19]
+    emotional_movement: {from: DISTANCE, to: RETURN, intensity: MEDIUM}
+    function: Eco volta e o vê de longe à beira da cava.
+    dramatic_question: Voltar é amor ou repetição?
+    irreversible_turn: Eco decide entrar na casa de novo.
+    continuity: [água parada, uma gota caindo, Eco mantém a chave]
+  - number: 29
+    title: A Segunda Recusa
+    movement: III — O Fundo
+    pov: Narciso
+    desire_stage: WITHERING
+    mirror_of: 5
+    reflection_presence: PRESENT
+    love_evidence: [LOVE-E7]
+    emotional_movement: {from: HOPE, to: REFUSAL, intensity: HIGH}
+    function: Eco oferece tirá-lo dali e ele recusa com lucidez.
+    dramatic_question: Ele a poupa ou prefere o que vê?
+    irreversible_turn: A recusa agora custa a ele.
+    continuity: [nenhuma ameaça de autolesão, Eco não é salvadora, lágrima única]
+  - number: 30
+    title: Tirésias Toca o Mármore
+    movement: III — O Fundo
+    pov: Eco
+    desire_stage: WITHERING
+    mirror_of: 4
+    reflection_presence: TRACE
+    reflection_evidence: [RFX-09]
+    illustration_slots: [IL-20]
+    emotional_movement: {from: WITNESS, to: GRIEF, intensity: LOW}
+    function: Teodoro toca o rosto de Narciso e diz que este não é o rosto que esculpiram.
+    dramatic_question: O que mudou, o rosto ou quem o toca?
+    irreversible_turn: Teodoro recusa voltar à casa.
+    continuity: [imobilidade de estátua, a frase sustenta leituras opostas]
+  - number: 31
+    title: Quase Nada
+    movement: III — O Fundo
+    pov: Narciso
+    desire_stage: WITHERING
+    mirror_of: 3
+    reflection_presence: PRESENT
+    love_evidence: [LOVE-E8]
+    illustration_slots: [IL-21]
+    adult_content: {kind: SOLO_COMPULSION, occurrence: DSR-6, function: ABSENCE, pleasure: NEAR_ZERO, explicitness_ceiling: SUGGESTED}
+    emotional_movement: {from: STILLNESS, to: ABSENCE, intensity: PEAK}
+    function: Sexta ocorrência, quase sem prazer; ao amanhecer, à beira da cava, ele chama um nome e a resposta volta.
+    dramatic_question: Que nome ele chama?
+    irreversible_turn: A cena termina antes de qualquer resolução.
+    continuity: [nenhum ato de autolesão narrado, névoa, nome ambíguo]
+  - number: 32
+    title: A Casa dos Espelhos Descobertos
+    movement: III — O Fundo
+    pov: Eco
+    desire_stage: WITHERING
+    mirror_of: 2
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-14]
+    illustration_slots: [IL-22, IL-23]
+    emotional_movement: {from: SEARCH, to: LOSS, intensity: HIGH}
+    function: Busca sem nenhum corpo; espelhos frente a frente; um narciso nasce da rachadura da estátua, onde não há terra.
+    dramatic_question: O que Eco leva consigo?
+    irreversible_turn: Eco guarda a foto e não colhe a flor.
+    continuity: [nenhum corpo, anel sobre o parapeito, flor única]
+  - number: 33
+    title: Nós Ainda Olhamos
+    movement: III — O Fundo
+    pov: Coro
+    desire_stage: WITHERING
+    mirror_of: 1
+    reflection_presence: PRESENT
+    reflection_evidence: [RFX-15]
+    # OQ-N9: adotada a recomendação F-C da SDD (fotografia do Coro), pendente de confirmação humana.
+    final_evidence: [RFX-15]
+    illustration_slots: [IL-24]
+    emotional_movement: {from: GRIEF, to: FASCINATION, intensity: MEDIUM}
+    function: Visitantes fotografam a cava; uma foto publicada mostra algo na água que o Coro não consegue concordar em nomear.
+    dramatic_question: Por que ainda olhamos?
+    irreversible_turn: A última evidência é entregue e nenhuma é resolvida.
+    continuity: [exatamente uma evidência nova, sem epílogo, olhar voltado para fora da página]

@@ -1,0 +1,9 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: CROWN_REFUSAL
+    chapters: [19]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: Isadora quebra a coroa de noivado diante da família Vane.
+    must_preserve: []
+    reject_if: []

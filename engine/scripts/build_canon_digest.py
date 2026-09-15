@@ -109,6 +109,123 @@ def relevant(fact: str, names: set[str]) -> bool:
     return any(name in plain for name in names)
 
 
+def _fmt(value) -> str:
+    """Renderiza um valor YAML qualquer (str, list, dict) numa linha compacta."""
+    if isinstance(value, str):
+        return " ".join(value.split())
+    if isinstance(value, list):
+        return "; ".join(_fmt(v) for v in value)
+    if isinstance(value, dict):
+        return "; ".join(f"{k}: {_fmt(v)}" for k, v in value.items())
+    return str(value)
+
+
+def _character_line(item: dict) -> str:
+    nome = item.get("nome", "?")
+    partes = []
+    if "idade_ato_I" in item or "idade_ato_II_III" in item:
+        partes.append(f"idade {item.get('idade_ato_I', '?')}/{item.get('idade_ato_II_III', '?')}")
+    if item.get("poder") and item["poder"] not in ("nenhum", None):
+        partes.append(f"poder: {_fmt(item['poder'])}")
+    if item.get("vetor_preco"):
+        partes.append(f"preço: {_fmt(item['vetor_preco'])}")
+    if item.get("capitulos"):
+        partes.append(f"caps: {_fmt(item['capitulos'])}")
+    if item.get("nota") or item.get("restricao"):
+        partes.append(_fmt(item.get("nota") or item.get("restricao")))
+    return f"**{nome}** — " + " | ".join(partes)
+
+
+def render_actual_schema(registry: dict, names: set[str]) -> tuple[list[str], dict]:
+    """Digest a partir do schema real produzido por CANON_GUARDIAN nesta engine
+    (dicts ricos por seção, não o schema atômico {id, status, fact} que
+    collect_facts() esperava). Ver reviews/LIVING_BOOK_ARCHITECTURE_REVIEW.md,
+    achado 3 (T041): o schema atômico nunca chegou a ser produzido por um
+    CANON_GUARDIAN real, então esta função é o caminho de fato usado."""
+    lines: list[str] = []
+    stats = {"total": 0, "included": 0}
+
+    def keep(text: str) -> bool:
+        return not names or relevant(text, names)
+
+    rules = registry.get("immutable_rules_index") or []
+    if rules:
+        lines.append("## Regras imutáveis\n\n")
+        for r in rules:
+            lines.append(f"- `{r.get('id')}` {_fmt(r.get('resumo', ''))}\n")
+        lines.append("\n")
+
+    wrs = registry.get("world_rules_summary") or []
+    if wrs:
+        stats["total"] += len(wrs)
+        lines.append("## Regras de mundo (WR)\n\n")
+        for w in wrs:
+            lines.append(f"- `{w.get('id')}` {_fmt(w.get('resumo', ''))}\n")
+        stats["included"] += len(wrs)
+        lines.append("\n")
+
+    chars = registry.get("characters") or []
+    limited = registry.get("personagens_uso_limitado") or []
+    all_chars = chars + limited
+    if all_chars:
+        stats["total"] += len(all_chars)
+        chosen = [c for c in all_chars if keep(_character_line(c))]
+        if chosen:
+            stats["included"] += len(chosen)
+            lines.append("## Personagens\n\n")
+            for c in chosen:
+                lines.append(f"- {_character_line(c)}\n")
+            lines.append("\n")
+
+    ts = registry.get("timeline_summary") or {}
+    if ts.get("blocos"):
+        stats["total"] += 1
+        lines.append("## Linha do tempo\n\n")
+        lines.append(f"- Âncora: {_fmt(ts.get('ancora_mestra', ''))}\n")
+        for b in ts["blocos"]:
+            lines.append(f"- {_fmt(b.get('bloco', ''))}: {_fmt(b.get('ano', ''))}"
+                          + (f" — {_fmt(b['nota'])}" if b.get("nota") else "") + "\n")
+        if ts.get("travas_temporais"):
+            for tid, texto in ts["travas_temporais"].items():
+                lines.append(f"- Trava `{tid}`: {_fmt(texto)}\n")
+        stats["included"] += 1
+        lines.append("\n")
+
+    symbols = registry.get("symbols") or []
+    if symbols:
+        stats["total"] += len(symbols)
+        stats["included"] += len(symbols)
+        lines.append("## Símbolos\n\n")
+        for s in symbols:
+            lines.append(f"- `{s.get('id')}` {_fmt(s.get('funcao', ''))}\n")
+        lines.append("\n")
+
+    scenes = registry.get("protected_scenes_index") or []
+    if scenes:
+        stats["total"] += len(scenes)
+        chosen = [s for s in scenes if keep(_fmt(s))]
+        if chosen:
+            stats["included"] += len(chosen)
+            lines.append("## Cenas protegidas\n\n")
+            for s in chosen:
+                cap = s.get("capitulo", s.get("capitulos"))
+                lines.append(f"- `{s.get('id')}` (cap. {_fmt(cap)}): {_fmt(s.get('must_preserve', ''))}\n")
+            lines.append("\n")
+
+    guards = registry.get("editorial_guards_agregados") or {}
+    if guards:
+        stats["total"] += 1
+        stats["included"] += 1
+        lines.append("## Diretrizes editoriais agregadas\n\n")
+        for k, v in guards.items():
+            if k == "donos":
+                continue
+            lines.append(f"- **{k}**: {_fmt(v)}\n")
+        lines.append("\n")
+
+    return lines, stats
+
+
 def build(runtime: Path, chapter: int | None) -> tuple[str, dict]:
     registry_path = runtime / "canon" / "CANON_REGISTRY.yaml"
     if not registry_path.is_file():
@@ -117,7 +234,8 @@ def build(runtime: Path, chapter: int | None) -> tuple[str, dict]:
     facts = collect_facts(registry)
 
     names = chapter_entities(runtime, chapter) if chapter else set()
-    lines = [f"# Canon Digest — {registry.get('metadata', {}).get('title', '')}\n\n"]
+    title = registry.get("metadata", {}).get("title", "")
+    lines = [f"# Canon Digest — {title}\n\n"]
     if chapter:
         lines.append(f"Recorte do capítulo {chapter}. ")
     lines.append(
@@ -161,6 +279,15 @@ def build(runtime: Path, chapter: int | None) -> tuple[str, dict]:
         if pov.get("forbidden"):
             lines.append(f"- Proibido: {'; '.join(str(f) for f in pov['forbidden'])}\n")
         lines.append("\n")
+
+    # Fallback: nenhum fato no schema atômico {id, status, fact} foi encontrado
+    # (schema nunca produzido por um CANON_GUARDIAN real nesta engine) — usa o
+    # schema real de dicts ricos por seção.
+    if stats["included"] == 0:
+        actual_lines, actual_stats = render_actual_schema(registry, names)
+        lines.extend(actual_lines)
+        stats["total"] += actual_stats["total"]
+        stats["included"] += actual_stats["included"]
 
     return "".join(lines), stats
 

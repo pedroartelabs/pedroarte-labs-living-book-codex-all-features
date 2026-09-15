@@ -1,0 +1,117 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: NarcisoLexicons
+# Léxicos proibidos. Aplicados ao PLANO no modo `package` e ao MANUSCRITO nos
+# modos `wave` e `final`. Comparação sem acentos e sem caixa, exceto
+# `reflection_named`, que diferencia maiúscula (nome próprio na narração).
+lexicons:
+  ontology_confirmation:     # UNC-07
+    - era uma alucinação
+    - era um fantasma
+    - era outra pessoa
+    - era amintas
+    - ele era o reflexo
+    - era o próprio narciso
+    - foi tudo imaginação
+    - era um espírito
+  motive_declaration:        # LOV-04
+    - porque a amava
+    - só amava a si
+    - nunca amou
+    - nunca a amou
+    - amava de verdade
+    - sempre a amou
+  youth_coding:              # IR-N05, aplicado a capítulos com adult_content
+    - menino
+    - garoto
+    - rapazinho
+    - adolescente
+    - juvenil
+    - infantil
+    - mocinho
+    - novinho
+  twin:                      # UNC-10, OQ-N2
+    - gêmeo
+    - gêmea
+    - irmão gêmeo
+    - irmã gêmea
+    - irmão perdido
+    - natimorto
+    - duplo biológico
+  clinical_answer:           # IR-N04
+    - diagnóstico
+    - laudo psiquiátrico
+    - esquizofrenia
+    - psicose
+    - surto psicótico
+    - transtorno
+  decay_glamour:             # IR-N08, aplicado aos estados de declínio da figura no canon visual
+    - magreza
+    - costelas à mostra
+    - clavículas saltadas
+    - esquelético
+    - ossos à mostra
+    - emagrecido e belo
+  hypothesis_names:          # PROMPT_LEAKS_HYPOTHESIS: briefs de imagem nunca "sabem" o que é o reflexo
+    - alucinação
+    - fantasma
+    - sobrenatural
+    - espírito
+    - gêmeo
+    - outra pessoa
+    - amintas
+    - o próprio narciso
+    - é uma projeção
+    - hipótese
+  explanatory_closure:       # UNC-08, aplicado ao último capítulo do manuscrito final
+    - a explicação
+    - explicava tudo
+    - tudo fez sentido
+    - tudo faz sentido agora
+    - finalmente entendemos
+    - finalmente entendeu
+    - o que realmente aconteceu
+    - a verdade é que
+    - a verdade era
+    - laudo
+    - carta explicativa
+    - anos depois
+  fate_confirmation:         # SDD 7.5, aplicado dos capítulos 31 a 33 do manuscrito final
+    - encontraram o corpo
+    - o corpo foi encontrado
+    - o corpo de narciso
+    - morreu afogado
+    - se afogou
+    - certidão de óbito
+    - atestado de óbito
+    - o enterro de narciso
+    - ele está vivo
+    - ele sobreviveu
+    - foi visto vivo
+  finish_promise:            # TRAP-05, SDD 21.4: textos de loja e redes (alvos KDP) nunca prometem
+    - espelhada
+    - espelhado
+    - acabamento espelhado
+    - numerada
+    - exemplares numerados
+    - assinada
+    - autografada
+    - edição limitada
+    - tiragem limitada
+    - foil
+    - hot stamping
+    - relevo
+    - sobrecapa
+    - verniz localizado
+    - borda pintada
+    - bordas pintadas
+    - fita marcadora
+    - marcador de fita
+    - slipcase
+    - guardas ilustradas
+    - cards colecionáveis
+  reflection_named:          # nome próprio proibido na narração (sensível a maiúscula)
+    - o Reflexo
+    - do Reflexo
+    - ao Reflexo
+    - no Reflexo
+    - pelo Reflexo

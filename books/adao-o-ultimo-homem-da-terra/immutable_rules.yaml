@@ -1,0 +1,101 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: IR001
+    category: ontology
+    rule: >
+      Nenhum ser humano biologicamente masculino nasce em nenhum momento da
+      obra depois do Dia Zero — em nenhum lugar do planeta, em nenhuma
+      época, incluindo os capítulos ambientados séculos após o
+      desaparecimento de Adão.
+    blocking: true
+  - id: IR002
+    category: causality
+    rule: A causa da cessação de nascimentos masculinos nunca é confirmada pelo narrador nem por evidência conclusiva de nenhum personagem.
+    blocking: true
+  - id: IR003
+    category: causality
+    rule: A causa do envelhecimento anormalmente lento de Adão a partir de aproximadamente setenta anos nunca é confirmada.
+    blocking: true
+  - id: IR004
+    category: causality
+    rule: A causa da fertilidade continuada de Adão além de qualquer limite biológico plausível nunca é confirmada.
+    blocking: true
+  - id: IR005
+    category: offspring
+    rule: Todo filho documentado de Adão, em qualquer capítulo e qualquer época, é do sexo feminino, sem exceção.
+    blocking: true
+  - id: IR006
+    category: genetics
+    rule: As incompatibilidades genéticas encontradas entre supostas filhas de Adão nunca são resolvidas ou explicadas de forma definitiva.
+    blocking: true
+  - id: IR007
+    category: ending
+    rule: O desaparecimento de Adão aos cento e quarenta e sete anos não tem corpo, explosão, portal, transformação visível ou qualquer cena sobrenatural objetiva narrada.
+    blocking: true
+  - id: IR008
+    category: legend
+    rule: A identidade do(s) "Andarilho(s)" relatado(s) após o desaparecimento nunca é confirmada nem desmentida como sendo Adão.
+    blocking: true
+  - id: IR009
+    category: messiah_ban
+    rule: >
+      Adão nunca se autodeclara divino, messias, imortal, enviado ou
+      alienígena. O narrador nunca confirma nenhuma dessas hipóteses como
+      fato objetivo do mundo.
+    blocking: true
+  - id: IR010
+    category: point_of_view
+    rule: A narração permanece em terceira pessoa limitada ao personagem POV declarado de cada capítulo, sem acesso oportunista a mentes de outros personagens.
+    blocking: true
+  - id: IR011
+    category: tone
+    rule: Nenhuma cena da obra encena evento sobrenatural explícito (luz, portal, transformação visível, voz incorpórea) em nenhuma época.
+    blocking: true
+  - id: IR012
+    category: bodily_autonomy
+    rule: >
+      Toda cena de coleta genética, exame clínico, gravidez atribuída a Adão
+      ou confinamento institucional registra explicitamente consentimento,
+      coerção, resistência ou ambivalência; o corpo de Adão nunca é tratado
+      como recurso neutro.
+    blocking: true
+  - id: IR013
+    category: non_caricature
+    rule: Nenhum capítulo retrata um mundo sem homens como utopia nem como colapso; a sociedade mantém poder, amor, ego, violência, cooperação, fé e oportunismo em todas as eras.
+    blocking: true
+  - id: IR014
+    category: mystery_evidence
+    rule: Toda pista relevante sobre os quatro mistérios centrais carrega evidência a favor e evidência contrária registradas em PLOT_DEPENDENCY_MAP.md.
+    blocking: true
+  - id: IR015
+    category: ending
+    rule: O capítulo final não mostra Adão diretamente em cena; sua presença existe apenas por ausência, testemunho ou vestígio.
+    blocking: true
+  - id: IR016
+    category: prose_discipline
+    rule: Os contadores demográficos (POPULAÇÃO MASCULINA, HOMENS VIVOS CONHECIDOS e equivalentes) aparecem apenas em pontos de virada estrutural, nunca como recurso decorativo repetido em todo capítulo.
+    blocking: true
+  - id: IR017
+    category: prose_discipline
+    rule: >
+      Nenhuma frase do narrador resolve o mistério pela adjetivação (vetado:
+      "imortal", "sobrenatural", "milagroso", "divino" aplicados a Adão pela
+      voz narrativa). Fatos são relatados de forma objetiva e documental.
+    blocking: true
+  - id: IR018
+    category: form
+    rule: Nenhum capítulo substitui cena dramatizada inteiramente por bloco documental; documentos, censos e transcrições complementam a cena, nunca a substituem.
+    blocking: true
+  - id: IR019
+    category: institutions
+    rule: A Comissão de Preservação Humana e instituições equivalentes nunca são retratadas como vilãs monolíticas; contêm pessoas com motivações diferenciadas e plausíveis.
+    blocking: true
+  - id: IR020
+    category: origin
+    rule: Adão nasce como bebê comum, sem marca, sinal ou reconhecimento sobrenatural no momento do nascimento; sua excepcionalidade só se torna perceptível décadas depois.
+    blocking: true
+  - id: IR021
+    category: legend
+    rule: Nenhuma comunidade, personagem ou instituição posterior ao desaparecimento estabelece consenso definitivo sobre o que Adão era; ao menos duas interpretações concorrentes permanecem válidas até a última página.
+    blocking: true

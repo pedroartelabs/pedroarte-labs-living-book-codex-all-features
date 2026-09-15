@@ -1,0 +1,190 @@
+# EDITION_CAPABILITIES — matriz de capacidades por alvo de edição
+#
+# Arquivo:    engine/templates/EDITION_CAPABILITIES.yaml (motor; neutro de
+#             gênero — engine/AGENTS.md)
+# Consumido:  engine/scripts/check_visual_canon.py (resolve_finish_intent,
+#             resolve_composition_surface)
+# Desenho:    docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md (seção 16)
+#
+# Isto é um arquivo de FATOS DE FABRICAÇÃO, não de julgamento criativo. Cada
+# linha tem proveniência: `sources` por alvo, e `metadata.verified_on` a
+# data em que os fatos foram conferidos contra a documentação oficial da
+# Amazon KDP. T699_KDP_REQUIREMENTS_REFRESH revalida antes de qualquer
+# release; uma divergência vira CAPABILITY_BLOCKER, nunca uma edição
+# silenciosa deste arquivo.
+#
+# Níveis (16.1 da SDD):
+#   PHYSICAL         — fabricado de verdade pelo processo de impressão do alvo.
+#   SIMULATED        — representação gráfica impressa/exibida (nunca o
+#                       material real; só a aparência).
+#   UNSUPPORTED      — o alvo não tem esse processo, ponto final.
+#   VENDOR_DEPENDENT — depende de uma gráfica especializada (só "collector");
+#                       sem layout/PRINTER_PROFILE.yaml confirmando o efeito,
+#                       resolve como UNSUPPORTED.
+#
+# A matriz NÃO é definitiva: é dado versionado com data, não constante viva
+# ("hoje a Amazon não oferece X" pode mudar amanhã). Mudança da Amazon =
+# nova versão deste arquivo, nenhuma mudança de código ou de canon de livro.
+
+apiVersion: pedroarte.livingbooks/v1
+kind: EditionCapabilities
+metadata:
+  version: 1.1.0
+  verified_on: "2026-09-14"
+  verified_by: SDD
+  note: >
+    Fatos coletados na sessão que escreveu o SDD v0.1, a partir de páginas
+    de ajuda oficiais da Amazon KDP (ver `sources` por alvo). T699 deve
+    revalidar antes de qualquer release real — ver docs/COMO_EXECUTAR_UM_LIVRO.md.
+    1.1.0 (docs/sdd/NARCISO_CANONICAL_SDD_v0.1.md, 29.6): MIRROR_BOARD,
+    METALLIZED_PAPER, BLIND_EMBOSS, SLIPCASE e INSERT_CARD — nenhum tem
+    processo documentado nas páginas KDP citadas (UNSUPPORTED nos três alvos
+    KDP) e todos dependem de gráfica no collector; superfícies SLIPCASE_*.
+
+targets:
+  kindle_ebook:
+    surfaces: [MARKETING_COVER, INTERNAL_COVER, TITLE_PAGE, COPYRIGHT_PAGE, CHAPTER_OPENER, INTERIOR_PLATE, PROMO]
+    budget: [ESSENTIAL]
+    effects:
+      COLOR_PRINT: SIMULATED
+      LAMINATE_FINISH: UNSUPPORTED
+      METALLIC_FOIL: UNSUPPORTED
+      SIMULATED_METALLIC_PRINT: SIMULATED
+      EMBOSS: UNSUPPORTED
+      DEBOSS: UNSUPPORTED
+      TONAL_RELIEF_SIMULATION: SIMULATED
+      SPOT_UV: UNSUPPORTED
+      SELECTIVE_VARNISH: UNSUPPORTED
+      CONTRAST_SIMULATION: SIMULATED
+      SPRAYED_EDGE: UNSUPPORTED
+      STENCILED_EDGE: UNSUPPORTED
+      DUST_JACKET: UNSUPPORTED
+      CLOTH_CASE: UNSUPPORTED
+      PRINTED_ENDPAPER: UNSUPPORTED
+      DIE_CUT: UNSUPPORTED
+      RIBBON_MARKER: UNSUPPORTED
+      SPINE_TEXT: UNSUPPORTED
+      NARRATIVE_SIGIL: PHYSICAL
+      NARRATIVE_ARTIFACT: PHYSICAL
+      INTERIOR_COLOR: SIMULATED   # depende do dispositivo do leitor; e-ink = grayscale
+      FLAT_ROLE_COLOR: SIMULATED
+      MIRROR_BOARD: UNSUPPORTED
+      METALLIZED_PAPER: UNSUPPORTED
+      BLIND_EMBOSS: UNSUPPORTED
+      SLIPCASE: UNSUPPORTED
+      INSERT_CARD: UNSUPPORTED
+    sources:
+      - https://kdp.amazon.com/en_US/help/topic/G6GTK3T3NUHKLEFX
+
+  kdp_paperback:
+    surfaces: [FRONT_COVER, BACK_COVER, SPINE, TITLE_PAGE, COPYRIGHT_PAGE, CHAPTER_OPENER, INTERIOR_PLATE]
+    budget: [ESSENTIAL, OPTIONAL]
+    effects:
+      COLOR_PRINT: PHYSICAL
+      LAMINATE_FINISH: PHYSICAL
+      METALLIC_FOIL: UNSUPPORTED
+      SIMULATED_METALLIC_PRINT: SIMULATED
+      EMBOSS: UNSUPPORTED
+      DEBOSS: UNSUPPORTED
+      TONAL_RELIEF_SIMULATION: SIMULATED
+      SPOT_UV: UNSUPPORTED
+      SELECTIVE_VARNISH: UNSUPPORTED
+      CONTRAST_SIMULATION: SIMULATED
+      SPRAYED_EDGE: UNSUPPORTED
+      STENCILED_EDGE: UNSUPPORTED
+      DUST_JACKET: UNSUPPORTED
+      CLOTH_CASE: UNSUPPORTED
+      PRINTED_ENDPAPER: UNSUPPORTED
+      DIE_CUT: UNSUPPORTED
+      RIBBON_MARKER: UNSUPPORTED
+      SPINE_TEXT: PHYSICAL   # condicionado a page_count >= spine_text_min_pages, ver PRINT_GEOMETRY
+      NARRATIVE_SIGIL: PHYSICAL
+      NARRATIVE_ARTIFACT: PHYSICAL
+      INTERIOR_COLOR: PHYSICAL   # se standard/premium color; preto/branco é o outro caminho de interior
+      FLAT_ROLE_COLOR: PHYSICAL
+      MIRROR_BOARD: UNSUPPORTED
+      METALLIZED_PAPER: UNSUPPORTED
+      BLIND_EMBOSS: UNSUPPORTED
+      SLIPCASE: UNSUPPORTED
+      INSERT_CARD: UNSUPPORTED
+    geometry_ref: PRINT_GEOMETRY.kdp_paperback
+    sources:
+      - https://kdp.amazon.com/en_US/help/topic/G201953020
+      - https://kdp.amazon.com/en_US/help/topic/G201834180
+
+  kdp_hardcover:
+    surfaces: [CASE_FRONT, CASE_BACK, CASE_SPINE, TITLE_PAGE, COPYRIGHT_PAGE, CHAPTER_OPENER, INTERIOR_PLATE]
+    budget: [ESSENTIAL, OPTIONAL, PREMIUM]   # PREMIUM só resolve como SIMULATED (nenhum efeito PREMIUM é PHYSICAL aqui)
+    effects:
+      COLOR_PRINT: PHYSICAL
+      LAMINATE_FINISH: PHYSICAL
+      METALLIC_FOIL: UNSUPPORTED
+      SIMULATED_METALLIC_PRINT: SIMULATED
+      EMBOSS: UNSUPPORTED
+      DEBOSS: UNSUPPORTED
+      TONAL_RELIEF_SIMULATION: SIMULATED
+      SPOT_UV: UNSUPPORTED
+      SELECTIVE_VARNISH: UNSUPPORTED
+      CONTRAST_SIMULATION: SIMULATED
+      SPRAYED_EDGE: UNSUPPORTED
+      STENCILED_EDGE: UNSUPPORTED
+      DUST_JACKET: UNSUPPORTED   # case laminate: "will not have a dust jacket"
+      CLOTH_CASE: UNSUPPORTED    # case laminate, não pano
+      PRINTED_ENDPAPER: UNSUPPORTED
+      DIE_CUT: UNSUPPORTED
+      RIBBON_MARKER: UNSUPPORTED
+      SPINE_TEXT: PHYSICAL
+      NARRATIVE_SIGIL: PHYSICAL
+      NARRATIVE_ARTIFACT: PHYSICAL
+      INTERIOR_COLOR: PHYSICAL   # só premium color; standard color indisponível em hardcover
+      FLAT_ROLE_COLOR: PHYSICAL
+      MIRROR_BOARD: UNSUPPORTED
+      METALLIZED_PAPER: UNSUPPORTED
+      BLIND_EMBOSS: UNSUPPORTED
+      SLIPCASE: UNSUPPORTED
+      INSERT_CARD: UNSUPPORTED
+    geometry_ref: PRINT_GEOMETRY.kdp_hardcover
+    sources:
+      - https://kdp.amazon.com/en_US/help/topic/GDTKFJPNQCBTMRV6
+      - https://kdp.amazon.com/en_US/help/topic/G201834180
+
+  collector:
+    surfaces:
+      [CASE_FRONT, CASE_BACK, CASE_SPINE,
+       DUST_JACKET_FRONT, DUST_JACKET_BACK, DUST_JACKET_SPINE, DUST_JACKET_FLAP_FRONT, DUST_JACKET_FLAP_BACK,
+       ENDPAPER_FRONT, ENDPAPER_BACK,
+       EDGE_TOP, EDGE_FORE, EDGE_BOTTOM,
+       TITLE_PAGE, COPYRIGHT_PAGE, CHAPTER_OPENER, INTERIOR_PLATE, INSERT, RIBBON,
+       SLIPCASE_FRONT, SLIPCASE_SPINE]
+    budget: [ESSENTIAL, OPTIONAL, PREMIUM, COLLECTOR_ONLY]
+    printer_profile_required: true   # sem layout/PRINTER_PROFILE.yaml, todo VENDOR_DEPENDENT abaixo vira UNSUPPORTED
+    effects:
+      COLOR_PRINT: PHYSICAL
+      LAMINATE_FINISH: VENDOR_DEPENDENT
+      METALLIC_FOIL: VENDOR_DEPENDENT
+      SIMULATED_METALLIC_PRINT: SIMULATED
+      EMBOSS: VENDOR_DEPENDENT
+      DEBOSS: VENDOR_DEPENDENT
+      TONAL_RELIEF_SIMULATION: SIMULATED
+      SPOT_UV: VENDOR_DEPENDENT
+      SELECTIVE_VARNISH: VENDOR_DEPENDENT
+      CONTRAST_SIMULATION: SIMULATED
+      SPRAYED_EDGE: VENDOR_DEPENDENT
+      STENCILED_EDGE: VENDOR_DEPENDENT
+      DUST_JACKET: VENDOR_DEPENDENT
+      CLOTH_CASE: VENDOR_DEPENDENT
+      PRINTED_ENDPAPER: VENDOR_DEPENDENT
+      DIE_CUT: VENDOR_DEPENDENT
+      RIBBON_MARKER: VENDOR_DEPENDENT
+      SPINE_TEXT: PHYSICAL
+      NARRATIVE_SIGIL: PHYSICAL
+      NARRATIVE_ARTIFACT: PHYSICAL
+      INTERIOR_COLOR: VENDOR_DEPENDENT
+      FLAT_ROLE_COLOR: PHYSICAL
+      MIRROR_BOARD: VENDOR_DEPENDENT      # placa espelhada aplicada/laminada
+      METALLIZED_PAPER: VENDOR_DEPENDENT  # papel ou filme metalizado de alto brilho
+      BLIND_EMBOSS: VENDOR_DEPENDENT      # relevo sem tinta nem foil
+      SLIPCASE: VENDOR_DEPENDENT
+      INSERT_CARD: VENDOR_DEPENDENT
+    sources:
+      - "nenhuma opção KDP documentada para estes efeitos; dependem inteiramente do perfil de gráfica"

@@ -1,0 +1,15 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: O Farol Apagado
+    pov: Marina
+    irreversible_turn: "Marina encontra o farol apagado pela primeira vez em anos."
+  - number: 12
+    title: A Dívida Nomeada
+    pov: Marina
+    irreversible_turn: "A dívida de sangue da família de Tomás é nomeada em voz alta."
+  - number: 21
+    title: O Nó Cortado
+    pov: Tomás
+    irreversible_turn: "Tomás corta a corda que prendia o barco ao cais."

@@ -1,0 +1,19 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - {id: IR001, category: protagonism, blocking: true, rule: Sigrid é co-protagonista com objetivo, plano, falhas e ao menos três decisões irreversíveis que não dependem da autorização de Elias.}
+  - {id: IR002, category: consent, blocking: true, rule: Todo vínculo romântico ou sexual envolve adultos; consentimento pré-esquecimento não vale automaticamente após o apagamento e magia, medo, dívida ou informação assimétrica nunca são narrados como consentimento.}
+  - {id: IR003, category: memory, blocking: true, rule: A maçã remove de Elias memórias autobiográficas em que Sigrid é o centro relacional, mas não apaga personalidade, habilidades, ética, fatos de Mestergård ou consequências físicas.}
+  - {id: IR004, category: agency, blocking: true, rule: Sigrid não restaura integralmente a memória de Elias sem consentimento informado e atual dele.}
+  - {id: IR005, category: magic, blocking: true, rule: Toda ação mágica tem vínculo, preço, limite e vestígio registrados em planning/06_MAGIC_RULES.md; solução sem custo é proibida.}
+  - {id: IR006, category: antagonist, blocking: true, rule: O Gigante age por uma lógica coerente de dívida e contenção; não se torna secretamente benevolente nem vilão sádico arbitrário.}
+  - {id: IR007, category: folklore, blocking: true, rule: A obra deriva apenas do conto tradicional em domínio público e de pesquisa cultural verificável; não imita nem referencia adaptações modernas.}
+  - {id: IR008, category: mystery, blocking: true, rule: Toda revelação central possui ao menos duas pistas anteriores e nenhuma pista depende de pensamento artificialmente omitido pelo POV.}
+  - {id: IR009, category: tasks, blocking: true, rule: Cada um dos quatro trabalhos produz mudança irreversível de enredo, mundo, personagem, relação e informação de payoff.}
+  - {id: IR010, category: visual_chekhov, blocking: true, rule: Maçã negra e três gotas têm setup, transformação e payoff narrativos; nenhum elemento dominante existe apenas por estética.}
+  - {id: IR011, category: culture, blocking: true, rule: Telemark e referências norueguesas reais são pesquisadas; Mestergård e a magia são identificáveis como ficção, sem medievalismo europeu genérico.}
+  - {id: IR012, category: ending, blocking: true, rule: O final fecha o arco emocional e o conflito de escolha, cobra um preço real e preserva apenas uma inquietação metafísica residual.}
+  - {id: IR013, category: pov, blocking: true, rule: Cada unidade usa terceira pessoa limitada a um único POV designado em chapter_architecture.yaml.}
+  - {id: IR014, category: style, blocking: true, rule: Prosa elegante e precisa; são proibidos clichês corporais, psicologia autoexplicada e repetição ornamental de perigo ou desejo.}
+  - {id: IR015, category: title, blocking: true, rule: Mestermø é título atribuído a Sigrid e seu sentido progride de serva competente para mestra dos contratos e finalmente pessoa que escolhe o próprio nome.}
+

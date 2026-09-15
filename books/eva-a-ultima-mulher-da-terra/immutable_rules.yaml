@@ -1,0 +1,83 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: IR001
+    category: ontology
+    rule: A partir do Dia Zero, todo nascimento humano é do sexo masculino; o fenômeno é real dentro do universo narrado e nunca cura, reverte ou explica a si mesmo.
+    blocking: true
+  - id: IR002
+    category: causality
+    rule: A causa do fenômeno (viral, genética, divina, alienígena, conspiratória, ambiental, tecnológica ou qualquer outra) nunca é confirmada pelo narrador em nenhum capítulo. Personagens podem formular, defender e abandonar hipóteses sem que nenhuma seja privilegiada como verdade da obra.
+    blocking: true
+  - id: IR003
+    category: coincidence
+    rule: A coincidência entre o nome Eva e seu papel histórico nunca é confirmada como sobrenatural nem descartada como irrelevante pelo narrador; apenas personagens interpretam.
+    blocking: true
+  - id: IR004
+    category: personhood
+    rule: Eva permanece pessoa completa em todo capítulo — humor, defeitos, contradições, erros, desejos banais — e nunca é reduzida a símbolo, propriedade, prêmio ou objeto de enredo, mesmo quando personagens institucionais a tratam dessa forma.
+    blocking: true
+  - id: IR005
+    category: ending_pregnancy
+    rule: 'O manuscrito nunca confirma, sugere tecnicamente ou nomeia gravidez de Eva em nenhum ponto, especialmente nos Capítulos 41 e 42. As seguintes palavras e seus derivados diretos são proibidos em referência ao estado físico de Eva nesses dois capítulos: gravidez, gestação, feto, embrião, bebê, chute (fetal), útero, contração (de parto), atraso menstrual, movimento fetal, parto, grávida.'
+    blocking: true
+  - id: IR006
+    category: ending_death
+    rule: O manuscrito nunca confirma nem descarta explicitamente a morte de Eva no Capítulo 42 ou em qualquer capítulo posterior. Frases como "Eva morreu", "seu coração parou", "sua última respiração" ou equivalentes definitivos são proibidas.
+    blocking: true
+  - id: IR007
+    category: longevity
+    rule: A longevidade de Eva nunca é descrita pelo narrador com a palavra "imortal" ou equivalente como fato objetivo. Eva envelhece de forma física e visível (rugas, fragilidade, memória falha, dor) em todas as partes tardias da obra; personagens podem especular sobre imortalidade sem que a narração confirme.
+    blocking: true
+  - id: IR008
+    category: birds
+    rule: Os andorinhões-de-vidro aparecem exclusivamente nos momentos listados em seeds/WORLD_RULES_SEED.md, seção 7, sem contagem numérica precisa, sem explicação sobrenatural e sem associação explícita a nenhuma religião da obra. A palavra "esperando" (ou equivalente com a mesma implicação de intenção) aplicada aos pássaros é reservada exclusivamente para a última linha do Capítulo 42.
+    blocking: true
+  - id: IR009
+    category: autopsy_resonance
+    rule: Nenhuma outra obra é nomeada, citada ou confirmada como universo compartilhado. Nenhum nome de personagem de outra obra é reutilizado. A ressonância com "Autópsia" existe apenas através do motivo dos pássaros descrito em seeds/WORLD_RULES_SEED.md.
+    blocking: true
+  - id: IR010
+    category: counters
+    rule: O contador final de população humana estimada no Capítulo 42 é exatamente 1, e o contador de nascimentos humanos no último ano é exatamente 0. Nenhum outro valor é permitido nesses dois contadores finais.
+    blocking: true
+  - id: IR011
+    category: impartiality
+    rule: O Movimento Eva Livre e os Continuacionistas recebem, cada um, ao menos uma cena em que seu argumento mais forte é apresentado sem ironia narrativa. Nenhum dos dois lados é caricato.
+    blocking: true
+  - id: IR012
+    category: religion
+    rule: Nenhuma interpretação religiosa do fenômeno (Evista, Naturalista ou outra) é ridicularizada nem confirmada como verdade objetiva da obra.
+    blocking: true
+  - id: IR013
+    category: point_of_view
+    rule: A narração usa terceira pessoa limitada a um único ponto de vista por capítulo, conforme designado em chapter_architecture.yaml, sem acesso oportunista à mente de outros personagens dentro do mesmo capítulo.
+    blocking: true
+  - id: IR014
+    category: science
+    rule: Toda tecnologia especulativa segue o protocolo de quatro passos definido em BOOK_CONSTITUTION.md (princípio, esperança, limite, nova pergunta). Nenhuma descoberta científica encerra o mistério central do fenômeno ou da longevidade de Eva.
+    blocking: true
+  - id: IR015
+    category: closure
+    rule: Não existe epílogo, nota do autor, glossário explicativo ou parágrafo de fechamento interpretativo depois da última imagem do Capítulo 42.
+    blocking: true
+  - id: IR016
+    category: boy_birth_anomaly
+    rule: A discrepância entre o cariótipo XX documentado de Theo durante a gestação e seu fenótipo masculino ao nascer nunca é resolvida ou explicada por nenhum personagem ou pelo narrador em nenhum capítulo posterior.
+    blocking: true
+  - id: IR017
+    category: number_147
+    rule: A idade final de Eva, 147 anos, nunca é destacada como numericamente significativa por nenhum personagem ou pelo narrador.
+    blocking: true
+  - id: IR018
+    category: tone
+    rule: A escassez de mulheres nunca é tratada com erotização, fetichização ou lógica de harém; novas configurações afetivas e familiares são exploradas com maturidade e sem moralismo em qualquer direção.
+    blocking: true
+  - id: IR019
+    category: twist
+    rule: A hipótese de que Eva seja a primeira ocorrência de algo novo, em vez da última ocorrência de algo antigo, nunca é escrita de forma explícita por nenhum personagem ou pelo narrador; ela só pode existir como inferência do leitor a partir das pistas listadas em seeds/WORLD_RULES_SEED.md, seção 8.
+    blocking: true
+  - id: IR020
+    category: demographics
+    rule: Toda grande mudança demográfica (queda de nascimentos, envelhecimento populacional, colapso econômico ou institucional) precisa se manifestar em cena concreta (objeto, lugar, personagem) em ao menos um capítulo antes ou depois de qualquer menção numérica em interlúdio de contador — proibido bloco de exposição estatística sem cena correspondente em algum ponto da obra.
+    blocking: true

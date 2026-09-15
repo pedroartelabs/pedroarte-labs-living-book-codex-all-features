@@ -1,0 +1,83 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: VisualNarrativeCanon
+metadata:
+  project_id: mare_de_chumbo_fixture
+  version: 0.1.0
+  owner: VISUAL_DIRECTOR
+  author_dna: {author_id: bea_halden_fixture, version: 1, sha256: null}
+  narrative_canon_refs:
+    canon_registry_version: 0.1.0
+    causal_ledger_version: 0.1.0
+
+book_dna:
+  visual_thesis: "A luz que guia também expõe."
+  duality:
+    outer_truth: "O farol aceso, guiando os barcos."
+    hidden_truth: "A lente vazia, sem ninguém para acendê-la."
+    anchors: ["LEDGER:GT-M-01", "SCENE:DEBT_NAMED"]
+  palette:
+    GROUND: "#101216"
+    INK: "#E2D9C4"
+    METAL: {material: WARM_PEWTER, hex: "#7A6F52"}
+    PULSE: "#7A4A0C"
+  role_overrides: []
+
+vetoes: []
+
+elements:
+  - id: SIG-LENS
+    label: fractured lens
+    class: MOTIF
+    meaning: "A luz que guia também expõe — a fratura de Marina virada para fora."
+    functions:
+      - {function: CHARACTER, anchors: ["LEDGER:GT-M-01", "DOC:/specs/SYMBOL_BIBLE.md#motif-1-fractured-lens"]}
+      - {function: REVELATION, anchors: ["SCENE:DEBT_NAMED"]}
+      - {function: TRANSFORMATION, anchors: ["LEDGER:EV-21"]}
+    count: 1
+    prominence: DOMINANT
+    first_appearance: "TURN:1"
+    exposure: {spoiler_level: NONE}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 8
+      text_alternative: "Lente de farol com uma fratura visível, feixe de luz desviado."
+    cost_class: ESSENTIAL
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+    status: PLANNED
+
+  - id: SIG-KNOT
+    label: sailor's knot
+    class: MOTIF
+    meaning: "O nó que prende Tomás à própria dívida de sangue."
+    functions:
+      - {function: WORLD, anchors: ["CANON:OBJ-LENS", "SCENE:DEBT_NAMED"]}
+      - {function: TRANSFORMATION, anchors: ["LEDGER:EV-21"]}
+    count: 1
+    prominence: SECONDARY
+    # LOW, não MEDIUM: o objeto (um nó de marinheiro) não revela por si só
+    # QUE dívida é essa nem quem a deve — a revelação (LEDGER:EV-12) é a
+    # NOMEAÇÃO da dívida em cena, não a imagem do nó, que é só matéria.
+    exposure: {spoiler_level: LOW}
+    accessibility:
+      monochrome_safe: true
+      min_render_size_mm: 8
+      text_alternative: "Nó de marinheiro apertado sobre corda gasta."
+    cost_class: ESSENTIAL
+    approval: {policy: REQUIRE_APPROVAL, id: null}
+    status: PLANNED
+
+compositions:
+  - id: COMP-FRONT
+    surface: FRONT_COVER
+    reading_layer: OUTER_TRUTH
+    elements:
+      - {element: SIG-LENS, prominence: DOMINANT}
+      - {element: SIG-KNOT, prominence: SECONDARY}
+    atmosphere: "Névoa fria, luz de sódio quebrada, silêncio do cais."
+
+finish_intents: []
+approvals: []
+releases: []
+mutation_log:
+  - {version: 0.1.0, task: T043_VISUAL_NARRATIVE_CANON, owner: VISUAL_DIRECTOR,
+     action: "Fixture de teste — Slice 1, segunda obra (prova de não-dependência)."}

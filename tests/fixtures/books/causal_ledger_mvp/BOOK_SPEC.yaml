@@ -1,0 +1,94 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: causal_ledger_mvp
+  title: Prova de Mesa do Ledger Causal
+  author: Pedro Arte
+  language: pt-BR
+  genre: dark romance (pacote de teste — capability DARK_ROMANCE_CANON_ARCHITECT)
+  chapter_count: 6
+  version: 0.1.0
+spec:
+  execution_profile: DRAFT
+  creative_sources:
+    - CREATIVE_BRIEF.md
+    - BOOK_CONSTITUTION.md
+  chapter_titles:
+    1: A recusa
+    2: A provocação
+    3: A mentira
+    4: O cuidado
+    5: A noite
+    6: A revelação
+  movements:
+    - {name: Ato Único, chapters: [1, 2, 3, 4, 5, 6]}
+  writing_waves:
+    - [1, 2]
+    - [3, 4]
+    - [5, 6]
+  voice_calibration_chapters: [1]
+  lead_novelist_owned_chapters: [1, 6]
+  features:
+    living_book:
+      enabled: true
+    images:
+      enabled: true
+      primary_per_chapter: 1
+      face_consistency_required: true
+    living_sound:
+      enabled: false
+    translation_preparation:
+      enabled: false
+      target: en
+    kdp_docx:
+      enabled: true
+    media_package:
+      enabled: true
+    # DARK_ROMANCE_CANON_ARCHITECT — docs/sdd/DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md.
+    # OFF por padrão em todo outro livro; este pacote existe só para provar,
+    # em tests/test_compose_regression.py, que ligar a feature aqui não muda
+    # NADA do grafo de nenhum livro que não a declara (INV-14).
+    causal_ledger:
+      enabled: true
+      min_payoff_feeds: 2
+      max_monotonic_run: 3
+      max_loop_silence: 6
+  agent_packs:
+    book_agents: {}
+    character_support: []
+    canon_guardians: []
+    wave_reviewers:
+      - PLOT_CONTINUITY_REVIEWER
+      - CHARACTER_CONTINUITY_REVIEWER
+      - WORLD_RULES_REVIEWER
+      - EMOTIONAL_EDITOR
+      - GENRE_GUARDIAN
+      - ANTI_MANIPULATION_GUARDIAN
+    voice_reviewers:
+      - LITERARY_STYLE_GUARDIAN
+      - DIALOGUE_DIRECTOR
+      - PHYSICALITY_AND_BODY_AGENT
+      - ANTI_MANIPULATION_GUARDIAN
+    critic_panel:
+      - LITERARY_CRITIC
+      - CINEMA_CRITIC
+      - COMMERCIAL_EDITOR_CRITIC
+      - DEVELOPMENTAL_EDITOR
+      - PLOT_CONTINUITY_REVIEWER
+    line_reviewers:
+      - DIALOGUE_DIRECTOR
+      - LITERARY_STYLE_GUARDIAN
+      - SUBTEXT_EDITOR
+      - SENSORY_AGENT
+      - PHYSICALITY_AND_BODY_AGENT
+      - TYPOGRAPHY_TEXT_REVIEWER
+      - REPETITION_AND_CLICHE_REVIEWER
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities: [a recusa em público, a mentira sobre a rua, o vigia noturno]
+  acoustic_environment_organism: N/A — living_sound desabilitado neste pacote de teste.
+  book_specific_rejection_states: []

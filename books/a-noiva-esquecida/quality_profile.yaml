@@ -1,0 +1,33 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters: {minimum: 9}
+  scene_strength: {minimum: 8}
+  subtext: {minimum: 9}
+  sensory_concreteness: {minimum: 8}
+  coherence: {minimum: 9}
+  emotional_impact: {minimum: 8}
+  sigrid_agency: {minimum: 9}
+  relationship_causality: {minimum: 9}
+  mystery_fairness: {minimum: 9}
+  cultural_specificity: {minimum: 8}
+risk_scores:
+  sentimentalism: {maximum: 3}
+  effect_phrase_overuse: {maximum: 2}
+  cliche: {maximum: 2}
+  continuity: {maximum: 1}
+  consent_ambiguity_unacknowledged: {maximum: 0}
+  magic_convenience: {maximum: 1}
+  quest_episodicity: {maximum: 1}
+  folklore_exoticization: {maximum: 1}
+  mystery_cheating: {maximum: 0}
+  visual_decoration_without_payoff: {maximum: 0}
+required_checks:
+  - cada capítulo modifica estado externo, relação e informação
+  - cada trabalho alimenta ao menos dois payoffs posteriores
+  - cada aproximação pós-esquecimento estabelece consentimento novo
+  - toda pista central precede a revelação e é honesta ao POV
+  - toda referência cultural real é distinguida da invenção ficcional
+  - maçã e três gotas passam Visual Chekhov
+  - nenhuma fala existe apenas para explicar a psicologia do falante
+

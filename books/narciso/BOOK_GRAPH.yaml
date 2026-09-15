@@ -1,0 +1,106 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: narciso
+  version: 0.2.0
+spec:
+  # docs/sdd/NARCISO_CANONICAL_SDD_v0.1.md, seções 26 e 28 (Slice 2).
+  #
+  # Limite D-N16: gate_extensions só acrescenta validadores; não adiciona
+  # `requires` a gates nem dependências a tarefas do motor. As tarefas abaixo
+  # dependem de tarefas do motor e o validador da obra reprova quando os
+  # artefatos delas não existem — o efeito é bloqueante sem tocar o motor.
+  custom_validators:
+    - id: V_NARCISO_PACKAGE
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode package'
+    - id: V_NARCISO_PLAN
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode plan'
+    - id: V_NARCISO_VISUAL
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode visual'
+    - id: V_NARCISO_ILLUSTRATIONS
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode illustrations'
+    - id: V_NARCISO_EDITION
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode edition'
+    - id: V_NARCISO_WAVE_1
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 6 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_00.yaml'
+    - id: V_NARCISO_WAVE_2
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 11 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_01.yaml'
+    - id: V_NARCISO_WAVE_3
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 17 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_02.yaml'
+    - id: V_NARCISO_WAVE_4
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 22 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_03.yaml'
+    - id: V_NARCISO_WAVE_5
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 28 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_04.yaml'
+    - id: V_NARCISO_WAVE_6
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode wave --through-chapter 33 --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_05.yaml'
+    - id: V_NARCISO_FINAL
+      command: '"..\..\.venv\Scripts\python.exe" book\validators\validate_narciso.py --runtime . --mode final --baseline canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_06.yaml'
+  gate_extensions:
+    GATE_CANON: {validators: [V_NARCISO_PACKAGE, V_NARCISO_PLAN]}
+    GATE_LIVING_BOOK: {validators: [V_NARCISO_VISUAL]}
+    GATE_WAVE_1: {validators: [V_NARCISO_WAVE_1]}
+    GATE_WAVE_2: {validators: [V_NARCISO_WAVE_2]}
+    GATE_WAVE_3: {validators: [V_NARCISO_WAVE_3]}
+    GATE_WAVE_4: {validators: [V_NARCISO_WAVE_4]}
+    GATE_WAVE_5: {validators: [V_NARCISO_WAVE_5]}
+    GATE_WAVE_6: {validators: [V_NARCISO_WAVE_6]}
+    GATE_FULL_MANUSCRIPT: {validators: [V_NARCISO_FINAL]}
+    GATE_VISUAL: {validators: [V_NARCISO_ILLUSTRATIONS]}
+    GATE_MEDIA_ASSETS: {validators: [V_NARCISO_ILLUSTRATIONS, V_NARCISO_EDITION]}
+    GATE_KDP: {validators: [V_NARCISO_EDITION]}
+  additional_tasks:
+    - id: T018N_INTERPRETIVE_CANON
+      phase: CANON
+      owner: CANON_GUARDIAN
+      depends_on: [T018_CANON_REGISTRY]
+      locks: [CANON_WRITE]
+      inputs: [/book/seeds/INTERPRETIVE_CANON.seed.yaml, /book/INTERPRETIVE_CANON_RUNBOOK.md, /canon/CAUSAL_LEDGER.yaml]
+      outputs: [/canon/NARCISO_INTERPRETIVE_CANON.yaml]
+    - id: T019N_AMBIGUITY_REVIEW
+      phase: CANON
+      owner: NARCISSUS_AMBIGUITY_GUARDIAN
+      depends_on: [T018N_INTERPRETIVE_CANON]
+      inputs: [/canon/NARCISO_INTERPRETIVE_CANON.yaml, /canon/CAUSAL_LEDGER.yaml, /book/immutable_rules.yaml]
+      outputs: [/reviews/NARCISO_AMBIGUITY_REVIEW.md]
+    - id: T021N_INTERPRETIVE_SNAPSHOT
+      phase: CANON
+      owner: CANON_GUARDIAN
+      depends_on: [T019N_AMBIGUITY_REVIEW]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_00'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_00.yaml]
+    - id: T201N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_1
+      owner: CANON_GUARDIAN
+      depends_on: [T201_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_01'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_01.yaml]
+    - id: T202N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_2
+      owner: CANON_GUARDIAN
+      depends_on: [T202_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_02'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_02.yaml]
+    - id: T203N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_3
+      owner: CANON_GUARDIAN
+      depends_on: [T203_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_03'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_03.yaml]
+    - id: T204N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_4
+      owner: CANON_GUARDIAN
+      depends_on: [T204_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_04'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_04.yaml]
+    - id: T205N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_5
+      owner: CANON_GUARDIAN
+      depends_on: [T205_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_05'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_05.yaml]
+    - id: T206N_INTERPRETIVE_SNAPSHOT
+      phase: WRITING_WAVE_6
+      owner: CANON_GUARDIAN
+      depends_on: [T206_CANON_UPDATE]
+      tool: '{python} book/validators/validate_narciso.py --runtime {runtime} --snapshot-as WAVE_06'
+      outputs: [/canon/snapshots/NARCISO_INTERPRETIVE_CANON.WAVE_06.yaml]

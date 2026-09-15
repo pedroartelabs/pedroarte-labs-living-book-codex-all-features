@@ -1,0 +1,67 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: NarcisoMirrorManifestation
+# Plano de manifestação do livro-espelho por edição (SDD 18.5, Slice 5).
+# Valores: INCLUDE | SEQUENTIAL (duas páginas em sequência, alvo refluível) |
+# ASSET (imagem de exibição; o texto de leitura nunca muda) | OMIT |
+# OUTER_ONLY (só a face externa existe no alvo).
+# `realized_by` diz onde a técnica mora: ARCH (chapter_architecture.yaml),
+# CANON (seeds/VISUAL_NARRATIVE_CANON.seed.yaml) ou PENDING (slice futuro).
+
+decisions:
+  drop_cap:
+    decision: OMIT
+    reason: >-
+      O builder não tem capitular (D-N4) e uma capitular em imagem de 3 linhas
+      depende de quadro flutuante que o Kindle não renderiza e que a
+      render-QA ainda não provou no KDP. A erosão por ato fica no ornamento
+      (inteiro → duplicado → interrompido), que é imagem abaixo do título.
+    revisit: quando existir render-QA com PDF do DOCX no ambiente
+
+spread:
+  composition: IL-12
+  chapter: 17
+
+callback_pairs:
+  - [IL-01, IL-24]
+  - [IL-02, IL-22]
+  - [IL-03, IL-20]
+  - [IL-04, IL-19]
+  - [IL-07, IL-17]
+  - [IL-10, IL-23]
+
+techniques:
+  - id: STRUCTURAL_PALINDROME
+    realized_by: ARCH:mirror_of
+    editions: {kindle_ebook: INCLUDE, kdp_paperback: INCLUDE, kdp_hardcover: INCLUDE, collector: INCLUDE}
+  - id: IMAGE_OPENER_SPREAD
+    realized_by: CANON:placement OPEN
+    editions: {kindle_ebook: SEQUENTIAL, kdp_paperback: INCLUDE, kdp_hardcover: INCLUDE, collector: INCLUDE}
+  - id: CENTRAL_SPREAD
+    realized_by: CANON:IL-12
+    note: sem arte na dobra (regra de brief)
+    editions: {kindle_ebook: SEQUENTIAL, kdp_paperback: INCLUDE, kdp_hardcover: INCLUDE, collector: INCLUDE}
+  - id: DISTANT_CALLBACKS
+    realized_by: CANON:callback_of
+    editions: {kindle_ebook: INCLUDE, kdp_paperback: INCLUDE, kdp_hardcover: INCLUDE, collector: INCLUDE}
+  - id: TITLE_ECHO
+    realized_by: CANON:display_assets
+    editions: {kindle_ebook: OMIT, kdp_paperback: ASSET, kdp_hardcover: ASSET, collector: ASSET}
+  - id: ACT_ORNAMENT
+    realized_by: CANON:display_assets
+    editions: {kindle_ebook: OMIT, kdp_paperback: ASSET, kdp_hardcover: ASSET, collector: ASSET}
+  - id: DROP_CAP
+    realized_by: decisions.drop_cap
+    editions: {kindle_ebook: OMIT, kdp_paperback: OMIT, kdp_hardcover: OMIT, collector: OMIT}
+  - id: ACT_WATER_PAGES
+    realized_by: PENDING
+    note: páginas negras de divisão de ato; composições entram com a produção de miolo
+    editions: {kindle_ebook: INCLUDE, kdp_paperback: INCLUDE, kdp_hardcover: INCLUDE, collector: INCLUDE}
+  - id: HIDDEN_TRUTH_CASE
+    realized_by: CANON:COMP-CASE-HIDDEN
+    editions: {kindle_ebook: OMIT, kdp_paperback: OMIT, kdp_hardcover: OUTER_ONLY, collector: INCLUDE}
+  - id: COLLECTOR_MIRROR_INSERT
+    realized_by: PENDING
+    surface: INSERT
+    requires_physical_mirror: true
+    note: única peça que pode pedir espelho físico, fora do miolo (MIR-02); Slice 7
+    editions: {kindle_ebook: OMIT, kdp_paperback: OMIT, kdp_hardcover: OMIT, collector: INCLUDE}

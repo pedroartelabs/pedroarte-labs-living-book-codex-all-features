@@ -1,0 +1,60 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata:
+  project_id: mare_de_chumbo_fixture
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+characters:
+  - id: CHR-MARINA
+    major: true
+    age: 32
+    ground_truth:
+      - id: GT-M-01
+        kind: WOUND
+        statement: >-
+          Marina restaura faróis porque não conseguiu salvar o próprio pai,
+          afogado sob a luz de um farol apagado.
+        reader_access: {from_event: EV-12}
+    self_model: []
+    social_persona: []
+  - id: CHR-TOMAS
+    major: true
+    age: 40
+    ground_truth: []
+    self_model: []
+    social_persona: []
+relationships: []
+loops: []
+beliefs: []
+events:
+  - id: EV-01
+    status: REALIZED
+    chapter: 1
+    structural: true
+    kind: [ARRIVAL]
+    actor: CHR-MARINA
+    participants: [CHR-MARINA]
+    facts:
+      - "Marina chega à ilha e encontra o farol apagado."
+    caused_by: [GT-M-01]
+  - id: EV-12
+    status: REALIZED
+    chapter: 12
+    structural: true
+    kind: [REVELATION]
+    actor: CHR-TOMAS
+    participants: [CHR-MARINA, CHR-TOMAS]
+    facts:
+      - "A dívida de sangue da família de Tomás é nomeada em voz alta."
+    caused_by: [GT-M-01]
+  - id: EV-21
+    status: REALIZED
+    chapter: 21
+    structural: true
+    kind: [TRANSFORMATION]
+    actor: CHR-TOMAS
+    participants: [CHR-TOMAS]
+    facts:
+      - "Tomás corta a corda que prendia o barco ao cais."
+    caused_by: [EV-12]
+mutation_log: []

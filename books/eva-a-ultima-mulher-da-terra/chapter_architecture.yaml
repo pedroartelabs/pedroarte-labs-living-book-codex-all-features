@@ -1,0 +1,816 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: Comum
+    movement: I — O Último Nascimento
+    pov: Alma
+    time: Dia Zero, manhã
+    location: Maternidade Municipal de Campo Alegre
+    function: Estabelecer o nascimento de Eva como inteiramente comum antes de qualquer pessoa saber que é extraordinário.
+    dramatic_question: O que torna um nascimento memorável antes de a história decidir que ele é histórico?
+    irreversible_turn: Alma e Vicente registram o nome Eva, escolhido meses antes, sem saber que nenhuma outra menina nascerá depois dela.
+    continuity:
+      - Eva nasce saudável, peso e Apgar normais, parto vaginal sem intercorrências.
+      - Alma é ex-enfermeira obstétrica da mesma maternidade.
+      - Vicente é mecânico autônomo.
+      - Nenhum personagem sabe, neste capítulo, que algo é diferente.
+    living_book_vitals:
+      pressure: nenhuma
+      breath: regular, doméstica
+      sensory_anchor: cheiro de álcool e leite em pó no quarto do hospital
+    demographic_counter: null
+
+  - number: 2
+    title: Nenhuma Depois Dela
+    movement: I — O Último Nascimento
+    pov: Sara Kessler
+    time: Dia Zero +14 meses
+    location: Ambulatório pediátrico regional
+    function: Introduzir Sara Kessler notando, por rotina clínica, que nenhuma paciente nova é menina há mais de um ano.
+    dramatic_question: Uma coincidência estatística regional é ruído ou sinal?
+    irreversible_turn: Sara compila os próprios registros e telefona para uma colega em outro estado, que confirma o mesmo padrão.
+    continuity:
+      - Sara ainda não conhece Eva pessoalmente.
+      - O padrão observado por Sara é regional, não mundial.
+      - Nenhuma autoridade foi notificada ainda.
+    living_book_vitals:
+      pressure: baixa, clínica
+      breath: atenta
+      sensory_anchor: fichas de papel empilhadas por mês de nascimento
+    demographic_counter: null
+
+  - number: 3
+    title: A Mulher dos Números
+    movement: I — O Último Nascimento
+    pov: Yuki Tanaka
+    time: Dia Zero +20 meses
+    location: Escritório de estatística demográfica, sede multilateral
+    function: Cruzar registros civis de dezenas de países e confirmar que o padrão de Sara é mundial, não regional.
+    dramatic_question: Como uma cientista comunica algo que soa impossível sem soar histérica?
+    irreversible_turn: Yuki confirma zero nascimentos femininos registrados em qualquer país nos últimos vinte meses e prepara o primeiro relatório confidencial.
+    continuity:
+      - Yuki não sabe ainda o nome de nenhuma criança específica.
+      - O relatório de Yuki ainda não foi divulgado publicamente.
+      - Governos individuais já notavam o padrão internamente sem coordenação entre si.
+    living_book_vitals:
+      pressure: crescente, institucional
+      breath: contida atrás de portas fechadas
+      sensory_anchor: gráfico de linha caindo a zero numa tela de projetor
+    demographic_counter: null
+
+  - number: 4
+    title: O Nome Antes do Fato
+    movement: I — O Último Nascimento
+    pov: Vicente
+    time: Dia Zero +2 anos
+    location: Casa da família Duarte, Campo Alegre
+    function: A identidade de Eva como a última menina nascida se torna pública e a família comum se torna terreno histórico da noite para o dia.
+    dramatic_question: O que uma família comum faz quando a própria filha se torna notícia mundial em uma manhã?
+    irreversible_turn: Repórteres cercam a casa dos Duarte no mesmo dia em que o relatório de Yuki Tanaka vaza para a imprensa internacional.
+    continuity:
+      - Eva tem dois anos e não compreende o que acontece.
+      - A coincidência do nome Eva é notada publicamente pela primeira vez neste capítulo.
+      - O governo local designa proteção temporária à família ainda hoje.
+    living_book_vitals:
+      pressure: súbita, esmagadora
+      breath: cortada por flashes de câmera
+      sensory_anchor: andorinhões-de-vidro voando alto sobre a rua cheia de antenas de transmissão
+    protected_scene: LAST_GIRL_REVEAL
+    demographic_counter: null
+
+  - number: 5
+    title: Patrimônio Genético
+    movement: I — O Último Nascimento
+    pov: Vicente
+    time: Dia Zero +2 anos e alguns meses
+    location: Escritório provisório do Conselho Mundial de Continuidade Humana
+    function: O Estado propõe formalmente classificar Eva como recurso de interesse mundial; os pais recusam a primeira versão do acordo.
+    dramatic_question: Que palavra usar para uma criança que instituições já chamam de patrimônio?
+    irreversible_turn: Vicente e Alma assinam apenas um acordo de proteção física, recusando qualquer cláusula sobre material biológico futuro de Eva.
+    continuity:
+      - O Conselho Mundial de Continuidade Humana (CMCH) é apresentado pela primeira vez, ainda sem Amos Weller em cena.
+      - A recusa dos pais se torna precedente legal citado décadas depois.
+      - Eva permanece sem saber, nesta idade, o teor da reunião.
+    living_book_vitals:
+      pressure: alta, burocrática
+      breath: seca, formal
+      sensory_anchor: caneta corporativa que não assina onde os pais recusam
+    demographic_counter: CF-1
+
+  - number: 6
+    title: O Último Berçário
+    movement: II — A Menina Impossível
+    pov: Eva
+    time: Eva, 6 anos
+    location: Creche do Instituto Meridian
+    function: Mostrar, pela primeira vez do ponto de vista de Eva, uma turma inteiramente masculina e a pergunta infantil que nenhum adulto sabe responder bem.
+    dramatic_question: Como uma criança de seis anos formula a pergunta que a ciência mundial ainda não conseguiu responder?
+    irreversible_turn: Eva pergunta à professora por que não existe nenhuma menina mais nova que ela, e a resposta evasiva da adulta é a primeira vez que Eva sente que os adultos escondem algo dela.
+    continuity:
+      - A família Duarte já se realocou para o Instituto Meridian por segurança.
+      - Nenhuma criança na turma de Eva, nem em turmas mais novas, é menina.
+      - Eva ainda não tem vocabulário para "a última".
+    living_book_vitals:
+      pressure: baixa, mas persistente
+      breath: infantil, curiosa
+      sensory_anchor: giz de cera quebrado dividido entre meninos
+    demographic_counter: null
+
+  - number: 7
+    title: Escolta
+    movement: II — A Menina Impossível
+    pov: Denise Farro
+    time: Eva, 7 anos
+    location: Trajeto entre o Instituto Meridian e a cidade vizinha
+    function: Estabelecer o aparato de segurança em torno de Eva através de quem o executa, não apenas de quem o sofre.
+    dramatic_question: Como proteger uma criança sem que a proteção vire a própria ameaça à sua infância?
+    irreversible_turn: Uma tentativa de abordagem não violenta mas invasiva de um grupo Evista obriga Denise a formalizar o primeiro protocolo de escolta permanente.
+    continuity:
+      - Denise Farro é apresentada como responsável direta pela segurança pessoal de Eva.
+      - O incidente não fere ninguém, mas encerra qualquer rotina de deslocamento livre da família.
+      - Vicente questiona pela primeira vez se a proteção já superou a necessidade real.
+    living_book_vitals:
+      pressure: tensa, contida
+      breath: profissional, vigilante
+      sensory_anchor: rádio comunicador preso ao cinto emitindo estática
+    demographic_counter: null
+
+  - number: 8
+    title: O Corredor das Bonecas
+    movement: II — A Menina Impossível
+    pov: Eva
+    time: Eva, 8 anos
+    location: Shopping center da cidade vizinha ao Instituto Meridian
+    function: Materializar o desaparecimento econômico de produtos infantis femininos através de uma cena concreta de mercado vista por uma criança.
+    dramatic_question: O que uma criança sente ao ver o próprio tipo de brinquedo sendo retirado das prateleiras, sem que ninguém lhe diga por quê?
+    irreversible_turn: Eva percebe que a loja de brinquedos está reduzindo pela metade a seção que ela mais gosta, e pergunta a Alma se é porque ela é "estranha".
+    continuity:
+      - A loja está fechando permanentemente a seção infantil feminina por falta de demanda futura, não presente.
+      - Alma evita responder diretamente à pergunta de Eva.
+      - Este é o primeiro momento em que Eva associa o próprio corpo a uma escassez econômica.
+    living_book_vitals:
+      pressure: silenciosa, comercial
+      breath: contida por Alma
+      sensory_anchor: etiquetas de liquidação coladas sobre embalagens antigas
+    demographic_counter: null
+
+  - number: 9
+    title: Dez
+    movement: II — A Menina Impossível
+    pov: Eva
+    time: Eva, 10 anos, aniversário
+    location: Instituto Meridian, sala de televisão comum
+    function: Fechar a Parte II com Eva ouvindo, por acidente, um fragmento de debate internacional sobre seu próprio futuro reprodutivo.
+    dramatic_question: O que significa fazer dez anos quando adultos já discutem publicamente sua fertilidade futura?
+    irreversible_turn: Eva desliga a televisão sozinha, sem contar a ninguém o que ouviu, e começa a guardar perguntas que não faz em voz alta.
+    continuity:
+      - O debate ouvido por Eva antecipa, sem ela entender totalmente, o tema da Parte IV.
+      - Sara Kessler é mencionada como presente na mesa de debate, à distância, sem saber que Eva assiste.
+      - Este é o primeiro segredo consciente que Eva guarda dos pais.
+    living_book_vitals:
+      pressure: interna, recém-formada
+      breath: suspensa
+      sensory_anchor: controle remoto apertado com força maior que o necessário
+    demographic_counter: CF-2
+
+  - number: 10
+    title: Quando "Menina" Virou Categoria
+    movement: III — A Última Menina
+    pov: Sara Kessler
+    time: Eva, 11 anos
+    location: Congresso médico internacional
+    function: Mostrar, pela perspectiva de Sara, a palavra "menina" mudando de uso corrente para categoria demográfica em declínio na literatura médica e educacional.
+    dramatic_question: O que acontece com uma língua quando uma palavra comum começa a precisar de nota de rodapé?
+    irreversible_turn: Sara apresenta um estudo em que "irmã mais nova" e "colega de turma menina" já não têm exemplos vivos com menos de onze anos em nenhum país, e a plateia recebe isso em silêncio, não em choque.
+    continuity:
+      - Sara agora é consultora médica formal do caso de Eva, com acesso a prontuários.
+      - O termo "categoria em extinção ativa" começa a circular em relatórios oficiais.
+      - Eva entra na adolescência fora de cena neste capítulo.
+    living_book_vitals:
+      pressure: acadêmica, gelada
+      breath: pausada por quem já se acostumou
+      sensory_anchor: slide de apresentação com a última data de matrícula feminina numa escola primária
+    demographic_counter: null
+
+  - number: 11
+    title: Audiência
+    movement: III — A Última Menina
+    pov: Eva
+    time: Eva, 13 anos
+    location: Sessão fechada de comissão parlamentar internacional
+    function: Colocar Eva, ainda menor de idade, dentro da sala onde adultos debatem formalmente seu futuro reprodutivo pela primeira vez com ela presente.
+    dramatic_question: Como uma adolescente participa de uma audiência sobre o próprio corpo sem que sua presença vire apenas legitimação simbólica do debate?
+    irreversible_turn: Eva interrompe um delegado que fala sobre ela em terceira pessoa e exige ser tratada em segunda pessoa pelo resto da sessão.
+    continuity:
+      - Vicente e Alma estão presentes, mas sem poder de veto sobre a pauta da audiência.
+      - Amos Weller é mencionado nominalmente pela primeira vez, ainda sem aparecer em cena.
+      - A interrupção de Eva se torna, sem que ela planeje, um trecho de vídeo amplamente compartilhado.
+    living_book_vitals:
+      pressure: sufocante, formal
+      breath: contida por protocolo de sessão
+      sensory_anchor: microfone de mesa que amplifica mais a hesitação do que a fala
+    demographic_counter: null
+
+  - number: 12
+    title: Irmãs de Papel
+    movement: III — A Última Menina
+    pov: Alma
+    time: Eva, 14 anos
+    location: Casa da família no Instituto Meridian
+    function: Mostrar o custo doméstico e emocional do fenômeno religioso e conspiratório em torno de Eva através da correspondência que a família recebe.
+    dramatic_question: Como uma mãe protege uma filha adolescente de devoção e ameaça que chegam pelo mesmo correio, às vezes na mesma carta?
+    irreversible_turn: Alma encontra, entre cartas de devoção Evista, uma ameaça velada específica o suficiente para acionar reforço formal de segurança pela primeira vez desde o Capítulo 7.
+    continuity:
+      - As primeiras seitas Evistas, incluindo referências ao futuro Bispo Ionatã Prade, são mencionadas de forma difusa.
+      - Alma não conta a Eva o conteúdo exato da ameaça.
+      - Vicente propõe, sem sucesso, restringir ainda mais a vida pública da família.
+    living_book_vitals:
+      pressure: doméstica, insidiosa
+      breath: contida atrás da porta do quarto de Eva
+      sensory_anchor: pilha de envelopes classificados por cor de selo
+    demographic_counter: null
+
+  - number: 13
+    title: A Última Turma
+    movement: III — A Última Menina
+    pov: Eva
+    time: Eva, 15 anos
+    location: Formatura do ensino médio de uma escola parceira do Instituto Meridian
+    function: Fazer Eva testemunhar a formatura da última turma que ainda contém mulheres nascidas antes do Dia Zero, e perceber que mesmo essa geração está se tornando rara.
+    dramatic_question: O que significa ser jovem quando até as pessoas mais próximas da sua idade já pertencem, tecnicamente, a uma geração em extinção?
+    irreversible_turn: Eva percebe, olhando a plateia, que não existe nenhuma mulher na sala mais jovem que as formandas de dezoito anos — e que ela mesma nunca terá colegas de escola do próprio sexo.
+    continuity:
+      - Esta é a primeira crise existencial explícita de Eva na obra.
+      - Sara Kessler está presente e nota a mudança de humor de Eva sem intervir.
+      - Fecha a Parte III sem resolução emocional, propositalmente.
+    living_book_vitals:
+      pressure: existencial, silenciosa
+      breath: presa no peito
+      sensory_anchor: capelo jogado ao ar por mãos quase todas masculinas
+    protected_scene: NO_PEERS_LEFT
+    demographic_counter: CF-3
+
+  - number: 14
+    title: O Banco
+    movement: IV — O Corpo do Mundo
+    pov: Amos Weller
+    time: Eva, 16 anos
+    location: Sede do Conselho Mundial de Continuidade Humana
+    function: Apresentar Amos Weller em profundidade, incluindo a perda pessoal que fundamenta sua doutrina, ao propor o primeiro banco internacional de óvulos e material genético compulsório para menores identificadas como geneticamente relevantes.
+    dramatic_question: Uma convicção nascida de luto real deixa de ser manipulação só porque é sincera?
+    irreversible_turn: Weller consegue aprovar o banco internacional de óvulos para adultas voluntárias, mas sua proposta de incluir menores de idade sem consentimento pleno é rejeitada por um voto.
+    continuity:
+      - Revela-se que Weller perdeu, dias antes do Dia Zero, uma gestação que exames indicavam ser de uma menina.
+      - O banco de óvulos voluntário se torna infraestrutura recorrente nas partes seguintes.
+      - Eva não aparece fisicamente neste capítulo, apenas como pauta.
+    living_book_vitals:
+      pressure: fria, determinada
+      breath: contida por décadas de luto convertido em trabalho
+      sensory_anchor: exame pré-natal antigo guardado numa gaveta de escritório oficial
+    demographic_counter: null
+
+  - number: 15
+    title: Eva Livre
+    movement: IV — O Corpo do Mundo
+    pov: Eva
+    time: Eva, 17 anos
+    location: Praça pública perto do Instituto Meridian
+    function: Apresentar Solenne Reyes e o nascimento do movimento Eva Livre a partir de uma manifestação real que Eva observa antes de decidir se participa.
+    dramatic_question: Eva pode apoiar uma causa que leva o próprio nome sem se tornar propriedade dessa causa também?
+    irreversible_turn: Eva se aproxima da manifestação sem escolta visível pela primeira vez em anos e é reconhecida por Solenne antes de ser reconhecida pela multidão.
+    continuity:
+      - Solenne Reyes é apresentada como carismática e genuinamente comprometida, não oportunista.
+      - O nome "Movimento Eva Livre" já circula antes deste encontro pessoal.
+      - Denise Farro perde Eva de vista por minutos reais, gerando repercussão interna de segurança.
+    living_book_vitals:
+      pressure: elétrica, quase alegre
+      breath: acelerada por escolha própria, não por medo
+      sensory_anchor: cartaz pintado à mão com o nome dela mal seco
+    demographic_counter: null
+
+  - number: 16
+    title: Continuacionistas
+    movement: IV — O Corpo do Mundo
+    pov: Amos Weller
+    time: Eva, 17 anos e alguns meses
+    location: Parlamentos de três países, intercalados
+    function: Mostrar o auge legislativo do movimento continuacionista, incluindo a proposta explícita de reserva reprodutiva compulsória aos dezoito anos, com os melhores argumentos genuínos de ambos os lados representados em debate.
+    dramatic_question: A sobrevivência da espécie humana justifica suspender, mesmo temporariamente, a autonomia corporal de uma única pessoa?
+    irreversible_turn: A proposta de reserva compulsória avança em dois países autoritários e é derrotada por margem estreita numa democracia, estabelecendo o mundo dividido que caracteriza o resto da obra.
+    continuity:
+      - Nenhum país é nomeado com nome real; os regimes autoritários citados são fictícios.
+      - Weller defende a proposta publicamente sem esconder de si mesmo, em momentos privados, sua origem emocional.
+      - O resultado dividido cria a tensão legal que domina o Capítulo 17.
+    living_book_vitals:
+      pressure: máxima, política
+      breath: retórica, treinada
+      sensory_anchor: placar de votação eletrônico piscando empatado antes de decidir
+    demographic_counter: null
+
+  - number: 17
+    title: Maioridade
+    movement: IV — O Corpo do Mundo
+    pov: Eva
+    time: Eva, 18 anos, dia do aniversário
+    location: Tribunal internacional ad hoc
+    function: Eva atinge a maioridade legal e recusa publicamente, com apoio jurídico do movimento Eva Livre, qualquer programa reprodutivo compulsório ou voluntário-sob-pressão.
+    dramatic_question: Uma vitória legal individual muda algo estrutural, ou apenas adia o mesmo conflito para a próxima crise?
+    irreversible_turn: O tribunal reconhece o direito de Eva de recusar qualquer intervenção sobre seu material genético, mas o CMCH mantém aberta uma cláusula de "emergência civilizacional" que permanece como ameaça futura.
+    continuity:
+      - Esta é a vitória legal mais importante de Eva na obra, e também a mais exposta publicamente.
+      - Weller aceita a derrota formalmente, mas não abandona a doutrina.
+      - Fecha a Parte IV sem resolver o conflito estrutural, apenas a batalha pontual.
+    living_book_vitals:
+      pressure: aliviada por dentro, esmagadora por fora
+      breath: primeira respiração funda em público que Eva permite a si mesma
+      sensory_anchor: andorinhões-de-vidro cruzando o átrio de vidro do tribunal
+    protected_scene: MAJORITY_REFUSAL
+    demographic_counter: CF-4
+
+  - number: 18
+    title: Anonimato (Falha)
+    movement: V — Eva Livre
+    pov: Eva
+    time: Eva, 21 anos
+    location: Universidade sob nome falso, cidade grande não nomeada
+    function: Mostrar Eva tentando vida civil comum sob pseudônimo e a falha inevitável dessa tentativa em semanas.
+    dramatic_question: Quanto de si mesma alguém precisa esconder para ter uma experiência comum, e o que sobra depois disso?
+    irreversible_turn: Um colega de turma reconhece uma cicatriz específica de infância mencionada em reportagem antiga, e o pseudônimo de Eva desmorona antes do fim do semestre.
+    continuity:
+      - Eva mora fora do Instituto Meridian pela primeira vez, com segurança discreta à distância.
+      - Este é o primeiro fracasso registrado de uma série de tentativas de vida comum ao longo da Parte V.
+      - Denise Farro aparece brevemente como contato de emergência, não presença constante.
+    living_book_vitals:
+      pressure: crescente, depois súbita
+      breath: leve no início, cortada no fim
+      sensory_anchor: crachá de identidade falsa dobrado na carteira
+    demographic_counter: null
+
+  - number: 19
+    title: Noah
+    movement: V — Eva Livre
+    pov: Eva
+    time: Eva, 23 anos
+    location: Café de bairro numa cidade onde Eva vive sob outro pseudônimo
+    function: Introduzir Noah Achterberg e um início de relação genuína, leve, cômica, sem nenhuma sombra ainda da exposição pública.
+    dramatic_question: É possível que alguém goste de Eva sem saber quem ela é, e isso continua válido depois que ele descobre?
+    irreversible_turn: Noah descobre por acaso quem Eva é, numa conversa de bar com terceiros, e decide continuar a relação mesmo assim, dizendo isso a ela diretamente.
+    continuity:
+      - Noah é apresentado com vida própria — profissão, humor, família — sem função de acessório.
+      - A relação começa antes da descoberta, o que a distingue de fãs ou oportunistas anteriores.
+      - Este capítulo estabelece o tom de felicidade genuína que será quebrado no Capítulo 20.
+    living_book_vitals:
+      pressure: quase ausente
+      breath: fácil, despreocupada
+      sensory_anchor: xícara de café rachada que os dois continuam usando por hábito
+    demographic_counter: null
+
+  - number: 20
+    title: Ele Gosta de Mim ou da Última Mulher
+    movement: V — Eva Livre
+    pov: Eva
+    time: Eva, 24 anos
+    location: Apartamento de Eva e Noah
+    function: Desmontar a relação de Eva e Noah sob o peso estrutural da exposição pública, sem transformar Noah em vilão nem em vítima perfeita.
+    dramatic_question: Como distinguir amor genuíno de fascínio histórico quando o mundo inteiro insiste em não deixar essa distinção existir?
+    irreversible_turn: Uma oferta comercial por fotos exclusivas do casal, recusada por Noah mas vazada de outra fonte, faz Eva se perguntar em voz alta, pela primeira vez, se ele a ama ou ama o papel que ela ocupa na história.
+    continuity:
+      - Noah nunca vendeu nem autorizou a venda das fotos vazadas.
+      - A pergunta do título não recebe resposta definitiva dentro do capítulo.
+      - O rompimento é mútuo e triste, não um ato de traição de nenhum dos dois.
+    living_book_vitals:
+      pressure: íntima, esmagadora
+      breath: entrecortada por tentativas de calma
+      sensory_anchor: notificações de celular silenciadas manualmente, uma a uma
+    protected_scene: NOAH_BREAKUP
+    demographic_counter: null
+
+  - number: 21
+    title: O Apartamento sem Endereço
+    movement: V — Eva Livre
+    pov: Eva
+    time: Eva, 26 anos
+    location: Comunidade isolada de acesso restrito, localização não divulgada no texto
+    function: Mostrar Eva construindo uma rede de amizade e família escolhida fora dos holofotes, como tentativa de recuperação depois do fim com Noah.
+    dramatic_question: É possível construir pertencimento real sabendo que ele pode ser descoberto e destruído a qualquer momento?
+    irreversible_turn: Eva revela sua identidade real a um pequeno grupo de amigos da comunidade por escolha própria, não por exposição forçada — a primeira vez que isso acontece na obra.
+    continuity:
+      - A comunidade não é mencionada por nome de país ou cidade.
+      - Este grupo de amigos reaparece de forma pontual em partes posteriores.
+      - Eva começa, informalmente, a se interessar por leitura científica sobre o próprio caso.
+    living_book_vitals:
+      pressure: baixa, reconstrutiva
+      breath: mais funda que em capítulos anteriores da Parte V
+      sensory_anchor: mesa de jantar comunitária com talheres emprestados de casas diferentes
+    demographic_counter: null
+
+  - number: 22
+    title: Trinta
+    movement: V — Eva Livre
+    pov: Eva
+    time: Eva, 30 anos, aniversário
+    location: Comunidade isolada e, por telefone, Instituto Meridian
+    function: Fechar a Parte V com Eva decidindo, sozinha, trocar fuga por investigação científica direta do próprio fenômeno.
+    dramatic_question: O que significa deixar de fugir de uma pergunta e começar a persegui-la?
+    irreversible_turn: Eva liga para Sara Kessler, agora próxima da aposentadoria, e pede ajuda para entrar formalmente em um programa de pesquisa genética — não como paciente, como candidata a cientista.
+    continuity:
+      - Esta decisão define toda a Parte VI.
+      - Sara Kessler expressa tanto orgulho quanto preocupação com a mudança de papel de Eva.
+      - Fecha o arco "Eva tentando ter uma vida" sem resolvê-lo — apenas substituindo fuga por outro tipo de ação.
+    living_book_vitals:
+      pressure: decisiva, calma
+      breath: firme, pela primeira vez em anos
+      sensory_anchor: telefone antigo da comunidade com fio torto pendurado na parede
+    demographic_counter: CF-5
+
+  - number: 23
+    title: Material de Estudo
+    movement: VI — A Cientista
+    pov: Eva
+    time: Eva, 31 anos
+    location: Laboratório de genética reprodutiva do Instituto Meridian
+    function: Eva ingressa formalmente na pesquisa e enfrenta resistência de colegas que preferem tratá-la como amostra em vez de cientista.
+    dramatic_question: Como alguém se torna sujeito de um campo de estudo que sempre a tratou como objeto?
+    irreversible_turn: 'Diante de um comitê que questiona sua neutralidade emocional, Eva declara: "Vocês estudam esse fenômeno. Eu vivo dentro dele" — e a frase se torna, sem que ela planeje, sua carta de aceitação informal ao programa.'
+    continuity:
+      - Dr. Ilan Okafor é apresentado como o único membro do comitê que vota a favor de Eva sem ressalvas.
+      - Eva mantém acesso a seu próprio histórico médico completo pela primeira vez.
+      - Sara Kessler atua como consultora informal, não superior hierárquica.
+    living_book_vitals:
+      pressure: acadêmica, hostil
+      breath: contida, deliberadamente calma
+      sensory_anchor: crachá de pesquisadora com foto tirada na mesma semana
+    demographic_counter: null
+
+  - number: 24
+    title: Gametas
+    movement: VI — A Cientista
+    pov: Ilan Okafor
+    time: Eva, 34 anos
+    location: Laboratório de biologia sintética, Instituto Meridian
+    function: Detalhar de forma plausível a tentativa de gametogênese artificial in vitro, sua esperança real e seu fracasso parcial, sem tecnobabble decorativo.
+    dramatic_question: Quanto otimismo científico é responsável antes de virar promessa vazia para um mundo desesperado?
+    irreversible_turn: A primeira linha de células reprogramadas produz estruturas que imitam óvulos sob o microscópio, mas nenhuma sobrevive além de poucas divisões — um fracasso que ainda assim reabre financiamento internacional.
+    continuity:
+      - Eva participa diretamente do experimento, não apenas observa.
+      - O fracasso é tratado pela imprensa como quase-sucesso, gerando tensão ética que Ilan e Eva discutem em particular.
+      - Este capítulo aplica explicitamente o protocolo de quatro passos da tecnologia especulativa.
+    living_book_vitals:
+      pressure: técnica, esperançosa e depois pesada
+      breath: contida sob máscara de laboratório
+      sensory_anchor: placa de Petri etiquetada e depois descartada no mesmo turno
+    demographic_counter: null
+
+  - number: 25
+    title: Íris
+    movement: VI — A Cientista
+    pov: Renata Sobral
+    time: Eva, 41 anos
+    location: Clínica de gestação experimental, Instituto Meridian
+    function: Acompanhar Renata Sobral, voluntária gestante de um embrião XX geneticamente confirmado, como pessoa completa antes do grande evento científico do livro.
+    dramatic_question: Como uma mulher comum vive uma gravidez que o mundo inteiro trata como acontecimento histórico antes mesmo do parto?
+    irreversible_turn: Renata escolhe em segredo o nome Íris para a criança, sem contar à imprensa, exatamente como os pais de Eva fizeram quatro décadas antes.
+    continuity:
+      - Os exames pré-natais confirmam cariótipo XX de forma consistente ao longo da gestação.
+      - Eva acompanha a gestação como cientista da equipe, não como figura pública central deste capítulo.
+      - O paralelo com o nome de Eva é deixado implícito, nunca comentado pelo narrador.
+    living_book_vitals:
+      pressure: esperançosa, mundial
+      breath: cuidadosamente monitorada
+      sensory_anchor: pulseira hospitalar com o nome provisório escrito a lápis
+    demographic_counter: null
+
+  - number: 26
+    title: Menino
+    movement: VI — A Cientista
+    pov: Eva
+    time: Eva, 42 anos
+    location: Sala de parto e corredor de observação, Instituto Meridian
+    function: O grande evento científico da obra — o parto do embrião XX aparentemente viável resulta em um menino — devastando a esperança mundial e deslocando a pergunta central do livro.
+    dramatic_question: O que resta da ciência quando o próprio resultado nega os dados que a produziram?
+    irreversible_turn: Theo nasce com características fenotípicas masculinas incompatíveis com o cariótipo XX documentado ao longo de toda a gestação, e nenhuma equipe consegue explicar a discrepância no mesmo dia.
+    continuity:
+      - Renata Sobral recebe e ama Theo sem tratá-lo como fracasso pessoal.
+      - 'Esta é a virada estrutural da obra: a pergunta muda de "por que nenhuma depois de Eva" para "por que Eva".'
+      - Ilan Okafor é o primeiro a verbalizar, ainda em voz baixa, a pergunta invertida.
+    living_book_vitals:
+      pressure: máxima, devastadora
+      breath: presa em toda a equipe simultaneamente
+      sensory_anchor: andorinhões-de-vidro visíveis pela janela alta da sala de observação no instante do choro do bebê
+    protected_scene: BOY_BIRTH_PIVOT
+    demographic_counter: null
+
+  - number: 27
+    title: A Pergunta Errada
+    movement: VI — A Cientista
+    pov: Eva
+    time: Eva, 45 anos
+    location: Laboratório pessoal de Eva, Instituto Meridian, madrugada
+    function: Eva reorienta décadas de pesquisa institucional para estudar a própria biologia, e encontra a primeira anomalia genética não catalogada em si mesma.
+    dramatic_question: E se a pergunta certa nunca foi sobre a espécie, mas sobre uma única pessoa específica?
+    irreversible_turn: Eva encontra em seus próprios exames um padrão genético sem correspondência em nenhuma literatura científica disponível, e decide não reportá-lo formalmente ainda.
+    continuity:
+      - Este é o giro central de releitura descrito em seeds/WORLD_RULES_SEED.md e deve ser tratado como descoberta real, não bombástica.
+      - Sara Kessler morre de causas naturais fora de cena entre este capítulo e o próximo, mencionada de forma retrospectiva na Parte VII.
+      - Eva guarda a descoberta para si mesma, decisão que carrega peso ético que reaparece na Parte IX.
+    living_book_vitals:
+      pressure: intensa, solitária
+      breath: contida por escolha, não por medo
+      sensory_anchor: resultado de sequenciamento genético impresso e dobrado ao meio antes de ser guardado numa gaveta trancada
+    protected_scene: WRONG_QUESTION_PIVOT
+    demographic_counter: CF-6
+
+  - number: 28
+    title: Cidades que Encolhem
+    movement: VII — O Mundo dos Homens
+    pov: Eva
+    time: Eva, 58 anos
+    location: Cidade portuária de médio porte, outrora populosa
+    function: Salto temporal que mostra o mundo transformado pela automação necessária e pelo esvaziamento urbano, através dos olhos de Eva visitando um lugar que já foi vibrante.
+    dramatic_question: O que uma pessoa sente ao envelhecer dentro de uma civilização que envelhece junto, na mesma direção?
+    irreversible_turn: Eva encontra um bairro inteiro administrado por sistemas automatizados sem nenhum morador humano, e entende, pela primeira vez de forma visceral, a escala real da queda populacional que ela vem estudando em números.
+    continuity:
+      - Sara Kessler é confirmada, retrospectivamente, como falecida há alguns anos.
+      - Ilan Okafor continua parceiro científico e pessoal próximo de Eva, sem que a obra precise nomear formalmente a relação.
+      - A automação civilizacional descrita em seeds/WORLD_RULES_SEED.md se torna paisagem concreta neste capítulo.
+    living_book_vitals:
+      pressure: melancólica, vasta
+      breath: lenta, quase turística
+      sensory_anchor: luzes automáticas acendendo numa rua sem ninguém para vê-las
+    demographic_counter: null
+
+  - number: 29
+    title: Famílias Escolhidas
+    movement: VII — O Mundo dos Homens
+    pov: Kai Almeida
+    time: Eva, 61 anos
+    location: Comunidade de parentalidade coletiva numa cidade média
+    function: Explorar novas configurações familiares e afetivas de um mundo quase sem mulheres através de Kai Almeida, sem moralismo em nenhuma direção, e sem que Eva seja o centro da cena.
+    dramatic_question: O que substitui a família tradicional quando ela deixa de ser demograficamente majoritária, sem que isso seja tratado como perda nem como progresso automático?
+    irreversible_turn: Kai apresenta a Eva, em visita discreta, uma criança criada por três pais sem vínculo romântico entre si, e a naturalidade da cena contrasta com o estranhamento de décadas anteriores.
+    continuity:
+      - Kai Almeida é apresentado com vida e comunidade próprias, independentes de Eva.
+      - A visita de Eva é pessoal, não institucional ou de pesquisa.
+      - Nenhuma configuração familiar é apresentada como solução ou como sintoma de decadência.
+    living_book_vitals:
+      pressure: calorosa, doméstica
+      breath: tranquila
+      sensory_anchor: mesa comprida com talheres de conjuntos diferentes, como no Capítulo 21
+    demographic_counter: null
+
+  - number: 30
+    title: A Última Atleta
+    movement: VII — O Mundo dos Homens
+    pov: Eva
+    time: Eva, 66 anos
+    location: Estádio nacional, categoria feminina adulta remanescente
+    function: Mostrar o desaparecimento cultural do esporte feminino de elite através da última competição de categoria adulta ainda disputada, testemunhada por Eva como espectadora, não como atleta ou símbolo.
+    dramatic_question: O que se perde culturalmente quando uma categoria inteira de competição humana chega ao fim por ausência de novas competidoras, não por decisão?
+    irreversible_turn: A campeã, com mais de setenta anos, anuncia em entrevista que não haverá próxima edição da categoria, e o estádio aplaude em silêncio relativo, sem o entusiasmo de décadas passadas.
+    continuity:
+      - A atleta campeã é uma personagem secundária nomeada apenas neste capítulo.
+      - Eva assiste como convidada comum, sem discurso público exigido dela.
+      - Este capítulo cristaliza, em cena, o "quando a palavra menina virou história" mencionado estruturalmente na obra.
+    living_book_vitals:
+      pressure: nostálgica, contida
+      breath: coletiva, mais baixa que o esperado
+      sensory_anchor: arquibancadas com setores inteiros vazios pela primeira vez em décadas
+    demographic_counter: null
+
+  - number: 31
+    title: Recorde
+    movement: VII — O Mundo dos Homens
+    pov: Eva
+    time: Eva, 91 anos
+    location: Instituto Meridian, ala de longevidade
+    function: Eva ultrapassa a expectativa de vida humana documentada, tornando sua própria longevidade uma segunda anomalia pública, tratada com perturbação em vez de celebração.
+    dramatic_question: O que significa se tornar, pela segunda vez na vida, um fenômeno que ninguém sabe explicar?
+    irreversible_turn: Um pesquisador aposentado menciona a Eva, en passant, ter visto "o mesmo padrão" em dados antigos de longevidade excepcional registrados décadas antes do Dia Zero — comentário que ninguém investiga a fundo neste momento.
+    continuity:
+      - Eva mostra sinais físicos de idade avançada reais — fragilidade, memória seletiva, dor articular.
+      - Ilan Okafor, mais velho, começa a expressar preocupação com o próprio fim de vida em contraste com a de Eva.
+      - Este capítulo planta explicitamente a pista de releitura descrita em seeds/WORLD_RULES_SEED.md, seção 8.
+    living_book_vitals:
+      pressure: perturbadora, silenciosa
+      breath: mais lenta, fisicamente perceptível
+      sensory_anchor: gráfico de expectativa de vida com uma única linha ultrapassando o eixo do papel
+    protected_scene: LONGEVITY_RECORD
+    demographic_counter: CF-7
+
+  - number: 32
+    title: O Ranking
+    movement: VIII — As Últimas
+    pov: Eva
+    time: Eva, 97 anos
+    location: Diversos, através de transmissões que Eva acompanha
+    function: Apresentar o fenômeno cultural macabro do ranking público das mulheres vivas mais jovens, com Eva sempre citada por ser, estruturalmente, a mais jovem de todas as mulheres já nascidas.
+    dramatic_question: O que uma sociedade faz quando transforma a extinção de um grupo humano em conteúdo de entretenimento organizado?
+    irreversible_turn: Eva vê o próprio nome no topo de uma lista pública pela primeira vez formulada como "ranking", e decide nunca mais acompanhar esse tipo de transmissão.
+    continuity:
+      - O ranking é apresentado como fenômeno de mídia, não como registro científico oficial.
+      - Ilan Okafor tenta, sem sucesso total, blindar Eva do noticiário relacionado.
+      - Este capítulo estabelece o mecanismo cultural que estrutura o Capítulo 33.
+    living_book_vitals:
+      pressure: incômoda, voyeurística
+      breath: contida por nojo, não por medo
+      sensory_anchor: contagem regressiva gráfica sobreposta a rostos de mulheres desconhecidas
+    demographic_counter: null
+
+  - number: 33
+    title: As Cem
+    movement: VIII — As Últimas
+    pov: Eva
+    time: Eva, 101 anos
+    location: Funerais dispersos, acompanhados por Eva ao longo de meses
+    function: Registrar o luto acumulado de Eva ao perder, uma a uma, mulheres que conheceu pessoalmente ao longo da vida, enquanto a contagem pública cai a dezenas.
+    dramatic_question: Como alguém sustenta luto individual por pessoas específicas enquanto o mundo trata a mesma perda como estatística coletiva?
+    irreversible_turn: Eva participa do funeral de uma amiga da comunidade descrita no Capítulo 21, e percebe que restam, segundo o ranking que ela evita, menos de cem mulheres vivas no mundo inteiro.
+    continuity:
+      - Ao menos uma das mulheres falecidas neste capítulo foi apresentada em partes anteriores da obra, não introduzida apenas para morrer.
+      - Kai Almeida aparece como apoio presente, não romântico.
+      - Este é o ponto de maior densidade de luto pessoal da Parte VIII.
+    living_book_vitals:
+      pressure: pesada, íntima
+      breath: entrecortada por choro contido em público
+      sensory_anchor: flores de espécies cada vez mais repetidas entre um funeral e outro
+    protected_scene: ACCUMULATED_GRIEF
+    demographic_counter: CF-8
+
+  - number: 34
+    title: A Penúltima
+    movement: VIII — As Últimas
+    pov: Eva
+    time: Eva, 108 anos
+    location: Quarto de hospital numa cidade distante, e o quarto de Eva no Instituto Meridian
+    function: A morte da penúltima mulher viva torna Eva, formalmente e de forma irreversível, "a última mulher da Terra".
+    dramatic_question: O que muda no instante exato em que um título deixa de ser hipótese estatística e se torna fato sobre uma única pessoa nomeada?
+    irreversible_turn: Eva recebe a notificação formal da morte da penúltima mulher viva enquanto está sozinha, e não há mais nenhuma outra mulher no mundo além dela.
+    continuity:
+      - A penúltima mulher é uma personagem mencionada apenas por nome e biografia breve, nunca central à trama.
+      - O contador de população feminina (seeds/WORLD_RULES_SEED.md) passa de 2 para 1 dentro deste capítulo.
+      - Ilan Okafor está fisicamente presente com Eva no momento da notificação.
+    living_book_vitals:
+      pressure: absoluta, histórica
+      breath: suspensa por um tempo mais longo que qualquer pausa anterior na obra
+      sensory_anchor: andorinhões-de-vidro pousados, não voando, no parapeito da janela do Instituto Meridian
+    protected_scene: LAST_WOMAN_THRESHOLD
+    demographic_counter: CF-9,CF-10
+
+  - number: 35
+    title: Cento e Dez
+    movement: VIII — As Últimas
+    pov: Eva
+    time: Eva, 110 anos
+    location: Laboratório do Instituto Meridian
+    function: Mostrar a reação mundial ao novo status de Eva e uma última tentativa científica com seu material genético, que ela aceita apenas parcialmente e sob condições próprias.
+    dramatic_question: Existe uma forma de participar de um último esforço científico da humanidade sem abrir mão da autonomia conquistada décadas antes?
+    irreversible_turn: Eva autoriza o uso de tecido não reprodutivo para pesquisa, mas recusa formalmente qualquer procedimento reprodutivo, encerrando de vez qualquer expectativa institucional nesse sentido.
+    continuity:
+      - Esta decisão não é revertida em nenhum capítulo posterior.
+      - A pesquisa autorizada por Eva neste capítulo é a mesma que, anos depois, revelará a anomalia mencionada no Capítulo 27 a outros pesquisadores, sem que a causa seja resolvida.
+      - Ambiguidade mantida sobre se a decisão de Eva é definitiva por convicção ou por cansaço — o texto não resolve isso.
+    living_book_vitals:
+      pressure: resignada, mas não derrotada
+      breath: estável, deliberada
+      sensory_anchor: formulário de consentimento assinado apenas em parte das cláusulas
+    demographic_counter: null
+
+  - number: 36
+    title: O Que Sobra dos Governos
+    movement: VIII — As Últimas
+    pov: Eva
+    time: Eva, 117 anos
+    location: Ruínas administrativas do que foi o Conselho Mundial de Continuidade Humana
+    function: Mostrar o colapso final das instituições globais que estruturaram a vida de Eva desde a infância, fechando a Parte VIII com o início do contador de população humana total.
+    dramatic_question: O que resta de uma instituição construída inteiramente em torno de uma emergência quando a emergência se torna irreversível?
+    irreversible_turn: O Conselho Mundial de Continuidade Humana se dissolve formalmente por falta de quórum de países funcionais, e Eva assina, como última formalidade, o documento de encerramento.
+    continuity:
+      - Amos Weller é mencionado como falecido há anos, sem cena de morte narrada.
+      - O contador de população humana total (seeds/WORLD_RULES_SEED.md) começa neste capítulo.
+      - Fecha a Parte VIII — da menina impossível à última mulher da Terra, o arco institucional está encerrado.
+    living_book_vitals:
+      pressure: anticlimática, vasta
+      breath: administrativa, cansada
+      sensory_anchor: carimbo oficial usado pela última vez sobre papel que ninguém vai arquivar
+    demographic_counter: CH-1
+
+  - number: 37
+    title: A Pergunta Sobre Eva
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 122 anos
+    location: Instituto Meridian, quase vazio
+    function: Ciência remanescente tenta, pela última vez de forma organizada, estudar a longevidade de Eva sem chegar a nenhuma conclusão, enquanto Eva encontra um detalhe antigo sobre o próprio nascimento.
+    dramatic_question: O que significa continuar sendo estudada quando quase não resta ninguém para receber os resultados do estudo?
+    irreversible_turn: Entre pertences antigos dos pais, Eva encontra um bilhete de Alma dizendo que ela "quase não chorou" ao nascer — detalhe deixado sem peso aparente, que Eva guarda sem comentar.
+    continuity:
+      - A equipe científica remanescente é pequena, composta por poucos pesquisadores muito idosos.
+      - A palavra "imortal" é levantada por um pesquisador e explicitamente recusada por Eva como descrição de si mesma.
+      - Este capítulo planta a última pista de releitura descrita em seeds/WORLD_RULES_SEED.md antes do desfecho.
+    living_book_vitals:
+      pressure: baixa, arqueológica
+      breath: cuidadosa, quase reverente
+      sensory_anchor: papel amarelado com a letra da mãe de Eva, morta há décadas
+    demographic_counter: CH-2
+
+  - number: 38
+    title: O Penúltimo Homem
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 134 anos
+    location: Assentamento remanescente, número reduzido de habitantes
+    function: Introduzir Tomás Rocha como companhia final de Eva — pessoa comum, sem função de líder ou sábio — através de uma amizade tranquila que se forma nos últimos anos de convivência humana.
+    dramatic_question: O que resta de importante entre duas pessoas quando quase tudo que costumava importar ao mundo já desapareceu?
+    irreversible_turn: Tomás e Eva estabelecem uma rotina diária simples — comida, conversa, silêncio companheiro — que se torna, sem cerimônia, o centro emocional do que resta da vida de Eva.
+    continuity:
+      - Tomás Rocha não tem histórico de destaque público antes deste capítulo.
+      - Restam, segundo o contador humano total, poucas dezenas de pessoas no mundo.
+      - Ilan Okafor é mencionado como falecido há anos entre este capítulo e o anterior.
+    living_book_vitals:
+      pressure: quase nula, doméstica
+      breath: pareada, sincronizada por hábito
+      sensory_anchor: duas cadeiras de varanda gastas de forma desigual
+    demographic_counter: CH-3
+
+  - number: 39
+    title: Um
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 137 anos
+    location: Varanda do assentamento remanescente
+    function: A morte de Tomás Rocha, incluindo a pergunta final sobre medo, torna Eva a única pessoa viva no mundo.
+    dramatic_question: Do que exatamente uma pessoa tem medo quando sabe que está prestes a deixar outra pessoa completamente sozinha?
+    irreversible_turn: Tomás pergunta a Eva se ela tem medo, e quando ela responde perguntando medo de quê, ele diz que é medo de ficar sozinha — e morre pouco depois, deixando Eva como a única pessoa viva.
+    continuity:
+      - A cena não deve ser melodramática; deve permanecer humana e contida, conforme BOOK_CONSTITUTION.md.
+      - Nenhuma causa sobrenatural é sugerida para a morte de Tomás; é morte natural de velhice.
+      - O contador de população humana total passa de 2 para 1 dentro deste capítulo.
+    living_book_vitals:
+      pressure: máxima, contida
+      breath: última respiração compartilhada da obra
+      sensory_anchor: andorinhões-de-vidro cruzando o céu no momento exato em que Tomás para de responder
+    protected_scene: LAST_MAN_DEATH
+    demographic_counter: CH-4,CH-5
+
+  - number: 40
+    title: A Era de Eva
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 140 anos
+    location: Regiões antes urbanas, agora tomadas pela vegetação
+    function: Mostrar anos de solidão total e a Terra se recuperando ecologicamente sem gestão humana, sem moralismo ambiental simplista.
+    dramatic_question: O planeta precisava da humanidade, ou apenas a tolerava?
+    irreversible_turn: Eva atravessa, a pé, uma cidade inteira agora coberta por floresta e decide, sem anunciar a ninguém porque não há mais ninguém, começar a caminhar para longe de qualquer assentamento conhecido.
+    continuity:
+      - Nenhum diálogo humano ocorre a partir deste capítulo até o fim da obra.
+      - A recuperação ecológica é mostrada com concretude física — estradas rachadas por raízes, prédios cedendo, animais reaparecendo.
+      - Este capítulo estabelece o cenário para a Parte final.
+    living_book_vitals:
+      pressure: vasta, silenciosa
+      breath: apenas de Eva, cada vez mais perceptível ao leitor
+      sensory_anchor: asfalto rachado por raízes crescendo havia anos sem ninguém para consertar
+    demographic_counter: CH-6
+
+  - number: 41
+    title: O Deserto
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 147 anos
+    location: Deserto, sem nome, sem coordenadas dadas ao leitor
+    function: Eva, muito idosa e caminhando sozinha, sente dor abdominal e vomita — o leitor deve interpretar isso, predominantemente, como o corpo dela finalmente falhando.
+    dramatic_question: Depois de 147 anos sem morrer, o corpo de Eva está, finalmente, chegando ao fim?
+    irreversible_turn: Uma segunda dor, diferente da primeira, faz Eva tocar o próprio abdômen e dizer apenas "Não..." — sem que o texto especifique o que ela reconhece ou teme.
+    continuity:
+      - PROIBIDO usar qualquer vocabulário técnico ou eufemístico de gravidez, gestação, feto, embrião, bebê, chute, útero, contração de parto, atraso menstrual ou movimento fetal, em qualquer forma, conforme immutable_rules.yaml.
+      - Eva carrega poucos objetos — possivelmente uma fotografia antiga e água.
+      - Este capítulo é o clímax ambíguo da obra e deve ser tratado com o máximo cuidado por todos os revisores.
+    living_book_vitals:
+      pressure: física, íntima, ambígua
+      breath: irregular, dolorida
+      sensory_anchor: areia quente sob os joelhos de Eva ao cair
+    protected_scene: DESERT_INCIDENT
+    demographic_counter: CH-7
+
+  - number: 42
+    title: Pássaros
+    movement: IX — Cento e Quarenta e Sete
+    pov: Eva
+    time: Eva, 147 anos, minutos depois do Capítulo 41
+    location: Mesmo deserto
+    function: Fechar a obra sem confirmar gravidez, morte, causa do fenômeno ou significado dos pássaros — apenas a última imagem sensorial e os contadores finais.
+    dramatic_question: (deliberadamente sem resposta, entregue ao leitor)
+    irreversible_turn: Eva tenta se levantar, não consegue, e os pássaros continuam no céu acima dela — o narrador nunca confirma se ela morre, sobrevive, ou o que os pássaros representam.
+    continuity:
+      - 'PROIBIDO qualquer frase que confirme a morte de Eva (exemplos vetados: "Eva morreu", "seu coração parou", "a última respiração saiu de seu corpo").'
+      - PROIBIDO qualquer frase que confirme que Eva sobreviveu ou se recuperou.
+      - PROIBIDO qualquer vocabulário de gravidez listado em immutable_rules.yaml.
+      - A palavra "esperando" aplicada aos pássaros é permitida apenas na última linha do livro, sem explicação adicional.
+      - O capítulo termina com os dois contadores finais em formato de página quase vazia, exatamente como especificado em seeds/WORLD_RULES_SEED.md, seção 4 — população humana estimada 1; nascimentos humanos no último ano 0.
+      - Não há epílogo, nota do autor, nem parágrafo explicativo após a imagem final.
+    living_book_vitals:
+      pressure: quase nenhuma no texto, máxima no leitor
+      breath: interrompida, não resolvida
+      sensory_anchor: silêncio do deserto quebrado apenas pelo som de asas distantes
+    protected_scene: FINAL_AMBIGUITY
+    demographic_counter: CH-8,CH-9

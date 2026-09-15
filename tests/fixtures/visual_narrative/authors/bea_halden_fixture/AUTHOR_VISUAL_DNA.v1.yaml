@@ -1,0 +1,97 @@
+# Fixture de teste — NÃO é o pacote real de authors/bea_halden/ (esse só
+# nasce no Slice 5, com valores aprovados por humano — ver OQ-5 da SDD).
+# Valores calibrados para que os exemplos de hex fiquem dentro das faixas
+# declaradas (ver docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md,
+# seção 12.1).
+
+apiVersion: pedroarte.livingbooks/v1
+kind: AuthorVisualDNA
+metadata:
+  author_id: bea_halden_fixture
+  public_name: Bea Halden
+  version: 1
+  status: APPROVED
+  approved_by_file: null
+  supersedes: null
+
+thesis:
+  - dark elegance
+  - psychological danger
+  - premium restraint
+  - collectible design
+
+invariants:
+  author_name_on: [FRONT_COVER, SPINE, TITLE_PAGE]
+  author_mark_required_on: [SPINE, BACK_COVER]
+  title_hierarchy: TITLE_OVER_AUTHOR
+  max_dominant_per_surface: 1
+  chekhov_required: true
+  sigils_monochrome_safe: true
+  hidden_surface_max_spoiler: MEDIUM
+  public_surface_max_spoiler: LOW
+
+defaults:
+  density:
+    max_secondary_per_surface: 2
+    decorative_budget_per_surface: 1
+  forbid_literal_protagonist_on_cover: true
+
+color:
+  value_structure: LOW_KEY
+  roles:
+    GROUND: {lightness: [0.03, 0.22], saturation: [0.00, 0.20], default: "#121113", label: charcoal}
+    INK:    {lightness: [0.75, 0.95], saturation: [0.10, 0.45], default: "#E6DCCB", label: bone / aged ivory}
+    METAL:  {lightness: [0.25, 0.55], saturation: [0.10, 0.70], default: "#8C6A3C", label: warm metal, material_family: WARM_METAL}
+    PULSE:  {lightness: [0.10, 0.35], saturation: [0.35, 0.90], max_area_ratio: 0.12, default: "#5A0E1C", label: blood wine}
+  signature_material: BURNT_COPPER
+
+typography:
+  roles:
+    TITLE:          {classification: HIGH_CONTRAST_SERIF, case: UPPER, tracking: WIDE, weight: [500, 700]}
+    SUBTITLE:       {classification: HIGH_CONTRAST_SERIF, case: SENTENCE, style: ITALIC}
+    AUTHOR:         {classification: GEOMETRIC_SANS, case: UPPER, tracking: VERY_WIDE, weight: [300, 400]}
+    SERIES:         {classification: GEOMETRIC_SANS, case: UPPER, size_relative_to: AUTHOR, ratio: 0.6}
+    TAGLINE:        {classification: HIGH_CONTRAST_SERIF, style: ITALIC}
+    EDITION_LABEL:  {classification: GEOMETRIC_SANS, case: UPPER}
+    CHAPTER_NUMBER: {classification: GEOMETRIC_SANS, case: UPPER, tracking: WIDE}
+    CHAPTER_TITLE:  {classification: HIGH_CONTRAST_SERIF}
+    BODY:           {classification: BOOK_SERIF, inherit_from: KDP_LAYOUT}
+  min_body_pt: 7.0
+
+author_mark:
+  id: MARK-BH-SEAL
+  assets: {vector: marks/BH_SEAL.v1.svg, raster_1bit: marks/BH_SEAL.v1.png}
+  monochrome_required: true
+  min_size_mm: 5
+  clearspace_ratio: 0.5
+  allowed_surfaces: [SPINE, BACK_COVER, TITLE_PAGE, COPYRIGHT_PAGE]
+  forbidden_surfaces: [CHAPTER_OPENER]
+
+spine_grammar:
+  mode: INDIVIDUAL_CONSISTENT
+  title_axis: TOP_TO_BOTTOM
+  author_zone: {from: 0.80, to: 0.93}
+  mark_zone: {from: 0.94, to: 0.98}
+  band: {position: 0.08, height_ratio: 0.012, role_color: METAL}
+
+generic_trope_watchlist:
+  - {id: SKULL, match: [skull, caveira]}
+  - {id: ROSE, match: [rose, rosa, petal, pétala]}
+  - {id: KNIFE, match: [knife, faca, dagger, punhal]}
+  - {id: CROWN, match: [crown, coroa]}
+  - {id: SHIRTLESS_MALE, match: [shirtless, torso nu]}
+  - {id: CHAINS, match: [chain, corrente]}
+  - {id: BLOOD, match: [blood, sangue]}
+  - {id: GENERIC_COUPLE, match: [couple embrace, casal abraçado]}
+
+approval_policy_defaults:
+  AUTHOR_MARK: REQUIRE_APPROVAL
+  COVER_COMPOSITION: REQUIRE_APPROVAL
+  DOMINANT_SYMBOL: REQUIRE_APPROVAL
+  FINISH_INTENT_COLLECTOR: REQUIRE_APPROVAL
+  HIDDEN_SURFACE: REQUIRE_APPROVAL
+  EDGE_ART: REQUIRE_APPROVAL
+  FIGURE_ON_COVER: REQUIRE_APPROVAL
+  NARRATIVE_ARTIFACT: SUGGEST
+  SIGIL_STATE: SUGGEST
+  PALETTE_WITHIN_ROLES: AUTO

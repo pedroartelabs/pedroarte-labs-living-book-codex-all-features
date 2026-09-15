@@ -1,0 +1,14 @@
+# PRINTER_PROFILE — fixture de teste. NÃO é um fornecedor real; representa
+# uma gráfica hipotética que confirmou um subconjunto de acabamentos para
+# provar o caminho VENDOR_DEPENDENT -> PHYSICAL do resolver (seção 22.1 da
+# SDD: "collector não é um fabricante, é uma classe de edição").
+apiVersion: pedroarte.livingbooks/v1
+kind: PrinterProfile
+metadata:
+  id: fixture-printer-01
+  name: "Gráfica de teste (fixture) — não é um fornecedor real"
+  confirmed_on: "2026-09-14"
+  contact: "fixture@example.test"
+confirmed_effects: [METALLIC_FOIL, SPOT_UV, STENCILED_EDGE]
+bleed_in: 0.125
+spine_in_per_page: 0.0025

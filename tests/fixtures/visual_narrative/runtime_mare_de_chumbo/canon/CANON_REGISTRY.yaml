@@ -1,0 +1,11 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CanonRegistry
+metadata:
+  project_id: mare_de_chumbo_fixture
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+objects:
+  - id: OBJ-LENS
+    status: CANON_APPROVED
+    fact: A lente de Fresnel do farol, com uma fratura antiga que desvia parte da luz.
+    source: /specs/WORLD_BIBLE.md#lente-fresnel

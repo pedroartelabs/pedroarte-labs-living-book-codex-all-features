@@ -1,0 +1,778 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: VisualNarrativeCanon
+# Semente do canon visual de Narciso (docs/sdd/NARCISO_CANONICAL_SDD_v0.1.md, 13–17, 21, 23).
+#
+# T043_VISUAL_NARRATIVE_CANON (VISUAL_DIRECTOR, lock VISUAL_CANON_WRITE)
+# consolida este arquivo em runtime/canon/VISUAL_NARRATIVE_CANON.yaml.
+# Validadores: engine/scripts/check_visual_canon.py e book/validators/validate_narciso.py.
+# Pranchas de miolo (IL-*) entram no Slice 4; aqui só capa, lombada,
+# contracapa, capa nua do collector e abertura de capítulo.
+metadata:
+  project_id: narciso
+  version: 0.1.0
+  owner: VISUAL_DIRECTOR
+  author_dna: {author_id: bea_halden, version: 1, sha256: null}
+  narrative_canon_refs: {canon_registry_version: null, causal_ledger_version: null}
+
+book_dna:
+  visual_thesis: "A beleza é uma superfície que olha de volta."
+  duality:
+    outer_truth: "Narciso olha para quem segura o livro."
+    hidden_truth: "Narciso olha para o reflexo que o livro produz."
+    anchors: ["SCENE:THE_CENTER", "SCENE:WE_STILL_LOOK"]
+  palette:
+    GROUND: "#0E0D0F"
+    INK: "#E9E1D2"
+    METAL: {material: AGED_GOLD, hex: "#8A6C3E"}
+    PULSE: "#3E0C16"
+  role_overrides:
+    - key: defaults.forbid_literal_protagonist_on_cover
+      value: false
+      override_reason: "Decisão humana OQ-N1: a beleza de Narciso é a isca da tese; ele aparece por fragmento do rosto, sem revelar o rosto inteiro."
+      approval: APR-COVER-01
+  typography_bindings: {}
+
+vetoes:
+  - {id: VETO-N01, match: [abdômen definido, músculo oleado, banco de imagens], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Beleza masculina genérica."}
+  - {id: VETO-N02, match: [torso nu, shirtless], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Nudez sem função narrativa."}
+  - {id: VETO-N03, match: [caveira, faca, sangue decorativo, pétalas de rosa], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Iconografia de gênero sem âncora."}
+  - {id: VETO-N04, match: [toga, louros, templo grego, coluna grega], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Kitsch mítico."}
+  - {id: VETO-N05, match: [pintura célebre, releitura de quadro], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Originalidade de composição."}
+  - {id: VETO-N06, match: [relógio derretido, paisagem surreal reconhecível], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Obras modernas protegidas."}
+  - {id: VETO-N07, match: [infantil, adolescente, juvenil], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Adulto inequívoco."}
+  - {id: VETO-N08, match: [magreza, costelas à mostra], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Dignidade do definhamento."}
+  - {id: VETO-N09, match: [selfie], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Banaliza a tese."}
+  - {id: VETO-N10, match: [neon, fumaça], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Clichê visual de gênero."}
+  - {id: VETO-N11, match: [marca d'água, watermark], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Nenhum texto em ilustração."}
+  - {id: VETO-N12, match: [genitália, ato sexual], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Sem conteúdo explícito em imagem."}
+  - {id: VETO-N13, match: [rosto do reflexo inteiro], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "O reflexo nunca é resolvido visualmente."}
+  - {id: VETO-N14, match: [pessoa real, celebridade], source: "DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#vetos", rule_kind: CANONICAL, rationale: "Rostos ficcionais."}
+
+elements:
+  - id: FIG-NARCISO
+    label: Narciso
+    class: FIGURE
+    identity_ref: "DOC:/book/planning/FACE_CANON.seed.md#narciso-c-fiso-c-digo-de-identidade-fv-narciso-01"
+    meaning: "O corpo como obra que se consome."
+    functions:
+      - {function: CHARACTER, anchors: ["TURN:2"]}
+      - {function: TRANSFORMATION, anchors: ["SCENE:THE_CENTER", "LEDGER:EV-DSR-4"]}
+      - {function: PROGRESSION, anchors: ["LEDGER:EV-DSR-5"]}
+    count: 1
+    prominence: DOMINANT
+    first_appearance: "TURN:1"
+    exposure: {spoiler_level: NONE, reveal: null}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 20, text_alternative: "Parte do rosto de um homem de olhos cinza-esverdeados, com uma pinta sob o olho direito."}
+    cost_class: ESSENTIAL
+    approval: {policy: REQUIRE_APPROVAL, id: APR-FIG-NARCISO}
+    status: PLANNED
+    states:
+      - {id: D0_PRISTINE, initial: true, memory_state: S, meaning: "perfeição que ainda não se viu", visual_description: "Rosto sereno, pele com luz uniforme, cabelo ondulado e barba feita."}
+      - {id: D1_SLEEPLESS, memory_state: R, meaning: "o desejo tira o sono", visual_description: "Olheiras, barba de dois dias e lábio seco."}
+      - {id: D2_FEVER, memory_state: T, meaning: "o toque falho vira febre", visual_description: "Cabelo molhado colado à testa, rubor e mãos trêmulas com a cicatriz aberta."}
+      - {id: D3_WITHERING, memory_state: T, meaning: "a necessidade apaga a luz", visual_description: "Pele baça, unhas roídas, camisa suja; perda de luz no rosto."}
+      - {id: D4_MARBLE, memory_state: P, meaning: "o corpo parece estátua", visual_description: "Palidez acinzentada, imobilidade de pedra e lábios rachados."}
+      - {id: D5_TRACE, memory_state: E, meaning: "só restam vestígios", visual_description: "Nenhum corpo em quadro; camisa, lençol negro, marca na água e anel."}
+    transitions:
+      - {from: D0_PRISTINE, to: D1_SLEEPLESS, trigger: "SCENE:STATUE_BREAKS", display_from: NEXT_CHAPTER, because: "O rosto da estátua racha."}
+      - {from: D1_SLEEPLESS, to: D2_FEVER, trigger: "SCENE:THE_CENTER", display_from: NEXT_CHAPTER, because: "As mãos não chegam juntas à superfície."}
+      - {from: D2_FEVER, to: D3_WITHERING, trigger: "LEDGER:EV-DSR-4", display_from: NEXT_CHAPTER, because: "O desejo vira necessidade."}
+      - {from: D3_WITHERING, to: D4_MARBLE, trigger: "LEDGER:EV-DSR-5", display_from: NEXT_CHAPTER, because: "Compulsão sem gozo."}
+      - {from: D4_MARBLE, to: D5_TRACE, trigger: "SCENE:THE_NAME_AT_DAWN", display_from: NEXT_CHAPTER, because: "O nome chamado ao amanhecer."}
+
+  - id: SYM-ESPELHO
+    label: espelho
+    class: MOTIF
+    meaning: "Identidade, duplicação, desejo e mentira."
+    functions:
+      - {function: CHARACTER, anchors: ["TURN:8"]}
+      - {function: TRANSFORMATION, anchors: ["SCENE:THE_CENTER"]}
+    count: 1
+    prominence: SECONDARY
+    exposure: {spoiler_level: LOW}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Espelho em moldura de bronze."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: VELADO, initial: true, memory_state: S, meaning: "proteção e proibição", visual_description: "Espelho alto coberto por lençol negro."}
+      - {id: DESCOBERTO, memory_state: R, meaning: "curiosidade proibida", visual_description: "Lençol caído aos pés de um espelho descoberto."}
+      - {id: MULTIPLICADO, memory_state: T, meaning: "desejo que se replica", visual_description: "Três espelhos inclinados uns para os outros no quarto."}
+      - {id: FRATURADO, memory_state: T, meaning: "identidade partida", visual_description: "Espelho com uma rachadura diagonal a partir do centro."}
+      - {id: FRENTE_A_FRENTE, memory_state: P, meaning: "infinito sem saída", visual_description: "Dois espelhos frente a frente abrindo um corredor de molduras."}
+      - {id: VAZIO, memory_state: E, meaning: "ausência sem dono", visual_description: "Moldura de bronze sem vidro diante da parede."}
+    transitions:
+      - {from: VELADO, to: DESCOBERTO, trigger: "TURN:8", display_from: NEXT_CHAPTER}
+      - {from: DESCOBERTO, to: MULTIPLICADO, trigger: "TURN:15", display_from: NEXT_CHAPTER}
+      - {from: MULTIPLICADO, to: FRATURADO, trigger: "SCENE:THE_CENTER", display_from: NEXT_CHAPTER}
+      - {from: FRATURADO, to: FRENTE_A_FRENTE, trigger: "LEDGER:EV-DSR-5", display_from: NEXT_CHAPTER}
+      - {from: FRENTE_A_FRENTE, to: VAZIO, trigger: "SCENE:THE_NAME_AT_DAWN", display_from: NEXT_CHAPTER}
+
+  - id: SIG-ESPELHO
+    label: selo do espelho
+    class: SIGIL
+    scope: BOOK
+    assignment: {mode: ALL_CHAPTERS}
+    meaning: "O selo de abertura que acompanha o espelho da casa capítulo a capítulo."
+    functions:
+      - {function: PROGRESSION, anchors: ["TURN:8", "SCENE:THE_CENTER"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Selo de moldura; a forma muda ao longo do livro."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: VELADO, initial: true, memory_state: S, meaning: "o espelho ainda coberto", visual_description: "Moldura retangular com um pano dobrado por cima.", render: {mode: GLYPH}}
+      - {id: DESCOBERTO, memory_state: R, meaning: "o espelho aberto", visual_description: "Moldura com uma linha vertical fina no centro.", render: {mode: GLYPH}}
+      - {id: MULTIPLICADO, memory_state: T, meaning: "o espelho repetido", visual_description: "Três molduras sobrepostas com deslocamento.", render: {mode: GLYPH}}
+      - {id: FRATURADO, memory_state: T, meaning: "o espelho partido", visual_description: "Moldura cortada por uma linha diagonal.", render: {mode: GLYPH}}
+      - {id: FRENTE_A_FRENTE, memory_state: P, meaning: "o corredor sem fim", visual_description: "Duas molduras encaixadas uma dentro da outra.", render: {mode: GLYPH}}
+      - {id: VAZIO, memory_state: E, meaning: "a moldura sem ninguém", visual_description: "Contorno de moldura aberto em um dos lados.", render: {mode: GLYPH}}
+    transitions:
+      - {from: VELADO, to: DESCOBERTO, trigger: "TURN:8", display_from: NEXT_CHAPTER}
+      - {from: DESCOBERTO, to: MULTIPLICADO, trigger: "TURN:15", display_from: NEXT_CHAPTER}
+      - {from: MULTIPLICADO, to: FRATURADO, trigger: "SCENE:THE_CENTER", display_from: NEXT_CHAPTER}
+      - {from: FRATURADO, to: FRENTE_A_FRENTE, trigger: "LEDGER:EV-DSR-5", display_from: NEXT_CHAPTER}
+      - {from: FRENTE_A_FRENTE, to: VAZIO, trigger: "SCENE:THE_NAME_AT_DAWN", display_from: NEXT_CHAPTER}
+
+  - id: SYM-AGUA
+    label: água parada
+    class: MOTIF
+    meaning: "Nascimento do que olha de volta, instabilidade e impossibilidade de tocar."
+    functions:
+      - {function: WORLD, anchors: ["SCENE:FIRST_WATER"]}
+      - {function: CLUE, anchors: ["TURN:23"]}
+    count: 1
+    prominence: SECONDARY
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Superfície de água negra e parada."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: PROIBIDA, initial: true, memory_state: S, meaning: "o limite da infância", visual_description: "Cava distante vista de uma janela alta."}
+      - {id: CONTEMPLADA, memory_state: R, meaning: "a primeira contemplação", visual_description: "Margem próxima com a lua na superfície."}
+      - {id: INVASORA, memory_state: T, meaning: "a água entra na casa", visual_description: "Bacias e chão molhado dentro dos cômodos."}
+      - {id: PARADA, memory_state: P, meaning: "estagnação total", visual_description: "Superfície lisa sem nenhuma ondulação."}
+      - {id: SUPERFICIE_PUBLICA, memory_state: E, meaning: "o olhar dos outros", visual_description: "Margem com pessoas fotografando a cava."}
+    transitions:
+      - {from: PROIBIDA, to: CONTEMPLADA, trigger: "SCENE:FIRST_WATER", display_from: NEXT_CHAPTER}
+      - {from: CONTEMPLADA, to: INVASORA, trigger: "TURN:19", display_from: NEXT_CHAPTER}
+      - {from: INVASORA, to: PARADA, trigger: "TURN:27", display_from: NEXT_CHAPTER}
+      - {from: PARADA, to: SUPERFICIE_PUBLICA, trigger: "SCENE:WE_STILL_LOOK", display_from: NEXT_CHAPTER}
+
+  - id: SYM-NARCISO
+    label: flor narciso
+    class: MOTIF
+    meaning: "Beleza que morre e volta; vaidade que floresce onde não há terra."
+    functions:
+      - {function: MEMORY, anchors: ["TURN:2"]}
+      - {function: TRANSFORMATION, anchors: ["TURN:32"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Uma única flor narciso branca."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: BULBO, initial: true, memory_state: S, meaning: "beleza adormecida", visual_description: "Bulbos em vasos na estufa embaçada."}
+      - {id: FORCADO, memory_state: R, meaning: "beleza apressada", visual_description: "Flor aberta num vaso dentro de casa, fora de estação."}
+      - {id: MURCHO, memory_state: T, meaning: "beleza que cede", visual_description: "Flor dobrada sobre o caule num quarto de espelhos."}
+      - {id: NA_RACHADURA, memory_state: P, meaning: "o que resta", visual_description: "Flor única nascendo de uma fenda na pedra negra."}
+    transitions:
+      - {from: BULBO, to: FORCADO, trigger: "TURN:9", display_from: NEXT_CHAPTER}
+      - {from: FORCADO, to: MURCHO, trigger: "TURN:22", display_from: NEXT_CHAPTER}
+      - {from: MURCHO, to: NA_RACHADURA, trigger: "TURN:32", display_from: NEXT_CHAPTER}
+
+  - id: SYM-OURO
+    label: ouro em folha
+    class: MOTIF
+    meaning: "Beleza transformada em objeto."
+    functions:
+      - {function: WORLD, anchors: ["TURN:10"]}
+      - {function: TRANSFORMATION, anchors: ["TURN:24"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Folha de ouro envelhecido."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: HERANCA, initial: true, memory_state: S, meaning: "riqueza da família", visual_description: "Molduras douradas vazias na casa."}
+      - {id: FOLHA_SOBRE_A_PELE, memory_state: R, meaning: "o corpo como peça de restauro", visual_description: "Folhas finas aplicadas sobre ombro e pescoço."}
+      - {id: RITUAL, memory_state: T, meaning: "adoração privada", visual_description: "Pó de ouro espalhado junto a velas e bacia."}
+      - {id: DESCASCANDO, memory_state: P, meaning: "o valor que se solta", visual_description: "Fragmentos de folha se soltando de uma fotografia."}
+      - {id: ANEL_SEM_MAO, memory_state: E, meaning: "herança sem herdeiro", visual_description: "Anel pousado sozinho sobre o parapeito."}
+    transitions:
+      - {from: HERANCA, to: FOLHA_SOBRE_A_PELE, trigger: "TURN:10", display_from: NEXT_CHAPTER}
+      - {from: FOLHA_SOBRE_A_PELE, to: RITUAL, trigger: "TURN:19", display_from: NEXT_CHAPTER}
+      - {from: RITUAL, to: DESCASCANDO, trigger: "TURN:24", display_from: NEXT_CHAPTER}
+      - {from: DESCASCANDO, to: ANEL_SEM_MAO, trigger: "TURN:32", display_from: NEXT_CHAPTER}
+
+  - id: SYM-MARMORE
+    label: mármore negro
+    class: MOTIF
+    meaning: "Perfeição que parece viva e corpo que começa a parecer estátua."
+    functions:
+      - {function: CHARACTER, anchors: ["TURN:1"]}
+      - {function: TRANSFORMATION, anchors: ["SCENE:STATUE_BREAKS"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Estátua de mármore negro com veios."}
+    cost_class: ESSENTIAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: ESTATUA_VELADA, initial: true, memory_state: S, meaning: "a imagem que ninguém viu", visual_description: "Estátua coberta por pano no terraço."}
+      - {id: ESTATUA_TOCADA, memory_state: R, meaning: "a imagem conhecida pelo toque", visual_description: "Mãos idosas sobre o rosto de pedra."}
+      - {id: ROSTO_QUEBRADO, memory_state: T, meaning: "a imagem destruída", visual_description: "Rosto de pedra com uma fenda funda da testa ao queixo."}
+      - {id: CORPO_DE_PEDRA, memory_state: P, meaning: "o homem vira estátua", visual_description: "Figura humana imóvel com a textura dos veios da pedra."}
+      - {id: PEDRA_QUE_FLORESCE, memory_state: E, meaning: "a pedra dá vida", visual_description: "Base da estátua com uma fenda aberta para cima."}
+    transitions:
+      - {from: ESTATUA_VELADA, to: ESTATUA_TOCADA, trigger: "TURN:4", display_from: NEXT_CHAPTER}
+      - {from: ESTATUA_TOCADA, to: ROSTO_QUEBRADO, trigger: "SCENE:STATUE_BREAKS", display_from: NEXT_CHAPTER}
+      - {from: ROSTO_QUEBRADO, to: CORPO_DE_PEDRA, trigger: "LEDGER:EV-DSR-5", display_from: NEXT_CHAPTER}
+      - {from: CORPO_DE_PEDRA, to: PEDRA_QUE_FLORESCE, trigger: "TURN:32", display_from: NEXT_CHAPTER}
+
+  - id: SYM-RACHADURA
+    label: rachadura
+    class: MOTIF
+    meaning: "Fragmentação da identidade."
+    functions:
+      - {function: TRANSFORMATION, anchors: ["SCENE:STATUE_BREAKS", "SCENE:THE_CENTER"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: "Fissura fina atravessando uma superfície."}
+    cost_class: OPTIONAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: FIO, initial: true, memory_state: S, meaning: "o primeiro defeito", visual_description: "Fissura quase invisível num espelho coberto."}
+      - {id: NO_ROSTO_DE_PEDRA, memory_state: R, meaning: "a imagem se parte", visual_description: "Fenda atravessando o rosto da estátua."}
+      - {id: NA_PALMA, memory_state: T, meaning: "a ferida volta ao corpo", visual_description: "Cicatriz reaberta na palma da mão."}
+      - {id: NA_BOCA, memory_state: P, meaning: "o corpo racha como pedra", visual_description: "Lábios partidos em linhas finas."}
+      - {id: DE_ONDE_NASCE, memory_state: E, meaning: "a fenda vira passagem", visual_description: "Fenda na pedra aberta para cima como uma boca."}
+    transitions:
+      - {from: FIO, to: NO_ROSTO_DE_PEDRA, trigger: "SCENE:STATUE_BREAKS", display_from: NEXT_CHAPTER}
+      - {from: NO_ROSTO_DE_PEDRA, to: NA_PALMA, trigger: "SCENE:THE_CENTER", display_from: NEXT_CHAPTER}
+      - {from: NA_PALMA, to: NA_BOCA, trigger: "LEDGER:EV-DSR-5", display_from: NEXT_CHAPTER}
+      - {from: NA_BOCA, to: DE_ONDE_NASCE, trigger: "TURN:32", display_from: NEXT_CHAPTER}
+
+  - id: SYM-GOTA
+    label: gota
+    class: MOTIF
+    meaning: "Água do corpo: suor, lágrima e desejo."
+    functions:
+      - {function: CONTRAST, anchors: ["SCENE:THE_CENTER"]}
+    count: 1
+    prominence: SUPPORTING
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 6, text_alternative: "Uma única gota suspensa."}
+    cost_class: OPTIONAL
+    approval: {policy: SUGGEST}
+    status: PLANNED
+    states:
+      - {id: ORVALHO, initial: true, memory_state: S, meaning: "a água do mundo", visual_description: "Gota de orvalho na borda da pedra."}
+      - {id: SUOR, memory_state: R, meaning: "o corpo aquecido", visual_description: "Gota escorrendo pela nuca."}
+      - {id: ENTRE_AS_MAOS, memory_state: T, meaning: "o que separa o toque", visual_description: "Gota suspensa entre duas mãos abertas."}
+      - {id: LAGRIMA, memory_state: P, meaning: "a perda admitida", visual_description: "Gota parada no canto de um olho."}
+      - {id: DESFAZ_O_REFLEXO, memory_state: E, meaning: "o que apaga a imagem", visual_description: "Círculos concêntricos abrindo na superfície da água."}
+    transitions:
+      - {from: ORVALHO, to: SUOR, trigger: "LEDGER:EV-DSR-2", display_from: NEXT_CHAPTER}
+      - {from: SUOR, to: ENTRE_AS_MAOS, trigger: "SCENE:THE_CENTER", display_from: NEXT_CHAPTER}
+      - {from: ENTRE_AS_MAOS, to: LAGRIMA, trigger: "TURN:29", display_from: NEXT_CHAPTER}
+      - {from: LAGRIMA, to: DESFAZ_O_REFLEXO, trigger: "SCENE:THE_NAME_AT_DAWN", display_from: NEXT_CHAPTER}
+
+  - id: MARK-BH-SEAL
+    label: marca da autora
+    class: AUTHOR_MARK
+    meaning: "Assinatura de catálogo de Bea Halden."
+    functions:
+      - {function: AUTHORIAL_IDENTITY, anchors: ["DOC:/book/planning/NARCISSUS_VISUAL_BIBLE.md#marca-autoral"]}
+    count: 1
+    prominence: TEXTURE
+    exposure: {spoiler_level: NONE}
+    accessibility: {monochrome_safe: true, min_render_size_mm: 5, text_alternative: "Selo BH."}
+    cost_class: ESSENTIAL
+    approval: {policy: AUTO}
+    status: PLANNED
+
+compositions:
+  - id: COMP-FRONT
+    surface: FRONT_COVER
+    reading_layer: OUTER_TRUTH
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, zone: [0.10, 0.18, 0.90, 0.72]}
+      - {element: SYM-AGUA, prominence: SECONDARY}
+    atmosphere: "Luz lateral fria sobre metade de um rosto; a linha da água corta a boca."
+    forbidden_elements: [VETO-N01, VETO-N02, VETO-N09, VETO-N13]
+    typography:
+      - {role: TITLE, text_source: "BOOK_SPEC.metadata.title", zone: [0.08, 0.74, 0.92, 0.86]}
+      - {role: AUTHOR, text_source: "AUTHOR_DNA.metadata.public_name", zone: [0.20, 0.88, 0.80, 0.94]}
+    thumbnail_intent: {focal_element: FIG-NARCISO, silhouette_readable: true}
+    approval: {policy: REQUIRE_APPROVAL, id: APR-COVER-01}
+    ext:
+      narciso:
+        face_fragment:
+          visible_ratio_max: 0.55
+          required_anchors: [eyes, mole_right, brow_line]
+          hidden_by: [water_line, shadow]
+          eyes_zone: [0.18, 0.30, 0.82, 0.48]
+        reflection_state: NONE
+        decay_state: D0_PRISTINE
+        gaze: TOWARD_READER
+        crop: EXTREME_CLOSE
+        nudity: false
+
+  - id: COMP-CASE-HIDDEN
+    surface: CASE_FRONT
+    reading_layer: HIDDEN_TRUTH
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT}
+      - {element: SYM-ESPELHO, prominence: SECONDARY}
+    atmosphere: "O mesmo fragmento visto do lado da água; um ponto de espelho onde estariam os olhos refletidos."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-CASE-01}
+    ext:
+      narciso:
+        reflection_state: ANOMALOUS_MIRROR
+        reflection_anomaly: mole
+        decay_state: D0_PRISTINE
+        gaze: UNDETERMINED
+        nudity: false
+
+  - id: COMP-SPINE
+    surface: SPINE
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-OURO, prominence: SUPPORTING}
+      - {element: MARK-BH-SEAL, prominence: TEXTURE}
+    atmosphere: "Faixa fina de ouro envelhecido sobre preto profundo."
+
+  - id: COMP-BACK
+    surface: BACK_COVER
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-GOTA, prominence: SUPPORTING}
+      - {element: MARK-BH-SEAL, prominence: TEXTURE}
+    atmosphere: "Uma gota suspensa sobre água negra, sinopse em marfim."
+
+  - id: COMP-OPENER
+    surface: CHAPTER_OPENER
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SIG-ESPELHO, prominence: DOMINANT}
+    atmosphere: "Número romano, título e selo do espelho no estado do capítulo."
+
+  # --- Slice 7: superfícies do collector (SDD 23.4). O resolver as omite nos alvos KDP.
+  - id: COMP-CASE-SPINE
+    surface: CASE_SPINE
+    reading_layer: HIDDEN_TRUTH   # lombada nua, sob a sobrecapa do collector
+    elements:
+      - {element: SYM-NARCISO, prominence: DOMINANT}
+    atmosphere: "Um narciso em relevo cego na lombada nua, sem cor."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-CASE-SPINE}
+  - id: COMP-ENDPAPER-FRONT
+    surface: ENDPAPER_FRONT
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-ESPELHO, prominence: DOMINANT}
+    atmosphere: "Padrão de lençóis negros sobre espelhos altos, sem figura."
+  - id: COMP-ENDPAPER-BACK
+    surface: ENDPAPER_BACK
+    reading_layer: HIDDEN_TRUTH
+    elements:
+      - {element: SYM-ESPELHO, prominence: DOMINANT}
+    atmosphere: "Os mesmos espelhos, agora descobertos, sem figura."
+  - id: COMP-EDGE-FORE
+    surface: EDGE_FORE
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-AGUA, prominence: DOMINANT}
+    atmosphere: "Borda frontal negra com ondulação de água em stencil."
+  - id: COMP-RIBBON
+    surface: RIBBON
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-AGUA, prominence: TEXTURE}
+    atmosphere: "Fita negra fina, como um fio de água."
+  - id: COMP-SLIPCASE
+    surface: SLIPCASE_FRONT
+    reading_layer: NEUTRAL
+    elements:
+      - {element: SYM-AGUA, prominence: DOMINANT}
+    atmosphere: "Caixa negra com uma janela de água parada, sem figura."
+
+  # --- Slice 4: as 24 pranchas (SDD 16.4). Um id por slot de chapter_architecture.yaml.
+  - id: IL-01
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 1
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-MARMORE, prominence: SECONDARY}
+    atmosphere: "Narciso de costas diante da estátua velada; o Coro em desfoque."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-IL-01}
+    illustration: {category: HERO, text_relation: COMPLEMENT, adds: "O Coro descreve o rosto; a imagem nunca o mostra.", placement: OPEN, placement_anchor: "TURN:1", spoiler_level: NONE}
+    ext: {narciso: {reflection_state: NONE, decay_state: D0_PRISTINE, gaze: AWAY, symmetry: STRICT, crop: WIDE, reader_emotion: "vontade de ver o rosto"}}
+  - id: IL-02
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 2
+    elements:
+      - {element: SYM-ESPELHO, prominence: DOMINANT}
+    atmosphere: "Corredor de espelhos altos cobertos por lençóis negros."
+    approval: {policy: SUGGEST}
+    illustration: {category: SYMBOL, text_relation: FORESHADOW, payoff_anchor: "TURN:32", placement: OPEN, placement_anchor: "TURN:2", spoiler_level: NONE}
+    ext: {narciso: {reflection_state: NONE, symmetry: STRICT, crop: WIDE, reader_emotion: "curiosidade pelo que está coberto"}}
+  - id: IL-03
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 4
+    elements:
+      - {element: SYM-MARMORE, prominence: DOMINANT}
+    atmosphere: "Mãos idosas pousadas sobre um rosto de pedra negra."
+    approval: {policy: SUGGEST}
+    illustration: {category: BODY_DETAIL, text_relation: FORESHADOW, payoff_anchor: "TURN:30", placement: OPEN, placement_anchor: "TURN:4", spoiler_level: NONE}
+    ext: {narciso: {reflection_state: NONE, symmetry: STRICT, crop: CLOSE, reader_emotion: "confiança no toque"}}
+  - id: IL-04
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 6
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-AGUA, prominence: SECONDARY}
+    atmosphere: "Cabelos sobre a água negra; uma ondulação parte a figura."
+    approval: {policy: SUGGEST}
+    illustration: {category: REFLECTION, text_relation: CONTRADICT, contradicts: "A narração percebe uma figura olhando; a imagem mostra só cabelo e ondulação.", placement: OPEN, placement_anchor: "SCENE:FIRST_WATER", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: FRAGMENTED, decay_state: D0_PRISTINE, gaze: TOWARD_REFLECTION, symmetry: STRICT, crop: MEDIUM, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF], reflection_face_visibility: NONE, reader_emotion: "dúvida sobre o que foi visto"}}
+  - id: IL-05
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 8
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-ESPELHO, prominence: SECONDARY}
+    atmosphere: "Perfil diante da janela noturna; o vidro devolve o rosto."
+    approval: {policy: SUGGEST}
+    illustration: {category: REFLECTION, text_relation: FORESHADOW, payoff_anchor: "SCENE:THE_CENTER", placement: OPEN, placement_anchor: "TURN:8", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: ANOMALOUS_MIRROR, reflection_anomaly: mole, decay_state: D0_PRISTINE, gaze: TOWARD_REFLECTION, symmetry: STRICT, crop: MEDIUM, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-GAZE], reflection_face_visibility: PARTIAL, reader_emotion: "algo pequeno parece errado"}}
+  - id: IL-06
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 9
+    elements:
+      - {element: SYM-ESPELHO, prominence: DOMINANT}
+    atmosphere: "Página arrancada de um diário, frase ilegível por desenho, sobre lençol negro."
+    approval: {policy: SUGGEST}
+    illustration: {category: SYMBOL, text_relation: COMPLEMENT, adds: "A página existe fisicamente e foi rasgada com pressa.", placement: AFTER, placement_anchor: "TURN:9", spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: NONE, symmetry: STRICT, crop: CLOSE, reader_emotion: "cumplicidade com o segredo de Eco"}}
+  - id: IL-07
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 10
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-OURO, prominence: SECONDARY}
+    atmosphere: "Ombro e pescoço cobertos de ouro em folha; os olhos voltados para quem olha."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-IL-07}
+    illustration: {category: HERO, text_relation: COMPLEMENT, adds: "O ouro cobre só metade do pescoço.", placement: OPEN, placement_anchor: "TURN:10", spoiler_level: NONE}
+    ext: {narciso: {reflection_state: NONE, decay_state: D0_PRISTINE, gaze: TOWARD_READER, symmetry: STRICT, crop: CLOSE, reader_emotion: "desejo de continuar olhando"}}
+  - id: IL-08
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 11
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-AGUA, prominence: SECONDARY}
+    atmosphere: "Margem da cava vista de longe; figura e reflexo mínimos."
+    approval: {policy: SUGGEST}
+    illustration: {category: REFLECTION, text_relation: FORESHADOW, payoff_anchor: "TURN:23", placement: OPEN, placement_anchor: "TURN:11", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: OCCLUDED, decay_state: D0_PRISTINE, gaze: AWAY, symmetry: STRICT, crop: WIDE, hypotheses_supported: [H-OTHER, H-SUPER, H-PROJ], reflection_face_visibility: NONE, reader_emotion: "vigiar junto com o Coro"}}
+  - id: IL-09
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 12
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D0_PRISTINE}
+      - {element: SYM-GOTA, prominence: SECONDARY}
+    atmosphere: "Mão molhada espalmada no vidro embaçado."
+    approval: {policy: SUGGEST}
+    illustration: {category: BODY_DETAIL, text_relation: CONTRADICT, contradicts: "O texto é erótico; a imagem mostra só uma mão parada no vidro.", placement: AFTER, placement_anchor: "TURN:12", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: OCCLUDED, decay_state: D0_PRISTINE, gaze: AWAY, symmetry: BROKEN, crop: CLOSE, hypotheses_supported: [H-PROJ, H-SELF], reflection_face_visibility: NONE, reader_emotion: "calor contido"}}
+  - id: IL-10
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 14
+    elements:
+      - {element: SYM-MARMORE, prominence: DOMINANT}
+      - {element: SYM-RACHADURA, prominence: SECONDARY}
+    atmosphere: "Rosto de mármore negro com uma fenda funda."
+    approval: {policy: SUGGEST}
+    illustration: {category: SYMBOL, text_relation: COMPLEMENT, adds: "A rachadura desce a partir do olho esquerdo da estátua.", placement: AFTER, placement_anchor: "SCENE:STATUE_BREAKS", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: NONE, symmetry: BROKEN, crop: CLOSE, reader_emotion: "perda irreversível"}}
+  - id: IL-11
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 15
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D1_SLEEPLESS}
+      - {element: SYM-ESPELHO, prominence: SECONDARY}
+    atmosphere: "Costas nuas diante de três espelhos; uma das figuras parece de frente."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-IL-11}
+    illustration: {category: REFLECTION, text_relation: CONTRADICT, contradicts: "Ele está sozinho no quarto.", placement: AFTER, placement_anchor: "TURN:15", spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: DOUBLE, decay_state: D1_SLEEPLESS, gaze: TOWARD_REFLECTION, symmetry: BROKEN, crop: MEDIUM, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-GAZE], reflection_face_visibility: PARTIAL, nudity: true, reader_emotion: "desconforto de estar no quarto"}}
+  - id: IL-12
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 17
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D1_SLEEPLESS}
+      - {element: SYM-GOTA, prominence: SECONDARY}
+    atmosphere: "Duas mãos quase se tocando através da superfície; uma gota entre elas."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-IL-12}
+    illustration: {category: HERO, text_relation: FORESHADOW, payoff_anchor: "SCENE:THE_NAME_AT_DAWN", placement: AFTER, placement_anchor: "SCENE:THE_CENTER", pair_with: SPREAD, spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: ANOMALOUS_MIRROR, reflection_anomaly: scar, decay_state: D1_SLEEPLESS, gaze: TOWARD_READER, symmetry: BROKEN, crop: EXTREME_CLOSE, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-GAZE], reflection_face_visibility: NONE, reader_emotion: "vontade de tocar junto"}}
+  - id: IL-13
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 18
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D2_FEVER}
+      - {element: SYM-ESPELHO, prominence: SECONDARY}
+    atmosphere: "Nuca e ombro na penumbra; a janela reflete uma figura só."
+    approval: {policy: SUGGEST}
+    illustration: {category: BODY_DETAIL, text_relation: CONTRADICT, contradicts: "Eco sente os dois no quarto; a janela reflete uma figura só.", placement: AFTER, placement_anchor: "TURN:18", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: OCCLUDED, decay_state: D2_FEVER, gaze: AWAY, symmetry: BROKEN, crop: CLOSE, hypotheses_supported: [H-PROJ, H-SELF], reflection_face_visibility: NONE, reader_emotion: "intimidade com inquietação"}}
+  - id: IL-14
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 19
+    elements:
+      - {element: SYM-AGUA, prominence: DOMINANT}
+      - {element: SYM-OURO, prominence: SECONDARY}
+    atmosphere: "Bacia de água, velas e pó de ouro sobre a pedra."
+    approval: {policy: SUGGEST}
+    illustration: {category: SYMBOL, text_relation: COMPLEMENT, adds: "A bacia reflete o teto, não um rosto.", placement: OPEN, placement_anchor: "TURN:19", spoiler_level: LOW}
+    ext: {narciso: {reflection_state: TRUE_MIRROR, symmetry: BROKEN, crop: MEDIUM, hypotheses_supported: [H-PROJ, H-GAZE], reflection_face_visibility: NONE, reader_emotion: "rito sem testemunha"}}
+  - id: IL-15
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 22
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D2_FEVER}
+      - {element: SYM-MARMORE, prominence: SECONDARY}
+    atmosphere: "Chave sobre mármore; mão de unhas roídas ao lado."
+    approval: {policy: SUGGEST}
+    illustration: {category: DECAY, text_relation: COMPLEMENT, adds: "A chave está do lado de fora da porta.", placement: AFTER, placement_anchor: "TURN:22", spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: NONE, decay_state: D2_FEVER, gaze: AWAY, symmetry: BROKEN, crop: EXTREME_CLOSE, reader_emotion: "alarme"}}
+  - id: IL-16
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 23
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D3_WITHERING}
+      - {element: SYM-AGUA, prominence: SECONDARY}
+    atmosphere: "Fotografia granulada da margem; o reflexo cai num ângulo que a luz não explica."
+    approval: {policy: SUGGEST}
+    illustration: {category: REFLECTION, text_relation: CONTRADICT, contradicts: "O Coro jura que ele estava sozinho.", placement: AFTER, placement_anchor: "TURN:23", spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: ANOMALOUS_MIRROR, reflection_anomaly: angle, decay_state: D3_WITHERING, gaze: AWAY, symmetry: FRAGMENTED, crop: CLOSE, hypotheses_supported: [H-OTHER, H-SUPER, H-PROJ], reflection_face_visibility: NONE, reader_emotion: "vontade de ampliar a foto"}}
+  - id: IL-17
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 24
+    elements:
+      - {element: SYM-OURO, prominence: DOMINANT}
+    atmosphere: "A fotografia guardada; o ouro do ombro descasca."
+    approval: {policy: SUGGEST}
+    illustration: {category: CALLBACK, text_relation: COMPLEMENT, adds: "O ouro descasca exatamente onde a folha cobria o pescoço.", callback_of: IL-07, callback_changes: [{what: "o ouro descasca"}], placement: AFTER, placement_anchor: "TURN:24", spoiler_level: MEDIUM}
+    ext: {narciso: {reflection_state: NONE, symmetry: FRAGMENTED, crop: CLOSE, reader_emotion: "nostalgia culpada"}}
+  - id: IL-18
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 27
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D3_WITHERING}
+      - {element: SYM-ESPELHO, prominence: SECONDARY}
+    atmosphere: "Lençol caído de um espelho; o corpo cortado de quadro, o reflexo mais íntegro que ele."
+    approval: {policy: SUGGEST}
+    illustration: {category: DECAY, text_relation: FORESHADOW, payoff_anchor: "TURN:32", placement: AFTER, placement_anchor: "TURN:27", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: ANOMALOUS_MIRROR, reflection_anomaly: decay_offset, decay_state: D3_WITHERING, gaze: TOWARD_REFLECTION, symmetry: FRAGMENTED, crop: CLOSE, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-GAZE], reflection_face_visibility: PARTIAL, reader_emotion: "o reflexo parece mais vivo"}}
+  - id: IL-19
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 28
+    elements:
+      - {element: SYM-AGUA, prominence: DOMINANT}
+      - {element: SYM-GOTA, prominence: SECONDARY}
+    atmosphere: "Água negra com uma única gota caindo, na composição da primeira água."
+    approval: {policy: SUGGEST}
+    illustration: {category: CALLBACK, text_relation: CONTRADICT, contradicts: "Eco o vê na margem; a água não mostra ninguém.", callback_of: IL-04, callback_changes: [{what: "nenhum cabelo sobre a água"}, {what: "a água ondula sem causa visível", impossible: true}], placement: AFTER, placement_anchor: "TURN:28", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: ABSENT_REFLECTION, symmetry: FRAGMENTED, crop: WIDE, hypotheses_supported: [H-PROJ, H-SUPER, H-OTHER], reflection_face_visibility: NONE, reader_emotion: "falta"}}
+  - id: IL-20
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 30
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D4_MARBLE}
+      - {element: SYM-MARMORE, prominence: SECONDARY}
+    atmosphere: "As mesmas mãos idosas, agora sobre um rosto de carne imóvel."
+    approval: {policy: SUGGEST}
+    illustration: {category: CALLBACK, text_relation: COMPLEMENT, adds: "As mãos de Teodoro repetem o gesto do capítulo 4 sobre pele fria.", callback_of: IL-03, callback_changes: [{what: "o rosto sob as mãos é de carne, não de pedra"}], placement: AFTER, placement_anchor: "TURN:30", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: NONE, decay_state: D4_MARBLE, gaze: AWAY, symmetry: FRAGMENTED, crop: CLOSE, reader_emotion: "luto antecipado"}}
+  - id: IL-21
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 31
+    elements:
+      - {element: FIG-NARCISO, prominence: DOMINANT, state: D4_MARBLE}
+      - {element: SYM-AGUA, prominence: SECONDARY}
+    atmosphere: "Amanhecer; névoa sobre a cava; reflexo parcial de uma silhueta."
+    approval: {policy: SUGGEST}
+    illustration: {category: REFLECTION, text_relation: CONTRADICT, contradicts: "Ele chama um nome; a imagem não mostra quem responde.", placement: AFTER, placement_anchor: "SCENE:THE_NAME_AT_DAWN", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: FRAGMENTED, decay_state: D4_MARBLE, gaze: AWAY, symmetry: FRAGMENTED, crop: TRACE, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-GAZE], reflection_face_visibility: NONE, reader_emotion: "suspensão"}}
+  - id: IL-22
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 32
+    elements:
+      - {element: SYM-ESPELHO, prominence: DOMINANT}
+    atmosphere: "O corredor da abertura, agora com os espelhos descobertos frente a frente."
+    approval: {policy: SUGGEST}
+    illustration: {category: CALLBACK, text_relation: FORESHADOW, payoff_anchor: "SCENE:WE_STILL_LOOK", callback_of: IL-02, callback_changes: [{what: "os lençóis foram retirados"}, {what: "espelhos frente a frente não multiplicam nada", impossible: true}], placement: AFTER, placement_anchor: "TURN:32", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: TRUE_MIRROR, symmetry: FRAGMENTED, crop: WIDE, hypotheses_supported: [H-GAZE, H-SUPER], reflection_face_visibility: NONE, reader_emotion: "vertigem"}}
+  - id: IL-23
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 32
+    elements:
+      - {element: SYM-NARCISO, prominence: DOMINANT}
+      - {element: SYM-RACHADURA, prominence: SECONDARY}
+    atmosphere: "Uma flor branca nascendo da fenda da pedra negra."
+    approval: {policy: SUGGEST}
+    illustration: {category: CALLBACK, text_relation: COMPLEMENT, adds: "A flor nasce da mesma fenda aberta no capítulo 14.", callback_of: IL-10, callback_changes: [{what: "uma flor nasce da fenda"}], placement: AFTER, placement_anchor: "TURN:32", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: NONE, symmetry: FRAGMENTED, crop: CLOSE, reader_emotion: "beleza insuportável"}}
+  - id: IL-24
+    surface: INTERIOR_PLATE
+    reading_layer: NEUTRAL
+    chapter: 33
+    elements:
+      - {element: SYM-AGUA, prominence: DOMINANT}
+      - {element: SYM-MARMORE, prominence: SECONDARY}
+    atmosphere: "A composição da primeira prancha: estátua, Coro fotografando, nenhuma figura, a água em primeiro plano."
+    approval: {policy: REQUIRE_APPROVAL, id: APR-IL-24}
+    illustration: {category: CALLBACK, text_relation: CONTRADICT, contradicts: "O Coro diz que não há ninguém na água.", callback_of: IL-01, callback_changes: [{what: "não há figura diante da estátua"}, {what: "o Coro fotografa"}, {what: "a água guarda uma forma que nada no quadro projeta", impossible: true}], placement: AFTER, placement_anchor: "SCENE:WE_STILL_LOOK", spoiler_level: HIGH}
+    ext: {narciso: {reflection_state: FRAGMENTED, symmetry: FRAGMENTED, crop: WIDE, hypotheses_supported: [H-PROJ, H-SUPER, H-SELF, H-OTHER, H-GAZE], reflection_face_visibility: NONE, reader_emotion: "percebe que também olhou"}}
+
+# --- Slice 5: recursos de exibição (SDD 18.3). Só imagem abaixo do título; o
+# texto de leitura nunca é espelhado (MIR-01). Kindle omite (18.5).
+display_assets:
+  - id: DSP-TITLE-ECHO
+    kind: TITLE_ECHO
+    meaning: "duplicata espelhada do título, em tinta muito clara, nos capítulos do Ato II em que o reflexo está presente"
+    chapters: [12, 15, 17, 19, 22]
+    asset: "images/display/title_echo_{chapter:02d}.png"
+  - id: DSP-ORNAMENT-I
+    kind: ORNAMENT
+    meaning: "fio fino inteiro"
+    chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    asset: "images/display/ornament_act1.png"
+  - id: DSP-ORNAMENT-II
+    kind: ORNAMENT
+    meaning: "fio duplicado"
+    chapters: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+    asset: "images/display/ornament_act2.png"
+  - id: DSP-ORNAMENT-III
+    kind: ORNAMENT
+    meaning: "fio interrompido"
+    chapters: [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
+    asset: "images/display/ornament_act3.png"
+
+finish_intents:
+  - id: FI-TITLE
+    target: {composition: COMP-FRONT, role: TITLE}
+    semantic_material: AGED_GOLD
+    meaning_element: SYM-OURO
+    preferred_effect: METALLIC_FOIL
+    fallbacks: [SIMULATED_METALLIC_PRINT, FLAT_ROLE_COLOR]
+    cost_class: PREMIUM
+    must_survive_grayscale: false
+    layer_name: L_FOIL_TITLE
+    approval: {policy: REQUIRE_APPROVAL, id: APR-FI-TITLE}
+  - id: FI-WATER
+    target: {composition: COMP-FRONT, element: SYM-AGUA}
+    semantic_material: OBSIDIAN_GLOSS
+    meaning_element: SYM-AGUA
+    preferred_effect: SPOT_UV
+    fallbacks: [CONTRAST_SIMULATION, FLAT_ROLE_COLOR]
+    cost_class: OPTIONAL
+    layer_name: L_SPOT_UV_WATER
+    approval: {policy: SUGGEST}
+  # Prata só como acabamento (decisão humana OQ-N6). Escada do Slice 7 (SDD 21.2):
+  # placa espelhada → papel metalizado → foil → impressão metálica simulada.
+  # TRAP-01: área pequena, baixo contraste, só na capa nua do collector.
+  - id: FI-MIRROR-POOL
+    target: {composition: COMP-CASE-HIDDEN, element: SYM-ESPELHO}
+    semantic_material: SILVER_MIRROR
+    meaning_element: SYM-ESPELHO
+    preferred_effect: MIRROR_BOARD
+    fallbacks: [METALLIZED_PAPER, METALLIC_FOIL, SIMULATED_METALLIC_PRINT]
+    cost_class: COLLECTOR_ONLY
+    layer_name: L_MIRROR_POOL
+    approval: {policy: REQUIRE_APPROVAL, id: APR-FI-MIRROR}
+    ext: {narciso: {area_ratio_max: 0.05, contrast: LOW}}
+  - id: FI-CRACK
+    target: {composition: COMP-CASE-HIDDEN, element: FIG-NARCISO}
+    semantic_material: STONE_MATTE
+    meaning_element: SYM-RACHADURA
+    preferred_effect: DEBOSS
+    fallbacks: [TONAL_RELIEF_SIMULATION]
+    cost_class: COLLECTOR_ONLY
+    layer_name: L_DEBOSS_CRACK
+    approval: {policy: REQUIRE_APPROVAL, id: APR-FI-CRACK}
+  # --- Slice 7: acabamentos do collector (SDD 21.2, 21.3). Todos COLLECTOR_ONLY e
+  # VENDOR_DEPENDENT: sem layout/PRINTER_PROFILE.yaml com evidência, viram omissão.
+  - id: FI-FLOWER
+    target: {composition: COMP-CASE-SPINE, element: SYM-NARCISO}
+    semantic_material: IVORY
+    meaning_element: SYM-NARCISO
+    preferred_effect: BLIND_EMBOSS
+    fallbacks: [EMBOSS]
+    cost_class: COLLECTOR_ONLY
+    layer_name: L_EMBOSS_FLOWER
+    approval: {policy: SUGGEST}
+  - id: FI-EDGE
+    target: {composition: COMP-EDGE-FORE, element: SYM-AGUA}
+    semantic_material: GROUND
+    meaning_element: SYM-AGUA
+    preferred_effect: SPRAYED_EDGE
+    fallbacks: [STENCILED_EDGE]
+    cost_class: COLLECTOR_ONLY
+    layer_name: L_EDGE_STENCIL
+    approval: {policy: SUGGEST}
+  - id: FI-RIBBON
+    target: {composition: COMP-RIBBON, element: SYM-AGUA}
+    semantic_material: BLACK_SILK
+    meaning_element: SYM-AGUA
+    preferred_effect: RIBBON_MARKER
+    fallbacks: []
+    cost_class: COLLECTOR_ONLY
+    approval: {policy: SUGGEST}
+  - id: FI-SLIPCASE
+    target: {composition: COMP-SLIPCASE, element: SYM-AGUA}
+    semantic_material: OBSIDIAN_GLOSS
+    meaning_element: SYM-AGUA
+    preferred_effect: SLIPCASE
+    fallbacks: []
+    cost_class: COLLECTOR_ONLY
+    approval: {policy: REQUIRE_APPROVAL, id: APR-FI-SLIPCASE}
+
+approvals: []
+releases: []
+mutation_log:
+  - {version: 0.1.0, task: SEED, owner: pacote, action: "Semente criada no Slice 3 a partir da SDD."}

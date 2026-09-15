@@ -1,0 +1,77 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+# Slice 2: os guardiões da obra assumem as cenas de ambiguidade e de
+# desejo/definhamento (SDD, seção 26.4).
+scenes:
+  - id: CHORUS_FIRST_GAZE
+    chapters: [1]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: O Coro apresenta Narciso de fora e coloca o leitor entre os que olham.
+    must_preserve: [primeira pessoa do plural sem acesso à mente de Narciso, beleza concreta e perturbadora, leitor implicado sem ser nomeado]
+    reject_if: [Coro sabe o que Narciso pensa, beleza genérica, explicação da estátua]
+  - id: THE_REJECTION
+    chapters: [5]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: A rejeição de Eco sustenta leitura de proteção e leitura de desprezo.
+    must_preserve: [crueldade precisa, as duas leituras verdadeiras, Eco mantém decisão própria]
+    reject_if: [humilhação erotizada, motivo declarado, violência física]
+  - id: FIRST_WATER
+    chapters: [6]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: Primeira presença na água sem resolver o que ela é.
+    must_preserve: [percepção sensorial concreta, ao menos três hipóteses viáveis, nenhuma fala]
+    reject_if: [figura nítida, confirmação sobrenatural, explicação psicológica conclusiva]
+  - id: STATUE_BREAKS
+    chapters: [14]
+    auditor: CHARACTER_CONTINUITY_REVIEWER
+    purpose: O gesto único em que ciúme e posse não se separam.
+    must_preserve: [gesto único, rachadura permanente, Eco não é ferida]
+    reject_if: [explicação interior do motivo, violência contra Eco]
+  - id: THE_CENTER
+    chapters: [17]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: Centro do palíndromo; o desejo encontra a superfície.
+    must_preserve: [toque fora de tempo, uma única gota, cicatriz da palma esquerda reabre]
+    reject_if: [mão atravessa a superfície, a figura fala, a figura age sozinha de forma inequívoca]
+  - id: NIGHT_WITHOUT_WORDS
+    chapters: [18]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Intimidade adulta em página, com teto de explicitude SENSUAL (decisão humana OQ-N4).
+    must_preserve: [consentimento verbal prévio, sinal de parada combinado, revogabilidade explícita, silêncio não é consentimento, olhar de Narciso para a janela]
+    reject_if: [silêncio tratado como sim, Eco sem capacidade de interromper, explicitude acima de SENSUAL, mecânica corporal descrita]
+  - id: DSR_OCCURRENCES
+    chapters: [12, 15, 19, 22, 27, 31]
+    auditor: DESIRE_DECAY_GUARDIAN
+    purpose: As seis ocorrências compulsivas mudam de significado e perdem prazer.
+    must_preserve: [função única por ocorrência, consequência em cada ocorrência, teto de explicitude declarado, capacidade de recusa reduzida a partir da quarta]
+    reject_if: [explicitude como diferença principal, pornografia gratuita, escalada de explicitude, magreza celebrada]
+  - id: LIA_THREE_VERSIONS
+    chapters: [25]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: Três versões documentadas e incompatíveis da origem das regras da casa.
+    must_preserve: [doença de família, lenda da água da cava, profecia do autoconhecimento, nenhuma versão privilegiada]
+    reject_if: [uma versão confirmada pela narração, qualquer versão envolvendo gêmeo ou irmão]
+  - id: GLASS_JEALOUSY
+    chapters: [26]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Ciúme do vidro e saída de Eco por decisão própria.
+    must_preserve: [Eco com agência e saída própria, ambiguidade de proteção e exclusão]
+    reject_if: [violência física romantizada, Eco expulsa sem escolha]
+  - id: SECOND_REFUSAL
+    chapters: [29]
+    auditor: DESIRE_DECAY_GUARDIAN
+    purpose: A recusa lúcida e custosa de ser tirado da casa.
+    must_preserve: [recusa lúcida, custo para Narciso, Eco não é salvadora]
+    reject_if: [resgate, sermão, ameaça de autolesão]
+  - id: THE_NAME_AT_DAWN
+    chapters: [31]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: O nome chamado ao amanhecer e a resposta que volta.
+    must_preserve: [nome ambíguo, eco ambíguo, cena termina antes de resolução]
+    reject_if: [nome dito inequivocamente para Eco, entrada deliberada na água narrada, ato de autolesão]
+  - id: WE_STILL_LOOK
+    chapters: [33]
+    auditor: NARCISSUS_AMBIGUITY_GUARDIAN
+    purpose: A última evidência e o olhar que continua.
+    must_preserve: [exatamente uma evidência nova, implicação do olhar do leitor, Coro sem consenso]
+    reject_if: [explicação, moral, epílogo]

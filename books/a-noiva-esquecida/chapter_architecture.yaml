@@ -1,0 +1,336 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: A Dívida Vinter
+    movement: I — A Casa do Gigante
+    pov: Elias
+    function: Astrid apresenta a cobrança e deixa Elias concluir que Liv será tomada.
+    dramatic_question: Ele protege a irmã ou decide por ela?
+    irreversible_turn: Elias assume formalmente a dívida sem consultar Liv.
+    continuity: [Astrid nunca afirma literalmente que Liv será raptada, maçã existe no brasão]
+  - number: 2
+    title: A Estrada Ausente
+    movement: I — A Casa do Gigante
+    pov: Elias
+    function: Cruzar o limiar de Mestergård e aceitar quatro trabalhos.
+    dramatic_question: Um consentimento voluntário pode ser informado se a família mentiu?
+    irreversible_turn: Elias responde três vezes que veio livre e informado.
+    continuity: [dia 1, quatro marcas no contrato, nenhum fiorde marítimo]
+  - number: 3
+    title: O Homem Chamado Gigante
+    movement: I — A Casa do Gigante
+    pov: Elias
+    function: Apresentar Runa, regras e a lógica sedutora do Gigante.
+    dramatic_question: A casa cobra justiça ou fabrica propriedade?
+    irreversible_turn: Elias encontra registros Vinter raspados e decide investigar.
+    continuity: [não comer fruto escuro, não cobrir espelhos, porta tem quatro riscos externos]
+  - number: 4
+    title: Quatro Trabalhos
+    movement: I — A Casa do Gigante
+    pov: Sigrid
+    function: Revelar que a porta dá para uma sala clandestina de contra-auditoria.
+    dramatic_question: Elias é testemunha útil ou outro Vinter perigoso?
+    irreversible_turn: Sigrid mostra que cada trabalho pode produzir prova da fraude.
+    continuity: [primeiro POV de Sigrid, ela nunca aparece em cela]
+  - number: 5
+    title: A Porta Proibida
+    movement: I — A Casa do Gigante
+    pov: Elias
+    function: Negociar acordo lateral limitado entre os protagonistas.
+    dramatic_question: Necessidade pode produzir confiança sem produzir posse?
+    irreversible_turn: Reflexo aceita os termos; uma gota de tinta desaparece.
+    continuity: [cooperação e saída apenas, nenhum consentimento íntimo]
+  - number: 6
+    title: Mestermø
+    movement: I — A Casa do Gigante
+    pov: Sigrid
+    function: Provar competência e introduzir o caderno de memórias.
+    dramatic_question: Por que uma mulher de memória perfeita registra a própria vida?
+    irreversible_turn: Sigrid trata a mão de Elias e permite que ele veja uma lacuna no caderno.
+    continuity: [Mestermø ainda parece título de serviço, café é ensinado]
+  - number: 7
+    title: O Preço da Ajuda
+    movement: I — A Casa do Gigante
+    pov: Elias
+    function: Dar ao Gigante seu argumento mais forte e mostrar afeto possessivo por Sigrid.
+    dramatic_question: Custódia coerciva pode ser proteção real?
+    irreversible_turn: Elias reconhece que sua família terceirizou custos e quase aceita a moral do Gigante.
+    continuity: [jantar sem fruta, Gigante não mente literalmente]
+  - number: 8
+    title: A Primeira Promessa
+    movement: I — A Casa do Gigante
+    pov: Sigrid
+    function: Revelar que os trabalhos são auditoria e selar promessa de saída.
+    dramatic_question: Elias vai levá-la porque quer ou porque precisa?
+    irreversible_turn: Elias promete sair com Sigrid, seu nome e os instrumentos.
+    continuity: [janela testemunha, Sigrid adverte sobre ser recebido limpo]
+    protected_scene: FIRST_PROMISE
+  - number: 9
+    title: O Pomar sem Estação
+    movement: II — Os Trabalhos
+    pov: Elias
+    function: Localizar no pomar a memória que financiou os Vinter.
+    dramatic_question: Que lembrança Elias oferece para fazer a verdade responder?
+    irreversible_turn: Ele deposita temporariamente sua lembrança mais feliz e a maçã correta aparece.
+    continuity: [trabalho 1, ninguém morde o fruto, heroísmo ligado a autopunição]
+  - number: 10
+    title: A Semente
+    movement: II — Os Trabalhos
+    pov: Sigrid
+    function: Extrair cadeia de custódia da maçã e mostrar Solveig com uma criança.
+    dramatic_question: A lembrança prova adoção, entrega ou resgate?
+    irreversible_turn: A semente registra a entrada da falsa Vinter.
+    continuity: [instrumento 1 adquirido, três manchas recorrentes]
+  - number: 11
+    title: Coroar o Afogado
+    movement: II — Os Trabalhos
+    pov: Elias
+    function: Recuperar o mandato submerso do primeiro credor.
+    dramatic_question: Elias obedece à regra ou salva Sigrid do afogamento?
+    irreversible_turn: Ele olha o reflexo, salva-a e vê Sigrid coroada ao lado do Gigante.
+    continuity: [trabalho 2, coroa de ferro, visão é semântica e não profética]
+  - number: 12
+    title: Aquilo que Ela Sabe
+    movement: II — Os Trabalhos
+    pov: Sigrid
+    function: Explicar parcialmente o ofício Mestermø e aprofundar cuidado cotidiano.
+    dramatic_question: Quanto de si Sigrid pode revelar sem perder vantagem?
+    irreversible_turn: Ela admite que Mestermø mede equivalências, omitindo que ocupa o cargo.
+    continuity: [instrumento 2 adquirido, Elias prepara café]
+  - number: 13
+    title: O Galho Morto
+    movement: II — Os Trabalhos
+    pov: Sigrid
+    function: Obter galho numa floresta que fecha caminhos diante de autoengano.
+    dramatic_question: A omissão de Sigrid transforma aliança em manipulação?
+    irreversible_turn: Ela admite ter tido chances físicas de fuga e Elias se sente usado.
+    continuity: [trabalho 3 começa, galho permanece seco]
+  - number: 14
+    title: O Imposto do Inferno
+    movement: II — Os Trabalhos
+    pov: Elias
+    function: Fazer o galho brotar por verdades e iniciar descida ao tribunal geotérmico.
+    dramatic_question: O inferno é lugar, memória coletiva ou estado induzido?
+    irreversible_turn: Elias admite que escolhe sofrer; Sigrid admite que também ficou pelo poder.
+    continuity: [primeiro beijo interrompido com limites verbalizados, ambiguidade sobrenatural]
+    protected_scene: HELL_TAX
+  - number: 15
+    title: A Moeda que Respira
+    movement: II — Os Trabalhos
+    pov: Sigrid
+    function: Cobrar três dívidas antigas nomeando benefícios ainda desfrutados.
+    dramatic_question: Herdeiros devem custos que nunca escolheram?
+    irreversible_turn: O tribunal entrega recibo de cobre com quatro marcas, uma raspada.
+    continuity: [sem Inferno religioso confirmado, linha uma noiva não é pagamento]
+    protected_scene: HELL_TAX
+  - number: 16
+    title: A Última Ordem
+    movement: II — Os Trabalhos
+    pov: Elias
+    function: Expor adoção fraudulenta e revelar involuntariamente a autoridade de Sigrid.
+    dramatic_question: Pode Elias protegê-la sem nomeá-la?
+    irreversible_turn: Ao chamá-la Mestermø, autentica o cargo e alerta a casa.
+    continuity: [instrumentos 3 e 4 adquiridos, quatro trabalhos completos]
+  - number: 17
+    title: Três Gotas
+    movement: III — A Fuga
+    pov: Sigrid
+    function: Recusar ordem de matar Elias e fabricar presença substituta.
+    dramatic_question: Quanto de si ela paga para preservar uma testemunha?
+    irreversible_turn: Três gotas custam voz da mãe, primeiro lugar seguro e rosto infantil.
+    continuity: [exatamente três, voz calor sombra, nada de respostas culinárias]
+    protected_scene: THREE_DROPS
+  - number: 18
+    title: A Casa que Escuta
+    movement: III — A Fuga
+    pov: Elias
+    function: Mostrar o simulacro físico e iniciar fuga pela drenagem da auditoria.
+    dramatic_question: A casa aceitará uma morte sem corpo?
+    irreversible_turn: Sigrid declara a morte ao espelho e o prazo começa.
+    continuity: [gotas não conversam, caderno registra perdas]
+    protected_scene: THREE_DROPS
+  - number: 19
+    title: A Floresta em Movimento
+    movement: III — A Fuga
+    pov: Sigrid
+    function: Escapar de cobradores humanos e caminhos contratuais.
+    dramatic_question: Ela salva a prova ou as próprias lembranças?
+    irreversible_turn: Sigrid destrói registros pessoais para preservar a semente.
+    continuity: [sem obstáculos do conto, instrumentos permanecem com o casal]
+  - number: 20
+    title: Água Negra
+    movement: III — A Fuga
+    pov: Elias
+    function: Sobreviver a avalanche numa estação meteorológica e consumar intimidade conquistada.
+    dramatic_question: Existe escolha livre numa pausa real entre perigos?
+    irreversible_turn: Depois de consentimento explícito, Elias descobre o custo das três gotas.
+    continuity: [janela de segurança, capacidade preservada, Sigrid esqueceu a voz de Solveig]
+    protected_scene: FIRST_INTIMACY
+  - number: 21
+    title: A Coroa de Ferro
+    movement: III — A Fuga
+    pov: Sigrid
+    function: Cruzar desfiladeiro por teleférico industrial e confrontar fuga anterior.
+    dramatic_question: Solveig morreu por erro de Sigrid ou versão repetida pelo Gigante?
+    irreversible_turn: Sigrid admite não confiar na origem da própria lembrança.
+    continuity: [pedreira ficcional, coroa não significa casamento]
+  - number: 22
+    title: O Nome da Mestra
+    movement: III — A Fuga
+    pov: Elias
+    function: Atravessar galeria inundada e ver Astrid entregando a menina.
+    dramatic_question: Elias carrega a prova ou escolhe a saída mais rápida?
+    irreversible_turn: Ele preserva a coroa; Sigrid o ancora contra água negra.
+    continuity: [reflexo mostra ausência, não futuro]
+  - number: 23
+    title: O Quarto Refúgio
+    movement: III — A Fuga
+    pov: Sigrid
+    function: Pagar passagem a um notário humano e declarar amor sem cobrança.
+    dramatic_question: O nome dela vale mais que a herança dele?
+    irreversible_turn: Elias entrega o relógio Vinter e preserva o nome de Sigrid.
+    continuity: [amor respondido por escolha, não dívida]
+  - number: 24
+    title: Antes da Casa Vinter
+    movement: III — A Fuga
+    pov: Elias
+    function: Estabelecer tabu de retorno e separar o casal.
+    dramatic_question: Ele pode proteger Liv sem quebrar a promessa a Sigrid?
+    irreversible_turn: Uma falsa urgência o faz entrar sozinho antes de garantir acesso a Sigrid.
+    continuity: [não entrar comer receber bênção ou ver Astrid, Sigrid espera na capela]
+  - number: 25
+    title: A Maçã
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Executar rito Vinter de hospitalidade e apagamento.
+    dramatic_question: Que perigo pode existir num gesto doméstico?
+    irreversible_turn: Elias morde a maçã e o vínculo com Sigrid fica inacessível.
+    continuity: [Liv está bem, Astrid encenou urgência, espelhos cobertos]
+    protected_scene: APPLE_FORGETTING
+  - number: 26
+    title: Sozinho
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Materializar vazio seletivo e devastar a promessa.
+    dramatic_question: Como alguém percebe que a própria narrativa está mentindo?
+    irreversible_turn: Elias diz que estava sozinho e prepara dois cafés.
+    continuity: [recorda casa tarefas e fuga, POV permanece Elias; dois cafés e a ausência exterior implicam a espera, corpo da espera abre o capítulo 27]
+    protected_scene: APPLE_FORGETTING
+  - number: 27
+    title: A Mulher no Portão
+    movement: IV — O Homem que a Esqueceu
+    pov: Sigrid
+    function: Entrar como auditora sem reivindicar relação ou hospitalidade.
+    dramatic_question: Como exigir justiça de quem não reconhece sua dor?
+    irreversible_turn: A moeda concede standing temporário e reabre a dívida.
+    continuity: [ela traz quatro instrumentos, não invade intimidade]
+  - number: 28
+    title: O Corpo se Lembra
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Reencenar o primeiro encontro com os papéis invertidos.
+    dramatic_question: Familiaridade corporal é pista, manipulação ou ameaça?
+    irreversible_turn: Elias impede a expulsão de Sigrid e aceita ouvir provas.
+    continuity: [alarme defensivo e familiaridade procedural coexistem, nenhum é desejo novo ou consentimento]
+  - number: 29
+    title: O Lugar à Mesa
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Tornar body memory concreta e estabelecer limites novos.
+    dramatic_question: O corpo pode testemunhar sem comandar?
+    irreversible_turn: Sigrid explica que o nó e o café não autorizam intimidade; eles pactuam investigar.
+    continuity: [acordo específico e revogável]
+    protected_scene: BODY_MEMORY_BOUNDARY
+  - number: 30
+    title: A Cicatriz
+    movement: IV — O Homem que a Esqueceu
+    pov: Sigrid
+    function: Encontrar enxerto e notas de Astrid com ajuda de Liv.
+    dramatic_question: A reação de Elias prova amor ou apenas dano?
+    irreversible_turn: Sigrid se recusa a usar a familiaridade como prova e Liv escolhe sua aliança.
+    continuity: [primeira elipse da segunda história, sonhos e desenho de Liv]
+  - number: 31
+    title: Coisas que Ele Não Aprendeu
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Ler arquivo contraditório em proximidade forçada sem repetir intimidade.
+    dramatic_question: Pode sentir ciúme do homem que ele mesmo foi?
+    irreversible_turn: Elias descobre evidência de relação anterior e escolhe distância ética.
+    continuity: [segunda elipse, arquivo trancado por Astrid]
+  - number: 32
+    title: A Segunda Recusa
+    movement: IV — O Homem que a Esqueceu
+    pov: Elias
+    function: Superar a omissão de Sigrid sobre o cargo pela conduta presente.
+    dramatic_question: Confiança precisa de lembrança ou de risco compartilhado?
+    irreversible_turn: Sigrid entrega a coroa para destruição; Elias devolve e o galho brota.
+    continuity: [confiança presente, não destino]
+  - number: 33
+    title: O Arquivo de Inverno
+    movement: V — Faça-me Lembrar
+    pov: Sigrid
+    function: Provar cadeia da adoção fraudulenta com cartas, semente e desenhos.
+    dramatic_question: Fatos sem experiência podem devolver uma pessoa?
+    irreversible_turn: Elias aceita a verdade histórica e recusa fingir emoção.
+    continuity: [Solveig formulou protocolo incompleto, riscos da porta eram tentativa de resgate]
+  - number: 34
+    title: O Que a Maçã Comeu
+    movement: V — Faça-me Lembrar
+    pov: Elias
+    function: Ouvir a defesa do Gigante e o preço exato da restauração.
+    dramatic_question: Recuperar o antigo eu justifica destruir o novo?
+    irreversible_turn: Ele aprende que restauração integral apagará seis semanas recentes.
+    continuity: [Gigante reteve Sigrid conscientemente, água negra ameaçava terceiros]
+  - number: 35
+    title: A Noiva de Ninguém
+    movement: V — Faça-me Lembrar
+    pov: Sigrid
+    function: Expor o custo autobiográfico de Mestermø e opções graduais.
+    dramatic_question: Sigrid quer ser lembrada ou escolhida?
+    irreversible_turn: Ela revela suas três perdas e prepara protocolo interrompível.
+    continuity: [caderno guarda fatos, não experiência]
+  - number: 36
+    title: Consentimento
+    movement: V — Faça-me Lembrar
+    pov: Elias
+    function: Apresentar nenhuma, factual, parcial e integral como escolhas reais.
+    dramatic_question: Quem tem direito a decidir qual Elias deve continuar?
+    irreversible_turn: Sigrid renuncia à promessa antiga; Elias escolhe adiar e conhecê-la agora.
+    continuity: [preço e alternativas informados, espelho testemunha]
+    protected_scene: RESTORATION_OPTIONS
+  - number: 37
+    title: A Memória Oferecida
+    movement: V — Faça-me Lembrar
+    pov: Sigrid
+    function: Consumir a segunda escolha e preparar testemunho jurídico.
+    dramatic_question: Amor novo pode coexistir com a obrigação de recuperar o passado?
+    irreversible_turn: Após intimidade nova e consentida, Elias decide recuperar memórias para testemunhar.
+    continuity: [terceira elipse, decisão não ocorre durante sexo]
+  - number: 38
+    title: O Homem que Voltaria
+    movement: V — Faça-me Lembrar
+    pov: Sigrid
+    function: Recusar restauração clandestina e obter confissão de Astrid.
+    dramatic_question: Ela devolverá o homem antigo sem perguntar ao atual?
+    irreversible_turn: Sigrid recusa; água/reflexo obriga Astrid a ouvir sua antiga declaração.
+    continuity: [tentação real, Liv descobre espelho, Astrid não é caricata]
+    protected_scene: RESTORATION_TEMPTATION
+  - number: 39
+    title: A Escolha de Elias
+    movement: V — Faça-me Lembrar
+    pov: Elias
+    function: Executar restauração em sessões escalonadas e perder o segundo romance.
+    dramatic_question: Qual versão de si ele consente em sacrificar?
+    irreversible_turn: Recupera Sigrid antiga e esquece as seis semanas em que a escolheu de novo.
+    continuity: [cada sessão confirmada, sintomas reais, nenhuma cura instantânea]
+    protected_scene: CONSENTED_RESTORATION
+  - number: 40
+    title: O Nome que Permanece
+    movement: V — Faça-me Lembrar
+    pov: Sigrid
+    function: Julgar fraude, dissolver posse e distribuir custódia.
+    dramatic_question: Liberdade pode existir sem transferir novamente o custo?
+    irreversible_turn: Sigrid assume o cargo por vontade, quebra a coroa e sai com Elias sem ser pagamento.
+    continuity: [Elias testemunha eu não estava sozinho, quatro fragmentos, Gigante não morre]
+    protected_scene: FINAL_JUDGMENT

@@ -1,0 +1,89 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: NarcisoMythDnaMap
+# ORIGINAL_MYTH_DNA -> BEA_HALDEN_REINTERPRETATION (SDD, seções 6.2 e 6.3).
+# anchors: SCENE:<id de protected_scenes.yaml> | TURN:<capítulo com irreversible_turn>
+elements:
+  - id: MYTH-01
+    myth_element: Narciso
+    reinterpretation: Narciso Céfiso, 27, herdeiro da pedreira de mármore alagada da família.
+    transformation: CONTEMPORARY_GOTHIC
+    chapters: [1, 2]
+    anchors: ["SCENE:CHORUS_FIRST_GAZE", "TURN:2"]
+  - id: MYTH-02
+    myth_element: beleza extraordinária
+    reinterpretation: Uma beleza que ele nunca pôde ver; conhece o próprio rosto só pelo desejo dos outros.
+    transformation: PSYCHOLOGICAL
+    chapters: [1, 10]
+    anchors: ["SCENE:CHORUS_FIRST_GAZE", "TURN:10"]
+  - id: MYTH-03
+    myth_element: admiradores
+    reinterpretation: O Coro de admiradores narra em primeira pessoa do plural e implica o leitor.
+    transformation: METANARRATIVE
+    chapters: [1, 11, 23, 33]
+    anchors: ["SCENE:CHORUS_FIRST_GAZE", "SCENE:WE_STILL_LOOK"]
+  - id: MYTH-04
+    myth_element: rejeição
+    reinterpretation: Rejeições precisas e cruéis que admitem leitura de proteção e de desprezo.
+    transformation: AMBIGUOUS
+    chapters: [5, 29]
+    anchors: ["SCENE:THE_REJECTION", "SCENE:SECOND_REFUSAL"]
+  - id: MYTH-05
+    myth_element: Eco
+    reinterpretation: Elisa "Eco" Varela, dubladora e restauradora de áudio, que repete vozes por ofício e decide por conta própria.
+    transformation: CONTEMPORARY
+    chapters: [3, 18, 21]
+    anchors: ["TURN:3", "SCENE:NIGHT_WITHOUT_WORDS"]
+  - id: MYTH-06
+    myth_element: reflexo
+    reinterpretation: Uma presença em água, vidro, mármore e fita que nunca é explicada.
+    transformation: FANTASTIC_PSYCHOLOGICAL
+    chapters: [6, 8, 17]
+    anchors: ["SCENE:FIRST_WATER", "SCENE:THE_CENTER"]
+  - id: MYTH-07
+    myth_element: água
+    reinterpretation: A cava da pedreira alagada, água negra e parada proibida desde a infância.
+    transformation: GOTHIC
+    chapters: [6, 28]
+    anchors: ["SCENE:FIRST_WATER", "TURN:28"]
+  - id: MYTH-08
+    myth_element: impossibilidade de possuir o que contempla
+    reinterpretation: As mãos nunca chegam juntas à superfície.
+    transformation: IDENTITY_HORROR
+    chapters: [17]
+    anchors: ["SCENE:THE_CENTER"]
+  - id: MYTH-09
+    myth_element: definhamento
+    reinterpretation: Compulsão, insônia, fome e recusa de ajuda contadas como perda.
+    transformation: BODILY_PSYCHOLOGICAL
+    chapters: [22, 27, 31]
+    anchors: ["SCENE:DSR_OCCURRENCES"]
+  - id: MYTH-10
+    myth_element: flor narciso
+    reinterpretation: Um narciso nasce da rachadura da estátua de mármore negro, onde não há terra.
+    transformation: FANTASTIC_AMBIGUOUS
+    chapters: [32]
+    anchors: ["TURN:32"]
+  - id: MYTH-11
+    myth_element: morte ou transformação
+    reinterpretation: Narciso desaparece sem corpo e sem confirmação de morte.
+    transformation: AMBIGUOUS
+    chapters: [31, 32]
+    anchors: ["SCENE:THE_NAME_AT_DAWN"]
+  - id: MYTH-12
+    myth_element: identidade e profecia
+    reinterpretation: Teodoro, restaurador cego, diz que ele viverá muito se não se conhecer, e depois que aquele não é o rosto que esculpiram.
+    transformation: CONTEMPORARY
+    chapters: [4, 30]
+    anchors: ["TURN:4", "TURN:30"]
+  - id: MYTH-13
+    myth_element: amor impossível
+    reinterpretation: A pergunta sem resposta sobre se Narciso amou alguém além de si.
+    transformation: AMBIGUOUS
+    chapters: [18, 26, 29]
+    anchors: ["SCENE:GLASS_JEALOUSY", "SCENE:NIGHT_WITHOUT_WORDS"]
+  - id: MYTH-14
+    myth_element: maldição do admirador rejeitado e Nêmesis
+    reinterpretation: Amintas Rocha, escultor desaparecido, deixa uma estátua de mármore do Veio Nêmesis com uma inscrição na base.
+    transformation: GOTHIC
+    chapters: [1, 14]
+    anchors: ["TURN:1", "SCENE:STATUE_BREAKS"]

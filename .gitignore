@@ -19,6 +19,11 @@ runtime/
 # Saídas de teste — artefatos gerados, recriáveis rodando a suíte.
 tests/outputs/
 
+# Saídas de trabalho e rascunhos locais — galerias/zips gerados e scripts
+# temporários de sessão; não fazem parte do pacote distribuível.
+output/
+tmp/
+
 # Python
 __pycache__/
 *.py[cod]

@@ -1,0 +1,27 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: FIRST_OFFER
+    chapters: [1]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A cena-modelo da loja explicando com precisão o poder e o efeito colateral antes da escolha de Davi — o padrão de transparência total que rege todo o livro nasce aqui.
+  - id: MARISA_FIRST_COST
+    chapters: [2]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A doença retirada de um estranho passando fisicamente para o corpo de Marisa, sem sensacionalismo gráfico gratuito, estabelecendo o efeito colateral como concreto e imediato.
+  - id: CHEAT_ATTEMPT_FAILURE
+    chapters: [15]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A tentativa racional de neutralizar o efeito colateral fracassa de forma inequívoca — nenhuma brecha lógica, tecnológica ou espiritual funciona.
+  - id: SHOP_RULE_ABSOLUTE
+    chapters: [14]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A recusa da loja ao pedido de Marlene por um segundo poder confirma, sem ambiguidade, que a regra de um único poder por pessoa é absoluta.
+  - id: ORIGIN_REVEAL
+    chapters: [19, 21]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A revelação de quem criou a loja e por quê preserva a neutralidade do lugar — não é castigo nem experimento cruel, e a ambiguidade moral não pode ser resolvida em maniqueísmo fácil.
+  - id: CLOSING_MIRROR
+    chapters: [24]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: A loja reaparece para um novo cliente repetindo a cena de abertura, sem sugerir que o ciclo vá parar — o fechamento preserva ambiguidade, não resolução.

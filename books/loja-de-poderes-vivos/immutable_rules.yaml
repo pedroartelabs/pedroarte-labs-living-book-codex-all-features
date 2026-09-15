@@ -1,0 +1,27 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - id: FREE_WITH_A_PRICE
+    rule: A loja nunca cobra dinheiro, contrato ou dívida. O único preço de qualquer poder é o efeito colateral, sempre revelado por completo e com precisão antes da escolha do visitante.
+    blocking: true
+  - id: PROPORTIONAL_SIDE_EFFECT
+    rule: Todo poder concedido produz exatamente um efeito colateral de proporção equivalente ao benefício — nunca menor, nunca maior.
+    blocking: true
+  - id: NO_COERCION_NO_DECEPTION
+    rule: A loja jamais coage, mente ou omite informação. O visitante pode sempre recusar o poder e sair pela mesma porta sem consequência.
+    blocking: true
+  - id: NO_LOOPHOLE
+    rule: Nenhum personagem consegue, de fato, trapacear, transferir ou anular permanentemente o efeito colateral de um poder. Tentativas podem ocorrer na trama, mas fracassam sempre.
+    blocking: true
+  - id: SHOP_NEUTRALITY
+    rule: A loja e quem a administra não punem, não julgam e não manipulam ativamente os visitantes para escolher um poder. O horror nasce da escolha humana, nunca da malícia da loja.
+    blocking: true
+  - id: MOSAIC_CONTINUITY
+    rule: Personagens, objetos ou consequências de capítulos anteriores devem reaparecer, ainda que brevemente, em pelo menos um capítulo posterior — nenhuma história de cliente é totalmente isolada.
+    blocking: true
+  - id: ORIGIN_DELAYED_REVEAL
+    rule: A identidade e o motivo de quem criou a loja não podem ser revelados, explicados ou confirmados antes do Ato III (capítulos 17 a 24).
+    blocking: true
+  - id: FORM
+    rule: Exatamente 24 capítulos em português do Brasil e no mínimo 70000 palavras.
+    blocking: true

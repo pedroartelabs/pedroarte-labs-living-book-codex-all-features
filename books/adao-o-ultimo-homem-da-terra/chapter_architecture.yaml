@@ -1,0 +1,579 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: Sala de Parto Quatro
+    movement: I — Dia Zero
+    pov: Alma Ferro
+    time: AS0, madrugada
+    location: Maternidade Nossa Senhora do Porto, Porto Cinza
+    function: Estabelecer o nascimento inteiramente comum de Adão e o Dia Zero apenas em retrospecto invisível ao leitor.
+    dramatic_question: O que Alma nota, sem entender, na sala de parto naquela madrugada?
+    irreversible_turn: Adão nasce; um obstetra comenta, sem importância, que é o único menino do plantão da noite.
+    continuity:
+      - Adão nasce em Porto Cinza, filho de Alma e Heitor Ferro.
+      - A maternidade registra nascimentos normalmente; nada é anunciado como extraordinário.
+      - Nenhum personagem suspeita de qualquer coisa fora do comum.
+    living_book_vitals:
+      pressure: doméstica
+      breath: regular
+      sensory_anchor: cheiro de álcool e leite sobre lençol quente
+    protected_scene: ADAO_BIRTH
+
+  - number: 2
+    title: Um Erro na Planilha
+    movement: I — Dia Zero
+    pov: Vera Nakamura
+    time: AS1
+    location: Observatório Global de População, sede regional
+    function: Introduzir a descoberta estatística do fenômeno como ruído descartável.
+    dramatic_question: Vera vai insistir num dado que todos os colegas chamam de erro de amostragem?
+    irreversible_turn: Ela arquiva um relatório interno recomendando "observar novamente em doze meses" — decisão que a perseguirá por décadas.
+    continuity:
+      - O Observatório Global de População (OGP) é organismo fictício pré-existente ao fenômeno.
+      - Vera é demógrafa sênior do OGP.
+      - Sinais estatísticos semelhantes aparecem, isoladamente, em múltiplos países no mesmo período.
+    living_book_vitals:
+      pressure: burocrática
+      breath: contida
+      sensory_anchor: cursor piscando sobre uma célula de planilha
+
+  - number: 3
+    title: Berçário B
+    movement: I — Dia Zero
+    pov: Iris Bittencourt
+    time: AS5
+    location: Creche Girassol, Porto Cinza
+    function: Mostrar a primeira consequência cotidiana e visível do fenômeno — uma sala de berçário sem meninos.
+    dramatic_question: Como uma professora nomeia algo que ainda não tem nome oficial, sem soar como teoria da conspiração?
+    irreversible_turn: Iris percebe que o Berçário B não recebe matrícula masculina há dois anos e é instruída pela direção a não comentar isso com os pais.
+    continuity:
+      - Adão, aos cinco anos, ainda convive com colegas homens mais velhos, nascidos antes do Dia Zero.
+      - Primeira instrução institucional de silêncio sobre o padrão.
+    living_book_vitals:
+      pressure: crescente
+      breath: sussurrada
+      sensory_anchor: fileira de ganchos de mochila, metade sem uso
+    protected_scene: null
+
+  - number: 4
+    title: O Menino Estatístico
+    movement: I — Dia Zero
+    pov: Sara Duval
+    time: AS9
+    location: Redação de jornal e casa dos Ferro, Porto Cinza
+    function: Primeira confirmação institucional global do fenômeno e primeira reportagem que transforma Adão em símbolo público.
+    dramatic_question: Alma vai permitir que o filho vire notícia nacional?
+    irreversible_turn: Sara publica a matéria que identifica Adão como um dos últimos meninos nascidos verificáveis do mundo, contra a vontade inicial de Alma.
+    continuity:
+      - O OGP confirma publicamente, em AS9, ausência de registro de nascimento masculino auditado em qualquer país nos últimos anos.
+      - Adão é identificado como nascido horas antes do que se tornaria o corte estatístico do Dia Zero.
+    living_book_vitals:
+      pressure: pública
+      breath: apressada
+      sensory_anchor: flash de câmera refletido na janela da sala
+
+  - number: 5
+    title: A Turma de Adão
+    movement: II — A Geração que Falta
+    pov: Iris Bittencourt
+    time: AS12
+    location: Escola Municipal Rio Alto, Porto Cinza
+    function: A escola como relógio demográfico visível através de fotografias de turma.
+    dramatic_question: O que a foto de turma deste ano revela quando posta ao lado das de anos anteriores?
+    irreversible_turn: Iris organiza a última foto de turma do fundamental com mais de um menino nela.
+    continuity:
+      - Adão, 12, é o único menino nascido no ano do Dia Zero ainda matriculado em sua escola.
+      - O corredor de fotos de turma da escola torna-se referência informal de acompanhamento do fenômeno.
+    living_book_vitals:
+      pressure: nostálgica sob controle
+      breath: pausada
+      sensory_anchor: pó de giz sobre a moldura das fotos antigas
+
+  - number: 6
+    title: Hipóteses
+    movement: II — A Geração que Falta
+    pov: Vera Nakamura
+    time: AS15
+    location: Congresso científico internacional
+    function: Apresentar o painel de hipóteses científicas concorrentes e a primeira leitura religiosa pública organizada.
+    dramatic_question: A ciência vai admitir publicamente que ainda não sabe?
+    irreversible_turn: Um painel internacional declara que nenhuma hipótese tem suporte suficiente, abrindo espaço institucional para interpretações não científicas.
+    continuity:
+      - Hipóteses formais discutidas em cena e sem confirmação, mutação do cromossomo Y, poluição ambiental, alteração epigenética, agente infeccioso não identificado, evento cósmico, causa desconhecida.
+      - O Padre Anselmo Cruz ganha visibilidade nacional com uma leitura profética do fenômeno.
+    living_book_vitals:
+      pressure: intelectual e frustrada
+      breath: monótona
+      sensory_anchor: zumbido de projetor superaquecido
+
+  - number: 7
+    title: Namoro
+    movement: II — A Geração que Falta
+    pov: Adão
+    time: AS18
+    location: Porto Cinza — escola e orla
+    function: Primeiro capítulo em ponto de vista de Adão; humanizar o peso de ser observado durante uma adolescência comum.
+    dramatic_question: Adão consegue viver um namoro normal sob vigilância pública crescente?
+    irreversible_turn: Um fotógrafo registra Adão com a namorada e a imagem vira manchete nacional; ele percebe, pela primeira vez de forma visceral, que sua vida privada deixou de lhe pertencer inteiramente.
+    continuity:
+      - Adão, 18, cursa o ensino médio e namora Beatriz Amado.
+      - A cobertura midiática sobre Adão é contínua desde os nove anos.
+    living_book_vitals:
+      pressure: íntima invadida
+      breath: contida de raiva
+      sensory_anchor: lente de câmera refletindo o sol da tarde
+    protected_scene: null
+
+  - number: 8
+    title: O Mercado que Sabia a Própria Data
+    movement: II — A Geração que Falta
+    pov: Ronaldo Petrini
+    time: AS22
+    location: Fábrica têxtil Petrini & Filhos, Porto Cinza
+    function: Mostrar um mercado prevendo a própria extinção por coorte etária.
+    dramatic_question: Petrini vai fechar a fábrica do avô ou tentar reinventá-la?
+    irreversible_turn: Ele decide encerrar a linha de roupas infantis masculinas depois de calcular, numa planilha, o ano exato em que o último cliente potencial fará a última compra possível.
+    continuity:
+      - Primeira onda relevante de falências setoriais ligadas ao fenômeno, por volta de AS20.
+    living_book_vitals:
+      pressure: financeira
+      breath: calculada
+      sensory_anchor: régua de corte parada sobre tecido azul
+
+  - number: 9
+    title: Formandos
+    movement: II — A Geração que Falta
+    pov: Sara Duval
+    time: AS26
+    location: Universidade Federal de Porto Cinza
+    function: Universidade ainda relativamente normal, mas rareando; primeira ruptura forte em formação de casais e famílias entre jovens adultos.
+    dramatic_question: Como uma geração namora quando os pares ficam estruturalmente escassos?
+    irreversible_turn: Sara documenta a primeira turma de formatura universitária com proporção de homens visivelmente menor que o histórico, e entrevista Adão, aos 26, sobre o que significa ser "o mais velho da geração que sobrou".
+    continuity:
+      - Adão conclui a universidade e mantém vida relativamente comum.
+      - Primeira geração de jovens adultos que cresceu já sabendo do fenômeno desde a infância.
+    living_book_vitals:
+      pressure: geracional
+      breath: ansiosa
+      sensory_anchor: beca alugada de tamanho errado
+
+  - number: 10
+    title: Trabalho de Homem
+    movement: III — O Mundo sem Meninos
+    pov: Adão
+    time: AS32
+    location: Oficina mecânica Ferro, Porto Cinza
+    function: Adão como jovem adulto comum construindo vida própria em meio à fama crescente; automação surge como pano de fundo econômico.
+    dramatic_question: Adão pode escolher uma vida pequena quando o mundo insiste em vê-lo como símbolo?
+    irreversible_turn: Ele recusa um convite formal do governo para ser "embaixador nacional" do fenômeno, escolhendo continuar mecânico na oficina herdada do pai.
+    continuity:
+      - Heitor Ferro morreu de causas naturais alguns anos antes; Adão herdou a oficina.
+      - Primeiros sinais visíveis de automação substituindo trabalho manual em setores historicamente masculinizados.
+    living_book_vitals:
+      pressure: pessoal contra institucional
+      breath: teimosa
+      sensory_anchor: graxa seca sob as unhas
+
+  - number: 11
+    title: Infraestrutura Estratégica
+    movement: III — O Mundo sem Meninos
+    pov: Vera Nakamura
+    time: AS40
+    location: Cúpula internacional sobre bancos genéticos
+    function: Bancos de sêmen e óvulos tornam-se recurso geopolítico estratégico; Vera próxima da aposentadoria treina sua sucessora.
+    dramatic_question: Quem tem direito ao material genético armazenado de uma geração que está desaparecendo?
+    irreversible_turn: Um tratado internacional fictício declara bancos genéticos "patrimônio de segurança nacional"; Vera observa sua sucessora, Noor Kessler, assumir o comando das negociações.
+    continuity:
+      - Noor Kessler introduzida como sucessora institucional de Vera no OGP.
+      - Primeira legislação genética internacional relevante da obra.
+    living_book_vitals:
+      pressure: geopolítica
+      breath: formal
+      sensory_anchor: tradutor simultâneo sussurrando no fone de ouvido
+
+  - number: 12
+    title: O Último Brinquedo
+    movement: III — O Mundo sem Meninos
+    pov: Alma Ferro
+    time: AS45
+    location: Casa de Alma Ferro e loja de brinquedos fechando, Porto Cinza
+    function: Pilar família, infância e brinquedos — Alma, agora avó de uma neta comum, testemunha o fechamento da última loja "de meninos" da cidade.
+    dramatic_question: O que Alma decide guardar de uma infância que a cidade já não vende mais?
+    irreversible_turn: A última loja de brinquedos com seção masculina de Porto Cinza fecha; Alma decide guardar os brinquedos antigos de Adão em vez de doá-los.
+    continuity:
+      - Adão tem uma filha, Marina Ferro, nascida por volta de AS43, de um relacionamento anterior — biologicamente comum para a idade dele nesta época.
+      - Heitor Ferro já falecido.
+    living_book_vitals:
+      pressure: doméstica e nostálgica
+      breath: lenta
+      sensory_anchor: caixa de papelão cheirando a poeira
+
+  - number: 13
+    title: A Torcida Vazia
+    movement: III — O Mundo sem Meninos
+    pov: Bruna Duval
+    time: AS52
+    location: Estádio nacional
+    function: Pilar esportes — a última categoria de base masculina de um esporte nacional disputa sua final antes da extinção oficial da categoria.
+    dramatic_question: Como se cobre jornalisticamente o fim de uma tradição sem transformá-lo em espetáculo barato?
+    irreversible_turn: Bruna assiste à última final sub-17 masculina do país; a categoria é oficialmente extinta por falta de atletas no dia seguinte.
+    continuity:
+      - Sara Duval, avó de Bruna, faleceu alguns anos antes; o legado jornalístico passa a Bruna.
+      - Adão, 52, comparece como convidado de honra, visivelmente incomodado com o papel simbólico.
+    living_book_vitals:
+      pressure: coletiva e cerimonial
+      breath: hino incompleto
+      sensory_anchor: bandeira dobrada sobre uma prateleira de vestiário
+
+  - number: 14
+    title: Banco de Sêmen Nacional
+    movement: III — O Mundo sem Meninos
+    pov: Dr. Caetano Rocha
+    time: AS58
+    location: Clínica nacional de reprodução assistida
+    function: Pilar reprodução — Adão é convidado, não coagido, a doar material genético; introduzir o geneticista que acompanhará o mistério nas décadas seguintes.
+    dramatic_question: Uma doação voluntária de rotina pode, décadas depois, deixar de parecer voluntária em retrospecto?
+    irreversible_turn: Adão aceita doar; Caetano arquiva a amostra sob um número de registro que reaparecerá décadas mais tarde.
+    continuity:
+      - Primeira amostra genética oficial de Adão catalogada, aos 58 anos, ainda dentro da normalidade biológica esperada.
+    living_book_vitals:
+      pressure: clínica e burocrática
+      breath: profissional
+      sensory_anchor: etiqueta impressa ainda quente da impressora
+
+  - number: 15
+    title: Setenta
+    movement: IV — O Homem Raro
+    pov: Adão
+    time: AS70
+    location: Porto Cinza
+    function: Primeiro sinal sutil e não anunciado de que algo nele é diferente; o leitor deve perceber sozinho, sem confirmação médica na cena.
+    dramatic_question: Por que os amigos de Adão parecem envelhecer mais depressa do que ele, e por que ele evita pensar nisso?
+    irreversible_turn: No próprio aniversário de setenta anos, um amigo de infância morre; diante do espelho, Adão nota que ainda tem a mesma força nas mãos que tinha aos cinquenta, e afasta o pensamento.
+    continuity:
+      - Primeira observação subjetiva do próprio corpo por Adão, sem qualquer confirmação médica na cena.
+    living_book_vitals:
+      pressure: interior e negada
+      breath: evitada
+      sensory_anchor: espelho embaçado de banheiro
+
+  - number: 16
+    title: A Turma que Sobrou
+    movement: IV — O Homem Raro
+    pov: Noor Kessler
+    time: AS75
+    location: Sede do Observatório Global de População
+    function: Contador institucional confirma que não há homem vivo mais jovem que Adão em nenhum país do planeta.
+    dramatic_question: O que significa, estatisticamente, quando uma coorte inteira se torna a última que resta?
+    irreversible_turn: Noor assina o relatório que declara oficialmente que Adão é, sem exceção conhecida, o homem mais jovem vivo do mundo.
+    continuity:
+      - Vera Nakamura faleceu alguns anos antes, de causas naturais.
+      - Noor Kessler dirige o OGP.
+    living_book_vitals:
+      pressure: institucional e fria
+      breath: definitiva
+      sensory_anchor: carimbo de "confirmado" batendo sobre o papel
+
+  - number: 17
+    title: Cento e Um
+    movement: IV — O Homem Raro
+    pov: Bruna Duval
+    time: AS101
+    location: Residência de Adão, Porto Cinza
+    function: Marco de idade explícito, tratado com objetividade documental — nunca com adjetivo do narrador.
+    dramatic_question: Como se faz uma reportagem de aniversário para um homem que já é notícia mundial só por continuar respirando?
+    irreversible_turn: Entrevistando Adão para a matéria do seu 101º aniversário, Bruna percebe que as respostas físicas dele — força do aperto de mão, postura, timbre de voz — não combinam com nenhum outro centenário que já entrevistou.
+    continuity:
+      - Abertura factual do capítulo registra "Adão completou cento e um anos naquela manhã", sem adjetivação.
+    living_book_vitals:
+      pressure: midiática e íntima
+      breath: cronometrada para a matéria
+      sensory_anchor: gravador digital com a bateria fraca
+
+  - number: 18
+    title: O Geneticista
+    movement: IV — O Homem Raro
+    pov: Dr. Caetano Rocha
+    time: AS108
+    location: Laboratório nacional de genética
+    function: Primeiro estudo sério da longevidade de Adão e primeira gravidez tardia documentada, reabrindo o caso genético arquivado desde AS58.
+    dramatic_question: Caetano vai publicar um resultado que ele mesmo hesita em acreditar, ou vai sentar sobre ele?
+    irreversible_turn: Exames confirmam compatibilidade de paternidade de Adão, aos 108 anos; meses depois nasce uma menina atribuída a ele.
+    continuity:
+      - Marcadores biológicos "incompatíveis com a idade" registrados sem explicação causal.
+      - O caso genético de AS58 é formalmente reaberto.
+    living_book_vitals:
+      pressure: científica e inquieta
+      breath: contida por ceticismo profissional
+      sensory_anchor: resultado de exame impresso ainda quente
+
+  - number: 19
+    title: Homens Vivos Conhecidos
+    movement: IV — O Homem Raro
+    pov: Noor Kessler
+    time: AS114
+    location: Sede do Observatório Global de População
+    function: Introduzir formalmente o contador central da obra, publicado pela primeira vez em caráter oficial e público.
+    dramatic_question: Quantos homens restam exatamente, e quem decide o que conta como "conhecido"?
+    irreversible_turn: O OGP publica publicamente, pela primeira vez, o número exato — HOMENS VIVOS CONHECIDOS 89 — e o mundo passa a acompanhá-lo como um placar.
+    continuity:
+      - Primeira publicação pública do contador central.
+      - Controvérsia metodológica sobre quem conta como "vivo conhecido".
+    living_book_vitals:
+      pressure: numérica e coletiva
+      breath: suspensa
+      sensory_anchor: telão público atualizando um número
+
+  - number: 20
+    title: A Comissão
+    movement: V — O Patrimônio
+    pov: Comissária Renata Salgado
+    time: AS118
+    location: Sede da recém-criada Comissão de Preservação Humana
+    function: Instituir formalmente o conflito central da obra — indivíduo contra espécie.
+    dramatic_question: Renata acredita mesmo que está protegendo Adão, ou está cumprindo um mandato que a protege dela mesma?
+    irreversible_turn: A Comissão assume tutela consultiva sobre a vida de Adão mediante "consentimento" formal, assinado sob pressão social imensa.
+    continuity:
+      - A Comissão de Preservação Humana é criada por lei, com poderes consultivos sobre o único homem vivo mais jovem que uma geração inteira.
+      - Adão, 118, assina o termo sob protesto documentado.
+    living_book_vitals:
+      pressure: institucional e moral
+      breath: controlada
+      sensory_anchor: caneta protocolar sobre veludo
+
+  - number: 21
+    title: Recusa
+    movement: V — O Patrimônio
+    pov: Adão
+    time: AS121
+    location: Instalação da Comissão de Preservação Humana
+    function: Clímax de autonomia corporal na primeira metade final da obra.
+    dramatic_question: Adão pode dizer não a uma espécie inteira?
+    irreversible_turn: Ele recusa publicamente uma ordem de coleta genética compulsória justificada por "necessidade de diversidade genética nacional", desencadeando crise legal.
+    continuity:
+      - Primeira recusa pública e documentada de Adão.
+      - Racha interno visível dentro da Comissão sobre a legitimidade da ordem.
+    living_book_vitals:
+      pressure: máxima e pessoal
+      breath: firme
+      sensory_anchor: porta de vidro reforçado entre ele e o comitê
+    protected_scene: FIRST_REFUSAL
+
+  - number: 22
+    title: Yuki
+    movement: V — O Patrimônio
+    pov: Yuki Tanaka
+    time: AS126
+    location: Casa de campo fora do sistema oficial
+    function: Contraponto íntimo e não institucional à Comissão.
+    dramatic_question: O que significa escolher engravidar de Adão por desejo próprio, à revelia do aparato estatal?
+    irreversible_turn: Yuki engravida de Adão por decisão pessoal e mútua e decide não registrar a gravidez no sistema genético oficial.
+    continuity:
+      - Uma das poucas gravidezes "não oficiais" de Adão na obra; a filha de Yuki cresce fora dos registros centrais.
+    living_book_vitals:
+      pressure: íntima e desafiadora
+      breath: livre
+      sensory_anchor: lençol de linho balançando num varal
+    protected_scene: YUKI_CONCEPTION
+
+  - number: 23
+    title: As Incompatíveis
+    movement: V — O Patrimônio
+    pov: Dr. Caetano Rocha
+    time: AS131
+    location: Congresso internacional de genética
+    function: Revelar publicamente a contradição genética entre filhas de Adão sem resolvê-la.
+    dramatic_question: O escândalo científico vai destruir a credibilidade de Caetano, ou vai confirmar que ninguém entende de fato o que Adão é?
+    irreversible_turn: Caetano apresenta dados comparando amostras de décadas diferentes — algumas confirmam parentesco com altíssima certeza estatística, outras o contradizem — e a comunidade científica se divide publicamente sem chegar a uma conclusão.
+    continuity:
+      - Teorias concorrentes permanecem abertas — erro laboratorial, contaminação de amostra, mutação somática ao longo da vida de Adão, fraude documental.
+    living_book_vitals:
+      pressure: científica e pública
+      breath: acalorada
+      sensory_anchor: gráfico de parentesco projetado, incompleto
+    protected_scene: GENETIC_INCOMPATIBILITY_REVEAL
+
+  - number: 24
+    title: "Homens Vivos Conhecidos: Um"
+    movement: V — O Patrimônio
+    pov: Comissária Renata Salgado
+    time: AS138
+    location: Instalação segura da Comissão
+    function: O penúltimo homem vivo conhecido morre; Adão torna-se o único.
+    dramatic_question: O que Renata diz a Adão no dia em que ele se torna, oficialmente, o único homem vivo conhecido?
+    irreversible_turn: Elias Bornholm, o segundo homem mais velho vivo conhecido, morre de causas naturais; o contador muda de dois para um, e Renata precisa comunicar isso a Adão pessoalmente.
+    continuity:
+      - Elias Bornholm foi mencionado brevemente em capítulos anteriores como contraponto de envelhecimento normal a Adão.
+    living_book_vitals:
+      pressure: solene
+      breath: contida por protocolo
+      sensory_anchor: pasta funcional fechada sobre a mesa
+
+  - number: 25
+    title: O Único
+    movement: VI — Cento e Quarenta e Sete
+    pov: Adão
+    time: AS140
+    location: Instalação segura da Comissão
+    function: Mostrar o peso absoluto de ser um sexo inteiro reduzido a uma única pessoa, sem transformar Adão em messias.
+    dramatic_question: Como um homem carrega, sozinho, o peso estatístico de metade de uma espécie?
+    irreversible_turn: Adão pede, pela primeira vez em décadas, para falar com um psicólogo sobre o que sente — não sobre o que representa.
+    continuity:
+      - Adão, 140, permanece lúcido e com vontade própria.
+    living_book_vitals:
+      pressure: existencial
+      breath: exausta
+      sensory_anchor: marca única de uso numa poltrona de couro gasto
+
+  - number: 26
+    title: Reserva
+    movement: VI — Cento e Quarenta e Sete
+    pov: Tomás Vale
+    time: AS144
+    location: "A Reserva — instalação segura da Comissão"
+    function: Rotina cotidiana de vigilância; humanizar Adão pelos olhos de quem cuida dele diariamente.
+    dramatic_question: Tomás vai tratar Adão como paciente, prisioneiro ou pessoa?
+    irreversible_turn: Tomás desobedece um pequeno protocolo — deixa Adão caminhar sozinho no jardim por vinte minutos sem escolta — decisão cujo peso só aparecerá três anos depois.
+    continuity:
+      - Rotina diária da Reserva estabelecida — câmeras, protocolos, equipe reduzida.
+      - Terceiro dia consecutivo de manutenção programada no sistema de câmeras do corredor B, mencionado casualmente.
+    living_book_vitals:
+      pressure: cotidiana e afetuosa
+      breath: relaxada em pequenos momentos
+      sensory_anchor: chave presa ao cinto de Tomás
+
+  - number: 27
+    title: A Falha de Sete Minutos
+    movement: VI — Cento e Quarenta e Sete
+    pov: Tomás Vale
+    time: AS147
+    location: "Corredor B, instalação segura da Comissão"
+    function: O desaparecimento de Adão, narrado como evento banal e administrativo.
+    dramatic_question: O que realmente aconteceu nos sete minutos em que a câmera do corredor B falhou?
+    irreversible_turn: Tomás encontra o quarto de Adão vazio, a porta destrancada, e nenhuma câmera do perímetro registra qualquer saída.
+    continuity:
+      - A falha de câmera decorre da manutenção mencionada no capítulo 26, sem nunca ser tratada como suficiente para explicar o desaparecimento.
+    living_book_vitals:
+      pressure: pânico contido
+      breath: acelerada
+      sensory_anchor: estática no rádio comunicador
+    protected_scene: THE_DISAPPEARANCE
+
+  - number: 28
+    title: "Homens Vivos Conhecidos: Zero"
+    movement: VI — Cento e Quarenta e Sete
+    pov: Comissária Renata Salgado
+    time: AS147, alguns dias depois
+    location: Sede da Comissão e cobertura midiática mundial
+    function: O mundo absorve o contador chegando a zero; nascimento imediato do mito.
+    dramatic_question: Como uma instituição formula um comunicado oficial para um número que não consegue explicar?
+    irreversible_turn: Renata assina o comunicado que atualiza o contador para zero usando deliberadamente a palavra "desaparecido", nunca "morto" — escolha que a imprensa mundial amplifica.
+    continuity:
+      - O comunicado oficial torna-se documento histórico citado nos capítulos finais da obra.
+    living_book_vitals:
+      pressure: histórica
+      breath: pesada
+      sensory_anchor: microfone desligado por engano segundos antes do pronunciamento
+    protected_scene: HOMENS_VIVOS_ZERO
+
+  - number: 29
+    title: O Arquivo da Humanidade
+    movement: VII — O Andarilho
+    pov: A Arquivista (Sétima Kwan)
+    time: "AS260 (aprox. cento e treze anos após o desaparecimento)"
+    location: Arquivo Central da Humanidade
+    function: Grande salto temporal; mostrar sociedade plenamente reorganizada e reprodução tecnológica normalizada; introduzir a arquivista responsável pelo dossiê de Adão.
+    dramatic_question: Por que, mais de um século depois, o caso de Adão continua administrativamente "aberto"?
+    irreversible_turn: Sétima recebe autorização para reabrir o dossiê de Adão após um novo relato ressurgir numa região remota.
+    continuity:
+      - Normalização completa — crianças perguntam se meninos "existiram de verdade".
+      - Reprodução humana plenamente estabelecida por tecnologia, sem depender de material genético masculino remanescente.
+    living_book_vitals:
+      pressure: arqueológica
+      breath: lenta
+      sensory_anchor: poeira assentada sobre uma caixa de microfilme
+
+  - number: 30
+    title: Relatos
+    movement: VII — O Andarilho
+    pov: A Arquivista
+    time: AS270
+    location: Regiões remotas — compilação documental
+    function: Mostrar o padrão de relatos do "Andarilho" se formando ao longo de décadas, com contradições físicas e temporais.
+    dramatic_question: Existe um padrão real nos relatos, ou é a arquivista que está projetando um?
+    irreversible_turn: Sétima identifica que, apesar das contradições físicas aparentes, os relatos coincidem sempre em três detalhes precisos, e decide viajar a campo pela primeira vez.
+    continuity:
+      - Múltiplos nomes regionais registrados para a mesma figura — O Andarilho, O Visitante, O Homem que Não Morre.
+    living_book_vitals:
+      pressure: investigativa
+      breath: crescente
+      sensory_anchor: mapa com alfinetes espalhados sem padrão óbvio
+
+  - number: 31
+    title: As Grandes Interpretações
+    movement: VII — O Andarilho
+    pov: A Arquivista
+    time: AS280
+    location: Congresso interdisciplinar sobre "o caso Adão"
+    function: Apresentar, em capítulo de formato documental intercalado com testemunhos transcritos, as grandes interpretações concorrentes sem que nenhuma vença.
+    dramatic_question: O que cada facção precisa que sua interpretação seja verdadeira?
+    irreversible_turn: Representantes de todas as facções — encontrar, proteger, capturar, estudar, matar, provar que ele não existe, "todas somos filhas de Adão" — sentam-se juntos pela primeira vez; a sessão termina sem consenso, mas com uma aliança inesperada entre duas facções rivais.
+    continuity:
+      - Facções nomeadas e suas lógicas internas estabelecidas, cada uma com argumento e falha próprios, conforme BOOK_CONSTITUTION.md seção 6.
+    living_book_vitals:
+      pressure: ideológica
+      breath: em disputa
+      sensory_anchor: microfone passado de mão em mão
+
+  - number: 32
+    title: O Nome Que Chamavam
+    movement: VII — O Andarilho
+    pov: A Arquivista
+    time: AS295
+    location: Vilarejo remoto
+    function: Transição final antes do encontro central da obra; conectar a arquivista à linhagem oral que leva a Inaê.
+    dramatic_question: A memória oral de uma anciã pode valer mais do que um arquivo genético?
+    irreversible_turn: Sétima entrevista uma anciã que se diz neta de uma mulher que "recebeu o Andarilho"; a anciã menciona, de passagem, uma parenta mais jovem, Inaê, que pode ter vivido experiência semelhante recentemente.
+    continuity:
+      - Ponte narrativa direta estabelecida para o capítulo 33.
+    living_book_vitals:
+      pressure: quase reverente
+      breath: pausada por respeito
+      sensory_anchor: chá servido numa caneca de lata amassada
+
+  - number: 33
+    title: O Viajante
+    movement: VIII — A-001
+    pov: Inaê
+    time: "AS ~296"
+    location: Vilarejo remoto isolado
+    function: O encontro central da era do mito, narrado inteiramente do ponto de vista comum de Inaê, sem confirmação de identidade.
+    dramatic_question: Quem era, de fato, o homem que passou pelo vilarejo de Inaê?
+    irreversible_turn: O viajante parte ao amanhecer sem despedida formal; semanas depois, Inaê descobre que está grávida.
+    continuity:
+      - A descrição física do viajante é deliberadamente inconsistente com os registros históricos de Adão em ao menos um detalhe.
+      - Nenhum diálogo revela identidade, missão ou natureza do viajante.
+    living_book_vitals:
+      pressure: silenciosa e íntima
+      breath: em suspenso
+      sensory_anchor: poeira da estrada assentando na soleira da porta
+    protected_scene: ANDARILHO_ENCOUNTER
+
+  - number: 34
+    title: Nascimentos nas Últimas Vinte e Quatro Horas
+    movement: VIII — A-001
+    pov: A Arquivista
+    time: "AS ~297"
+    location: Arquivo Central da Humanidade
+    function: Capítulo de fechamento, predominantemente documental, com o resultado genético inconclusivo da filha de Inaê.
+    dramatic_question: O que a arquivista escreve num relatório que sabe que nunca vai fechar o caso?
+    irreversible_turn: Sétima recebe o resultado degradado da comparação genética entre a filha recém-nascida de Inaê e o arquivo antiquíssimo rotulado A-001 — compatível, porém inconclusivo — e decide, pela primeira vez em sua carreira, não classificar o caso como encerrado.
+    continuity:
+      - A criança nascida é do sexo feminino, sem qualquer atributo sobrenatural.
+      - Nenhuma confirmação definitiva é dada ao leitor.
+    living_book_vitals:
+      pressure: final e aberta
+      breath: em suspensão, não resolução
+      sensory_anchor: cursor piscando sobre um campo de status em branco
+    protected_scene: FINAL_BIRTH_A001

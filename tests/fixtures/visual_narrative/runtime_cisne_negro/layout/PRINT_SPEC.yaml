@@ -1,0 +1,18 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: PrintSpec
+spec:
+  kdp_paperback:
+    trim_in: {width: 6.0, height: 9.0}
+    interior: {ink: BLACK, paper: CREAM}
+    page_count: 300
+    page_count_source: /qa/fixture/PAGE_COUNT.txt
+    laminate: MATTE
+  kdp_hardcover:
+    trim_in: {width: 6.0, height: 9.0}
+    interior: {ink: PREMIUM_COLOR, paper: WHITE}
+    page_count: 300
+    laminate: MATTE
+  collector:
+    trim_in: {width: 6.0, height: 9.0}
+    interior: {ink: PREMIUM_COLOR, paper: WHITE}
+    page_count: 300

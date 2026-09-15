@@ -108,7 +108,19 @@ def resolve_font(kind: str) -> tuple[Path | None, str]:
     return None, "PIL default (bitmap)"
 
 
-def load_font(kind: str, size: int) -> ImageFont.ImageFont:
+def load_font(kind: str, size: int, *, role: str | None = None,
+               typography_bindings: dict | None = None) -> ImageFont.ImageFont:
+    """`typography_bindings` (BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM, Slice 6,
+    D-V2/seção 17.4): binding opcional por papel semântico (`role`),
+    projetado de `book_dna.typography_bindings` no canon visual via
+    `media/MEDIA_DESIGN.yaml`. Sem binding usável para o papel — a
+    esmagadora maioria das chamadas, sem a capability ligada — o caminho é
+    idêntico ao de sempre: `resolve_font(kind)` por tipo fixo (INV-VN-02)."""
+    if role and typography_bindings:
+        binding = typography_bindings.get(role) or {}
+        file = binding.get("file")
+        if file and binding.get("embeddable") and Path(file).is_file():
+            return ImageFont.truetype(file, size=size)
     path, _ = resolve_font(kind)
     if path is None:
         return ImageFont.load_default()
@@ -229,15 +241,16 @@ def build_cover(runtime: Path, book: dict, design: dict, use_base: bool) -> tupl
     rule_y = round(height * 0.83)
     author_y = round(height * 0.86)
 
-    title_face = load_font("serif_bold", cover_cfg["title_size"])
-    author_face = load_font("serif", cover_cfg["author_size"])
+    bindings = design.get("typography_bindings")
+    title_face = load_font("serif_bold", cover_cfg["title_size"], role="TITLE", typography_bindings=bindings)
+    author_face = load_font("serif", cover_cfg["author_size"], role="AUTHOR", typography_bindings=bindings)
     title = wrap(book["title"].upper(), title_face, inner, draw)
     draw.multiline_text((COVER_SIZE[0] // 2, title_y), title, font=title_face,
                         fill=tuple(palette["ink"]), anchor="ma", align="center", spacing=18)
 
     tagline = design.get("tagline")
     if tagline:
-        tag_face = load_font("serif", cover_cfg["tagline_size"])
+        tag_face = load_font("serif", cover_cfg["tagline_size"], role="TAGLINE", typography_bindings=bindings)
         draw.multiline_text((COVER_SIZE[0] // 2, tagline_y),
                             wrap(tagline, tag_face, inner, draw), font=tag_face,
                             fill=tuple(palette["muted"]), anchor="ma", align="center", spacing=12)

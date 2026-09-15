@@ -1,0 +1,27 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - {number: 1, title: A Porta Entre Dois Prédios, movement: Ato I — Escolha um Poder, function: Davi encontra a loja, ouve a regra completa e escolhe ler pensamentos mesmo avisado do preço.}
+  - {number: 2, title: O Toque Que Cura, movement: Ato I — Escolha um Poder, function: Marisa aceita curar com um toque e sente pela primeira vez a doença de um estranho passar para o próprio corpo.}
+  - {number: 3, title: Dez Minutos Roubados, movement: Ato I — Escolha um Poder, function: Yuri usa o poder de voltar dez minutos e percebe, de relance, que alguém em algum lugar acabou de perder o mesmo tempo.}
+  - {number: 4, title: O Calendário que Elenice Não Pode Ler, movement: Ato I — Escolha um Poder, function: Elenice recebe o poder de saber quando as pessoas morrerão e o testa, pela primeira vez, dentro da própria família.}
+  - {number: 5, title: Amado por Qualquer Um, movement: Ato I — Escolha um Poder, function: Rafael escolhe ser amado por quem desejar e vive a euforia inicial antes de notar o silêncio que vem depois.}
+  - {number: 6, title: O Homem que Quis Ficar Rico, movement: Ato I — Escolha um Poder, function: um cliente escolhe multiplicar riqueza à custa de anos da própria vida e decide que vale a pena.}
+  - {number: 7, title: A Vingança de Marlene, movement: Ato I — Escolha um Poder, function: Marlene escolhe infligir a mesma dor que sofreu e descobre, tarde demais, que sente cada golpe que causa.}
+  - {number: 8, title: A Repórter que Não Acreditou, movement: Ato I — Escolha um Poder, function: Cecília entra na loja para investigar rumores, recusa um poder e começa a notar que os casos que apura se cruzam.}
+  - {number: 9, title: O Filho Que Marisa Curou, movement: Ato II — As Contas Se Cruzam, function: anos depois, o acúmulo de doenças no corpo de Marisa a leva a procurar Davi, tentando entender se algum pensamento explica sua deterioração.}
+  - {number: 10, title: Os Dez Minutos de Outra Pessoa, movement: Ato II — As Contas Se Cruzam, function: Cecília rastreia quem perde tempo cada vez que Yuri o recupera e encontra uma idosa definhando sem explicação médica.}
+  - {number: 11, title: A Data que Elenice Escondeu, movement: Ato II — As Contas Se Cruzam, function: Elenice tenta usar o conhecimento da morte de alguém para impedi-la e descobre que a tentativa acelera o prazo.}
+  - {number: 12, title: Rafael e o Espelho, movement: Ato II — As Contas Se Cruzam, function: incapaz de confiar em qualquer afeto, Rafael arma um teste que fere Marlene para provar se é amado de verdade.}
+  - {number: 13, title: O Preço em Anos, movement: Ato II — As Contas Se Cruzam, function: o homem que ficou rico, envelhecendo rápido demais, procura Elenice para saber quanto tempo lhe resta.}
+  - {number: 14, title: Marlene Encontra a Loja de Novo, movement: Ato II — As Contas Se Cruzam, function: Marlene tenta voltar à loja pedindo um segundo poder para anular o primeiro, e a recusa confirma que a regra de um único poder é absoluta.}
+  - {number: 15, title: A Tentativa de Trapacear, movement: Ato II — As Contas Se Cruzam, function: um cliente racional tenta decifrar e neutralizar tecnicamente o efeito colateral, e o fracasso reforça que a regra não tem brecha.}
+  - {number: 16, title: Cecília Encontra o Padrão, movement: Ato II — As Contas Se Cruzam, function: reunindo os casos apurados, Cecília percebe que todas as histórias que investigou levam de volta à mesma loja e decide procurá-la de novo.}
+  - {number: 17, title: Cecília Escolhe Não Escolher, movement: Ato III — Quem Criou a Loja, function: Cecília retorna como repórter, não como cliente, e recebe da loja a primeira explicação parcial e verdadeira sobre sua própria natureza.}
+  - {number: 18, title: O Lojista, movement: Ato III — Quem Criou a Loja, function: a figura que administra a loja se revela em parte, sem entregar ainda a origem completa do lugar.}
+  - {number: 19, title: O Primeiro Cliente, movement: Ato III — Quem Criou a Loja, function: um flashback revela quem foi a primeira pessoa a entrar na loja e como essa escolha original deu forma à regra do efeito colateral.}
+  - {number: 20, title: Os Fios se Puxam, movement: Ato III — Quem Criou a Loja, function: Davi, Marisa, Yuri, Elenice, Rafael e o homem rico se cruzam na mesma noite, cada um às voltas com a escalada do próprio preço.}
+  - {number: 21, title: O Motivo, movement: Ato III — Quem Criou a Loja, function: revela-se por que a loja existe — nem castigo nem experimento cruel, mas a consequência ambígua de uma escolha anterior.}
+  - {number: 22, title: O Que Cecília Decide Fazer com a Verdade, movement: Ato III — Quem Criou a Loja, function: de posse da história inteira, Cecília decide se publica, guarda ou usa o que descobriu.}
+  - {number: 23, title: As Contas Finais, movement: Ato III — Quem Criou a Loja, function: os desfechos cruzados dos clientes principais se resolvem — quem sobrevive ao próprio preço e quem não sobrevive.}
+  - {number: 24, title: Escolha um Poder. É Grátis., movement: Ato III — Quem Criou a Loja, function: a loja reaparece em outro lugar para outra pessoa, repetindo a cena de abertura sob nova luz e preservando a ambiguidade final.}

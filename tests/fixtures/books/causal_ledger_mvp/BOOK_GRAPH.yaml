@@ -1,0 +1,9 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookGraphExtensions
+metadata:
+  slug: causal_ledger_mvp
+  version: 0.1.0
+spec:
+  custom_validators: []
+  gate_extensions: {}
+  additional_tasks: []

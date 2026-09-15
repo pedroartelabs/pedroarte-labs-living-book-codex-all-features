@@ -74,6 +74,38 @@ PLACEMENT_BEFORE = {"OPEN"}
 PLACEMENT_AFTER = {"HINGE", "AFTER"}
 
 
+def load_chapter_openers(runtime: Path) -> dict[int, dict]:
+    """BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM, Slice 6 (seção 18.4 da SDD): quando
+    o canon visual declara sigils de abertura de capítulo, o EDITION_PLAN já
+    projetado (T698) carrega `chapter_openers[]` — o asset do estado vigente
+    em cada capítulo. Sem o arquivo (a esmagadora maioria dos livros, sem a
+    capability ligada) retorna vazio: nenhuma mudança no DOCX (INV-VN-02).
+    `kdp_paperback` e `kdp_hardcover` compartilham a MESMA lista
+    (`CHAPTER_OPENER` mapeia para si mesma em todo `SURFACE_MAP`) — lê o
+    primeiro que existir."""
+    openers = load_print_edition_plan(runtime).get("chapter_openers") or []
+    return {int(o["chapter"]): o for o in openers if o.get("asset")}
+
+
+def load_print_edition_plan(runtime: Path) -> dict:
+    for target in ("kdp_paperback", "kdp_hardcover"):
+        path = runtime / "layout" / "editions" / target / "EDITION_PLAN.yaml"
+        if path.is_file():
+            return load_yaml(path) or {}
+    return {}
+
+
+def load_chapter_display(runtime: Path) -> dict[int, list[dict]]:
+    """Recursos de exibição por capítulo (NARCISO SDD, 18.3/18.5): o
+    EDITION_PLAN de impressão pode trazer `chapter_display[]` (eco do título,
+    ornamento). Só entradas INCLUDED com asset entram; sem a lista, nada muda."""
+    out: dict[int, list[dict]] = {}
+    for entry in load_print_edition_plan(runtime).get("chapter_display") or []:
+        if entry.get("status") == "INCLUDED" and entry.get("asset"):
+            out.setdefault(int(entry["chapter"]), []).append(entry)
+    return out
+
+
 def load_placement(runtime: Path, chapter_count: int) -> dict[int, dict]:
     """Placement por capítulo. Sem o arquivo, todo capítulo abre com imagem
     (OPEN) — o comportamento mais conservador, porque OPEN nunca antecipa um
@@ -93,6 +125,28 @@ def load_placement(runtime: Path, chapter_count: int) -> dict[int, dict]:
 # --------------------------------------------------------------------------
 # Helpers OOXML
 # --------------------------------------------------------------------------
+
+def load_illustrations(runtime: Path) -> dict[int, list[dict]]:
+    """Pranchas por id (NARCISO SDD, 28.3): `illustrations[]` opcional em
+    layout/IMAGE_PLACEMENT.yaml. Presente, substitui a imagem única por
+    capítulo e permite várias pranchas no mesmo capítulo; ausente, o build
+    segue exatamente o caminho antigo."""
+    path = runtime / "layout" / "IMAGE_PLACEMENT.yaml"
+    if not path.is_file():
+        return {}
+    out: dict[int, list[dict]] = {}
+    for raw in (load_yaml(path) or {}).get("illustrations") or []:
+        entry = dict(raw or {})
+        if not entry.get("id") or entry.get("chapter") is None:
+            raise SystemExit("BUILD FAILED: ilustração sem id ou chapter em layout/IMAGE_PLACEMENT.yaml")
+        entry["placement"] = str(entry.get("placement", "OPEN")).upper()
+        if entry.get("pair_with") == "SPREAD" and entry["placement"] not in PLACEMENT_AFTER:
+            # OPEN já é um par imagem-verso/abertura-recto; um spread antes da
+            # abertura empurraria o capítulo para uma página a mais.
+            raise SystemExit(f"BUILD FAILED: spread {entry['id']} exige placement HINGE ou AFTER")
+        out.setdefault(int(entry["chapter"]), []).append(entry)
+    return out
+
 
 def set_run_font(run, family, language, size=None, bold=None, italic=None):
     run.font.name = family
@@ -331,12 +385,17 @@ def bookmark(paragraph, name, bid):
 
 
 def add_rich_text(paragraph, text, family, language, size):
-    """Itálico Markdown é a única marcação inline do manuscrito para o leitor."""
+    """Negrito (**texto**) e itálico Markdown (*texto*) são as marcações inline
+    do manuscrito para o leitor — negrito aparece na frase de entrada da loja
+    ("**Escolha um poder. É grátis.**"), itálico em ênfase e pensamento."""
     pos = 0
-    for m in re.finditer(r"(?<!\*)\*([^*]+)\*(?!\*)", text):
+    for m in re.finditer(r"\*\*([^*]+)\*\*|(?<!\*)\*([^*]+)\*(?!\*)", text):
         if m.start() > pos:
             set_run_font(paragraph.add_run(text[pos:m.start()]), family, language, size)
-        set_run_font(paragraph.add_run(m.group(1)), family, language, size, italic=True)
+        if m.group(1) is not None:
+            set_run_font(paragraph.add_run(m.group(1)), family, language, size, bold=True)
+        else:
+            set_run_font(paragraph.add_run(m.group(2)), family, language, size, italic=True)
         pos = m.end()
     if pos < len(text):
         set_run_font(paragraph.add_run(text[pos:]), family, language, size)
@@ -370,6 +429,120 @@ def add_image_page(doc, runtime, cfg, chapter, entry, start_type=WD_SECTION.NEW_
     inline.docPr.set("descr", descr)
     inline.docPr.set("title", f"Ilustração do capítulo {chapter:02d}")
     return sec
+
+
+def add_illustration_page(doc, runtime: Path, cfg, plate: dict, start_type=WD_SECTION.NEW_PAGE):
+    ill = cfg["illustrations"]
+    path = runtime / ill["source_dir"] / ill["filename_pattern"].format(id=plate["id"])
+    if not path.is_file():
+        raise SystemExit(f"BUILD FAILED: ilustração ausente {plate['id']}: {path}")
+    size = ill["sizes"].get(plate.get("category"), ill["sizes"]["DEFAULT"])
+    sec = doc.add_section(start_type)
+    set_blank_furniture(sec, cfg)
+    p = doc.add_paragraph(style="Image Page")
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(ill["space_before_pt"])
+    p.paragraph_format.space_after = Pt(0)
+    inline = p.add_run().add_picture(
+        str(path), width=Inches(size["width_in"]), height=Inches(size["height_in"])
+    )._inline
+    inline.docPr.set("descr", ill["alt_text_prefix"].format(id=plate["id"], chapter=int(plate["chapter"]))
+                     + plate.get("alt", ""))
+    inline.docPr.set("title", f"Ilustração {plate['id']}")
+    return sec
+
+
+SPREAD_SIDES = ("verso", "recto")
+
+
+def spread_halves(runtime: Path, ill: dict, plate: dict) -> list:
+    """Metades do spread: arquivos `{id}_verso`/`{id}_recto` quando existem;
+    senão a imagem inteira cortada ao meio em memória (PNG, sem perda). A
+    arte não pode depender da dobra — isso é regra de brief, não do build."""
+    base = runtime / ill["source_dir"]
+    halves = [base / ill["spread_filename_pattern"].format(id=plate["id"], side=side) for side in SPREAD_SIDES]
+    if all(path.is_file() for path in halves):
+        return [str(path) for path in halves]
+    whole = base / ill["filename_pattern"].format(id=plate["id"])
+    if not whole.is_file():
+        raise SystemExit(f"BUILD FAILED: spread ausente {plate['id']}: {whole}")
+    from io import BytesIO
+    from PIL import Image
+    streams = []
+    with Image.open(whole) as img:
+        img = img.convert("RGB")
+        width, height = img.size
+        for box in ((0, 0, width // 2, height), (width // 2, 0, width, height)):
+            buf = BytesIO()
+            img.crop(box).save(buf, format="PNG")
+            buf.seek(0)
+            streams.append(buf)
+    return streams
+
+
+def add_spread_pages(doc, runtime: Path, cfg, plate: dict):
+    """Spread (NARCISO SDD, 18.1): metade esquerda numa seção que começa em
+    página par e metade direita na ímpar seguinte — o Word insere a página em
+    branco de paridade quando necessário, e o par fica sempre frente a frente."""
+    ill = cfg["illustrations"]
+    size = ill["sizes"]["SPREAD"]
+    starts = (WD_SECTION.EVEN_PAGE, WD_SECTION.ODD_PAGE)
+    alignments = (WD_ALIGN_PARAGRAPH.RIGHT, WD_ALIGN_PARAGRAPH.LEFT)  # as metades encostam na lombada
+    sec = None
+    for side, source, start, alignment in zip(SPREAD_SIDES, spread_halves(runtime, ill, plate), starts, alignments):
+        sec = doc.add_section(start)
+        set_blank_furniture(sec, cfg)
+        p = doc.add_paragraph(style="Image Page")
+        p.alignment = alignment
+        p.paragraph_format.space_before = Pt(ill["space_before_pt"])
+        p.paragraph_format.space_after = Pt(0)
+        inline = p.add_run().add_picture(
+            source, width=Inches(size["width_in"]), height=Inches(size["height_in"])
+        )._inline
+        inline.docPr.set("descr", ill["alt_text_prefix"].format(id=plate["id"], chapter=int(plate["chapter"]))
+                         + plate.get("alt", "") + f" ({side})")
+        inline.docPr.set("title", f"Ilustração {plate['id']} — {side}")
+    return sec
+
+
+def add_display_asset(doc, runtime: Path, cfg, entry: dict) -> bool:
+    """Recurso de exibição abaixo do título do capítulo. Como o sigil, é
+    reforço opcional: arquivo ausente não entra e não falha o build. O texto
+    de leitura nunca é espelhado nem alterado (MIR-01)."""
+    asset_path = runtime / entry["asset"]
+    if not asset_path.is_file():
+        return False
+    spec = cfg["chapter_opening"]["display_asset"]
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(spec["space_before_pt"])
+    p.paragraph_format.space_after = Pt(spec["space_after_pt"])
+    p.paragraph_format.keep_with_next = True
+    inline = p.add_run().add_picture(str(asset_path), width=Inches(spec["width_in"]))._inline
+    inline.docPr.set("descr", "")  # decorativo
+    inline.docPr.set("title", f"Exibição {entry.get('display_asset', '')} — capítulo {int(entry['chapter']):02d}")
+    return True
+
+
+def add_sigil(doc, runtime: Path, cfg, entry: dict) -> bool:
+    """Insere o asset do sigil de abertura ACIMA do rótulo `CAPÍTULO N`
+    (18.4 da SDD). Diferente de `add_image_page` (imagem de capítulo,
+    obrigatória — falha o build se ausente), um sigil sem arquivo no runtime
+    (estado `GLYPH` sem raster ainda gerado) simplesmente não é inserido: é
+    reforço visual opcional, nunca requisito estrutural do DOCX."""
+    asset_path = runtime / entry["asset"]
+    if not asset_path.is_file():
+        return False
+    sig = cfg["chapter_opening"]["sigil"]
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(sig["space_before_pt"])
+    p.paragraph_format.space_after = Pt(sig["space_after_pt"])
+    run = p.add_run()
+    inline = run.add_picture(str(asset_path), width=Inches(sig["width_in"]))._inline
+    inline.docPr.set("descr", f"Sigil {entry.get('element', '')} ({entry.get('state', '')}).")
+    inline.docPr.set("title", f"Sigil de abertura — capítulo {entry['chapter']:02d}")
+    return True
 
 
 def parse_manuscript(path: Path, cfg) -> dict[int, list[str]]:
@@ -450,6 +623,9 @@ def build(runtime: Path) -> int:
     cfg = load_config(runtime)
     book = load_book(runtime)
     placement = load_placement(runtime, book["chapter_count"])
+    illustrations = load_illustrations(runtime)
+    chapter_openers = load_chapter_openers(runtime)
+    chapter_display = load_chapter_display(runtime)
     typo, family, lang = cfg["typography"], cfg["typography"]["family"], book["language"]
 
     manuscript_path = runtime / cfg["manuscript"]["source"]
@@ -491,7 +667,11 @@ def build(runtime: Path) -> int:
     markers = set(sb.get("source_markers", ["* * *"]))
     opening = cfg["chapter_opening"]
     inserted: set[int] = set()
+    plates_inserted: set[str] = set()
+    spreads_inserted = 0
+    display_inserted = 0
     scene_breaks = 0
+    sigils_inserted = 0
     first_chapter = True
 
     for chapter in range(1, expected + 1):
@@ -500,9 +680,13 @@ def build(runtime: Path) -> int:
         anchor = entry.get("anchor")
 
         # OPEN: página de imagem no verso imediatamente anterior à abertura.
-        if mode in PLACEMENT_BEFORE:
+        if not illustrations and mode in PLACEMENT_BEFORE:
             add_image_page(doc, runtime, cfg, chapter, entry, WD_SECTION.EVEN_PAGE)
             inserted.add(chapter)
+        for plate in illustrations.get(chapter, []):
+            if plate["placement"] in PLACEMENT_BEFORE:
+                add_illustration_page(doc, runtime, cfg, plate, WD_SECTION.EVEN_PAGE)
+                plates_inserted.add(plate["id"])
 
         start = WD_SECTION.ODD_PAGE if opening.get("start_on_recto", True) else WD_SECTION.NEW_PAGE
         sec = doc.add_section(start)
@@ -510,6 +694,10 @@ def build(runtime: Path) -> int:
         if first_chapter:
             set_page_restart(sec, 1)
             first_chapter = False
+
+        opener_entry = chapter_openers.get(chapter)
+        if opener_entry and add_sigil(doc, runtime, cfg, opener_entry):
+            sigils_inserted += 1
 
         pn = doc.add_paragraph(style="Chapter Number")
         pn.paragraph_format.space_before = Pt(opening["space_before_pt"])
@@ -519,6 +707,8 @@ def build(runtime: Path) -> int:
         set_run_font(pt.add_run(book["titles"].get(chapter, f"Capítulo {chapter}")),
                      family, lang, typo["chapter_title_pt"], bold=True)
         bookmark(pt, f"chapter_{chapter:02d}", chapter)
+        for display_entry in chapter_display.get(chapter, []):
+            display_inserted += add_display_asset(doc, runtime, cfg, display_entry)
 
         first_after_break = True
         buf: list[str] = []
@@ -535,20 +725,39 @@ def build(runtime: Path) -> int:
                 buf = []
                 # HINGE/AFTER: a imagem entra somente depois do parágrafo que
                 # executa o gatilho declarado; o texto retoma na página seguinte.
-                if (mode in PLACEMENT_AFTER and chapter not in inserted
+                if (not illustrations and mode in PLACEMENT_AFTER and chapter not in inserted
                         and anchor and anchor in text):
                     add_image_page(doc, runtime, cfg, chapter, entry, WD_SECTION.NEW_PAGE)
                     inserted.add(chapter)
                     cont = doc.add_section(WD_SECTION.NEW_PAGE)
                     set_body_furniture(cont, cfg, book, first_page=False)
                     first_after_break = True
+                for plate in illustrations.get(chapter, []):
+                    if (plate["placement"] in PLACEMENT_AFTER and plate["id"] not in plates_inserted
+                            and plate.get("anchor") and plate["anchor"] in text):
+                        if plate.get("pair_with") == "SPREAD":
+                            add_spread_pages(doc, runtime, cfg, plate)
+                            spreads_inserted += 1
+                        else:
+                            add_illustration_page(doc, runtime, cfg, plate, WD_SECTION.NEW_PAGE)
+                        plates_inserted.add(plate["id"])
+                        cont = doc.add_section(WD_SECTION.NEW_PAGE)
+                        set_body_furniture(cont, cfg, book, first_page=False)
+                        first_after_break = True
             if stripped in markers:
                 p = doc.add_paragraph(style="Scene Break")
                 set_run_font(p.add_run(sb["glyph"]), family, lang, sb["size_pt"])
                 scene_breaks += 1
                 first_after_break = True
 
-    never = sorted(set(range(1, expected + 1)) - inserted)
+    declared_plates = {p["id"] for plates in illustrations.values() for p in plates}
+    missing_plates = sorted(declared_plates - plates_inserted)
+    if missing_plates:
+        raise SystemExit(
+            f"BUILD FAILED: ilustrações não inseridas {missing_plates}. Para HINGE/AFTER, confira "
+            "se `anchor` em layout/IMAGE_PLACEMENT.yaml existe literalmente no manuscrito."
+        )
+    never = [] if illustrations else sorted(set(range(1, expected + 1)) - inserted)
     if never:
         raise SystemExit(
             "BUILD FAILED: imagem não inserida nos capítulos "
@@ -567,6 +776,14 @@ def build(runtime: Path) -> int:
     print(f"DOCX OK | {out}")
     print(f"- capítulos: {len(chapters)}")
     print(f"- imagens inseridas: {len(inserted)}")
+    if illustrations:
+        print(f"- ilustrações inseridas: {len(plates_inserted)}")
+        if spreads_inserted:
+            print(f"- spreads: {spreads_inserted}")
+    if chapter_display:
+        print(f"- recursos de exibição inseridos: {display_inserted}")
+    if chapter_openers:
+        print(f"- sigils de abertura inseridos: {sigils_inserted}")
     print(f"- quebras de cena: {scene_breaks}")
     print(f"- seções: {len(doc.sections)}")
     print(f"- bytes: {out.stat().st_size}")

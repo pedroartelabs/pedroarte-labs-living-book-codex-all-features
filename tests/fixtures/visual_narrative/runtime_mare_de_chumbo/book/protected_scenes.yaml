@@ -1,0 +1,9 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: DEBT_NAMED
+    chapters: [12]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: A dívida de sangue da família de Tomás é nomeada em voz alta.
+    must_preserve: []
+    reject_if: []

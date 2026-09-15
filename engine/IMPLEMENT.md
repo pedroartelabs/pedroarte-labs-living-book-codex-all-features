@@ -25,6 +25,21 @@ Only CANON_GUARDIAN mutates the runtime canon registry.
 
 Writers may propose continuity facts but may not silently promote them to canon.
 
+If `canon/AGENTS.md` exists in this runtime, the active book declares
+`features.causal_ledger.enabled: true` (capability `DARK_ROMANCE_CANON_ARCHITECT` —
+see `docs/sdd/DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md`). Read it before touching
+`canon/CAUSAL_LEDGER.yaml`: same owner, same lock, same proposal protocol as the
+canon registry, but a stricter contract. Its absence means the book does not use
+this capability — nothing else changes.
+
+If `canon/VISUAL_AGENTS.md` exists in this runtime, the active book declares
+`features.visual_narrative.enabled: true` (capability `BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM` —
+see `docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md`). Read it before touching
+`canon/VISUAL_NARRATIVE_CANON.yaml`: owned exclusively by `VISUAL_DIRECTOR` under the
+`VISUAL_CANON_WRITE` lock. The permanent author-level visual identity lives read-only
+in `author/AUTHOR_VISUAL_DNA.v<N>.yaml` and is never edited from a runtime. Its absence
+means the book does not use this capability — nothing else changes.
+
 ## Writing waves
 
 The standard generator builds waves from `BOOK_SPEC.yaml`.

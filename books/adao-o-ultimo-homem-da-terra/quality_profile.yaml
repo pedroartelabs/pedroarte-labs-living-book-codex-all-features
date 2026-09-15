@@ -1,0 +1,46 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookQualityProfile
+chapter_scores:
+  authenticity_of_characters:
+    minimum: 8
+  scene_strength:
+    minimum: 8
+  subtext:
+    minimum: 7
+  sensory_concreteness:
+    minimum: 7
+  coherence:
+    minimum: 9
+  emotional_impact:
+    minimum: 8
+  demographic_plausibility:
+    minimum: 9
+  mystery_ambiguity:
+    minimum: 9
+  documentary_balance:
+    minimum: 7
+risk_scores:
+  sentimentalism:
+    maximum: 4
+  effect_phrase_overuse:
+    maximum: 4
+  abstraction:
+    maximum: 4
+  continuity:
+    maximum: 1
+  mystery_overexplanation:
+    maximum: 1
+  caricature_worldbuilding:
+    maximum: 1
+  messiah_framing:
+    maximum: 1
+  demographic_number_without_human_anchor:
+    maximum: 2
+required_checks:
+  - every chapter changes a relationship, a fact about the phenomenon, or a condition of the world
+  - every large demographic number is anchored to a named person in the same or adjacent scene
+  - every scene involving Adão's body records consent, coercion, resistance or ambivalence
+  - every offspring attributed to Adão is explicitly female
+  - no narrator sentence resolves any of the four central mysteries
+  - counters (HOMENS VIVOS CONHECIDOS and equivalents) appear only at structural turning points
+  - point of view stays limited to the chapter's declared POV character

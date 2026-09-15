@@ -1,0 +1,4794 @@
+{
+  "apiVersion": "pedroarte.livingbooks/v1",
+  "kind": "LiteraryTaskGraph",
+  "metadata": {
+    "author": "Pedro Arte",
+    "book_version": "0.1.0",
+    "chapter_count": 24,
+    "engine_version": "1.1.0",
+    "execution_profile": "STANDARD",
+    "language": "pt-BR",
+    "project_id": "loja-de-poderes-vivos",
+    "title": "Loja de Poderes Vivos"
+  },
+  "spec": {
+    "agents": {
+      "ANTI_MANIPULATION_GUARDIAN": {
+        "profile": "/engine/agents/anti_manipulation_guardian.toml"
+      },
+      "BOOK_LAYOUT_ARCHITECT": {
+        "profile": "/engine/agents/book_layout_architect.toml"
+      },
+      "BRIEFING_ARCHITECT": {
+        "profile": "/engine/agents/briefing_architect.toml"
+      },
+      "CANON_GUARDIAN": {
+        "profile": "/engine/agents/canon_guardian.toml"
+      },
+      "CHAPTER_IMAGE_DIRECTOR": {
+        "profile": "/engine/agents/chapter_image_director.toml"
+      },
+      "CHAPTER_WRITER": {
+        "profile": "/engine/agents/chapter_writer.toml"
+      },
+      "CHARACTER_CONTINUITY_REVIEWER": {
+        "profile": "/engine/agents/character_continuity_reviewer.toml"
+      },
+      "CHARACTER_PSYCHOLOGIST": {
+        "profile": "/engine/agents/character_psychologist.toml"
+      },
+      "CHILD_VOICE_GUARDIAN": {
+        "profile": "/engine/agents/child_voice_guardian.toml"
+      },
+      "CINEMA_CRITIC": {
+        "profile": "/engine/agents/cinema_critic.toml"
+      },
+      "COMMERCIAL_EDITOR_CRITIC": {
+        "profile": "/engine/agents/commercial_editor_critic.toml"
+      },
+      "COPYRIGHT_ORIGINALITY_AUDITOR": {
+        "profile": "/engine/agents/originality_auditor.toml"
+      },
+      "CULTURAL_ADAPTATION_GUARDIAN": {
+        "profile": "/engine/agents/cultural_adaptation_guardian.toml"
+      },
+      "DELIVERY_AGENT": {
+        "profile": "/engine/agents/delivery_agent.toml"
+      },
+      "DEVELOPMENTAL_EDITOR": {
+        "profile": "/engine/agents/developmental_editor.toml"
+      },
+      "DIALOGUE_DIRECTOR": {
+        "profile": "/engine/agents/dialogue_director.toml"
+      },
+      "EMOTIONAL_EDITOR": {
+        "profile": "/engine/agents/emotional_editor.toml"
+      },
+      "EMOTIONAL_PHYSIOLOGY_ARCHITECT": {
+        "profile": "/engine/agents/emotional_physiology_architect.toml"
+      },
+      "EMOTIONAL_REPETITION_AUDITOR": {
+        "profile": "/engine/agents/emotional_repetition_auditor.toml"
+      },
+      "ENGLISH_CHILD_VOICE_GUARDIAN": {
+        "profile": "/engine/agents/english_child_voice_guardian.toml"
+      },
+      "ENGLISH_LITERARY_EDITOR": {
+        "profile": "/engine/agents/english_literary_editor.toml"
+      },
+      "ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT": {
+        "profile": "/engine/agents/environment_acoustic_evolution_agent.toml"
+      },
+      "EXECUTIVE_EDITOR": {
+        "profile": "/engine/agents/executive_editor.toml"
+      },
+      "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT": {
+        "profile": "/engine/agents/facial_identity_expert.toml"
+      },
+      "FINAL_PROOFREADER": {
+        "profile": "/engine/agents/final_proofreader.toml"
+      },
+      "GENRE_GUARDIAN": {
+        "profile": "/engine/agents/genre_guardian.toml"
+      },
+      "IMAGE_CONTINUITY_QA": {
+        "profile": "/engine/agents/image_continuity_qa.toml"
+      },
+      "IMAGE_GENERATOR": {
+        "profile": "/engine/agents/image_generator.toml"
+      },
+      "IMAGE_LAYOUT_AGENT": {
+        "profile": "/engine/agents/image_layout_agent.toml"
+      },
+      "KDP_FORMATTER": {
+        "profile": "/engine/agents/kdp_formatter.toml"
+      },
+      "KDP_REQUIREMENTS_RESEARCHER": {
+        "profile": "/engine/agents/kdp_requirements_researcher.toml"
+      },
+      "LEAD_NOVELIST": {
+        "profile": "/engine/agents/lead_novelist.toml"
+      },
+      "LEGAL_EDITOR_BR": {
+        "profile": "/engine/agents/legal_editor_br.toml"
+      },
+      "LEGAL_EDITOR_GLOBAL": {
+        "profile": "/engine/agents/legal_editor_global.toml"
+      },
+      "LITERARY_CRITIC": {
+        "profile": "/engine/agents/literary_critic.toml"
+      },
+      "LITERARY_STYLE_GUARDIAN": {
+        "profile": "/engine/agents/literary_style_guardian.toml"
+      },
+      "LITERARY_TRANSLATOR_EN": {
+        "profile": "/engine/agents/literary_translator_en.toml"
+      },
+      "LIVING_SOUNDTRACK_ARCHITECT": {
+        "profile": "/engine/agents/living_soundtrack_architect.toml"
+      },
+      "LIVING_SOUND_PROMPT_ENGINEER": {
+        "profile": "/engine/agents/living_sound_prompt_engineer.toml"
+      },
+      "MASTER_INTEGRATOR": {
+        "profile": "/engine/agents/master_integrator.toml"
+      },
+      "MASTER_ORCHESTRATOR": {
+        "profile": "/engine/agents/master_orchestrator.toml"
+      },
+      "MEDIA_AND_KDP_AGENT": {
+        "profile": "/engine/agents/media_kdp_agent.toml"
+      },
+      "MERGE_COORDINATOR": {
+        "profile": "/engine/agents/merge_coordinator.toml"
+      },
+      "NARRATIVE_ARCHITECT": {
+        "profile": "/engine/agents/narrative_architect.toml"
+      },
+      "PAGE_BREATHING_ARCHITECT": {
+        "profile": "/engine/agents/page_breathing_architect.toml"
+      },
+      "PHYSICALITY_AND_BODY_AGENT": {
+        "profile": "/engine/agents/physicality_and_body_agent.toml"
+      },
+      "PLOT_CONTINUITY_REVIEWER": {
+        "profile": "/engine/agents/plot_continuity_reviewer.toml"
+      },
+      "PLOT_ENGINEER": {
+        "profile": "/engine/agents/plot_engineer.toml"
+      },
+      "PROTECTED_SCENE_AUDITOR": {
+        "profile": "/engine/agents/protected_scene_auditor.toml"
+      },
+      "PTBR_GRAMMAR_EDITOR": {
+        "profile": "/engine/agents/ptbr_grammar_editor.toml"
+      },
+      "READER_VITALS_AGENT": {
+        "profile": "/engine/agents/reader_vitals_agent.toml"
+      },
+      "REALISM_ENGINEER": {
+        "profile": "/engine/agents/realism_engineer.toml"
+      },
+      "REPETITION_AND_CLICHE_REVIEWER": {
+        "profile": "/engine/agents/repetition_and_cliche_reviewer.toml"
+      },
+      "SCENE_ARCHITECT": {
+        "profile": "/engine/agents/scene_architect.toml"
+      },
+      "SENSORY_AGENT": {
+        "profile": "/engine/agents/sensory_agent.toml"
+      },
+      "SOUND_BIOME_ARCHITECT": {
+        "profile": "/engine/agents/sound_biome_architect.toml"
+      },
+      "SPEC_ARCHITECT": {
+        "profile": "/engine/agents/spec_architect.toml"
+      },
+      "SUBTEXT_EDITOR": {
+        "profile": "/engine/agents/subtext_editor.toml"
+      },
+      "SYMBOLISM_ARCHITECT": {
+        "profile": "/engine/agents/symbolism_architect.toml"
+      },
+      "TABLE_OF_CONTENTS_AGENT": {
+        "profile": "/engine/agents/table_of_contents_agent.toml"
+      },
+      "TEMPORAL_ARCHITECT": {
+        "profile": "/engine/agents/temporal_architect.toml"
+      },
+      "TRANSLATION_ARCHITECT": {
+        "profile": "/engine/agents/translation_architect.toml"
+      },
+      "TYPOGRAPHY_TEXT_REVIEWER": {
+        "profile": "/engine/agents/typography_text_reviewer.toml"
+      },
+      "VISUAL_DIRECTOR": {
+        "profile": "/engine/agents/visual_director.toml"
+      },
+      "WORLD_ARCHITECT": {
+        "profile": "/engine/agents/world_architect.toml"
+      },
+      "WORLD_RULES_REVIEWER": {
+        "profile": "/engine/agents/world_rules_reviewer.toml"
+      }
+    },
+    "custom_validators": [
+      {
+        "command": "python scripts/validate_media_assets.py",
+        "id": "V_MEDIA_ASSET_PACKAGE"
+      }
+    ],
+    "execution_policy": {
+      "canon_write_policy": {
+        "concurrent_write": false,
+        "exclusive_owner": "CANON_GUARDIAN"
+      },
+      "continue_without_user_confirmation": true,
+      "explicit_subagent_spawning": true,
+      "final_manuscript_write_policy": {
+        "concurrent_write": false,
+        "exclusive_owner": "LEAD_NOVELIST"
+      },
+      "max_parallel_critics": 8,
+      "max_parallel_image_tasks": 6,
+      "max_parallel_sound_tasks": 6,
+      "max_parallel_tasks": 8,
+      "max_parallel_writers": 4,
+      "merge_policy": {
+        "destructive_merge": false,
+        "merge_log_required": true
+      },
+      "mode": "AUTONOMOUS",
+      "never_skip_blocking_gates": true,
+      "never_skip_dependencies": true,
+      "reviewer_write_access": {
+        "canon": false,
+        "manuscript": false,
+        "reports": true
+      },
+      "stop_and_fix": {
+        "enabled": true,
+        "rule": "If any blocking validation or gate fails, repair, revalidate, then continue."
+      }
+    },
+    "gates": {
+      "GATE_BOOTSTRAP": {
+        "blocking": true,
+        "requires": [
+          "T000_INITIALIZE_RUNTIME",
+          "T001_VALIDATE_CAPABILITIES",
+          "T002_REGISTER_AGENTS"
+        ]
+      },
+      "GATE_CANON": {
+        "approval_file": "/project_state/APPROVALS/GATE_CANON.md",
+        "blocking": true,
+        "requires": [
+          "T010_MASTER_BRIEF",
+          "T011_STORY_BIBLE",
+          "T012_WORLD_RULES",
+          "T013_CHARACTER_BIBLE",
+          "T014_WORLD_BIBLE",
+          "T015_SYMBOL_BIBLE",
+          "T016_PLOT_DEPENDENCY_MAP",
+          "T017_TIMELINE",
+          "T018_CANON_REGISTRY",
+          "T019_CANON_REVIEW"
+        ],
+        "requires_human_approval": true
+      },
+      "GATE_CHAPTER_BRIEFS": {
+        "blocking": true,
+        "requires": [
+          "T101_BRIEF_CHAPTER",
+          "T102_BRIEF_CHAPTER",
+          "T103_BRIEF_CHAPTER",
+          "T104_BRIEF_CHAPTER",
+          "T105_BRIEF_CHAPTER",
+          "T106_BRIEF_CHAPTER",
+          "T107_BRIEF_CHAPTER",
+          "T108_BRIEF_CHAPTER",
+          "T109_BRIEF_CHAPTER",
+          "T110_BRIEF_CHAPTER",
+          "T111_BRIEF_CHAPTER",
+          "T112_BRIEF_CHAPTER",
+          "T113_BRIEF_CHAPTER",
+          "T114_BRIEF_CHAPTER",
+          "T115_BRIEF_CHAPTER",
+          "T116_BRIEF_CHAPTER",
+          "T117_BRIEF_CHAPTER",
+          "T118_BRIEF_CHAPTER",
+          "T119_BRIEF_CHAPTER",
+          "T120_BRIEF_CHAPTER",
+          "T121_BRIEF_CHAPTER",
+          "T122_BRIEF_CHAPTER",
+          "T123_BRIEF_CHAPTER",
+          "T124_BRIEF_CHAPTER"
+        ]
+      },
+      "GATE_DELIVERY": {
+        "blocking": true,
+        "requires": [
+          "T800_MEDIA_PACKAGE",
+          "GATE_MEDIA_ASSETS",
+          "T803_DELIVERY_MANIFEST",
+          "T804_FINAL_ARTIFACT_AUDIT",
+          "T805_FINAL_DELIVERY"
+        ]
+      },
+      "GATE_FULL_MANUSCRIPT": {
+        "approval_file": "/project_state/APPROVALS/GATE_FULL_MANUSCRIPT.md",
+        "blocking": true,
+        "requires": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT",
+          "T301_WHOLE_BOOK_INTEGRATION",
+          "T302_CRITIC_PANEL",
+          "T3201_PROTECTED_FIRST_OFFER",
+          "T3202_PROTECTED_MARISA_FIRST_COST",
+          "T3203_PROTECTED_CHEAT_ATTEMPT_FAILURE",
+          "T3204_PROTECTED_SHOP_RULE_ABSOLUTE",
+          "T3205_PROTECTED_ORIGIN_REVEAL",
+          "T3206_PROTECTED_CLOSING_MIRROR",
+          "T303_REVIEW_SYNTHESIS",
+          "T304_LEAD_NOVELIST_REVISION",
+          "T307_FINAL_LITERARY_REVISION",
+          "T308_PTBR_REVIEW",
+          "T309_FINAL_PROOF",
+          "T310_FREEZE_MANUSCRIPT"
+        ],
+        "requires_human_approval": true
+      },
+      "GATE_KDP": {
+        "blocking": true,
+        "requires": [
+          "T699_KDP_REQUIREMENTS_REFRESH",
+          "T700_LAYOUT_BIBLE",
+          "T701_TABLE_OF_CONTENTS",
+          "T702_IMAGE_PLACEMENT",
+          "T703_BUILD_DOCX",
+          "T704_KDP_QA",
+          "T705_DOCX_FINAL_FIXES",
+          "T706_APPROVE_KDP"
+        ]
+      },
+      "GATE_LEGAL": {
+        "blocking": true,
+        "requires": [
+          "T600_LEGAL_BR",
+          "T601_LEGAL_GLOBAL",
+          "T602_ORIGINALITY_AUDIT",
+          "T603_LEGAL_SYNTHESIS",
+          "T604_BLOCKING_LEGAL_FIXES"
+        ]
+      },
+      "GATE_LIVING_BOOK": {
+        "blocking": true,
+        "requires": [
+          "T030_LIVING_BOOK_BIBLE",
+          "T031_LIVRO_BIOME",
+          "T032_READER_VITALS",
+          "T033_EMOTIONAL_RESPIRATION",
+          "T034_PAGE_BIBLE",
+          "T035_MEMORY_MOTIF_MAP",
+          "T036_VISUAL_LIFE_SPEC",
+          "T037_IMAGE_BIOME",
+          "T038_FACE_CANON",
+          "T039_CHARACTER_VISUAL_BIBLE",
+          "T040_SOUND_BIOME_DRAFT",
+          "T041_LIVING_BOOK_REVIEW"
+        ]
+      },
+      "GATE_MEDIA_ASSETS": {
+        "blocking": true,
+        "custom_validators": [
+          "V_MEDIA_ASSET_PACKAGE"
+        ],
+        "requires": [
+          "T801_KDP_BOOK_COVER",
+          "T802_INSTAGRAM_STORIES"
+        ]
+      },
+      "GATE_SOUND": {
+        "blocking": true,
+        "requires": [
+          "T500_SOUNDTRACK_BIBLE_FINAL",
+          "T501_CHAPTER_SOUND_MAP_FINAL",
+          "T502_ENVIRONMENT_ACOUSTIC_EVOLUTION",
+          "T503_SOUND_PROMPTS",
+          "T504_SOUND_REVIEW"
+        ]
+      },
+      "GATE_VISUAL": {
+        "blocking": true,
+        "requires": [
+          "T401_IMAGE_APPROVE",
+          "T402_IMAGE_APPROVE",
+          "T403_IMAGE_APPROVE",
+          "T404_IMAGE_APPROVE",
+          "T405_IMAGE_APPROVE",
+          "T406_IMAGE_APPROVE",
+          "T407_IMAGE_APPROVE",
+          "T408_IMAGE_APPROVE",
+          "T409_IMAGE_APPROVE",
+          "T410_IMAGE_APPROVE",
+          "T411_IMAGE_APPROVE",
+          "T412_IMAGE_APPROVE",
+          "T413_IMAGE_APPROVE",
+          "T414_IMAGE_APPROVE",
+          "T415_IMAGE_APPROVE",
+          "T416_IMAGE_APPROVE",
+          "T417_IMAGE_APPROVE",
+          "T418_IMAGE_APPROVE",
+          "T419_IMAGE_APPROVE",
+          "T420_IMAGE_APPROVE",
+          "T421_IMAGE_APPROVE",
+          "T422_IMAGE_APPROVE",
+          "T423_IMAGE_APPROVE",
+          "T424_IMAGE_APPROVE"
+        ]
+      },
+      "GATE_VOICE": {
+        "approval_file": "/project_state/APPROVALS/GATE_VOICE.md",
+        "blocking": true,
+        "requires": [
+          "T151C_REVISE_CHAPTER_01",
+          "T152C_REVISE_CHAPTER_02",
+          "T156_BUILD_VOICE_REFERENCE",
+          "T157_APPROVE_VOICE"
+        ],
+        "requires_human_approval": true
+      },
+      "GATE_WAVE_1": {
+        "blocking": true,
+        "requires": [
+          "T201_PREFLIGHT",
+          "T201_WRITE",
+          "T201_MERGE",
+          "T201_REVIEW",
+          "T201_REVISION",
+          "T201_CANON_UPDATE",
+          "T201_APPROVAL"
+        ]
+      },
+      "GATE_WAVE_2": {
+        "blocking": true,
+        "requires": [
+          "T202_PREFLIGHT",
+          "T202_WRITE",
+          "T202_MERGE",
+          "T202_REVIEW",
+          "T202_REVISION",
+          "T202_CANON_UPDATE",
+          "T202_APPROVAL"
+        ]
+      },
+      "GATE_WAVE_3": {
+        "blocking": true,
+        "requires": [
+          "T203_PREFLIGHT",
+          "T203_WRITE",
+          "T203_MERGE",
+          "T203_REVIEW",
+          "T203_REVISION",
+          "T203_CANON_UPDATE",
+          "T203_APPROVAL"
+        ]
+      },
+      "GATE_WAVE_4": {
+        "blocking": true,
+        "requires": [
+          "T204_PREFLIGHT",
+          "T204_WRITE",
+          "T204_MERGE",
+          "T204_REVIEW",
+          "T204_REVISION",
+          "T204_CANON_UPDATE",
+          "T204_APPROVAL"
+        ]
+      },
+      "GATE_WAVE_5": {
+        "blocking": true,
+        "requires": [
+          "T205_PREFLIGHT",
+          "T205_WRITE",
+          "T205_MERGE",
+          "T205_REVIEW",
+          "T205_REVISION",
+          "T205_CANON_UPDATE",
+          "T205_APPROVAL"
+        ]
+      }
+    },
+    "immutable_rules": {
+      "apiVersion": "pedroarte.livingbooks/v1",
+      "kind": "ImmutableRules",
+      "rules": [
+        {
+          "blocking": true,
+          "id": "FREE_WITH_A_PRICE",
+          "rule": "A loja nunca cobra dinheiro, contrato ou dívida. O único preço de qualquer poder é o efeito colateral, sempre revelado por completo e com precisão antes da escolha do visitante."
+        },
+        {
+          "blocking": true,
+          "id": "PROPORTIONAL_SIDE_EFFECT",
+          "rule": "Todo poder concedido produz exatamente um efeito colateral de proporção equivalente ao benefício — nunca menor, nunca maior."
+        },
+        {
+          "blocking": true,
+          "id": "NO_COERCION_NO_DECEPTION",
+          "rule": "A loja jamais coage, mente ou omite informação. O visitante pode sempre recusar o poder e sair pela mesma porta sem consequência."
+        },
+        {
+          "blocking": true,
+          "id": "NO_LOOPHOLE",
+          "rule": "Nenhum personagem consegue, de fato, trapacear, transferir ou anular permanentemente o efeito colateral de um poder. Tentativas podem ocorrer na trama, mas fracassam sempre."
+        },
+        {
+          "blocking": true,
+          "id": "SHOP_NEUTRALITY",
+          "rule": "A loja e quem a administra não punem, não julgam e não manipulam ativamente os visitantes para escolher um poder. O horror nasce da escolha humana, nunca da malícia da loja."
+        },
+        {
+          "blocking": true,
+          "id": "MOSAIC_CONTINUITY",
+          "rule": "Personagens, objetos ou consequências de capítulos anteriores devem reaparecer, ainda que brevemente, em pelo menos um capítulo posterior — nenhuma história de cliente é totalmente isolada."
+        },
+        {
+          "blocking": true,
+          "id": "ORIGIN_DELAYED_REVEAL",
+          "rule": "A identidade e o motivo de quem criou a loja não podem ser revelados, explicados ou confirmados antes do Ato III (capítulos 17 a 24)."
+        },
+        {
+          "blocking": true,
+          "id": "FORM",
+          "rule": "Exatamente 24 capítulos em português do Brasil e no mínimo 70000 palavras."
+        }
+      ]
+    },
+    "locks": {
+      "CANON_WRITE": {
+        "mode": "EXCLUSIVE"
+      },
+      "CHARACTER_BIBLE_WRITE": {
+        "mode": "EXCLUSIVE"
+      },
+      "DELIVERY_BUILD": {
+        "mode": "EXCLUSIVE"
+      },
+      "DOCX_BUILD": {
+        "mode": "EXCLUSIVE"
+      },
+      "FACE_CANON_WRITE": {
+        "mode": "EXCLUSIVE"
+      },
+      "MANUSCRIPT_FINAL_WRITE": {
+        "mode": "EXCLUSIVE"
+      },
+      "MANUSCRIPT_MERGE": {
+        "mode": "EXCLUSIVE"
+      },
+      "STORY_BIBLE_WRITE": {
+        "mode": "EXCLUSIVE"
+      },
+      "TIMELINE_WRITE": {
+        "mode": "EXCLUSIVE"
+      }
+    },
+    "protocols": {
+      "BASE_WAVE_REVIEW_PROTOCOL": {
+        "final_approval": {
+          "agent": "EXECUTIVE_EDITOR"
+        },
+        "report_schema": {
+          "category": "REQUIRED",
+          "chapter": "REQUIRED",
+          "evidence": "REQUIRED",
+          "finding_id": "REQUIRED",
+          "recommended_action": "REQUIRED",
+          "severity": "REQUIRED"
+        },
+        "review_synthesis": {
+          "owner": "EXECUTIVE_EDITOR"
+        },
+        "reviewer_policy": {
+          "manuscript_write": "FORBIDDEN",
+          "report_write": "REQUIRED"
+        },
+        "revision_owner": {
+          "agent": "LEAD_NOVELIST"
+        },
+        "severity": [
+          "INFO",
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "BLOCKER"
+        ]
+      },
+      "CANON_PROPOSAL_PROTOCOL": {
+        "mutation_owner": "CANON_GUARDIAN",
+        "proposal_location": "CANON_PROPOSALS",
+        "unapproved_facts_are_canon": false
+      },
+      "PROTECTED_SCENE_PROTOCOL": {
+        "blocking": true,
+        "criteria_source": "/book/protected_scenes.yaml",
+        "owner": "PROTECTED_SCENE_AUDITOR"
+      }
+    },
+    "quality_defaults": {
+      "chapter_scores": {
+        "authenticity_of_characters": 8,
+        "coherence": 8,
+        "emotional_impact": 7,
+        "scene_strength": 7,
+        "sensory_concreteness": 7,
+        "subtext": 7
+      },
+      "risk_maximums": {
+        "abstraction": 6,
+        "continuity": 2,
+        "effect_phrase_overuse": 5,
+        "sentimentalism": 6
+      }
+    },
+    "quality_profile": {
+      "apiVersion": "pedroarte.livingbooks/v1",
+      "chapter_scores": {
+        "authenticity_of_characters": 8,
+        "coherence": 9,
+        "emotional_impact": 8,
+        "scene_strength": 8,
+        "sensory_concreteness": 7,
+        "subtext": 8
+      },
+      "kind": "BookQualityProfile",
+      "risk_scores": {
+        "abstraction": 4,
+        "continuity": 1,
+        "effect_phrase_overuse": 4,
+        "ethical_safety": 1,
+        "sentimentalism": 4
+      }
+    },
+    "rejection_states": [
+      "CANON_CONFLICT",
+      "EMOTIONAL_MANIPULATION",
+      "WORLD_RULES_FAILURE",
+      "FACE_IDENTITY_FAILURE",
+      "VISUAL_REJECTED",
+      "SOUND_BIOME_FAILURE",
+      "CONTINUITY_FAILURE",
+      "KDP_VALIDATION_FAILURE",
+      "MEDIA_ASSET_VALIDATION_FAILURE",
+      "CAPABILITY_BLOCKER",
+      "RULE_VIOLATION_FREE_POWER_WITH_HIDDEN_COST",
+      "LOOPHOLE_FOUND",
+      "SHOP_PORTRAYED_AS_MALICIOUS",
+      "ORIGIN_REVEALED_TOO_EARLY",
+      "MOSAIC_ISOLATION_FAILURE"
+    ],
+    "success_states": [
+      "APPROVED",
+      "CANON_APPROVED",
+      "FINAL"
+    ],
+    "task_states": [
+      "PENDING",
+      "READY",
+      "SPAWNING",
+      "RUNNING",
+      "WAITING_DEPENDENCIES",
+      "UNDER_REVIEW",
+      "REVISION_REQUIRED",
+      "BLOCKED",
+      "FAILED",
+      "APPROVED",
+      "CANON_APPROVED",
+      "FINAL"
+    ],
+    "tasks": [
+      {
+        "depends_on": [],
+        "id": "T000_INITIALIZE_RUNTIME",
+        "model_tier": "M",
+        "outputs": [
+          "/project_state/PROJECT_STATUS.yaml",
+          "/logs/ORCHESTRATION_LOG.md",
+          "/integration/MERGE_LOG.md"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "BOOTSTRAP"
+      },
+      {
+        "depends_on": [
+          "T000_INITIALIZE_RUNTIME"
+        ],
+        "id": "T001_VALIDATE_CAPABILITIES",
+        "model_tier": "XS",
+        "outputs": [
+          "/project_state/CAPABILITY_STATUS.yaml"
+        ],
+        "owner": "SPEC_ARCHITECT",
+        "phase": "BOOTSTRAP"
+      },
+      {
+        "depends_on": [
+          "T000_INITIALIZE_RUNTIME"
+        ],
+        "id": "T002_REGISTER_AGENTS",
+        "model_tier": "M",
+        "outputs": [
+          "/project_state/AGENT_REGISTRY.yaml"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "BOOTSTRAP"
+      },
+      {
+        "depends_on": [
+          "GATE_BOOTSTRAP"
+        ],
+        "id": "T010_MASTER_BRIEF",
+        "inputs": [
+          "/book/CREATIVE_BRIEF.md",
+          "/book/BOOK_CONSTITUTION.md"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/specs/MASTER_BRIEF.md"
+        ],
+        "owner": "BRIEFING_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T010_MASTER_BRIEF"
+        ],
+        "id": "T011_STORY_BIBLE",
+        "inputs": [
+          "/book/chapter_architecture.yaml"
+        ],
+        "locks": [
+          "STORY_BIBLE_WRITE"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/specs/STORY_BIBLE.md"
+        ],
+        "owner": "NARRATIVE_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T010_MASTER_BRIEF"
+        ],
+        "id": "T012_WORLD_RULES",
+        "inputs": [
+          "/book/seeds/WORLD_RULES_SEED.md"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/specs/WORLD_RULES.md"
+        ],
+        "owner": "WORLD_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T011_STORY_BIBLE"
+        ],
+        "id": "T013_CHARACTER_BIBLE",
+        "locks": [
+          "CHARACTER_BIBLE_WRITE"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/specs/CHARACTER_BIBLE.md"
+        ],
+        "owner": "CHARACTER_PSYCHOLOGIST",
+        "phase": "CANON",
+        "spawn": {
+          "agents": [
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T011_STORY_BIBLE",
+          "T012_WORLD_RULES"
+        ],
+        "id": "T014_WORLD_BIBLE",
+        "model_tier": "S",
+        "outputs": [
+          "/specs/WORLD_BIBLE.md"
+        ],
+        "owner": "WORLD_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T011_STORY_BIBLE"
+        ],
+        "id": "T015_SYMBOL_BIBLE",
+        "model_tier": "M",
+        "outputs": [
+          "/specs/SYMBOL_BIBLE.md"
+        ],
+        "owner": "SYMBOLISM_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T011_STORY_BIBLE",
+          "T013_CHARACTER_BIBLE",
+          "T015_SYMBOL_BIBLE"
+        ],
+        "id": "T016_PLOT_DEPENDENCY_MAP",
+        "model_tier": "S",
+        "outputs": [
+          "/specs/PLOT_DEPENDENCY_MAP.md"
+        ],
+        "owner": "PLOT_ENGINEER",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T011_STORY_BIBLE",
+          "T016_PLOT_DEPENDENCY_MAP"
+        ],
+        "id": "T017_TIMELINE",
+        "locks": [
+          "TIMELINE_WRITE"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/specs/TIMELINE.md"
+        ],
+        "owner": "TEMPORAL_ARCHITECT",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T012_WORLD_RULES",
+          "T013_CHARACTER_BIBLE",
+          "T014_WORLD_BIBLE",
+          "T015_SYMBOL_BIBLE",
+          "T016_PLOT_DEPENDENCY_MAP",
+          "T017_TIMELINE"
+        ],
+        "id": "T018_CANON_REGISTRY",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/canon/CANON_REGISTRY.yaml"
+        ],
+        "owner": "CANON_GUARDIAN",
+        "phase": "CANON"
+      },
+      {
+        "depends_on": [
+          "T018_CANON_REGISTRY"
+        ],
+        "id": "T019_CANON_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/CANON_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "CANON",
+        "spawn": {
+          "agents": [
+            "CANON_GUARDIAN",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN",
+            "GENRE_GUARDIAN",
+            "REALISM_ENGINEER"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "CANON_GUARDIAN": "S",
+            "GENRE_GUARDIAN": "M",
+            "REALISM_ENGINEER": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_CANON"
+        ],
+        "id": "T020_CANON_DIGEST",
+        "inputs": [
+          "/canon/CANON_REGISTRY.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/canon/CANON_DIGEST.md"
+        ],
+        "owner": "CANON_GUARDIAN",
+        "phase": "CANON",
+        "tool": "{python} scripts/build_canon_digest.py --runtime {runtime}"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON"
+        ],
+        "id": "T030_LIVING_BOOK_BIBLE",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/LIVING_BOOK_BIBLE.md"
+        ],
+        "owner": "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON"
+        ],
+        "id": "T031_LIVRO_BIOME",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/LIVRO_BIOME.md"
+        ],
+        "owner": "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON"
+        ],
+        "id": "T032_READER_VITALS",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/READER_VITALS.md"
+        ],
+        "owner": "READER_VITALS_AGENT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T032_READER_VITALS"
+        ],
+        "id": "T033_EMOTIONAL_RESPIRATION",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/EMOTIONAL_RESPIRATION_MAP.md"
+        ],
+        "owner": "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T032_READER_VITALS",
+          "T033_EMOTIONAL_RESPIRATION"
+        ],
+        "id": "T034_PAGE_BIBLE",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/PAGE_BIBLE.md"
+        ],
+        "owner": "PAGE_BREATHING_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON"
+        ],
+        "id": "T035_MEMORY_MOTIF_MAP",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/MEMORY_MOTIF_MAP.md"
+        ],
+        "owner": "SYMBOLISM_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON",
+          "T035_MEMORY_MOTIF_MAP"
+        ],
+        "id": "T036_VISUAL_LIFE_SPEC",
+        "inputs": [
+          "/book/visual_profile.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/VISUAL_LIFE_SPEC.md"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T036_VISUAL_LIFE_SPEC"
+        ],
+        "id": "T037_IMAGE_BIOME",
+        "model_tier": "M",
+        "outputs": [
+          "/living_book/IMAGE_BIOME.md"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T013_CHARACTER_BIBLE"
+        ],
+        "id": "T038_FACE_CANON",
+        "locks": [
+          "FACE_CANON_WRITE"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/images/canon/FACE_CANON.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T038_FACE_CANON",
+          "T037_IMAGE_BIOME"
+        ],
+        "id": "T039_CHARACTER_VISUAL_BIBLE",
+        "locks": [
+          "FACE_CANON_WRITE"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/images/canon/CHARACTER_VISUAL_BIBLE.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_CANON",
+          "T032_READER_VITALS"
+        ],
+        "id": "T040_SOUND_BIOME_DRAFT",
+        "inputs": [
+          "/book/sound_profile.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/sound/SOUND_BIOME_DRAFT.md"
+        ],
+        "owner": "SOUND_BIOME_ARCHITECT",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "T030_LIVING_BOOK_BIBLE",
+          "T031_LIVRO_BIOME",
+          "T032_READER_VITALS",
+          "T033_EMOTIONAL_RESPIRATION",
+          "T034_PAGE_BIBLE",
+          "T035_MEMORY_MOTIF_MAP",
+          "T036_VISUAL_LIFE_SPEC",
+          "T037_IMAGE_BIOME",
+          "T038_FACE_CANON",
+          "T039_CHARACTER_VISUAL_BIBLE",
+          "T040_SOUND_BIOME_DRAFT"
+        ],
+        "id": "T041_LIVING_BOOK_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/LIVING_BOOK_ARCHITECTURE_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "LIVING_BOOK"
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T101_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_01_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T102_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_02_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T103_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_03_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T104_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_04_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T105_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_05_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T106_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_06_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T107_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_07_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T108_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_08_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T109_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_09_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T110_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_10_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T111_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_11_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T112_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_12_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T113_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_13_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T114_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_14_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T115_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_15_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T116_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_16_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T117_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_17_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T118_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_18_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T119_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_19_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T120_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_20_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T121_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_21_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T122_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_22_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T123_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_23_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_LIVING_BOOK"
+        ],
+        "id": "T124_BRIEF_CHAPTER",
+        "inputs": [
+          "/book/chapter_architecture.yaml",
+          "/specs/STORY_BIBLE.md",
+          "/specs/CHARACTER_BIBLE.md",
+          "/specs/PLOT_DEPENDENCY_MAP.md",
+          "/specs/TIMELINE.md",
+          "/living_book/READER_VITALS.md"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/briefs/chapters/CHAPTER_24_BRIEF.md"
+        ],
+        "owner": "SCENE_ARCHITECT",
+        "phase": "CHAPTER_BRIEFS",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_PHYSIOLOGY_ARCHITECT": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "GATE_CHAPTER_BRIEFS"
+        ],
+        "id": "T151A_WRITE_CHAPTER_01",
+        "model_tier": "S",
+        "outputs": [
+          "/manuscript/raw/chapter_01.md"
+        ],
+        "owner": "LEAD_NOVELIST",
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "T151A_WRITE_CHAPTER_01"
+        ],
+        "id": "T151B_REVIEW_CHAPTER_01",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/chapter_01_voice_review.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "VOICE_CALIBRATION",
+        "spawn": {
+          "agents": [
+            "LITERARY_STYLE_GUARDIAN",
+            "DIALOGUE_DIRECTOR",
+            "PHYSICALITY_AND_BODY_AGENT",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "DIALOGUE_DIRECTOR": "M",
+            "LITERARY_STYLE_GUARDIAN": "M",
+            "PHYSICALITY_AND_BODY_AGENT": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T151B_REVIEW_CHAPTER_01"
+        ],
+        "id": "T151C_REVISE_CHAPTER_01",
+        "model_tier": "S",
+        "outputs": [
+          "/manuscript/approved/chapter_01.md"
+        ],
+        "owner": "LEAD_NOVELIST",
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "T151C_REVISE_CHAPTER_01"
+        ],
+        "id": "T152A_WRITE_CHAPTER_02",
+        "model_tier": "S",
+        "outputs": [
+          "/manuscript/raw/chapter_02.md"
+        ],
+        "owner": "LEAD_NOVELIST",
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "T152A_WRITE_CHAPTER_02"
+        ],
+        "id": "T152B_REVIEW_CHAPTER_02",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/chapter_02_voice_review.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "VOICE_CALIBRATION",
+        "spawn": {
+          "agents": [
+            "LITERARY_STYLE_GUARDIAN",
+            "DIALOGUE_DIRECTOR",
+            "PHYSICALITY_AND_BODY_AGENT",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "DIALOGUE_DIRECTOR": "M",
+            "LITERARY_STYLE_GUARDIAN": "M",
+            "PHYSICALITY_AND_BODY_AGENT": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T152B_REVIEW_CHAPTER_02"
+        ],
+        "id": "T152C_REVISE_CHAPTER_02",
+        "model_tier": "S",
+        "outputs": [
+          "/manuscript/approved/chapter_02.md"
+        ],
+        "owner": "LEAD_NOVELIST",
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "T151C_REVISE_CHAPTER_01",
+          "T152C_REVISE_CHAPTER_02"
+        ],
+        "id": "T156_BUILD_VOICE_REFERENCE",
+        "model_tier": "M",
+        "outputs": [
+          "/specs/VOICE_REFERENCE.md"
+        ],
+        "owner": "LITERARY_STYLE_GUARDIAN",
+        "parameters": {},
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "T156_BUILD_VOICE_REFERENCE"
+        ],
+        "id": "T157_APPROVE_VOICE",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/VOICE_APPROVAL.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "VOICE_CALIBRATION"
+      },
+      {
+        "depends_on": [
+          "GATE_VOICE"
+        ],
+        "id": "T201_PREFLIGHT",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "parameters": {
+          "chapters": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "phase": "WRITING_WAVE_1"
+      },
+      {
+        "depends_on": [
+          "T201_PREFLIGHT"
+        ],
+        "id": "T201_WRITE",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "WRITING_WAVE_1",
+        "spawn": {
+          "jobs": [
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                3,
+                4
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                5,
+                6
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                7,
+                8
+              ]
+            }
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHAPTER_WRITER": "M"
+          },
+          "shared_inputs": [
+            "/specs/VOICE_REFERENCE.md",
+            "/canon/CANON_REGISTRY.yaml"
+          ],
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T201_WRITE"
+        ],
+        "id": "T201_MERGE",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "owner": "MERGE_COORDINATOR",
+        "phase": "WRITING_WAVE_1"
+      },
+      {
+        "depends_on": [
+          "T201_MERGE"
+        ],
+        "id": "T201_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/WAVE_01_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_1",
+        "spawn": {
+          "agents": [
+            "PLOT_CONTINUITY_REVIEWER",
+            "CHARACTER_CONTINUITY_REVIEWER",
+            "WORLD_RULES_REVIEWER"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHARACTER_CONTINUITY_REVIEWER": "M",
+            "PLOT_CONTINUITY_REVIEWER": "M",
+            "WORLD_RULES_REVIEWER": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T201_REVIEW"
+        ],
+        "id": "T201_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "WRITING_WAVE_1"
+      },
+      {
+        "depends_on": [
+          "T201_REVISION"
+        ],
+        "id": "T201_CANON_UPDATE",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "CANON_GUARDIAN",
+        "phase": "WRITING_WAVE_1"
+      },
+      {
+        "depends_on": [
+          "T201_CANON_UPDATE"
+        ],
+        "id": "T201_APPROVAL",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_1"
+      },
+      {
+        "depends_on": [
+          "GATE_WAVE_1"
+        ],
+        "id": "T202_PREFLIGHT",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "parameters": {
+          "chapters": [
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        "phase": "WRITING_WAVE_2"
+      },
+      {
+        "depends_on": [
+          "T202_PREFLIGHT"
+        ],
+        "id": "T202_WRITE",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "WRITING_WAVE_2",
+        "spawn": {
+          "jobs": [
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                9,
+                10
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                11,
+                12
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                13
+              ]
+            }
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHAPTER_WRITER": "M"
+          },
+          "shared_inputs": [
+            "/specs/VOICE_REFERENCE.md",
+            "/canon/CANON_REGISTRY.yaml"
+          ],
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T202_WRITE"
+        ],
+        "id": "T202_MERGE",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "owner": "MERGE_COORDINATOR",
+        "phase": "WRITING_WAVE_2"
+      },
+      {
+        "depends_on": [
+          "T202_MERGE"
+        ],
+        "id": "T202_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/WAVE_02_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_2",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_EDITOR",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_EDITOR": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T202_REVIEW"
+        ],
+        "id": "T202_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "WRITING_WAVE_2"
+      },
+      {
+        "depends_on": [
+          "T202_REVISION"
+        ],
+        "id": "T202_CANON_UPDATE",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "CANON_GUARDIAN",
+        "phase": "WRITING_WAVE_2"
+      },
+      {
+        "depends_on": [
+          "T202_CANON_UPDATE"
+        ],
+        "id": "T202_APPROVAL",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_2"
+      },
+      {
+        "depends_on": [
+          "GATE_WAVE_2"
+        ],
+        "id": "T203_PREFLIGHT",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "parameters": {
+          "chapters": [
+            14,
+            15,
+            16
+          ]
+        },
+        "phase": "WRITING_WAVE_3"
+      },
+      {
+        "depends_on": [
+          "T203_PREFLIGHT"
+        ],
+        "id": "T203_WRITE",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "WRITING_WAVE_3",
+        "spawn": {
+          "jobs": [
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                14,
+                15
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                16
+              ]
+            }
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHAPTER_WRITER": "M"
+          },
+          "shared_inputs": [
+            "/specs/VOICE_REFERENCE.md",
+            "/canon/CANON_REGISTRY.yaml"
+          ],
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T203_WRITE"
+        ],
+        "id": "T203_MERGE",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "owner": "MERGE_COORDINATOR",
+        "phase": "WRITING_WAVE_3"
+      },
+      {
+        "depends_on": [
+          "T203_MERGE"
+        ],
+        "id": "T203_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/WAVE_03_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_3",
+        "spawn": {
+          "agents": [
+            "PLOT_CONTINUITY_REVIEWER",
+            "CHARACTER_CONTINUITY_REVIEWER",
+            "WORLD_RULES_REVIEWER"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHARACTER_CONTINUITY_REVIEWER": "M",
+            "PLOT_CONTINUITY_REVIEWER": "M",
+            "WORLD_RULES_REVIEWER": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T203_REVIEW"
+        ],
+        "id": "T203_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "WRITING_WAVE_3"
+      },
+      {
+        "depends_on": [
+          "T203_REVISION"
+        ],
+        "id": "T203_CANON_UPDATE",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "CANON_GUARDIAN",
+        "phase": "WRITING_WAVE_3"
+      },
+      {
+        "depends_on": [
+          "T203_CANON_UPDATE"
+        ],
+        "id": "T203_APPROVAL",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_3"
+      },
+      {
+        "depends_on": [
+          "GATE_WAVE_3"
+        ],
+        "id": "T204_PREFLIGHT",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "parameters": {
+          "chapters": [
+            17,
+            18,
+            19,
+            20
+          ]
+        },
+        "phase": "WRITING_WAVE_4"
+      },
+      {
+        "depends_on": [
+          "T204_PREFLIGHT"
+        ],
+        "id": "T204_WRITE",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "WRITING_WAVE_4",
+        "spawn": {
+          "jobs": [
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                17,
+                18
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                19,
+                20
+              ]
+            }
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHAPTER_WRITER": "M"
+          },
+          "shared_inputs": [
+            "/specs/VOICE_REFERENCE.md",
+            "/canon/CANON_REGISTRY.yaml"
+          ],
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T204_WRITE"
+        ],
+        "id": "T204_MERGE",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "owner": "MERGE_COORDINATOR",
+        "phase": "WRITING_WAVE_4"
+      },
+      {
+        "depends_on": [
+          "T204_MERGE"
+        ],
+        "id": "T204_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/WAVE_04_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_4",
+        "spawn": {
+          "agents": [
+            "EMOTIONAL_EDITOR",
+            "GENRE_GUARDIAN",
+            "ANTI_MANIPULATION_GUARDIAN"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "ANTI_MANIPULATION_GUARDIAN": "S",
+            "EMOTIONAL_EDITOR": "M",
+            "GENRE_GUARDIAN": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T204_REVIEW"
+        ],
+        "id": "T204_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "WRITING_WAVE_4"
+      },
+      {
+        "depends_on": [
+          "T204_REVISION"
+        ],
+        "id": "T204_CANON_UPDATE",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "CANON_GUARDIAN",
+        "phase": "WRITING_WAVE_4"
+      },
+      {
+        "depends_on": [
+          "T204_CANON_UPDATE"
+        ],
+        "id": "T204_APPROVAL",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_4"
+      },
+      {
+        "depends_on": [
+          "GATE_WAVE_4"
+        ],
+        "id": "T205_PREFLIGHT",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "parameters": {
+          "chapters": [
+            21,
+            22,
+            23,
+            24
+          ]
+        },
+        "phase": "WRITING_WAVE_5"
+      },
+      {
+        "depends_on": [
+          "T205_PREFLIGHT"
+        ],
+        "id": "T205_WRITE",
+        "model_tier": "M",
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "WRITING_WAVE_5",
+        "spawn": {
+          "jobs": [
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                21,
+                22
+              ]
+            },
+            {
+              "agent": "CHAPTER_WRITER",
+              "chapters": [
+                23
+              ]
+            },
+            {
+              "agent": "LEAD_NOVELIST",
+              "chapters": [
+                24
+              ]
+            }
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHAPTER_WRITER": "M",
+            "LEAD_NOVELIST": "S"
+          },
+          "shared_inputs": [
+            "/specs/VOICE_REFERENCE.md",
+            "/canon/CANON_REGISTRY.yaml"
+          ],
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T205_WRITE"
+        ],
+        "id": "T205_MERGE",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "owner": "MERGE_COORDINATOR",
+        "phase": "WRITING_WAVE_5"
+      },
+      {
+        "depends_on": [
+          "T205_MERGE"
+        ],
+        "id": "T205_REVIEW",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/WAVE_05_REVIEW.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_5",
+        "spawn": {
+          "agents": [
+            "PLOT_CONTINUITY_REVIEWER",
+            "CHARACTER_CONTINUITY_REVIEWER",
+            "WORLD_RULES_REVIEWER"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CHARACTER_CONTINUITY_REVIEWER": "M",
+            "PLOT_CONTINUITY_REVIEWER": "M",
+            "WORLD_RULES_REVIEWER": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T205_REVIEW"
+        ],
+        "id": "T205_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "WRITING_WAVE_5"
+      },
+      {
+        "depends_on": [
+          "T205_REVISION"
+        ],
+        "id": "T205_CANON_UPDATE",
+        "locks": [
+          "CANON_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "CANON_GUARDIAN",
+        "phase": "WRITING_WAVE_5"
+      },
+      {
+        "depends_on": [
+          "T205_CANON_UPDATE"
+        ],
+        "id": "T205_APPROVAL",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "WRITING_WAVE_5"
+      },
+      {
+        "depends_on": [
+          "GATE_WAVE_5"
+        ],
+        "id": "T300_ASSEMBLE_FULL_MANUSCRIPT",
+        "locks": [
+          "MANUSCRIPT_MERGE"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/manuscript/revised/FULL_MANUSCRIPT_PRE_INTEGRATION.md"
+        ],
+        "owner": "MERGE_COORDINATOR",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T301_WHOLE_BOOK_INTEGRATION",
+        "model_tier": "S",
+        "outputs": [
+          "/integration/INTEGRATION_REPORT.md"
+        ],
+        "owner": "MASTER_INTEGRATOR",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T302_CRITIC_PANEL",
+        "model_tier": "M",
+        "outputs": [
+          "/reviews/CRITIC_PANEL/"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "INTEGRATION",
+        "spawn": {
+          "agents": [
+            "LITERARY_CRITIC",
+            "CINEMA_CRITIC",
+            "COMMERCIAL_EDITOR_CRITIC"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "CINEMA_CRITIC": "M",
+            "COMMERCIAL_EDITOR_CRITIC": "M",
+            "LITERARY_CRITIC": "S"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3201_PROTECTED_FIRST_OFFER",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_FIRST_OFFER_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            1
+          ],
+          "scene_id": "FIRST_OFFER"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3202_PROTECTED_MARISA_FIRST_COST",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_MARISA_FIRST_COST_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            2
+          ],
+          "scene_id": "MARISA_FIRST_COST"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3203_PROTECTED_CHEAT_ATTEMPT_FAILURE",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_CHEAT_ATTEMPT_FAILURE_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            15
+          ],
+          "scene_id": "CHEAT_ATTEMPT_FAILURE"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3204_PROTECTED_SHOP_RULE_ABSOLUTE",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_SHOP_RULE_ABSOLUTE_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            14
+          ],
+          "scene_id": "SHOP_RULE_ABSOLUTE"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3205_PROTECTED_ORIGIN_REVEAL",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_ORIGIN_REVEAL_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            19,
+            21
+          ],
+          "scene_id": "ORIGIN_REVEAL"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T300_ASSEMBLE_FULL_MANUSCRIPT"
+        ],
+        "id": "T3206_PROTECTED_CLOSING_MIRROR",
+        "inputs": [
+          "/book/protected_scenes.yaml"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/PROTECTED_CLOSING_MIRROR_AUDIT.md"
+        ],
+        "owner": "PROTECTED_SCENE_AUDITOR",
+        "parameters": {
+          "chapters": [
+            24
+          ],
+          "scene_id": "CLOSING_MIRROR"
+        },
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T301_WHOLE_BOOK_INTEGRATION",
+          "T302_CRITIC_PANEL",
+          "T3201_PROTECTED_FIRST_OFFER",
+          "T3202_PROTECTED_MARISA_FIRST_COST",
+          "T3203_PROTECTED_CHEAT_ATTEMPT_FAILURE",
+          "T3204_PROTECTED_SHOP_RULE_ABSOLUTE",
+          "T3205_PROTECTED_ORIGIN_REVEAL",
+          "T3206_PROTECTED_CLOSING_MIRROR"
+        ],
+        "id": "T303_REVIEW_SYNTHESIS",
+        "model_tier": "S",
+        "outputs": [
+          "/reviews/MASTER_REVISION_DIRECTIVE.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T303_REVIEW_SYNTHESIS"
+        ],
+        "id": "T304_LEAD_NOVELIST_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T304_LEAD_NOVELIST_REVISION"
+        ],
+        "id": "T307_FINAL_LITERARY_REVISION",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "parameters": {
+          "consolidated": true,
+          "replaces": [
+            "T305_DEVELOPMENTAL_REVIEW",
+            "T306_LINE_REVIEW"
+          ]
+        },
+        "phase": "INTEGRATION",
+        "spawn": {
+          "agents": [
+            "DEVELOPMENTAL_EDITOR",
+            "DIALOGUE_DIRECTOR",
+            "LITERARY_STYLE_GUARDIAN",
+            "SENSORY_AGENT",
+            "SUBTEXT_EDITOR"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "DEVELOPMENTAL_EDITOR": "S",
+            "DIALOGUE_DIRECTOR": "M",
+            "LITERARY_STYLE_GUARDIAN": "M",
+            "SENSORY_AGENT": "M",
+            "SUBTEXT_EDITOR": "M"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T307_FINAL_LITERARY_REVISION"
+        ],
+        "id": "T308_PTBR_REVIEW",
+        "model_tier": "XS",
+        "owner": "PTBR_GRAMMAR_EDITOR",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T308_PTBR_REVIEW"
+        ],
+        "id": "T309_FINAL_PROOF",
+        "model_tier": "XS",
+        "owner": "FINAL_PROOFREADER",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "T309_FINAL_PROOF"
+        ],
+        "id": "T310_FREEZE_MANUSCRIPT",
+        "locks": [
+          "MANUSCRIPT_FINAL_WRITE"
+        ],
+        "model_tier": "S",
+        "outputs": [
+          "/manuscript/final/MANUSCRIPT_FINAL_PTBR.md",
+          "/manuscript/final/MANUSCRIPT_FINAL_PTBR.txt"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "INTEGRATION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T401_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_01_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T401_IMAGE_BRIEF"
+        ],
+        "id": "T401_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_01/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T401_IMAGE_GENERATE"
+        ],
+        "id": "T401_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_01/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T401_IMAGE_GENERATE"
+        ],
+        "id": "T401_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_01/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T401_FACE_QA",
+          "T401_CONTINUITY_QA"
+        ],
+        "id": "T401_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_01.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T402_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_02_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T402_IMAGE_BRIEF"
+        ],
+        "id": "T402_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_02/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T402_IMAGE_GENERATE"
+        ],
+        "id": "T402_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_02/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T402_IMAGE_GENERATE"
+        ],
+        "id": "T402_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_02/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T402_FACE_QA",
+          "T402_CONTINUITY_QA"
+        ],
+        "id": "T402_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_02.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T403_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_03_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T403_IMAGE_BRIEF"
+        ],
+        "id": "T403_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_03/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T403_IMAGE_GENERATE"
+        ],
+        "id": "T403_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_03/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T403_IMAGE_GENERATE"
+        ],
+        "id": "T403_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_03/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T403_FACE_QA",
+          "T403_CONTINUITY_QA"
+        ],
+        "id": "T403_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_03.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T404_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_04_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T404_IMAGE_BRIEF"
+        ],
+        "id": "T404_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_04/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T404_IMAGE_GENERATE"
+        ],
+        "id": "T404_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_04/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T404_IMAGE_GENERATE"
+        ],
+        "id": "T404_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_04/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T404_FACE_QA",
+          "T404_CONTINUITY_QA"
+        ],
+        "id": "T404_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_04.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T405_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_05_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T405_IMAGE_BRIEF"
+        ],
+        "id": "T405_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_05/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T405_IMAGE_GENERATE"
+        ],
+        "id": "T405_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_05/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T405_IMAGE_GENERATE"
+        ],
+        "id": "T405_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_05/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T405_FACE_QA",
+          "T405_CONTINUITY_QA"
+        ],
+        "id": "T405_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_05.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T406_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_06_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T406_IMAGE_BRIEF"
+        ],
+        "id": "T406_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_06/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T406_IMAGE_GENERATE"
+        ],
+        "id": "T406_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_06/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T406_IMAGE_GENERATE"
+        ],
+        "id": "T406_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_06/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T406_FACE_QA",
+          "T406_CONTINUITY_QA"
+        ],
+        "id": "T406_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_06.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T407_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_07_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T407_IMAGE_BRIEF"
+        ],
+        "id": "T407_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_07/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T407_IMAGE_GENERATE"
+        ],
+        "id": "T407_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_07/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T407_IMAGE_GENERATE"
+        ],
+        "id": "T407_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_07/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T407_FACE_QA",
+          "T407_CONTINUITY_QA"
+        ],
+        "id": "T407_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_07.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T408_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_08_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T408_IMAGE_BRIEF"
+        ],
+        "id": "T408_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_08/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T408_IMAGE_GENERATE"
+        ],
+        "id": "T408_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_08/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T408_IMAGE_GENERATE"
+        ],
+        "id": "T408_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_08/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T408_FACE_QA",
+          "T408_CONTINUITY_QA"
+        ],
+        "id": "T408_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_08.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T409_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_09_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T409_IMAGE_BRIEF"
+        ],
+        "id": "T409_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_09/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T409_IMAGE_GENERATE"
+        ],
+        "id": "T409_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_09/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T409_IMAGE_GENERATE"
+        ],
+        "id": "T409_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_09/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T409_FACE_QA",
+          "T409_CONTINUITY_QA"
+        ],
+        "id": "T409_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_09.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T410_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_10_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T410_IMAGE_BRIEF"
+        ],
+        "id": "T410_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_10/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T410_IMAGE_GENERATE"
+        ],
+        "id": "T410_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_10/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T410_IMAGE_GENERATE"
+        ],
+        "id": "T410_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_10/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T410_FACE_QA",
+          "T410_CONTINUITY_QA"
+        ],
+        "id": "T410_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_10.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T411_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_11_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T411_IMAGE_BRIEF"
+        ],
+        "id": "T411_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_11/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T411_IMAGE_GENERATE"
+        ],
+        "id": "T411_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_11/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T411_IMAGE_GENERATE"
+        ],
+        "id": "T411_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_11/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T411_FACE_QA",
+          "T411_CONTINUITY_QA"
+        ],
+        "id": "T411_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_11.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T412_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_12_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T412_IMAGE_BRIEF"
+        ],
+        "id": "T412_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_12/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T412_IMAGE_GENERATE"
+        ],
+        "id": "T412_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_12/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T412_IMAGE_GENERATE"
+        ],
+        "id": "T412_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_12/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T412_FACE_QA",
+          "T412_CONTINUITY_QA"
+        ],
+        "id": "T412_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_12.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T413_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_13_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T413_IMAGE_BRIEF"
+        ],
+        "id": "T413_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_13/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T413_IMAGE_GENERATE"
+        ],
+        "id": "T413_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_13/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T413_IMAGE_GENERATE"
+        ],
+        "id": "T413_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_13/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T413_FACE_QA",
+          "T413_CONTINUITY_QA"
+        ],
+        "id": "T413_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_13.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T414_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_14_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T414_IMAGE_BRIEF"
+        ],
+        "id": "T414_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_14/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T414_IMAGE_GENERATE"
+        ],
+        "id": "T414_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_14/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T414_IMAGE_GENERATE"
+        ],
+        "id": "T414_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_14/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T414_FACE_QA",
+          "T414_CONTINUITY_QA"
+        ],
+        "id": "T414_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_14.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T415_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_15_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T415_IMAGE_BRIEF"
+        ],
+        "id": "T415_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_15/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T415_IMAGE_GENERATE"
+        ],
+        "id": "T415_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_15/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T415_IMAGE_GENERATE"
+        ],
+        "id": "T415_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_15/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T415_FACE_QA",
+          "T415_CONTINUITY_QA"
+        ],
+        "id": "T415_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_15.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T416_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_16_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T416_IMAGE_BRIEF"
+        ],
+        "id": "T416_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_16/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T416_IMAGE_GENERATE"
+        ],
+        "id": "T416_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_16/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T416_IMAGE_GENERATE"
+        ],
+        "id": "T416_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_16/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T416_FACE_QA",
+          "T416_CONTINUITY_QA"
+        ],
+        "id": "T416_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_16.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T417_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_17_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T417_IMAGE_BRIEF"
+        ],
+        "id": "T417_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_17/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T417_IMAGE_GENERATE"
+        ],
+        "id": "T417_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_17/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T417_IMAGE_GENERATE"
+        ],
+        "id": "T417_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_17/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T417_FACE_QA",
+          "T417_CONTINUITY_QA"
+        ],
+        "id": "T417_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_17.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T418_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_18_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T418_IMAGE_BRIEF"
+        ],
+        "id": "T418_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_18/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T418_IMAGE_GENERATE"
+        ],
+        "id": "T418_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_18/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T418_IMAGE_GENERATE"
+        ],
+        "id": "T418_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_18/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T418_FACE_QA",
+          "T418_CONTINUITY_QA"
+        ],
+        "id": "T418_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_18.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T419_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_19_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T419_IMAGE_BRIEF"
+        ],
+        "id": "T419_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_19/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T419_IMAGE_GENERATE"
+        ],
+        "id": "T419_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_19/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T419_IMAGE_GENERATE"
+        ],
+        "id": "T419_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_19/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T419_FACE_QA",
+          "T419_CONTINUITY_QA"
+        ],
+        "id": "T419_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_19.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T420_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_20_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T420_IMAGE_BRIEF"
+        ],
+        "id": "T420_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_20/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T420_IMAGE_GENERATE"
+        ],
+        "id": "T420_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_20/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T420_IMAGE_GENERATE"
+        ],
+        "id": "T420_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_20/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T420_FACE_QA",
+          "T420_CONTINUITY_QA"
+        ],
+        "id": "T420_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_20.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T421_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_21_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T421_IMAGE_BRIEF"
+        ],
+        "id": "T421_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_21/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T421_IMAGE_GENERATE"
+        ],
+        "id": "T421_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_21/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T421_IMAGE_GENERATE"
+        ],
+        "id": "T421_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_21/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T421_FACE_QA",
+          "T421_CONTINUITY_QA"
+        ],
+        "id": "T421_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_21.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T422_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_22_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T422_IMAGE_BRIEF"
+        ],
+        "id": "T422_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_22/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T422_IMAGE_GENERATE"
+        ],
+        "id": "T422_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_22/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T422_IMAGE_GENERATE"
+        ],
+        "id": "T422_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_22/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T422_FACE_QA",
+          "T422_CONTINUITY_QA"
+        ],
+        "id": "T422_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_22.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T423_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_23_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T423_IMAGE_BRIEF"
+        ],
+        "id": "T423_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_23/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T423_IMAGE_GENERATE"
+        ],
+        "id": "T423_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_23/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T423_IMAGE_GENERATE"
+        ],
+        "id": "T423_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_23/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T423_FACE_QA",
+          "T423_CONTINUITY_QA"
+        ],
+        "id": "T423_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_23.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T424_IMAGE_BRIEF",
+        "model_tier": "M",
+        "outputs": [
+          "/images/prompts/CHAPTER_24_IMAGE_BRIEF.md"
+        ],
+        "owner": "CHAPTER_IMAGE_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T424_IMAGE_BRIEF"
+        ],
+        "id": "T424_IMAGE_GENERATE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/chapters/chapter_24/"
+        ],
+        "owner": "IMAGE_GENERATOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T424_IMAGE_GENERATE"
+        ],
+        "id": "T424_FACE_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_24/FACE_QA.md"
+        ],
+        "owner": "FACIAL_IDENTITY_AND_PHYSIOGNOMY_EXPERT",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T424_IMAGE_GENERATE"
+        ],
+        "id": "T424_CONTINUITY_QA",
+        "model_tier": "XS",
+        "outputs": [
+          "/images/chapters/chapter_24/CONTINUITY_QA.md"
+        ],
+        "owner": "IMAGE_CONTINUITY_QA",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "T424_FACE_QA",
+          "T424_CONTINUITY_QA"
+        ],
+        "id": "T424_IMAGE_APPROVE",
+        "model_tier": "M",
+        "outputs": [
+          "/images/approved/chapter_24.jpg"
+        ],
+        "owner": "VISUAL_DIRECTOR",
+        "phase": "VISUAL_PRODUCTION"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T500_SOUNDTRACK_BIBLE_FINAL",
+        "model_tier": "M",
+        "outputs": [
+          "/sound/LIVING_SOUNDTRACK_BIBLE.md"
+        ],
+        "owner": "LIVING_SOUNDTRACK_ARCHITECT",
+        "phase": "LIVING_SOUND"
+      },
+      {
+        "depends_on": [
+          "T500_SOUNDTRACK_BIBLE_FINAL"
+        ],
+        "id": "T501_CHAPTER_SOUND_MAP_FINAL",
+        "model_tier": "M",
+        "outputs": [
+          "/sound/CHAPTER_SOUND_MAP.md"
+        ],
+        "owner": "LIVING_SOUNDTRACK_ARCHITECT",
+        "phase": "LIVING_SOUND"
+      },
+      {
+        "depends_on": [
+          "T500_SOUNDTRACK_BIBLE_FINAL"
+        ],
+        "id": "T502_ENVIRONMENT_ACOUSTIC_EVOLUTION",
+        "model_tier": "M",
+        "outputs": [
+          "/sound/ENVIRONMENT_ACOUSTIC_EVOLUTION.md"
+        ],
+        "owner": "ENVIRONMENT_ACOUSTIC_EVOLUTION_AGENT",
+        "parameters": {
+          "environment_organism": "O silêncio da loja é perfeito demais no início — sem sino, sem passos, sem trânsito de fundo — e ao longo do livro passa a carregar, cada vez mais perto, os sons específicos do preço de cada capítulo (um relógio, uma respiração, um choro contido), até o silêncio original retornar no capítulo final."
+        },
+        "phase": "LIVING_SOUND"
+      },
+      {
+        "depends_on": [
+          "T501_CHAPTER_SOUND_MAP_FINAL",
+          "T502_ENVIRONMENT_ACOUSTIC_EVOLUTION"
+        ],
+        "id": "T503_SOUND_PROMPTS",
+        "model_tier": "M",
+        "outputs": [
+          "/sound/prompts/CHAPTER_{chapter:02d}_SOUND_PROMPT.md"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "LIVING_SOUND",
+        "spawn": {
+          "foreach_chapter": "1..24",
+          "max_parallel": 6,
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "LIVING_SOUND_PROMPT_ENGINEER": "XS"
+          },
+          "template_agent": "LIVING_SOUND_PROMPT_ENGINEER",
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T503_SOUND_PROMPTS"
+        ],
+        "id": "T504_SOUND_REVIEW",
+        "model_tier": "M",
+        "outputs": [
+          "/reviews/LIVING_SOUND_REVIEW.md"
+        ],
+        "owner": "SOUND_BIOME_ARCHITECT",
+        "phase": "LIVING_SOUND"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T600_LEGAL_BR",
+        "model_tier": "S",
+        "outputs": [
+          "/legal/LEGAL_REVIEW_BR.md"
+        ],
+        "owner": "LEGAL_EDITOR_BR",
+        "phase": "LEGAL"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T601_LEGAL_GLOBAL",
+        "model_tier": "S",
+        "outputs": [
+          "/legal/LEGAL_REVIEW_GLOBAL.md"
+        ],
+        "owner": "LEGAL_EDITOR_GLOBAL",
+        "phase": "LEGAL"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T602_ORIGINALITY_AUDIT",
+        "model_tier": "M",
+        "outputs": [
+          "/legal/ORIGINALITY_REPORT.md"
+        ],
+        "owner": "COPYRIGHT_ORIGINALITY_AUDITOR",
+        "phase": "LEGAL"
+      },
+      {
+        "depends_on": [
+          "T600_LEGAL_BR",
+          "T601_LEGAL_GLOBAL",
+          "T602_ORIGINALITY_AUDIT"
+        ],
+        "id": "T603_LEGAL_SYNTHESIS",
+        "model_tier": "S",
+        "outputs": [
+          "/legal/LEGAL_BLOCKERS.md"
+        ],
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "LEGAL"
+      },
+      {
+        "condition": "LEGAL_BLOCKERS contains blocking findings",
+        "depends_on": [
+          "T603_LEGAL_SYNTHESIS"
+        ],
+        "id": "T604_BLOCKING_LEGAL_FIXES",
+        "model_tier": "S",
+        "owner": "LEAD_NOVELIST",
+        "phase": "LEGAL"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T699_KDP_REQUIREMENTS_REFRESH",
+        "model_tier": "M",
+        "outputs": [
+          "/layout/KDP_CURRENT_REQUIREMENTS.md"
+        ],
+        "owner": "KDP_REQUIREMENTS_RESEARCHER",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "GATE_FULL_MANUSCRIPT"
+        ],
+        "id": "T700_LAYOUT_BIBLE",
+        "model_tier": "M",
+        "outputs": [
+          "/layout/PAGE_BIBLE.md"
+        ],
+        "owner": "BOOK_LAYOUT_ARCHITECT",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "T700_LAYOUT_BIBLE"
+        ],
+        "id": "T701_TABLE_OF_CONTENTS",
+        "model_tier": "XS",
+        "outputs": [
+          "/layout/TABLE_OF_CONTENTS_SPEC.md"
+        ],
+        "owner": "TABLE_OF_CONTENTS_AGENT",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "GATE_VISUAL",
+          "T700_LAYOUT_BIBLE"
+        ],
+        "id": "T702_IMAGE_PLACEMENT",
+        "model_tier": "M",
+        "outputs": [
+          "/layout/IMAGE_PLACEMENT_REPORT.md"
+        ],
+        "owner": "IMAGE_LAYOUT_AGENT",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "GATE_LEGAL",
+          "GATE_VISUAL",
+          "GATE_SOUND",
+          "T699_KDP_REQUIREMENTS_REFRESH",
+          "T701_TABLE_OF_CONTENTS",
+          "T702_IMAGE_PLACEMENT"
+        ],
+        "id": "T703_BUILD_DOCX",
+        "locks": [
+          "DOCX_BUILD"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/outputs/KDP_DRAFT.docx"
+        ],
+        "owner": "KDP_FORMATTER",
+        "phase": "KDP",
+        "tool": "{python} scripts/build_kdp_docx.py --runtime {runtime}"
+      },
+      {
+        "depends_on": [
+          "T703_BUILD_DOCX"
+        ],
+        "id": "T704_KDP_QA",
+        "model_tier": "M",
+        "outputs": [
+          "/reviews/KDP_QA_REPORT.md"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "KDP",
+        "spawn": {
+          "agents": [
+            "BOOK_LAYOUT_ARCHITECT",
+            "TABLE_OF_CONTENTS_AGENT",
+            "IMAGE_LAYOUT_AGENT",
+            "FINAL_PROOFREADER"
+          ],
+          "mode": "PARALLEL_SUBAGENTS",
+          "model_tiers": {
+            "BOOK_LAYOUT_ARCHITECT": "M",
+            "FINAL_PROOFREADER": "XS",
+            "IMAGE_LAYOUT_AGENT": "M",
+            "TABLE_OF_CONTENTS_AGENT": "XS"
+          },
+          "wait_for_all": true
+        }
+      },
+      {
+        "depends_on": [
+          "T704_KDP_QA"
+        ],
+        "id": "T705_DOCX_FINAL_FIXES",
+        "locks": [
+          "DOCX_BUILD"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/outputs/BOOK_KDP_FINAL.docx"
+        ],
+        "owner": "KDP_FORMATTER",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "T705_DOCX_FINAL_FIXES"
+        ],
+        "id": "T706_APPROVE_KDP",
+        "model_tier": "S",
+        "owner": "EXECUTIVE_EDITOR",
+        "phase": "KDP"
+      },
+      {
+        "depends_on": [
+          "GATE_KDP"
+        ],
+        "id": "T800_MEDIA_PACKAGE",
+        "model_tier": "M",
+        "outputs": [
+          "/media/KDP_DESCRIPTION_4000.txt",
+          "/media/KDP_DESCRIPTION_SHORT.txt",
+          "/media/KDP_KEYWORDS.md",
+          "/media/COVER_BRIEF.md",
+          "/media/SHAREABLE_EXCERPTS.md",
+          "/media/INSTAGRAM_STORIES_IDEAS.md"
+        ],
+        "owner": "MEDIA_AND_KDP_AGENT",
+        "phase": "DELIVERY"
+      },
+      {
+        "depends_on": [
+          "T800_MEDIA_PACKAGE"
+        ],
+        "id": "T801_KDP_BOOK_COVER",
+        "locks": [
+          "DELIVERY_BUILD"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/media/outputs/cover/BOOK_COVER_KDP.jpg",
+          "/media/outputs/COVER_PRODUCTION_REPORT.md"
+        ],
+        "owner": "MEDIA_AND_KDP_AGENT",
+        "parameters": {
+          "color_mode": "RGB",
+          "format": "JPEG",
+          "height_px": 2560,
+          "maximum_bytes": 52428800,
+          "minimum_dpi": 300,
+          "width_px": 1600
+        },
+        "phase": "DELIVERY",
+        "tool": "{python} scripts/build_cover_and_stories.py --runtime {runtime}"
+      },
+      {
+        "depends_on": [
+          "T801_KDP_BOOK_COVER"
+        ],
+        "id": "T802_INSTAGRAM_STORIES",
+        "locks": [
+          "DELIVERY_BUILD"
+        ],
+        "model_tier": "M",
+        "outputs": [
+          "/media/outputs/instagram_stories/story_01.jpg",
+          "/media/outputs/instagram_stories/story_02.jpg",
+          "/media/outputs/instagram_stories/story_03.jpg",
+          "/media/outputs/instagram_stories/story_04.jpg",
+          "/media/outputs/instagram_stories/story_05.jpg",
+          "/media/outputs/INSTAGRAM_STORIES_COPY.md",
+          "/media/outputs/MEDIA_ASSET_MANIFEST.md"
+        ],
+        "owner": "MEDIA_AND_KDP_AGENT",
+        "parameters": {
+          "color_mode": "RGB",
+          "commercial_promotion": true,
+          "count": 5,
+          "format": "JPEG",
+          "height_px": 1920,
+          "minimum_dpi": 300,
+          "width_px": 1080
+        },
+        "phase": "DELIVERY"
+      },
+      {
+        "depends_on": [
+          "GATE_MEDIA_ASSETS"
+        ],
+        "id": "T803_DELIVERY_MANIFEST",
+        "model_tier": "XS",
+        "outputs": [
+          "/outputs/DELIVERY_MANIFEST.md"
+        ],
+        "owner": "DELIVERY_AGENT",
+        "phase": "DELIVERY"
+      },
+      {
+        "depends_on": [
+          "T803_DELIVERY_MANIFEST"
+        ],
+        "id": "T804_FINAL_ARTIFACT_AUDIT",
+        "model_tier": "M",
+        "outputs": [
+          "/reviews/FINAL_ARTIFACT_AUDIT.md"
+        ],
+        "owner": "MASTER_ORCHESTRATOR",
+        "phase": "DELIVERY"
+      },
+      {
+        "depends_on": [
+          "T804_FINAL_ARTIFACT_AUDIT"
+        ],
+        "id": "T805_FINAL_DELIVERY",
+        "locks": [
+          "DELIVERY_BUILD"
+        ],
+        "model_tier": "XS",
+        "outputs": [
+          "/project_state/FINAL_DELIVERY_APPROVED"
+        ],
+        "owner": "DELIVERY_AGENT",
+        "phase": "DELIVERY"
+      }
+    ]
+  }
+}

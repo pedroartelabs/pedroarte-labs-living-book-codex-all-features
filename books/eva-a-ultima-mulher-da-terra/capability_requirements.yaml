@@ -1,0 +1,36 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  long_form_text:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Produção e revisão do manuscrito de 42 capítulos em português brasileiro ao longo de nove movimentos.
+  deterministic_validation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Validação de pacote, grafo, gates, contadores demográficos e artefatos finais.
+  image_generation:
+    required: false
+    blocker_if_unavailable: false
+    purpose: Recurso desativado por decisão explícita deste pacote (features.images.enabled=false); nenhuma imagem de capítulo é gerada nesta produção.
+  image_inspection:
+    required: false
+    blocker_if_unavailable: false
+    purpose: Não aplicável enquanto a geração de imagem permanecer desativada.
+  docx_generation:
+    required: true
+    blocker_if_unavailable: true
+    purpose: Entrega do manuscrito final em DOCX formatado para KDP.
+  web_research:
+    required: true
+    blocker_if_unavailable: false
+    freshness_required: true
+    purpose: Atualização dos requisitos oficiais da Amazon KDP antes da montagem final do DOCX.
+  demographic_fact_checking:
+    required: true
+    blocker_if_unavailable: false
+    purpose: Verificar plausibilidade da curva demográfica (fertilidade, expectativa de vida, dinâmica populacional) descrita em seeds/WORLD_RULES_SEED.md.
+  medical_fact_checking:
+    required: true
+    blocker_if_unavailable: false
+    purpose: Verificar linguagem clínica de gestação, parto, geriatria e genética reprodutiva usada ao longo da obra.

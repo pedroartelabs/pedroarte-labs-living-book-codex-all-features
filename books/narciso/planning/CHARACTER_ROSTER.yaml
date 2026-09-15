@@ -1,0 +1,14 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: NarcisoCharacterRoster
+# Idades canônicas inteiras (INV-06 do ledger; IR-N05). Nomes próprios são as
+# propostas da SDD, pendentes de confirmação humana (OQ-N12).
+# O que olha de volta NUNCA é personagem deste elenco nem do ledger (SDD 9.5).
+characters:
+  - {id: CHR-NARCISO, name: Narciso Céfiso, age: 27, role: PROTAGONIST, erotic_presence: true, mythic_root: Narciso}
+  - {id: CHR-ECO, name: Elisa "Eco" Varela, age: 31, role: PROTAGONIST, erotic_presence: true, mythic_root: Eco}
+  - {id: CHR-LIA, name: Liríope "Lia" Céfiso, age: 61, role: SUPPORTING, erotic_presence: false, mythic_root: Liríope}
+  - {id: CHR-TEODORO, name: Teodoro Braga, age: 78, role: SUPPORTING, erotic_presence: false, mythic_root: Tirésias}
+  - {id: CHR-AMINTAS, name: Amintas Rocha, age: 34, role: ABSENT, erotic_presence: true, mythic_root: admirador rejeitado}
+  - {id: CHR-IRIS, name: Íris Maia, age: 29, role: CHORUS, erotic_presence: true, mythic_root: admiradores}
+  - {id: CHR-CORO-DALIA, name: Dália Nunes, age: 44, role: CHORUS, erotic_presence: true, mythic_root: admiradores}
+  - {id: CHR-CORO-OTAVIO, name: Otávio Serra, age: 38, role: CHORUS, erotic_presence: true, mythic_root: admiradores}

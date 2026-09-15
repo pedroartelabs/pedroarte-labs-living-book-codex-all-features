@@ -1,0 +1,108 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: ADAO_BIRTH
+    chapters: [1]
+    auditor: MYSTERY_INTEGRITY_GUARDIAN
+    purpose: Estabelecer Adão como bebê comum, sem marca ou sinal sobrenatural, em uma sala de parto ordinária no que se tornará o Dia Zero.
+    must_preserve:
+      - ponto de vista inteiramente ordinário de Alma Ferro, sem premonição narrativa;
+      - ausência de qualquer sinal físico, luminoso ou simbólico no parto;
+      - o Dia Zero só é identificável em retrospecto, nunca anunciado no capítulo;
+      - detalhe clínico e doméstico concreto (peso, hora, exaustão, rotina hospitalar).
+    reject_if:
+      - qualquer frase do narrador sugerindo destino, escolha ou marca especial;
+      - luz, silêncio sobrenatural ou reação anormal de equipamentos;
+      - Alma ou equipe médica pressentindo algo fora do comum.
+  - id: THE_DISAPPEARANCE
+    chapters: [27]
+    auditor: MYSTERY_INTEGRITY_GUARDIAN
+    purpose: Narrar o desaparecimento de Adão aos cento e quarenta e sete anos como evento banal e administrativo, sem explicação.
+    must_preserve:
+      - ponto de vista de Tomás Vale, testemunha comum sem acesso privilegiado;
+      - falha concreta e mundana (corredor, porta, lacuna de câmera de poucos minutos);
+      - ausência total de corpo, vestígio sobrenatural ou explicação mecânica;
+      - reação institucional de confusão administrativa, não de revelação.
+    reject_if:
+      - qualquer efeito visual, luminoso, sonoro ou físico sobrenatural;
+      - Adão narrando ou explicando sua própria saída;
+      - qualquer personagem afirmando com certeza o que aconteceu;
+      - tom de clímax heroico ou ascensão.
+  - id: HOMENS_VIVOS_ZERO
+    chapters: [28]
+    auditor: MYSTERY_INTEGRITY_GUARDIAN
+    purpose: Registrar a contagem oficial chegando a zero sem declarar a morte de Adão.
+    must_preserve:
+      - a palavra "CONHECIDOS" mantida no contador e discutida por ao menos um personagem;
+      - ambiguidade explícita entre desaparecimento e morte;
+      - reação institucional, midiática e popular plural, não uniforme;
+      - ao menos uma personagem nomeada reagindo de forma pessoal, não estatística.
+    reject_if:
+      - narrador afirmando que Adão morreu;
+      - encerramento definitivo do mistério por qualquer autoridade do enredo;
+      - tom de luto resolvido ou catarse limpa.
+  - id: FIRST_REFUSAL
+    chapters: [21]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: Mostrar Adão recusando uma ordem de coleta genética compulsória e a Comissão de Preservação Humana como instituição internamente dividida, não vilã monolítica.
+    must_preserve:
+      - agência e consentimento explícitos de Adão;
+      - ao menos uma figura institucional que discorda internamente da coerção;
+      - custo concreto da recusa (legal, social ou pessoal) sem punição espetacular;
+      - ausência de solução jurídica definitiva no capítulo.
+    reject_if:
+      - coerção física ou clínica narrada sem resistência ou registro de custo;
+      - Comissão retratada como bloco único e cínico;
+      - recusa de Adão resolvida com vitória total e imediata.
+  - id: YUKI_CONCEPTION
+    chapters: [22]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: Narrar uma concepção tardia de Adão a partir da intimidade de Yuki Tanaka, sem espetáculo clínico ou erotização da idade.
+    must_preserve:
+      - ponto de vista e desejo próprios de Yuki, com motivação além de Adão;
+      - consentimento mútuo e contexto histórico da decisão;
+      - linguagem concreta e não voyeurística;
+      - humanidade de Adão fora do olhar institucional.
+    reject_if:
+      - erotização ou fetichização da idade de qualquer personagem;
+      - tratamento da cena como demonstração científica;
+      - Yuki reduzida a instrumento ou símbolo.
+  - id: GENETIC_INCOMPATIBILITY_REVEAL
+    chapters: [23]
+    auditor: MYSTERY_INTEGRITY_GUARDIAN
+    purpose: Revelar publicamente as incompatibilidades genéticas entre filhas de Adão sem resolver a contradição.
+    must_preserve:
+      - dados técnicos plausíveis apresentados com contradição preservada;
+      - ao menos duas interpretações concorrentes formuladas por personagens distintos;
+      - ambiguidade sobre erro de laboratório versus fenômeno genuíno;
+      - consequência pública ou institucional concreta.
+    reject_if:
+      - narrador ou personagem-autoridade resolvendo a contradição como fato definitivo;
+      - explicação técnica decorativa sem função dramática;
+      - descarte da anomalia como erro sem manter dúvida residual.
+  - id: ANDARILHO_ENCOUNTER
+    chapters: [33]
+    auditor: LEGEND_CONTINUITY_KEEPER
+    purpose: Narrar o encontro de Inaê com o viajante sem confirmar sua identidade como Adão.
+    must_preserve:
+      - ponto de vista inteiramente de Inaê, sem acesso à mente ou ao passado do viajante;
+      - descrição física inconsistente com registros anteriores de Adão em ao menos um detalhe;
+      - ausência de diálogo em que o viajante revele identidade, missão ou natureza;
+      - partida do viajante narrada com a mesma banalidade do desaparecimento original.
+    reject_if:
+      - confirmação direta, verbal ou visual, de que o viajante é Adão;
+      - cena sobrenatural explícita;
+      - viajante descrito como salvador, missionário ou figura messiânica.
+  - id: FINAL_BIRTH_A001
+    chapters: [34]
+    auditor: LEGEND_CONTINUITY_KEEPER
+    purpose: Encerrar a obra com um nascimento fora dos sistemas oficiais e uma correspondência genética inconclusiva, sem mostrar Adão.
+    must_preserve:
+      - formato predominantemente documental (dados, registros, contadores);
+      - correspondência genética explicitamente qualificada como incompleta, degradada ou controversa;
+      - a criança nascida é do sexo feminino, sem atributo sobrenatural;
+      - camada dupla de leitura preservada — literal e especulativa — sem que o texto escolha uma.
+    reject_if:
+      - confirmação de que a criança é descendente de Adão;
+      - aparição de Adão, mesmo indireta e inequívoca;
+      - fechamento explicativo de qualquer um dos quatro mistérios centrais.

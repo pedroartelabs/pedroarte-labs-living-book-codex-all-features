@@ -1,0 +1,105 @@
+# VISUAL_NARRATIVE_CANON — template do contrato v0.1
+#
+# Arquivo:    runtime/<slug>/canon/VISUAL_NARRATIVE_CANON.yaml
+# Camadas:    B (book_dna, elements, compositions, finish_intents, vetoes) e
+#             C (estado narrativo — sempre projetado, nunca armazenado aqui;
+#             ver seção 14 de docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md)
+# Dono:       VISUAL_DIRECTOR (lock VISUAL_CANON_WRITE). Demais agentes
+#             propõem em canon/CANON_PROPOSALS/VISUAL_CANDIDATES.yaml —
+#             nada proposto é canon antes de aprovado.
+# Validador:  engine/scripts/check_visual_canon.py
+# Desenho:    docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md (seção 12.2)
+#
+# Princípios
+# - Todo elemento com prominence >= SUPPORTING precisa de >=1 função com
+#   >=1 âncora RESOLVÍVEL: LEDGER:/SCENE:/TURN:/CHAPTER_FIELD:/CANON:/DOC:/
+#   RULE:/TEXT:. Um número de capítulo nu NUNCA é âncora válida
+#   (ARBITRARY_STATE_MUTATION).
+# - O canon visual CITA fatos narrativos; nunca os CRIA (VP-05). Um
+#   artefato que precisa de um fato novo passa por CANON_PROPOSAL_PROTOCOL,
+#   como qualquer outra mutação de canon no motor.
+# - Chekhov é PROJETADO pelo validador (status PROVEN | SUPPORTED |
+#   DECORATIVE_ALLOWED | UNJUSTIFIED | CONTRADICTORY — seção 11.5 da SDD).
+#   Este template neutro não tenta provar Chekhov sozinho, porque não há
+#   canon narrativo nem bíblias reais para resolver as âncoras contra —
+#   isso é o que a fixture de teste, com um runtime real, demonstra.
+#
+# Este template valida a integridade de contrato (V0) e a consistência com
+# o Author Visual DNA (V1) contra AUTHOR_VISUAL_DNA_TEMPLATE.yaml. As
+# regras V2 (Chekhov) e V3 (Anti-Generic) exigem contexto narrativo real
+# (canon/CANON_REGISTRY.yaml, canon/CAUSAL_LEDGER.yaml, book/, specs/) e
+# por isso não têm o que verificar aqui — não é uma lacuna, é a fronteira
+# correta entre "forma válida" e "significado comprovado".
+
+apiVersion: pedroarte.livingbooks/v1
+kind: VisualNarrativeCanon
+metadata:
+  project_id: slug-do-livro
+  version: 0.1.0
+  owner: VISUAL_DIRECTOR
+  author_dna: {author_id: author-slug, version: 1, sha256: null}
+  narrative_canon_refs:
+    canon_registry_version: null
+    causal_ledger_version: null
+
+book_dna:
+  visual_thesis: TO_DEFINE
+  duality: null                  # opcional; {outer_truth, hidden_truth, anchors} — seção 19.5 (dust jacket duality)
+  palette:
+    # Valores concretos DENTRO dos papéis do Author Visual DNA pinado acima.
+    GROUND: "#121113"
+    INK: "#E6DCCB"
+    METAL: {material: TO_DEFINE, hex: "#8C6A3C"}
+    PULSE: "#5A0E1C"
+  role_overrides: []             # [{key, value, override_reason, approval}] — nunca sobrescreve invariants.*
+  typography_bindings: {}        # FONT IMPLEMENTATION por papel: {TITLE: {family, file, license, embeddable}}
+
+vetoes: []
+  # - id: VETO-01
+  #   match: [termo1, termo2]
+  #   source: DOC:/book/visual_profile.md#veto
+  #   rule_kind: CANONICAL       # CANONICAL (narrativo) | TACTICAL (produção; expira — expires_when)
+  #   rationale: TO_DEFINE
+
+elements: []
+  # - id: SYM-EXEMPLO
+  #   label: TO_DEFINE
+  #   class: MOTIF                # MOTIF | SIGIL | NARRATIVE_ARTIFACT | DECORATIVE_ILLUSTRATION | TYPOGRAPHIC | AUTHOR_MARK | FIGURE
+  #   meaning: TO_DEFINE
+  #   functions:
+  #     - {function: CHARACTER, anchors: ["LEDGER:GT-A-01"]}
+  #   count: 1
+  #   count_rationale: null       # obrigatório (com âncora) se count > 1 e prominence >= SUPPORTING
+  #   prominence: SUPPORTING      # DOMINANT | SECONDARY | SUPPORTING | TEXTURE
+  #   first_appearance: "TURN:1"
+  #   exposure: {spoiler_level: NONE, reveal: null}
+  #   accessibility: {monochrome_safe: true, min_render_size_mm: 8, text_alternative: TO_DEFINE}
+  #   cost_class: ESSENTIAL       # ESSENTIAL | OPTIONAL | PREMIUM | COLLECTOR_ONLY
+  #   approval: {policy: REQUIRE_APPROVAL, id: null}
+  #   states: []                  # progressão narrativa ancorada — seção 14 da SDD
+  #   transitions: []
+  #   status: PLANNED             # PLANNED | REALIZED | RETIRED (CANDIDATE nunca aparece aqui — VP-08)
+
+compositions: []
+  # - id: COMP-FRONT
+  #   surface: FRONT_COVER
+  #   reading_layer: OUTER_TRUTH  # OUTER_TRUTH | HIDDEN_TRUTH | NEUTRAL
+  #   elements: [{element: SYM-EXEMPLO, prominence: DOMINANT}]
+  #   atmosphere: TO_DEFINE
+  #   forbidden_elements: []
+
+finish_intents: []
+  # - id: FI-EXEMPLO
+  #   target: {composition: COMP-FRONT, role: TITLE}
+  #   semantic_material: TO_DEFINE
+  #   meaning_element: SYM-EXEMPLO   # todo acabamento também obedece Chekhov
+  #   preferred_effect: METALLIC_FOIL
+  #   fallbacks: [SIMULATED_METALLIC_PRINT, FLAT_ROLE_COLOR]
+  #   cost_class: PREMIUM
+  #   approval: {policy: REQUIRE_APPROVAL}
+
+approvals: []
+releases: []
+mutation_log:
+  - {version: 0.1.0, task: T043_VISUAL_NARRATIVE_CANON, owner: VISUAL_DIRECTOR,
+     action: "Consolidação inicial a partir de VISUAL_CANDIDATES."}

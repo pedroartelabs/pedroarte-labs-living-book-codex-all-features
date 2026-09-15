@@ -1,0 +1,24 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: PrinterProfile
+# MODELO — não descreve nenhuma gráfica real. Copiar para layout/PRINTER_PROFILE.yaml
+# só depois que uma gráfica confirmar, com evidência, cada efeito
+# (planning/PRINTER_PROFILE_RESEARCH.md). O resolver do motor só trata um efeito
+# VENDOR_DEPENDENT como PHYSICAL se ele estiver em confirmed_effects; o validador da
+# obra exige um registro de evidência completo para cada um (PRINTER_EFFECT_UNEVIDENCED).
+metadata:
+  id: null
+  name: null
+  confirmed_on: null
+  contact: null
+confirmed_effects: []
+# Registro exigido por efeito confirmado:
+#   MIRROR_BOARD: {vendor: "...", quote_ref: "...", date: "AAAA-MM-DD", sample_approved: true}
+evidence: {}
+# Numeração, assinatura e tiragem limitada: decisão comercial humana (OQ-N8).
+production:
+  numbered: false
+  signed: false
+  limited: false
+  decided_by: null
+bleed_in: null
+spine_in_per_page: null

@@ -1,0 +1,33 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: A recusa
+    movement: Ato Único
+    function: A recusa em público de A a B nasce do medo de expô-la a inimigos antigos, não de desprezo.
+    emotional_movement: {from: SAFETY, to: DANGER, intensity: MEDIUM}
+  - number: 2
+    title: A provocação
+    movement: Ato Único
+    function: B confronta A com ironia diante de outros, recusando o papel de invisível.
+    emotional_movement: {from: DISTANCE, to: DESIRE, intensity: MEDIUM}
+  - number: 3
+    title: A mentira
+    movement: Ato Único
+    function: A mente sobre onde esteve; B encontra a prova que contradiz a versão dele.
+    emotional_movement: {from: TRUST, to: BETRAYAL, intensity: HIGH}
+  - number: 4
+    title: O cuidado
+    movement: Ato Único
+    function: A cuida de B ferida, sem chamar ninguém, revelando uma competência que contradiz sua indiferença encenada.
+    emotional_movement: {from: DANGER, to: TENDERNESS, intensity: LOW}
+  - number: 5
+    title: A noite
+    movement: Ato Único
+    function: B escolhe ficar; os dois passam a noite juntos, por decisão explícita de ambos.
+    emotional_movement: {from: RESTRAINT, to: DESIRE, intensity: PEAK}
+  - number: 6
+    title: A revelação
+    movement: Ato Único
+    function: A conta por que mentiu e por que vigiava a rua — a revelação recontextualiza os capítulos 1 e 3 sem alterar seus fatos.
+    emotional_movement: {from: TRUST, to: HOPE, intensity: HIGH}

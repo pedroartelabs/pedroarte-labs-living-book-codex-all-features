@@ -1,0 +1,33 @@
+# Roteiro emocional do fixture do MVP (Slice 3).
+#
+# Corresponde aos mesmos 6 capítulos de mvp_ledger.yaml, mas mora num arquivo
+# separado de propósito: `emotional_movement` é STORY PLANNING, não CANON
+# (ver docs/sdd/DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md, E.4). Um plano de
+# capítulo pode ser reescrito livremente sem virar retcon — o leitor ainda
+# não viu — e por isso check_emotional_amplitude() nunca lê o
+# CAUSAL_LEDGER.yaml para esta checagem.
+#
+# Curva emocional por contraste (LAW 05), do Apêndice 2 do SDD:
+# SAFETY→DANGER · DISTANCE→DESIRE · TRUST→BETRAYAL · DANGER→TENDERNESS ·
+# RESTRAINT→DESIRE · TRUST→HOPE — nunca escalada contínua.
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: A recusa
+    emotional_movement: {from: SAFETY, to: DANGER, intensity: MEDIUM}
+  - number: 2
+    title: A provocação
+    emotional_movement: {from: DISTANCE, to: DESIRE, intensity: MEDIUM}
+  - number: 3
+    title: A mentira
+    emotional_movement: {from: TRUST, to: BETRAYAL, intensity: HIGH}
+  - number: 4
+    title: O cuidado
+    emotional_movement: {from: DANGER, to: TENDERNESS, intensity: LOW}
+  - number: 5
+    title: A noite
+    emotional_movement: {from: RESTRAINT, to: DESIRE, intensity: PEAK}
+  - number: 6
+    title: A revelação
+    emotional_movement: {from: TRUST, to: HOPE, intensity: HIGH}

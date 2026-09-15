@@ -1,0 +1,48 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: VisualCandidates
+# Variantes de capa exploradas na SDD (seção 23.2). Candidato NÃO é canon
+# (VP-08): nenhum renderer lê este arquivo, e o canon nunca cita ids CAND-*.
+metadata: {project_id: narciso, produced_by: SLICE_3_SEED}
+candidates:
+  - id: CAND-CV-A
+    label: rosto parcial
+    kind_hint: DOMINANT_OBJECT
+    description: "Metade superior do rosto, olhos para o leitor, linha d'água cortando abaixo do nariz."
+    status: PROMOTED
+    decision_note: "Decisão humana OQ-N1: promovido a COMP-FRONT (OUTER_TRUTH)."
+  - id: CAND-CV-B
+    label: água com olhar
+    kind_hint: DUALITY
+    description: "Superfície negra; só os olhos refletidos, invertidos."
+    status: REJECTED
+    decision_note: "Mantido apenas como contingência técnica se nenhum candidato de COMP-FRONT passar a rubrica COV-H."
+  - id: CAND-CV-C
+    label: escultura rachada
+    kind_hint: DOMINANT_OBJECT
+    description: "Rosto de mármore negro rachado com olhos de ouro."
+    status: REJECTED
+    decision_note: "OQ-N1 escolheu Narciso vivo na capa; a estátua fica para o miolo."
+  - id: CAND-CV-D
+    label: mão na água
+    kind_hint: DOMINANT_OBJECT
+    description: "Mão com cicatriz e anel tocando a água, reflexo chegando antes."
+    status: REJECTED
+    decision_note: "Candidata a prancha de detalhe no Slice 4."
+  - id: CAND-CV-E
+    label: flor refletida
+    kind_hint: SYMBOL
+    description: "Um narciso branco refletido como outra flor."
+    status: REJECTED
+    decision_note: "Genérico sem a figura; a flor pertence ao fim do livro."
+  - id: CAND-CV-F
+    label: composição dupla
+    kind_hint: DUALITY
+    description: "O mesmo fragmento visto do lado da água, com uma âncora não espelhada."
+    status: PROMOTED
+    decision_note: "Promovido a COMP-CASE-HIDDEN (HIDDEN_TRUTH, só collector)."
+  - id: CAND-CV-G
+    label: ausência do rosto
+    kind_hint: SECRET
+    description: "Capa só com água, anel e névoa."
+    status: REJECTED
+    decision_note: "Lê como thriller e contraria OQ-N1."

@@ -1,0 +1,14 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CapabilityRequirements
+capabilities:
+  ptbr_literary_generation: {required: true, blocker_if_unavailable: true, purpose: Produção futura do romance em português brasileiro.}
+  deterministic_validation: {required: true, blocker_if_unavailable: true, purpose: Validação de pacote, causalidade, canon visual e gates.}
+  raster_image_generation: {required: true, blocker_if_unavailable: true, purpose: Capa Kindle real do piloto visual mínimo.}
+  docx_generation: {required: true, blocker_if_unavailable: true, purpose: Interior KDP futuro.}
+  docx_pdf_rendering: {required: true, blocker_if_unavailable: true, purpose: QA visual do interior antes da entrega.}
+  docx_visual_render_qa: {required: true, blocker_if_unavailable: true, purpose: Inspeção das páginas renderizadas.}
+  zip_packaging: {required: true, blocker_if_unavailable: true, purpose: Empacotamento final futuro.}
+  current_kdp_research: {required: true, blocker_if_unavailable: true, purpose: Requisitos KDP vigentes antes de produção.}
+  folklore_source_research: {required: true, blocker_if_unavailable: true, purpose: Separar Mestermø tradicional de adaptações modernas.}
+  norwegian_cultural_fact_checking: {required: true, blocker_if_unavailable: false, purpose: Verificar paisagem, arquitetura, alimentação e costumes de Telemark.}
+

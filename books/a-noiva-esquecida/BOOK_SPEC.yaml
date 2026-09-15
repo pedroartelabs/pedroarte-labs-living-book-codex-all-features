@@ -1,0 +1,109 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: a-noiva-esquecida
+  title: A Noiva Esquecida
+  subtitle: Se a memória acaba, a promessa ainda obriga?
+  author: Bea Halden
+  language: pt-BR
+  genre: dark romance psicológico / horror gótico norueguês / fantasia sombria
+  chapter_count: 40
+  version: 0.1.0
+spec:
+  execution_profile: STANDARD
+  creative_sources: [CREATIVE_BRIEF.md, BOOK_CONSTITUTION.md]
+  chapter_titles:
+    1: A Dívida Vinter
+    2: A Estrada Ausente
+    3: O Homem Chamado Gigante
+    4: Quatro Trabalhos
+    5: A Porta Proibida
+    6: Mestermø
+    7: O Preço da Ajuda
+    8: A Primeira Promessa
+    9: O Pomar sem Estação
+    10: A Semente
+    11: Coroar o Afogado
+    12: Aquilo que Ela Sabe
+    13: O Galho Morto
+    14: O Imposto do Inferno
+    15: A Moeda que Respira
+    16: A Última Ordem
+    17: Três Gotas
+    18: A Casa que Escuta
+    19: A Floresta em Movimento
+    20: Água Negra
+    21: A Coroa de Ferro
+    22: O Nome da Mestra
+    23: O Quarto Refúgio
+    24: Antes da Casa Vinter
+    25: A Maçã
+    26: Sozinho
+    27: A Mulher no Portão
+    28: O Corpo se Lembra
+    29: O Lugar à Mesa
+    30: A Cicatriz
+    31: Coisas que Ele Não Aprendeu
+    32: A Segunda Recusa
+    33: O Arquivo de Inverno
+    34: O Que a Maçã Comeu
+    35: A Noiva de Ninguém
+    36: Consentimento
+    37: A Memória Oferecida
+    38: O Homem que Voltaria
+    39: A Escolha de Elias
+    40: O Nome que Permanece
+  movements:
+    - {name: I — A Casa do Gigante, chapters: [1,2,3,4,5,6,7,8]}
+    - {name: II — Os Trabalhos, chapters: [9,10,11,12,13,14,15,16]}
+    - {name: III — A Fuga, chapters: [17,18,19,20,21,22,23,24]}
+    - {name: IV — O Homem que a Esqueceu, chapters: [25,26,27,28,29,30,31,32]}
+    - {name: V — Faça-me Lembrar, chapters: [33,34,35,36,37,38,39,40]}
+  writing_waves:
+    - [1,2,3,4]
+    - [5,6,7,8]
+    - [9,10,11,12]
+    - [13,14,15,16]
+    - [17,18,19,20]
+    - [21,22,23,24]
+    - [25,26,27,28]
+    - [29,30,31,32]
+    - [33,34,35,36]
+    - [37,38,39,40]
+  voice_calibration_chapters: [1,6,26,28]
+  lead_novelist_owned_chapters: [1,8,14,17,24,25,26,32,36,37,39,40]
+  features:
+    living_book: {enabled: true}
+    images: {enabled: false}
+    living_sound: {enabled: false}
+    translation_preparation: {enabled: false, target: en}
+    kdp_docx: {enabled: true}
+    media_package: {enabled: true}
+    causal_ledger:
+      enabled: true
+      min_payoff_feeds: 2
+      max_monotonic_run: 3
+      max_loop_silence: 6
+    visual_narrative:
+      enabled: true
+      author_profile: bea_halden
+      author_dna_version: 1
+      edition_targets: [kindle_ebook, kdp_paperback]
+  agent_packs:
+    book_agents: {}
+    character_support: [CHARACTER_PSYCHOLOGIST, EMOTIONAL_PHYSIOLOGY_ARCHITECT, ANTI_MANIPULATION_GUARDIAN]
+    canon_guardians: [CANON_GUARDIAN, WORLD_RULES_REVIEWER, REALISM_ENGINEER, ANTI_MANIPULATION_GUARDIAN]
+    wave_reviewers: [PLOT_CONTINUITY_REVIEWER, CHARACTER_CONTINUITY_REVIEWER, WORLD_RULES_REVIEWER, EMOTIONAL_EDITOR, GENRE_GUARDIAN, ANTI_MANIPULATION_GUARDIAN]
+    voice_reviewers: [LITERARY_STYLE_GUARDIAN, DIALOGUE_DIRECTOR, PHYSICALITY_AND_BODY_AGENT, SUBTEXT_EDITOR, ANTI_MANIPULATION_GUARDIAN]
+    critic_panel: [LITERARY_CRITIC, CINEMA_CRITIC, COMMERCIAL_EDITOR_CRITIC, DEVELOPMENTAL_EDITOR, PLOT_CONTINUITY_REVIEWER]
+    line_reviewers: [DIALOGUE_DIRECTOR, LITERARY_STYLE_GUARDIAN, SUBTEXT_EDITOR, SENSORY_AGENT, PHYSICALITY_AND_BODY_AGENT, TYPOGRAPHY_TEXT_REVIEWER, REPETITION_AND_CLICHE_REVIEWER]
+  immutable_rules_file: immutable_rules.yaml
+  protected_scenes_file: protected_scenes.yaml
+  chapter_architecture_file: chapter_architecture.yaml
+  quality_profile_file: quality_profile.yaml
+  capability_requirements_file: capability_requirements.yaml
+  world_rules_seed: seeds/WORLD_RULES_SEED.md
+  symbol_priorities: [maçã negra, três gotas de sangue, água negra, reflexo, coroa de ferro, galhos de inverno]
+  acoustic_environment_organism: O silêncio de Mestergård escuta; madeira, ferro, água sob gelo e vento mudam de comportamento quando uma dívida reconhece seu devedor.
+  book_specific_rejection_states: [SIGRID_AGENCY_FAILURE, POST_AMNESIA_CONSENT_FAILURE, MAGIC_PRICE_EVASION, MEMORY_RESET_FAILURE, FOLKLORE_DERIVATION_FAILURE, MYSTERY_FAIRNESS_FAILURE, VISUAL_CHEKHOV_FAILURE, QUEST_EPISODICITY_FAILURE]
+

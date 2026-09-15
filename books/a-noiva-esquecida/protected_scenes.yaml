@@ -1,0 +1,64 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: FIRST_PROMISE
+    chapters: [8]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: A aliança nasce como contrato limitado, não posse romântica.
+    must_preserve: [Sigrid redige termos, Elias pode recusar, promessa trata de saída e nome]
+    reject_if: [sedução substitui negociação, promessa concede corpo ou casamento]
+  - id: HELL_TAX
+    chapters: [14,15]
+    auditor: WORLD_RULES_REVIEWER
+    purpose: Reimaginar o imposto do Inferno como auditoria de custos terceirizados.
+    must_preserve: [ambiguidade ontológica, três dívidas nomeadas, recibo de cobre, consequência futura]
+    reject_if: [Inferno cristão confirmado, missão episódica, exposição sem escolha]
+  - id: THREE_DROPS
+    chapters: [17,18]
+    auditor: PROTECTED_SCENE_AUDITOR
+    purpose: Sigrid cria presença falsa e paga com três memórias.
+    must_preserve: [iniciativa de Sigrid, exatamente três gotas, voz calor sombra, perdas nomeadas]
+    reject_if: [gotas conversam, repetição culinária do conto, sangue decorativo, custo revertido]
+  - id: FIRST_INTIMACY
+    chapters: [20]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Desejo conquistado ocorre numa janela de segurança e consentimento explícito.
+    must_preserve: [adultos, capacidade, opção real de parar, vínculo não condicionado à fuga]
+    reject_if: [hipotermia ou ferimento incapacitam, perigo é tratado como consentimento]
+  - id: APPLE_FORGETTING
+    chapters: [25,26]
+    auditor: PLOT_CONTINUITY_REVIEWER
+    purpose: A maçã apaga Sigrid sem resetar Elias e corta para a espera dela.
+    must_preserve: [Astrid como agente, mordida voluntária mas desinformada, memória seletiva, dois cafés, resposta sozinho]
+    reject_if: [amnésia total, personalidade resetada, Sigrid culpada, efeito curado por romance]
+  - id: BODY_MEMORY_BOUNDARY
+    chapters: [29]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Separar automatismo corporal de autorização.
+    must_preserve: [Sigrid nomeia o limite, acordo novo, revogabilidade]
+    reject_if: [reação física equivale a sim, conhecimento íntimo é usado como arma]
+  - id: RESTORATION_OPTIONS
+    chapters: [36]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Elias recebe decisão informada sobre sua identidade.
+    must_preserve: [quatro opções, preço, tempo para decidir, promessa antiga renunciada]
+    reject_if: [chantagem, ameaça imediata, antigo consentimento invocado]
+  - id: RESTORATION_TEMPTATION
+    chapters: [38]
+    auditor: CHARACTER_CONTINUITY_REVIEWER
+    purpose: Sigrid recusa restaurar clandestinamente o homem que a amava.
+    must_preserve: [oportunidade real, conflito emocional, recusa sem recompensa garantida]
+    reject_if: [recusa fácil, Astrid caricata, Elias inconsciente é usado]
+  - id: CONSENTED_RESTORATION
+    chapters: [39]
+    auditor: ANTI_MANIPULATION_GUARDIAN
+    purpose: Restauração gradual cobra as memórias do segundo romance.
+    must_preserve: [sessões interrompíveis, confirmação a cada etapa, perda irreversível, Sigrid não decide]
+    reject_if: [cura instantânea, custo cancelado, sexo ou beijo restaura]
+  - id: FINAL_JUDGMENT
+    chapters: [40]
+    auditor: CANON_GUARDIAN
+    purpose: Consentimento invalida posse e distribui custódia sem apagar responsabilidade.
+    must_preserve: [quatro instrumentos, testemunho de Elias, confissão de Astrid, escolha de Sigrid, custo]
+    reject_if: [Gigante morto como solução simples, dívida some, final vira sermão]
+

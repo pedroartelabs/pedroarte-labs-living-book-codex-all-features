@@ -1,0 +1,278 @@
+{
+  "collector": {
+    "compositions": [
+      {
+        "canonical_surface": "FRONT_COVER",
+        "composition": "COMP-FRONT",
+        "mapped_surface": "DUST_JACKET_FRONT",
+        "note": null,
+        "reading_layer": "OUTER_TRUTH",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "CASE_FRONT",
+        "composition": "COMP-CASE-HIDDEN",
+        "mapped_surface": "CASE_FRONT",
+        "note": null,
+        "reading_layer": "HIDDEN_TRUTH",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "INTERIOR_PLATE",
+        "composition": "COMP-CONTRACT-PLATE",
+        "mapped_surface": "INTERIOR_PLATE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "EDGE_FORE",
+        "composition": "COMP-EDGE",
+        "mapped_surface": "EDGE_FORE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "SPINE",
+        "composition": "COMP-SPINE",
+        "mapped_surface": "DUST_JACKET_SPINE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      }
+    ],
+    "finish_intents": [
+      {
+        "effect": "METALLIC_FOIL",
+        "finish_intent": "FI-TITLE",
+        "level": "PHYSICAL",
+        "printer_unconfirmed": false,
+        "reason": "confirmado pelo perfil de gráfica (layout/PRINTER_PROFILE.yaml)"
+      },
+      {
+        "effect": "SPOT_UV",
+        "finish_intent": "FI-FEATHERS",
+        "level": "PHYSICAL",
+        "printer_unconfirmed": false,
+        "reason": "confirmado pelo perfil de gráfica (layout/PRINTER_PROFILE.yaml)"
+      },
+      {
+        "effect": "STENCILED_EDGE",
+        "finish_intent": "FI-EDGE",
+        "level": "PHYSICAL",
+        "printer_unconfirmed": false,
+        "reason": "confirmado pelo perfil de gráfica (layout/PRINTER_PROFILE.yaml)"
+      }
+    ],
+    "printer_profile_confirmed": true,
+    "target": "collector"
+  },
+  "kdp_hardcover": {
+    "compositions": [
+      {
+        "canonical_surface": "FRONT_COVER",
+        "composition": "COMP-FRONT",
+        "mapped_surface": "CASE_FRONT",
+        "note": null,
+        "reading_layer": "OUTER_TRUTH",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "CASE_FRONT",
+        "composition": "COMP-CASE-HIDDEN",
+        "mapped_surface": null,
+        "note": "HIDDEN_TRUTH omitido: alvo sem sobrecapa física para esconder atrás (DJ-01/05)",
+        "reading_layer": "HIDDEN_TRUTH",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "INTERIOR_PLATE",
+        "composition": "COMP-CONTRACT-PLATE",
+        "mapped_surface": "INTERIOR_PLATE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "EDGE_FORE",
+        "composition": "COMP-EDGE",
+        "mapped_surface": null,
+        "note": "superfície 'EDGE_FORE' não existe no alvo kdp_hardcover",
+        "reading_layer": "NEUTRAL",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "SPINE",
+        "composition": "COMP-SPINE",
+        "mapped_surface": "CASE_SPINE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      }
+    ],
+    "finish_intents": [
+      {
+        "effect": "SIMULATED_METALLIC_PRINT",
+        "finish_intent": "FI-TITLE",
+        "level": "SIMULATED",
+        "printer_unconfirmed": false,
+        "reason": null
+      },
+      {
+        "effect": "CONTRAST_SIMULATION",
+        "finish_intent": "FI-FEATHERS",
+        "level": "SIMULATED",
+        "printer_unconfirmed": false,
+        "reason": null
+      },
+      {
+        "effect": null,
+        "finish_intent": "FI-EDGE",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "COLLECTOR_ONLY fora do alvo collector"
+      }
+    ],
+    "printer_profile_confirmed": true,
+    "target": "kdp_hardcover"
+  },
+  "kdp_paperback": {
+    "compositions": [
+      {
+        "canonical_surface": "FRONT_COVER",
+        "composition": "COMP-FRONT",
+        "mapped_surface": "FRONT_COVER",
+        "note": null,
+        "reading_layer": "OUTER_TRUTH",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "CASE_FRONT",
+        "composition": "COMP-CASE-HIDDEN",
+        "mapped_surface": null,
+        "note": "HIDDEN_TRUTH omitido: alvo sem sobrecapa física para esconder atrás (DJ-01/05)",
+        "reading_layer": "HIDDEN_TRUTH",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "INTERIOR_PLATE",
+        "composition": "COMP-CONTRACT-PLATE",
+        "mapped_surface": "INTERIOR_PLATE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "EDGE_FORE",
+        "composition": "COMP-EDGE",
+        "mapped_surface": null,
+        "note": "superfície 'EDGE_FORE' não existe no alvo kdp_paperback",
+        "reading_layer": "NEUTRAL",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "SPINE",
+        "composition": "COMP-SPINE",
+        "mapped_surface": "SPINE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      }
+    ],
+    "finish_intents": [
+      {
+        "effect": null,
+        "finish_intent": "FI-TITLE",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "PREMIUM fora do orçamento de kdp_paperback"
+      },
+      {
+        "effect": "CONTRAST_SIMULATION",
+        "finish_intent": "FI-FEATHERS",
+        "level": "SIMULATED",
+        "printer_unconfirmed": false,
+        "reason": null
+      },
+      {
+        "effect": null,
+        "finish_intent": "FI-EDGE",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "COLLECTOR_ONLY fora do alvo collector"
+      }
+    ],
+    "printer_profile_confirmed": true,
+    "target": "kdp_paperback"
+  },
+  "kindle_ebook": {
+    "compositions": [
+      {
+        "canonical_surface": "FRONT_COVER",
+        "composition": "COMP-FRONT",
+        "mapped_surface": "MARKETING_COVER",
+        "note": null,
+        "reading_layer": "OUTER_TRUTH",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "CASE_FRONT",
+        "composition": "COMP-CASE-HIDDEN",
+        "mapped_surface": null,
+        "note": "HIDDEN_TRUTH omitido: alvo sem sobrecapa física para esconder atrás (DJ-01/05)",
+        "reading_layer": "HIDDEN_TRUTH",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "INTERIOR_PLATE",
+        "composition": "COMP-CONTRACT-PLATE",
+        "mapped_surface": "INTERIOR_PLATE",
+        "note": null,
+        "reading_layer": "NEUTRAL",
+        "status": "INCLUDED"
+      },
+      {
+        "canonical_surface": "EDGE_FORE",
+        "composition": "COMP-EDGE",
+        "mapped_surface": null,
+        "note": "superfície 'EDGE_FORE' não existe no alvo kindle_ebook",
+        "reading_layer": "NEUTRAL",
+        "status": "OMITTED"
+      },
+      {
+        "canonical_surface": "SPINE",
+        "composition": "COMP-SPINE",
+        "mapped_surface": null,
+        "note": "superfície 'SPINE' não existe no alvo kindle_ebook",
+        "reading_layer": "NEUTRAL",
+        "status": "OMITTED"
+      }
+    ],
+    "finish_intents": [
+      {
+        "effect": null,
+        "finish_intent": "FI-TITLE",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "PREMIUM fora do orçamento de kindle_ebook"
+      },
+      {
+        "effect": null,
+        "finish_intent": "FI-FEATHERS",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "OPTIONAL fora do orçamento de kindle_ebook"
+      },
+      {
+        "effect": null,
+        "finish_intent": "FI-EDGE",
+        "level": "OMIT",
+        "printer_unconfirmed": false,
+        "reason": "COLLECTOR_ONLY fora do alvo collector"
+      }
+    ],
+    "printer_profile_confirmed": true,
+    "target": "kindle_ebook"
+  }
+}

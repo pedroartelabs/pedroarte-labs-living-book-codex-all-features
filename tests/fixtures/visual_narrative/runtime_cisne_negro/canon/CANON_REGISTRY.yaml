@@ -1,0 +1,11 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CanonRegistry
+metadata:
+  project_id: cisne_negro_fixture
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+objects:
+  - id: OBJ-003
+    status: CANON_APPROVED
+    fact: A coroa de noivado da família Vane, de ouro envelhecido, usada pelas cinco herdeiras anteriores.
+    source: /specs/WORLD_BIBLE.md#coroa-vane
