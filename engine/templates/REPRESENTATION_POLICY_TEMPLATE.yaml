@@ -1,0 +1,58 @@
+# REPRESENTATION_POLICY — template do contrato v0.1
+#
+# Arquivo de autora:  authors/<author_id>/REPRESENTATION_POLICY.v<N>.yaml
+# Validador:          scripts/check_representation.py
+# Desenho:            docs/sdd/REPRESENTATION_INTEGRITY_SDD_v0.1.md (seções 14 e 22.3)
+#
+# O QUE ISTO É: o eixo SUBJECT_PERMISSION — até onde cada FAMÍLIA de conteúdo
+# pode ser representada nas obras desta autora. É política de REPRESENTAÇÃO,
+# não de existência: um assunto pode existir no cânone mesmo com teto baixo
+# (CAN_EXIST). Nenhuma lista de palavras; o validador nunca lê a prosa por tema.
+#
+# O QUE ISTO NÃO É: hard boundaries. Sexualização de menores e instrução
+# operacional de dano são limites do MOTOR, valem para toda autora e não
+# aparecem aqui como permissão — não existe valor que os libere.
+#
+# Uma obra pode ESTREITAR esta política (BOOK_SPEC.features.representation_integrity
+# .overrides), nunca alargá-la. Aprovação da política é humana (approvals/).
+#
+# Este template é validado pela suíte: campo que mudar aqui muda no validador.
+
+apiVersion: pedroarte.livingbooks/v1
+kind: RepresentationPolicy
+metadata:
+  author_id: exemplo
+  version: 1
+  status: DRAFT                   # DRAFT | APPROVED
+  approved_by_file: null          # ex.: approvals/REPRESENTATION_POLICY_v1.md (escrito por pessoa)
+
+# Famílias: SEXUAL | SEXUAL_VIOLENCE | VIOLENCE | SELF_HARM | ABUSE_CONTROL |
+#           SUBSTANCE | TABOO | PSYCHOLOGICAL_EXTREMITY | DEATH_GRIEF
+# Família ausente = CAN_EXIST (conservador: só REFERENCE_ONLY, sem gráfico).
+#
+# depiction_ceiling:
+#   CAN_EXIST                    só REFERENCE_ONLY; nunca graphic
+#   CAN_BE_DEPICTED              qualquer execução; nunca graphic
+#   CAN_BE_GRAPHICALLY_DEPICTED  qualquer execução, inclusive graphic
+# central_theme: pode ser tema central da obra (ortogonal ao teto).
+permissions:
+  VIOLENCE:      {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  SELF_HARM:     {depiction_ceiling: CAN_BE_DEPICTED, central_theme: true}
+  ABUSE_CONTROL: {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+
+# Só ACRESCENTA limites (nunca remove os HB-* do motor).
+additional_hard_boundaries:
+  - {id: AHB-01, rule: "Descrição livre de um limite adicional da autora.", scope: BOOK}
+
+# Famílias que sempre exigem AUTHOR_REVIEW quando a representação foi limitada.
+always_review: [SEXUAL_VIOLENCE, SELF_HARM]
+
+# RECORD_GAP: representação reduzida que preserva o cânone vira CONSTRAINED + gap.
+# BLOCK:      qualquer redução vira CAPABILITY_BLOCKER (comportamento de Narciso).
+on_constrained_representation: RECORD_GAP
+
+# Escala de intensidade 0-10 é editorial e RELATIVA à obra (não é medição).
+thresholds: {gap_threshold: 2, review_threshold: 4}
+
+reader_warnings: {granularity: BOOK, spoilers: false}    # BOOK | CHAPTER
+lexicons: {youth_coding: []}                              # opcional (AG-05, Slice futuro)

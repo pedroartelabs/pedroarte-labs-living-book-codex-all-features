@@ -1,0 +1,467 @@
+# Fixture de REPRESENTATION_INTEGRITY (Slice 1).
+#
+# Derivada de tests/fixtures/causal_ledger/mvp_ledger.yaml + eventos sensíveis
+# NEUTROS (só fatos resumidos e ids; sem prosa e sem conteúdo explícito).
+# Todos os eventos são REALIZED com intended+realized; os testes derivam
+# variantes PLANNED e mutações em memória. Precisa continuar sem achado
+# HIGH/BLOCKER de check_causal_ledger.py e de check_representation.py.
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata:
+  project_id: representation-vale-escuro
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+characters:
+- id: CHR-A
+  major: true
+  age: 31
+  age_source: fixture#chr-a
+  ground_truth:
+  - id: GT-A-01
+    kind: FORMATIVE_HISTORY
+    statement: Anos atrás, uma pessoa próxima de A foi ferida por inimigos dele depois de ser vista ao seu lado.
+    reader_access: NEVER
+  - id: GT-A-02
+    kind: FEAR
+    statement: A teme que qualquer pessoa associada publicamente a ele vire alvo.
+    reader_access:
+      from_event: EV-06
+  self_model:
+  - id: SM-A-01
+    statement: A acredita que não se envolve com ninguém porque não precisa de ninguém.
+    diverges_from:
+    - GT-A-02
+  social_persona:
+  - id: SP-A-01
+    statement: Frio, irônico e indiferente em público.
+    conceals:
+    - GT-A-01
+    - GT-A-02
+- id: CHR-B
+  major: true
+  age: 27
+  age_source: fixture#chr-b
+  ground_truth:
+  - id: GT-B-01
+    kind: CORE_BELIEF
+    statement: B acredita que ser ignorada é pior do que ser odiada.
+    reader_access: OPEN
+  - id: GT-B-02
+    kind: VULNERABILITY
+    statement: B não tem para onde voltar se perder o lugar onde está.
+    reader_access: NEVER
+  self_model:
+  - id: SM-B-01
+    statement: B se vê como alguém que simplesmente não se deixa intimidar.
+    diverges_from:
+    - GT-B-01
+  social_persona:
+  - id: SP-B-01
+    statement: Direta, provocadora e autossuficiente.
+    conceals:
+    - GT-B-02
+- id: CHR-C
+  major: false
+  age: 45
+  age_source: fixture#chr-c
+relationships:
+- pair: CHR-A->CHR-B
+  baseline:
+    desire: LATENT
+    restraint: LOW
+- pair: CHR-B->CHR-A
+  baseline:
+    trust: NONE
+    attraction: NONE
+    vulnerability: CLOSED
+    intimacy: NONE
+loops:
+- id: LP-01
+  kind: INTIMACY
+  pair: CHR-A<->CHR-B
+  question: A distância que A impõe a B vai ceder, e a que custo?
+- id: LP-02
+  kind: VULNERABILITY
+  pair: CHR-A<->CHR-B
+  question: B vai deixar A ver aquilo que ela esconde?
+- id: LP-03
+  kind: RELATIONAL
+  pair: CHR-A<->CHR-B
+  question: O que acontece com os dois quando B descobrir por que A mentiu?
+beliefs:
+- id: RB-01
+  about:
+  - EV-01
+  interpretation: A despreza B e a considera irrelevante.
+  confidence: MEDIUM
+  expectation: B deveria desistir de se reaproximar de A.
+  truth: 'FALSE'
+  disclosed_by_revision:
+  - GT-A-02
+  left_open: false
+- id: RB-02
+  about:
+  - EV-03
+  interpretation: A esconde algo de que se envergonha.
+  confidence: MEDIUM
+  expectation: A tem um segredo humilhante, provavelmente outra pessoa.
+  truth: INCOMPLETE
+  disclosed_by_revision:
+  - GT-A-02
+  left_open: false
+events:
+- id: EV-01
+  status: REALIZED
+  chapter: 1
+  structural: true
+  kind:
+  - REJECTION
+  actor: CHR-A
+  participants:
+  - CHR-A
+  - CHR-B
+  facts:
+  - Diante de outras pessoas, A recusa o convite de B e a dispensa com frieza.
+  caused_by:
+  - GT-A-02
+  self_attribution: SM-A-01
+  interpretations:
+  - by: CHR-B
+    reads_as: A a considera irrelevante.
+  relationship_delta:
+  - pair: CHR-B->CHR-A
+    dimension: trust
+    from: NONE
+    to: WARY
+  - pair: CHR-B->CHR-A
+    dimension: attraction
+    from: NONE
+    to: PROVOKED
+    because: a recusa desafia GT-B-01
+  evidence_to_reader:
+  - A recusa B em público, sem explicação.
+  beliefs:
+    establishes:
+    - RB-01
+- id: EV-02
+  status: REALIZED
+  chapter: 2
+  structural: true
+  kind:
+  - PROVOCATION
+  actor: CHR-B
+  participants:
+  - CHR-B
+  - CHR-A
+  facts:
+  - B procura A de novo e o confronta com ironia diante de quem trabalha para ele.
+  caused_by:
+  - GT-B-01
+  - EV-01
+  self_attribution: SM-B-01
+  interpretations:
+  - by: CHR-A
+    reads_as: B não tem medo dele, e isso o desarma.
+  relationship_delta:
+  - pair: CHR-A->CHR-B
+    dimension: desire
+    from: LATENT
+    to: ACTIVE
+  - pair: CHR-A->CHR-B
+    dimension: restraint
+    from: LOW
+    to: HIGH
+  evidence_to_reader:
+  - A responde seco e encerra a conversa antes do que precisava.
+  loops:
+    opens:
+    - LP-01
+- id: EV-03
+  status: REALIZED
+  chapter: 3
+  structural: true
+  kind:
+  - LIE
+  actor: CHR-A
+  participants:
+  - CHR-A
+  - CHR-B
+  facts:
+  - A diz a B que passou a noite fora da cidade; na verdade, vigiava a rua onde ela mora.
+  caused_by:
+  - GT-A-02
+  - EV-01
+  self_attribution: SM-A-01
+  interpretations:
+  - by: CHR-B
+    reads_as: A esconde algo de que se envergonha.
+  relationship_delta:
+  - pair: CHR-B->CHR-A
+    dimension: trust
+    from: WARY
+    to: BROKEN
+  evidence_to_reader:
+  - B encontra um recibo que contradiz a versão de A.
+  loops:
+    feeds:
+    - LP-01
+  beliefs:
+    establishes:
+    - RB-02
+- id: EV-04
+  status: REALIZED
+  chapter: 4
+  structural: true
+  kind:
+  - CARE
+  actor: CHR-A
+  participants:
+  - CHR-A
+  - CHR-B
+  facts:
+  - B se fere num acidente; A a leva para casa e cuida do ferimento sem chamar ninguém.
+  caused_by:
+  - GT-A-01
+  - EV-03
+  self_attribution: SM-A-01
+  interpretations:
+  - by: CHR-B
+    reads_as: O cuidado não combina com a indiferença que ele encena.
+  relationship_delta:
+  - pair: CHR-B->CHR-A
+    dimension: vulnerability
+    from: CLOSED
+    to: OPEN
+  evidence_to_reader:
+  - A limpa o ferimento com a precisão de quem já fez isso antes.
+  loops:
+    feeds:
+    - LP-01
+    opens:
+    - LP-02
+- id: EV-V1
+  status: REALIZED
+  chapter: 4
+  structural: false
+  kind:
+  - VIOLENT_ACT
+  actor: CHR-A
+  participants:
+  - CHR-A
+  - CHR-C
+  facts:
+  - A agride C com violência grave; C sobrevive com sequelas permanentes.
+  caused_by:
+  - GT-A-01
+  - EV-03
+  evidence_to_reader:
+  - O ato é elidido; o leitor recebe o estado de C e a reação de quem viu.
+  representation:
+    content_classes:
+    - VIOLENCE
+    themes:
+    - rage
+    - possession
+    narrative_function: O ato fixa o ponto de não retorno de A e a dívida que B passa a carregar.
+    intended:
+      execution: SENSITIVE
+      intensity: 9
+      graphic: true
+    realized:
+      execution: FADE_TO_BLACK
+      intensity: 6
+      graphic: false
+      constraint_source: PROVIDER_LIMIT
+      literary_strategy:
+      - ELLIPSIS
+      - AFTERMATH
+      rated_by:
+        writer: 6
+        independent: 6
+    status: CONSTRAINED
+    gap:
+      dimensions:
+      - GRAPHIC_DETAIL
+      description: A duração e a proximidade do ato, planejadas para que o leitor sinta a irreversibilidade no corpo,
+        ficaram elididas; ela chega só pelo aftermath.
+      author_review: RECOMMENDED
+- id: EV-05
+  status: REALIZED
+  chapter: 5
+  structural: true
+  kind:
+  - INTIMACY
+  actor: CHR-B
+  participants:
+  - CHR-B
+  - CHR-A
+  facts:
+  - B pede que A fique; os dois passam a noite juntos, por escolha explícita de ambos.
+  caused_by:
+  - EV-02
+  - EV-04
+  interpretations:
+  - by: CHR-A
+    reads_as: Ficar é exatamente o risco que ele jurou não correr.
+  relationship_delta:
+  - pair: CHR-B->CHR-A
+    dimension: intimacy
+    from: NONE
+    to: ESTABLISHED
+  - pair: CHR-A->CHR-B
+    dimension: restraint
+    from: HIGH
+    to: RELEASED
+  evidence_to_reader:
+  - A cena corta; de manhã, A ainda está lá, acordado, olhando para a porta.
+  consent:
+    canonical: CONSENSUAL
+    manipulation_present: false
+    power_imbalance_present: true
+    ability_to_refuse: FULL
+    boundary_state: NEGOTIATED
+    perceived:
+      CHR-A: Ele sente que finalmente parou de fugir.
+      CHR-B: Ela sente que decidiu por si mesma, sem pressão de ninguém.
+      READER: Duas pessoas escolhendo isso de olhos abertos.
+  loops:
+    opens:
+    - LP-03
+    resolves:
+    - loop: LP-01
+      mode: TRANSFORMED
+      into: LP-03
+      why_now:
+      - EV-04
+  representation:
+    content_classes:
+    - SEXUAL
+    themes:
+    - consensual_intimacy
+    narrative_function: A intimidade converte o desejo acumulado em vínculo e abre a pergunta sobre o que B ainda
+      não sabe.
+    intended:
+      execution: SENSITIVE
+      intensity: 6
+      graphic: false
+    realized:
+      execution: SENSITIVE
+      intensity: 6
+      graphic: false
+      constraint_source: NONE
+      literary_strategy: []
+      rated_by:
+        writer: 6
+        independent: 6
+    status: FULLY_REPRESENTED
+- id: EV-S1
+  status: REALIZED
+  chapter: 5
+  structural: false
+  kind:
+  - SELF_HARM_EPISODE
+  actor: CHR-B
+  participants:
+  - CHR-B
+  facts:
+  - B se fere; o episódio ocorre fora da página e só é conhecido depois.
+  caused_by:
+  - GT-B-02
+  evidence_to_reader:
+  - O leitor sabe pelas marcas e pelo silêncio de B, nunca pelo ato.
+  representation:
+    content_classes:
+    - SELF_HARM
+    themes:
+    - shame
+    narrative_function: Mostra o custo do que B esconde e reforça a assimetria com A.
+    intended:
+      execution: REFERENCE_ONLY
+      intensity: 3
+      graphic: false
+    realized:
+      execution: REFERENCE_ONLY
+      intensity: 3
+      graphic: false
+      constraint_source: NONE
+      literary_strategy:
+      - AFTERMATH
+      rated_by:
+        writer: 3
+        independent: 3
+    status: FULLY_REPRESENTED
+- id: EV-06
+  status: REALIZED
+  chapter: 6
+  structural: true
+  kind:
+  - REVELATION
+  actor: CHR-A
+  participants:
+  - CHR-A
+  - CHR-B
+  facts:
+  - A conta a B o motivo pelo qual vigiava a rua — anos antes, alguém próximo dele foi ferido por inimigos dele
+    depois de ser visto ao seu lado, e desde então ele evita se envolver publicamente com qualquer pessoa.
+  caused_by:
+  - EV-03
+  - EV-05
+  relationship_delta:
+  - pair: CHR-B->CHR-A
+    dimension: trust
+    from: BROKEN
+    to: REBUILDING
+  knowledge_delta:
+  - knower: READER
+    learns:
+    - GT-A-02
+  - knower: CHR-B
+    learns:
+    - GT-A-02
+  evidence_to_reader:
+  - A explica, sem embelezamento, por que mentiu e por que se afasta das pessoas.
+  beliefs:
+    revises:
+    - RB-01
+    - RB-02
+- id: EV-H1
+  status: REALIZED
+  chapter: 6
+  structural: false
+  kind:
+  - HISTORICAL_ABUSE
+  actor: CHR-C
+  participants:
+  - CHR-C
+  - CHR-B
+  facts:
+  - Na infância de B, C cometeu abuso contra ela; o fato vem à tona por testemunho.
+  caused_by:
+  - GT-B-02
+  evidence_to_reader:
+  - O leitor recebe o fato pelo testemunho e pelas consequências, sem cena.
+  representation:
+    content_classes:
+    - SEXUAL_VIOLENCE
+    themes:
+    - childhood_trauma
+    narrative_function: Explica a vulnerabilidade de B e recontextualiza o que ela esconde de A.
+    intended:
+      execution: REFERENCE_ONLY
+      intensity: 2
+      graphic: false
+    realized:
+      execution: REFERENCE_ONLY
+      intensity: 2
+      graphic: false
+      constraint_source: NONE
+      literary_strategy:
+      - TESTIMONY
+      - AFTERMATH
+      rated_by:
+        writer: 2
+        independent: 2
+    status: FULLY_REPRESENTED
+    age_at_event:
+      CHR-B: 9
+      CHR-C: 36

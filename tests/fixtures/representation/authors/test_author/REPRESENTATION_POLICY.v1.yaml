@@ -1,0 +1,20 @@
+# Política de teste (NÃO é a política de nenhuma autora real).
+apiVersion: pedroarte.livingbooks/v1
+kind: RepresentationPolicy
+metadata: {author_id: test_author, version: 1, status: APPROVED, approved_by_file: null}
+permissions:
+  SEXUAL:                  {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  SEXUAL_VIOLENCE:         {depiction_ceiling: CAN_BE_DEPICTED, central_theme: true}
+  VIOLENCE:                {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  SELF_HARM:               {depiction_ceiling: CAN_BE_DEPICTED, central_theme: true}
+  ABUSE_CONTROL:           {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  SUBSTANCE:               {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: false}
+  TABOO:                   {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  PSYCHOLOGICAL_EXTREMITY: {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+  DEATH_GRIEF:             {depiction_ceiling: CAN_BE_GRAPHICALLY_DEPICTED, central_theme: true}
+additional_hard_boundaries: []
+always_review: [SEXUAL_VIOLENCE, SELF_HARM]
+on_constrained_representation: RECORD_GAP
+thresholds: {gap_threshold: 2, review_threshold: 4}
+reader_warnings: {granularity: BOOK, spoilers: false}
+lexicons: {youth_coding: []}

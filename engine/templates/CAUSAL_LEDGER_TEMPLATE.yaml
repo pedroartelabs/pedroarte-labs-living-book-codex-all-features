@@ -192,6 +192,26 @@ events:
       perceived:
         CHR-A: Como A vive este momento por dentro.
         CHR-B: Como B vive este momento por dentro.
+    # OPCIONAL (capability REPRESENTATION_INTEGRITY; features.representation_integrity).
+    # Metadado de RENDERIZAÇÃO, não canon: nunca é `caused_by`, nunca entra em
+    # projeção, e check_causal_ledger.py não o lê. Só existe em evento que tem
+    # uma família de conteúdo; eventos neutros não têm este bloco.
+    # THEME != CANONICAL EVENT != SCENE REPRESENTATION != GENERATION CAPABILITY.
+    # Contrato: templates/REPRESENTATION_POLICY_TEMPLATE.yaml + check_representation.py.
+    representation:
+      # SEXUAL | SEXUAL_VIOLENCE | VIOLENCE | SELF_HARM | ABUSE_CONTROL |
+      # SUBSTANCE | TABOO | PSYCHOLOGICAL_EXTREMITY | DEATH_GRIEF
+      content_classes: [SEXUAL]
+      themes: [consensual_intimacy]      # vocabulário aberto da obra; nunca gatilho de regra
+      narrative_function: A intimidade converte o desejo acumulado em vínculo (função, nunca conteúdo).
+      intended:                          # escrito no PLANO (T018)
+        execution: SENSITIVE             # NORMAL | SENSITIVE | FADE_TO_BLACK | REFERENCE_ONLY
+        intensity: 6                     # 0-10, editorial e RELATIVA à obra (não é medição)
+        graphic: false
+      # `realized`, `status` e `gap` só existem depois que o evento é REALIZED
+      # (T2NN_CANON_UPDATE). status: FULLY_REPRESENTED | CONSTRAINED | AUTHOR_REVIEW.
+      # FORBIDDEN nunca é gravado: é a projeção de um hard boundary.
+      # Opcional: age_at_event: {CHR-X: 9}   # idade no momento de um flashback
     loops:
       opens: [LP-02]
       resolves:
