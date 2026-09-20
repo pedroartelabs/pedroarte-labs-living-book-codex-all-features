@@ -1,0 +1,234 @@
+# INTERPRETIVE_CANON — template do contrato v0.1
+#
+# Arquivo de canon:  runtime/<slug>/canon/INTERPRETIVE_CANON.yaml
+# Dono exclusivo:    CANON_GUARDIAN (lock CANON_WRITE). Os demais agentes
+#                    propõem em canon/CANON_PROPOSALS; nada proposto é canon
+#                    antes de aprovado.
+# Validador:         scripts/check_interpretive_canon.py
+# Desenho:           docs/sdd/LIVING_THEORY_ENGINE_SDD_v0.1.md (seções 8–17, 23, 26, 31)
+#
+# Princípios
+# - Guarda PERGUNTAS, LEITURAS e EVIDÊNCIAS, nunca respostas. Pergunta `NEVER`
+#   não tem resposta em nenhum arquivo (NO_HIDDEN_ANSWER): chaves como truth,
+#   answer, correct, author_answer, resposta ou verdade são reprovadas.
+# - Teoria cita canon; nunca o cria. Uma interpretação nunca é `caused_by` no
+#   ledger nem aparece como fato no registry; evidência que presume fato novo é
+#   proposta, não canon (CI-01..03).
+# - "O motor sabe que não sabe" mora no registry: toda pergunta `NEVER`
+#   aponta uma incógnita `MUST_REMAIN_UNKNOWN` e as inferências proibidas que
+#   delimitam a ambiguidade.
+# - Poucas sementes profundas; perguntas derivadas são `partitions`.
+# - Dupla evidência é PROJETADA pelo validador (S em duas leituras da mesma
+#   pergunta), nunca declarada; quem a declara escreve as `readings`.
+# - `observable` é percepção (gesto, objeto, tempo, ausência), nunca verdade.
+#
+# Blocos validados até o Slice 2: policy, narrators, questions, partitions,
+# relations, evidence. mutations/false_resolutions/destabilizers (Slice 4) são
+# reservados: aceitos no arquivo, ainda sem regras.
+#
+# YAML 1.1: escreva "-" (neutro) e nomes de face "YES"/"NO" SEMPRE entre aspas.
+#
+# Este template é validado pela suíte de testes: um campo que mudar aqui
+# precisa mudar no validador, e vice-versa.
+
+apiVersion: pedroarte.livingbooks/v1
+kind: InterpretiveCanon
+metadata:
+  project_id: slug-do-livro
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  refs: {canon_registry: /canon/CANON_REGISTRY.yaml, causal_ledger: null, visual_canon: null}
+
+policy:
+  no_hidden_answer: true          # obrigatório (AD-01)
+  # Sobrescreve padrões do validador; BOOK_SPEC.features.living_theory.thresholds vence.
+  # Este template usa limiares mínimos só para caber num exemplo curto — um livro
+  # real deixa o bloco vazio e herda os padrões (min_support 3, min_double_evidence 3,
+  # max_red_herring_share 0.15).
+  thresholds: {min_support: 1, min_double_evidence: 1, max_red_herring_share: 0.2}
+
+narrators:
+  # Não confiabilidade tem escopo e deixa pista (EL-08, anti-pattern 34).
+  - id: NRL-01
+    voice: CHR-A                  # NARRATOR ou CHR-*
+    scope: "TURN:2"               # TURN:/SCENE:/LEDGER:EV-* (um ou lista)
+    unreliability: Memória seletiva sobre o que fez naquela noite.
+    tells: [EVD-03]               # evidências que permitem desconfiar da voz
+
+questions:
+  # Semente binária de meia-vida alta: continua discutível com todos os fatos conhecidos.
+  - id: Q-01
+    question: Pergunta interpretativa neutra, sem sugerir resposta.
+    axis: RELATIONAL              # FACTUAL | TEXTUAL | EPISTEMIC | PSYCHOLOGICAL | MORAL | ONTOLOGICAL | RELATIONAL
+    half_life: HIGH               # LOW | MEDIUM | HIGH
+    half_life_rationale: Continua discutível mesmo com todos os eventos conhecidos.
+    resolution_policy: NEVER      # NEVER | LATE_PARTIAL | RESOLVED_AT (SEQUEL é reprovado — AD-06)
+    resolved_at: null             # só RESOLVED_AT: "LEDGER:EV-*"
+    unknown_ref: "CANON:UNK-001"  # obrigatório em NEVER; status MUST_REMAIN_UNKNOWN no registry
+    prohibited_refs: ["CANON:PRO-001"]
+    rule_ref: null                # "RULE:<id>" — exceção declarada para FACTUAL + NEVER (HL-03)
+    shape: BINARY                 # BINARY (2 interpretações) | PLURAL (3+)
+    min_viable_at_end: 2          # 2..nº de interpretações; padrão BINARY=2, PLURAL=3
+    ledger_beliefs: [RB-01]       # NEVER exige crença INCOMPLETE + left_open, nunca revisada (AD-03)
+    ledger_ground_truths: [GT-A-01]  # NEVER exige reader_access NEVER e kind CONTRADICTION (AD-04)
+    interpretations:
+      - {id: Q-01/A, thesis: Tese A.}
+      - {id: Q-01/B, thesis: Tese B.}
+
+  # Semente plural: dela saem perguntas binárias derivadas por partição.
+  - id: Q-02
+    question: Pergunta sobre a natureza de um fenômeno da obra.
+    axis: ONTOLOGICAL
+    half_life: HIGH
+    half_life_rationale: Nenhum fato do livro decide entre as leituras.
+    resolution_policy: NEVER
+    resolved_at: null
+    unknown_ref: "CANON:UNK-002"
+    prohibited_refs: ["CANON:PRO-002"]
+    rule_ref: null
+    shape: PLURAL
+    min_viable_at_end: 2
+    ledger_beliefs: []
+    ledger_ground_truths: []
+    interpretations:
+      - {id: Q-02/A, thesis: Leitura A.}
+      - {id: Q-02/B, thesis: Leitura B.}
+      - {id: Q-02/C, thesis: Leitura C.}
+
+  # Mistério com resposta: a revelação é justa quando o ledger a ancora (INV-11).
+  - id: Q-03
+    question: Pergunta factual que a obra responde.
+    axis: FACTUAL
+    half_life: LOW
+    half_life_rationale: null
+    resolution_policy: RESOLVED_AT
+    resolved_at: "LEDGER:EV-05"
+    unknown_ref: null
+    prohibited_refs: []
+    rule_ref: null
+    shape: BINARY
+    min_viable_at_end: null
+    ledger_beliefs: []
+    ledger_ground_truths: []
+    interpretations:
+      - {id: Q-03/A, thesis: Hipótese A.}
+      - {id: Q-03/B, thesis: Hipótese B.}
+
+partitions:
+  # Pergunta binária derivada de uma semente plural. Uma interpretação pode
+  # ficar fora das faces: a disputa sobre como classificá-la é teoria derivada.
+  - id: Q-02~NATURAL
+    of: Q-02
+    question: Pergunta binária derivada da semente plural.
+    sides: {"YES": [Q-02/A], "NO": [Q-02/B, Q-02/C]}
+
+relations:
+  # Arestas entre interpretações de perguntas distintas.
+  # kind: IMPLIES | TENSIONS | EXCLUDES | AMPLIFIES
+  - {from: Q-03/A, to: Q-01/B, kind: TENSIONS, synthesis: null}
+
+evidence:
+  # support: S sustenta · C complica sem excluir · X exclui (em NEVER exige approval) · "-" neutro.
+  # Tocar uma pergunta obriga a declarar TODAS as suas interpretações (EL-02).
+  - id: EVD-01
+    status: PLANNED               # PLANNED | REALIZED (exige text_anchor) | RETIRED
+    anchor: "TURN:1"              # localiza um capítulo: LEDGER:EV-* | SCENE: | TURN:
+    text_anchor: null             # REALIZED: 'TEXT:<capítulo>:"trecho literal"' (conferido no Slice 4)
+    channel: BEHAVIOR             # DIALOGUE | BEHAVIOR | ABSENCE | TIMING | MEMORY | VERSION_DELTA | ENVIRONMENT |
+                                  # OBJECT | DOCUMENT | PERCEPTION_CONFLICT | PARATEXT | ILLUSTRATION | PHYSICAL_BOOK
+    source: NARRATOR              # NARRATOR | DOCUMENT | ILLUSTRATION | OBJECT | CHR-*
+    observable: Um gesto que a cena mostra sem explicar.
+    salience: SUPPORTING          # TEXTURE | SUPPORTING | NOTICEABLE (teto de saliência, 16.3)
+    discoverable_on: FIRST_READ   # FIRST_READ | REREAD
+    role: CLUE                    # CLUE | RED_HERRING
+    support: {Q-01/A: S, Q-01/B: S}
+    readings:                     # obrigatório para cada S de uma dupla evidência (DE-01..04)
+      Q-01/A: {reading: Como o grupo A usa o gesto., strength: MEDIUM, corroborated_by: [EVD-02]}
+      Q-01/B: {reading: Como o grupo B usa o gesto., strength: MEDIUM, corroborated_by: [EVD-03]}
+    approval: null
+    language_dependent: false     # true = a dupla leitura depende do idioma (tradução precisa preservar)
+    ledger_event: null            # EV-* do ledger quando o gesto é estrutural
+    fair_herring: null
+
+  - id: EVD-02
+    status: PLANNED
+    anchor: "LEDGER:EV-02"
+    text_anchor: null
+    channel: DIALOGUE
+    source: NARRATOR
+    observable: Uma frase dita que pode ser lida de dois modos.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-01/A: S, Q-01/B: C, Q-02/A: S, Q-02/B: S, Q-02/C: C}
+    readings:
+      Q-02/A: {reading: A frase confirma a leitura A do fenômeno., strength: MEDIUM, corroborated_by: [EVD-05]}
+      Q-02/B: {reading: A frase confirma a leitura B do fenômeno., strength: MEDIUM, corroborated_by: [EVD-03]}
+    approval: null
+    language_dependent: false
+    ledger_event: EV-02
+    fair_herring: null
+
+  - id: EVD-03
+    status: PLANNED
+    anchor: "SCENE:CENA-01"
+    text_anchor: null
+    channel: MEMORY
+    source: NARRATOR
+    observable: Duas lembranças do mesmo momento que não concordam.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-01/A: C, Q-01/B: S, Q-02/A: C, Q-02/B: S, Q-02/C: S}
+    readings:
+      Q-02/B: {reading: A lembrança errada é sintoma da leitura B., strength: MEDIUM, corroborated_by: [EVD-02]}
+      Q-02/C: {reading: A lembrança errada é sintoma da leitura C., strength: MEDIUM, corroborated_by: [EVD-04]}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  # Red herring justo: causa no mundo, sobrevive à revelação, contraevidência antes (17).
+  - id: EVD-04
+    status: PLANNED
+    anchor: "TURN:3"
+    text_anchor: null
+    channel: OBJECT
+    source: DOCUMENT
+    observable: Um documento que aponta para a hipótese errada.
+    salience: SUPPORTING
+    discoverable_on: FIRST_READ
+    role: RED_HERRING
+    support: {Q-03/A: S, Q-03/B: C, Q-02/A: "-", Q-02/B: C, Q-02/C: S}
+    readings: {}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring:
+      points_toward: Q-03/A
+      in_world_cause: "LEDGER:GT-A-01"   # por que o documento existe, independentemente do leitor
+      survives_reveal: "LEDGER:EV-05"    # a revelação vem depois e o documento continua verdadeiro
+      counter_available_before: [EVD-05] # contraevidência (C) justa antes da revelação
+      after_function: CHARACTERIZES      # CHARACTERIZES | MUTATES | THEMATIC
+
+  # Testemunho: a voz está declarada em narrators[].
+  - id: EVD-05
+    status: PLANNED
+    anchor: "TURN:2"
+    text_anchor: null
+    channel: DIALOGUE
+    source: CHR-A
+    observable: Um personagem afirma o que viu, e o detalhe não bate com a cena anterior.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-03/A: C, Q-03/B: S, Q-02/A: S, Q-02/B: "-", Q-02/C: "-"}
+    readings: {}
+    approval: null
+    language_dependent: true
+    ledger_event: null
+    fair_herring: null
+
+mutation_log:
+  - {version: 0.1.0, task: T018_CANON_REGISTRY, owner: CANON_GUARDIAN,
+     action: "Consolidação inicial a partir das propostas aprovadas em CANON_PROPOSALS."}

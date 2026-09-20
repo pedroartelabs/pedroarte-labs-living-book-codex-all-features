@@ -1,0 +1,160 @@
+# Ledger causal mínimo da fixture "O Sino de Vale Alto" (Slice 1 do
+# LIVING_THEORY_ENGINE). Precisa continuar sem achados HIGH/BLOCKER de
+# check_causal_ledger.py: a fixture prova que o canon interpretativo convive
+# com o ledger real, não com uma versão simplificada dele.
+#
+# - GT-IRENE-01 é a "verdade que preserva ambiguidade" (SDD 23.3): CONTRADICTION,
+#   reader_access NEVER, sem enunciar nenhuma das teses de Q-GUILT.
+# - RB-BELL e RB-GUILT ficam abertas até o fim (AD-03).
+# - RB-LOCK é a crença revisada de verdade: Q-LOCK é RESOLVED_AT em EV-04, e a
+#   GT revelada já estava na ancestralidade de EV-02 (INV-11).
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata:
+  project_id: living-theory-mvp
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+
+characters:
+  - id: CHR-IRENE
+    major: true
+    age: 58
+    age_source: fixture#chr-irene
+    ground_truth:
+      - id: GT-IRENE-01
+        kind: CONTRADICTION
+        statement: Na noite do incêndio, o desejo de livrar-se do padre e o impulso de salvá-lo foram o mesmo gesto em Irene.
+        reader_access: NEVER
+    self_model:
+      - id: SM-IRENE-01
+        statement: Irene se vê como a única que sempre cuidou da capela e do padre.
+        diverges_from: [GT-IRENE-01]
+    social_persona:
+      - id: SP-IRENE-01
+        statement: Sacristã devota, calada e incansável.
+        conceals: [GT-IRENE-01]
+
+  - id: CHR-TOMAS
+    major: true
+    age: 34
+    age_source: fixture#chr-tomas
+    ground_truth:
+      - id: GT-TOMAS-01
+        kind: MOTIVE
+        statement: Tomás precisa vender a torre da capela para pagar as dívidas da serraria.
+        reader_access: {from_event: EV-04}
+    self_model:
+      - id: SM-TOMAS-01
+        statement: Tomás acredita que só está protegendo Irene de uma vila que a culpa.
+        diverges_from: [GT-TOMAS-01]
+    social_persona:
+      - id: SP-TOMAS-01
+        statement: Filho adotivo prestativo, sempre por perto quando algo quebra.
+        conceals: [GT-TOMAS-01]
+
+relationships:
+  - pair: CHR-IRENE->CHR-TOMAS
+    baseline: {trust: HIGH}
+  - pair: CHR-TOMAS->CHR-IRENE
+    baseline: {trust: WARY}
+
+loops: []
+
+beliefs:
+  - id: RB-BELL
+    about: [EV-01]
+    interpretation: Alguém ou algo tocou o sino com a torre trancada.
+    confidence: MEDIUM
+    expectation: O leitor espera descobrir quem tinha acesso à torre.
+    truth: "INCOMPLETE"
+    disclosed_by_revision: []
+    left_open: true
+  - id: RB-LOCK
+    about: [EV-02]
+    interpretation: O prefeito trocou a fechadura da torre.
+    confidence: MEDIUM
+    expectation: O leitor desconfia do prefeito.
+    truth: "FALSE"
+    disclosed_by_revision: [GT-TOMAS-01]
+    left_open: false
+  - id: RB-GUILT
+    about: [EV-03]
+    interpretation: Irene sabe mais sobre o incêndio do que admite.
+    confidence: MEDIUM
+    expectation: O leitor espera uma confissão.
+    truth: "INCOMPLETE"
+    disclosed_by_revision: []
+    left_open: true
+
+events:
+  - id: EV-01
+    status: PLANNED
+    chapter: 1
+    structural: true
+    kind: [DISCOVERY]
+    actor: CHR-IRENE
+    participants: [CHR-IRENE]
+    facts:
+      - Irene acorda com o sino tocando e encontra a porta da torre trancada.
+    caused_by: [GT-IRENE-01]
+    evidence_to_reader:
+      - Irene de camisola na escada, a chave da torre ainda no bolso do avental.
+    beliefs:
+      establishes: [RB-BELL]
+
+  - id: EV-02
+    status: PLANNED
+    chapter: 2
+    structural: true
+    kind: [DECEPTION]
+    actor: CHR-TOMAS
+    participants: [CHR-TOMAS, CHR-IRENE]
+    facts:
+      - Tomás mostra a Irene a fechadura nova e diz que foi ordem do prefeito.
+    caused_by: [GT-TOMAS-01]
+    relationship_delta:
+      - {pair: CHR-IRENE->CHR-TOMAS, dimension: trust, from: HIGH, to: UNEASY}
+    evidence_to_reader:
+      - Tomás evita dizer quando o prefeito teria dado a ordem.
+    beliefs:
+      establishes: [RB-LOCK]
+
+  - id: EV-03
+    status: PLANNED
+    chapter: 3
+    structural: true
+    kind: [CONFRONTATION]
+    actor: CHR-IRENE
+    participants: [CHR-IRENE, CHR-TOMAS]
+    facts:
+      - Irene pergunta a Tomás onde ele estava na noite do incêndio.
+    caused_by: [GT-IRENE-01, EV-02]
+    relationship_delta:
+      - {pair: CHR-TOMAS->CHR-IRENE, dimension: trust, from: WARY, to: DEFENSIVE}
+    evidence_to_reader:
+      - Irene responde à própria pergunta antes que Tomás fale.
+    beliefs:
+      establishes: [RB-GUILT]
+
+  - id: EV-04
+    status: PLANNED
+    chapter: 5
+    structural: true
+    kind: [REVELATION]
+    actor: CHR-TOMAS
+    participants: [CHR-TOMAS, CHR-IRENE]
+    facts:
+      - Tomás admite que trocou a fechadura da torre para vender a capela.
+    caused_by: [GT-TOMAS-01, EV-03]
+    relationship_delta:
+      - {pair: CHR-IRENE->CHR-TOMAS, dimension: trust, from: UNEASY, to: BROKEN}
+    knowledge_delta:
+      - {knower: READER, learns: [GT-TOMAS-01]}
+      - {knower: CHR-IRENE, learns: [GT-TOMAS-01]}
+    evidence_to_reader:
+      - O recibo da venda está dobrado dentro do missal.
+    beliefs:
+      revises: [RB-LOCK]
+
+mutation_log:
+  - {version: 0.1.0, task: T018_CANON_REGISTRY, owner: CANON_GUARDIAN, action: "Fixture do Slice 1."}

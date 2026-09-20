@@ -512,8 +512,11 @@ partitions:
   - id: Q-02~SUPERNATURAL
     of: Q-02
     question: "Existe algo sobrenatural?"
-    sides: {YES: [Q-02/SUPER, Q-02/GAZE], NO: [Q-02/PROJ, Q-02/SELF, Q-02/OTHER]}
+    sides: {"YES": [Q-02/SUPER, Q-02/GAZE], "NO": [Q-02/PROJ, Q-02/SELF, Q-02/OTHER]}
 ```
+
+Nomes de face ficam **sempre entre aspas**: YAML 1.1 lê `YES`/`NO` sem aspas
+como booleano (achado do Slice 1; o validador reprova com `PARTITION_INVALID`).
 
 Uma interpretação pode ficar **fora** das duas faces (`unassigned`) — é aí
 que leitores brigam por classificação, o que é teoria derivada legítima
@@ -1519,10 +1522,15 @@ O template é validado pela suíte (mesma disciplina de
 ```text
 check_interpretive_canon.py --runtime . --mode plan|realized|final|assets|paratext
     [--through-chapter N] [--baseline <snapshot>] [--forum <FORUM_SYNTHESIS.yaml>]
-    [--json] [--snapshot-as PLAN|WAVE_NN]
-Consultas: --graph | --ledger Q-* | --double Q-* | --heatmap | --leader Q-* --at-chapter N
+    [--json] [--out relatorio.md] [--snapshot-as PLAN|WAVE_NN]
+Fontes avulsas (sem runtime): --canon | --registry | --causal-ledger | --book-spec | --immutable-rules
+Consultas: --graph | --ledger Q-* | --double [Q-*] | --heatmap | --leader Q-* --at-chapter N
            --gaps | --mutations | --collisions | --exposure | --metrics | --end-state
 ```
+
+`--causal-ledger` é o **arquivo** do ledger causal; `--ledger Q-*` é a
+**consulta** de evidências por interpretação. Os nomes se distinguem porque a
+consulta é o uso frequente (decisão do Slice 2).
 
 Saída: Markdown ou JSON no **formato** de `REVIEW_FINDING` (sem o limite de
 capítulo, R-05); exit 1 com HIGH/BLOCKER (convenção de todos os validadores).
@@ -1942,22 +1950,45 @@ E1 = S1–S4 · E2 = S5, S6, S8 · E3 = S7, S9, S10
 ### SLICE 1 — Minimal Theory Model
 
 - **Objetivo:** contrato mínimo e integridade: perguntas, interpretações, partições, `NO_HIDDEN_ANSWER`, fronteira de canon.
-- **Arquivos:** `engine/templates/INTERPRETIVE_CANON_TEMPLATE.yaml` (novo); `engine/scripts/check_interpretive_canon.py` (novo, `--mode plan`, `--ledger`/`--runtime`); `tests/test_interpretive_canon.py`; `tests/fixtures/books/living_theory_mvp/` e `tests/fixtures/living_theory/runtime/`.
-- **Contratos:** 31.1 (sem `mutations`, `destabilizers`); regras `AD-01..04`, `CI-01..05`, `TG-01/02/05`, limites de 10.4, `HL-01..03`.
-- **Testes:** UNIT + CANON (35.3); template ↔ validador.
+- **Arquivos:** `engine/templates/INTERPRETIVE_CANON_TEMPLATE.yaml` (novo); `engine/scripts/check_interpretive_canon.py` (novo, `--mode plan`, `--runtime`/`--canon`); `tests/test_interpretive_canon.py`; `tests/fixtures/living_theory/runtime_sino_vale_alto/` (canon interpretativo, registry, ledger causal, recorte de `BOOK_SPEC`, `immutable_rules`).
+- **Contratos:** 31.1 (sem `evidence`, `narrators`, `mutations`, `false_resolutions`, `destabilizers` — reservados); regras `AD-01..04`, `AD-06`, `CI-01`, `CI-02`, `CI-04`, `CI-05`, `TG-01/02/05`, limites de 10.4, `DD-03`, `HL-01..03`.
+- **Testes:** UNIT + CANON (35.3); template ↔ validador; ledger da fixture validado pelo `check_causal_ledger.py` real; CLI (exit 0/1/2, `--json`).
 - **Riscos:** sobredesenho do schema antes de dados reais → só campos usados por alguma regra.
 - **Dependências:** S0.
 - **DoD:** fixture passa; cada mutação dá categoria exata; nenhum arquivo existente do motor alterado.
+- **Status:** **concluído em 2026-09-15.**
+- **Decisões de implementação:**
+  - Campos novos na pergunta, necessários para verificar a fronteira já neste slice: `ledger_beliefs` (AD-03), `ledger_ground_truths` (AD-04) e `rule_ref` (exceção de HL-03). Campo opcional `prohibited_inferences[].match` no registry (OQ-LTE-11) usado por CI-05.
+  - `CI-02 THEORY_PROMOTED_TO_FACT` vale **só para perguntas `NEVER`**: em `RESOLVED_AT`, a tese revelada vira fato por desenho.
+  - `TG-05` testa **toda** interpretação de pergunta `RESOLVED_AT`/`LATE_PARTIAL`, porque o canon nunca sabe qual será revelada.
+  - Contexto opcional: sem registry/ledger as regras dependentes não rodam e o relatório declara o que foi carregado; em `--runtime`, registry ausente é `CONTEXT_MISSING` e referência a ledger inexistente é `LEDGER_REFERENCE_WITHOUT_LEDGER`.
+  - Comparação tese × fato é lexical (fração de palavras de conteúdo, limiar 0.8, mínimo de 3 palavras); paráfrase segue com `CANON_GUARDIAN`.
+  - Adiado: `CI-03` (âncora de evidência) → Slice 2; pacote de livro completo da fixture → Slice 5.
+- **Achados do slice:**
+  - YAML 1.1 lê `YES`/`NO` sem aspas como booleano: faces de partição viravam `True`/`False` sem aviso. Template e fixture corrigidos; validador reprova com `PARTITION_INVALID` (10.3).
+  - `.gitignore` ignora qualquer diretório `runtime/`, inclusive dentro de `tests/fixtures/`: a fixture se chama `runtime_sino_vale_alto` (mesma convenção de `runtime_cisne_negro`).
 
 ### SLICE 2 — Evidence Ledger
 
 - **Objetivo:** linhas de evidência, suporte, balanço, dupla evidência projetada, red herrings, saliência.
-- **Arquivos:** `check_interpretive_canon.py` (importa `resolve_anchor` de `check_visual_canon.py`); template; testes.
-- **Contratos:** `EL-01..09`, `DE-01..06`, `RH-01..05, 07`, 16.3 estrutural; `--ledger`, `--double`, `--heatmap`.
-- **Testes:** EVIDENCE, BALANCE, RANDOMNESS (estrutural).
+- **Arquivos:** `check_interpretive_canon.py` (importa `resolve_anchor`, `load_bibles` e `find_canon_id` de `check_visual_canon.py`); template (blocos `evidence` e `narrators`); fixture (`chapter_architecture.yaml`, `protected_scenes.yaml`, 11 evidências, 1 narrador); testes.
+- **Contratos:** `EL-01..06`, `EL-08`, `EL-09`, `CI-03`, `TG-03`, `TG-04`, `DE-01..06`, `RH-01..05`, `RH-07`, 16.3 estrutural; `--ledger`, `--double`, `--heatmap`.
+- **Testes:** EVIDENCE, BALANCE, RANDOMNESS (estrutural), red herrings, narradores, sinal/ruído, consultas.
 - **Riscos:** acoplamento a módulo de 3,2 mil linhas com Pillow (R-12).
 - **Dependências:** S1.
-- **DoD:** consultas funcionam na fixture; `RH-06` fica para S4 (precisa ledger).
+- **DoD:** consultas funcionam na fixture; `EL-07` (imutabilidade contra snapshot) e `RH-06` (retenção por POV) ficam para S4.
+- **Status:** **concluído em 2026-09-15.**
+- **Decisões de implementação:**
+  - Âncora de evidência precisa **localizar capítulo**: só `LEDGER:EV-*`, `SCENE:` e `TURN:`. A citação literal vai em `text_anchor` (`TEXT:`), conferida contra o manuscrito só no Slice 4; `REALIZED` sem ela é `TEXT_ANCHOR_MISSING`.
+  - `CI-03` distingue causa: âncora `LEDGER:`/`CANON:` inexistente é `EVIDENCE_CREATES_FACT` (a linha presume um fato não registrado); as demais são `EVIDENCE_ANCHOR_UNRESOLVED`.
+  - `TG-03` e `TG-04` entraram aqui (dependem só de contagem), em vez do Slice 3.
+  - `EL-02` exige suporte para **todas** as interpretações de uma pergunta tocada — o neutro (`"-"`) também é decisão.
+  - `X` em pergunta `NEVER` exige `approval` registrado (`EXCLUSION_WITHOUT_APPROVAL`); a viabilidade final vira `QUESTION_COLLAPSED`.
+  - `EL-08` aceita duas saídas: voz declarada em `narrators[]` **ou** complicação (`C`) vinda de outra fonte.
+  - Campos novos: bloco `narrators[]`, `evidence[].approval` e `evidence[].language_dependent` (R-11); `role` aceita só `CLUE`/`RED_HERRING` — `DOUBLE_EVIDENCE`, `DESTABILIZER` e `TEXTURE` são projetados ou não entram no canon.
+  - CLI: a flag de arquivo `--ledger` do Slice 1 virou `--causal-ledger`, liberando `--ledger Q-*` para a consulta de 31.2.
+  - Evidência visual (`ILLUSTRATION`/`PHYSICAL_BOOK`) já é barrada sem as duas features ligadas (`VISUAL_EVIDENCE_DISABLED`); a âncora `VISUAL:` em si é do Slice 7.
+  - `answer_lexicon` por obra entra em `BOOK_SPEC.features.living_theory` e alimenta `EL-03`.
 
 ### SLICE 3 — Theory Graph
 
@@ -1982,7 +2013,7 @@ E1 = S1–S4 · E2 = S5, S6, S8 · E3 = S7, S9, S10
 ### SLICE 5 — Pipeline integration (OFF por padrão)
 
 - **Objetivo:** ligar a capability no compositor sem alterar nenhum livro existente.
-- **Arquivos:** `engine/scripts/livingbook.py` (flag, anotações, `T022T`, `T2NNT`, validadores em gates, cópia de scripts/runbook, `validate_book_data`); `engine/templates/INTERPRETIVE_CANON_RUNBOOK.md`; `engine/IMPLEMENT.md` (1 parágrafo); `engine/ENGINE_GRAPH.yaml` (`long_context_reading`); `EXECUTION_PROFILES.yaml` (`forum_panel_limit`); `tests/test_compose_regression.py`.
+- **Arquivos:** `engine/scripts/livingbook.py` (flag, anotações, `T022T`, `T2NNT`, validadores em gates, cópia de scripts/runbook, `validate_book_data`); `engine/templates/INTERPRETIVE_CANON_RUNBOOK.md`; `engine/IMPLEMENT.md` (1 parágrafo); `engine/ENGINE_GRAPH.yaml` (`long_context_reading`); `EXECUTION_PROFILES.yaml` (`forum_panel_limit`); `tests/test_compose_regression.py`; `tests/fixtures/books/living_theory_mvp/` (pacote de livro completo de "O Sino de Vale Alto", derivado do runtime fixture do Slice 1).
 - **Contratos:** 29, 30, `LT-INV-00..03`.
 - **Testes:** CONTRACT + REGRESSION (goldens byte a byte).
 - **Riscos:** alterar ordem de tarefas de livros existentes → tudo dentro de `if living_theory_enabled`, lido do spec original.

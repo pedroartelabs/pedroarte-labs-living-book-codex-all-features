@@ -1,0 +1,317 @@
+# Fixture do LIVING_THEORY_ENGINE — mistério rural, gênero diferente de romance
+# (docs/sdd/LIVING_THEORY_ENGINE_SDD_v0.1.md, 35.2).
+#
+# "O Sino de Vale Alto": na madrugada seguinte ao enterro do padre Anselmo,
+# morto no incêndio da casa paroquial, o sino da capela toca com a torre
+# trancada. Duas sementes NEVER (quem/o que tocou o sino; a culpa de Irene) e
+# uma pergunta factual com resposta (quem trocou a fechadura).
+#
+# Slice 2: onze evidências em quatro dos seis capítulos (1, 2, 3, 5), dentro de
+# todos os limites padrão — suporte >= 3 e ao menos uma complicação por leitura
+# aberta, razão <= 2, >= 3 duplas por pergunta NEVER, <= 2 duplas e <= 3
+# evidências por capítulo, 2/11 perceptíveis, 6/11 só de releitura, um red herring.
+#
+# tests/test_interpretive_canon.py muta CÓPIAS deste runtime em memória. Este
+# arquivo precisa continuar sem nenhum achado do validador.
+apiVersion: pedroarte.livingbooks/v1
+kind: InterpretiveCanon
+metadata:
+  project_id: living-theory-mvp
+  version: 0.2.0
+  owner: CANON_GUARDIAN
+  refs: {canon_registry: /canon/CANON_REGISTRY.yaml, causal_ledger: /canon/CAUSAL_LEDGER.yaml, visual_canon: null}
+
+policy:
+  no_hidden_answer: true
+  thresholds: {}
+
+narrators:
+  - id: NRL-01
+    voice: CHR-IRENE
+    scope: "TURN:3"
+    unreliability: A memória de Irene sobre a noite do incêndio se contradiz.
+    tells: [EVD-06]
+
+questions:
+  - id: Q-BELL
+    question: Quem ou o que tocou o sino na madrugada do enterro?
+    axis: ONTOLOGICAL
+    half_life: HIGH
+    half_life_rationale: Mesmo sabendo quem tinha a chave, o toque continua compatível com memória falha, acaso e presença.
+    resolution_policy: NEVER
+    resolved_at: null
+    unknown_ref: "CANON:UNK-001"
+    prohibited_refs: ["CANON:PRO-001", "CANON:PRO-003"]
+    rule_ref: null
+    shape: PLURAL
+    min_viable_at_end: 2
+    ledger_beliefs: [RB-BELL]
+    ledger_ground_truths: []
+    interpretations:
+      - {id: Q-BELL/IRENE, thesis: Irene tocou o sino sem lembrar de ter subido à torre.}
+      - {id: Q-BELL/WIND, thesis: O vento e as vigas apodrecidas fizeram o sino soar sozinho.}
+      - {id: Q-BELL/DEAD, thesis: O padre Anselmo voltou depois de morto para chamar a vila.}
+
+  - id: Q-GUILT
+    question: Irene é culpada pela morte do padre?
+    axis: MORAL
+    half_life: HIGH
+    half_life_rationale: Os gestos de Irene na noite do incêndio sustentam cuidado e abandono ao mesmo tempo.
+    resolution_policy: NEVER
+    resolved_at: null
+    unknown_ref: "CANON:UNK-002"
+    prohibited_refs: ["CANON:PRO-002"]
+    rule_ref: null
+    shape: BINARY
+    min_viable_at_end: 2
+    ledger_beliefs: [RB-GUILT]
+    ledger_ground_truths: [GT-IRENE-01]
+    interpretations:
+      - {id: Q-GUILT/GUILTY, thesis: Irene deixou a vela acesa sabendo que o padre dormia.}
+      - {id: Q-GUILT/INNOCENT, thesis: Irene tentou salvar o padre e carrega uma culpa que não lhe pertence.}
+
+  - id: Q-LOCK
+    question: Quem trocou a fechadura da torre?
+    axis: FACTUAL
+    half_life: LOW
+    half_life_rationale: null
+    resolution_policy: RESOLVED_AT
+    resolved_at: "LEDGER:EV-04"
+    unknown_ref: null
+    prohibited_refs: []
+    rule_ref: null
+    shape: BINARY
+    min_viable_at_end: null
+    ledger_beliefs: []
+    ledger_ground_truths: []
+    interpretations:
+      - {id: Q-LOCK/TOMAS, thesis: Tomás trocou a fechadura da torre.}
+      - {id: Q-LOCK/MAYOR, thesis: O prefeito trocou a fechadura da torre.}
+
+partitions:
+  - id: Q-BELL~SUPERNATURAL
+    of: Q-BELL
+    question: Houve algo sobrenatural na capela?
+    sides: {"YES": [Q-BELL/DEAD], "NO": [Q-BELL/IRENE, Q-BELL/WIND]}
+
+relations:
+  # Se foi o prefeito, havia alguém vivo com a chave: a leitura do padre morto perde necessidade.
+  - {from: Q-LOCK/MAYOR, to: Q-BELL/DEAD, kind: EXCLUDES, synthesis: null}
+  - {from: Q-GUILT/GUILTY, to: Q-BELL/IRENE, kind: AMPLIFIES,
+     synthesis: "A culpa que Irene não admite é a mão que toca o sino."}
+  - {from: Q-LOCK/TOMAS, to: Q-BELL/WIND, kind: TENSIONS, synthesis: null}
+
+evidence:
+  # --- capítulo 1 -------------------------------------------------------------
+  - id: EVD-01
+    status: PLANNED
+    anchor: "LEDGER:EV-01"
+    text_anchor: null
+    channel: BEHAVIOR
+    source: NARRATOR
+    observable: Irene está de camisola na escada da torre com a chave no bolso do avental.
+    salience: NOTICEABLE
+    discoverable_on: FIRST_READ
+    role: CLUE
+    support: {Q-BELL/IRENE: S, Q-BELL/WIND: S, Q-BELL/DEAD: C, Q-GUILT/GUILTY: "-", Q-GUILT/INNOCENT: C}
+    readings:
+      Q-BELL/IRENE: {reading: "A chave no bolso: ela subiu e desceu sem lembrar.", strength: MEDIUM, corroborated_by: [EVD-05]}
+      Q-BELL/WIND: {reading: "A porta seguia trancada: ninguém subiu, o sino tocou sozinho.", strength: MEDIUM, corroborated_by: [EVD-02]}
+    approval: null
+    language_dependent: false
+    ledger_event: EV-01
+    fair_herring: null
+
+  - id: EVD-02
+    status: PLANNED
+    anchor: "TURN:1"
+    text_anchor: null
+    channel: ENVIRONMENT
+    source: NARRATOR
+    observable: Uma viga do campanário range com o vento na madrugada.
+    salience: SUPPORTING
+    discoverable_on: FIRST_READ
+    role: CLUE
+    support: {Q-BELL/IRENE: C, Q-BELL/WIND: S, Q-BELL/DEAD: C}
+    readings: {}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  - id: EVD-11
+    status: PLANNED
+    anchor: "TURN:1"
+    text_anchor: null
+    channel: ENVIRONMENT
+    source: NARRATOR
+    observable: Os pombos deixam o campanário uma hora antes do toque.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-BELL/IRENE: C, Q-BELL/WIND: S, Q-BELL/DEAD: S}
+    readings:
+      Q-BELL/WIND: {reading: Os pombos sentem a tempestade antes de todos., strength: MEDIUM, corroborated_by: [EVD-02]}
+      Q-BELL/DEAD: {reading: Os pombos fogem de quem sobe a escada., strength: MEDIUM, corroborated_by: [EVD-10]}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  # --- capítulo 2 -------------------------------------------------------------
+  - id: EVD-03
+    status: PLANNED
+    anchor: "LEDGER:EV-02"
+    text_anchor: null
+    channel: DIALOGUE
+    source: CHR-TOMAS
+    observable: Tomás diz que a fechadura nova foi ordem do prefeito.
+    salience: SUPPORTING
+    discoverable_on: FIRST_READ
+    role: RED_HERRING
+    support: {Q-LOCK/TOMAS: C, Q-LOCK/MAYOR: S}
+    readings: {}
+    approval: null
+    language_dependent: false
+    ledger_event: EV-02
+    fair_herring:
+      points_toward: Q-LOCK/MAYOR
+      in_world_cause: "LEDGER:GT-TOMAS-01"
+      survives_reveal: "LEDGER:EV-04"
+      counter_available_before: [EVD-04]
+      after_function: CHARACTERIZES
+
+  - id: EVD-04
+    status: PLANNED
+    anchor: "TURN:2"
+    text_anchor: null
+    channel: TIMING
+    source: NARRATOR
+    observable: Tomás não sabe dizer em que dia o prefeito teria dado a ordem.
+    salience: SUPPORTING
+    discoverable_on: FIRST_READ
+    role: CLUE
+    support: {Q-LOCK/TOMAS: S, Q-LOCK/MAYOR: C}
+    readings: {}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  - id: EVD-07
+    status: PLANNED
+    anchor: "TURN:2"
+    text_anchor: null
+    channel: OBJECT
+    source: NARRATOR
+    observable: O castiçal da casa paroquial aparece limpo no armário da sacristia.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-GUILT/GUILTY: S, Q-GUILT/INNOCENT: S}
+    readings:
+      Q-GUILT/GUILTY: {reading: Limpou o castiçal para apagar a marca da vela., strength: MEDIUM, corroborated_by: [EVD-06]}
+      Q-GUILT/INNOCENT: {reading: Limpar as coisas do padre é o luto que Irene sabe fazer., strength: MEDIUM, corroborated_by: [EVD-09]}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  # --- capítulo 3 -------------------------------------------------------------
+  - id: EVD-05
+    status: PLANNED
+    anchor: "LEDGER:EV-03"
+    text_anchor: null
+    channel: DIALOGUE
+    source: CHR-IRENE
+    observable: Irene responde à própria pergunta sobre a noite do incêndio antes que Tomás fale.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-GUILT/GUILTY: S, Q-GUILT/INNOCENT: S, Q-BELL/IRENE: S, Q-BELL/WIND: "-", Q-BELL/DEAD: "-"}
+    readings:
+      Q-GUILT/GUILTY: {reading: Responde antes porque ensaiou a mentira., strength: STRONG, corroborated_by: [EVD-07]}
+      Q-GUILT/INNOCENT: {reading: Responde antes porque repete uma culpa que já assumiu., strength: STRONG, corroborated_by: [EVD-09]}
+    approval: null
+    language_dependent: false
+    ledger_event: EV-03
+    fair_herring: null
+
+  - id: EVD-06
+    status: PLANNED
+    anchor: "SCENE:VIGIL"
+    text_anchor: null
+    channel: MEMORY
+    source: NARRATOR
+    observable: Irene lembra de ter apagado a vela e em seguida lembra de tê-la visto acesa.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-GUILT/GUILTY: S, Q-GUILT/INNOCENT: S, Q-BELL/IRENE: S, Q-BELL/WIND: "-", Q-BELL/DEAD: "-"}
+    readings:
+      Q-GUILT/GUILTY: {reading: A segunda lembrança é a verdadeira., strength: MEDIUM, corroborated_by: [EVD-05]}
+      Q-GUILT/INNOCENT: {reading: A culpa inventou a segunda lembrança., strength: MEDIUM, corroborated_by: [EVD-10]}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  # --- capítulo 5 -------------------------------------------------------------
+  - id: EVD-08
+    status: PLANNED
+    anchor: "LEDGER:EV-04"
+    text_anchor: null
+    channel: DOCUMENT
+    source: DOCUMENT
+    observable: O recibo da venda da torre está dobrado dentro do missal do padre.
+    salience: NOTICEABLE
+    discoverable_on: FIRST_READ
+    role: CLUE
+    support: {Q-LOCK/TOMAS: S, Q-LOCK/MAYOR: C, Q-BELL/IRENE: S, Q-BELL/WIND: C, Q-BELL/DEAD: S}
+    readings:
+      Q-BELL/DEAD: {reading: O missal foi enterrado com o padre e voltou à capela., strength: MEDIUM, corroborated_by: [EVD-11]}
+      Q-BELL/IRENE: {reading: Irene guardou o recibo no missal para não esquecer., strength: MEDIUM, corroborated_by: [EVD-01]}
+    approval: null
+    language_dependent: false
+    ledger_event: EV-04
+    fair_herring: null
+
+  - id: EVD-09
+    status: PLANNED
+    anchor: "TURN:5"
+    text_anchor: null
+    channel: BEHAVIOR
+    source: NARRATOR
+    observable: Irene pede perdão ao túmulo antes de saber da venda.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-GUILT/GUILTY: C, Q-GUILT/INNOCENT: S, Q-BELL/IRENE: C, Q-BELL/WIND: "-", Q-BELL/DEAD: S}
+    readings: {}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+  - id: EVD-10
+    status: PLANNED
+    anchor: "TURN:5"
+    text_anchor: null
+    channel: ENVIRONMENT
+    source: NARRATOR
+    observable: O sino amanhece com o badalo amarrado por um cordão de rosário.
+    salience: SUPPORTING
+    discoverable_on: REREAD
+    role: CLUE
+    support: {Q-BELL/IRENE: S, Q-BELL/WIND: C, Q-BELL/DEAD: S, Q-GUILT/GUILTY: C, Q-GUILT/INNOCENT: S}
+    readings:
+      Q-BELL/IRENE: {reading: O rosário amarrado ao badalo é o de Irene., strength: MEDIUM, corroborated_by: [EVD-06]}
+      Q-BELL/DEAD: {reading: O rosário foi enterrado nas mãos do padre., strength: MEDIUM, corroborated_by: [EVD-09]}
+    approval: null
+    language_dependent: false
+    ledger_event: null
+    fair_herring: null
+
+mutation_log:
+  - {version: 0.1.0, task: T018_CANON_REGISTRY, owner: CANON_GUARDIAN, action: "Fixture do Slice 1."}
+  - {version: 0.2.0, task: T018_CANON_REGISTRY, owner: CANON_GUARDIAN, action: "Slice 2: narradores e evidências."}

@@ -1,0 +1,5 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ImmutableRules
+rules:
+  - {id: IR-01, category: ambiguity, blocking: true, rule: A autoria do toque do sino nunca é confirmada por narrador, personagem ou documento.}
+  - {id: IR-02, category: ambiguity, blocking: true, rule: O livro nunca declara se Irene quis a morte do padre.}

@@ -1,0 +1,40 @@
+# Registry mínimo da fixture "O Sino de Vale Alto" (Slice 1 do LIVING_THEORY_ENGINE).
+# Mesma forma livre dos registries reais: nós com id/status/fact, unknowns e
+# prohibited_inferences (precedente runtime/a_morte_ainda_nao_nasceu).
+apiVersion: pedroarte.livingbooks/v1
+kind: CanonRegistry
+metadata:
+  project_id: living-theory-mvp
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+
+places:
+  - id: ENV-001
+    status: CANON_APPROVED
+    fact: A torre da capela de Vale Alto tem uma única porta, trancada por fechadura de ferro.
+
+events:
+  - id: FACT-001
+    status: CANON_APPROVED
+    fact: A casa paroquial queimou na noite de São João, com o padre Anselmo dentro.
+  - id: FACT-002
+    status: CANON_APPROVED
+    fact: O sino tocou três vezes na madrugada seguinte ao enterro.
+
+unknowns:
+  - id: UNK-001
+    status: MUST_REMAIN_UNKNOWN
+    question: Quem ou o que tocou o sino na madrugada do enterro?
+  - id: UNK-002
+    status: MUST_REMAIN_UNKNOWN
+    question: Irene quis a morte do padre?
+
+prohibited_inferences:
+  - id: PRO-001
+    statement: Tomás armou um mecanismo escondido para tocar o sino e enganar a vila.
+    match: [mecanismo escondido, armou o sino]
+  - id: PRO-002
+    statement: O incêndio foi causado por um raio enviado como castigo divino.
+  - id: PRO-003
+    statement: Os acontecimentos do livro foram um sonho de Irene.
+    match: [era um sonho, foi um sonho]

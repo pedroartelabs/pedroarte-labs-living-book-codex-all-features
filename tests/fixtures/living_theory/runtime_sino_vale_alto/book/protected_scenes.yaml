@@ -1,0 +1,9 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: VIGIL
+    chapters: [3]
+    auditor: SUBTEXT_EDITOR
+    purpose: A vigília sustenta ao mesmo tempo a leitura de culpa e a de luto de Irene.
+    must_preserve: [as duas lembranças da vela sem hierarquia, o luto de Irene como emoção concreta]
+    reject_if: [narrador decide qual lembrança é verdadeira, Irene declara o próprio motivo]

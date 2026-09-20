@@ -1,0 +1,18 @@
+# Recorte do BOOK_SPEC da fixture "O Sino de Vale Alto" — só o que o validador
+# lê até o Slice 2. O pacote de livro completo (para compose) entra no Slice 5.
+apiVersion: pedroarte.livingbooks/v1
+kind: BookSpec
+metadata:
+  slug: living-theory-mvp
+  title: O Sino de Vale Alto
+  author: Fixture
+  language: pt-BR
+  chapter_count: 6
+spec:
+  features:
+    living_theory:
+      enabled: true
+      thresholds:
+        max_duality_seeds: 3
+      # Termos que, num observável, enunciariam uma resposta (EL-03).
+      answer_lexicon: [foi o vento, o fantasma do padre, irene matou o padre]

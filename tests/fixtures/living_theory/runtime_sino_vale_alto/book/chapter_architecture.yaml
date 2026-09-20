@@ -1,0 +1,30 @@
+# Arquitetura mínima da fixture "O Sino de Vale Alto" (Slice 2 do
+# LIVING_THEORY_ENGINE): o que as âncoras TURN: resolvem. Nenhuma função de
+# capítulo cita ids de teoria — capítulo existe pela história (DD-01).
+apiVersion: pedroarte.livingbooks/v1
+kind: ChapterArchitecture
+chapters:
+  - number: 1
+    title: O Toque
+    function: O sino acorda a vila na madrugada seguinte ao enterro do padre.
+    irreversible_turn: Irene encontra a torre trancada com a chave no próprio avental.
+  - number: 2
+    title: A Fechadura Nova
+    function: Tomás mostra a fechadura trocada e culpa o prefeito.
+    irreversible_turn: Irene deixa de confiar em Tomás.
+  - number: 3
+    title: A Vigília
+    function: Irene vela o padre em memória e confronta Tomás sobre a noite do incêndio.
+    irreversible_turn: Irene fala do incêndio pela primeira vez.
+  - number: 4
+    title: A Feira
+    function: A vila discute a venda da capela enquanto Irene limpa a sacristia.
+    irreversible_turn: O prefeito nega ter dado qualquer ordem.
+  - number: 5
+    title: O Missal
+    function: A venda da torre é descoberta.
+    irreversible_turn: Tomás admite que trocou a fechadura para vender a capela.
+  - number: 6
+    title: O Silêncio
+    function: A vila decide o destino do sino.
+    irreversible_turn: O sino é retirado da torre sem tocar.
