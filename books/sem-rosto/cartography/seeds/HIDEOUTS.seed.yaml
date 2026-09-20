@@ -1,0 +1,17 @@
+# Esconderijos registrados (SDD 18).
+hideouts:
+- id: HID-RCH
+  location: RM-URB-RCH
+  source: {map: SRC-MAP-A, label: Root Cellar Hideout, marker: RED_DOT_AT_ENTRANCE}
+  capacity: UNSPECIFIED
+  discoverability: UNSPECIFIED
+  entry_points: []
+  exit_points: [EDG-P-004]
+  concealment: UNSPECIFIED
+  sound_isolation: UNSPECIFIED
+  weather_protection: UNSPECIFIED
+  duration_safe: UNSPECIFIED
+  known_by: []
+  compromise_events: []
+  status: UNKNOWN
+  note: Único esconderijo registrado. Nenhum outro lugar é esconderijo até proposta.

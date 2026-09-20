@@ -1,0 +1,15 @@
+roads:
+  - {id: ROAD-SUL, names: [{name: Estrada Sul, kind: MAP_A_LABEL}], road_class: MAIN, edges: []}
+edges:
+  - {id: EDG-U-001, from: TS-CEN-ORG, to: TS-CEN-CAP, edge_type: ROAD, directionality: BOTH}
+  - {id: EDG-U-002, from: TS-CEN-ORG, to: TS-CEN-EST, edge_type: ROAD, directionality: BOTH}
+  - {id: EDG-U-003, from: TS-CEN-EST, to: TS-URB-PNT, edge_type: ROAD, directionality: BOTH}
+  - {id: EDG-U-004, from: TS-URB-PNT, to: TS-URB-MOI, edge_type: TRAIL, directionality: BOTH}
+  - {id: EDG-U-005, from: TS-CEN-ORG, to: TS-URB-CEM, edge_type: TRAIL, directionality: BOTH}
+  - {id: EDG-U-006, from: TS-CEN-ORG, to: TS-FRM-S, edge_type: ROAD, directionality: BOTH}
+  - {id: EDG-U-007, from: TS-CEN-ORG, to: TS-REG-ALD, edge_type: FRAME_LINK, directionality: BOTH}
+  - {id: EDG-U-008, from: TS-REG-ALD, to: TS-REG-GRA, edge_type: TRAIL, directionality: BOTH}
+  - {id: EDG-P-001, from: TS-CEN-CAP, to: TS-SUB-POR, edge_type: PORTAL, directionality: BOTH}
+  - {id: EDG-P-002, from: TS-URB-CEM, to: TS-SUB-TUN, edge_type: PORTAL, directionality: BOTH}
+  - {id: EDG-S-001, from: TS-SUB-POR, to: TS-JCT-1, edge_type: SECRET_PASSAGE, directionality: BOTH}
+  - {id: EDG-S-002, from: TS-JCT-1, to: TS-SUB-TUN, edge_type: SECRET_PASSAGE, directionality: BOTH}

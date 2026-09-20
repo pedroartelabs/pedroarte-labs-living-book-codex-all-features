@@ -1,0 +1,9 @@
+# Conhecimento no capítulo 0. Conhecimento de personagens vem do ledger (knowledge_delta) e de propostas.
+baseline:
+- knower: PUBLIC
+  knows: {ROUTE: 'public_knowledge in [PUBLIC]'}
+  source: seletor projetado
+- knower: READER
+  knows: {SEEN_ON_MAP: 'todo id em SRC-MAP-A e SRC-MAP-B, inclusive a topologia do inset'}
+  from: front_matter
+  source: 'decisão OQ-CART-03: mapas impressos'

@@ -1,0 +1,390 @@
+# Nós e arestas do subsolo (inset 'REDE SUBTERRÂNEA' do Mapa A) + portais.
+# Topologia = fato; posição no inset ≠ geografia; pontas de seta NÃO são direcionalidade (OQ-CART-08).
+# Black Thistle Filling Station e Sealed Crypt IV: subterrâneo declarado pela autora, fora do inset (SDD 11.6).
+locations:
+- id: RM-SUB-CHB
+  canonical_name: Chapel Basement
+  names:
+  - {name: Chapel Basement, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: CELLAR
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1095, 670]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-CEN-CHP
+- id: RM-SUB-CCT
+  canonical_name: Cemetery Crypt Tunnel
+  names:
+  - {name: Cemetery Crypt Tunnel, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: TUNNEL
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [965, 668]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-OPC
+- id: RM-SUB-STD
+  canonical_name: Storm Drains
+  names:
+  - {name: Storm Drains, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: STORM_DRAIN
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1100, 766]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  position: UNKNOWN
+- id: RM-SUB-RCP
+  canonical_name: Root Cellar Passage
+  names:
+  - {name: Root Cellar Passage, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: SUBTERRANEAN_PASSAGE
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [990, 770]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-RCH
+- id: RM-SUB-PSC
+  canonical_name: Pumping Station Channel
+  names:
+  - {name: Pumping Station Channel, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: TUNNEL
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1298, 760]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-PMP
+- id: RM-SUB-QCS
+  canonical_name: Quarry Crawlspace
+  names:
+  - {name: Quarry Crawlspace, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: SUBTERRANEAN_PASSAGE
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1248, 663]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-OQY
+  anchor_note: ANM-A-03
+- id: RM-SUB-ROT
+  canonical_name: Reservoir Overflow Tunnel
+  names:
+  - {name: Reservoir Overflow Tunnel, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: TUNNEL
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1297, 845]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-RSV
+- id: RM-SUB-CUX
+  canonical_name: Culvert Exit
+  names:
+  - {name: Culvert Exit, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: CULVERT
+  layer: SUBTERRANEAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  inset_px:
+    source: SRC-MAP-A
+    px: [1013, 857]
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  anchor_to: RM-URB-DCU
+  anchor_confidence: MEDIUM
+- id: RM-JCT-S1
+  canonical_name: junção capela
+  type: JUNCTION
+  layer: SUBTERRANEAN
+  geometry: POINT
+  position: UNKNOWN
+  inset_px:
+    source: SRC-MAP-A
+    px: [1102, 700]
+- id: RM-JCT-S2
+  canonical_name: junção drenos–canal
+  type: JUNCTION
+  layer: SUBTERRANEAN
+  geometry: POINT
+  position: UNKNOWN
+  inset_px:
+    source: SRC-MAP-A
+    px: [1160, 736]
+- id: RM-JCT-S3
+  canonical_name: junção inferior
+  type: JUNCTION
+  layer: SUBTERRANEAN
+  geometry: POINT
+  position: UNKNOWN
+  inset_px:
+    source: SRC-MAP-A
+    px: [1160, 823]
+- id: RM-SUB-BTF
+  canonical_name: Black Thistle Filling Station
+  names:
+  - {name: Black Thistle Filling Station, kind: CANONICAL, source: AUTHOR_DECLARED}
+  type: UNKNOWN
+  type_confidence: LOW
+  layer: SUBTERRANEAN
+  geometry: POINT
+  position: UNKNOWN
+  source: AUTHOR_DECLARED
+  status: UNKNOWN
+  epistemic_status: FACT
+  connectivity: UNDECLARED
+  omitted_by: [MAP-DIEGETIC-A]
+  depicted_by: []
+  first_allowed_reveal: {after_chapter: 0}
+  note: o nome sugere posto; type_confidence LOW
+- id: RM-SUB-SC4
+  canonical_name: Sealed Crypt IV
+  names:
+  - {name: Sealed Crypt IV, kind: CANONICAL, source: AUTHOR_DECLARED}
+  type: CRYPT
+  type_confidence: MEDIUM
+  layer: SUBTERRANEAN
+  geometry: POINT
+  position: UNKNOWN
+  source: AUTHOR_DECLARED
+  status: SEALED
+  epistemic_status: FACT
+  connectivity: UNDECLARED
+  omitted_by: [MAP-DIEGETIC-A]
+  depicted_by: []
+  first_allowed_reveal: {after_chapter: 0}
+  note: selada pelo nome; nenhuma cripta I–III é assumida
+edges:
+- id: EDG-P-001
+  from: RM-CEN-CHP
+  to: RM-SUB-CHB
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: HIDDEN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-002
+  from: RM-URB-OPC
+  to: RM-SUB-CCT
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: HIDDEN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-003
+  from: RM-URB-OQY
+  to: RM-SUB-QCS
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: HIDDEN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-004
+  from: RM-URB-RCH
+  to: RM-SUB-RCP
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: HIDDEN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-005
+  from: RM-URB-PMP
+  to: RM-SUB-PSC
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: UNKNOWN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-006
+  from: RM-URB-RSV
+  to: RM-SUB-ROT
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: UNKNOWN
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-P-007
+  from: RM-URB-DCU
+  to: RM-SUB-CUX
+  edge_type: PORTAL
+  directionality: BOTH
+  distance_meters: {basis: UNSPECIFIED}
+  secret_level: NONE
+  vertical_delay_s: UNSPECIFIED
+  canon_status: CANONICAL
+  confidence: PROBABLE
+- id: EDG-S-001
+  from: RM-SUB-CHB
+  to: RM-JCT-S1
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-002
+  from: RM-JCT-S1
+  to: RM-SUB-CCT
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: TO_B
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-003
+  from: RM-JCT-S1
+  to: RM-SUB-STD
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: TO_B
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-004
+  from: RM-SUB-STD
+  to: RM-SUB-RCP
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: TO_B
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-005
+  from: RM-SUB-STD
+  to: RM-JCT-S2
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-006
+  from: RM-JCT-S2
+  to: RM-SUB-PSC
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-007
+  from: RM-SUB-PSC
+  to: RM-SUB-QCS
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-008
+  from: RM-JCT-S2
+  to: RM-JCT-S3
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-009
+  from: RM-JCT-S3
+  to: RM-SUB-ROT
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-010
+  from: RM-JCT-S3
+  to: RM-SUB-CUX
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL
+- id: EDG-S-011
+  from: RM-SUB-RCP
+  to: RM-SUB-CUX
+  edge_type: SECRET_PASSAGE
+  directionality: BOTH
+  drawn_arrow: null
+  distance_meters: {basis: UNSPECIFIED}
+  visibility: UNDERGROUND
+  secret_level: HIDDEN
+  legend_class: HIDDEN_PASSAGE
+  canon_status: CANONICAL
+  confidence: CONFIRMED_VISUAL

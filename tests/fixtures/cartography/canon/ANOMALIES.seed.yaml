@@ -1,0 +1,7 @@
+anomalies:
+  - {id: ANM-01, source: SRC-MAP-A, description: "marca sem legenda junto à ponte", classification: INTENTIONAL_ARTIFACT, decided_by: fixture-decision}
+  - {id: ANM-02, source: SRC-MAP-A, description: "escala irregular", classification: UNDECIDED}
+glyphs:
+  - {id: GLY-01, source: SRC-MAP-A, px: [30, 20], readings_candidate: ["R1", "11"], attributed_to: null}
+unlabeled:
+  - {id: UNL-01, source: SRC-MAP-A, px: [60, 60], description: "casa sem rótulo", kind_of: STRUCTURE}

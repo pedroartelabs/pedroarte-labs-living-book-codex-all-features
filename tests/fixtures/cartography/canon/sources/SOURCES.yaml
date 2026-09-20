@@ -1,0 +1,23 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CartographySources
+metadata: {project_id: fixture-valdoro, version: 0.1.0}
+sources:
+  - id: SRC-MAP-A
+    title: "Valdoro — mapa local"
+    file: MAP_A_mini.png
+    sha256: a3f0b71249b569dd8ac5a354bcda3eb374b6907e98e8454f0657e5200a98989c
+    pixels: [100, 80]
+    north: UP
+    origin_px: [50, 40]
+    scale_evidence: {meters_per_px: 10}
+  - id: SRC-MAP-B
+    title: "Valdoro — mapa regional"
+    file: MAP_B_mini.png
+    sha256: 1857b4425fd860578c719ea793d012211a721caec6fa9e738a662003fe0830cf
+    pixels: [100, 80]
+    north: UP
+    origin_px: [50, 40]
+    scale_evidence: {meters_per_px: 100}
+transforms:
+  - {id: XFM-A@v1, source: SRC-MAP-A}
+  - {id: XFM-B@S10, source: SRC-MAP-B, scale_ratio_A_to_B: 0.1}

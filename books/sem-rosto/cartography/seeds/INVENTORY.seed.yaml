@@ -1,0 +1,157 @@
+# Checklist de transcrição (SDD 38.5, regra CG-08): todo item transcrito dos mapas resolve para uma entidade.
+inventory:
+- {item: 'A: Flarry Estate', kind: MAP_A_LABEL, maps_to: RM-URB-FLE}
+- {item: 'A: Old Quarry', kind: MAP_A_LABEL, maps_to: RM-URB-OQY}
+- {item: 'A: Sheep Fields', kind: MAP_A_LABEL, maps_to: RM-URB-SHF}
+- {item: 'A: Shepherd''s Bothy', kind: MAP_A_LABEL, maps_to: RM-URB-SBO}
+- {item: 'A: Manfred Farm', kind: MAP_A_LABEL, maps_to: RM-URB-MNF}
+- {item: 'A: Strathmoor Woods', kind: MAP_A_LABEL, maps_to: RM-URB-SWD}
+- {item: 'A: Rowan Cottage', kind: MAP_A_LABEL, maps_to: RM-URB-ROW}
+- {item: 'A: Ash Burn', kind: MAP_A_LABEL, maps_to: WAT-ASH}
+- {item: 'A: Reservoir', kind: MAP_A_LABEL, maps_to: RM-URB-RSV}
+- {item: 'A: Pumping Station', kind: MAP_A_LABEL, maps_to: RM-URB-PMP}
+- {item: 'A: Burn Bridge', kind: MAP_A_LABEL, maps_to: RM-URB-BBR}
+- {item: 'A: East Road — Officially Closed', kind: MAP_A_LABEL, maps_to: ROAD-EAST}
+- {item: 'A: Saint Morrow Chapel', kind: MAP_A_LABEL, maps_to: RM-CEN-CHP}
+- {item: 'A: Old Parish Cemetery', kind: MAP_A_LABEL, maps_to: RM-URB-OPC}
+- {item: 'A: Red Stag Pub', kind: MAP_A_LABEL, maps_to: RM-CEN-RSP}
+- {item: 'A: General Mercantile', kind: MAP_A_LABEL, maps_to: RM-CEN-GMC}
+- {item: 'A: Office of Civic Preservation', kind: MAP_A_LABEL, maps_to: RM-CEN-OCP}
+- {item: 'A: Saint Morrow Cross (0,0)', kind: MAP_A_LABEL, maps_to: RM-CEN-SMC}
+- {item: 'A: Civil Archive Hall', kind: MAP_A_LABEL, maps_to: RM-CEN-CAH}
+- {item: 'A: Redmur Constabulary', kind: MAP_A_LABEL, maps_to: RM-CEN-CON}
+- {item: 'A: Village Clinic', kind: MAP_A_LABEL, maps_to: RM-CEN-CLN}
+- {item: 'A: Old Coach Stop', kind: MAP_A_LABEL, maps_to: RM-CEN-OCS}
+- {item: 'A: Caretaker House', kind: MAP_A_LABEL, maps_to: RM-URB-CTH}
+- {item: 'A: Root Cellar Hideout', kind: MAP_A_LABEL, maps_to: RM-URB-RCH}
+- {item: 'A: Drainage Culvert', kind: MAP_A_LABEL, maps_to: RM-URB-DCU}
+- {item: 'A: South Gate Road (Entrada Principal)', kind: MAP_A_LABEL, maps_to: ROAD-SGR}
+- {item: 'A: Ruined Tool Shed', kind: MAP_A_LABEL, maps_to: RM-URB-RTS}
+- {item: 'A: R1', kind: MAP_A_LABEL, maps_to: RTE-A-R1}
+- {item: 'A: R2', kind: MAP_A_LABEL, maps_to: RTE-A-R2}
+- {item: 'A: R3', kind: MAP_A_LABEL, maps_to: RTE-A-R3}
+- {item: 'A inset: Cemetery Crypt Tunnel', kind: INSET_LABEL, maps_to: RM-SUB-CCT}
+- {item: 'A inset: Chapel Basement', kind: INSET_LABEL, maps_to: RM-SUB-CHB}
+- {item: 'A inset: Quarry Crawlspace', kind: INSET_LABEL, maps_to: RM-SUB-QCS}
+- {item: 'A inset: Root Cellar Passage', kind: INSET_LABEL, maps_to: RM-SUB-RCP}
+- {item: 'A inset: Storm Drains', kind: INSET_LABEL, maps_to: RM-SUB-STD}
+- {item: 'A inset: Pumping Station Channel', kind: INSET_LABEL, maps_to: RM-SUB-PSC}
+- {item: 'A inset: Culvert Exit', kind: INSET_LABEL, maps_to: RM-SUB-CUX}
+- {item: 'A inset: Reservoir Overflow Tunnel', kind: INSET_LABEL, maps_to: RM-SUB-ROT}
+- {item: 'A inset: glifos ⊤ ● + ◀', kind: INSET_GLYPHS, maps_to: MAP-A-INSET-GLYPHS}
+- {item: 'A: ponto vermelho do Root Cellar', kind: MARKER, maps_to: MAP-A-MRK-01}
+- {item: 'A: legenda', kind: LEGEND, maps_to: MAP-A-LEGEND}
+- {item: 'A: escala', kind: SCALE, maps_to: MAP-A-SCALE}
+- {item: 'A: grade', kind: GRID, maps_to: MAP-A-GRID}
+- {item: 'A: rosa dos ventos', kind: ORNAMENT, maps_to: MAP-A-ORN-COMPASS}
+- {item: 'A: texto 1', kind: TEXT, maps_to: MAP-A-TXT-01}
+- {item: 'A: texto 2', kind: TEXT, maps_to: MAP-A-TXT-02}
+- {item: 'A: texto 3', kind: TEXT, maps_to: MAP-A-TXT-03}
+- {item: 'A: texto 4', kind: TEXT, maps_to: MAP-A-TXT-04}
+- {item: 'A: texto 5', kind: TEXT, maps_to: MAP-A-TXT-05}
+- {item: 'A: texto 6', kind: TEXT, maps_to: MAP-A-TXT-06}
+- {item: 'A: texto 7', kind: TEXT, maps_to: MAP-A-TXT-07}
+- {item: 'A: texto 8', kind: TEXT, maps_to: MAP-A-TXT-08}
+- {item: 'A: figura 1', kind: FIGURE, maps_to: MAP-A-FIG-01}
+- {item: 'A: figura 2', kind: FIGURE, maps_to: MAP-A-FIG-02}
+- {item: 'B: Saint Morrow Cross', kind: MAP_B_LABEL, maps_to: RM-CEN-SMC}
+- {item: 'B: REDMUR', kind: MAP_B_LABEL, maps_to: RM-REG-RDM}
+- {item: 'B: Cemitério Antigo', kind: MAP_B_LABEL, maps_to: RM-URB-OPC}
+- {item: 'B: Estrada 13 Em Disputa', kind: MAP_B_LABEL, maps_to: ROAD-E13}
+- {item: 'B: Lago Negro (Loch Draven)', kind: MAP_B_LABEL, maps_to: RM-REG-LDR}
+- {item: 'B: Loch Calder', kind: MAP_B_LABEL, maps_to: RM-REG-LCD}
+- {item: 'B: Loch Ainslie', kind: MAP_B_LABEL, maps_to: RM-REG-LAN}
+- {item: 'B: Torran Mire (pântano)', kind: MAP_B_LABEL, maps_to: RM-REG-TRM}
+- {item: 'B: Muirfield Farm', kind: MAP_B_LABEL, maps_to: RM-REG-MFF}
+- {item: 'B: R3 (Strathmoor)', kind: MAP_B_LABEL, maps_to: RTE-B-R3-STR}
+- {item: 'B: R3 (Glenath)', kind: MAP_B_LABEL, maps_to: RTE-B-R3-GLN}
+- {item: 'B: R4', kind: MAP_B_LABEL, maps_to: RTE-B-R4}
+- {item: 'B: R7', kind: MAP_B_LABEL, maps_to: RTE-B-R7}
+- {item: 'B: R13', kind: MAP_B_LABEL, maps_to: RTE-B-R13}
+- {item: 'B: R17', kind: MAP_B_LABEL, maps_to: RTE-B-R17}
+- {item: 'B: glifo do corredor Old Quarry–Manfred', kind: MAP_B_LABEL, maps_to: GLY-B-09}
+- {item: 'B: Glenath', kind: MAP_B_LABEL, maps_to: RM-REG-GLN}
+- {item: 'B: Creggan Bothy', kind: MAP_B_LABEL, maps_to: RM-REG-CRB}
+- {item: 'B: Blackridge Farm', kind: MAP_B_LABEL, maps_to: RM-REG-BRF}
+- {item: 'B: Corrie''s End', kind: MAP_B_LABEL, maps_to: RM-REG-CRE}
+- {item: 'B: Kirkhollow', kind: MAP_B_LABEL, maps_to: RM-REG-KRK}
+- {item: 'B: Elderglen', kind: MAP_B_LABEL, maps_to: RM-REG-ELG}
+- {item: 'B: Harrowmire', kind: MAP_B_LABEL, maps_to: RM-REG-HRW}
+- {item: 'B: Stonewell', kind: MAP_B_LABEL, maps_to: RM-REG-STW}
+- {item: 'B: Cairnvale', kind: MAP_B_LABEL, maps_to: RM-REG-CRV}
+- {item: 'B: Grayfen', kind: MAP_B_LABEL, maps_to: RM-REG-GRF}
+- {item: 'B: Thistlebank', kind: MAP_B_LABEL, maps_to: RM-REG-THB}
+- {item: 'B: Craigness', kind: MAP_B_LABEL, maps_to: RM-REG-CRG}
+- {item: 'B: Abadia em Ruínas de Saint Bride', kind: MAP_B_LABEL, maps_to: RM-REG-SBA}
+- {item: 'B: Moor Cairn', kind: MAP_B_LABEL, maps_to: RM-REG-MCR}
+- {item: 'B: Ben Ràth (714 m)', kind: MAP_B_LABEL, maps_to: RM-REG-BRT}
+- {item: 'B: Ruínas de Kellburne', kind: MAP_B_LABEL, maps_to: RM-REG-KLB}
+- {item: 'B: Carriden Hamlet', kind: MAP_B_LABEL, maps_to: RM-REG-CRH}
+- {item: 'B: Blackthorn Cottage', kind: MAP_B_LABEL, maps_to: RM-REG-BTC}
+- {item: 'B: Willowford', kind: MAP_B_LABEL, maps_to: RM-REG-WLF}
+- {item: 'B: Fenside Grange', kind: MAP_B_LABEL, maps_to: RM-REG-FSG}
+- {item: 'B: Mossgate', kind: MAP_B_LABEL, maps_to: RM-REG-MSG}
+- {item: 'B: Raven''s Holt', kind: MAP_B_LABEL, maps_to: RM-REG-RVH}
+- {item: 'B: Old Mill (em ruínas)', kind: MAP_B_LABEL, maps_to: RM-REG-OML}
+- {item: 'B placa: Para Caelrith? (32 milhas)', kind: SIGN, maps_to: RM-OFF-CLR}
+- {item: 'B placa: Para Dunsgate (17 milhas)', kind: SIGN, maps_to: RM-OFF-DNS}
+- {item: 'B placa: Para Westhaven (29 milhas)', kind: SIGN, maps_to: RM-OFF-WSH}
+- {item: 'B placa: Para Inverloch (?7 milhas)', kind: SIGN, maps_to: RM-OFF-INV}
+- {item: 'B placa: Para Eldham (41 milhas) ×2', kind: SIGN, maps_to: RM-OFF-ELD}
+- {item: 'B: texto 1', kind: TEXT, maps_to: MAP-B-TXT-01}
+- {item: 'B: texto 2', kind: TEXT, maps_to: MAP-B-TXT-02}
+- {item: 'B: texto 3', kind: TEXT, maps_to: MAP-B-TXT-03}
+- {item: 'B: texto 4', kind: TEXT, maps_to: MAP-B-TXT-04}
+- {item: 'B: texto 5', kind: TEXT, maps_to: MAP-B-TXT-05}
+- {item: 'B: texto 6', kind: TEXT, maps_to: MAP-B-TXT-06}
+- {item: 'B: texto 7', kind: TEXT, maps_to: MAP-B-TXT-07}
+- {item: 'B: texto 8', kind: TEXT, maps_to: MAP-B-TXT-08}
+- {item: 'B: texto 9', kind: TEXT, maps_to: MAP-B-TXT-09}
+- {item: 'B: texto 10', kind: TEXT, maps_to: MAP-B-TXT-10}
+- {item: 'B: texto 11', kind: TEXT, maps_to: MAP-B-TXT-11}
+- {item: 'B: registro (30 linhas)', kind: REGISTER, maps_to: MAP-B-REG}
+- {item: 'B: legenda', kind: LEGEND, maps_to: MAP-B-LEGEND}
+- {item: 'B: escala', kind: SCALE, maps_to: MAP-B-SCALE}
+- {item: 'B: grade', kind: GRID, maps_to: MAP-B-GRID}
+- {item: 'B: rotas contestadas (título)', kind: TEXT, maps_to: MAP-B-ROUTES-TITLE}
+- {item: 'B: rosa dos ventos', kind: ORNAMENT, maps_to: MAP-B-ORN-COMPASS}
+- {item: 'B: glifo vermelho ilegível 1', kind: GLYPH, maps_to: GLY-B-01}
+- {item: 'B: glifo vermelho ilegível 2', kind: GLYPH, maps_to: GLY-B-02}
+- {item: 'B: glifo vermelho ilegível 3', kind: GLYPH, maps_to: GLY-B-03}
+- {item: 'B: glifo vermelho ilegível 4', kind: GLYPH, maps_to: GLY-B-04}
+- {item: 'B: glifo vermelho ilegível 5', kind: GLYPH, maps_to: GLY-B-05}
+- {item: 'B: glifo vermelho ilegível 6', kind: GLYPH, maps_to: GLY-B-06}
+- {item: 'B: glifo vermelho ilegível 7', kind: GLYPH, maps_to: GLY-B-07}
+- {item: 'B: glifo vermelho ilegível 8', kind: GLYPH, maps_to: GLY-B-08}
+- {item: 'B: glifo vermelho ilegível 9', kind: GLYPH, maps_to: GLY-B-09}
+- {item: 'B: triângulo branco', kind: SYMBOL, maps_to: UNL-B-03}
+- {item: 'B registro linha 1: Redmur', kind: REGISTER_LINE, maps_to: REG-B-01}
+- {item: 'B registro linha 2: Saint Morrow', kind: REGISTER_LINE, maps_to: REG-B-02}
+- {item: 'B registro linha 3: Flarry Estate', kind: REGISTER_LINE, maps_to: REG-B-03}
+- {item: 'B registro linha 4: Manfred Farm', kind: REGISTER_LINE, maps_to: REG-B-04}
+- {item: 'B registro linha 5: Rowan Cottage', kind: REGISTER_LINE, maps_to: REG-B-05a}
+- {item: 'B registro linha 6: Glenath', kind: REGISTER_LINE, maps_to: REG-B-05b}
+- {item: 'B registro linha 7: Creggan Bothy', kind: REGISTER_LINE, maps_to: REG-B-07}
+- {item: 'B registro linha 8: Blackridge Farm', kind: REGISTER_LINE, maps_to: REG-B-08}
+- {item: 'B registro linha 9: Corrie''s End', kind: REGISTER_LINE, maps_to: REG-B-09}
+- {item: 'B registro linha 10: Kirkhollow', kind: REGISTER_LINE, maps_to: REG-B-10}
+- {item: 'B registro linha 11: Elderglen', kind: REGISTER_LINE, maps_to: REG-B-11}
+- {item: 'B registro linha 12: Harrowmire', kind: REGISTER_LINE, maps_to: REG-B-12}
+- {item: 'B registro linha 13: Stonewell', kind: REGISTER_LINE, maps_to: REG-B-13}
+- {item: 'B registro linha 14: Cairnvale', kind: REGISTER_LINE, maps_to: REG-B-14}
+- {item: 'B registro linha 15: Grayfen', kind: REGISTER_LINE, maps_to: REG-B-15}
+- {item: 'B registro linha 16: Thistlebank', kind: REGISTER_LINE, maps_to: REG-B-16}
+- {item: 'B registro linha 17: Letham', kind: REGISTER_LINE, maps_to: REG-B-17}
+- {item: 'B registro linha 18: Craigness', kind: REGISTER_LINE, maps_to: REG-B-18}
+- {item: 'B registro linha 19: Abadia de Saint Bride', kind: REGISTER_LINE, maps_to: REG-B-19}
+- {item: 'B registro linha 20: Moor Cairn', kind: REGISTER_LINE, maps_to: REG-B-20}
+- {item: 'B registro linha 21: Ben Ràth', kind: REGISTER_LINE, maps_to: REG-B-21}
+- {item: 'B registro linha 22: Ruínas de Kellburne', kind: REGISTER_LINE, maps_to: REG-B-22}
+- {item: 'B registro linha 23: Passo de Muirchéin', kind: REGISTER_LINE, maps_to: REG-B-23}
+- {item: 'B registro linha 24: Carriden Hamlet', kind: REGISTER_LINE, maps_to: REG-B-24}
+- {item: 'B registro linha 25: Blackthorn Cottage', kind: REGISTER_LINE, maps_to: REG-B-25}
+- {item: 'B registro linha 26: Willowford', kind: REGISTER_LINE, maps_to: REG-B-26}
+- {item: 'B registro linha 27: Fenside Grange', kind: REGISTER_LINE, maps_to: REG-B-27}
+- {item: 'B registro linha 28: Mossgate', kind: REGISTER_LINE, maps_to: REG-B-28}
+- {item: 'B registro linha 29: Raven''s Holt', kind: REGISTER_LINE, maps_to: REG-B-29}
+- {item: 'B registro linha 30: Old Mill', kind: REGISTER_LINE, maps_to: REG-B-30}

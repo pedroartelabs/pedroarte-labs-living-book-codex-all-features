@@ -1,0 +1,11 @@
+# Camadas históricas reservadas: existem como id, sem conteúdo (SDD 25).
+layers:
+- {id: LYR-VICTORIAN, name: Victorian Map, status: RESERVED, era: UNKNOWN}
+- {id: LYR-PRE-COFFER, name: Pre-Coffer Map, status: RESERVED, era: UNKNOWN}
+- {id: LYR-EARLY-PRESERVATION, name: Early Preservation Map, status: RESERVED, era: UNKNOWN}
+- {id: LYR-MODERN-OFFICIAL, name: Modern Official Map, status: RESERVED, era: UNKNOWN, note: 'NÃO é a camada dos Mapas A/B: a autoria deles é
+    MUST_REMAIN_UNKNOWN (SDD 22.7).'}
+- {id: LYR-UNDERGROUND-MAINTENANCE, name: Underground Maintenance Map, status: RESERVED, era: UNKNOWN}
+- {id: LYR-PRIVATE-MANFRED, name: Private Family Map — Manfred, status: RESERVED, era: UNKNOWN}
+- {id: LYR-PRIVATE-FLARRY, name: Private Family Map — Flarry, status: RESERVED, era: UNKNOWN}
+- {id: LYR-RELIGIOUS, name: Religious Records Map, status: RESERVED, era: UNKNOWN}

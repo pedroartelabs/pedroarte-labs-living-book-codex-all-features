@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pedroarte.livingbooks/v1/CARTOGRAPHY.schema.json",
+  "title": "CartographySeeds",
+  "description": "Contrato dos seeds do canon cartográfico (docs/sdd/*CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md, seção 31). Cada arquivo *.seed.yaml valida contra este schema pela chave de topo que declara. Regras que JSON Schema não expressa (referências cruzadas, geometria, proteção de mistério) vivem em engine/scripts/check_cartography.py. Não há campo de resposta: a cartografia guarda estrutura, nunca verdade narrativa; a única ponte para a verdade é truth_ref (id opaco).",
+  "type": "object",
+  "properties": {
+    "apiVersion": {"const": "pedroarte.livingbooks/v1"},
+    "kind": {"const": "CartographyCanon"},
+    "metadata": {"$ref": "#/$defs/Metadata"},
+    "includes": {"type": "array", "items": {"type": "string"}},
+    "settings": {"type": "object"},
+    "mutations": {"type": "array"},
+    "mutation_log": {"type": "array"},
+    "locations": {"type": "array", "items": {"$ref": "#/$defs/Location"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/Edge"}},
+    "roads": {"type": "array", "items": {"$ref": "#/$defs/Road"}},
+    "routes": {"type": "array", "items": {"$ref": "#/$defs/Route"}},
+    "addresses": {"type": "array", "items": {"$ref": "#/$defs/Address"}},
+    "sightlines": {"type": "array", "items": {"$ref": "#/$defs/Id"}},
+    "hideouts": {"type": "array", "items": {"$ref": "#/$defs/Hideout"}},
+    "boundaries": {"type": "array", "items": {"$ref": "#/$defs/Boundary"}},
+    "exits": {"type": "array", "items": {"$ref": "#/$defs/Exit"}},
+    "route_mysteries": {"type": "array", "items": {"$ref": "#/$defs/RouteMystery"}},
+    "mysteries": {"type": "array", "items": {"$ref": "#/$defs/CartographicMystery"}},
+    "register": {"$ref": "#/$defs/Register"},
+    "artifacts": {"type": "array", "items": {"$ref": "#/$defs/Artifact"}},
+    "layers": {"type": "array", "items": {"$ref": "#/$defs/Id"}},
+    "anomalies": {"type": "array", "items": {"$ref": "#/$defs/Anomaly"}},
+    "glyphs": {"type": "array", "items": {"$ref": "#/$defs/Id"}},
+    "unlabeled": {"type": "array", "items": {"$ref": "#/$defs/Id"}},
+    "baseline": {"type": "array"},
+    "inventory": {"type": "array", "items": {"$ref": "#/$defs/InventoryItem"}}
+  },
+  "$defs": {
+    "Id": {"type": "object", "required": ["id"], "properties": {"id": {"type": "string", "minLength": 1}}},
+    "Metadata": {
+      "type": "object",
+      "required": ["project_id", "sources", "grid"],
+      "properties": {
+        "project_id": {"type": "string"},
+        "sources": {"type": "string", "description": "Caminho relativo ao SOURCES.yaml."},
+        "grid": {"type": "object", "required": ["origin"], "properties": {"origin": {"type": "string"}}},
+        "edges_digitized": {"type": "boolean"},
+        "type_extensions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "Epistemic": {"enum": ["FACT", "OFFICIAL_CLAIM", "HISTORICAL_CLAIM", "RUMOR", "MYSTERY", "FALSE_MAP_DATA", "UNKNOWN"]},
+    "SourcePx": {
+      "type": "object", "required": ["source", "px"],
+      "properties": {
+        "source": {"type": "string"},
+        "px": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+        "anchor": {"enum": ["ICON", "LABEL", "EDGE", "SIGN", "SCHEMATIC"]}
+      }
+    },
+    "Location": {
+      "type": "object",
+      "required": ["id", "canonical_name", "type", "layer"],
+      "properties": {
+        "id": {"type": "string"},
+        "canonical_name": {"type": "string"},
+        "names": {"type": "array"},
+        "type": {"description": "Vocabulário base (SDD 12.2) + type_extensions do manifesto.", "oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]},
+        "layer": {"enum": ["URBAN", "REGIONAL", "SUBTERRANEAN"]},
+        "geometry": {"enum": ["POINT", "AREA", "LINE"]},
+        "status": {"enum": ["ACTIVE", "ABANDONED", "RUINED", "SEALED", "RESTRICTED", "DISPUTED", "UNKNOWN"]},
+        "epistemic_status": {"$ref": "#/$defs/Epistemic"},
+        "source_px": {"type": "array", "items": {"$ref": "#/$defs/SourcePx"}},
+        "polyline_px": {"type": "array"},
+        "anchor_to": {"type": "string"},
+        "position": {"const": "UNKNOWN"},
+        "position_accuracy_m": {"type": "number", "minimum": 0},
+        "coordinates_cache": {"type": "object", "description": "Cache derivado; nunca fonte. Diverge da derivada ⇒ CN-05."},
+        "connectivity": {"enum": ["UNDECLARED", "DECLARED"]},
+        "source": {"enum": ["MAP", "AUTHOR_DECLARED"]},
+        "first_allowed_reveal": {},
+        "valid_from": {"type": ["integer", "null"]},
+        "valid_until": {"type": ["integer", "null"]}
+      },
+      "not": {"anyOf": [{"required": ["true_exit"]}, {"required": ["truth"]}, {"required": ["answer"]}]}
+    },
+    "Edge": {
+      "type": "object",
+      "required": ["id", "from", "to", "edge_type"],
+      "properties": {
+        "id": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"},
+        "edge_type": {"enum": ["ROAD", "TRAIL", "FOREST_PATH", "TUNNEL", "DRAIN", "SECRET_PASSAGE", "BRIDGE", "WATER_ROUTE", "SERVICE_ROUTE", "PORTAL", "FRAME_LINK", "OPEN_GROUND"]},
+        "directionality": {"enum": ["BOTH", "A_TO_B", "B_TO_A"]},
+        "distance_meters": {"type": "object"},
+        "secret_level": {"type": "string"}
+      }
+    },
+    "Road": {"type": "object", "required": ["id"], "properties": {"id": {"type": "string"}, "edges": {"type": "array"}, "claims": {"type": "array"}}},
+    "Route": {
+      "type": "object", "required": ["id", "label", "source"],
+      "properties": {
+        "id": {"type": "string"}, "label": {"type": "string"}, "source": {"type": "string"},
+        "legend_class": {"enum": ["ESCAPE_ROUTE", "CONTESTED", "BLOCKED", "HIDDEN_PASSAGE"]},
+        "edges": {"type": "array"},
+        "continuation_beyond_drawn": {"const": "UNKNOWN"}
+      }
+    },
+    "Address": {"type": "object", "required": ["id", "location"], "properties": {"id": {"type": "string"}, "location": {"type": "string"}}},
+    "Hideout": {"type": "object", "required": ["id", "location"], "properties": {"id": {"type": "string"}, "location": {"type": "string"}}},
+    "Boundary": {
+      "type": "object", "required": ["id", "kind"],
+      "properties": {"id": {"type": "string"}, "kind": {"enum": ["UNCERTAIN_LIMIT", "ADMINISTRATIVE", "RESTRICTED_ZONE", "NATURAL", "MAP_FRAME"]}}
+    },
+    "Exit": {
+      "type": "object", "required": ["id", "physical", "exit_classes"],
+      "description": "Enum FECHADO de classes de saída: não existe valor de saída verdadeira (INV-C07). O que há além da moldura é sempre OFF_MAP.",
+      "properties": {
+        "id": {"type": "string"}, "road": {"type": "string"}, "frame_portal": {"type": ["string", "null"]},
+        "physical": {
+          "type": "object", "required": ["beyond_frame"],
+          "properties": {"drawn_to": {"enum": ["FRAME", "DEAD_END", "LOOP_WITHIN_FRAME", "BLOCKED_POINT", "UNKNOWN"]}, "beyond_frame": {"const": "OFF_MAP"}}
+        },
+        "claims": {"type": "array", "items": {"type": "object", "properties": {"class": {"enum": ["APPARENT_EXIT", "OFFICIAL_EXIT", "HISTORICAL_EXIT", "CLOSED_EXIT", "DISPUTED_EXIT", "FALSE_EXIT", "UNKNOWN_EXIT"]}}}},
+        "exit_classes": {"type": "array", "items": {"enum": ["APPARENT_EXIT", "OFFICIAL_EXIT", "HISTORICAL_EXIT", "CLOSED_EXIT", "DISPUTED_EXIT", "FALSE_EXIT", "UNKNOWN_EXIT"]}},
+        "truth_ref": {"type": ["string", "null"]}
+      }
+    },
+    "RouteMystery": {
+      "type": "object", "required": ["id", "label", "motto", "motto_status", "resolution_state"],
+      "properties": {
+        "id": {"type": "string"}, "label": {"type": "string"}, "motto": {"type": "string"}, "motto_status": {"const": "MAP_ARTIFACT"},
+        "resolution_state": {"enum": ["UNRESOLVED", "PARTIALLY_RESOLVED", "RESOLVED", "PERMANENTLY_AMBIGUOUS"]},
+        "truth_ref": {"type": ["string", "null"]}
+      }
+    },
+    "CartographicMystery": {
+      "type": "object", "required": ["id", "question", "resolution_state"],
+      "properties": {
+        "id": {"type": "string"}, "question": {"type": "string"},
+        "resolution_state": {"enum": ["UNRESOLVED", "PARTIALLY_RESOLVED", "RESOLVED", "PERMANENTLY_AMBIGUOUS"]},
+        "question_policy": {"enum": ["NEVER", "LATE_PARTIAL", "RESOLVED_AT"]},
+        "candidate_interpretations": {"type": "array", "description": "Sem valor de verdade: nenhum campo plausible/true/false/score."},
+        "truth_ref": {"type": ["string", "null"]},
+        "question_ref": {"type": ["string", "null"]}
+      }
+    },
+    "Register": {
+      "type": "object", "required": ["entries", "printed_order_is_artifact"],
+      "properties": {
+        "expected_lines": {"type": "integer"},
+        "printed_order_is_artifact": {"const": true},
+        "entries": {"type": "array", "items": {
+          "type": "object", "required": ["id", "display_index", "printed_name", "placement"],
+          "properties": {
+            "display_index": {"type": "string", "description": "String literal: preserva zeros e duplicatas."},
+            "placement": {"enum": ["ON_MAP", "NOT_ON_MAP", "NO_STANDALONE_LABEL"]},
+            "ordering_significance": {"enum": ["UNKNOWN", "ADMINISTRATIVE", "CHRONOLOGICAL", "CARTOGRAPHIC", "ENCRYPTED", "DECOY"]}
+          }
+        }}
+      }
+    },
+    "Artifact": {
+      "type": "object", "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["MAP", "TEXT", "FIGURE", "GLYPH_SET", "MARKER", "ORNAMENT", "REGISTER"]},
+        "epistemic_status": {"$ref": "#/$defs/Epistemic"},
+        "author": {"type": "object", "required": ["status"], "properties": {"status": {"const": "MUST_REMAIN_UNKNOWN"}}}
+      }
+    },
+    "Anomaly": {
+      "type": "object", "required": ["id", "classification"],
+      "properties": {"id": {"type": "string"}, "classification": {"enum": ["UNDECIDED", "INTENTIONAL_ARTIFACT", "RENDER_ERROR"]}, "decided_by": {"type": "string"}}
+    },
+    "InventoryItem": {"type": "object", "required": ["item", "maps_to"], "properties": {"item": {"type": "string"}, "maps_to": {"type": "string"}}}
+  },
+  "additionalProperties": true
+}

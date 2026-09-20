@@ -1,0 +1,28 @@
+# Manifesto do canon cartográfico de SEM ROSTO (SDD REDMUR_CANONICAL_CARTOGRAPHY_GRAPH, seção 31.2).
+apiVersion: pedroarte.livingbooks/v1
+kind: CartographyCanon
+metadata:
+  project_id: sem-rosto
+  version: 0.1
+  owner: CANON_GUARDIAN
+  sdd: docs/sdd/REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md
+  sources: ../sources/SOURCES.yaml
+  grid:
+    name: REDMUR_CANONICAL_GRID
+    origin: RM-CEN-SMC
+    units: m
+    axes: {x: EAST, y: NORTH, z: UP_REL}
+  edges_digitized: false
+  type_extensions: [LANDMARK, TRANSPORT_STOP, UTILITY, MOUNTAIN, STANDING_STONES, MILL, ABBEY, JUNCTION, FRAME_PORTAL, OFF_MAP_DESTINATION]
+includes: [LOCATIONS, SUBTERRANEAN, EDGES, ROUTES, ADDRESSES, VISIBILITY, HIDEOUTS, BOUNDARIES, MYSTERIES, ARTIFACTS, LAYERS, ANOMALIES, KNOWLEDGE_BASELINE,
+  INVENTORY]
+settings:
+  approved_by: CART_DECISION_0001
+  speeds_mps:
+    physical_max: {WALK: 2.2, RUN_le_400m: 9.0, RUN_le_1500m: 7.3, RUN_le_5km: 6.6, CRAWL: 0.5}
+    profile:
+      FIT: {WALK: 1.35, RUN_sustained: 3.2, RUN_max: 4.2, CRAWL: 0.3, STOOP: 0.7}
+  detection_thresholds_m: {DAYLIGHT: 1500, OVERCAST: 1000, TWILIGHT: 400, NIGHT_MOON: 150, NIGHT_DARK: 30}
+  note: 'Valores completos e modificadores: SDD 16.3, 17.2, 17.3 (aprovados em 2026-09-19).'
+mutations: []
+mutation_log: []

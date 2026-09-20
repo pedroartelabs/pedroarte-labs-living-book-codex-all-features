@@ -1,0 +1,80 @@
+# Artefatos dos mapas: textos, figuras, glifos, ornamentos (SDD 9.5, 10.5, 22.5). Texto de mapa é alegação do artefato,
+# nunca FACT. Ornamento/figura: cartographic_meaning NONE_ASSUMED (registrado, não interpretado).
+# Autoria dos mapas: MUST_REMAIN_UNKNOWN (mistério permanente, SDD 22.7).
+artifacts:
+- id: MAP-DIEGETIC-A
+  kind: MAP
+  title: REDMUR — MAPA CANÔNICO DA CIDADE
+  source_file: SRC-MAP-A
+  author: {status: MUST_REMAIN_UNKNOWN, question_ref: Q-MAP-AUTHOR, unk_ref: UNK-MAP-AUTHOR}
+  date: UNKNOWN
+  map_layer: UNKNOWN
+  accuracy: UNKNOWN
+  tampering_status: UNKNOWN
+  printed_in_book: true
+  associated_mysteries: [CMY-01, CMY-08, CMY-09]
+- id: MAP-DIEGETIC-B
+  kind: MAP
+  title: REDMUR — MAPA CANÔNICO DOS ARREDORES
+  source_file: SRC-MAP-B
+  author: {status: MUST_REMAIN_UNKNOWN, question_ref: Q-MAP-AUTHOR, unk_ref: UNK-MAP-AUTHOR}
+  date: UNKNOWN
+  map_layer: UNKNOWN
+  accuracy: UNKNOWN
+  tampering_status: UNKNOWN
+  printed_in_book: true
+  associated_mysteries: [CMY-01, CMY-06, CMY-08, CMY-09]
+- {id: MAP-A-TXT-01, kind: TEXT, text: Algumas verdades sempre encontram um caminho de volta., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-02, kind: TEXT, text: O que é escondido também pertence a Redmur., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-03, kind: TEXT, text: Montanhas guardam segredos. Redmur os preserva., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-04, kind: TEXT, text: Lugares também guardam memórias., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-05, kind: TEXT, text: Redmur sempre observa., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-06, kind: TEXT, text: Disciplina. Memória. Preservação., epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-07, kind: TEXT, text: District of Civic Preservation — Scottish Interior, epistemic_status: UNKNOWN}
+- {id: MAP-A-TXT-08, kind: TEXT, text: Para os vales e o resto do mundo, epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-01, kind: TEXT, text: 'Mesmos caminhos, outros rostos.', epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-02, kind: TEXT, text: 'Não há fronteiras, apenas mais estradas.', epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-03, kind: TEXT, text: O que parece saída pode ser apenas outra entrada., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-04, kind: TEXT, text: Os vales guardam segredos. Redmur é apenas o centro. E talvez não seja o fim., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-05, kind: TEXT, text: Nem todo nome no mapa é um lugar. Alguns são avisos., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-06, kind: TEXT, text: Todo mapa mente um pouco., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-07, kind: TEXT, text: Lugares também guardam memórias., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-08, kind: TEXT, text: Redmur sempre observa., epistemic_status: UNKNOWN, rendered_text: REDNUR SEMPBE OBSERVA, anomaly: ANM-B-12}
+- {id: MAP-B-TXT-09, kind: TEXT, text: Disciplina. Memória. Preservação., epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-10, kind: TEXT, text: Registro dos Vilarejos (e não apenas deles), epistemic_status: UNKNOWN}
+- {id: MAP-B-TXT-11, kind: TEXT, text: Estrada 13 Em Disputa, epistemic_status: UNKNOWN}
+- {id: MAP-A-LEGEND, kind: TEXT, text: 'Legenda do Mapa A: estrada principal, trilha, rota de fuga, passagem oculta, área restrita, túmulo/cripta,
+    água, bosque.', epistemic_status: UNKNOWN}
+- {id: MAP-B-LEGEND, kind: TEXT, text: 'Legenda do Mapa B: estrada principal/secundária, trilha, rota contestada, estrada bloqueada, limite incerto,
+    vilarejo, ruínas, capela, casa isolada, ponte, moinho, pedra erguida, rio, lago, charco, floresta, montanha, campos, cemitério, construção
+    notável.', epistemic_status: UNKNOWN}
+- {id: MAP-A-SCALE, kind: TEXT, text: 'Escala: 0 · 250 · 300 · 750 · 1.000 m', epistemic_status: UNKNOWN, anomaly: ANM-A-01}
+- {id: MAP-B-SCALE, kind: TEXT, text: 'Escala: 0 · 2,5 · 5 · 10 · 15 · 20 km', epistemic_status: UNKNOWN, anomaly: ANM-B-03}
+- {id: MAP-A-GRID, kind: TEXT, text: Grade A–H × 1–7, epistemic_status: UNKNOWN, anomaly: ANM-A-02}
+- {id: MAP-B-GRID, kind: TEXT, text: Grade A–M × 1–10, epistemic_status: UNKNOWN}
+- {id: MAP-B-ROUTES-TITLE, kind: TEXT, text: Rotas contestadas, epistemic_status: UNKNOWN}
+- id: MAP-A-FIG-01
+  kind: FIGURE
+  description: figura humana escura na via abaixo de '(0,0)'
+  px: [527, 603]
+  cartographic_meaning: NONE_ASSUMED
+- id: MAP-A-FIG-02
+  kind: FIGURE
+  description: figura encapuzada na South Gate Road
+  px: [579, 763]
+  cartographic_meaning: NONE_ASSUMED
+- id: MAP-A-INSET-GLYPHS
+  kind: GLYPH_SET
+  glyphs: [⊤, ●, +, ponta de seta]
+  meaning: UNKNOWN
+  note: Não estão na legenda; ponta de seta NÃO é direcionalidade.
+- {id: MAP-A-MRK-01, kind: MARKER, description: ponto vermelho junto à entrada do Root Cellar Hideout, meaning: UNKNOWN}
+- {id: MAP-B-REG, kind: REGISTER, title: Registro dos Vilarejos (e não apenas deles), register: true}
+- {id: MAP-A-ORN-COMPASS, kind: ORNAMENT, description: rosa dos ventos com rosa, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-A-ORN-ROSES, kind: ORNAMENT, description: rosas nos cantos, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-A-ORN-SERPENT, kind: ORNAMENT, description: serpente na margem oeste, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-A-ORN-SKULL, kind: ORNAMENT, description: caveira sobre o inset subterrâneo, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-B-ORN-COMPASS, kind: ORNAMENT, description: rosa dos ventos com rosa, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-B-ORN-ROSES, kind: ORNAMENT, description: rosas nos cantos, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-B-ORN-SERPENT, kind: ORNAMENT, description: serpente na margem sudoeste, cartographic_meaning: NONE_ASSUMED}
+- {id: MAP-B-ORN-SKULL, kind: ORNAMENT, description: caveira sobre o painel central inferior, cartographic_meaning: NONE_ASSUMED}

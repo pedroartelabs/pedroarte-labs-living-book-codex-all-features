@@ -1,0 +1,9 @@
+artifacts:
+  - id: MAP-DIEGETIC-A
+    kind: MAP
+    title: "Valdoro — mapa local"
+    source_file: SRC-MAP-A
+    author: {status: MUST_REMAIN_UNKNOWN, question_ref: Q-MAP-AUTHOR, unk_ref: UNK-MAP-AUTHOR}
+    map_layer: UNKNOWN
+    printed_in_book: true
+  - {id: MAP-A-TXT-01, kind: TEXT, text: "Todo caminho tem dois lados.", epistemic_status: UNKNOWN}

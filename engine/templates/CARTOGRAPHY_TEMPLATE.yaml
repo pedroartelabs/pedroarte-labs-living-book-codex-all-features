@@ -1,0 +1,100 @@
+# CARTOGRAPHY_TEMPLATE.yaml — canon cartográfico (features.cartography, neutro de gênero)
+#
+# Contrato: engine/contracts/CARTOGRAPHY.schema.json. Validador: engine/scripts/check_cartography.py.
+# SDD: docs/sdd/*CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md.
+#
+# Este arquivo é UM exemplo em documento único, com lugares fictícios (Vale Fictício).
+# Na prática cada chave de topo vive em um arquivo <CHAVE>.seed.yaml listado em `includes`,
+# ao lado de CARTOGRAPHY.seed.yaml e de sources/SOURCES.yaml (ver tests/fixtures/cartography/canon/).
+#
+# REGRAS DE OURO
+#  - Coordenadas em metros NUNCA são digitadas: derivam de `source_px` + escala da fonte.
+#  - Geometria desenhada é fato; texto de mapa é alegação; o que o mapa não mostra é UNKNOWN.
+#  - Nenhum campo guarda resposta de mistério. A ponte para a verdade é `truth_ref` (id opaco).
+#  - Enum de saídas é fechado: não existe valor de saída "verdadeira".
+#  - Lugar novo entra por proposta aprovada, nunca por conveniência de cena.
+
+apiVersion: pedroarte.livingbooks/v1
+kind: CartographyCanon
+metadata:
+  project_id: slug-do-livro
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  sources: sources/SOURCES.yaml          # pinado por sha256
+  grid: {name: GRID_DO_LIVRO, origin: XX-CEN-ORG, units: m}   # origem = (0, 0) por definição
+  edges_digitized: false                 # true quando as vias de superfície estiverem digitalizadas
+  type_extensions: [LANDMARK, JUNCTION, FRAME_PORTAL, OFF_MAP_DESTINATION]   # cada uma justificada por um elemento real
+includes: [LOCATIONS, EDGES, MYSTERIES, ARTIFACTS, ANOMALIES]
+
+locations:
+  - id: XX-CEN-ORG                       # id estável; nunca reutilizado
+    canonical_name: Praça Central
+    names: [{name: Praça Central, kind: MAP_A_LABEL, source: SRC-MAP-A}]
+    type: LANDMARK
+    layer: URBAN                         # URBAN | REGIONAL | SUBTERRANEAN
+    geometry: POINT                      # POINT | AREA | LINE
+    status: ACTIVE                       # ACTIVE | ABANDONED | RUINED | SEALED | RESTRICTED | DISPUTED | UNKNOWN
+    source_px:                           # proveniência: a coordenada é derivada disto
+      - {source: SRC-MAP-A, px: [50, 40], anchor: ICON}
+      - {source: SRC-MAP-B, px: [50, 40], anchor: SCHEMATIC}   # SCHEMATIC = não entra em nenhuma distância
+  - id: XX-SUB-POR
+    canonical_name: Porão da Capela
+    type: CELLAR
+    layer: SUBTERRANEAN
+    anchor_to: XX-CEN-CAP                # posição = a do portal de superfície
+  - id: XX-SUB-SEL                       # lugar declarado pela autora, sem posição nem ligação
+    canonical_name: Cripta Selada
+    type: CRYPT
+    layer: SUBTERRANEAN
+    position: UNKNOWN
+    source: AUTHOR_DECLARED
+    connectivity: UNDECLARED             # nó inerte até uma proposta declarar como se entra
+
+edges:
+  - {id: EDG-U-001, from: XX-CEN-ORG, to: XX-CEN-CAP, edge_type: ROAD, directionality: BOTH}
+  - {id: EDG-P-001, from: XX-CEN-CAP, to: XX-SUB-POR, edge_type: PORTAL, directionality: BOTH}   # única forma de mudar de camada
+
+exits:
+  - id: EXT-01
+    road: ROAD-SUL
+    frame_portal: XX-FRM-S               # ou `frame_portal: null` + `frame_status: TO_DIGITIZE`
+    physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}   # além da moldura = sempre OFF_MAP
+    claims:
+      - {class: OFFICIAL_EXIT, text: "Saída Sul", source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+    exit_classes: [APPARENT_EXIT, OFFICIAL_EXIT]   # projeção das claims + geometria
+
+route_mysteries:
+  - id: RMY-R1
+    label: R1
+    motto: "O caminho volta."            # literal do mapa
+    motto_status: MAP_ARTIFACT           # lema é artefato, nunca resposta
+    resolution_state: UNRESOLVED
+    truth_ref: null
+
+mysteries:
+  - id: CMY-01
+    question: "O que significa a marca na ponte?"
+    activation: {requires_anomalies: [ANM-01]}   # só anomalia INTENTIONAL_ARTIFACT alimenta mistério
+    candidate_interpretations: []        # sem valor de verdade (nada de plausible/true/score)
+    resolution_state: UNRESOLVED         # RESOLVED/PARTIALLY exige truth_ref + question_ref
+    truth_ref: null
+
+anomalies:
+  - {id: ANM-01, source: SRC-MAP-A, description: "marca sem legenda", classification: INTENTIONAL_ARTIFACT, decided_by: DECISAO-0001}
+
+artifacts:
+  - id: MAP-DIEGETIC-A
+    kind: MAP
+    author: {status: MUST_REMAIN_UNKNOWN, question_ref: Q-AUTOR, unk_ref: UNK-AUTOR}   # se a autoria é mistério permanente
+    map_layer: UNKNOWN
+  - {id: MAP-A-TXT-01, kind: TEXT, text: "Todo caminho tem dois lados.", epistemic_status: UNKNOWN}   # texto de mapa nunca é FACT
+
+register:                                # registro numerado: a ordem impressa é artefato
+  expected_lines: 2
+  printed_order_is_artifact: true
+  entries:
+    - {id: REG-01, display_index: "01", printed_name: "Praça Central", location_id: XX-CEN-ORG, placement: ON_MAP}
+    - {id: REG-02, display_index: "01", printed_name: "Nenhum lugar", location_id: null, placement: NOT_ON_MAP}   # índice = string literal
+
+inventory:                               # checklist de transcrição (CG-08): cada item do mapa aponta para uma entidade
+  - {item: "A: Praça Central", kind: LABEL, maps_to: XX-CEN-ORG}

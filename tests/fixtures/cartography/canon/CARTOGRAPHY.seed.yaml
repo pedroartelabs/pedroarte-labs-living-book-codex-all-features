@@ -1,0 +1,11 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CartographyCanon
+metadata:
+  project_id: fixture-valdoro
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  sources: sources/SOURCES.yaml
+  grid: {name: FIXTURE_GRID, origin: TS-CEN-ORG, units: m}
+  edges_digitized: true
+  type_extensions: [LANDMARK, MILL, JUNCTION, FRAME_PORTAL, OFF_MAP_DESTINATION]
+includes: [LOCATIONS, EDGES, MYSTERIES, ARTIFACTS, ANOMALIES]

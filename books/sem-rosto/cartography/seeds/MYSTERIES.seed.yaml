@@ -1,0 +1,209 @@
+# Mistérios cartográficos (SDD 21). NENHUM tem interpretação, resposta ou padrão real.
+# O lado espacial de uma pergunta; a verdade (se existir) mora no Story Truth Ledger, referenciada por truth_ref (hoje null).
+route_mysteries:
+- id: RMY-R1
+  label: R1
+  motto: O círculo retorna.
+  motto_status: MAP_ARTIFACT
+  physical_routes: []
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  map_b_anchor: {status: NOT_FOUND}
+  label_match_only: [RTE-A-R1]
+- id: RMY-R2
+  label: R2
+  motto: Nem todo caminho continua.
+  motto_status: MAP_ARTIFACT
+  physical_routes: []
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  map_b_anchor: {status: NOT_FOUND}
+  label_match_only: [RTE-A-R2]
+- id: RMY-R3
+  label: R3
+  motto: Há mais de uma margem.
+  motto_status: MAP_ARTIFACT
+  physical_routes: [RTE-B-R3-GLN, RTE-B-R3-STR]
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  anomalies: [ANM-B-09]
+- id: RMY-R4
+  label: R4
+  motto: Entrada ou saída?
+  motto_status: MAP_ARTIFACT
+  physical_routes: [RTE-B-R4]
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+- id: RMY-R7
+  label: R7
+  motto: Desaparece após a ponte.
+  motto_status: MAP_ARTIFACT
+  physical_routes: [RTE-B-R7]
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  physical_facts_checked: [Nenhuma ponte identificada junto ao marcador na transcrição v0.]
+- id: RMY-R13
+  label: R13
+  motto: Sinais foram removidos.
+  motto_status: MAP_ARTIFACT
+  physical_routes: [RTE-B-R13]
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+- id: RMY-R17
+  label: R17
+  motto: Usada, mas por quem?
+  motto_status: MAP_ARTIFACT
+  physical_routes: [RTE-B-R17]
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+mysteries:
+- id: CMY-01
+  question: Alguma das vias que tocam a moldura leva para fora de Redmur? Qual?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  involved_exits: [EXT-01, EXT-02, EXT-03, EXT-04, EXT-05, EXT-06, EXT-07, EXT-08, EXT-09, EXT-10]
+- id: CMY-02
+  question: As rotas R1–R3 do mapa urbano são as mesmas R1–R3 da legenda regional?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  involved_routes: [RTE-A-R1, RTE-A-R2, RTE-A-R3, RTE-B-R3-STR, RTE-B-R3-GLN, RTE-B-QM, RTE-B-CHP]
+  numbers: [R1, R2, R3]
+  activation:
+    requires_anomalies: [ANM-X-01]
+- id: CMY-03
+  question: Por que o registro tem dois '05' e nenhum '06'?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  involved_locations: [RM-URB-ROW, RM-REG-GLN]
+  activation:
+    requires_anomalies: [ANM-B-01]
+- id: CMY-04
+  question: Por que os marcadores são R1, R2, R3, R4, R7, R13 e R17?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  numbers: [R1, R2, R3, R4, R7, R13, R17]
+- id: CMY-05
+  question: Letham e Passo de Muirchéin são lugares ou avisos?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  involved_locations: []
+  register_entries: [REG-B-17, REG-B-23]
+  activation:
+    requires_anomalies: [ANM-B-02]
+- id: CMY-06
+  question: As distâncias do Mapa B (barra, placas, duas Eldham a 41 milhas) são verdadeiras?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  activation:
+    requires_anomalies: [ANM-X-02, ANM-B-03, ANM-B-04, ANM-B-06]
+- id: CMY-07
+  question: O que é o triângulo branco junto à capela no Mapa B?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  involved_locations: [RM-CEN-CHP, RM-URB-OPC]
+  activation:
+    requires_anomalies: [ANM-B-11]
+- id: CMY-08
+  question: Os lemas dos dois mapas compõem uma mensagem?
+  candidate_interpretations: []
+  resolution_state: UNRESOLVED
+  truth_ref: null
+  map_artifacts: [MAP-A-TXT-01, MAP-B-TXT-01]
+- id: CMY-09
+  question: Quem produziu os mapas dentro do mundo?
+  candidate_interpretations: []
+  resolution_state: PERMANENTLY_AMBIGUOUS
+  truth_ref: null
+  question_policy: NEVER
+  question_ref: Q-MAP-AUTHOR
+  note: Discutido no livro; investigado; nunca revelado (SDD 22.7).
+register:
+  artifact: MAP-B-REG
+  title: Registro dos Vilarejos (e não apenas deles)
+  footer: Nem todo nome no mapa é um lugar. Alguns são avisos.
+  expected_lines: 30
+  printed_order_is_artifact: true
+  entries:
+  - {id: REG-B-01, line: 1, display_index: '01', printed_name: Redmur, location_id: RM-REG-RDM, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - id: REG-B-02
+    line: 2
+    display_index: '02'
+    printed_name: Saint Morrow
+    location_id: null
+    placement: NO_STANDALONE_LABEL
+    public_interpretation: null
+    historical_interpretation: null
+    truth_ref: null
+    ordering_significance: UNKNOWN
+    candidates: [RM-CEN-CHP, RM-CEN-SMC]
+  - {id: REG-B-03, line: 3, display_index: '03', printed_name: Flarry Estate, location_id: RM-URB-FLE, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-04, line: 4, display_index: '04', printed_name: Manfred Farm, location_id: RM-URB-MNF, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-05a, line: 5, display_index: '05', printed_name: Rowan Cottage, location_id: RM-URB-ROW, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-05b, line: 6, display_index: '05', printed_name: Glenath, location_id: RM-REG-GLN, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-07, line: 7, display_index: '07', printed_name: Creggan Bothy, location_id: RM-REG-CRB, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-08, line: 8, display_index: 08, printed_name: Blackridge Farm, location_id: RM-REG-BRF, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-09, line: 9, display_index: 09, printed_name: Corrie's End, location_id: RM-REG-CRE, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-10, line: 10, display_index: '10', printed_name: Kirkhollow, location_id: RM-REG-KRK, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-11, line: 11, display_index: '11', printed_name: Elderglen, location_id: RM-REG-ELG, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-12, line: 12, display_index: '12', printed_name: Harrowmire, location_id: RM-REG-HRW, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-13, line: 13, display_index: '13', printed_name: Stonewell, location_id: RM-REG-STW, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-14, line: 14, display_index: '14', printed_name: Cairnvale, location_id: RM-REG-CRV, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-15, line: 15, display_index: '15', printed_name: Grayfen, location_id: RM-REG-GRF, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-16, line: 16, display_index: '16', printed_name: Thistlebank, location_id: RM-REG-THB, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-17, line: 17, display_index: '17', printed_name: Letham, location_id: null, placement: NOT_ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-18, line: 18, display_index: '18', printed_name: Craigness, location_id: RM-REG-CRG, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-19, line: 19, display_index: '19', printed_name: Abadia de Saint Bride, location_id: RM-REG-SBA, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-20, line: 20, display_index: '20', printed_name: Moor Cairn, location_id: RM-REG-MCR, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-21, line: 21, display_index: '21', printed_name: Ben Ràth, location_id: RM-REG-BRT, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-22, line: 22, display_index: '22', printed_name: Ruínas de Kellburne, location_id: RM-REG-KLB, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-23, line: 23, display_index: '23', printed_name: Passo de Muirchéin, location_id: null, placement: NOT_ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-24, line: 24, display_index: '24', printed_name: Carriden Hamlet, location_id: RM-REG-CRH, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-25, line: 25, display_index: '25', printed_name: Blackthorn Cottage, location_id: RM-REG-BTC, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-26, line: 26, display_index: '26', printed_name: Willowford, location_id: RM-REG-WLF, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-27, line: 27, display_index: '27', printed_name: Fenside Grange, location_id: RM-REG-FSG, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-28, line: 28, display_index: '28', printed_name: Mossgate, location_id: RM-REG-MSG, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-29, line: 29, display_index: '29', printed_name: Raven's Holt, location_id: RM-REG-RVH, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}
+  - {id: REG-B-30, line: 30, display_index: '30', printed_name: Old Mill, location_id: RM-REG-OML, placement: ON_MAP, public_interpretation: null,
+    historical_interpretation: null, truth_ref: null, ordering_significance: UNKNOWN}

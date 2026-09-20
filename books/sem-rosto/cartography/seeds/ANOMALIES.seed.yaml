@@ -1,0 +1,138 @@
+# Anomalias dos mapas: TODAS `INTENTIONAL_ARTIFACT` por decisão da autora (CART_DECISION_0001, OQ-CART-15).
+# Intencional NÃO é interpretado: nenhuma tem significado atribuído e nenhuma é corrigida (os mapas são impressos como estão).
+# Estruturas sem rótulo (UNL-*) existem como obstáculo/cobertura, não como lugar canônico.
+anomalies:
+- {id: ANM-A-01, source: SRC-MAP-A, description: 'barra de escala 0 · 250 · 300 · 750 · 1.000 m, divisões internas desproporcionais', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-A-02, source: SRC-MAP-A, description: colunas da grade com espaçamento irregular, classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-A-03, source: SRC-MAP-A, description: 'inset põe Quarry Crawlspace ao lado de Pumping Station Channel; na superfície distam ≈ 3,35
+    km', classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-A-04, source: SRC-MAP-A, description: via de Rowan Cottage parece cruzar o Ash Burn sem ponte; R2 passa ao norte da nascente visível,
+  classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-A-05, source: SRC-MAP-A, description: 'edificação com ''+'' branco sem rótulo, símbolo diferente do ''†'' da legenda', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001, refers_to: UNL-A-01}
+- {id: ANM-X-01, source: A×B, description: corredor Bothy–Strathmoor–Rowan é R2 no Mapa A e R3 no Mapa B, classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-X-02, source: A×B, description: 'barra e desenho do núcleo do Mapa B não batem com a razão de escala 7,25 : 100', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-X-03, source: A×B, description: 'Old Parish Cemetery (A) e Cemitério Antigo (B): mesmo lugar por posição relativa e tipo', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-01, source: SRC-MAP-B, description: 'registro: índice 05 em duas linhas (Rowan Cottage, Glenath) e 06 ausente', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-02, source: SRC-MAP-B, description: 'registro × mapa: Letham e Passo de Muirchéin sem lugar; Muirfield Farm sem registro; Saint Morrow
+    sem rótulo', classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-03, source: SRC-MAP-B, description: 'barra de escala não linear (intervalos iguais para 2,5 e 5 km)', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-04, source: SRC-MAP-B, description: duas placas 'Para Eldham (41 milhas)' em vias diferentes, classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-05, source: SRC-MAP-B, description: '''Para Caelrith?'' com ponto de interrogação na placa', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-06, source: SRC-MAP-B, description: 'placas em milhas, barra em quilômetros', classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-07, source: SRC-MAP-B, description: '''Inverloch (?7 milhas)'': dígito ilegível', classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-08, source: SRC-MAP-B, description: '''Westhaven'' ou ''Weathoven''', classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-09, source: SRC-MAP-B, description: rótulo R3 em três lugares distintos, classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-10, source: SRC-MAP-B, description: R1 e R2 na legenda sem marcador localizado, classification: INTENTIONAL_ARTIFACT, decided_by: CART_DECISION_0001}
+- {id: ANM-B-11, source: SRC-MAP-B, description: 'triângulo branco junto à capela, ausente da legenda', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+- {id: ANM-B-12, source: SRC-MAP-B, description: '''REDMUR SEMPRE OBSERVA'' renderizado como ''REDNUR SEMPBE OBSERVA''', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001, printed_as_is: true}
+- id: ANM-B-13
+  source: SRC-MAP-B
+  description: nove glifos vermelhos ilegíveis
+  classification: INTENTIONAL_ARTIFACT
+  decided_by: CART_DECISION_0001
+  refers_to: [GLY-B-01, GLY-B-02, GLY-B-03, GLY-B-04, GLY-B-05, GLY-B-06, GLY-B-07, GLY-B-08, GLY-B-09]
+- {id: ANM-B-14, source: SRC-MAP-B, description: linha para Dunsgate entre os símbolos 'trilha' e 'limite incerto', classification: INTENTIONAL_ARTIFACT,
+  decided_by: CART_DECISION_0001}
+glyphs:
+- id: GLY-B-01
+  source: SRC-MAP-B
+  px: [143, 368]
+  readings_candidate: ['10', R0, IO]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-02
+  source: SRC-MAP-B
+  px: [218, 487]
+  readings_candidate: [R1, '11', R4]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-03
+  source: SRC-MAP-B
+  px: [149, 669]
+  readings_candidate: ['17', R7]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-04
+  source: SRC-MAP-B
+  px: [322, 727]
+  readings_candidate: ['11', R1]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-05
+  source: SRC-MAP-B
+  px: [1045, 250]
+  readings_candidate: ['10', 1U, R0]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-06
+  source: SRC-MAP-B
+  px: [577, 233]
+  readings_candidate: [E7, R7, '17']
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-07
+  source: SRC-MAP-B
+  px: [687, 295]
+  readings_candidate: []
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-08
+  source: SRC-MAP-B
+  px: [1002, 855]
+  readings_candidate: ['23', R3, '25']
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+- id: GLY-B-09
+  source: SRC-MAP-B
+  px: [730, 432]
+  readings_candidate: [R3]
+  attributed_to: null
+  note: leituras candidatas nunca viram vínculo
+unlabeled:
+- id: UNL-A-01
+  source: SRC-MAP-A
+  px: [770, 720]
+  kind_of: STRUCTURE
+  description: pequena edificação com '+' branco a sudeste do Old Coach Stop
+- id: UNL-A-02
+  source: SRC-MAP-A
+  px: [298, 708]
+  kind_of: STRUCTURE
+  description: casa isolada a oeste da trilha para Caretaker House
+- id: UNL-A-03
+  source: SRC-MAP-A
+  px: [957, 393]
+  kind_of: STRUCTURE
+  description: casa isolada entre Manfred Farm e Ash Burn
+- id: UNL-A-04
+  source: SRC-MAP-A
+  px: [530, 686]
+  kind_of: STRUCTURE
+  description: edificação baixa junto à South Gate Road
+- id: UNL-B-01
+  source: SRC-MAP-B
+  px: [880, 600]
+  kind_of: STRUCTURE
+  description: pequeno lago a sul de Carriden Hamlet
+- id: UNL-B-02
+  source: SRC-MAP-B
+  px: [500, 150]
+  kind_of: STRUCTURE
+  description: cordilheira norte sem nome
+- id: UNL-B-03
+  source: SRC-MAP-B
+  px: [497, 517]
+  kind_of: STRUCTURE
+  description: triângulo branco junto à capela (símbolo fora da legenda)
+  refers_to: ANM-B-11

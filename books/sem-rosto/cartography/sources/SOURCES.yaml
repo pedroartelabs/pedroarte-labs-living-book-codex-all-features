@@ -1,0 +1,53 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: CartographySources
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  sdd: docs/sdd/REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md
+  note: >
+    Fontes canônicas primárias. Nunca editar in loco: uma versão corrigida entra
+    como nova fonte (SRC-MAP-x@v1.1) com `supersedes`; a antiga fica arquivada.
+    Os PNGs impressos no livro SÃO estes arquivos (decisão OQ-CART-03).
+sources:
+  - id: SRC-MAP-A
+    title: "REDMUR — MAPA CANÔNICO DA CIDADE"
+    subtitle: "District of Civic Preservation — Scottish Interior"
+    file: MAP_A_redmur_map.png
+    sha256: 98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36
+    pixels: [1448, 1086]
+    north: UP
+    origin_px: [521, 527]            # base do monumento de Saint Morrow Cross; rotulado "(0,0)"
+    scale_evidence:
+      bar_px: [186, 433]             # extremidades da barra; marcas internas irregulares (ANM-A-01)
+      bar_m: [0, 1000]
+      meters_per_px: 4.05
+    grid: {columns: [A, B, C, D, E, F, G, H], rows: [1, 2, 3, 4, 5, 6, 7], spacing: IRREGULAR}   # ANM-A-02
+    printed_in_book: true
+  - id: SRC-MAP-B
+    title: "REDMUR — MAPA CANÔNICO DOS ARREDORES"
+    subtitle: "Terras, Vilarejos e Caminhos da Escócia Interior"
+    file: MAP_B_redmur_arredores_map.png
+    sha256: 36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3
+    pixels: [1448, 1086]
+    north: UP
+    origin_px: [638, 530]            # Saint Morrow Cross no Mapa B
+    scale_evidence:
+      bar_px: [901, 1143]            # barra irregular e não é a escala (ANM-B-03, intencional)
+      bar_km: [0, 20]
+      meters_per_px: 55.86           # decisão OQ-CART-01: razão A:B = 7,25:100
+    grid: {columns: [A, B, C, D, E, F, G, H, I, J, K, L, M], rows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], spacing: REGULAR_APPROX}
+    printed_in_book: true
+transforms:
+  - id: XFM-A@v1
+    source: SRC-MAP-A
+    x_m: "(px_x - 521) * 4.05"
+    y_m: "(527 - px_y) * 4.05"
+    position_accuracy_m: 60
+  - id: XFM-B@S7.25
+    source: SRC-MAP-B
+    scale_ratio_A_to_B: 0.0725       # m/px do Mapa B = 4.05 / 0.0725 = 55.86
+    x_m: "(px_x - 638) * 55.86"
+    y_m: "(530 - px_y) * 55.86"
+    position_accuracy_m: 840
+    applies_to: "nós exclusivos do Mapa B; nós presentes nos dois mapas usam XFM-A@v1 (Mapa B = esquemático)"
+    interpretation: "razão LINEAR de escala; leitura por área (~15 m/px) não adotada — confirmar (SDD 7.4)"

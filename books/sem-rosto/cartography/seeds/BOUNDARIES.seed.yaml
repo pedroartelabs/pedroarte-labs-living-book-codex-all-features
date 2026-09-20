@@ -1,0 +1,115 @@
+# Fronteiras e saídas (SDD 19–20). A classe de saída é um enum FECHADO: não existe valor de saída verdadeira.
+# `APPARENT_EXIT` é geometria (a via toca a moldura). O que há além da moldura é OFF_MAP.
+boundaries:
+- {id: BND-B-01, kind: UNCERTAIN_LIMIT, source: SRC-MAP-B, legend: Limite incerto, location: 'NE, cruzando a Estrada 13', crossing_effect: NONE_PHYSICAL,
+  epistemic_status: OFFICIAL_CLAIM}
+- {id: BND-B-02, kind: UNCERTAIN_LIMIT, source: SRC-MAP-B, legend: Limite incerto ou trilha (ambíguo), location: 'O, rumo a Dunsgate', crossing_effect: NONE_PHYSICAL,
+  epistemic_status: UNKNOWN, anomaly: ANM-B-14}
+- {id: BND-A-01, kind: RESTRICTED_ZONE, source: SRC-MAP-A, legend: Área restrita, location: hachura sobre a East Road a leste de Burn Bridge,
+  physical_barrier: X vermelho no ponto, epistemic_status: OFFICIAL_CLAIM}
+- {id: BND-A-FRAME, kind: MAP_FRAME, source: SRC-MAP-A, note: 'limite do desenho, não do mundo'}
+- {id: BND-B-FRAME, kind: MAP_FRAME, source: SRC-MAP-B, note: 'limite do desenho, não do mundo'}
+- {id: BND-ADM-CP, kind: ADMINISTRATIVE, source: SRC-MAP-A, legend: District of Civic Preservation, extent: UNKNOWN, epistemic_status: OFFICIAL_CLAIM}
+exits:
+- id: EXT-01
+  road: ROAD-SGR
+  frame_portal: RM-FRM-A-S
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: OFFICIAL_EXIT, text: Entrada Principal, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT, OFFICIAL_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  related_marker: R4 'Entrada ou saída?' adjacente no Mapa B
+- id: EXT-02
+  road: ROAD-EAST
+  frame_portal: null
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: CLOSED_EXIT, text: Officially Closed, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT, CLOSED_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  frame_status: TO_DIGITIZE
+  confidence: PROBABLE
+  note: Barreira física no X; a alegação 'fechada' é do artefato.
+- id: EXT-03
+  road: ROAD-E13
+  frame_portal: RM-FRM-B-NE
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: DISPUTED_EXIT, text: Estrada 13 Em Disputa, source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  - {class: APPARENT_EXIT, text: 'Para Caelrith? (32 milhas)', source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT, DISPUTED_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+- id: EXT-04
+  road: ROAD-B-W
+  frame_portal: RM-FRM-B-W
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: UNKNOWN_EXIT, text: Para Dunsgate (17 milhas), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT, UNKNOWN_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  note: Linha pontilhada entre 'trilha' e 'limite incerto' (ANM-B-14).
+- id: EXT-05
+  road: ROAD-B-SW1
+  frame_portal: RM-FRM-B-SW1
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: APPARENT_EXIT, text: Para Westhaven (29 milhas), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+- id: EXT-06
+  road: ROAD-B-SW2
+  frame_portal: RM-FRM-B-SW2
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: APPARENT_EXIT, text: 'Para Inverloch (?7 milhas)', source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+- id: EXT-07
+  road: ROAD-B-R13
+  frame_portal: RM-FRM-B-SE1
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: APPARENT_EXIT, text: Para Eldham (41 milhas), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  related_route: RTE-B-R13
+- id: EXT-08
+  road: ROAD-B-SE2
+  frame_portal: RM-FRM-B-SE2
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: APPARENT_EXIT, text: Para Eldham (41 milhas), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  note: Segunda placa idêntica a EXT-07 (ANM-B-04).
+- id: EXT-09
+  road: ROAD-B-R3N
+  frame_portal: null
+  physical: {drawn_to: UNKNOWN, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: UNKNOWN_EXIT, text: trilha vermelha contestada que sobe a cordilheira norte, source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [UNKNOWN_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  frame_status: TO_DIGITIZE
+  related_route: RTE-B-R3-GLN
+- id: EXT-10
+  road: ROAD-B-KEL
+  frame_portal: null
+  physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+  claims:
+  - {class: CLOSED_EXIT, text: Estrada bloqueada (símbolo da legenda), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+  exit_classes: [APPARENT_EXIT, CLOSED_EXIT]
+  truth_ref: null
+  first_allowed_reveal: OPEN
+  frame_status: TO_DIGITIZE
+  confidence: PROBABLE

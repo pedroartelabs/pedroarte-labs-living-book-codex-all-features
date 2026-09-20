@@ -1,0 +1,64 @@
+# Vias nomeadas. As arestas de superfície são digitalizadas no Slice 2 (metadata.edges_digitized: false).
+# As arestas subterrâneas e os portais estão em SUBTERRANEAN.seed.yaml.
+roads:
+- id: ROAD-SGR
+  names:
+  - {name: South Gate Road, kind: MAP_A_LABEL}
+  - {name: South Gate Road (Entrada Principal), kind: MAP_B_LABEL}
+  road_class: MAIN
+  edges: []
+  named_extent: DRAWN
+  claims:
+  - {text: Entrada Principal, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+  - {text: Para os vales e o resto do mundo, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+- id: ROAD-EAST
+  names:
+  - {name: East Road — Officially Closed, kind: MAP_A_LABEL}
+  road_class: MAIN
+  edges: []
+  named_extent: SEGMENT_ONLY
+  claims:
+  - {text: Officially Closed, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+- id: ROAD-E13
+  names:
+  - {name: Estrada 13 Em Disputa, kind: MAP_B_LABEL}
+  road_class: MAIN
+  edges: []
+  claims:
+  - {text: Em Disputa, source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
+- id: ROAD-B-W
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: trilha a oeste rumo à placa Dunsgate
+- id: ROAD-B-SW1
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: estrada SO junto a Loch Calder
+- id: ROAD-B-SW2
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: estrada SO abaixo de Thistlebank
+- id: ROAD-B-R13
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: estrada E–SE (R13)
+- id: ROAD-B-SE2
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: trilha vermelha ao sul de Mossgate
+- id: ROAD-B-R3N
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: trilha R3 que sobe a cordilheira
+- id: ROAD-B-KEL
+  names: []
+  road_class: UNKNOWN
+  edges: []
+  note: via NE com trechos de 'estrada bloqueada' perto de Kellburne
+edges: []

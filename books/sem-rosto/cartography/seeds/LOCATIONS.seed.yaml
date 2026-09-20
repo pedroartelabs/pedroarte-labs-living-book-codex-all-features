@@ -1,0 +1,1069 @@
+# Nós de superfície: Level 1 (Mapa A), Level 2 (Mapa B), frames e destinos fora da moldura.
+# Coordenadas NUNCA são digitadas: derivam de source_px + escala da fonte (SOURCES.yaml).
+# Nós presentes nos dois mapas: posição métrica do Mapa A; anchor SCHEMATIC no Mapa B (SDD 7.4).
+locations:
+- id: RM-CEN-SMC
+  canonical_name: Saint Morrow Cross
+  names:
+  - {name: Saint Morrow Cross, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Saint Morrow Cross, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: LANDMARK
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:D4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [521, 527]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [638, 530]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-CEN-RSP
+  canonical_name: Red Stag Pub
+  names:
+  - {name: Red Stag Pub, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: PUB
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:D4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [560, 462]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-CON
+  canonical_name: Redmur Constabulary
+  names:
+  - {name: Redmur Constabulary, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: POLICE
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:D5']
+  source_px:
+  - source: SRC-MAP-A
+    px: [615, 590]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-CAH
+  canonical_name: Civil Archive Hall
+  names:
+  - {name: Civil Archive Hall, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: ARCHIVE
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:C5']
+  source_px:
+  - source: SRC-MAP-A
+    px: [400, 605]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-OCP
+  canonical_name: Office of Civic Preservation
+  names:
+  - {name: Office of Civic Preservation, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: GOVERNMENT_BUILDING
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:B4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [355, 540]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-GMC
+  canonical_name: General Mercantile
+  names:
+  - {name: General Mercantile, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: SHOP
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:E4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [700, 475]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-OCS
+  canonical_name: Old Coach Stop
+  names:
+  - {name: Old Coach Stop, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: TRANSPORT_STOP
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:D6']
+  source_px:
+  - source: SRC-MAP-A
+    px: [640, 680]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-CLN
+  canonical_name: Village Clinic
+  names:
+  - {name: Village Clinic, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: CLINIC
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:E5']
+  source_px:
+  - source: SRC-MAP-A
+    px: [735, 622]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-CEN-CHP
+  canonical_name: Saint Morrow Chapel
+  names:
+  - {name: Saint Morrow Chapel, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Saint Morrow Chapel, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: CHAPEL
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:B3']
+  source_px:
+  - source: SRC-MAP-A
+    px: [318, 410]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [518, 457]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-OPC
+  canonical_name: Old Parish Cemetery
+  names:
+  - {name: Old Parish Cemetery, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Old Parish Cemetery, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  - {name: Cemitério Antigo, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: pt}
+  type: CEMETERY
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:A4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [185, 495]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [505, 525]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-FLE
+  canonical_name: Flarry Estate
+  names:
+  - {name: Flarry Estate, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Flarry Estate, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: ESTATE
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:B2']
+  source_px:
+  - source: SRC-MAP-A
+    px: [258, 235]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [485, 290]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-OQY
+  canonical_name: Old Quarry
+  names:
+  - {name: Old Quarry, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Old Quarry, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: QUARRY
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:C3']
+  source_px:
+  - source: SRC-MAP-A
+    px: [435, 315]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [580, 425]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-SHF
+  canonical_name: Sheep Fields
+  names:
+  - {name: Sheep Fields, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Sheep Fields, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: FIELD
+  layer: URBAN
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:D2']
+  source_px:
+  - source: SRC-MAP-A
+    px: [620, 260]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [660, 387]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-SBO
+  canonical_name: Shepherd's Bothy
+  names:
+  - {name: Shepherd's Bothy, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Shepherd's Bothy, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: BOTHY
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:D1']
+  source_px:
+  - source: SRC-MAP-A
+    px: [630, 140]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [690, 310]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-MNF
+  canonical_name: Manfred Farm
+  names:
+  - {name: Manfred Farm, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Manfred Farm, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: FARM
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:E2']
+  source_px:
+  - source: SRC-MAP-A
+    px: [790, 295]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [800, 405]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-SWD
+  canonical_name: Strathmoor Woods
+  names:
+  - {name: Strathmoor Woods, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Strathmoor Woods, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: FOREST
+  layer: URBAN
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:E1-G2']
+  source_px:
+  - source: SRC-MAP-A
+    px: [975, 133]
+    anchor: LABEL
+  - source: SRC-MAP-B
+    px: [892, 293]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-ROW
+  canonical_name: Rowan Cottage
+  names:
+  - {name: Rowan Cottage, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Rowan Cottage, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: COTTAGE
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:G2']
+  source_px:
+  - source: SRC-MAP-A
+    px: [1100, 222]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [1050, 345]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-RSV
+  canonical_name: Reservoir
+  names:
+  - {name: Reservoir, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Reservoir, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: RESERVOIR
+  layer: URBAN
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:H3']
+  source_px:
+  - source: SRC-MAP-A
+    px: [1270, 360]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [1105, 445]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-PMP
+  canonical_name: Pumping Station
+  names:
+  - {name: Pumping Station, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Pumping Station, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: UTILITY
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:H3']
+  source_px:
+  - source: SRC-MAP-A
+    px: [1255, 425]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [1080, 487]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+- id: RM-URB-BBR
+  canonical_name: Burn Bridge
+  names:
+  - {name: Burn Bridge, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: Burn Bridge, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  type: BRIDGE
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:H4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [1150, 490]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [985, 512]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+  crosses: [WAT-ASH]
+- id: RM-URB-ERC
+  canonical_name: East Road — ponto de bloqueio
+  names:
+  - {name: East Road — ponto de bloqueio, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  - {name: East Road — ponto de bloqueio, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: en}
+  - {name: East Road — Officially Closed, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: ROADBLOCK
+  layer: URBAN
+  geometry: POINT
+  status: RESTRICTED
+  epistemic_status: FACT
+  map_grid_reference: ['A:H4']
+  source_px:
+  - source: SRC-MAP-A
+    px: [1280, 507]
+    anchor: ICON
+  - source: SRC-MAP-B
+    px: [1037, 538]
+    anchor: SCHEMATIC
+  parent_region: RM-REG-RDM
+  status_source: OFFICIAL_CLAIM
+  physical_barrier_marker: 'X vermelho sobre hachura (legenda: Área restrita)'
+- id: RM-URB-CTH
+  canonical_name: Caretaker House
+  names:
+  - {name: Caretaker House, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: HOUSE
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:B7']
+  source_px:
+  - source: SRC-MAP-A
+    px: [330, 790]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-URB-RCH
+  canonical_name: Root Cellar Hideout
+  names:
+  - {name: Root Cellar Hideout, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: CELLAR
+  layer: URBAN
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['A:A7']
+  source_px:
+  - source: SRC-MAP-A
+    px: [205, 860]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  marker: ponto vermelho junto à entrada (MAP-A-MRK-01)
+- id: RM-URB-DCU
+  canonical_name: Drainage Culvert
+  names:
+  - {name: Drainage Culvert, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: CULVERT
+  layer: URBAN
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['A:B7']
+  source_px:
+  - source: SRC-MAP-A
+    px: [358, 885]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-URB-RTS
+  canonical_name: Ruined Tool Shed
+  names:
+  - {name: Ruined Tool Shed, kind: MAP_A_LABEL, source: SRC-MAP-A, lang: en}
+  type: RUIN
+  layer: URBAN
+  geometry: POINT
+  status: RUINED
+  epistemic_status: FACT
+  map_grid_reference: ['A:E7']
+  source_px:
+  - source: SRC-MAP-A
+    px: [735, 880]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: WAT-ASH
+  canonical_name: Ash Burn
+  names:
+  - {name: Ash Burn, kind: MAP_A_LABEL, source: SRC-MAP-A}
+  - {name: Ash Burn, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: BURN
+  layer: URBAN
+  geometry: LINE
+  status: ACTIVE
+  epistemic_status: FACT
+  polyline_px:
+  - source: SRC-MAP-A
+    px: [975, 245]
+  - source: SRC-MAP-A
+    px: [1150, 490]
+  - source: SRC-MAP-A
+    px: [1200, 570]
+  polyline_px_B:
+  - [970, 380]
+  - [985, 512]
+  - [1080, 560]
+  spring: UNKNOWN
+  note: Curso visível; nascente e continuação sob o bosque desconhecidas (ANM-A-04).
+- id: RM-FRM-A-S
+  canonical_name: moldura sul (South Gate Road)
+  type: FRAME_PORTAL
+  layer: URBAN
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-A
+    px: [583, 985]
+    anchor: EDGE
+  note: Onde a South Gate Road toca a moldura sul do Mapa A.
+- id: RM-REG-GLN
+  canonical_name: Glenath
+  names:
+  - {name: Glenath, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['B:H2']
+  source_px:
+  - source: SRC-MAP-B
+    px: [855, 190]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '05'
+- id: RM-REG-CRB
+  canonical_name: Creggan Bothy
+  names:
+  - {name: Creggan Bothy, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: BOTHY
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:E3']
+  source_px:
+  - source: SRC-MAP-B
+    px: [553, 230]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '07'
+- id: RM-REG-BRF
+  canonical_name: Blackridge Farm
+  names:
+  - {name: Blackridge Farm, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: FARM
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:C5']
+  source_px:
+  - source: SRC-MAP-B
+    px: [265, 400]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: 08
+- id: RM-REG-CRE
+  canonical_name: Corrie's End
+  names:
+  - {name: Corrie's End, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: LOW
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:D5']
+  source_px:
+  - source: SRC-MAP-B
+    px: [400, 355]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: 09
+- id: RM-REG-KRK
+  canonical_name: Kirkhollow
+  names:
+  - {name: Kirkhollow, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:B6']
+  source_px:
+  - source: SRC-MAP-B
+    px: [140, 445]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '10'
+- id: RM-REG-ELG
+  canonical_name: Elderglen
+  names:
+  - {name: Elderglen, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: LOW
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:B7']
+  source_px:
+  - source: SRC-MAP-B
+    px: [110, 540]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '11'
+- id: RM-REG-HRW
+  canonical_name: Harrowmire (charco)
+  names:
+  - {name: Harrowmire (charco), kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: MARSH
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: AREA
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:A4']
+  source_px:
+  - source: SRC-MAP-B
+    px: [180, 335]
+    anchor: LABEL
+  parent_region: RM-REG-RDM
+  register_index: '12'
+- id: RM-REG-STW
+  canonical_name: Stonewell
+  names:
+  - {name: Stonewell, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: LOW
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:D9']
+  source_px:
+  - source: SRC-MAP-B
+    px: [340, 695]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '13'
+- id: RM-REG-CRV
+  canonical_name: Cairnvale
+  names:
+  - {name: Cairnvale, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:F8']
+  source_px:
+  - source: SRC-MAP-B
+    px: [470, 640]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '14'
+- id: RM-REG-GRF
+  canonical_name: Grayfen
+  names:
+  - {name: Grayfen, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: LOW
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:F10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [555, 835]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '15'
+- id: RM-REG-THB
+  canonical_name: Thistlebank
+  names:
+  - {name: Thistlebank, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:C10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [262, 830]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '16'
+- id: RM-REG-CRG
+  canonical_name: Craigness
+  names:
+  - {name: Craigness, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:B8']
+  source_px:
+  - source: SRC-MAP-B
+    px: [170, 640]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '18'
+- id: RM-REG-SBA
+  canonical_name: Abadia em Ruínas de Saint Bride
+  names:
+  - {name: Abadia em Ruínas de Saint Bride, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: [ABBEY, RUIN]
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: RUINED
+  epistemic_status: FACT
+  map_grid_reference: ['B:C8']
+  source_px:
+  - source: SRC-MAP-B
+    px: [245, 620]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '19'
+- id: RM-REG-MCR
+  canonical_name: Moor Cairn
+  names:
+  - {name: Moor Cairn, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: STANDING_STONES
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:D3']
+  source_px:
+  - source: SRC-MAP-B
+    px: [355, 265]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '20'
+- id: RM-REG-BRT
+  canonical_name: Ben Ràth
+  names:
+  - {name: Ben Ràth, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: MOUNTAIN
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:C3']
+  source_px:
+  - source: SRC-MAP-B
+    px: [250, 225]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '21'
+  elevation: {z_rel: null, elevation_asl: 714}
+- id: RM-REG-KLB
+  canonical_name: Ruínas de Kellburne
+  names:
+  - {name: Ruínas de Kellburne, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: RUIN
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: RUINED
+  epistemic_status: FACT
+  map_grid_reference: ['B:K2']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1115, 170]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '22'
+- id: RM-REG-CRH
+  canonical_name: Carriden Hamlet
+  names:
+  - {name: Carriden Hamlet, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:H8']
+  source_px:
+  - source: SRC-MAP-B
+    px: [850, 640]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '24'
+- id: RM-REG-BTC
+  canonical_name: Blackthorn Cottage
+  names:
+  - {name: Blackthorn Cottage, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: COTTAGE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:J7']
+  source_px:
+  - source: SRC-MAP-B
+    px: [960, 570]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '25'
+- id: RM-REG-WLF
+  canonical_name: Willowford
+  names:
+  - {name: Willowford, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:K9']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1020, 700]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '26'
+- id: RM-REG-FSG
+  canonical_name: Fenside Grange
+  names:
+  - {name: Fenside Grange, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: FARM
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:L8']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1115, 625]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '27'
+- id: RM-REG-MSG
+  canonical_name: Mossgate
+  names:
+  - {name: Mossgate, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: VILLAGE
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:K10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1030, 825]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '28'
+- id: RM-REG-RVH
+  canonical_name: Raven's Holt
+  names:
+  - {name: Raven's Holt, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: HAMLET
+  type_confidence: MEDIUM
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:H10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [850, 855]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '29'
+- id: RM-REG-OML
+  canonical_name: Old Mill (em ruínas)
+  names:
+  - {name: Old Mill (em ruínas), kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: MILL
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: RUINED
+  epistemic_status: FACT
+  map_grid_reference: ['B:G9']
+  source_px:
+  - source: SRC-MAP-B
+    px: [722, 790]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+  register_index: '30'
+- id: RM-REG-MFF
+  canonical_name: Muirfield Farm
+  names:
+  - {name: Muirfield Farm, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: FARM
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: POINT
+  status: UNKNOWN
+  epistemic_status: FACT
+  map_grid_reference: ['B:C6']
+  source_px:
+  - source: SRC-MAP-B
+    px: [268, 480]
+    anchor: ICON
+  parent_region: RM-REG-RDM
+- id: RM-REG-LDR
+  canonical_name: Lago Negro (Loch Draven)
+  names:
+  - {name: Lago Negro (Loch Draven), kind: MAP_B_LABEL, source: SRC-MAP-B}
+  - {name: Loch Draven, kind: MAP_B_LABEL, source: SRC-MAP-B, lang: gd}
+  type: LAKE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['B:G3']
+  source_px:
+  - source: SRC-MAP-B
+    px: [700, 248]
+    anchor: LABEL
+  parent_region: RM-REG-RDM
+- id: RM-REG-LCD
+  canonical_name: Loch Calder
+  names:
+  - {name: Loch Calder, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: LAKE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['B:B10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [192, 760]
+    anchor: LABEL
+  parent_region: RM-REG-RDM
+- id: RM-REG-LAN
+  canonical_name: Loch Ainslie
+  names:
+  - {name: Loch Ainslie, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: LAKE
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['B:L9']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1115, 700]
+    anchor: LABEL
+  parent_region: RM-REG-RDM
+- id: RM-REG-TRM
+  canonical_name: Torran Mire (pântano)
+  names:
+  - {name: Torran Mire (pântano), kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: MARSH
+  type_confidence: HIGH
+  layer: REGIONAL
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  map_grid_reference: ['B:L10']
+  source_px:
+  - source: SRC-MAP-B
+    px: [1140, 785]
+    anchor: LABEL
+  parent_region: RM-REG-RDM
+- id: RM-REG-RDM
+  canonical_name: Redmur
+  names:
+  - {name: Redmur, kind: MAP_B_LABEL, source: SRC-MAP-B}
+  type: TOWN
+  layer: REGIONAL
+  geometry: AREA
+  status: ACTIVE
+  epistemic_status: FACT
+  anchor_to: RM-CEN-SMC
+  register_index: '01'
+  map_grid_reference: ['B:G6']
+  note: Região-pai de RM-CEN-* e RM-URB-*.
+- id: RM-FRM-B-NE
+  canonical_name: moldura NE (Estrada 13)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1375, 222]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-FRM-B-W
+  canonical_name: moldura O (trilha)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [48, 680]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-FRM-B-SW1
+  canonical_name: moldura SO (Loch Calder)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [160, 810]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-FRM-B-SW2
+  canonical_name: moldura SO (Thistlebank)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [243, 875]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-FRM-B-SE1
+  canonical_name: moldura SE (R13)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1147, 870]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-FRM-B-SE2
+  canonical_name: moldura SE (sul de Mossgate)
+  type: FRAME_PORTAL
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1133, 955]
+    anchor: SIGN
+  note: Posição da seta da placa; a via toca a moldura por aqui (a digitalizar no Slice 2).
+- id: RM-OFF-CLR
+  canonical_name: Caelrith?
+  type: OFF_MAP_DESTINATION
+  layer: REGIONAL
+  geometry: POINT
+  position: UNKNOWN
+  status: UNKNOWN
+  claims:
+  - {text: 'Para Caelrith? (32 milhas)', distance_claim_mi: 32, epistemic_status: OFFICIAL_CLAIM, source: SRC-MAP-B}
+  note: grafia Caelrith/Coelrith incerta; o '?' é da placa (ANM-B-05)
+- id: RM-OFF-DNS
+  canonical_name: Dunsgate
+  type: OFF_MAP_DESTINATION
+  layer: REGIONAL
+  geometry: POINT
+  position: UNKNOWN
+  status: UNKNOWN
+  claims:
+  - {text: Para Dunsgate (17 milhas), distance_claim_mi: 17, epistemic_status: OFFICIAL_CLAIM, source: SRC-MAP-B}
+- id: RM-OFF-WSH
+  canonical_name: Westhaven
+  type: OFF_MAP_DESTINATION
+  layer: REGIONAL
+  geometry: POINT
+  position: UNKNOWN
+  status: UNKNOWN
+  claims:
+  - {text: Para Westhaven (29 milhas), distance_claim_mi: 29, epistemic_status: OFFICIAL_CLAIM, source: SRC-MAP-B}
+  note: grafia Westhaven/Weathoven incerta (ANM-B-08)
+- id: RM-OFF-INV
+  canonical_name: Inverloch
+  type: OFF_MAP_DESTINATION
+  layer: REGIONAL
+  geometry: POINT
+  position: UNKNOWN
+  status: UNKNOWN
+  claims:
+  - {text: 'Para Inverloch (?7 milhas)', distance_claim_mi: null, epistemic_status: OFFICIAL_CLAIM, source: SRC-MAP-B}
+  note: dígito inicial ilegível (ANM-B-07)
+- id: RM-OFF-ELD
+  canonical_name: Eldham
+  type: OFF_MAP_DESTINATION
+  layer: REGIONAL
+  geometry: POINT
+  position: UNKNOWN
+  status: UNKNOWN
+  claims:
+  - {text: Para Eldham (41 milhas), distance_claim_mi: 41, epistemic_status: OFFICIAL_CLAIM, source: SRC-MAP-B}
+  note: duas placas iguais em vias diferentes (ANM-B-04)

@@ -1,0 +1,157 @@
+# Rotas do mapa. `edges` vazio até a digitalização (Slice 2). O traçado desenhado é fato; a continuação é UNKNOWN.
+# Rótulos iguais em mapas diferentes NÃO implicam identidade (CMY-02).
+routes:
+- id: RTE-A-R1
+  label: R1
+  source: SRC-MAP-A
+  legend_class: ESCAPE_ROUTE
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R1
+  drawn_endpoints:
+  - {location: RM-URB-OPC}
+  - px: [430, 505]
+    source: SRC-MAP-A
+    near: [RM-CEN-CHP, RM-CEN-OCP]
+  cross_map_counterpart: {route: RTE-B-CHP, relation: SAME_CORRIDOR, confidence: MEDIUM}
+  note: Não chega à capela nem ao Drainage Culvert (D-CART-03).
+- id: RTE-A-R2
+  label: R2
+  source: SRC-MAP-A
+  legend_class: ESCAPE_ROUTE
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R2
+  drawn_endpoints:
+  - {location: RM-URB-SBO}
+  - {location: RM-URB-ROW}
+  cross_map_counterpart: {route: RTE-B-R3-STR, relation: SAME_CORRIDOR, confidence: HIGH}
+  drawn_arrow_near: RM-URB-ROW
+  note: Rótulo diverge do Mapa B (ANM-X-01); atravessa Ash Burn? (ANM-A-04).
+- id: RTE-A-R3
+  label: R3
+  source: SRC-MAP-A
+  legend_class: ESCAPE_ROUTE
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R3
+  drawn_endpoints:
+  - {location: RM-URB-OQY}
+  - {location: RM-URB-MNF}
+  cross_map_counterpart: {route: RTE-B-QM, relation: SAME_CORRIDOR, confidence: HIGH}
+  note: Não segue para a East Road (D-CART-04).
+- id: RTE-B-R3-STR
+  label: R3
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R3
+  marker_px: [797, 332]
+  drawn_endpoints:
+  - {location: RM-URB-SBO}
+  - {location: RM-URB-ROW}
+  note: ANM-X-01
+- id: RTE-B-R3-GLN
+  label: R3
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R3
+  marker_px: [787, 212]
+  drawn_endpoints:
+  - px: [770, 150]
+    source: SRC-MAP-B
+    near: [RM-REG-GLN]
+  note: Some na cordilheira ao norte (EXT-09).
+- id: RTE-B-QM
+  label: GLY-B-09
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R3
+  marker_px: [730, 432]
+  drawn_endpoints:
+  - {location: RM-URB-OQY}
+  - {location: RM-URB-MNF}
+  note: Glifo ilegível; leitura candidata 'R3' com baixa confiança; NÃO atribuída.
+- id: RTE-B-CHP
+  label: sem rótulo
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  drawn_endpoints:
+  - {location: RM-URB-OPC}
+  - {location: RM-CEN-CHP}
+- id: RTE-B-R4
+  label: R4
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R4
+  marker_px: [767, 660]
+  drawn_endpoints:
+  - px: [755, 655]
+    source: SRC-MAP-B
+- id: RTE-B-R7
+  label: R7
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R7
+  marker_px: [262, 545]
+  drawn_endpoints:
+  - near: [RM-REG-MFF]
+    px: [262, 545]
+    source: SRC-MAP-B
+- id: RTE-B-R13
+  label: R13
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R13
+  marker_px: [1012, 806]
+  drawn_endpoints:
+  - near: [RM-REG-WLF, RM-REG-MSG]
+    px: [1012, 806]
+    source: SRC-MAP-B
+- id: RTE-B-R17
+  label: R17
+  source: SRC-MAP-B
+  legend_class: CONTESTED
+  edges: []
+  trace_status: TO_DIGITIZE
+  continuation_beyond_drawn: UNKNOWN
+  epistemic_status: FACT
+  mystery: RMY-R17
+  marker_px: [531, 730]
+  drawn_endpoints:
+  - near: [RM-REG-CRV, RM-REG-STW]
+    px: [531, 730]
+    source: SRC-MAP-B
