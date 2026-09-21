@@ -1,0 +1,91 @@
+# BOOK_GATES — o que cada livro precisa, pode parcialmente e não pode fazer (SDD seções 69–70).
+#
+# REQUIRED  = verificado no modo `final` (regras SR-B1-*, Slice 4).
+# PARTIAL   = permitido até um teto; o teto é aplicado pelo MYSTERY_DISCLOSURE_GATE (Slice 2+).
+# FORBIDDEN = resolução proibida no livro; `unknowns` são as incógnitas que não podem ser ensinadas.
+# ALLOWED   = tudo o que não está nestas listas e não viola lock (não é lista branca).
+# Mudar qualquer linha exige aprovação humana com subject_sha256 deste arquivo.
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoBookGates
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  approval: null
+
+book_gates:
+  B1:
+    contract: CR-P14-01
+    required:
+      - {id: BG1-R-CRIME, requirement: "Um crime concreto, delimitado, menor que o mistério de Redmur, investigável, solucionável e humanamente motivado; o leitor termina sabendo substancialmente o que ocorreu; não pode ser 'quem apagou os quarenta anos?'.", source: {id: SRC-DOSSIER, location: "§16.1"}, verify: [SR-B1-01]}
+      - {id: BG1-R-REDMUR-CRIME, requirement: "O crime depende de pelo menos duas características específicas de Redmur.", source: {id: SRC-DOSSIER, location: "§16.2"}, verify: [SR-B1-02]}
+      - {id: BG1-R-COUPLING, requirement: "CRIME_ROMANCE_COUPLING = REQUIRED: investigação e romance alteram um ao outro.", source: {id: SRC-DOSSIER, location: "§16.3"}, verify: [SR-B1-03]}
+      - {id: BG1-R-FAIRPLAY, requirement: "Solução com evidências previamente presentes; ao menos três pistas retroativas relevantes; nenhum documento milagroso no último minuto.", source: {id: SRC-DOSSIER, location: "§16.4"}, verify: [SR-B1-04]}
+      - {id: BG1-R-CLIFFHANGER, requirement: "Convergência → última evidência → revelação do crime → motivo humano → consequência romântica → evidência de dois gumes → contradição maior → cliffhanger.", source: {id: SRC-DOSSIER, location: "§16.5"}, verify: [SR-B1-05]}
+      - {id: BG1-R-DOUBLE-EDGE, requirement: "A mesma evidência decisiva resolve o crime e abre mistério muito maior sobre Redmur, sem resolvê-lo; o criminoso não precisa conhecer a verdade de Redmur.", source: {id: SRC-DOSSIER, location: "§16.6"}, verify: [SR-B1-06]}
+      - {id: BG1-R-IRREVERSIBLE, requirement: "RELATIONSHIP_IRREVERSIBILITY = REQUIRED: os protagonistas não retornam honestamente ao estado emocional inicial; não exige final feliz nem casal junto.", source: {id: SRC-DOSSIER, location: "§16.7"}, verify: [SR-B1-07]}
+      - {id: BG1-R-STATES-CHANGED, requirement: "CHARACTER_STATE_CHANGED, KNOWLEDGE_STATE_CHANGED, RELATIONSHIP_STATE_CHANGED e INVESTIGATION_STATE_CHANGED = TRUE.", source: {id: SRC-DOSSIER, location: "§16.8"}, verify: [SR-B1-08]}
+      - {id: BG1-R-NO-FACE, requirement: "Nenhum rosto identificável como recompensa; o leitor nunca vê rosto reconstruível.", source: {id: SRC-DOSSIER, location: "§1.4, §16.8"}, verify: [SR-B1-09]}
+      - {id: BG1-R-REDMUR-REMAINS, requirement: "Redmur sobrevive: não destruir a cidade, abolir os cofres, derrubar todo o sistema ou libertar Redmur; WORLD_SYSTEM_STABLE = TRUE.", source: {id: SRC-DOSSIER, location: "§16.8"}, verify: [SR-B1-10]}
+      - {id: BG1-R-40Y-REAL, requirement: "Os quarenta anos existem como problema real (o passado conhecido não consegue ser verdadeiro por inteiro).", source: {id: SRC-DOSSIER, location: "§12.4"}, verify: [SR-B1-11]}
+    partial:
+      - {id: BG1-P-40Y, topic: "Missing Forty Years", allowed: [CITE, PROVOKE, SHOW_DATES, CONTRADICT_DOCUMENTS, PRESENT_SYMBOLS, REVEAL_CONSEQUENCES, DEMONSTRATE_INCOMPATIBILITIES], ceiling: EXPANDING, source: {id: SRC-DOSSIER, location: "§12.4"}}
+      - {id: BG1-P-SELKA, topic: "Madre Selka", allowed: [RUMOR, FRAGMENT, CONTRADICTION, CLUE, THEORY], ceiling: THEORY, records: [ENT-SELKA], source: {id: SRC-DOSSIER, location: "§14.9"}}
+      - {id: BG1-P-PULL, topic: "The Pull", allowed: [PARTIAL_EXPLANATION_BY_SUBTEXT], ceiling: OPEN, records: [CR-P6-01], source: {id: SRC-DOSSIER, location: "§8"}}
+      - {id: BG1-P-MANFRED, topic: "Manfred", allowed: [HYPOTHESIS_REMAINS_TEMPTING, COEXISTING_ALTERNATIVES], ceiling: EXPANDING, records: [CR-P11-04], source: {id: SRC-DOSSIER, location: "§13.3"}}
+    forbidden:
+      - {id: BG1-F-TRUE-CHRONOLOGY, what: "True Chronology", unknowns: [UNK-SR-TRUE-CHRONOLOGY], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-40Y, what: "Missing Forty Years (o que aconteceu neles)", unknowns: [UNK-SR-40Y-CAUSE, UNK-SR-40Y-DELIBERATE, UNK-SR-40Y-SINGLE-ACTOR], records: [PRO-SR-40Y-EXPLAINED-B1], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-40Y-VIA-EXHUMATION, what: "resolver os quarenta anos por exumação", unknowns: [UNK-SR-40Y-CAUSE], records: [CAP-DEAD-ARCHIVE], source: {id: SRC-DOSSIER, location: "§12.3"}}
+      - {id: BG1-F-AQUELE-DIA-CAUSE, what: "causa definitiva de Aquele Dia", unknowns: [UNK-SR-AQUELE-DIA], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-MANFRED-ROLE, what: "papel definitivo / causal completo dos Manfred", unknowns: [UNK-SR-MANFRED-ROLE], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-FLARRY-ROLE, what: "papel definitivo de Flarry", unknowns: [UNK-SR-FLARRY-ROLE], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-LOST-CHILD, what: "verdade da criança perdida", unknowns: [UNK-SR-LOST-CHILD], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-COFFER-ORIGIN, what: "origem definitiva/completa dos cofres", unknowns: [UNK-SR-COFFER-ORIGIN], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-SIX-MONTH-ORIGIN, what: "origem definitiva do Six-Month Protocol", unknowns: [UNK-SR-SIX-MONTH-ORIGIN], source: {id: SRC-DOSSIER, location: "§12.4"}}
+      - {id: BG1-F-ACT-MOTIVE, what: "motivo definitivo do Preservation Act", unknowns: [UNK-SR-ACT-MOTIVE], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-SAVINGS-MOTIVE, what: "motivo definitivo das Savings Clauses", unknowns: [UNK-SR-SAVINGS-CLAUSES-WHY], source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}}
+      - {id: BG1-F-PULL, what: "explicação de The Pull além de subtexto parcial", unknowns: [UNK-SR-PULL-COMPLETE], source: {id: SRC-DOSSIER, location: "§8, §16.8"}}
+      - {id: BG1-F-SELKA-GRAVE, what: "encontrar ou localizar o túmulo de Selka", unknowns: [UNK-SR-SELKA-GRAVE-LOCATION], source: {id: SRC-DOSSIER, location: "§14.9, §16.8"}}
+      - {id: BG1-F-SELKA-BODY, what: "encontrar o corpo de Selka", unknowns: [UNK-SR-SELKA-GRAVE-LOCATION], source: {id: SRC-DOSSIER, location: "§14.9"}}
+      - {id: BG1-F-SELKA-COFFER, what: "encontrar o cofre de Selka", unknowns: [UNK-SR-SELKA-COFFER-MODEL], source: {id: SRC-DOSSIER, location: "§14.9, §16.8"}}
+      - {id: BG1-F-SELKA-TATTOOS-DIRECT, what: "descobrir diretamente as tatuagens de Selka", unknowns: [UNK-SR-SELKA-TATTOO-MEANING, UNK-SR-SELKA-TATTOO-COUNT], source: {id: SRC-DOSSIER, location: "§14.9"}}
+      - {id: BG1-F-SELKA-DEATH, what: "solucionar a morte de Selka", unknowns: [UNK-SR-SELKA-DEATH], source: {id: SRC-DOSSIER, location: "§14.9, §16.8"}}
+      - {id: BG1-F-40Y-VIA-SELKA, what: "resolver os Missing Forty Years por Selka", unknowns: [UNK-SR-40Y-CAUSE], records: [PRO-SR-SELKA-IS-THE-KEY], source: {id: SRC-DOSSIER, location: "§14.9"}}
+      - {id: BG1-F-MAGIC, what: "magia / sobrenatural confirmado", records: [PRO-SR-SUPERNATURAL-CAUSE], source: {id: SRC-DOSSIER, location: "§16.8"}}
+      - {id: BG1-F-FACE-REWARD, what: "rosto identificável como recompensa final", records: [CR-ABS-04], source: {id: SRC-DOSSIER, location: "§16.8"}}
+      - {id: BG1-F-REDMUR-DESTROYED, what: "destruir a cidade, abolir os cofres, derrubar todo o sistema ou libertar Redmur", records: [CR-P14-01], source: {id: SRC-DOSSIER, location: "§16.8"}}
+    writing_gates:   # dossiê §21, na ordem
+      - {item: 1, gate: "nenhum rosto reconstruível entregue ao leitor", verify: [HL-04]}
+      - {item: 2, gate: "nenhuma expressão facial inacessível narrada como observação objetiva", verify: [CR-P13-01]}
+      - {item: 3, gate: "nenhuma magia como causa factual", verify: [HL-01, HL-02]}
+      - {item: 4, gate: "regras de cofre respeitadas", verify: [HL-21, HL-23, HL-24]}
+      - {item: 5, gate: "combinação não virou removal authority", verify: [HL-07]}
+      - {item: 6, gate: "consentimento não inferido de corpo, cofre, pescoço, combinação, autoridade, medo ou coerção", verify: [HL-08]}
+      - {item: 7, gate: "contexto erótico só entre adultos", verify: [HL-06]}
+      - {item: 8, gate: "cartografia respeitada", verify: [HL-22]}
+      - {item: 9, gate: "conhecimentos de personagem e leitor não confundidos", verify: [SR-KN-01, SR-RD-01]}
+      - {item: 10, gate: "nenhuma capacidade sistêmica virou instância sem aprovação", verify: [HL-05]}
+      - {item: 11, gate: "Manfred não usado como explicação universal", verify: [HL-15]}
+      - {item: 12, gate: "Selka não virou chave total", verify: [HL-14]}
+      - {item: 13, gate: "Missing Forty Years não resolvidos", verify: [BG1-F-40Y]}
+      - {item: 14, gate: "True Chronology não vazou", verify: [BG1-F-TRUE-CHRONOLOGY]}
+      - {item: 15, gate: "crime solucionável e Redmur maior no final", verify: [BG1-R-CRIME, BG1-R-40Y-REAL, BG1-R-REDMUR-REMAINS]}
+      - {item: 16, gate: "evidência final resolve o crime e só abre o mistério maior", verify: [BG1-R-DOUBLE-EDGE]}
+  B2:
+    status: UNDEFINED        # nada do Livro 2 é decidido aqui
+
+series:
+  structural_locks: [HL-01, HL-02, HL-03, HL-04, HL-20]    # "mesmo em livros futuros" (§22)
+  structural_locks_source: {id: SRC-DOSSIER, location: "§22"}
+  future_domains:            # onde livros futuros PODEM avançar; FUTURE ≠ "será resolvido" (§22)
+    - {id: BGF-TRUE-CHRONOLOGY, label: "P10-B True Chronology", unknowns: [UNK-SR-TRUE-CHRONOLOGY], earliest_allowed_reveal: B2, source: {id: SRC-DOSSIER, location: "§12, §22"}}
+    - {id: BGF-FOUR-ARCHIVES, label: "novas relações entre os Four Archives", records: [CR-P10-03], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-FORTY-YEARS, label: "investigação mais profunda dos Missing Forty Years", unknowns: [UNK-SR-40Y-CAUSE, UNK-SR-40Y-DELIBERATE, UNK-SR-40Y-SINGLE-ACTOR], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-FLARRY, label: "avanço sobre Flarry", unknowns: [UNK-SR-FLARRY-ROLE], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-MANFRED, label: "avanço sobre Manfred", unknowns: [UNK-SR-MANFRED-ROLE], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-LOST-CHILD, label: "avanço sobre a criança perdida", unknowns: [UNK-SR-LOST-CHILD], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-SIX-MONTH, label: "avanço sobre o Six-Month Protocol", unknowns: [UNK-SR-SIX-MONTH-CONTENTS, UNK-SR-SIX-MONTH-ORIGIN], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-SELKA, label: "avanço sobre Selka", unknowns: [UNK-SR-SELKA-DEATH, UNK-SR-SELKA-GRAVE-LOCATION, UNK-SR-SELKA-COFFER-MODEL, UNK-SR-SELKA-TATTOO-MEANING], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}
+    - {id: BGF-PULL, label: "aprofundamento de The Pull (explicação completa nunca)", unknowns: [UNK-SR-PULL-COMPLETE], earliest_allowed_reveal: FUTURE, full_explanation: NEVER, source: {id: SRC-DOSSIER, location: "§8, §22"}}
+    - {id: BGF-LEGAL, label: "novas camadas jurídicas/institucionais", unknowns: [UNK-SR-ACT-MOTIVE, UNK-SR-SAVINGS-CLAUSES-WHY, UNK-SR-ANOMALY-MAINTENANCE], earliest_allowed_reveal: FUTURE, source: {id: SRC-DOSSIER, location: "§22"}}

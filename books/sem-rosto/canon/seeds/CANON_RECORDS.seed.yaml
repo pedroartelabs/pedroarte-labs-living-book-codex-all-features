@@ -1,0 +1,944 @@
+# CANON_RECORDS — registros canônicos de SEM ROSTO (SDD SEM_ROSTO_CANONICAL_STORY_SYSTEM, seções 12–14).
+#
+# Cada registro APONTA para o dossiê congelado (source.location = §N[.N]); `statement` é uma
+# formulação operacional curta, nunca substituta do texto do dossiê. Em caso de dúvida, vale o dossiê.
+#
+# Tipos por prefixo: CR-* regra/fato · CAP-* capacidade do sistema (nunca instância) ·
+# UNK-SR-* incógnita (SEM conteúdo) · PRO-SR-* inferência proibida · ENT-/INST-/FAM-* entidade.
+# THEORY-*, RUM-* e MYS-* entram no Slice 2 (RUMORS, MYSTERIES).
+#
+# Nenhuma chave de resposta (truth, answer, verdade, …) em nível algum.
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoCanonRecords
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  source: ../sources/SOURCES.yaml
+  approval: null                # approvals/CANON_SEEDS_<n>.md (humano) com subject_sha256 deste arquivo
+
+records:
+  # ---------------------------------------------------------------- §0–§1 princípios absolutos
+  - id: CR-ABS-00
+    domain: ABSOLUTE
+    title: "SYSTEM_CAPABILITY ≠ CANONICAL_INSTANCE"
+    statement: "Nenhuma possibilidade técnica, exemplo ou stress test torna-se fato histórico sem aprovação humana."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§0, §23"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-05
+  - id: CR-ABS-01
+    domain: ABSOLUTE
+    title: "Redmur não é o mundo"
+    statement: "Redmur é uma pequena cidade fictícia do interior da Escócia; Escócia, Reino Unido e o mundo são contemporâneos; Redmur não é soberana nem representa a humanidade."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.1"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-10
+  - id: CR-ABS-02
+    domain: TECHNOLOGY
+    title: "Modern function. Ancient interface."
+    statement: "Redmur mantém interface social, administrativa e estética antiga e pode usar tecnologia contemporânea institucional, escondida ou absorvida pela cultura local."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-ABS-03
+    domain: ABSOLUTE
+    title: "Regra sobrenatural"
+    statement: "SUPERNATURAL_CANON = FALSE; MAGICAL_CAUSALITY = FORBIDDEN; UNKNOWN ≠ SUPERNATURAL. Rumores, vultos, coincidências e impressões podem existir; entidades sobrenaturais causais não. Sem retcon sobrenatural futuro."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.3"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-01
+  - id: CR-ABS-04
+    domain: FACE
+    title: "Regra absoluta do rosto"
+    statement: "O leitor nunca recebe rosto humano identificável/reconstruível; CHARACTER_SEES = TRUE não implica READER_SEES = TRUE. Vale para rosto real, foto, vídeo, desenho, pintura, reflexo, escultura, molde, 3D, IA e composição acima do threshold."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.4"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-04
+  - id: CR-ABS-05
+    domain: MYSTERY
+    title: "Regra do mistério"
+    statement: "Mistério é informação cuja relação ainda não foi revelada, nunca ausência de planejamento; as verdades maiores têm estrutura interna mesmo escondidas."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.5"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-ABS-06
+    domain: ABSOLUTE
+    title: "Regra de humanidade"
+    statement: "O horror de Redmur se sustenta em seres humanos, instituições, memória, desejo, burocracia, tradição, desigualdade, segredo, medo e poder; quando o comportamento humano basta, não se recorre ao sobrenatural."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§1.6"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §2 P0 Coffer Mechanics
+  - id: CR-P0-01
+    domain: COFFER
+    title: "The head is inside the coffer"
+    statement: "A cabeça está dentro do cofre; a cabeça não carrega o cofre. O cofre não é caixa maciça sustentada pelo pescoço."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.1"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-21
+  - id: CAP-COF-COMPONENTS
+    domain: COFFER
+    title: "Componentes possíveis do cofre"
+    statement: "O sistema pode usar os componentes listados; um cofre específico só tem os componentes que o canon lhe atribuir."
+    components: [INTERNAL_FRAME, EXTERNAL_SHELL, SHOULDER_YOKE, LOAD_DISTRIBUTION, ROTATING_COLLAR,
+                 PASSIVE_VENTILATION, ACTIVE_VENTILATION, OPTICAL_LABYRINTH, ACOUSTIC_CHANNELS, VOICE_GRILLE,
+                 FEEDING_DRAWER, DRAINAGE_HYGIENE, SERVICE_COWL, EMERGENCY_SYSTEMS, SEALS, MAINTENANCE_FITTING,
+                 SENSORS, FANS, PASSIVE_ID, LIMITED_TELEMETRY]
+    mandatory: [PASSIVE_VENTILATION]
+    status: SYSTEM_CAPABILITY
+    epistemic_class: FACT
+    system_capability_only: true
+    instances: []
+    source: {id: SRC-DOSSIER, location: "§2.1, §9.2"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-05
+  - id: CR-P0-02
+    domain: COFFER
+    title: "Sobrevivência não depende só de energia"
+    statement: "A sobrevivência do usuário não pode depender exclusivamente de bateria ou energia elétrica; a segurança fundamental não depende exclusivamente de eletrônica."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.1, §9.2"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-21
+  - id: CR-P0-03
+    domain: COFFER
+    title: "Service Cowl"
+    statement: "Mecanismo que permite descobrir fisicamente o rosto em espaço visualmente protegido (higiene, manutenção, cuidados pessoais, procedimentos médicos autorizados): FACIAL_UNCOVERING sem FACIAL_EXPOSURE."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P0-04
+    domain: COFFER
+    title: "Emergency Breach"
+    statement: "Existe procedimento emergencial de abertura; pode exigir ruptura irreversível de selos e protocolos extraordinários."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P0-05
+    domain: COFFER
+    title: "Sem combinação universal"
+    statement: "Não existe combinação universal simples capaz de abrir todos os cofres."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.3"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-23
+  - id: CR-P0-06
+    domain: COFFER
+    title: "Dual Authorization"
+    statement: "Procedimentos críticos (fitting, manutenção, emergência, instalação) podem exigir dois profissionais/autorizadores."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P0-07
+    domain: COFFER
+    title: "Estratificação predominante"
+    statement: "Classes predominantes: A Helmet, B Shoulder (padrão cívico), C Torso Cage (custódia/contenção), D Dual-Shell (elite; carcaças herdáveis e modernizáveis). Não é casta jurídica rígida."
+    classes: [CLS-A-HELMET, CLS-B-SHOULDER, CLS-C-TORSO-CAGE, CLS-D-DUAL-SHELL]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.5"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P0-08
+    domain: COFFER
+    title: "Coffer Heraldry — COFFER ≠ PERSON"
+    statement: "Material, acabamento, bordas, fechos, rebites, formato e desgaste comunicam classe, instituição, tradição, família e geração; o cofre não prova sozinho identidade individual."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.6"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-24
+  - id: CR-P0-R1
+    domain: COFFER
+    title: "Combination ≠ Removal Authority"
+    statement: "KNOWING_COMBINATION ≠ PERMISSION_TO_TOUCH ≠ PERMISSION_TO_MANIPULATE_LOCK ≠ REMOVAL_AUTHORITY ≠ FACIAL_EXPOSURE_PERMISSION. A combinação é camada de acesso pessoal (confiança, intimidade, chantagem, informação), não entrega do rosto."
+    status: CANON_PATCH_APPROVED
+    patch: R1
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-07
+  - id: CR-P0-R5
+    domain: COFFER
+    title: "Permanent Requirement ≠ Permanent Hardware"
+    statement: "A obrigação de proteção facial pode ser permanente sem a mesma peça física a vida toda (crescimento, substituição, fitting, manutenção, medicina, emergência). PEDIATRIC_ACCESS = CLINICAL / PROTECTIVE / FUNCTIONAL; nunca presumir erotismo."
+    status: CANON_PATCH_APPROVED
+    patch: R5
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§2.8"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-26
+
+  # ---------------------------------------------------------------- §3 P1 Facial Exposure Law
+  - id: CR-P1-01
+    domain: FACE
+    title: "Facial Uncovering"
+    statement: "O rosto fisicamente descoberto não é crime por si só."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P1-02
+    domain: FACE
+    title: "Facial Exposure = crime"
+    statement: "Há exposição quando informação visual suficiente do rosto fica acessível a terceiro de modo a permitir recuperar representação facial individualizada. A classificação independe da intenção; responsabilidade e gravidade dependem de contexto."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P1-03
+    domain: FACE
+    title: "Facial Record"
+    statement: "Representação reconstruível preservada (foto, vídeo, desenho, pintura, arquivo digital, gravação, escultura, molde, 3D, IA, composição de fragmentos). Registro facial reconstruível não autorizado é ofensa."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P1-R9
+    domain: FACE
+    title: "Functional Reconstructibility Threshold"
+    statement: "Teste: o material, isolado ou razoavelmente combinável, permite recuperar representação facial coerente e individualizada? Estados NON_RECONSTRUCTIBLE, PARTIALLY_FACIAL, RECONSTRUCTIBLE_FACE; percentual e contagem de traços não decidem sozinhos; fragmentos podem ultrapassar o threshold em conjunto; NECK = NOT FACE."
+    status: CANON_PATCH_APPROVED
+    patch: R9
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P1-R6
+    domain: FACE
+    title: "Sealed Facial Evidence — requisitos e proibições"
+    statement: "Captura facial necessária em contexto médico, forense, autópsia ou judicial exige necessidade, exposição mínima, autoridade de captura autorizada, cadeia de custódia, limitação de finalidade, acesso controlado e registro de acesso. Proibidos: banco geral de reconhecimento facial, thumbnails faciais, acesso público, uso geral da OCP para captura. Cópias derivadas mantêm a proteção."
+    status: CANON_PATCH_APPROVED
+    patch: R6
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.5"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-12
+  - id: CAP-SEALED-FACIAL-EVIDENCE
+    domain: FACE
+    title: "Sealed Facial Evidence (capacidade)"
+    statement: "A categoria existe; nenhuma peça específica existe sem canon explícito (nem de Selka, Manfred, protagonistas, Missing Forty Years, Aquele Dia ou qualquer arquivo)."
+    status: SYSTEM_CAPABILITY
+    epistemic_class: FACT
+    system_capability_only: true
+    instances: []
+    source: {id: SRC-DOSSIER, location: "§3.5, §23"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-05
+  - id: CR-P1-R7
+    domain: FACE
+    title: "Outside Facial Records"
+    statement: "Redmur regula exposição facial local, não a existência global de rostos: LAWFUL_EXTERNAL_EXISTENCE ≠ LAWFUL_LOCAL_POSSESSION ≠ LAWFUL_LOCAL_EXPOSURE. Sem autoridade global de exclusão; o Returner não apaga a vida anterior; documentos externos permanecem válidos."
+    status: CANON_PATCH_APPROVED
+    patch: R7
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.6"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-13
+  - id: CAP-EXTERNAL-FACIAL-RECORD
+    domain: FACE
+    title: "Registro facial externo (capacidade)"
+    statement: "Registros faciais externos podem existir legalmente; nenhum registro externo específico existe sem canon explícito."
+    status: SYSTEM_CAPABILITY
+    epistemic_class: FACT
+    system_capability_only: true
+    instances: []
+    source: {id: SRC-DOSSIER, location: "§3.6, §23"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-05
+  - id: CR-R8-01
+    domain: FACE
+    title: "NO_DELIBERATE_SELF_VIEWING"
+    statement: "O tabu protege o rosto dos outros e da própria pessoa: ver deliberadamente o próprio rosto é proibido."
+    status: CANON_PATCH_APPROVED
+    patch: R8
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-11
+  - id: CR-R8-02
+    domain: FACE
+    title: "Encontro acidental com o próprio rosto"
+    statement: "Encontrar acidentalmente o próprio rosto não é crime por si só."
+    status: CANON_PATCH_APPROVED
+    patch: R8
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-R8-03
+    domain: FACE
+    title: "Memória e toque do próprio rosto"
+    statement: "Memória facial própria é permitida; tocar o próprio rosto é permitido."
+    status: CANON_PATCH_APPROVED
+    patch: R8
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-R8-04
+    domain: FACE
+    title: "Espelhos em Redmur"
+    statement: "Espelhos comuns capazes de reproduzir rosto reconstruível não são normais em Redmur; o desenho permite o corpo e mantém a área facial abaixo do threshold (fosqueamento, oxidação, distorção, gravação, interrupção, opacidade ou equivalente)."
+    status: CANON_PATCH_APPROVED
+    patch: R8
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-R8-05
+    domain: FACE
+    title: "Memória visual do próprio rosto por origem"
+    statement: "Quem é residente desde a infância pode crescer sem memória visual útil do próprio rosto; um Adult Returner pode conservar memória anterior."
+    status: CANON_PATCH_APPROVED
+    patch: R8
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §4 P2 Six-Month Child Protocol
+  - id: CR-P2-01
+    domain: CHILD_PROTOCOL
+    title: "Neonatal Facial Exemption"
+    statement: "Em curta janela pós-parto os pais podem conhecer visualmente o recém-nascido e lembrar; FACIAL_RECORD continua proibido."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P2-02
+    domain: CHILD_PROTOCOL
+    title: "Transfer, custódia e Child Bulletins"
+    statement: "Após estabilização clínica ocorre TRANSFER; a criança fica sob custódia institucional por aproximadamente seis meses, sem visitas presenciais regulares; os pais recebem Child Bulletins (saúde, peso, alimentação, desenvolvimento, fitting, retorno)."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P2-03
+    domain: CHILD_PROTOCOL
+    title: "The Return"
+    statement: "Aos aproximadamente seis meses a criança retorna usando o primeiro sistema de proteção facial apropriado à idade; a obrigação é permanente, o hardware não."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CAP-INFANT-STAGES
+    domain: CHILD_PROTOCOL
+    title: "Infant Veil → Infant Frame → First Coffer (capacidade)"
+    statement: "A adaptação pode ocorrer progressivamente por estágios funcionais; o desenho pediátrico prioriza segurança clínica e desenvolvimento, nunca miniaturização de cofre adulto. Nenhuma criança específica passa por estágios não canonizados."
+    stages: [INFANT_VEIL, INFANT_FRAME, FIRST_COFFER]
+    status: SYSTEM_CAPABILITY
+    epistemic_class: FACT
+    system_capability_only: true
+    instances: []
+    source: {id: SRC-DOSSIER, location: "§4.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P2-R4
+    domain: CHILD_PROTOCOL
+    title: "Facility Visibility ≠ Protocol Transparency"
+    statement: "O local do protocolo pode ser fisicamente conhecido, localizado e institucionalmente visível; o mistério não depende de prédio secreto. O local pertence à cartografia canônica existente."
+    status: CANON_PATCH_APPROVED
+    patch: R4
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.6"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-25
+  - id: CR-P2-R3
+    domain: JURISDICTION
+    title: "Eligibility ≠ Extraterritorial Enforcement"
+    statement: "Redmur pode estabelecer elegibilidade e condições cívicas; isso não cria poder policial fora de Redmur. A OCP não é polícia internacional; Redmur não é Estado soberano."
+    status: CANON_PATCH_APPROVED
+    patch: R3
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-10
+  - id: CR-P2-R11
+    domain: AGE
+    title: "Child Semantic Firewall"
+    statement: "MINOR_EROTIC_SEMANTICS = ABSOLUTELY_DISABLED. O protocolo é pediátrico, clínico e cívico; nenhuma semântica adulta de pescoço, cofre, lock, combinação, roupa ou toque se transfere para bebês, crianças, cuidado parental ou pediátrico."
+    status: CANON_PATCH_APPROVED
+    patch: R11
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§4.8"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-06
+
+  # ---------------------------------------------------------------- §5 P3 Visitor Protocol
+  - id: CR-P3-01
+    domain: VISITOR
+    title: "Preservation Boundary"
+    statement: "Redmur não tem fronteira internacional; existe uma Preservation Boundary como área regulamentada de acesso."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§5"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-DEC-05B
+    domain: VISITOR
+    title: "Preservation Boundary = limite do District of Civic Preservation"
+    statement: "A Preservation Boundary é o limite do District of Civic Preservation (BND-ADM-CP do Mapa A); extensão desconhecida; a legenda do mapa continua alegação oficial."
+    map_refs: [BND-ADM-CP]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: APPROVAL:CANON_DECISION_0001, location: "OQ-SR-05b"}
+    depends_on: [CR-P3-01]
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P3-02
+    domain: VISITOR
+    title: "Veil House e Visitor Coffer"
+    statement: "Visitantes entram por instalação intermediária sem exposição direta aos habitantes e recebem Visitor Coffer temporário, que comunica OUTSIDER (não casta); instalação e remoção podem ocorrer em fitting chamber privada; quem recusa simplesmente não entra."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§5.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P3-03
+    domain: VISITOR
+    title: "Tecnologia do visitante"
+    statement: "Dispositivos visuais podem ser lacrados, armazenados ou limitados; não há obrigação geral de apagá-los; documentos fotográficos usam protocolo de ocultação facial."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§5.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P3-04
+    domain: VISITOR
+    title: "Categorias externas, Transfer Zone e autoridades"
+    statement: "Turistas, jornalistas, profissionais externos, familiares, autoridades e prestadores entram sob protocolos próprios; mercadorias podem usar Transfer Zone; Police Scotland, bombeiros, paramédicos e autoridades competentes mantêm seus poderes; emergências podem sobrepor o protocolo local; crianças visitantes não entram no Six-Month Protocol; entrada acidental prioriza proteção e correção, não punição automática."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§5.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-DEC-05C
+    domain: VISITOR
+    title: "Veil House e Transfer Zone fora dos mapas"
+    statement: "Veil House e Transfer Zone ficam na Preservation Boundary e não estão desenhadas nos mapas; a posição é desconhecida; não entram no grafo nem em rotas sem decisão cartográfica."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: APPROVAL:CANON_DECISION_0001, location: "OQ-SR-05c"}
+    depends_on: [CR-P3-02, CR-P3-04, CR-DEC-05B]
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §6 P4 Returner / Open Gate
+  - id: CR-P4-01
+    domain: RETURNER
+    title: "Categorias cívicas"
+    statement: "Categorias: VISITOR, RETURNER, RESIDENT, BORN-REDMUR, OFFICIAL, OUTSIDER CONTRACTOR."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P4-02
+    domain: RETURNER
+    title: "Physical Departure ≠ Civic Release"
+    statement: "Sair fisicamente não resolve o vínculo cívico; estados ACTIVE, DEPARTED, RELEASED, RETURNER; nascimento em Redmur não cria obrigação eterna absoluta."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P4-R2
+    domain: RETURNER
+    title: "Physical Return ≠ Civic Reactivation"
+    statement: "Retornar fisicamente não ativa automaticamente o regime de Returner: PHYSICAL_PRESENCE ≠ AUTOMATIC_RETURNER_ACTIVE_STATUS. Distinguir visitante, pessoa fisicamente retornada, pessoa elegível e Returner reativado; a reativação depende de processo institucional; passar pela fronteira não muda status."
+    status: CANON_PATCH_APPROVED
+    patch: R2
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6.2"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-09
+  - id: CR-P4-03
+    domain: RETURNER
+    title: "Return Acceptance / Civic Reactivation"
+    statement: "O Returner reativado volta às regras de Facial Preservation e recebe cofre individual permanente, não Visitor Coffer; a instalação pode envolver dual authorization, medidas, fitting, stabilization, ventilação, locking, sealing e mobility test; sedação não é rotina."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P4-04
+    domain: RETURNER
+    title: "Civic Release"
+    statement: "Existe mecanismo de desvinculação cívica; sair fisicamente e obter release completo são processos distintos."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P4-05
+    domain: RETURNER
+    title: "Open Gate Paradox"
+    statement: "Visitors may leave. Outsiders may leave. They simply tend not to. A liberdade de sair é real; muitos ficam voluntariamente; a razão completa é mistério."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§6.5"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §7 P5 Redmur × Reino Unido
+  - id: CR-P5-01
+    domain: JURISDICTION
+    title: "Palimpsest Jurisdiction"
+    statement: "Redmur integra Escócia e Reino Unido; o Reino Unido sabe que Redmur existe; a cidade não é secreta. Uma antiga carta real isolada não explica a autoridade contemporânea."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-10
+  - id: CR-P5-ACT
+    domain: JURISDICTION
+    title: "Redmur Preservation Act"
+    statement: "Instrumento ficcional central concebido como antigo Local/Private Act de Westminster; regularizou práticas preexistentes e criou estrutura estatutária específica."
+    name_status: PROVISIONAL
+    date: UNKNOWN
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P5-OCP
+    domain: JURISDICTION
+    title: "Office of Civic Preservation — competências"
+    statement: "A OCP é statutory preservation body, não prefeitura. Normal Scotland: impostos, tribunais, polícia, NHS, serviços, legislação geral. Preservation Redmur: facial preservation, cofres, fittings, registros específicos, visitantes, returners, protocolos determinados."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P5-SAVINGS
+    domain: JURISDICTION
+    title: "Savings Clause Horror"
+    statement: "Reformas sucessivas preservaram a anomalia por cláusulas equivalentes a savings clauses; a pergunta canônica é por que gerações do sistema britânico a encontraram e preservaram parte dela."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P5-POLICE
+    domain: JURISDICTION
+    title: "Justiça e polícia"
+    statement: "Police Scotland mantém jurisdição; COPFS mantém competência criminal; tribunais escoceses continuam válidos; Redmur Constabulary atua como wardens/civic security/preservation officers de competência limitada."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P5-STATE-KNOWS
+    domain: JURISDICTION
+    title: "O Estado sabe do Six-Month Protocol"
+    statement: "O Estado sabe que o sistema existe; não é masmorra secreta; pode haver inspeção, regulação, licenciamento e estruturas médicas. O mistério é a finalidade completa e o que ocorre internamente."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.5"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §8 P6 The Pull
+  - id: CR-P6-01
+    domain: PULL
+    title: "The Pull é multicausal"
+    statement: "Não existe força mágica que impeça pessoas de sair; The Pull é fenômeno social, perceptivo e cultural multicausal."
+    components: [ANONYMITY_RELIEF, FORBIDDEN_INTIMACY, SECRET_SEEKING_COMPULSION, SOCIAL_ROOTING,
+                 PERCEPTUAL_ACCLIMATIZATION, DARK_EROTIC_FIELD, COFFER_PANIC_PROTECTION]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§8, §8.1, §8.2, §8.3, §8.4, §8.5, §8.6, §8.7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-02
+
+  # ---------------------------------------------------------------- §9 P7 Technology Veil
+  - id: CR-P7-01
+    domain: TECHNOLOGY
+    title: "Technology Veil"
+    statement: "Categorias PUBLIC, INSTITUTIONAL, HIDDEN, EXTERNAL e FORBIDDEN TECHNOLOGY; Redmur não é tecnologicamente atrasada (eletricidade, água, saneamento, medicina moderna, telecomunicações, logística, informática)."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§9"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P7-02
+    domain: TECHNOLOGY
+    title: "Paper Face / Digital Shadow"
+    statement: "Para o cidadão: papel, carimbo, livro, ficha, documento físico. Nos bastidores: bancos de dados, servidores, backups, indexação, sistemas externos. Não presumir IA central onisciente."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§9.1"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-27
+  - id: CR-P7-03
+    domain: TECHNOLOGY
+    title: "Cofres e tecnologia"
+    statement: "Cofres podem ter sensores, ventiladores, identificação passiva e telemetria técnica limitada; Redmur evita vigilância facial indiscriminada e prefere sensores ambientais, identificação mecânica e biometria não facial."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§9.2"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-27
+
+  # ---------------------------------------------------------------- §10 P8 Identity Stack / Tattoo
+  - id: CR-P8-01
+    domain: IDENTITY
+    title: "People recognize. Institutions verify. Forensics prove."
+    statement: "Não há substituto único do rosto; o reconhecimento combina voz, marcha, movimento, mãos, postura, altura, proporções, cheiro, respiração, roupa, cofre, hábitos e contexto (Faceless Literacy, falível). Impersonation temporária é possível; roubar cofre não transforma alguém em outra pessoa."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§10"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P8-02
+    domain: IDENTITY
+    title: "Coffer Civic Seal"
+    statement: "Cofres permanentes têm identificação institucional; COFFER_IDENTITY ≠ PERSON_IDENTITY; procedimentos sensíveis podem usar autenticação multifator não facial."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§10.1"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-24
+  - id: CR-P8-03
+    domain: TATTOO
+    title: "Dermal Identity Layer"
+    statement: "Redmur desenvolveu cultura sofisticada de tatuagens (rituais, animais, luas, relíquias, religião, profanação, sexualidade adulta, histórias, passado, enigmas, pertencimento, mentiras)."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§10.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P8-04
+    domain: TATTOO
+    title: "Combination Tattoos — BODY = INFORMATION, BODY ≠ TRUTH"
+    statement: "Números explícitos não são solução artística de combinações; combinações podem ser sugeridas por símbolos, luas, animais, objetos, padrões, relações e imagens; nenhuma tatuagem representa rosto humano individualizado/reconstruível; leituras variam por observador e contexto."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§10.3"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-19
+
+  # ---------------------------------------------------------------- §11 P9 Economy / Body Gap
+  - id: CR-P9-01
+    domain: ECONOMY
+    title: "Economia semipermeável"
+    statement: "Redmur não é autossuficiente: usa libra esterlina, banco britânico, tributação, contratos, importação, exportação e logística; produz parte relevante de alimentos, agricultura, artesanato, couro, metal, madeira, tailoring e manutenção; importa medicamentos, equipamentos, combustível, componentes, tecnologia, veículos e industriais."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§11"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P9-02
+    domain: ECONOMY
+    title: "Coffermaking, tattoo economy, Manfred Estate Network"
+    statement: "Coffermaking é indústria estratégica (cofres fabricados, mantidos, restaurados, herdados, modernizados, não descartáveis); tatuadores têm grande prestígio e a arte pode ter reputação externa; Manfred mantém patrimônio (terras, leases, imóveis, trusts, propriedades agrícolas, participações) sem soberania."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§11.1, §11.2, §11.3"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P9-03
+    domain: ECONOMY
+    title: "Information Market"
+    statement: "Existe mercado negro em que informação pode valer mais que dinheiro; mercadorias clandestinas possíveis: combinação, Facial Record, arquivo, registro infantil, documento antigo, identidade. Facial Records clandestinos são raros, perigosos e difíceis de autenticar."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§11.4"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-05
+  - id: CR-P9-BODYGAP
+    domain: BODY
+    title: "The Redmur Body Gap"
+    statement: "BODY_CULTIVATION_PRESSURE = TRUE; BODY_UNIFORMITY = FALSE; BODY_DISPARITY = OBSERVABLE; SINGLE_CAUSE = FALSE; corpos cultivados convivem com corpos comuns, envelhecidos, cicatrizados, deteriorados, assimétricos; causas mundanas possíveis; distribuição completa ainda inexplicada."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§11.5"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §12 P10 Blind Chronology
+  - id: CR-P10-01
+    domain: CHRONOLOGY
+    title: "Blind Chronology"
+    statement: "P10 do Livro 1 é P10-A BLIND CHRONOLOGY; True Chronology é reservada para Livro 2/futuro."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§12"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P10-02
+    domain: CHRONOLOGY
+    title: "The Redmur Black Interval"
+    statement: "Aproximadamente quarenta anos perderam continuidade, não documentos: existem cartas, registros, recibos, mortes, nascimentos, atas, objetos. Causa desconhecida; apagamento deliberado e ator único não confirmados; Aquele Dia, Manfred, Flarry, a criança perdida, cofres, Preservation Act e Six-Month Protocol orbitam o intervalo sem ordem causal definida."
+    interval: {approx_years: 40, start: UNKNOWN, end: UNKNOWN}
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§12.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P10-03
+    domain: ARCHIVE
+    title: "Four Archives of Redmur"
+    statement: "PAPER (o que instituições registraram), STONE (arquitetura, túmulos, edifícios, cofres, objetos), BODY (tatuagens, cicatrizes, corpos), VOICE (o que gerações repetiram). Nenhum arquivo é soberano."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§12.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CAP-DEAD-ARCHIVE
+    domain: ARCHIVE
+    title: "The Dead Archive (capacidade)"
+    statement: "Mortos podem funcionar como arquivos involuntários; tatuagens podem sobreviver a documentos; túmulos podem preservar corpo, símbolos, cofres e informação material. Não autoriza exumação nem resolver os quarenta anos no Livro 1."
+    status: SYSTEM_CAPABILITY
+    epistemic_class: FACT
+    system_capability_only: true
+    instances: []
+    source: {id: SRC-DOSSIER, location: "§12.3"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- §13 P11 Manfred
+  - id: CR-P11-01
+    domain: MANFRED
+    title: "Power without a throne"
+    statement: "Os Manfred não governam formalmente Redmur, não têm soberania e não controlam automaticamente Police Scotland, OCP, tribunais ou instituições; seu poder é gravidade estrutural herdada; distinguir LEGAL POWER, INSTITUTIONAL INFLUENCE e CULTURAL DEFERENCE; um Manfred pode ouvir não."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§13"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P11-02
+    domain: MANFRED
+    title: "Manfred ≠ Manfreds"
+    statement: "A família não é mente coletiva: há facções, gerações, ricos, pobres, reformistas, tradicionalistas, afastados e conflitos; pode haver Manfred sem poder e não-Manfred com enorme influência na rede."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§13.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P11-03
+    domain: MANFRED
+    title: "Information Rule"
+    statement: "Não existe Manfred que saiba tudo o que os Manfred sabem; arquivos familiares têm lacunas, mentiras, interpretações e documentos perdidos."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§13.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P11-04
+    domain: MANFRED
+    title: "No Universal Manfred Conspiracy"
+    statement: "Nunca usar os Manfred como explicação automática; sempre qual Manfred, quando, com quais evidências. A hipótese de que Manfred apagou os quarenta anos continua tentadora e coexiste com alternativas."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§13.3"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-15
+
+  # ---------------------------------------------------------------- §14 P12 1% / Selka
+  - id: CR-P12-01
+    domain: NON_HUMAN
+    title: "The 1% Non-Human Rule"
+    statement: "O 1% não humano é resíduo epistemológico, não sobrenatural: RATIONAL, AMBIGUOUS (duas ou mais explicações humanas), RESIDUAL (detalhe sem explicação completa). RESIDUAL ≠ SUPERNATURAL; não usar em toda cena; sem retcon sobrenatural."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§14.1"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-03
+  - id: ENT-SELKA
+    domain: SELKA
+    entity_kind: HISTORICAL_PERSON
+    title: "Madre Selka"
+    statement: "Mulher real; viveu em Redmur; freira; viveu durante os Missing Forty Years; teve vida privada clandestina parcialmente incompatível com a identidade religiosa pública (PUBLIC_SELKA ≠ PRIVATE_SELKA); morreu em Redmur ou em circunstâncias diretamente ligadas à cidade; tinha tatuagens."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§14.2, §14.3, §14.7"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-14
+  - id: CR-P12-02
+    domain: SELKA
+    title: "Tradições sobre o túmulo e a sepultura que falta"
+    statement: "Existe tradição persistente sobre o túmulo perdido de Selka; reconstruções funerárias sugerem diferença entre sepultamentos registrados e sepulturas reconciliáveis (folclore: A Sepultura Que Falta); circulam listas das 10 Relíquias em que o túmulo aparece em versões importantes."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§14.4, §14.5, §14.6"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P12-03
+    domain: SELKA
+    title: "Selka Ontology Firewall"
+    statement: "O destino pós-morte de Selka em outra obra não pode explicar Redmur, confirmar magia, criar fantasma, causar The Pull, mover objetos ou solucionar mistérios; nenhuma obra depende da outra; não explicar didaticamente."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§14.8"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-14
+
+  # ---------------------------------------------------------------- §15 P13 expressão / pescoço / toque
+  - id: CR-P13-01
+    domain: EXPRESSION
+    title: "Feel → Observe → Infer"
+    statement: "O rosto existe fisicamente; a narrativa não recebe acesso visual automático. O POV narra sensações internas próprias; outro personagem não observa objetivamente o que o cofre esconde e usa voz, mãos, postura, corpo, distância, respiração, som do cofre, tatuagens, roupa, toque e contexto. 'Pareceu sorrir' é permitido; 'ele sorriu para ela' como observação objetiva sem acesso é proibido."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.1"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P13-02
+    domain: EXPRESSION
+    title: "No Gesture Loop"
+    statement: "Não substituir expressão facial por poucos tiques repetitivos; não escrever rosto convencional e traduzir para corpo; personagens importantes podem ter assinaturas não faciais consistentes, sem exagero."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: CR-P13-03
+    domain: INTIMACY
+    title: "The Naked Neck"
+    statement: "NECK_VISIBILITY = ALLOWED; NECK ≠ FACE; em contexto adulto o pescoço é zona de vulnerabilidade e erotismo; cobri-lo é costume, não lei; decotes são permitidos; pescoço, decote e tatuagem nunca implicam consentimento."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.3"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-08
+  - id: CR-P13-R10
+    domain: CONSENT
+    title: "Layered Contextual Touch Grammar"
+    statement: "O significado de tocar um cofre depende de zona, pressão, duração, intenção, consentimento, relação e contexto; toque não é automaticamente sexual nem ilegal; manipulação não autorizada do lock é violação grave; CONSENT_TO_COFFER_TOUCH ≠ CONSENT_TO_LOCK_MANIPULATION ≠ CONSENT_TO_REMOVAL ≠ CONSENT_TO_FACIAL_EXPOSURE; sem dicionário gestual."
+    status: CANON_PATCH_APPROVED
+    patch: R10
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.4"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-08
+  - id: CR-P13-R11
+    domain: AGE
+    title: "Adult-Only Semantic Firewall"
+    statement: "Semântica erótica de menores absolutamente desabilitada; status adulto é necessário, não suficiente. Hard consent locks: pescoço exposto, decote, toque de cofre, conhecimento de combinação, acesso ao lock, autoridade, medo e coerção não são consentimento. Toque médico, técnico, parental e pediátrico é eroticamente neutro; violência não é automaticamente erótica."
+    status: CANON_PATCH_APPROVED
+    patch: R11
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.5"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-06
+  - id: CR-P13-04
+    domain: CONSENT
+    title: "Arquitetura de intimidade"
+    statement: "IDENTITY (cofre/rosto), ACCESS (lock/combinação), BODY (pescoço/decote/postura) e CONSENT (camada independente): IDENTITY ≠ ACCESS ≠ BODY ≠ CONSENT; INTIMACY ≠ SEXUALITY; VIOLENCE ≠ DESIRE."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§15.6"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-08
+
+  # ---------------------------------------------------------------- §16 P14 contrato do Livro 1 (detalhe em BOOK_GATES)
+  - id: CR-P14-01
+    domain: BOOK_CONTRACT
+    title: "Arquitetura do Livro 1"
+    statement: "CRIME → CLOSED; DARK ROMANCE → IRREVERSIBLE, NOT CLOSED; REDMUR → EXPANDED."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§16"}
+    scope: {book: B1, reader: OPEN}
+
+  # ---------------------------------------------------------------- §19 dependência cartográfica
+  - id: CR-CART-01
+    domain: CARTOGRAPHY_DEPENDENCY
+    title: "Mapas canônicos como fonte espacial"
+    statement: "Os dois mapas aprovados são fonte cartográfica canônica; localidades, rotas, passagens, subsolo, posições, áreas restritas e mistérios cartográficos são respeitados; nenhuma infraestrutura recorrente surge por conveniência sem proposta/atualização cartográfica."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§19"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-22
+
+  # ---------------------------------------------------------------- entidades
+  - id: FAM-MANFRED
+    domain: MANFRED
+    entity_kind: FAMILY
+    title: "Família Manfred"
+    statement: "Família com patrimônio e influência herdados; entidade, nunca ator causal de evento."
+    map_refs: [RM-URB-MNF]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§11.3, §13"}
+    scope: {book: SERIES, reader: OPEN}
+    lock: HL-15
+  - id: ENT-FLARRY
+    domain: MANFRED
+    entity_kind: UNSPECIFIED
+    title: "Flarry"
+    statement: "Nome que orbita os Missing Forty Years; natureza (família, pessoa) não especificada no dossiê; nenhum vínculo com o rótulo Flarry Estate do Mapa A é afirmado."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§12.1, §12.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: INST-OCP
+    domain: JURISDICTION
+    entity_kind: INSTITUTION
+    title: "Office of Civic Preservation (OCP)"
+    statement: "Statutory preservation body de Redmur."
+    map_refs: [RM-CEN-OCP]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.2"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: INST-CONSTABULARY
+    domain: JURISDICTION
+    entity_kind: INSTITUTION
+    title: "Redmur Constabulary"
+    statement: "Wardens/civic security/preservation officers de competência limitada; não é força soberana."
+    map_refs: [RM-CEN-CON]
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: ENT-POLICE-SCOTLAND
+    domain: JURISDICTION
+    entity_kind: INSTITUTION
+    title: "Police Scotland"
+    statement: "Mantém jurisdição em Redmur."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§5.3, §7.4"}
+    scope: {book: SERIES, reader: OPEN}
+  - id: ENT-COPFS
+    domain: JURISDICTION
+    entity_kind: INSTITUTION
+    title: "COPFS"
+    statement: "Mantém competência criminal."
+    status: CANON_APPROVED
+    epistemic_class: FACT
+    source: {id: SRC-DOSSIER, location: "§7.4"}
+    scope: {book: SERIES, reader: OPEN}
+
+  # ---------------------------------------------------------------- incógnitas: dossiê §17 (um registro por item, na ordem)
+  # UNK não tem statement, answer nem hipótese. `unlock` só classifica o bloqueio; todo desbloqueio é decisão humana.
+  - {id: UNK-SR-COFFER-ORIGIN, domain: COFFER, question: "Qual a origem verdadeira dos cofres?", status: CANON_UNKNOWN, dossier_item: 1, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.4, §16.8"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-FACE-BAN-ORIGIN, domain: FACE, question: "Qual a origem real da proibição facial?", status: CANON_UNKNOWN, dossier_item: 2, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELF-FACE-ORIGIN, domain: FACE, question: "Qual o propósito profundo de proteger alguém do próprio rosto?", status: CANON_UNKNOWN, dossier_item: 3, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §3.7"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-AQUELE-DIA, domain: CHRONOLOGY, question: "Qual a causa e a natureza completa de Aquele Dia?", status: CANON_UNKNOWN, dossier_item: 4, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-TRUE-CHRONOLOGY, domain: CHRONOLOGY, question: "Qual é a True Chronology de Redmur?", status: CANON_UNKNOWN, dossier_item: 5, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-40Y-CAUSE, domain: CHRONOLOGY, question: "Qual a causalidade dos Missing Forty Years?", status: CANON_UNKNOWN, dossier_item: 6, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.1"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-40Y-DELIBERATE, domain: CHRONOLOGY, question: "Houve apagamento deliberado?", status: CANON_UNKNOWN, dossier_item: 7, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.1"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-40Y-SINGLE-ACTOR, domain: CHRONOLOGY, question: "Houve ator único?", status: CANON_UNKNOWN, dossier_item: 8, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.1"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-LOST-CHILD, domain: MANFRED, question: "Qual a verdade integral da criança perdida dos Manfred?", status: CANON_UNKNOWN, dossier_item: 9, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-FLARRY-ROLE, domain: MANFRED, question: "Qual o papel completo de Flarry?", status: CANON_UNKNOWN, dossier_item: 10, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-ACT-MOTIVE, domain: JURISDICTION, question: "Qual o motivo final do Redmur Preservation Act?", status: CANON_UNKNOWN, dossier_item: 11, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SAVINGS-CLAUSES-WHY, domain: JURISDICTION, question: "Qual o motivo final das Savings Clauses?", status: CANON_UNKNOWN, dossier_item: 12, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §7.3, §12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-ANOMALY-MAINTENANCE, domain: JURISDICTION, question: "Qual a razão completa para a manutenção institucional da anomalia?", status: CANON_UNKNOWN, dossier_item: 13, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SIX-MONTH-CONTENTS, domain: CHILD_PROTOCOL, question: "O que ocorre integralmente durante os seis meses das crianças?", status: CANON_UNKNOWN, dossier_item: 14, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §4.5, §7.5"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-CHILD-FACILITY-LOCATION, domain: CHILD_PROTOCOL, question: "Qual lugar da cartografia existente é o local do Six-Month Protocol, e qual seu uso narrativo final?", status: CANON_UNKNOWN, dossier_item: 15, unlock: CARTOGRAPHIC_DECISION, decided_by: "APPROVAL:CANON_DECISION_0001 (OQ-SR-05a: permanece desconhecido)", source: {id: SRC-DOSSIER, location: "§17, §4.6"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-PULL-COMPLETE, domain: PULL, question: "Qual a razão completa de The Pull?", status: CANON_UNKNOWN, dossier_item: 16, unlock: NEVER, source: {id: SRC-DOSSIER, location: "§17, §8"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-BODY-GAP, domain: BODY, question: "Qual a explicação total do Body Gap?", status: CANON_UNKNOWN, dossier_item: 17, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §11.5"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-DEATH, domain: SELKA, question: "Qual a causa da morte de Madre Selka?", status: CANON_UNKNOWN, dossier_item: 18, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §14.3, §14.9"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-GRAVE-LOCATION, domain: SELKA, question: "Onde fica o túmulo de Selka?", status: CANON_UNKNOWN, dossier_item: 19, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §14.4, §14.9"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-COFFER-MODEL, domain: SELKA, question: "Qual o modelo e o conteúdo do cofre de Selka?", status: CANON_UNKNOWN, dossier_item: 20, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §14.7, §14.9"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-TATTOO-MEANING, domain: SELKA, question: "Qual o significado das tatuagens de Selka?", status: CANON_UNKNOWN, dossier_item: 21, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§17, §14.7, §14.9"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-TEN-RELICS, domain: SELKA, question: "Qual a lista objetiva das 10 Relíquias?", status: CANON_UNKNOWN, dossier_item: 22, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §14.6"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-PRAYER-ORIGIN, domain: SELKA, question: "Qual a origem da frase 'Aqui ninguém termina a oração.'?", status: CANON_UNKNOWN, dossier_item: 23, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §14.8"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-HISTORICAL-FACIAL-RECORD, domain: FACE, question: "Existe algum Facial Record histórico específico?", status: CANON_UNKNOWN, dossier_item: 24, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§17, §3.5, §23"}, scope: {book: SERIES, reader: NEVER}}
+
+  # ---------------------------------------------------------------- incógnitas fora de §17 (citadas por locks e gates)
+  - {id: UNK-SR-SIX-MONTH-ORIGIN, domain: CHILD_PROTOCOL, question: "Qual a origem definitiva do Six-Month Protocol?", status: CANON_UNKNOWN, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§12.4"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-MANFRED-ROLE, domain: MANFRED, question: "Qual o papel causal definitivo dos Manfred?", status: CANON_UNKNOWN, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§12.4, §16.8"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-PRIVATE-LIFE, domain: SELKA, question: "Quais os detalhes completos da vida clandestina de Selka?", status: CANON_UNKNOWN, unlock: HUMAN_DECISION, source: {id: SRC-DOSSIER, location: "§14.2"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-SELKA-TATTOO-COUNT, domain: SELKA, question: "Quantas tatuagens Selka tinha?", status: CANON_UNKNOWN, unlock: B1_LOCKED, source: {id: SRC-DOSSIER, location: "§14.7"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-VEIL-HOUSE-LOCATION, domain: VISITOR, question: "Onde fica fisicamente a Veil House?", status: CANON_UNKNOWN, unlock: CARTOGRAPHIC_DECISION, source: {id: APPROVAL:CANON_DECISION_0001, location: "OQ-SR-05c"}, scope: {book: SERIES, reader: NEVER}}
+  - {id: UNK-SR-TRANSFER-ZONE-LOCATION, domain: VISITOR, question: "Onde fica fisicamente a Transfer Zone?", status: CANON_UNKNOWN, unlock: CARTOGRAPHIC_DECISION, source: {id: APPROVAL:CANON_DECISION_0001, location: "OQ-SR-05c"}, scope: {book: SERIES, reader: NEVER}}
+
+  # ---------------------------------------------------------------- inferências proibidas (as que os locks citam; mais no Slice 2)
+  - {id: PRO-SR-SUPERNATURAL-CAUSE, domain: ABSOLUTE, statement: "Um fenômeno de Redmur tem causa sobrenatural confirmada (fantasma, maldição, entidade, portal, força mágica).", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§1.3, §14.1"}, scope: {book: SERIES}}
+  - {id: PRO-SR-PULL-FORCE, domain: PULL, statement: "The Pull é uma força, maldição, hipnose, campo ou entidade que impede as pessoas de sair.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§8, §8.6"}, scope: {book: SERIES}}
+  - {id: PRO-SR-SELKA-CROSSOVER, domain: SELKA, statement: "O destino pós-morte de Selka em outra obra explica ou age em Redmur.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§14.8"}, scope: {book: SERIES}}
+  - {id: PRO-SR-SELKA-IS-THE-KEY, domain: SELKA, statement: "Selka é a chave que explica Redmur ou os Missing Forty Years.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§14.9"}, scope: {book: SERIES}}
+  - {id: PRO-SR-COMBINATION-REMOVES, domain: COFFER, statement: "Conhecer a combinação de um cofre basta para removê-lo, tocá-lo, manipular o lock ou expor o rosto.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§2.7"}, scope: {book: SERIES}}
+  - {id: PRO-SR-UNIVERSAL-COMBINATION, domain: COFFER, statement: "Existe uma combinação que abre todos os cofres.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§2.3"}, scope: {book: SERIES}}
+  - {id: PRO-SR-MANFRED-DID-IT, domain: MANFRED, statement: "Os Manfred, como família, causaram algo sem indicação de qual Manfred, quando e com que evidência.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§13.3"}, scope: {book: SERIES}}
+  - {id: PRO-SR-40Y-EXPLAINED-B1, domain: CHRONOLOGY, statement: "O Livro 1 estabelece o que aconteceu nos Missing Forty Years.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§12.4"}, scope: {book: B1}}
+  - {id: PRO-SR-40Y-EMPTY, domain: CHRONOLOGY, statement: "Os quarenta anos não deixaram documentos.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§12.1"}, scope: {book: SERIES}}
+  - {id: PRO-SR-REDMUR-SOVEREIGN, domain: JURISDICTION, statement: "Redmur é Estado soberano, tem fronteira internacional ou poder policial fora de seus limites.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§1.1, §4.7, §5"}, scope: {book: SERIES}}
+  - {id: PRO-SR-GLOBAL-PURGE, domain: FACE, statement: "Uma autoridade de Redmur apaga registros faciais fora de Redmur.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§3.6"}, scope: {book: SERIES}}
+  - {id: PRO-SR-OMNISCIENT-AI, domain: TECHNOLOGY, statement: "Redmur é governada ou vigiada por uma IA central onisciente ou por vigilância facial indiscriminada.", status: CANON_APPROVED, source: {id: SRC-DOSSIER, location: "§9.1, §9.2"}, scope: {book: SERIES}}

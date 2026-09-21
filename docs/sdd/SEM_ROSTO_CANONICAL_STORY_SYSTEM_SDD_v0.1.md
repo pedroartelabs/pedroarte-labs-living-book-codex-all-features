@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Status | **E0 — PROPOSTA; Slice 0 concluído (2026-09-21).** Dossiê pinado no repositório, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). Nenhum código escrito, nenhum comportamento do motor alterado. Próximo: Slice 1. |
+| Status | **E0 — PROPOSTA; Slices 0 e 1 concluídos (2026-09-21).** S0: dossiê pinado, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). S1: seeds `CANON_RECORDS`/`HARD_LOCKS`/`BOOK_GATES` e validador `--mode package` (seção 79.1). Nenhum comportamento do motor alterado. Próximo: Slice 2. |
 | Data | 2026-09-21 |
 | Obra | **SEM ROSTO** — autoria **Bea Halden** — gênero DEDR (*Distopic Enigma Dark Romance*) |
 | Papel | **Fundação canônica narrativa** da obra (2 de 2). A outra é `REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md` (espacial). Este SDD é o "Story Truth Ledger" que a cartografia referencia por contrato (cartografia §22.4). |
@@ -3327,12 +3327,44 @@ S0 ─▶ S1 ─▶ S2 ─▶ S3 ─▶ S4 ─┬─▶ S5 (integração no paco
 | Slice | Objetivo | Arquivos | Testes / DoD | Compl. |
 |---|---|---|---|---|
 | **S0** Decisões e pinagem — **CONCLUÍDO 2026-09-21** | freeze, versionar dossiê | `books/sem-rosto/canon/sources/{REDMUR_CANON_RESOLUTION_DOSSIER_FINAL.md, SOURCES.yaml}`, `approvals/CANON_FREEZE_0001.md` (humano), README do pacote | hash conferido; OQ-SR-01/02 decididas | S |
-| **S1** Registros, locks, gates | contrato e integridade | `canon/seeds/{CANON_RECORDS, HARD_LOCKS, BOOK_GATES}.seed.yaml`, `canon/templates/*`, `validators/check_sem_rosto_canon.py` (`--mode package`), `tests/test_sem_rosto_canon.py`, fixture | SR-SRC, SR-CR, SR-ST, SR-PV, SR-HL-02/03; `git diff --stat engine/` vazio | M |
+| **S1** Registros, locks, gates — **CONCLUÍDO 2026-09-21** | contrato e integridade | `canon/seeds/{CANON_RECORDS, HARD_LOCKS, BOOK_GATES}.seed.yaml`, `canon/templates/*`, `validators/check_sem_rosto_canon.py` (`--mode package`), `tests/test_sem_rosto_canon.py`, fixture | SR-SRC, SR-CR, SR-ST, SR-PV, SR-HL-02/03; `git diff --stat engine/` vazio | M |
 | **S2** Mistérios, rumores, conhecimento | projeções | seeds `MYSTERIES`, `RUMORS`; `--emit-registry-fragment`; `--is-true`, `--who-knows`, `--reader-at`, `--mystery` | TEST 03, 05, 06, 10; `REGISTRY_DRIFT` | M |
 | **S3** Firewalls | estado dinâmico e regras | seeds `COFFERS`, `CIVIC`, `JURISDICTION`, `LEXICON`; template `STATE_DELTAS`; famílias FACE/FRC/SFE/EXT/CMB/TCH/CNS/AGE/CIV/JUR/TEC/TAT/MAN/SEL/NH | TEST 01, 02, 04, 07–09, 15–25, 30 | L |
 | **S4** Pack, contrato, pós-cena, crime | escrita guiada | `--pack`, Scene Generation Contract, `POST_SCENE_REPORT`, schemas; crime/fair-play/double-edge/irreversibilidade/promessas; `--mode wave/final/regression`; snapshots | TEST 11–14, 26–29; `--verdict` | L |
 | **S5** Integração no pacote | pacote compõe com o sistema | `BOOK_SPEC`/`BOOK_GRAPH` de SEM ROSTO (quando existir), `agents/redmur_canon_warden.toml`, `text_quality.yaml`, tarefas `T018S`, `T1NNS`, `T2NNS`; cartografia: D-SR-11 | compose em diretório temporário; `validate-gate GATE_CANON`; goldens idênticos | M |
 | **S6** Piloto (opcional, pago) | 2–3 capítulos em `DRAFT` | runtime real | humano responde "sim" à pergunta de aceite (seção 80) para as cenas do piloto e o relatório concorda | — |
+
+### 79.1 Estado do Slice 1 (2026-09-21)
+
+Entregue:
+
+- `books/sem-rosto/canon/seeds/CANON_RECORDS.seed.yaml` — 136 registros: 82 `CR-*`, 5 `CAP-*` (todos com
+  `instances: []`), 30 `UNK-SR-*` (um por item do dossiê §17 — 24 — mais 6 citados por locks/gates e pelas
+  decisões OQ-SR-05), 12 `PRO-SR-*`, 7 entidades (`ENT-SELKA`, `FAM-MANFRED`, `ENT-FLARRY` `UNSPECIFIED`,
+  `INST-OCP`, `INST-CONSTABULARY`, Police Scotland, COPFS). Todo registro cita `§N[.N]` existente no dossiê
+  pinado ou um item de aprovação humana.
+- `HARD_LOCKS.seed.yaml` — os 28 locks da seção 15.2, com detectores `SR-*`, `ENGINE:<validador>:<regra>`
+  ou `JUDGMENT:<agente>`.
+- `BOOK_GATES.seed.yaml` — Livro 1: 11 `REQUIRED`, 4 `PARTIAL`, 21 `FORBIDDEN`, os 16 gates de escrita do
+  §21; série: 5 locks estruturais e 10 domínios futuros; `B2: UNDEFINED`.
+- `books/sem-rosto/validators/check_sem_rosto_canon.py --mode package` — famílias SR-SRC, SR-CR, SR-ST-04,
+  SR-PV-01/05, SR-HL-02/03; lista de chaves de resposta importada do motor
+  (`check_interpretive_canon.HIDDEN_ANSWER_KEYS`); `map_refs` conferidos contra os seeds da cartografia.
+- `tests/test_sem_rosto_canon.py` — 39 testes (9 sobre os dados reais, 30 mutações com categoria exata).
+
+Resultado nos dados reais: `PASS_WITH_WARNINGS` — 3 × `SEED_UNAPPROVED` (MEDIUM: os seeds aguardam
+aprovação humana, como os da cartografia) e 1 `LOCK_DETECTORS_PLANNED` (INFO: 21 dos 28 locks só têm
+detectores estruturais de slices futuros; até lá valem como checklist do revisor — o relatório diz isso
+explicitamente em vez de fingir cobertura).
+
+Desvios do texto do SDD, deliberados:
+
+| Onde | SDD dizia | Implementado | Por quê |
+|---|---|---|---|
+| 12.1 | campo `canon_id` | `id` | convenção de todos os artefatos do repositório |
+| 12.6 | templates separados em `canon/templates/` | os próprios seeds + testes de mutação são o contrato executável | um template a mais duplicaria 136 registros sem ganho; o contrato está em `FIELDS_BY_KIND`/`REQUIRED_BY_KIND` do validador |
+| 13, 66 | regras SR-CR sem numeração | SR-CR-01..11 (contrato, duplicado, id, enum, referência, UNK com conteúdo, resposta escondida, cobertura, registry drift [S2], seed não aprovado, seed editado) e SR-SRC-02 `FREEZE_NOT_APPROVED`; SR-B1-01..11 = verificação final de cada `BG1-R-*` (S4) | os locks precisam citar regras por id |
+| 12.2 | `THEORY-*`, `RUM-*`, `MYS-*` em `CANON_RECORDS` | ficam para o Slice 2 (`RUMORS`, `MYSTERIES`) | escopo do slice |
 
 Pré-condição de S5: pacote completo de SEM ROSTO (hoje parcial — só
 cartografia; DEDR S6) e working tree de outras frentes versionado (D-CART-16).

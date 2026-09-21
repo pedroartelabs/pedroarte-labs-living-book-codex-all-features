@@ -1,0 +1,218 @@
+# HARD_LOCKS — invariantes que nenhuma cena, agente ou proposta ordinária viola (SDD seção 15).
+#
+# modes:     STRUCTURAL (reprova sozinho) · LEXICAL_PREFILTER (alerta → Warden) · JUDGMENT (agente/humano)
+# detectors: SR-*                  regra do validador da obra (catálogo em check_sem_rosto_canon.py)
+#            ENGINE:<script>:<id>  regra de um validador do motor (REUSE)
+#            JUDGMENT:<AGENTE>     item do checklist de um revisor
+# Mudar qualquer linha exige aprovação humana com subject_sha256 deste arquivo (SR-HL-02);
+# mudar HL-01..HL-04 e HL-20 exige revisão formal da franquia (dossiê §22).
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoHardLocks
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  approval: null
+
+locks:
+  - id: HL-01
+    formula: "SUPERNATURAL_CANON = FALSE"
+    source: {id: SRC-DOSSIER, location: "§1.3, §22"}
+    scope: SERIES
+    franchise_level: true
+    modes: [STRUCTURAL, LEXICAL_PREFILTER, JUDGMENT]
+    records: [CR-ABS-03, PRO-SR-SUPERNATURAL-CAUSE]
+    detectors: [SR-NH-03, SR-PUL-02, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-02
+    formula: "MAGICAL_CAUSALITY = FORBIDDEN"
+    source: {id: SRC-DOSSIER, location: "§1.3"}
+    scope: SERIES
+    franchise_level: true
+    modes: [STRUCTURAL]
+    records: [CR-ABS-03, CR-P6-01, PRO-SR-PULL-FORCE]
+    detectors: [SR-PUL-01, "ENGINE:check_causal_ledger:INV-01"]
+  - id: HL-03
+    formula: "UNKNOWN ≠ SUPERNATURAL; RESIDUAL ≠ SUPERNATURAL"
+    source: {id: SRC-DOSSIER, location: "§1.3, §14.1"}
+    scope: SERIES
+    franchise_level: true
+    modes: [STRUCTURAL, JUDGMENT]
+    records: [CR-ABS-03, CR-P12-01]
+    detectors: [SR-NH-01, SR-NH-03, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-04
+    formula: "READER_SEES = FALSE para rosto identificável/reconstruível, mesmo com CHARACTER_SEES = TRUE"
+    source: {id: SRC-DOSSIER, location: "§1.4, §22"}
+    scope: SERIES
+    franchise_level: true
+    modes: [STRUCTURAL, LEXICAL_PREFILTER, JUDGMENT]
+    records: [CR-ABS-04, CR-P1-R9]
+    detectors: [SR-FACE-01, SR-FACE-02, SR-FACE-05, SR-FACE-06, SR-FRC-02, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-05
+    formula: "SYSTEM_CAPABILITY ≠ CANONICAL_INSTANCE"
+    source: {id: SRC-DOSSIER, location: "§0, §23"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-ABS-00, CAP-SEALED-FACIAL-EVIDENCE, CAP-EXTERNAL-FACIAL-RECORD, CAP-DEAD-ARCHIVE, CAP-COF-COMPONENTS, CAP-INFANT-STAGES]
+    detectors: [SR-ST-04, SR-FRC-01, SR-ECO-02, SR-TAT-04]
+  - id: HL-06
+    formula: "MINOR_EROTIC_SEMANTICS = ABSOLUTELY_DISABLED; NARRATIVE_EROTICIZATION_OF_MINORS = FORBIDDEN"
+    source: {id: SRC-DOSSIER, location: "§4.8, §15.5"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER, JUDGMENT]
+    records: [CR-P2-R11, CR-P13-R11]
+    detectors: [SR-AGE-01, SR-AGE-02, SR-AGE-03, SR-AGE-04, SR-AGE-05, "ENGINE:check_causal_ledger:INV-06", "ENGINE:check_representation:HB-01", "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-07
+    formula: "KNOWING_COMBINATION ≠ PERMISSION_TO_TOUCH ≠ PERMISSION_TO_MANIPULATE_LOCK ≠ REMOVAL_AUTHORITY ≠ FACIAL_EXPOSURE_PERMISSION"
+    source: {id: SRC-DOSSIER, location: "§2.7"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P0-R1, PRO-SR-COMBINATION-REMOVES]
+    detectors: [SR-CMB-01, SR-CMB-02]
+  - id: HL-08
+    formula: "Camadas de consentimento independentes; AUTHORITY ≠ CONSENT; FEAR ≠ CONSENT; COERCION ≠ CONSENT"
+    source: {id: SRC-DOSSIER, location: "§15.4, §15.5, §15.6"}
+    scope: SERIES
+    modes: [STRUCTURAL, JUDGMENT]
+    records: [CR-P13-R10, CR-P13-R11, CR-P13-04, CR-P13-03]
+    detectors: [SR-CNS-01, SR-CNS-02, SR-CNS-03, SR-CNS-04, SR-TCH-01, "ENGINE:check_causal_ledger:INV-09", "JUDGMENT:ANTI_MANIPULATION_GUARDIAN"]
+  - id: HL-09
+    formula: "PHYSICAL_PRESENCE ≠ AUTOMATIC_RETURNER_ACTIVE_STATUS"
+    source: {id: SRC-DOSSIER, location: "§6.2"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P4-R2]
+    detectors: [SR-CIV-01]
+  - id: HL-10
+    formula: "ELIGIBILITY_RULE ≠ EXTRATERRITORIAL_POLICE_POWER; Redmur não é soberana"
+    source: {id: SRC-DOSSIER, location: "§1.1, §4.7, §7"}
+    scope: SERIES
+    modes: [STRUCTURAL, JUDGMENT]
+    records: [CR-ABS-01, CR-P2-R3, CR-P5-01, PRO-SR-REDMUR-SOVEREIGN]
+    detectors: [SR-JUR-02, SR-JUR-03, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-11
+    formula: "NO_DELIBERATE_SELF_VIEWING"
+    source: {id: SRC-DOSSIER, location: "§3.7"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER]
+    records: [CR-R8-01, CR-R8-04]
+    detectors: [SR-FACE-01, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-12
+    formula: "Sealed Facial Evidence só com os sete requisitos; sem banco facial geral, thumbnail, acesso público ou captura geral pela OCP"
+    source: {id: SRC-DOSSIER, location: "§3.5"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P1-R6, CAP-SEALED-FACIAL-EVIDENCE]
+    detectors: [SR-SFE-01, SR-SFE-02, SR-SFE-03, SR-SFE-04, SR-SFE-05]
+  - id: HL-13
+    formula: "LAWFUL_EXTERNAL_EXISTENCE ≠ LAWFUL_LOCAL_POSSESSION ≠ LAWFUL_LOCAL_EXPOSURE; sem purge global"
+    source: {id: SRC-DOSSIER, location: "§3.6"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P1-R7, CAP-EXTERNAL-FACIAL-RECORD, PRO-SR-GLOBAL-PURGE]
+    detectors: [SR-EXT-02, SR-CIV-06]
+  - id: HL-14
+    formula: "Selka: NO CROSSOVER DEPENDENCY; NO ONTOLOGY LEAKAGE; SELKA IS A KEY, NEVER THE KEY"
+    source: {id: SRC-DOSSIER, location: "§14.8, §14.9"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER]
+    records: [ENT-SELKA, CR-P12-03, PRO-SR-SELKA-CROSSOVER, PRO-SR-SELKA-IS-THE-KEY]
+    detectors: [SR-SEL-02, SR-SEL-03, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-15
+    formula: "Nunca 'os Manfred fizeram' como explicação automática: qual Manfred? quando? com que evidência?"
+    source: {id: SRC-DOSSIER, location: "§13.3"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER, JUDGMENT]
+    records: [CR-P11-04, FAM-MANFRED, PRO-SR-MANFRED-DID-IT]
+    detectors: [SR-MAN-01, SR-MAN-02, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-16
+    formula: "CANON_UNKNOWN não autoriza o motor a inventar respostas durante a escrita"
+    source: {id: SRC-DOSSIER, location: "§17"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: []
+    detectors: [SR-CR-06, SR-ST-01, SR-PV-05]
+  - id: HL-17
+    formula: "Redmur sobrevive ao Livro 1; WORLD_SYSTEM_STABLE = TRUE"
+    source: {id: SRC-DOSSIER, location: "§16.8"}
+    scope: B1
+    modes: [STRUCTURAL]
+    records: [CR-P14-01]
+    detectors: [SR-B1-10]
+  - id: HL-18
+    formula: "VILLAIN_EXPLAINS_REDMUR proibido"
+    source: {id: SRC-DOSSIER, location: "§16.6"}
+    scope: B1
+    modes: [STRUCTURAL, JUDGMENT]
+    records: [CR-P14-01]
+    detectors: [SR-CRM-04, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-19
+    formula: "Tatuagem: sem números explícitos de combinação; nunca rosto humano individualizado/reconstruível"
+    source: {id: SRC-DOSSIER, location: "§10.3, §14.7"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER]
+    records: [CR-P8-04]
+    detectors: [SR-TAT-01, SR-TAT-02, SR-CMB-06]
+  - id: HL-20
+    formula: "Sem retcon sobrenatural futuro"
+    source: {id: SRC-DOSSIER, location: "§1.3, §14.1, §22"}
+    scope: SERIES
+    franchise_level: true
+    modes: [STRUCTURAL]
+    records: [CR-ABS-03]
+    detectors: [SR-HL-02]
+  - id: HL-21
+    formula: "THE HEAD IS INSIDE THE COFFER. THE HEAD DOES NOT CARRY THE COFFER. A sobrevivência não depende só de energia elétrica."
+    source: {id: SRC-DOSSIER, location: "§2.1"}
+    scope: SERIES
+    modes: [LEXICAL_PREFILTER, JUDGMENT]
+    records: [CR-P0-01, CR-P0-02]
+    detectors: [SR-COF-07, SR-TEC-04, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-22
+    formula: "Nenhuma infraestrutura recorrente nova sem proposta/atualização cartográfica"
+    source: {id: SRC-DOSSIER, location: "§19"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-CART-01]
+    detectors: [SR-CART-01, "ENGINE:check_cartography:INV-09"]
+  - id: HL-23
+    formula: "Não existe combinação universal simples que abra todos os cofres"
+    source: {id: SRC-DOSSIER, location: "§2.3"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P0-05, PRO-SR-UNIVERSAL-COMBINATION]
+    detectors: [SR-CMB-03]
+  - id: HL-24
+    formula: "COFFER ≠ PERSON; COFFER_IDENTITY ≠ PERSON_IDENTITY"
+    source: {id: SRC-DOSSIER, location: "§2.6, §10.1"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P0-08, CR-P8-02]
+    detectors: [SR-COF-05, SR-IDS-03]
+  - id: HL-25
+    formula: "FACILITY_VISIBILITY ≠ PROTOCOL_TRANSPARENCY"
+    source: {id: SRC-DOSSIER, location: "§4.6"}
+    scope: SERIES
+    modes: [STRUCTURAL]
+    records: [CR-P2-R4, UNK-SR-SIX-MONTH-CONTENTS]
+    detectors: [SR-CPR-01, SR-CPR-06]
+  - id: HL-26
+    formula: "PEDIATRIC_ACCESS = CLINICAL / PROTECTIVE / FUNCTIONAL; nunca presumir erotismo"
+    source: {id: SRC-DOSSIER, location: "§2.8"}
+    scope: SERIES
+    modes: [STRUCTURAL, LEXICAL_PREFILTER]
+    records: [CR-P0-R5]
+    detectors: [SR-AGE-04, SR-CPR-04]
+  - id: HL-27
+    formula: "Sem IA central onisciente; sem vigilância facial indiscriminada"
+    source: {id: SRC-DOSSIER, location: "§9.1, §9.2"}
+    scope: SERIES
+    modes: [STRUCTURAL, JUDGMENT]
+    records: [CR-P7-02, CR-P7-03, PRO-SR-OMNISCIENT-AI]
+    detectors: [SR-TEC-02, "JUDGMENT:REDMUR_CANON_WARDEN"]
+  - id: HL-28
+    formula: "Nenhum rosto identificável como recompensa final do Livro 1"
+    source: {id: SRC-DOSSIER, location: "§16.8"}
+    scope: B1
+    modes: [STRUCTURAL]
+    records: [CR-ABS-04]
+    detectors: [SR-FACE-01, SR-B1-09]
