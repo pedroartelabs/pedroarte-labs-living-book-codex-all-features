@@ -728,6 +728,7 @@ edges:
   - {from_chapter: 0, state: OPEN}
   note: 'CONEXÃO INFERIDA: a linha vermelha R1 termina entre casas a ~110 m desta via; o mapa não desenha a ligação. Sem ela o cemitério ficaria
     a 2,9 km do Red Stag Pub (1,5 km em linha reta).'
+  printed: false
 - id: EDG-U-016
   from: RM-CEN-OCP
   to: RM-CEN-SMC

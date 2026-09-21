@@ -682,6 +682,12 @@ def validate_movement(model, mv, stagings, ledger=None, defaults=None):
             elif interval > times["max_reasonable_s"] + 1e-6:
                 _add(out, "TR-04 UNEXPLAINED_DELAY", "INFO", chapter, mid, f"Intervalo {round(interval)} s > razoável {round(times['max_reasonable_s'])} s.",
                      "A narrativa pode explicar o atraso.")
+    planned_on = str(mv.get("planned_on") or "")
+    if planned_on.startswith("BELIEF:"):
+        import cartography_maps as maps
+        art = planned_on.split(":", 1)[1]
+        out.extend(maps.check_planned_belief(model, art, mv.get("planned_route"), [e["id"] for _, _, e in path["edges"]] if path else [],
+                                             chapter, mid, seen_ok=maps.artifact_seen(mv, ledger, actor, chapter, art)))
     sev = {f["severity"] for f in out}
     verdict = "FAIL" if sev & cc.BLOCKING else ("WARNING" if "MEDIUM" in sev else "PASS")
     return {"verdict": verdict, "findings": out, "times": times}

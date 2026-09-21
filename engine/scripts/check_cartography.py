@@ -12,7 +12,8 @@ Regras (SDD 29.3):
   CN  coordenada divergente da derivada de `source_px`; mutação sem proposta/causa
   TR/AC/KN/HD  deslocamento, acesso, conhecimento e esconderijo (`--check-staging`, cartography_graph.py)
 
-Ainda não faz (Slices 4–5): saídas/mistérios por consulta, pack de cena, integração no compose.
+S4: `--exits`, `--exit-truth`, `--reader-map`, `--reader-gap`, `--belief`, `--check-prose` (cartography_maps.py).
+Ainda não faz (Slice 5): pack de cena e integração no compose.
 
 Princípio: coordenadas em metros nunca são digitadas — DERIVAM de `source_px` + escala da fonte.
 
@@ -738,7 +739,7 @@ def check_artifacts(model: dict) -> list[dict]:
             if a.get("epistemic_status") == "FACT":
                 out.append(finding("TEXT_CLAIMED_AS_FACT", "HIGH", None, aid,
                                    "Texto de mapa é alegação do artefato, nunca FACT.", "Usar OFFICIAL_CLAIM/UNKNOWN."))
-        if kind == "MAP":
+        if kind == "MAP" and (a.get("source_file") or str(aid).startswith("MAP-DIEGETIC")):
             author = a.get("author")
             if not (isinstance(author, dict) and author.get("status") == "MUST_REMAIN_UNKNOWN"):
                 out.append(finding("MY-08 MAP_AUTHOR_REVEALED", "BLOCKER", None, f"{aid}.author={author!r}",
@@ -850,6 +851,8 @@ def validate(model: dict) -> list[dict]:
     findings += cg.check_mutations(model)
     import cartography_chase as chase  # noqa: E402
     findings += chase.check_sightlines(model)
+    import cartography_maps as maps  # noqa: E402
+    findings += maps.validate_maps(model)
     order = {s: i for i, s in enumerate(reversed(SEVERITY_ORDER))}
     return sorted(findings, key=lambda f: (order[f["severity"]], f["category"], f["evidence"]))
 
@@ -946,6 +949,14 @@ def main() -> int:
     ap.add_argument("--visible", nargs=2, metavar=("A", "B"), help="A observa B (visibilidade).")
     ap.add_argument("--target-lit", action="store_true", help="Alvo com luz própria (para --visible).")
     ap.add_argument("--recognize", action="store_true", help="Pergunta de reconhecimento: sempre fora de escopo.")
+    ap.add_argument("--exits", action="store_true", help="Saídas: classes e alegações. Nunca a verdadeira (EXIT_TRUTH_NOT_IN_CARTOGRAPHY).")
+    ap.add_argument("--exit-truth", action="store_true", help="Só os truth_ref (ponteiros opacos).")
+    ap.add_argument("--engine-view", action="store_true", help="Com --authorized-by GT-*: confirma a pertinência do id, nunca o conteúdo.")
+    ap.add_argument("--authorized-by", metavar="GT")
+    ap.add_argument("--reader-map", action="store_true", help="Projeção do leitor no --chapter (baseline: mapas impressos).")
+    ap.add_argument("--reader-gap", metavar="ACTOR", help="Arestas que o leitor viu e o POV desconhece (ironia dramática).")
+    ap.add_argument("--belief", metavar="ARTIFACT", help="Como um artefato de mapa descreve o mundo (crença por artefato).")
+    ap.add_argument("--check-prose", type=Path, metavar="FILE", help="KN-02: prosa do --chapter revela lugar antes da hora?")
     ap.add_argument("--hideouts", metavar="A", help="Esconderijos registrados acessíveis a partir de A e o veredito de vigilância.")
     ap.add_argument("--bottlenecks", action="store_true", help="Pontos de articulação e pontes do grafo permitido.")
     ap.add_argument("--layer", action="append", help="Restringe --bottlenecks a uma camada (repetível).")
@@ -966,6 +977,27 @@ def main() -> int:
     if args.coords:
         print(json.dumps(coords_table(model), ensure_ascii=False, indent=2))
         return 0
+    if args.exits or args.exit_truth or args.reader_map or args.reader_gap or args.belief or args.check_prose:
+        import cartography_maps as maps
+        ledger = load_yaml(args.ledger) if args.ledger else None
+        ch = args.chapter if args.chapter is not None else 0
+        code = 0
+        if args.exits:
+            payload = maps.exits_query(model, args.chapter)
+        elif args.exit_truth:
+            payload = maps.exit_truth(model, args.engine_view, args.authorized_by, ledger)
+        elif args.reader_map:
+            payload = maps.reader_map(model, ch, ledger)
+        elif args.reader_gap:
+            payload = maps.reader_knows_pov_does_not(model, args.reader_gap, ch, ledger)
+        elif args.belief:
+            payload = maps.belief_view(model, args.belief) or {"found": False}
+        else:
+            fs = maps.check_reader_leak(model, args.check_prose.read_text(encoding="utf-8"), ch, ledger)
+            payload = {"chapter": ch, "findings": fs}
+            code = 1 if any(f["severity"] in BLOCKING for f in fs) else 0
+        print(json.dumps(payload, ensure_ascii=False, indent=2, default=str))
+        return code
     queries = (args.distance, args.bearing, args.time, args.reachable, args.route, args.escape_routes, args.check_staging,
                args.visible, args.bottlenecks, args.hideouts)
     if any(queries):
@@ -1004,6 +1036,9 @@ def main() -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2, default=str))
         return 0
     findings = validate(model)
+    if args.ledger:
+        import cartography_maps as maps
+        findings = findings + maps.check_author_protection(model, load_yaml(args.ledger))
     sm = summary(model)
     if args.json:
         print(json.dumps({"summary": sm, "findings": findings}, ensure_ascii=False, indent=2))

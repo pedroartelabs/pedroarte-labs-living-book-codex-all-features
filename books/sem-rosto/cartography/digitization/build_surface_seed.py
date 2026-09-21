@@ -74,7 +74,7 @@ EDGES = [
     ("EDG-U-015", "RM-CEN-CHP", "RM-JCT-U18", "ROAD", S, None, [(318, 410), (380, 450), (440, 480)], "PROBABLE", {}),
     ("EDG-U-045", "RM-JCT-U18", "RM-CEN-SMC", "ROAD", S, None, [(440, 480), (470, 495), (521, 527)], "PROBABLE", {}),
     ("EDG-U-046", "RM-JCT-U16", "RM-JCT-U18", "OPEN_GROUND", PA, None, [(430, 505), (440, 480)], "UNCERTAIN",
-     {"note": "CONEXÃO INFERIDA: a linha vermelha R1 termina entre casas a ~110 m desta via; o mapa não desenha a ligação. "
+     {"printed": False, "note": "CONEXÃO INFERIDA: a linha vermelha R1 termina entre casas a ~110 m desta via; o mapa não desenha a ligação. "
               "Sem ela o cemitério ficaria a 2,9 km do Red Stag Pub (1,5 km em linha reta)."}),
     ("EDG-U-016", "RM-CEN-OCP", "RM-CEN-SMC", "ROAD", S, None, [(355, 540), (430, 555), (521, 540)], "PROBABLE", {}),
     ("EDG-U-017", "RM-CEN-CAH", "RM-CEN-SMC", "ROAD", S, None, [(400, 605), (470, 600), (515, 560)], "UNCERTAIN", {}),
@@ -155,7 +155,7 @@ def main():
              "confidence": conf, "state_timeline": [{"from_chapter": 0, "state": extra.get("state", "OPEN")}]}
         if road:
             e["road"] = road
-        for k in ("note", "government_control"):
+        for k in ("note", "government_control", "printed"):
             if k in extra:
                 e[k] = extra[k]
         return e

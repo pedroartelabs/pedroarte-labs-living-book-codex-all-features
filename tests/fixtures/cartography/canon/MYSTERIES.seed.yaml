@@ -6,6 +6,16 @@ exits:
     claims:
       - {class: OFFICIAL_EXIT, text: "Saída Sul", source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
     exit_classes: [APPARENT_EXIT, OFFICIAL_EXIT]
+    truth_ref: GT-EXIT-1
+  - id: EXT-02
+    frame_portal: null
+    frame_status: TO_DIGITIZE
+    physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+    claims:
+      - {class: DISPUTED_EXIT, text: "Em Disputa", source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+    exit_classes: [APPARENT_EXIT, DISPUTED_EXIT]
+    truth_ref: null
+    first_allowed_reveal: 5
 boundaries:
   - {id: BND-A-FRAME, kind: MAP_FRAME, source: SRC-MAP-A}
 hideouts:

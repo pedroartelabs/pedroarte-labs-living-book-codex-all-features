@@ -389,7 +389,17 @@
             "AUTHOR_DECLARED"
           ]
         },
-        "first_allowed_reveal": {},
+        "first_allowed_reveal": {
+          "oneOf": [
+            {
+              "const": "OPEN"
+            },
+            {
+              "type": "integer",
+              "minimum": 0
+            }
+          ]
+        },
         "valid_from": {
           "type": [
             "integer",
@@ -401,6 +411,10 @@
             "integer",
             "null"
           ]
+        },
+        "printed": {
+          "type": "boolean",
+          "description": "false: não consta dos mapas impressos (ligação inferida, nó não desenhado)."
         }
       },
       "not": {
@@ -618,6 +632,10 @@
             "SECRET",
             "UNKNOWN"
           ]
+        },
+        "printed": {
+          "type": "boolean",
+          "description": "false: não consta dos mapas impressos (ligação inferida, nó não desenhado)."
         }
       }
     },
@@ -859,6 +877,17 @@
             "string",
             "null"
           ]
+        },
+        "first_allowed_reveal": {
+          "oneOf": [
+            {
+              "const": "OPEN"
+            },
+            {
+              "type": "integer",
+              "minimum": 0
+            }
+          ]
         }
       }
     },
@@ -1031,6 +1060,18 @@
               "const": "MUST_REMAIN_UNKNOWN"
             }
           }
+        },
+        "depicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Depiction"
+          }
+        },
+        "printed_in_book": {
+          "type": "boolean"
+        },
+        "map_layer": {
+          "type": "string"
         }
       }
     },
@@ -1241,6 +1282,51 @@
               }
             }
           }
+        }
+      }
+    },
+    "Depiction": {
+      "type": "object",
+      "required": [
+        "target",
+        "relation"
+      ],
+      "description": "Relação entre o que um mapa mostra e o grafo físico (SDD 22.2). Diferente de ACCURATE é afirmação sobre a verdade: exige base física verificável ou truth_ref.",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "relation": {
+          "enum": [
+            "ACCURATE",
+            "OMITS",
+            "PHANTOM",
+            "FALSIFIED_STATUS",
+            "RENAMED",
+            "MISPLACED",
+            "FALSIFIED_ACCESS"
+          ]
+        },
+        "as_name": {
+          "type": "string"
+        },
+        "as_status": {
+          "type": "string"
+        },
+        "as_position_px": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "truth_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Único vínculo com a verdade (id opaco do Story Truth Ledger)."
         }
       }
     }

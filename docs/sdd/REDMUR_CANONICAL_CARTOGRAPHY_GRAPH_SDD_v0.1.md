@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -2703,7 +2703,7 @@ decisões  contrato+  arestas+   visibil.+   mistério+   integração   uso rea
 | **S1 — Contrato e inventário** | todos os nós (L1, L2, L3, OFF, FRM), registro, artefatos, anomalias, rotas como traçado declarado; transformações; `CG`, `MY`, `CN-05` | `CARTOGRAPHY.schema.json`, `CARTOGRAPHY_TEMPLATE.yaml`, `check_cartography.py --mode canon`, seeds de nós/mistérios/artefatos/anomalias, fixture neutra | T01–T05, T10, T11, T19–T23, T28, T30 | conferência humana do inventário contra os mapas (checklist por item do Apêndice A); nenhum arquivo em `engine/scripts/livingbook.py` alterado |
 | **S2 — Arestas e viagem** *(concluído para o Mapa A em 2026-09-21; Mapa B pendente — ver 36.4)* | digitalização das vias (polilinhas em px, conferidas), água, travessias, portais; `distance/time/reachable/route`; validador de caminho; `TR`, `AC`, `KN`, `CX` | `EDGES.seed.yaml`, `SUBTERRANEAN.seed.yaml`, `STAGING` (formato), `--mode wave` | T03, T06–T09, T12–T18, T29 | Apêndice C perguntas 1–3 e 7 respondidas pelo CLI |
 | **S3 — Visibilidade, esconderijos, perseguição** *(concluído em 2026-09-22 — ver 36.5)* | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
-| **S4 — Mistério e camadas** | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
+| **S4 — Mistério e camadas** *(concluído em 2026-09-23 — ver 36.6)* | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
 | **S5 — Integração** | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
 | **S6 — Uso real** | primeiros capítulos de SEM ROSTO com staging; recalibrar limiares | pacote real (DEDR S6) | — | a autora responde "sim": *o sistema me impediu de algo que eu não queria e me deixou fazer tudo que eu queria?* |
 
@@ -2798,6 +2798,40 @@ formato**, não um caso válido. A variante coerente (capela → cemitério, 4 a
   (`sightlines: []` nos dados de SEM ROSTO).
 - **Vigilância, capacidade, duração segura e descobribilidade do Root Cellar Hideout** seguem `UNSPECIFIED` (dono: canon narrativo).
 - **Pack de contexto de cena (T27)** e integração no compose: Slice 5. **Camadas de mistério/saídas com `frame_portal`:** Slice 4 / Mapa B.
+
+### 36.6 Estado do Slice 4 (2026-09-23)
+
+**Entregue** (`engine/scripts/cartography_maps.py`, neutro; CLI: `--exits --exit-truth [--engine-view --authorized-by GT-*] --reader-map --reader-gap ACTOR --belief ARTIFACT --check-prose FILE`, todos com `--chapter`/`--ledger`):
+
+- **Barreira 4 do MYSTERY PRESERVATION GATE (20.4).** `--exits` devolve classes, alegações (com `epistemic_status`), posição do portal de moldura *derivada* e a
+  frase fixa `EXIT_TRUTH_NOT_IN_CARTOGRAPHY`; além da moldura é sempre `OFF_MAP`. `--exit-truth` devolve só `truth_ref` opacos; com `--engine-view` **e**
+  `--authorized-by` de um GT que existe no ledger, marca `pertinent` (confirma o id, nunca o significado; o conteúdo do GT não é lido). `--authorized-by`
+  sem `--engine-view` é recusado (`ENGINE_VIEW_REQUIRED`); GT inexistente não autoriza (`GT_NOT_FOUND_IN_LEDGER`). T09 varre as saídas de todas as consultas;
+  T10 confirma que `TRUE_EXIT` reprova no seed.
+- **Mapa do leitor (22.3/22.6, T33).** `printed_ids` decide o que consta dos mapas impressos (posição/nome/alegação em fonte impressa, inset subterrâneo
+  desenhado; fora: `connectivity: UNDECLARED`, `omitted_by`, `printed: false`, ligação inferida). `reader_map` = baseline `SEEN_ON_MAP` desde o capítulo 0 +
+  `knowledge_delta` de `READER` (`CART:EXISTS|ACCESS|ROUTE|FAMILIAR|VISITED:<id>` ou id puro) + stagings `REALIZED` com POV; **sem** estado físico, sem quem sabe
+  o quê, sem verdade. `--reader-gap` lista arestas que o leitor viu e o POV desconhece (ironia dramática verificável; `KN-01` continua proibindo o uso).
+  `KN-02 READER_MAP_LEAK` (HIGH) por nome/alias na prosa, só para lugares com `first_allowed_reveal` posterior ao capítulo e ausentes dos mapas impressos.
+  `MUTATION_DIVERGES_FROM_PRINTED_MAP` (INFO) quando uma mutação faz um mapa impresso mentir.
+- **Mapas do mundo (22.2) e camadas (25).** `depicts` com relações `ACCURATE/OMITS/PHANTOM/FALSIFIED_STATUS/RENAMED/MISPLACED/FALSIFIED_ACCESS`;
+  `MP-01` (PHANTOM que existe no físico), `MP-02` (MISPLACED dentro da precisão), `MP-03` (relação sem base verificável nem `truth_ref`); `LY-01` (camada
+  `RESERVED` com conteúdo). `MY-08` passa a valer para os mapas diegéticos com arquivo-fonte; um mapa oficial futuro pode ter autor `INST-*`.
+- **Autoria protegida no ledger (22.7, T36).** `check_author_protection`: nenhum `knowledge_delta` ensina a autoria; `PROVENANCE_INQUIRY` que resolve reprova;
+  a que só produz evidência passa.
+- **Crença por artefato (23.4).** `planned_on: BELIEF:<MAP>` em movimento: `PLANNED_ON_FALSE_BELIEF` (INFO) para via fantasma, falsificada ou colapsada;
+  `KN-04 BELIEF_ARTIFACT_NOT_SEEN` (HIGH) se o ator não viu o mapa (`artifact_seen` ou `CART:SEEN:<id>` no ledger); a física continua valendo (`TR-01`).
+
+**Resultado nos dados de SEM ROSTO:** 10 saídas, todas `OFF_MAP` além da moldura, nenhuma com `truth_ref`; **3 ids** invisíveis ao leitor no capítulo 0
+(Black Thistle Filling Station, Sealed Crypt IV e a ligação inferida `EDG-U-046`, marcada `printed: false` no gerador); 163 ids `SEEN_ON_MAP`, inclusive toda a
+topologia do inset. Nenhum mapa tem `depicts` (autoria desconhecida; nenhum mapa oficial foi criado), e as 8 camadas históricas seguem `RESERVED` sem conteúdo.
+
+**Não feito (por decisão):**
+
+- **Mapas oficiais/históricos concretos** (`MAP-OFF-*`, `MAP-HIST-*`): dependem do canon narrativo; o motor e o contrato existem, os dados não.
+- **`CN-04`** (camada histórica × estado presente) e o filtro `--at-year`: aguardam `story_present_year` (TIMELINE).
+- **Saídas do Mapa B (`EXT-*` com `frame_status: TO_DIGITIZE`)**: seguem pendentes da digitalização do Mapa B.
+- **Pack de contexto (T27) e compose**: Slice 5.
 
 ---
 

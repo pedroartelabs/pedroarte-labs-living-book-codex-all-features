@@ -229,6 +229,7 @@ class MysteryPreservation(unittest.TestCase):
 
     def test_false_exit_needs_proof(self):
         m = model()
+        m["exits"][0]["truth_ref"] = None   # sem ponteiro para o ledger e sem prova física
         m["exits"][0]["claims"].append({"class": "FALSE_EXIT", "text": "x", "source": "SRC-MAP-A"})
         m["exits"][0]["exit_classes"].append("FALSE_EXIT")
         self.assertTrue(cats(cc.validate(m), "EXIT_FALSE_WITHOUT_PROOF"))
@@ -313,6 +314,8 @@ class Contract(unittest.TestCase):
         self.assertEqual(set(d["Location"]["properties"]["status"]["enum"]), cc.LOCATION_STATUS)
         self.assertEqual(set(d["Register"]["properties"]["entries"]["items"]["properties"]["placement"]["enum"]),
                          cc.REGISTER_PLACEMENTS)
+        import cartography_maps as mp
+        self.assertEqual(set(d["Depiction"]["properties"]["relation"]["enum"]), mp.DEPICTION_RELATIONS)
 
     def test_no_enum_can_represent_a_true_exit(self):
         blob = json.dumps(json.loads(SCHEMA.read_text(encoding="utf-8"))["$defs"])

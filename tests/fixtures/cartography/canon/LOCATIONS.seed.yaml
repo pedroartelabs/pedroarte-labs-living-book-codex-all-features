@@ -23,4 +23,4 @@ locations:
   - {id: TS-SUB-TUN, canonical_name: Túnel do Cemitério, type: TUNNEL, layer: SUBTERRANEAN, geometry: POINT, anchor_to: TS-URB-CEM, status: UNKNOWN}
   - {id: TS-JCT-1, canonical_name: junção 1, type: JUNCTION, layer: SUBTERRANEAN, geometry: POINT, position: UNKNOWN}
   - {id: TS-SUB-SEL, canonical_name: Cripta Selada, type: CRYPT, layer: SUBTERRANEAN, geometry: POINT, position: UNKNOWN,
-     source: AUTHOR_DECLARED, connectivity: UNDECLARED, status: SEALED}
+     source: AUTHOR_DECLARED, connectivity: UNDECLARED, status: SEALED, first_allowed_reveal: 8}
