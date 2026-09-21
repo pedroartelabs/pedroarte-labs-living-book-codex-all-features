@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -2374,6 +2374,7 @@ modificadores). Derivados:
 | `CH-05 LOS_REACQUIRE_UNJUSTIFIED` | WARNING | perseguidor "volta a ver" o alvo onde `visible_from` é `NOT_VISIBLE` |
 | `CH-06 ESCAPE_THROUGH_UNKNOWN` | FAIL | fuga por aresta que o alvo não conhece (é `KN-01` no contexto de perseguição) |
 | `CH-07 BOTTLENECK_IGNORED` | INFO | rota do alvo passa por gargalo com perseguidor mais próximo dele — tensão que a cena talvez queira usar |
+| `CH-08 GAP_INCONSISTENT` | FAIL | `initial_gap_m` menor que a distância mínima entre os pontos de partida (acrescentada no S3) |
 
 O motor não decide quem vence a perseguição; decide o que é **fisicamente
 coerente** e aponta onde está a tensão (gargalos, pontos de fuga).
@@ -2701,7 +2702,7 @@ decisões  contrato+  arestas+   visibil.+   mistério+   integração   uso rea
 | **S0 — Decisões** | aprovar esta SDD; decisões da autora já registradas (escala 7,25 %, mapas diegéticos e impressos, autoria `NEVER`, anomalias intencionais, dois lugares no subterrâneo, valores de viagem); pendentes: confirmar a leitura linear da escala, `OQ-CART-04` (slug/pacote parcial), `OQ-CART-20` (limite de perguntas `NEVER`); versionar os PNGs | `books/sem-rosto/README.md`, `cartography/sources/`, `approvals/CART_DECISION_0001.md` | T32 | fontes pinadas; decisões registradas com `subject_sha256` |
 | **S1 — Contrato e inventário** | todos os nós (L1, L2, L3, OFF, FRM), registro, artefatos, anomalias, rotas como traçado declarado; transformações; `CG`, `MY`, `CN-05` | `CARTOGRAPHY.schema.json`, `CARTOGRAPHY_TEMPLATE.yaml`, `check_cartography.py --mode canon`, seeds de nós/mistérios/artefatos/anomalias, fixture neutra | T01–T05, T10, T11, T19–T23, T28, T30 | conferência humana do inventário contra os mapas (checklist por item do Apêndice A); nenhum arquivo em `engine/scripts/livingbook.py` alterado |
 | **S2 — Arestas e viagem** *(concluído para o Mapa A em 2026-09-21; Mapa B pendente — ver 36.4)* | digitalização das vias (polilinhas em px, conferidas), água, travessias, portais; `distance/time/reachable/route`; validador de caminho; `TR`, `AC`, `KN`, `CX` | `EDGES.seed.yaml`, `SUBTERRANEAN.seed.yaml`, `STAGING` (formato), `--mode wave` | T03, T06–T09, T12–T18, T29 | Apêndice C perguntas 1–3 e 7 respondidas pelo CLI |
-| **S3 — Visibilidade, esconderijos, perseguição** | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
+| **S3 — Visibilidade, esconderijos, perseguição** *(concluído em 2026-09-22 — ver 36.5)* | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
 | **S4 — Mistério e camadas** | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
 | **S5 — Integração** | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
 | **S6 — Uso real** | primeiros capítulos de SEM ROSTO com staging; recalibrar limiares | pacote real (DEDR S6) | — | a autora responde "sim": *o sistema me impediu de algo que eu não queria e me deixou fazer tudo que eu queria?* |
@@ -2766,6 +2767,37 @@ conferência (`render_overlay.py` → `overlay_A.png`).
 6. **Resposta ao exemplo do SDD 17.7** com o grafo digitalizado: Red Stag → Old Parish Cemetery por vias de
    superfície = **1.852 m**; mínimo físico a pé ≈ 12,6 min, esperado ≈ 24 min (36 min à noite sem luz e chovendo).
    `23:14 → 23:18` é **`FAIL TR-01`** a pé e correndo.
+
+### 36.5 Estado do Slice 3 (2026-09-22)
+
+**Entregue** (`engine/scripts/cartography_chase.py`, neutro; CLI: `--visible --bottlenecks --hideouts`, e `--check-staging` agora valida a cena inteira):
+
+- **`visible_from(A, B)`** com base declarada: `DECLARED` (sightline com proposta), `DERIVED_RULE` (subsolo nunca é visto da superfície; além do
+  limiar de detecção; mesmo lugar) ou `UNDETERMINED`. **Consequência assumida do que as fontes têm:** os mapas não trazem relevo
+  nem altura de edifícios; portanto, dentro do limiar, sem sightline declarada, a resposta é `UNDETERMINED` (a prosa **não** pode afirmar visão) e
+  `VISIBLE` só existe por sightline aprovada. Limiares aprovados (16.3) vêm do manifesto. **Detectar não é reconhecer:** `--recognize` devolve
+  `RECOGNITION_OUT_OF_SCOPE`.
+- **Regras:** `VS-01/02/03` (afirmações `sees` de stagings e `initial_visibility` de perseguições), `HD-02/03/04` (capacidade, permanência,
+  reuso de esconderijo comprometido — só falha se o ator **sabe**; se não sabe é `INFO`, tensão dramática), `CH-01..08`.
+- **Gargalos** (`bottlenecks`): pontos de articulação e pontes do grafo permitido, por camada e por conhecimento do ator.
+- **Perseguição por janelas** (`analyze_chase`): janela `[mais cedo, mais tarde]` por nó (esforço máximo nos primeiros 400 m, depois
+  sustentado; subsolo a passo agachado; portais com atraso), pontos de interceptação e de fuga (aresta que o perseguidor não conhece), transições
+  ocultas, becos sem saída a ≤ 5 min do alvo, gargalos na rota.
+- **`accessible_hideouts`** (pergunta 5): rota até cada esconderijo registrado e veredito de vigilância. O motor **não inventa vigilância**:
+  enquanto houver lugar da rota com `surveillance: UNKNOWN` a resposta é `UNDETERMINED_SURVEILLANCE`, listando o que a autora precisa decidir.
+
+**Achado sobre o exemplo do próprio SDD (28.1):** com os dados digitalizados, a perseguição `CHS-0003` (capela → Root Cellar Hideout pelo
+subsolo, "lacuna 120 m, visível") é fisicamente incoerente e o motor diz por quê: (a) o trecho subterrâneo tem comprimento mínimo ≥ a distância entre as
+âncoras (≈ 1,9 km) a passo agachado, ou seja, **≥ 43 min**, enquanto o perseguidor chega ao destino por cima em ≈ 17 min; (b) a distância entre as partidas
+(≈ 550 m) contradiz a "lacuna de 120 m" (`CH-08`); (c) a 550 m à luz da lua (limite 150 m) o alvo não é visível (`VS-01`). O bloco 28.1 é **ilustrativo do
+formato**, não um caso válido. A variante coerente (capela → cemitério, 4 arestas, ≈ 640 m de subsolo) passa sem achados.
+
+**Não feito (por decisão, não por esquecimento):**
+
+- **Relevo, curvas cegas e "vantagem de altura":** exigem proposta (`ELEVATION_ADVANTAGE`, `BLIND_CORNER`); nenhuma sightline foi inventada
+  (`sightlines: []` nos dados de SEM ROSTO).
+- **Vigilância, capacidade, duração segura e descobribilidade do Root Cellar Hideout** seguem `UNSPECIFIED` (dono: canon narrativo).
+- **Pack de contexto de cena (T27)** e integração no compose: Slice 5. **Camadas de mistério/saídas com `frame_portal`:** Slice 4 / Mapa B.
 
 ---
 

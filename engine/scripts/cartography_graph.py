@@ -398,7 +398,9 @@ class Graph:
         return {"edges": seq, "nodes": [a] + [s[1] for s in seq], "cost": dist[b]}
 
     # ---- tempos ----------------------------------------------------------
-    def path_times(self, path, ctx):
+    def resolve_lengths(self, path):
+        """Comprimentos nominal/mínimo por aresta do caminho. Trechos de comprimento não especificado
+        (passagens subterrâneas) recebem a distância entre as âncoras conhecidas mais próximas (SDD 11.4)."""
         seq = path["edges"]
         nodes = path["nodes"]
         n = len(seq)
@@ -435,6 +437,11 @@ class Graph:
                 lmin[t] = run_min if t == i else 0.0
             warnings.append("SUBTERRANEAN_DIMENSIONS_UNSPECIFIED")
             i = j + 1
+        return lnom, lmin, warnings
+
+    def path_times(self, path, ctx):
+        seq = path["edges"]
+        lnom, lmin, warnings = self.resolve_lengths(path)
         total_nom = sum(x or 0.0 for x in lnom)
         total_min = sum(x or 0.0 for x in lmin)
         mode = ctx["mode"]

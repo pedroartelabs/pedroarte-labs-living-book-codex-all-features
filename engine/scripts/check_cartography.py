@@ -12,7 +12,7 @@ Regras (SDD 29.3):
   CN  coordenada divergente da derivada de `source_px`; mutação sem proposta/causa
   TR/AC/KN/HD  deslocamento, acesso, conhecimento e esconderijo (`--check-staging`, cartography_graph.py)
 
-Ainda não faz (Slices 3–5): visibilidade, perseguição, pack de cena, integração no compose.
+Ainda não faz (Slices 4–5): saídas/mistérios por consulta, pack de cena, integração no compose.
 
 Princípio: coordenadas em metros nunca são digitadas — DERIVAM de `source_px` + escala da fonte.
 
@@ -759,13 +759,28 @@ def check_boundaries(model: dict) -> list[dict]:
     return out
 
 
+DISCOVERABILITY = {"OBVIOUS", "FINDABLE", "OBSCURE", "NEAR_IMPOSSIBLE", "UNSPECIFIED"}
+
+
 def check_hideouts(model: dict) -> list[dict]:
     out = []
     ids = {l.get("id") for l in model["locations"]}
     for h in model["hideouts"]:
+        hid = h.get("id", "?")
         if h.get("location") not in ids:
-            out.append(finding("CG-01 EDGE_DANGLING", "BLOCKER", None, f"{h.get('id')}.location={h.get('location')}",
+            out.append(finding("CG-01 EDGE_DANGLING", "BLOCKER", None, f"{hid}.location={h.get('location')}",
                                "Esconderijo em lugar inexistente.", "Corrigir."))
+        for field in ("capacity", "duration_safe"):
+            v = h.get(field, "UNSPECIFIED")
+            if v != "UNSPECIFIED" and not (isinstance(v, (int, float)) and not isinstance(v, bool) and v > 0):
+                out.append(finding("HIDEOUT_FIELD_INVALID", "HIGH", None, f"{hid}.{field}={v!r}",
+                                   f"{field} é número positivo ou UNSPECIFIED (nada de valor inventado).", "Corrigir."))
+        if h.get("discoverability", "UNSPECIFIED") not in DISCOVERABILITY:
+            out.append(finding("INVALID_ENUM", "HIGH", None, f"{hid}.discoverability", f"∈ {sorted(DISCOVERABILITY)}.", "Corrigir."))
+        for ev in as_list(h.get("compromise_events")):
+            if ev.get("effect") not in ("COMPROMISED", "DESTROYED", "WATCHED"):
+                out.append(finding("INVALID_ENUM", "HIGH", None, f"{hid}.compromise_events.effect={ev.get('effect')!r}",
+                                   "effect ∈ COMPROMISED | DESTROYED | WATCHED.", "Corrigir."))
     return out
 
 
@@ -833,6 +848,8 @@ def validate(model: dict) -> list[dict]:
     import cartography_graph as cg  # noqa: E402  (importação tardia: o grafo importa este módulo)
     findings += cg.check_water_crossings(model)
     findings += cg.check_mutations(model)
+    import cartography_chase as chase  # noqa: E402
+    findings += chase.check_sightlines(model)
     order = {s: i for i, s in enumerate(reversed(SEVERITY_ORDER))}
     return sorted(findings, key=lambda f: (order[f["severity"]], f["category"], f["evidence"]))
 
@@ -924,7 +941,14 @@ def main() -> int:
     ap.add_argument("--route", nargs=2, metavar=("A", "B"))
     ap.add_argument("--kind", choices=["shortest", "safest", "hidden"], default="shortest")
     ap.add_argument("--escape-routes", metavar="A")
-    ap.add_argument("--check-staging", type=Path, metavar="STAGING.yaml", help="Valida deslocamentos de um STAGING.yaml.")
+    ap.add_argument("--check-staging", type=Path, metavar="STAGING.yaml",
+                    help="Valida deslocamentos, visão declarada, esconderijos e perseguições de um STAGING.yaml.")
+    ap.add_argument("--visible", nargs=2, metavar=("A", "B"), help="A observa B (visibilidade).")
+    ap.add_argument("--target-lit", action="store_true", help="Alvo com luz própria (para --visible).")
+    ap.add_argument("--recognize", action="store_true", help="Pergunta de reconhecimento: sempre fora de escopo.")
+    ap.add_argument("--hideouts", metavar="A", help="Esconderijos registrados acessíveis a partir de A e o veredito de vigilância.")
+    ap.add_argument("--bottlenecks", action="store_true", help="Pontos de articulação e pontes do grafo permitido.")
+    ap.add_argument("--layer", action="append", help="Restringe --bottlenecks a uma camada (repetível).")
     ap.add_argument("--travel-mode", choices=["WALK", "RUN", "CRAWL", "VEHICLE"], default="WALK")
     ap.add_argument("--profile", default="FIT")
     ap.add_argument("--actor")
@@ -942,7 +966,8 @@ def main() -> int:
     if args.coords:
         print(json.dumps(coords_table(model), ensure_ascii=False, indent=2))
         return 0
-    queries = (args.distance, args.bearing, args.time, args.reachable, args.route, args.escape_routes, args.check_staging)
+    queries = (args.distance, args.bearing, args.time, args.reachable, args.route, args.escape_routes, args.check_staging,
+               args.visible, args.bottlenecks, args.hideouts)
     if any(queries):
         import cartography_graph as cg
         ledger = load_yaml(args.ledger) if args.ledger else None
@@ -950,7 +975,15 @@ def main() -> int:
                "lighting": args.lighting, "weather": args.weather, "ledger": ledger}
         if args.actor:
             ctx.update(view="ACTOR", actor=args.actor)
-        if args.distance:
+        import cartography_chase as chase
+        if args.visible:
+            payload = chase.visible_from(model, *args.visible, ctx={"lighting": args.lighting, "weather": args.weather,
+                                                                   "target_lit": args.target_lit, "recognize": args.recognize})
+        elif args.hideouts:
+            payload = {"hideouts": chase.accessible_hideouts(model, args.hideouts, ctx)}
+        elif args.bottlenecks:
+            payload = chase.bottlenecks(model, ctx, layers=set(args.layer) if args.layer else None)
+        elif args.distance:
             payload = cg.distance(model, *args.distance)
         elif args.bearing:
             payload = cg.bearing(model, *args.bearing)
@@ -963,7 +996,7 @@ def main() -> int:
         elif args.escape_routes:
             payload = cg.escape_routes(model, args.escape_routes, ctx=ctx)
         else:
-            res = cg.validate_staging(model, load_yaml(args.check_staging), ledger=ledger)
+            res = chase.validate_scene(model, load_yaml(args.check_staging), ledger=ledger)
             print(json.dumps(res, ensure_ascii=False, indent=2, default=str))
             return 1 if any(f["severity"] in BLOCKING for f in res["findings"]) else 0
         if ctx.get("view") != "ACTOR" and not args.check_staging:

@@ -117,7 +117,7 @@
     "sightlines": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/Id"
+        "$ref": "#/$defs/Sightline"
       }
     },
     "hideouts": {
@@ -698,6 +698,64 @@
         },
         "location": {
           "type": "string"
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "const": "UNSPECIFIED"
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ]
+        },
+        "duration_safe": {
+          "oneOf": [
+            {
+              "const": "UNSPECIFIED"
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "description": "Horas."
+        },
+        "discoverability": {
+          "enum": [
+            "OBVIOUS",
+            "FINDABLE",
+            "OBSCURE",
+            "NEAR_IMPOSSIBLE",
+            "UNSPECIFIED"
+          ]
+        },
+        "compromise_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "event",
+              "chapter",
+              "effect"
+            ],
+            "properties": {
+              "event": {
+                "type": "string"
+              },
+              "chapter": {
+                "type": "integer"
+              },
+              "effect": {
+                "enum": [
+                  "COMPROMISED",
+                  "DESTROYED",
+                  "WATCHED"
+                ]
+              }
+            }
+          }
         }
       }
     },
@@ -1038,6 +1096,13 @@
         },
         "ledger_event": {
           "type": "string"
+        },
+        "group_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "conditions": {
+          "type": "object"
         }
       }
     },
@@ -1074,6 +1139,108 @@
         },
         "conditions": {
           "type": "object"
+        }
+      }
+    },
+    "Sightline": {
+      "type": "object",
+      "required": [
+        "id",
+        "from",
+        "to",
+        "result",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "symmetric": {
+          "type": "boolean"
+        },
+        "source": {
+          "type": "string",
+          "description": "Proposta aprovada: visibilidade não se decide por conveniência de cena."
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "VISIBLE",
+              "PARTIAL",
+              "NOT_VISIBLE"
+            ]
+          },
+          "description": "Chaves: DAYLIGHT (também OVERCAST), TWILIGHT, NIGHT_MOON, NIGHT_DARK."
+        }
+      }
+    },
+    "Chase": {
+      "type": "object",
+      "required": [
+        "id",
+        "target",
+        "pursuer"
+      ],
+      "properties": {
+        "lighting": {
+          "enum": [
+            "DAYLIGHT",
+            "OVERCAST",
+            "TWILIGHT",
+            "NIGHT_MOON",
+            "NIGHT_LIGHT",
+            "NIGHT_DARK"
+          ]
+        },
+        "initial_gap_m": {
+          "type": "number",
+          "minimum": 0
+        },
+        "initial_visibility": {
+          "enum": [
+            "VISIBLE",
+            "NOT_VISIBLE",
+            "UNKNOWN"
+          ]
+        },
+        "target": {
+          "type": "object",
+          "required": [
+            "actor",
+            "start"
+          ]
+        },
+        "pursuer": {
+          "type": "object",
+          "required": [
+            "actor",
+            "start"
+          ]
+        },
+        "declared_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "ARRIVES",
+                  "PURSUER_REACHES",
+                  "TARGET_REACHES",
+                  "INTERCEPT",
+                  "GAP_CLOSED",
+                  "SIGHT_REACQUIRED"
+                ]
+              }
+            }
+          }
         }
       }
     }

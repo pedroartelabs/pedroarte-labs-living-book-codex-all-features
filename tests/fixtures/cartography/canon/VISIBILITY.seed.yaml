@@ -1,0 +1,3 @@
+sightlines:
+  - {id: SGT-0001, from: TS-CEN-EST, to: TS-URB-PNT, symmetric: true, source: CP-0001,
+     result: {DAYLIGHT: VISIBLE, NIGHT_MOON: PARTIAL, NIGHT_DARK: NOT_VISIBLE}}
