@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6); S5 concluído (2026-09-23, seção 36.7)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -2704,7 +2704,7 @@ decisões  contrato+  arestas+   visibil.+   mistério+   integração   uso rea
 | **S2 — Arestas e viagem** *(concluído para o Mapa A em 2026-09-21; Mapa B pendente — ver 36.4)* | digitalização das vias (polilinhas em px, conferidas), água, travessias, portais; `distance/time/reachable/route`; validador de caminho; `TR`, `AC`, `KN`, `CX` | `EDGES.seed.yaml`, `SUBTERRANEAN.seed.yaml`, `STAGING` (formato), `--mode wave` | T03, T06–T09, T12–T18, T29 | Apêndice C perguntas 1–3 e 7 respondidas pelo CLI |
 | **S3 — Visibilidade, esconderijos, perseguição** *(concluído em 2026-09-22 — ver 36.5)* | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
 | **S4 — Mistério e camadas** *(concluído em 2026-09-23 — ver 36.6)* | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
-| **S5 — Integração** | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
+| **S5 — Integração** *(concluído em 2026-09-23 — ver 36.7)* | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
 | **S6 — Uso real** | primeiros capítulos de SEM ROSTO com staging; recalibrar limiares | pacote real (DEDR S6) | — | a autora responde "sim": *o sistema me impediu de algo que eu não queria e me deixou fazer tudo que eu queria?* |
 
 Complexidade: S1 M · S2 L (digitalização é o trabalho grosso) · S3 M · S4 M ·
@@ -2832,6 +2832,41 @@ topologia do inset. Nenhum mapa tem `depicts` (autoria desconhecida; nenhum mapa
 - **`CN-04`** (camada histórica × estado presente) e o filtro `--at-year`: aguardam `story_present_year` (TIMELINE).
 - **Saídas do Mapa B (`EXT-*` com `frame_status: TO_DIGITIZE`)**: seguem pendentes da digitalização do Mapa B.
 - **Pack de contexto (T27) e compose**: Slice 5.
+
+### 36.7 Estado do Slice 5 (2026-09-23)
+
+**Entregue** (`engine/scripts/cartography_runtime.py`, neutro; `livingbook.py` só com hunks aditivos sob `features.cartography`):
+
+- **Feature `features.cartography.enabled`, OFF por padrão**, lida do dict original do `BOOK_SPEC` (padrão `causal_ledger`). Sem ela o grafo é idêntico ao
+  golden (T31: nenhum dos 6 livros existentes nem o livro-fixture do ledger ganha uma linha de cartografia).
+- **Tarefas.** `T018C_CARTOGRAPHY` (`CANON_GUARDIAN`, lock `CANON_WRITE`, depende de `T018`, não do próprio `GATE_CANON`) materializa
+  `book/cartography/{seeds,sources}` em `canon/cartography/` **uma vez** (`--materialize`: nunca sobrescreve canon existente; reescreve `../sources/` para
+  `sources/`; cria `STAGING.yaml` vazio). `T022C_CARTOGRAPHY_SNAPSHOT` e `T2nnY_CARTOGRAPHY_SNAPSHOT` (uma por wave, depois do `CANON_UPDATE`) congelam
+  `canon/snapshots/CARTOGRAPHY.WAVE_NN.yaml` (`--snapshot-auto`). As três são `tool` mecânicas (zero token). Os briefs recebem a instrução de declarar staging
+  `PLANNED` e gerar o pack.
+- **Validadores em gates existentes, nenhum gate novo (29.1):** `V_CARTO_CANON` → `GATE_CANON`; `V_CARTO_WAVE_n` → `GATE_WAVE_n` (`--mode wave
+  --through-chapter <último da wave> --baseline <snapshot anterior>`); `V_CARTO_FINAL` → `GATE_FULL_MANUSCRIPT`. `canon` = validação estática + autoria no ledger;
+  `wave` = estática + `TR/AC/KN/VS/HD/CH` **só sobre stagings `REALIZED` até N** + `CN-06` + `CN-07`; `final` = tudo + `KN-02` sobre os capítulos do manuscrito.
+- **`CN-06 RENAME_WITHOUT_PROPOSAL`** (HIGH: `canonical_name` mudou desde o snapshot sem mutação) e **`CN-07 RETROACTIVE_MUTATION`** (BLOCKER: mutação nova com efeito
+  em capítulo que o snapshot já congelou) — o snapshot guarda `through_chapter` = maior capítulo `REALIZED`.
+- **Cartography Context Pack (27.1)** — `--runtime . --pack --chapter N [--scene SC] [--engine-view]` → `briefs/cartography/CHAPTER_NN_PACK.yaml`, determinístico:
+  local atual, adjacentes por arestas públicas com tempo, saídas visíveis, passagens ocultas **que o POV conhece** e **só a contagem** das que não conhece (ids só com
+  `--engine-view`), distâncias aproximadas (com a precisão das fontes), becos sem saída a ≤ 5 min, cobertura/vigilância **sem inventar** (`UNSPECIFIED`/`UNKNOWN`),
+  efeitos de clima e limiar de detecção, restrições de canon, proibições (`KN-01/KN-02/VS-01`), estado do leitor e `reader_knows_but_pov_does_not` (o que o leitor viu
+  impresso e o POV não sabe). Nenhuma frase do pack ou das instruções de brief contém "saída verdadeira" (o teste de varredura T09 pegou o meu próprio texto).
+- **Gate de ponta a ponta:** compose do livro-fixture + `--materialize` + `runtime_taskgraph.py validate-gate GATE_CANON` executa `V_CARTO_CANON: PASS`; sem
+  materializar, o gate reprova com `CARTOGRAPHY_CANON_MISSING`.
+
+**Achado real do primeiro uso:** um movimento `RUN` de 3 min da Saint Morrow Chapel à Cruz (≈ 490 m) reprova `TR-03` (perfil FIT precisa de ≈ 262 s só na fase de esforço
+máximo) — o motor pega o que a prosa não pegaria.
+
+**Não feito (por decisão):**
+
+- **Tarefa de pack por capítulo.** O pack é gerado por CLI, instruído no brief; uma tarefa `tool` por capítulo exigiria parâmetros por tarefa no mecanismo de `tool`
+  (`run_deterministic.py`, área de outra frente).
+- **`STAGING_MISSING` para cena com POV sem staging** (tabela de riscos): depende do formato da lista de cenas do brief, ainda não definido.
+- **`check_canon_continuity.py` (vocabulário de lugares) e `build_canon_digest.py`:** fora do DoD do S5; extensões de uma função cada, para quando houver capítulos.
+- **Runbook do `CANON_GUARDIAN` (`CARTOGRAPHY_RUNBOOK.md`):** fica para o S6, com o primeiro uso real.
 
 ---
 

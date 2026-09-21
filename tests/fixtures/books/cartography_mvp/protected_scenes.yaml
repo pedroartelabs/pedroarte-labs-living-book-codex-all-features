@@ -1,0 +1,14 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: ProtectedScenes
+scenes:
+  - id: THE_REVELATION
+    chapters: [6]
+    auditor: PROTECTED_SCENE_AUDITOR
+    must_preserve: >
+      A revelação do capítulo 6 recontextualiza os capítulos 1 e 3 (Second-Read
+      Test) sem alterar nenhum fato já narrado neles — a mentira continua tendo
+      sido uma mentira; o que muda é só a razão por trás dela.
+    reject_if: >
+      Qualquer versão em que os fatos dos capítulos 1 ou 3 precisem ser
+      reescritos para a revelação fazer sentido, ou em que a Ground Truth
+      revelada não estivesse já plantada como causa desses capítulos.

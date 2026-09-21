@@ -1,0 +1,55 @@
+# Override de engine/templates/TEXT_QUALITY_DEFAULTS.yaml para este livro.
+#
+# detect_repetition.py faz merge por SEÇÃO (cfg[secao].update(valores)), não
+# por item — por isso `patterns` abaixo repete a lista base inteira e
+# acrescenta os clichês específicos do gênero (SDD, C.3: "clichês lexicais do
+# gênero entram no text_quality.yaml do livro"). Omitir a base aqui a
+# substituiria, não a estenderia.
+apiVersion: pedroarte.livingbooks/v1
+kind: TextQualityOverrides
+spec:
+  cliches:
+    enabled: true
+    severity: MEDIUM
+    patterns:
+      # --- base de engine/templates/TEXT_QUALITY_DEFAULTS.yaml ---
+      - coração disparado
+      - coração aos pulos
+      - coração na boca
+      - lágrimas escorriam
+      - lágrimas rolaram
+      - olhos marejados
+      - marejaram os olhos
+      - um arrepio percorreu
+      - arrepio na espinha
+      - gelou a espinha
+      - sangue gelou
+      - silêncio ensurdecedor
+      - sorriso amarelo
+      - nó na garganta
+      - peso no peito
+      - friozinho na barriga
+      - borboletas no estômago
+      - o tempo parou
+      - o tempo pareceu parar
+      - o mundo desabou
+      - como se o mundo
+      - respirou fundo e
+      - suspirou fundo
+      - engoliu em seco
+      - ficou sem palavras
+      - não era mais o mesmo
+      - naquele exato momento
+      - por um breve instante
+      - mal sabia ele
+      - mal sabia ela
+      - só o tempo diria
+      # --- específicos de dark romance, catalogados neste livro ---
+      - sorriso predatório
+      - olhos que prometiam perigo
+      - ele a encurralou contra a parede
+      - dominação silenciosa
+      - ela nunca tinha se sentido tão exposta
+      - o cheiro dele a envolveu
+      - seu corpo traiu sua mente
+      - um rosnado baixo

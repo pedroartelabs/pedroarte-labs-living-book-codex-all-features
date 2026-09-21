@@ -1,0 +1,20 @@
+artifacts:
+  - id: MAP-DIEGETIC-A
+    kind: MAP
+    title: "Valdoro — mapa local"
+    source_file: SRC-MAP-A
+    author: {status: MUST_REMAIN_UNKNOWN, question_ref: Q-MAP-AUTHOR, unk_ref: UNK-MAP-AUTHOR}
+    map_layer: UNKNOWN
+    printed_in_book: true
+  - {id: MAP-A-TXT-01, kind: TEXT, text: "Todo caminho tem dois lados.", epistemic_status: UNKNOWN}
+  - id: MAP-OFF-01
+    kind: MAP
+    title: "Mapa da guarda de Valdoro"
+    author: INST-GUARDA
+    map_layer: LYR-ANTIGO
+    depicts:
+      - {target: TS-SUB-TUN, relation: OMITS}
+      - {target: PHANTOM-EDG-1, relation: PHANTOM}
+      - {target: TS-URB-MOI, relation: FALSIFIED_STATUS, as_status: ACTIVE, truth_ref: GT-MOI}
+      - {target: TS-URB-CEM, relation: RENAMED, as_name: "Campo Santo", truth_ref: GT-NOME}
+      - {target: TS-CEN-CAP, relation: ACCURATE}

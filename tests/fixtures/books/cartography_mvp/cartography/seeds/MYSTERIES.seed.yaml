@@ -1,0 +1,55 @@
+exits:
+  - id: EXT-01
+    road: ROAD-SUL
+    frame_portal: TS-FRM-S
+    physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+    claims:
+      - {class: OFFICIAL_EXIT, text: "Saída Sul", source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+    exit_classes: [APPARENT_EXIT, OFFICIAL_EXIT]
+    truth_ref: GT-EXIT-1
+  - id: EXT-02
+    frame_portal: null
+    frame_status: TO_DIGITIZE
+    physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
+    claims:
+      - {class: DISPUTED_EXIT, text: "Em Disputa", source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
+    exit_classes: [APPARENT_EXIT, DISPUTED_EXIT]
+    truth_ref: null
+    first_allowed_reveal: 5
+boundaries:
+  - {id: BND-A-FRAME, kind: MAP_FRAME, source: SRC-MAP-A}
+hideouts:
+  - {id: HID-CEM, location: TS-URB-CEM, capacity: UNSPECIFIED}
+route_mysteries:
+  - id: RMY-R1
+    label: R1
+    motto: "O caminho volta."
+    motto_status: MAP_ARTIFACT
+    physical_routes: []
+    resolution_state: UNRESOLVED
+    truth_ref: null
+mysteries:
+  - id: CMY-01
+    question: "O que significa a marca na ponte?"
+    involved_locations: [TS-URB-PNT]
+    activation: {requires_anomalies: [ANM-01]}
+    candidate_interpretations: []
+    resolution_state: UNRESOLVED
+    truth_ref: null
+  - id: CMY-09
+    question: "Quem fez o mapa?"
+    question_policy: NEVER
+    question_ref: Q-MAP-AUTHOR
+    resolution_state: PERMANENTLY_AMBIGUOUS
+    truth_ref: null
+register:
+  expected_lines: 3
+  printed_order_is_artifact: true
+  entries:
+    - {id: REG-01, display_index: "01", printed_name: "Marco Zero", location_id: TS-CEN-ORG, placement: ON_MAP}
+    - {id: REG-02, display_index: "02", printed_name: "Aldeia Norte", location_id: TS-REG-ALD, placement: ON_MAP}
+    - {id: REG-03, display_index: "02", printed_name: "Nenhum lugar", location_id: null, placement: NOT_ON_MAP}
+inventory:
+  - {item: "Marco Zero", kind: LABEL, maps_to: TS-CEN-ORG}
+  - {item: "Ponte Velha", kind: LABEL, maps_to: TS-URB-PNT}
+  - {item: "Porão da Capela", kind: INSET_LABEL, maps_to: TS-SUB-POR}

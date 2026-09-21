@@ -928,12 +928,46 @@ def render_report(findings: list[dict], source: str, sm: dict) -> str:
     return "".join(out)
 
 
+def _runtime_main(args) -> int:
+    import cartography_runtime as rt
+    if args.materialize:
+        res = rt.materialize(args.runtime)
+        print(json.dumps(res, ensure_ascii=False, indent=2))
+        return 1 if res["status"] == "NO_SEEDS" else 0
+    if args.snapshot_auto:
+        print(f"Snapshot: {rt.snapshot_auto(args.runtime)}")
+        return 0
+    if args.pack:
+        if args.chapter is None:
+            print("--pack exige --chapter", file=sys.stderr)
+            return 2
+        print(f"Pack: {rt.write_pack(args.runtime, args.chapter, args.scene, args.engine_view)}")
+        return 0
+    findings = rt.run_mode(args.runtime, args.mode or "canon", args.through_chapter, args.baseline)
+    if args.json:
+        print(json.dumps({"mode": args.mode or "canon", "findings": findings}, ensure_ascii=False, indent=2))
+    else:
+        sm = {"mode": args.mode or "canon"}
+        print(render_report(findings, str(args.runtime), sm))
+    blocking = [f for f in findings if f["severity"] in BLOCKING]
+    print(f"\nTOTAL: {len(findings)} achado(s), {len(blocking)} bloqueante(s)", file=sys.stderr)
+    return 1 if blocking else 0
+
+
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
         sys.stderr.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="Valida o canon cartográfico (SDD CANONICAL_CARTOGRAPHY_GRAPH).")
-    ap.add_argument("--canon", type=Path, required=True, help="Diretório com CARTOGRAPHY.seed.yaml e os seeds.")
+    ap.add_argument("--canon", type=Path, help="Diretório com CARTOGRAPHY.seed.yaml e os seeds.")
+    ap.add_argument("--runtime", type=Path, help="Raiz do runtime: lê canon/cartography/ (modos dos gates, pack, snapshot).")
+    ap.add_argument("--mode", choices=["canon", "wave", "final"], help="Com --runtime: V_CARTO_CANON | V_CARTO_WAVE_n | V_CARTO_FINAL.")
+    ap.add_argument("--through-chapter", type=int, help="Com --mode wave/final: só stagings REALIZED até este capítulo.")
+    ap.add_argument("--baseline", help="Com --mode wave/final: snapshot da wave anterior (CN-06/CN-07).")
+    ap.add_argument("--pack", action="store_true", help="Com --runtime e --chapter: gera briefs/cartography/CHAPTER_NN_PACK.yaml.")
+    ap.add_argument("--scene", help="Com --pack: restringe a uma cena.")
+    ap.add_argument("--snapshot-auto", action="store_true", help="Com --runtime: escreve o próximo canon/snapshots/CARTOGRAPHY.WAVE_NN.yaml.")
+    ap.add_argument("--materialize", action="store_true", help="Com --runtime: copia book/cartography/{seeds,sources} para canon/cartography/ (uma vez).")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--coords", action="store_true", help="Tabela de coordenadas derivadas e sai.")
@@ -969,6 +1003,10 @@ def main() -> int:
     ap.add_argument("--ledger", type=Path, help="CAUSAL_LEDGER.yaml (conhecimento por ator).")
     args = ap.parse_args()
 
+    if args.runtime:
+        return _runtime_main(args)
+    if not args.canon:
+        ap.error("informe --canon ou --runtime")
     try:
         model = load_model(args.canon)
     except FileNotFoundError as exc:

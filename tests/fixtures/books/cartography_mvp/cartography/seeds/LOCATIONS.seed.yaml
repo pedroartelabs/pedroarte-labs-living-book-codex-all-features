@@ -1,0 +1,26 @@
+locations:
+  - {id: TS-CEN-ORG, canonical_name: Marco Zero, type: LANDMARK, layer: URBAN, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-A, px: [50, 40], anchor: ICON}, {source: SRC-MAP-B, px: [50, 40], anchor: ICON}]}
+  - {id: TS-CEN-CAP, canonical_name: Capela do Vau, type: CHAPEL, layer: URBAN, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-A, px: [20, 30], anchor: ICON}]}
+  - {id: TS-CEN-EST, canonical_name: Estalagem, type: PUB, layer: URBAN, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-A, px: [70, 45], anchor: ICON}]}
+  - {id: TS-URB-PNT, canonical_name: Ponte Velha, type: BRIDGE, layer: URBAN, geometry: POINT, status: ACTIVE, crosses: [WAT-RIO],
+     source_px: [{source: SRC-MAP-A, px: [81, 40], anchor: ICON}]}
+  - {id: TS-URB-MOI, canonical_name: Moinho, type: MILL, layer: URBAN, geometry: POINT, status: RUINED,
+     source_px: [{source: SRC-MAP-A, px: [90, 20], anchor: ICON}]}
+  - {id: TS-URB-CEM, canonical_name: Cemitério Velho, type: CEMETERY, layer: URBAN, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-A, px: [10, 50], anchor: ICON}]}
+  - {id: WAT-RIO, canonical_name: Rio Manso, type: BURN, layer: URBAN, geometry: LINE, status: ACTIVE,
+     polyline_px: [{source: SRC-MAP-A, px: [78, 0]}, {source: SRC-MAP-A, px: [82, 40]}, {source: SRC-MAP-A, px: [80, 79]}]}
+  - {id: TS-REG-ALD, canonical_name: Aldeia Norte, type: VILLAGE, layer: REGIONAL, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-B, px: [50, 10], anchor: ICON}]}
+  - {id: TS-REG-GRA, canonical_name: Granja Alta, type: FARM, layer: REGIONAL, geometry: POINT, status: ACTIVE,
+     source_px: [{source: SRC-MAP-B, px: [20, 30], anchor: ICON}]}
+  - {id: TS-FRM-S, canonical_name: moldura sul, type: FRAME_PORTAL, layer: URBAN, geometry: POINT,
+     source_px: [{source: SRC-MAP-A, px: [50, 79], anchor: EDGE}]}
+  - {id: TS-SUB-POR, canonical_name: Porão da Capela, type: CELLAR, layer: SUBTERRANEAN, geometry: POINT, anchor_to: TS-CEN-CAP, status: UNKNOWN}
+  - {id: TS-SUB-TUN, canonical_name: Túnel do Cemitério, type: TUNNEL, layer: SUBTERRANEAN, geometry: POINT, anchor_to: TS-URB-CEM, status: UNKNOWN}
+  - {id: TS-JCT-1, canonical_name: junção 1, type: JUNCTION, layer: SUBTERRANEAN, geometry: POINT, position: UNKNOWN}
+  - {id: TS-SUB-SEL, canonical_name: Cripta Selada, type: CRYPT, layer: SUBTERRANEAN, geometry: POINT, position: UNKNOWN,
+     source: AUTHOR_DECLARED, connectivity: UNDECLARED, status: SEALED, first_allowed_reveal: 8}

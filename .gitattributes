@@ -1,3 +1,4 @@
 books/sem-rosto/** text eol=lf
 tests/fixtures/cartography/** text eol=lf
 *.png binary
+tests/fixtures/books/cartography_mvp/cartography/** text eol=lf

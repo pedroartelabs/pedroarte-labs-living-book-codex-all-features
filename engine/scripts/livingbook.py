@@ -52,6 +52,11 @@ TOOL_BY_PATTERN: list[tuple[str,str]] = [
     # build_standard_graph); o padrao aqui e module-level e inofensivo para
     # todo outro livro, porque nenhuma tarefa deles casa com este glob.
     ('T*_LEDGER_SNAPSHOT', '{python} scripts/check_causal_ledger.py --runtime {runtime} --snapshot-auto'),
+    # Cartografia canonica (docs/sdd/*CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md, secoes 27/29): materializar os
+    # seeds da obra em /canon/cartography/ e congelar o snapshot de cada wave sao mecanicos. So existem
+    # tarefas assim quando features.cartography.enabled=true.
+    ('T018C_CARTOGRAPHY', '{python} scripts/check_cartography.py --runtime {runtime} --materialize'),
+    ('T*_CARTOGRAPHY_SNAPSHOT', '{python} scripts/check_cartography.py --runtime {runtime} --snapshot-auto'),
 ]
 
 def _causal_ledger_threshold_flags(cfg: dict) -> str:
@@ -231,6 +236,10 @@ def build_standard_graph(book: Path):
     # tambem nao e uma feature que perfis de execucao desligam sozinhos.
     visual_narrative_cfg = sp.get('features', {}).get('visual_narrative') or {}
     visual_narrative_enabled = bool(visual_narrative_cfg.get('enabled'))
+    # CANONICAL_CARTOGRAPHY_GRAPH: mesmo padrao OFF por padrao, lido do dict ORIGINAL -- perfis de execucao
+    # nao desligam a fisica do mundo. Ausente => grafo identico ao golden.
+    cartography_cfg = sp.get('features', {}).get('cartography') or {}
+    cartography_enabled = bool(cartography_cfg.get('enabled'))
     vn_author_profile = visual_narrative_cfg.get('author_profile')
     vn_author_dna_version = visual_narrative_cfg.get('author_dna_version')
     vn_edition_targets = visual_narrative_cfg.get('edition_targets') or []
@@ -265,6 +274,17 @@ def build_standard_graph(book: Path):
                           inputs=['/canon/CAUSAL_LEDGER.yaml'],
                           outputs=['/canon/snapshots/CAUSAL_LEDGER.WAVE_00.yaml']))
         gates['GATE_CANON']['requires'].append('T021_LEDGER_SNAPSHOT')
+    if cartography_enabled:
+        # Mesmo dono e mesmo lock CANON_WRITE de CANON_REGISTRY: a cartografia e um terceiro arquivo de canon
+        # (seeds da obra -> /canon/cartography/, padrao Narciso). Materializar e mecanico (copia uma vez, nunca
+        # sobrescreve canon existente); depois so muda por mutacao aprovada. Nao depende de GATE_CANON (ciclo).
+        tasks.append(task('T018C_CARTOGRAPHY','CANON','CANON_GUARDIAN',['T018_CANON_REGISTRY'],locks=['CANON_WRITE'],
+                          inputs=['/book/cartography/seeds/CARTOGRAPHY.seed.yaml'],
+                          outputs=['/canon/cartography/CARTOGRAPHY.seed.yaml','/canon/cartography/STAGING.yaml']))
+        tasks.append(task('T022C_CARTOGRAPHY_SNAPSHOT','CANON','CANON_GUARDIAN',['T018C_CARTOGRAPHY'],
+                          inputs=['/canon/cartography/CARTOGRAPHY.seed.yaml'],
+                          outputs=['/canon/snapshots/CARTOGRAPHY.WAVE_00.yaml']))
+        gates['GATE_CANON']['requires'] += ['T018C_CARTOGRAPHY','T022C_CARTOGRAPHY_SNAPSHOT']
     # Digest de canon: destila o CANON_REGISTRY a ~11% do tamanho das biblias,
     # para as tarefas de CONFERENCIA lerem no lugar do corpo completo. E
     # deterministico (le YAML, escreve Markdown), entao roda sem LLM.
@@ -326,6 +346,17 @@ def build_standard_graph(book: Path):
     for ch in range(1,count+1):
         tasks.append(task(f'T1{ch:02d}_BRIEF_CHAPTER','CHAPTER_BRIEFS','SCENE_ARCHITECT',['GATE_LIVING_BOOK'],inputs=['/book/chapter_architecture.yaml','/specs/STORY_BIBLE.md','/specs/CHARACTER_BIBLE.md','/specs/PLOT_DEPENDENCY_MAP.md','/specs/TIMELINE.md','/living_book/READER_VITALS.md'],outputs=[f'/briefs/chapters/CHAPTER_{ch:02d}_BRIEF.md'],spawn={'mode':'PARALLEL_SUBAGENTS','agents':['EMOTIONAL_PHYSIOLOGY_ARCHITECT','GENRE_GUARDIAN','ANTI_MANIPULATION_GUARDIAN'],'wait_for_all':True}))
     gates['GATE_CHAPTER_BRIEFS']={'blocking':True,'requires':[f'T1{ch:02d}_BRIEF_CHAPTER' for ch in range(1,count+1)]}
+    if cartography_enabled:
+        # Briefs com cena declaram staging PLANNED em /canon/cartography/STAGING.yaml e geram o pack
+        # deterministico (zero token) que o escritor le junto com o brief. O pack ajuda sem decidir.
+        for ch in range(1,count+1):
+            brief = next(t for t in tasks if t['id']==f'T1{ch:02d}_BRIEF_CHAPTER')
+            brief.setdefault('inputs',[]).append('/canon/cartography/CARTOGRAPHY.seed.yaml')
+            brief['parameters']={**brief.get('parameters',{}),'cartography':
+                f'Se o capitulo tem cena com deslocamento, declare staging/movimentos PLANNED em /canon/cartography/STAGING.yaml '
+                f'(lugares RM-*, relogio DnnnTHH:MM) e rode "python scripts/check_cartography.py --runtime . --pack --chapter {ch}"; '
+                f'cite /briefs/cartography/CHAPTER_{ch:02d}_PACK.yaml. O pack lista o possivel e o proibido; a cena escolhe. '
+                'A cartografia nao modela o que ha alem da moldura do mapa nem a autoria dos mapas.'}
     if visual_narrative_enabled:
         # 28.2 da SDD: briefs de capitulo passam a citar os elementos
         # relevantes do canon visual (sigils, artefatos, progressoes
@@ -393,6 +424,12 @@ def build_standard_graph(book: Path):
                               inputs=['/canon/CAUSAL_LEDGER.yaml'],
                               outputs=[f'/canon/snapshots/CAUSAL_LEDGER.WAVE_{wi:02d}.yaml']))
             gate_requires.append(snap_id)
+        if cartography_enabled:
+            csnap=f'{base}Y_CARTOGRAPHY_SNAPSHOT'
+            tasks.append(task(csnap,f'WRITING_WAVE_{wi}','CANON_GUARDIAN',[cu],
+                              inputs=['/canon/cartography/CARTOGRAPHY.seed.yaml','/canon/cartography/STAGING.yaml'],
+                              outputs=[f'/canon/snapshots/CARTOGRAPHY.WAVE_{wi:02d}.yaml']))
+            gate_requires.append(csnap)
         gates[gid]={'blocking':True,'requires':gate_requires}
         prev_gate=gid
     if causal_ledger_enabled:
@@ -708,6 +745,18 @@ def build_standard_graph(book: Path):
         gates[edition_gate].setdefault('custom_validators',[]).append('V_VISUAL_EDITION')
         engine_validators.append({'id':'V_VISUAL_ASSETS','command':'python scripts/check_visual_canon.py --runtime . --mode assets --cover-image media/outputs/cover/BOOK_COVER_KDP.jpg'})
         gates['GATE_MEDIA_ASSETS'].setdefault('custom_validators',[]).append('V_VISUAL_ASSETS')
+    if cartography_enabled:
+        # CANONICAL_CARTOGRAPHY_GRAPH (SDD, secao 29.1): 3 familias de validador em 3 gates JA existentes,
+        # nenhum gate novo -- mesmo padrao do causal_ledger.
+        engine_validators.append({'id':'V_CARTO_CANON','command':'python scripts/check_cartography.py --runtime . --mode canon'})
+        gates['GATE_CANON'].setdefault('custom_validators',[]).append('V_CARTO_CANON')
+        wave_count_c=len(sp['writing_waves'])
+        for wi,chs in enumerate(sp['writing_waves'],1):
+            vid=f'V_CARTO_WAVE_{wi}'
+            engine_validators.append({'id':vid,'command':f'python scripts/check_cartography.py --runtime . --mode wave --through-chapter {max(chs)} --baseline canon/snapshots/CARTOGRAPHY.WAVE_{wi-1:02d}.yaml'})
+            gates[f'GATE_WAVE_{wi}'].setdefault('custom_validators',[]).append(vid)
+        engine_validators.append({'id':'V_CARTO_FINAL','command':f'python scripts/check_cartography.py --runtime . --mode final --baseline canon/snapshots/CARTOGRAPHY.WAVE_{wave_count_c:02d}.yaml'})
+        gates['GATE_FULL_MANUSCRIPT'].setdefault('custom_validators',[]).append('V_CARTO_FINAL')
     return {'apiVersion':'pedroarte.livingbooks/v1','kind':'LiteraryTaskGraph','metadata':{'project_id':md['slug'],'title':md['title'],'author':md['author'],'language':md['language'],'chapter_count':count,'engine_version':e['metadata']['version'],'book_version':md.get('version','1.0.0'),'execution_profile':profile_name},'spec':{'execution_policy':e['spec']['execution_policy'],'task_states':e['spec']['task_states'],'success_states':e['spec']['success_states'],'rejection_states':rejections,'locks':e['spec']['locks'],'agents':agents,'protocols':e['spec']['protocols'],'quality_defaults':e['spec']['quality_defaults'],'quality_profile':load_yaml(book/sp['quality_profile_file']),'immutable_rules':load_yaml(book/sp['immutable_rules_file']),'custom_validators':engine_validators+ext.get('spec',{}).get('custom_validators',[]),'gates':gates,'tasks':tasks}}
 
 def validate_graph(g, root: Path):
@@ -801,6 +850,10 @@ def copy_runtime(book: Path, runtime: Path, graph):
     # BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM (docs/sdd/BEA_HALDEN_VISUAL_NARRATIVE_SYSTEM_SDD_v0.1.md).
     # Mesma deteccao via grafo (nao parametro novo): T042 so existe quando
     # features.visual_narrative.enabled=true.
+    # CANONICAL_CARTOGRAPHY_GRAPH: mesma deteccao via grafo (T018C so existe com features.cartography.enabled=true).
+    if any(t.get('id')=='T018C_CARTOGRAPHY' for t in graph['spec']['tasks']):
+        for script in ('check_cartography.py','cartography_graph.py','cartography_chase.py','cartography_maps.py','cartography_runtime.py'):
+            shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
     if any(t.get('id')=='T042_VISUAL_DISCOVERY' for t in graph['spec']['tasks']):
         vn_spec=load_yaml(book/'BOOK_SPEC.yaml')['spec']
         vn_cfg=vn_spec.get('features',{}).get('visual_narrative') or {}

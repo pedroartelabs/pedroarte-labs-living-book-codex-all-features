@@ -371,10 +371,16 @@ class AuthorDecisions(unittest.TestCase):
         self.assertEqual(s["speeds_mps"]["physical_max"]["WALK"], 2.2)
 
 
-class EngineUntouched(unittest.TestCase):
-    def test_compose_does_not_know_cartography_yet(self):
+class EngineCompose(unittest.TestCase):
+    """Slice 5: o compose conhece a cartografia SÓ atrás de `features.cartography.enabled` (OFF por padrão)."""
+
+    def test_compose_reads_the_feature_with_get_and_guards_every_use(self):
         text = (REPO / "engine" / "scripts" / "livingbook.py").read_text(encoding="utf-8")
-        self.assertNotIn("cartography", text.lower())      # integração no compose só no Slice 5
+        self.assertIn("sp.get('features', {}).get('cartography') or {}", text)
+        self.assertIn("cartography_enabled = bool(cartography_cfg.get('enabled'))", text)   # OFF por padrão; uso guardado: ver test_cartography_compose
+
+    def test_sem_rosto_package_is_still_partial_and_does_not_enable_the_feature(self):
+        self.assertFalse((REPO / "books" / "sem-rosto" / "BOOK_SPEC.yaml").exists())
 
 
 if __name__ == "__main__":
