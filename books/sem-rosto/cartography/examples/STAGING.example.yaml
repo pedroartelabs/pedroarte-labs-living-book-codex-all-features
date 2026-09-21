@@ -1,0 +1,18 @@
+# ILUSTRATIVO — não é canon, não é capítulo do livro. Mostra o formato de STAGING.yaml e o que o motor diz de cenas
+# hipotéticas sobre a cartografia real de Redmur. Atores são placeholders (CHR-EX-*): personagens reais vêm do ledger.
+# Nada aqui vale como REALIZED: só a autora e o CANON_GUARDIAN promovem uma cena a realizada.
+clock: {format: "D<nnn>T<HH:MM>"}
+staging:
+  - {id: STG-EX-01, status: PLANNED, chapter: 7, scene: SC-EX-01, actor: CHR-EX-A, at: "D001T23:14", location: RM-CEN-RSP,
+     conditions: {lighting: NIGHT_DARK, weather: RAIN}}
+  - {id: STG-EX-02, status: PLANNED, chapter: 7, scene: SC-EX-01, actor: CHR-EX-A, at: "D001T23:54", location: RM-URB-OPC}
+  - {id: STG-EX-03, status: PLANNED, chapter: 7, scene: SC-EX-02, actor: CHR-EX-B, at: "D001T22:00", location: RM-URB-PMP}
+  - {id: STG-EX-04, status: PLANNED, chapter: 7, scene: SC-EX-02, actor: CHR-EX-B, at: "D001T22:50", location: RM-CEN-SMC}
+  - {id: STG-EX-05, status: PLANNED, chapter: 7, scene: SC-EX-03, actor: CHR-EX-C, at: "D001T23:14", location: RM-CEN-RSP}
+  - {id: STG-EX-06, status: PLANNED, chapter: 7, scene: SC-EX-03, actor: CHR-EX-C, at: "D001T23:34", location: RM-URB-OPC}
+movements:
+  - {id: MOV-EX-01, status: PLANNED, actor: CHR-EX-A, from_staging: STG-EX-01, to_staging: STG-EX-02, mode: WALK, route: null,
+     conditions: {lighting: NIGHT_DARK, weather: RAIN, familiar: true}}
+  - {id: MOV-EX-02, status: PLANNED, actor: CHR-EX-B, from_staging: STG-EX-03, to_staging: STG-EX-04, mode: WALK, route: null}
+  # Mesmo trajeto da cena 1 com só 20 min: fisicamente possível a passo rápido, mas apertado (WARNING, não bloqueia).
+  - {id: MOV-EX-03, status: PLANNED, actor: CHR-EX-C, from_staging: STG-EX-05, to_staging: STG-EX-06, mode: WALK, route: null}

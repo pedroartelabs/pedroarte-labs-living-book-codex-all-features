@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6); S5 concluído (2026-09-23, seção 36.7)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6); S5 concluído (2026-09-23, seção 36.7); S6 preparado (2026-09-23, seção 36.8): uso real aguarda a autora**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -2705,7 +2705,7 @@ decisões  contrato+  arestas+   visibil.+   mistério+   integração   uso rea
 | **S3 — Visibilidade, esconderijos, perseguição** *(concluído em 2026-09-22 — ver 36.5)* | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
 | **S4 — Mistério e camadas** *(concluído em 2026-09-23 — ver 36.6)* | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
 | **S5 — Integração** *(concluído em 2026-09-23 — ver 36.7)* | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
-| **S6 — Uso real** | primeiros capítulos de SEM ROSTO com staging; recalibrar limiares | pacote real (DEDR S6) | — | a autora responde "sim": *o sistema me impediu de algo que eu não queria e me deixou fazer tudo que eu queria?* |
+| **S6 — Uso real** *(preparado em 2026-09-23 — ver 36.8; a parte que depende da autora está aberta)* | primeiros capítulos de SEM ROSTO com staging; recalibrar limiares | pacote real (DEDR S6) | — | a autora responde "sim": *o sistema me impediu de algo que eu não queria e me deixou fazer tudo que eu queria?* |
 
 Complexidade: S1 M · S2 L (digitalização é o trabalho grosso) · S3 M · S4 M ·
 S5 S · S6 variável.
@@ -2867,6 +2867,20 @@ máximo) — o motor pega o que a prosa não pegaria.
 - **`STAGING_MISSING` para cena com POV sem staging** (tabela de riscos): depende do formato da lista de cenas do brief, ainda não definido.
 - **`check_canon_continuity.py` (vocabulário de lugares) e `build_canon_digest.py`:** fora do DoD do S5; extensões de uma função cada, para quando houver capítulos.
 - **Runbook do `CANON_GUARDIAN` (`CARTOGRAPHY_RUNBOOK.md`):** fica para o S6, com o primeiro uso real.
+
+### 36.8 Estado do Slice 6 (2026-09-23) — preparado; o uso real depende da autora
+
+O S6 é "primeiros capítulos de SEM ROSTO com staging; recalibrar limiares", com critério de sucesso subjetivo (a autora responde *o sistema me impediu de algo que eu não
+queria e me deixou fazer tudo que eu queria?*). **Não há capítulo, nem `BOOK_SPEC` completo, nem ledger de SEM ROSTO**; inventar cenas para "usar" o sistema seria fabricar canon. O que
+foi entregue é o que não exige essa decisão:
+
+- **`tests/test_redmur_acceptance.py`**: as 9 perguntas da missão (Apêndice C) como asserções sobre os dados reais (1–9 verdes). Corrigiu duas estimativas do próprio SDD (perg. 2 e 7, ver Apêndice C).
+- **`books/sem-rosto/cartography/examples/STAGING.example.yaml`**: exemplo **ilustrativo** (atores `CHR-EX-*`, tudo `PLANNED`, "não é canon") do formato completo; o motor o valida
+  (2 cenas coerentes, 1 trajeto apertado como `TR-07` WARNING).
+- **`engine/templates/CARTOGRAPHY_RUNBOOK.md`** (neutro), copiado para `canon/CARTOGRAPHY_RUNBOOK.md` pelo compose quando a feature está ligada.
+- **`books/sem-rosto/cartography/approvals/CART_OPEN_DECISIONS.md`**: folha de decisões (7 que destravam respostas, 5 de método, 3 técnicas). É pedido, não aprovação.
+
+**Recalibração de limiares:** não feita, de propósito: não há uso real para calibrar. Os limiares aprovados (`OQ-CART-14`) e o único parâmetro meu (`walk_brisk_mps = 1,8`) ficam como estão até a primeira wave real.
 
 ---
 
@@ -3257,7 +3271,7 @@ citáveis por mistério, evidência e cena, sem significado atribuído.
 
 ## Apêndice C — Condição de sucesso: as perguntas da missão (§42)
 
-Respostas como o sistema as dará após o S4, com os dados desta transcrição.
+Respostas como o sistema as dá com os dados finais. **Valores corrigidos no S6** (verificados por `tests/test_redmur_acceptance.py`): perg. 2 — distância mínima 1.931 m, nominal 2.145 m pela via digitalizada; a pé, perfil `FIT`, de dia: mínimo ≈ 14,6 min, esperado ≈ 29 min, à noite sem luz ≈ 38 min (a estimativa original de 2,6 km/43 min vinha de tortuosidade presumida, não da via desenhada). Perg. 7 — o percurso mínimo Red Stag → cemitério é 1.667 m (≈ 12,6 min só a pé rápido; esperado ≈ 24 min): `FAIL TR-01` às 23:18, e correndo `FAIL TR-01/TR-03`. Perg. 5 — `UNDETERMINED_SURVEILLANCE` e a lista do que decidir. O texto abaixo é o original e fica como histórico.
 `ENGINE_VIEW` = visão do motor (não entregar a personagem nem ao leitor).
 
 **1. "Quais rotas a protagonista conhece para sair do cemitério?"**

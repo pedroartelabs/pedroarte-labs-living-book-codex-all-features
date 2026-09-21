@@ -109,7 +109,7 @@ class Wiring(unittest.TestCase):
         self.assertEqual(owners, {"CANON_GUARDIAN"})
 
     def test_grafo_valida_sem_erros(self):
-        self.assertEqual(lb.validate_graph(GRAPH, REPO) if lb.validate_graph.__code__.co_argcount == 2 else [], [])
+        self.assertEqual(lb.validate_graph(GRAPH, FIXTURE_BOOK), [])
 
     def test_ledger_e_cartografia_juntos(self):
         with tempfile.TemporaryDirectory() as d:
@@ -150,6 +150,11 @@ class ComposeEndToEnd(unittest.TestCase):
     def test_scripts_da_cartografia_acompanham_o_runtime(self):
         for name in ("check_cartography.py", "cartography_graph.py", "cartography_chase.py", "cartography_maps.py", "cartography_runtime.py"):
             self.assertTrue((self.runtime / "scripts" / name).is_file(), name)
+
+    def test_runbook_acompanha_o_runtime_e_e_neutro(self):
+        text = (self.runtime / "canon" / "CARTOGRAPHY_RUNBOOK.md").read_text(encoding="utf-8")
+        self.assertIn("A cartografia conhece estrutura", text)
+        self.assertNotRegex(text.lower(), r"redmur|sem rosto|sa[ií]da verdadeira")
 
     def test_seeds_da_obra_vao_junto_com_o_livro(self):
         self.assertTrue((self.runtime / "book" / "cartography" / "seeds" / "CARTOGRAPHY.seed.yaml").is_file())

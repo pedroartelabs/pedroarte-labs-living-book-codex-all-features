@@ -854,6 +854,7 @@ def copy_runtime(book: Path, runtime: Path, graph):
     if any(t.get('id')=='T018C_CARTOGRAPHY' for t in graph['spec']['tasks']):
         for script in ('check_cartography.py','cartography_graph.py','cartography_chase.py','cartography_maps.py','cartography_runtime.py'):
             shutil.copy2(ENGINE/'scripts'/script, runtime/'scripts'/script)
+        shutil.copy2(ENGINE/'templates/CARTOGRAPHY_RUNBOOK.md', runtime/'canon/CARTOGRAPHY_RUNBOOK.md')
     if any(t.get('id')=='T042_VISUAL_DISCOVERY' for t in graph['spec']['tasks']):
         vn_spec=load_yaml(book/'BOOK_SPEC.yaml')['spec']
         vn_cfg=vn_spec.get('features',{}).get('visual_narrative') or {}
