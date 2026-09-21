@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 concluído (2026-09-20)** e **S1 concluído (2026-09-20)**: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4)**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -1517,7 +1517,7 @@ travel_mode, known_routes (projetado), scene_id`. Saída:
 | `FAIL` | `KN-01 SECRET_ROUTE_UNKNOWN_TO_ACTOR` | rota declarada usa aresta secreta que o ator não conhece |
 | `FAIL` | `AC-01 CLOSED_TRAVERSAL_WITHOUT_ACTION` | rota declarada atravessa aresta/lugar fechado naquele capítulo sem `access_actions` |
 | `FAIL` | `TR-03 TRAVEL_BEYOND_PROFILE` | intervalo < tempo com o **máximo esforço do perfil** do ator |
-| `WARNING` | `TR-02 TRAVEL_REQUIRES_RUNNING` | modo declarado `WALK`, mas só correndo cabe |
+| `WARNING` | `TR-02 TRAVEL_REQUIRES_RUNNING` | modo declarado `WALK`, mas só cabe em passo acima de `walk_brisk_mps` = 1,8 m/s (≈ 1,33 × perfil `FIT`; parâmetro **derivado**, ausente da tabela aprovada — ajustável) |
 | `WARNING` | `TR-07 TRAVEL_TIGHT` | intervalo < `expected` (possível, apertado) |
 | `WARNING` | `COORDINATE_PROVISIONAL` | viagem toca nó `PROVISIONAL` (a escala regional já está decidida; sobra o caso de digitalização `UNCERTAIN`) |
 | `INFO` | `TR-04 UNEXPLAINED_DELAY` | intervalo > `maximum_reasonable` |
@@ -2700,7 +2700,7 @@ decisões  contrato+  arestas+   visibil.+   mistério+   integração   uso rea
 |---|---|---|---|---|
 | **S0 — Decisões** | aprovar esta SDD; decisões da autora já registradas (escala 7,25 %, mapas diegéticos e impressos, autoria `NEVER`, anomalias intencionais, dois lugares no subterrâneo, valores de viagem); pendentes: confirmar a leitura linear da escala, `OQ-CART-04` (slug/pacote parcial), `OQ-CART-20` (limite de perguntas `NEVER`); versionar os PNGs | `books/sem-rosto/README.md`, `cartography/sources/`, `approvals/CART_DECISION_0001.md` | T32 | fontes pinadas; decisões registradas com `subject_sha256` |
 | **S1 — Contrato e inventário** | todos os nós (L1, L2, L3, OFF, FRM), registro, artefatos, anomalias, rotas como traçado declarado; transformações; `CG`, `MY`, `CN-05` | `CARTOGRAPHY.schema.json`, `CARTOGRAPHY_TEMPLATE.yaml`, `check_cartography.py --mode canon`, seeds de nós/mistérios/artefatos/anomalias, fixture neutra | T01–T05, T10, T11, T19–T23, T28, T30 | conferência humana do inventário contra os mapas (checklist por item do Apêndice A); nenhum arquivo em `engine/scripts/livingbook.py` alterado |
-| **S2 — Arestas e viagem** | digitalização das vias (polilinhas em px, conferidas), água, travessias, portais; `distance/time/reachable/route`; validador de caminho; `TR`, `AC`, `KN`, `CX` | `EDGES.seed.yaml`, `SUBTERRANEAN.seed.yaml`, `STAGING` (formato), `--mode wave` | T03, T06–T09, T12–T18, T29 | Apêndice C perguntas 1–3 e 7 respondidas pelo CLI |
+| **S2 — Arestas e viagem** *(concluído para o Mapa A em 2026-09-21; Mapa B pendente — ver 36.4)* | digitalização das vias (polilinhas em px, conferidas), água, travessias, portais; `distance/time/reachable/route`; validador de caminho; `TR`, `AC`, `KN`, `CX` | `EDGES.seed.yaml`, `SUBTERRANEAN.seed.yaml`, `STAGING` (formato), `--mode wave` | T03, T06–T09, T12–T18, T29 | Apêndice C perguntas 1–3 e 7 respondidas pelo CLI |
 | **S3 — Visibilidade, esconderijos, perseguição** | `visible_from`, `SGT-*`, `HID-*`, `CHS-*`, gargalos | `VISIBILITY`, `HIDEOUTS`, `--chase`, `--bottlenecks` | T24–T26 | Apêndice C perguntas 4–6 |
 | **S4 — Mistério e camadas** | `EXT-*`, `RMY-*`, `CMY-*`, `MAP-*` diegéticos, `LYR-*`, crença por artefato, MYSTERY PRESERVATION GATE completo | `BOUNDARIES`, `MYSTERIES`, `ARTIFACTS`, `LAYERS`, `--exits`, `--exit-truth` | T09–T11, T22, T23 | Apêndice C perguntas 8 e 9 |
 | **S5 — Integração** | `features.cartography` no compose (`T018C`, `V_CARTO_*`, pack), continuidade, digest | `livingbook.py`, `check_canon_continuity.py`, `build_canon_digest.py`, fixture de livro | T27, T31 | compose do pacote-fixture + `validate-gate GATE_CANON` executa `V_CARTO_CANON`; golden idêntico sem a feature |
@@ -2711,13 +2711,61 @@ S5 S · S6 variável.
 
 ### 36.3 Protocolo de digitalização (S2)
 
-1. Para cada via visível, marcar polilinha em pixels sobre o PNG pinado
-   (ferramenta qualquer; o artefato é a lista de pontos).
-2. Gerar um PNG de verificação com a polilinha sobreposta
-   (`reports/cartography/digitization/<edge>.png`).
-3. Conferência humana: aceita / corrige / marca `UNCERTAIN`.
-4. Só arestas `CONFIRMED_VISUAL` ou `PROBABLE` aceitas entram como
-   `CANONICAL`; `UNCERTAIN` entra `PROVISIONAL`.
+Ferramentas (neutras, em `engine/scripts/`): `trace_map_paths.py` segue a via **desenhada** pelo caminho de menor
+custo entre pontos-chave (modos `road` = via clara, `red` = linha de rota, `water` = curso d'água) e devolve a
+polilinha simplificada; a obra guarda só a tabela de pontos-chave
+(`books/sem-rosto/cartography/digitization/build_surface_seed.py` → `SURFACE.seed.yaml`) e a imagem de
+conferência (`render_overlay.py` → `overlay_A.png`).
+
+1. O operador informa lugares e cruzamentos em pixels sobre o PNG pinado; a ferramenta traça a via.
+2. Gera-se a imagem de sobreposição (verde = `PROBABLE`, laranja = `UNCERTAIN`, vermelho = linha de rota,
+   azul = água).
+3. Conferência humana: aceita / corrige / rebaixa a `UNCERTAIN`.
+4. Só arestas conferidas passam de `PROBABLE` a `CONFIRMED_VISUAL`; `UNCERTAIN` permanece marcada e usável, com
+   o aviso `COORDINATE_PROVISIONAL` quando entra numa viagem.
+
+### 36.4 Estado do Slice 2 (2026-09-21)
+
+**Entregue (Mapa A / Level 1 + Level 3):**
+
+- `engine/scripts/cartography_graph.py`: `distance`, `bearing`, `route` (`shortest`/`safest`/`hidden`), `travel_times`
+  (mínimo, esperado, razoável), `reachable` (com `blocked_by`), `escape_routes`, filtros de conhecimento por ator,
+  estado por capítulo (`fold` de mutações), `check_water_crossings` (**CX-01**), `check_mutations` (**CN-02/03**) e
+  `validate_staging` (**TR-01..07, KN-01, AC-01, HD-01**) com o veredito PASS/WARNING/FAIL.
+- CLI: `--distance --bearing --time --reachable --route --escape-routes --check-staging`. Consulta sem `--actor`
+  roda em visão `ENGINE` e sai rotulada `ENGINE_VIEW`.
+- Dados: 49 arestas de superfície (46 vias e ligações + 3 traçados das linhas de rota R1–R3), 19 cruzamentos e pontas de via,
+  o curso do Ash Burn rastreado, e todas as vias nomeadas (`ROAD-SGR`, `ROAD-EAST`) com suas arestas.
+- Nenhum lugar urbano fica isolado; nenhuma via cruza o Ash Burn fora de Burn Bridge (CX-01 verde nos dados reais).
+
+**Pendente:**
+
+- **Mapa B (regional):** as vias regionais **não** foram digitalizadas (`edges_digitized.REGIONAL: false`). São ≈ 30
+  vilarejos e uma malha densa; o método é o mesmo (tabela de pontos-chave + rastreador + conferência), mas o trabalho
+  é de outra ordem de grandeza. Até lá, `reachable` entre lugares regionais responde "sem ligação", e as saídas
+  `EXT-*` continuam sem `frame_portal` digitalizado (`frame_status: TO_DIGITIZE`).
+- **Conferência humana** das 49 arestas (imagem `overlay_A.png`); nada está `CONFIRMED_VISUAL`.
+- **CN-07** (mutação retroativa a uma cena já realizada) e **AC-02** (horário de funcionamento): dependem de
+  stagings realizados e de horários canônicos; ficam para o Slice 3/5.
+
+**Decisões tomadas durante a implementação (registradas, revisáveis):**
+
+1. **Conexão inferida da R1.** A linha vermelha R1 termina entre casas, a ≈ 110 m da via da capela, e o mapa não
+   desenha a ligação. Sem ela, o cemitério ficava a 2,9 km do Red Stag Pub (1,5 km em linha reta). Foi criada a
+   aresta `EDG-U-046` (`OPEN_GROUND`, `UNCERTAIN`, nota "CONEXÃO INFERIDA"). A R1 em si continua sem
+   `continuation_beyond_drawn`.
+2. **`walk_brisk_mps` = 1,8 m/s** (limiar do `TR-02`): parâmetro derivado, ausente da tabela aprovada em 17.2.
+3. **Mínimo do caminho** = soma dos comprimentos mínimos ÷ velocidade absoluta da banda, sobre o caminho de menor
+   **tempo esperado** (não de menor mínimo): pode superar em alguns por cento o mínimo teórico de outro caminho.
+   Sempre ≥ a linha reta ÷ velocidade absoluta.
+4. **Mínimo por aresta** = 90 % do traçado digitalizado (erro de digitalização), nunca abaixo da linha reta menos
+   as precisões, nunca acima do nominal.
+5. **Visão do motor mostra o túnel.** Sem `--actor`, `route(CHP → OPC)` devolve a passagem subterrânea; para a
+   pergunta "que rotas a personagem conhece", use `--actor` (a visão `ACTOR` só usa aresta secreta que o ator aprendeu
+   no baseline ou no ledger).
+6. **Resposta ao exemplo do SDD 17.7** com o grafo digitalizado: Red Stag → Old Parish Cemetery por vias de
+   superfície = **1.852 m**; mínimo físico a pé ≈ 12,6 min, esperado ≈ 24 min (36 min à noite sem luz e chovendo).
+   `23:14 → 23:18` é **`FAIL TR-01`** a pé e correndo.
 
 ---
 

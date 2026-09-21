@@ -1,0 +1,3 @@
+baseline:
+  - {knower: PUBLIC, knows: {ROUTE: "public_knowledge in [PUBLIC]"}}
+  - {knower: CHR-K, knows: {ROUTE: [EDG-P-001, EDG-P-002, EDG-S-001, EDG-S-002]}, source: "fixture"}

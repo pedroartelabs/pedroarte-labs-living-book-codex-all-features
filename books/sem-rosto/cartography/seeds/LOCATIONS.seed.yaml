@@ -453,15 +453,51 @@ locations:
   - source: SRC-MAP-A
     px: [975, 245]
   - source: SRC-MAP-A
-    px: [1150, 490]
+    px: [1015, 285]
   - source: SRC-MAP-A
-    px: [1200, 570]
+    px: [1045, 285]
+  - source: SRC-MAP-A
+    px: [1065, 305]
+  - source: SRC-MAP-A
+    px: [1085, 310]
+  - source: SRC-MAP-A
+    px: [1123, 348]
+  - source: SRC-MAP-A
+    px: [1159, 378]
+  - source: SRC-MAP-A
+    px: [1168, 378]
+  - source: SRC-MAP-A
+    px: [1195, 405]
+  - source: SRC-MAP-A
+    px: [1195, 420]
+  - source: SRC-MAP-A
+    px: [1200, 425]
+  - source: SRC-MAP-A
+    px: [1192, 434]
+  - source: SRC-MAP-A
+    px: [1190, 450]
+  - source: SRC-MAP-A
+    px: [1181, 458]
+  - source: SRC-MAP-A
+    px: [1174, 458]
+  - source: SRC-MAP-A
+    px: [1152, 481]
+  - source: SRC-MAP-A
+    px: [1147, 512]
+  - source: SRC-MAP-A
+    px: [1140, 520]
+  - source: SRC-MAP-A
+    px: [1170, 545]
+  - source: SRC-MAP-A
+    px: [1190, 550]
+  - source: SRC-MAP-A
+    px: [1210, 570]
   polyline_px_B:
   - [970, 380]
   - [985, 512]
   - [1080, 560]
   spring: UNKNOWN
-  note: Curso visível; nascente e continuação sob o bosque desconhecidas (ANM-A-04).
+  note: Curso rastreado sobre a imagem; nascente e continuação além do bosque desconhecidas (ANM-A-04).
 - id: RM-FRM-A-S
   canonical_name: moldura sul (South Gate Road)
   type: FRAME_PORTAL

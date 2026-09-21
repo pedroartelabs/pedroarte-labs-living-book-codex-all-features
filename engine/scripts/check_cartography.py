@@ -1,26 +1,28 @@
 """Validador do canon cartográfico (capability neutra `features.cartography`).
 
-Slice 1 de docs/sdd/*CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md: contrato,
-integridade do grafo e proteção de mistério. NÃO contém nome de nenhuma obra: o
-que é de uma obra mora nos seeds (books/<slug>/cartography/seeds/).
+Slices 1–2 de docs/sdd/*CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md: contrato, integridade do grafo,
+proteção de mistério e consultas de viagem. NÃO contém nome de nenhuma obra: o que é de uma obra
+mora nos seeds (books/<slug>/cartography/seeds/).
 
-O que este script faz (regras do SDD, seção 29.3):
+Regras (SDD 29.3):
   CG  integridade: arestas, ids, origem, tipos, fontes, inventário, registro
-  CX  física mínima: subsolo com entrada, aresta mais curta que a euclidiana
-  MY  proteção de mistério: nenhuma resposta escondida, nenhuma saída
-      "verdadeira", nenhuma interpretação promovida a fato, autoria protegida
-  CN  coordenada divergente da derivada de `source_px`
+  CX  física: subsolo com entrada, aresta mais curta que a euclidiana, travessia de água sem estrutura
+  MY  proteção de mistério: nenhuma resposta escondida, nenhuma saída "verdadeira", nenhuma
+      interpretação promovida a fato, autoria protegida
+  CN  coordenada divergente da derivada de `source_px`; mutação sem proposta/causa
+  TR/AC/KN/HD  deslocamento, acesso, conhecimento e esconderijo (`--check-staging`, cartography_graph.py)
 
-O que NÃO faz neste slice: viagem, visibilidade, conhecimento de ator,
-perseguição, pack de cena (Slices 2–5).
+Ainda não faz (Slices 3–5): visibilidade, perseguição, pack de cena, integração no compose.
 
-Princípio: coordenadas em metros nunca são digitadas — são DERIVADAS de
-`source_px` + escala da fonte (`SOURCES.yaml`).
+Princípio: coordenadas em metros nunca são digitadas — DERIVAM de `source_px` + escala da fonte.
 
 Uso:
     python engine/scripts/check_cartography.py --canon books/<slug>/cartography/seeds
     python engine/scripts/check_cartography.py --canon <dir> --coords
     python engine/scripts/check_cartography.py --canon <dir> --json
+    python engine/scripts/check_cartography.py --canon <dir> --route A B --actor CHR-X --lighting NIGHT_DARK
+    python engine/scripts/check_cartography.py --canon <dir> --reachable A B | --time A B | --escape-routes A
+    python engine/scripts/check_cartography.py --canon <dir> --check-staging STAGING.yaml
 
 Sem dependências novas: biblioteca padrão + PyYAML.
 """
@@ -504,23 +506,32 @@ def check_subterranean(model: dict) -> list[dict]:
 
 
 def check_orphans(model: dict) -> list[dict]:
-    locs = model["locations"]
+    """CG-10. `edges_digitized` pode ser booleano ou {LAYER: bool}: só camadas digitalizadas exigem arestas."""
+    meta = model["manifest"].get("metadata") or {}
+    flag = meta.get("edges_digitized")
     touched = set()
     for e in model["edges"]:
         touched.update([e.get("from"), e.get("to")])
-    orphans = [l["id"] for l in locs
+
+    def digitized(layer):
+        return bool(flag.get(layer)) if isinstance(flag, dict) else bool(flag)
+
+    orphans = [l for l in model["locations"]
                if l.get("id") and l.get("id") not in touched
                and "JUNCTION" not in as_list(l.get("type"))
                and l.get("geometry", "POINT") == "POINT"
                and l.get("source") != "AUTHOR_DECLARED"
                and "OFF_MAP_DESTINATION" not in as_list(l.get("type"))]
-    if not orphans:
-        return []
-    digitized = bool((model["manifest"].get("metadata") or {}).get("edges_digitized"))
-    return [finding("CG-10 ORPHAN_NODE", "MEDIUM" if digitized else "INFO", None,
-                    f"{len(orphans)} nó(s) sem aresta",
-                    "Nós pontuais sem nenhuma aresta" + ("." if digitized else " (esperado até a digitalização das vias — Slice 2)."),
-                    "Digitalizar as vias que os ligam." if not digitized else "Ligar ou justificar cada nó.")]
+    hard = [l["id"] for l in orphans if digitized(l.get("layer"))]
+    soft = [l["id"] for l in orphans if not digitized(l.get("layer"))]
+    out = []
+    if hard:
+        out.append(finding("CG-10 ORPHAN_NODE", "MEDIUM", None, f"{len(hard)} nó(s): {', '.join(sorted(hard)[:8])}",
+                           "Nós pontuais sem nenhuma aresta em camada já digitalizada.", "Ligar ou justificar cada nó."))
+    if soft:
+        out.append(finding("CG-10 ORPHAN_NODE", "INFO", None, f"{len(soft)} nó(s) sem aresta",
+                           "Nós pontuais sem aresta em camada ainda não digitalizada.", "Digitalizar as vias que os ligam."))
+    return out
 
 
 def check_names(model: dict) -> list[dict]:
@@ -819,6 +830,9 @@ def validate(model: dict) -> list[dict]:
     findings += check_artifacts(model)
     findings += check_mysteries(model)
     findings += scan_answers(model)
+    import cartography_graph as cg  # noqa: E402  (importação tardia: o grafo importa este módulo)
+    findings += cg.check_water_crossings(model)
+    findings += cg.check_mutations(model)
     order = {s: i for i, s in enumerate(reversed(SEVERITY_ORDER))}
     return sorted(findings, key=lambda f: (order[f["severity"]], f["category"], f["evidence"]))
 
@@ -903,6 +917,21 @@ def main() -> int:
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--coords", action="store_true", help="Tabela de coordenadas derivadas e sai.")
+    ap.add_argument("--distance", nargs=2, metavar=("A", "B"))
+    ap.add_argument("--bearing", nargs=2, metavar=("A", "B"))
+    ap.add_argument("--time", nargs=2, metavar=("A", "B"), help="Tempos mínimo/esperado/razoável entre dois lugares.")
+    ap.add_argument("--reachable", nargs=2, metavar=("A", "B"))
+    ap.add_argument("--route", nargs=2, metavar=("A", "B"))
+    ap.add_argument("--kind", choices=["shortest", "safest", "hidden"], default="shortest")
+    ap.add_argument("--escape-routes", metavar="A")
+    ap.add_argument("--check-staging", type=Path, metavar="STAGING.yaml", help="Valida deslocamentos de um STAGING.yaml.")
+    ap.add_argument("--travel-mode", choices=["WALK", "RUN", "CRAWL", "VEHICLE"], default="WALK")
+    ap.add_argument("--profile", default="FIT")
+    ap.add_argument("--actor")
+    ap.add_argument("--chapter", type=int)
+    ap.add_argument("--lighting", default="DAYLIGHT")
+    ap.add_argument("--weather", default="CLEAR")
+    ap.add_argument("--ledger", type=Path, help="CAUSAL_LEDGER.yaml (conhecimento por ator).")
     args = ap.parse_args()
 
     try:
@@ -912,6 +941,34 @@ def main() -> int:
         return 2
     if args.coords:
         print(json.dumps(coords_table(model), ensure_ascii=False, indent=2))
+        return 0
+    queries = (args.distance, args.bearing, args.time, args.reachable, args.route, args.escape_routes, args.check_staging)
+    if any(queries):
+        import cartography_graph as cg
+        ledger = load_yaml(args.ledger) if args.ledger else None
+        ctx = {"mode": args.travel_mode, "profile": args.profile, "chapter": args.chapter,
+               "lighting": args.lighting, "weather": args.weather, "ledger": ledger}
+        if args.actor:
+            ctx.update(view="ACTOR", actor=args.actor)
+        if args.distance:
+            payload = cg.distance(model, *args.distance)
+        elif args.bearing:
+            payload = cg.bearing(model, *args.bearing)
+        elif args.time:
+            payload = cg.travel_times(model, *args.time, ctx=ctx) or {"found": False}
+        elif args.reachable:
+            payload = cg.reachable(model, *args.reachable, ctx=ctx)
+        elif args.route:
+            payload = cg.route(model, *args.route, ctx=ctx, kind=args.kind)
+        elif args.escape_routes:
+            payload = cg.escape_routes(model, args.escape_routes, ctx=ctx)
+        else:
+            res = cg.validate_staging(model, load_yaml(args.check_staging), ledger=ledger)
+            print(json.dumps(res, ensure_ascii=False, indent=2, default=str))
+            return 1 if any(f["severity"] in BLOCKING for f in res["findings"]) else 0
+        if ctx.get("view") != "ACTOR" and not args.check_staging:
+            payload = {"ENGINE_VIEW": "não entregar a personagem nem ao leitor", **(payload if isinstance(payload, dict) else {"result": payload})}
+        print(json.dumps(payload, ensure_ascii=False, indent=2, default=str))
         return 0
     findings = validate(model)
     sm = summary(model)

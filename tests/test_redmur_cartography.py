@@ -221,7 +221,8 @@ class Underground(unittest.TestCase):
 
     def test_underground_dimensions_are_unspecified_not_invented(self):
         for e in MODEL["edges"]:
-            self.assertEqual(e["distance_meters"], {"basis": "UNSPECIFIED"})
+            if e["id"].startswith(("EDG-S-", "EDG-P-")):
+                self.assertEqual(e["distance_meters"], {"basis": "UNSPECIFIED"})
 
     def test_black_thistle_and_sealed_crypt_are_undeclared_underground(self):  # T21
         for lid in ("RM-SUB-BTF", "RM-SUB-SC4"):

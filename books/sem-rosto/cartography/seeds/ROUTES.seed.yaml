@@ -5,8 +5,8 @@ routes:
   label: R1
   source: SRC-MAP-A
   legend_class: ESCAPE_ROUTE
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-U-R1]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R1
@@ -21,8 +21,8 @@ routes:
   label: R2
   source: SRC-MAP-A
   legend_class: ESCAPE_ROUTE
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-U-R2]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R2
@@ -36,8 +36,8 @@ routes:
   label: R3
   source: SRC-MAP-A
   legend_class: ESCAPE_ROUTE
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-U-R3]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R3

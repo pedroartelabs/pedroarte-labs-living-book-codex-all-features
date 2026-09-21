@@ -6,7 +6,7 @@ roads:
   - {name: South Gate Road, kind: MAP_A_LABEL}
   - {name: South Gate Road (Entrada Principal), kind: MAP_B_LABEL}
   road_class: MAIN
-  edges: []
+  edges: [EDG-U-001, EDG-U-002, EDG-U-003, EDG-U-004]
   named_extent: DRAWN
   claims:
   - {text: Entrada Principal, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
@@ -15,7 +15,7 @@ roads:
   names:
   - {name: East Road — Officially Closed, kind: MAP_A_LABEL}
   road_class: MAIN
-  edges: []
+  edges: [EDG-U-022, EDG-U-023, EDG-U-035]
   named_extent: SEGMENT_ONLY
   claims:
   - {text: Officially Closed, source: SRC-MAP-A, epistemic_status: OFFICIAL_CLAIM}
