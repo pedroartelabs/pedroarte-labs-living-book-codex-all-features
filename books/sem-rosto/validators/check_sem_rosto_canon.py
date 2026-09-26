@@ -98,6 +98,7 @@ SEED_KINDS = {
     "BOOK_GATES.seed.yaml": "SemRostoBookGates",
     "MYSTERIES.seed.yaml": "SemRostoMysteries",
     "RUMORS.seed.yaml": "SemRostoRumors",
+    "LEXICON.seed.yaml": "SemRostoLexicon",
 }
 SEED_ROOT_FIELDS = {
     "SemRostoCanonRecords": {"apiVersion", "kind", "metadata", "records"},
@@ -105,6 +106,7 @@ SEED_ROOT_FIELDS = {
     "SemRostoBookGates": {"apiVersion", "kind", "metadata", "book_gates", "series"},
     "SemRostoMysteries": {"apiVersion", "kind", "metadata", "mysteries"},
     "SemRostoRumors": {"apiVersion", "kind", "metadata", "rumors"},
+    "SemRostoLexicon": {"apiVersion", "kind", "metadata", "lexicon"},
 }
 METADATA_FIELDS = {"project_id", "version", "owner", "source", "approval"}
 LOCK_SEEDS = {"HARD_LOCKS.seed.yaml", "BOOK_GATES.seed.yaml", "MYSTERIES.seed.yaml"}   # edição após aprovação = BLOCKER
@@ -161,6 +163,65 @@ STATE_DELTA_TYPES = {"KNOWLEDGE_PROVENANCE", "FACE_EVENT", "COFFER_STATE", "COFF
                      "IRREVERSIBLE", "INJURY", "PULL_FACTORS"}
 STATE_DELTA_TYPES_IMPLEMENTED = {"KNOWLEDGE_PROVENANCE"}
 CONFIDENCES = {"FULL", "PARTIAL", "MISREAD"}
+
+# --- Slice 3 — firewalls de rosto, cofre, combinação, cível, tatuagem, tecnologia, Manfred/Selka,
+#     1% não humano (SDD seções 22-41). Registros novos vivem em SEM_ROSTO_STATE_DELTAS.yaml, ao
+#     lado de `deltas`: `combinations` (CMB-*), `face_fragments` (FRG-*), `sealed_evidence` (SFE-*),
+#     `tattoos` (TAT-*). Nenhum guarda resposta; todos apontam id/evento/proveniência.
+
+STATE_DELTA_TYPES_IMPLEMENTED |= {"FACE_EVENT", "CIVIC_TRANSITION", "RECOGNITION", "ANOMALY"}
+
+FACE_EVENT_KINDS = {"UNCOVERING", "EXPOSURE", "CAPTURE", "SELF_VIEWING", "RECORD_ACCESS",
+                    "EXTERNAL_RECORD_ENCOUNTER"}
+FACE_EVENT_SETTINGS = {"SERVICE_COWL", "FITTING_CHAMBER", "EMERGENCY_BREACH", "MEDICAL", "FORENSIC",
+                       "PRIVATE", "PUBLIC", "UNKNOWN"}
+CLINICAL_SETTINGS = {"SERVICE_COWL", "FITTING_CHAMBER", "EMERGENCY_BREACH", "MEDICAL", "FORENSIC"}
+RECONSTRUCTIBILITY_CLASSES = {"NON_RECONSTRUCTIBLE", "PARTIALLY_FACIAL", "RECONSTRUCTIBLE_FACE"}
+READER_VISIBILITY_VALUES = {"NONE", "NON_RECONSTRUCTIBLE"}          # RECONSTRUCTIBLE não é representável (D-CART-09-like)
+LEGAL_READINGS = {"NONE", "EXPOSURE", "OFFENCE_RECORD", "AUTHORIZED", "UNKNOWN"}
+FACE_EVENT_FIELDS = {"id", "event", "type", "status", "chapter", "subject", "kind", "setting", "uncovered",
+                     "viewers", "deliberate", "reconstructibility", "record", "authorization", "consent_ref",
+                     "legal_reading", "reader_visibility", "narration_mode"}
+
+FRG_FIELDS = {"id", "subject", "carrier", "class", "combinable_with", "combined_class", "reader_visibility"}
+SFE_FIELDS = {"id", "capability", "context", "necessity", "minimum_necessary_exposure", "capturing_authority",
+             "procedure", "purpose_limitation", "custody", "access_log", "derived_copies", "item"}
+SFE_CONTEXTS = {"MEDICAL", "FORENSIC", "AUTOPSY", "JUDICIAL"}
+TAT_FIELDS = {"id", "bearer", "placement", "motifs", "encodes_digits", "depicts_face", "readings", "clue_ref"}
+CMB_FIELDS = {"id", "coffer", "value_status", "value_ref", "truth_status"}
+CMB_VALUE_STATUSES = {"UNDEFINED", "DEFINED_ENGINE_ONLY", "REVEALED_TO_READER"}
+
+CIVIC_AXES = {"category", "civic_link", "presence"}
+CIVIC_TRANSITION_FIELDS = {"id", "event", "type", "status", "chapter", "person", "axis", "from", "to",
+                          "preconditions_met", "documents", "authorities"}
+RECOGNITION_LEVELS = {"SOCIAL_RECOGNITION", "CIVIC_VERIFICATION", "FORENSIC_VERIFICATION"}
+RECOGNITION_USES = {"PROOF", "SUSPICION", "CASUAL"}
+RECOGNITION_FIELDS = {"id", "event", "type", "status", "chapter", "observer", "claimed_identity", "actual",
+                     "channels_used", "level", "confidence", "used_as"}
+
+ANOMALY_REGISTERS = {"RATIONAL", "AMBIGUOUS", "RESIDUAL"}
+ANOMALY_FIELDS = {"id", "event", "type", "status", "chapter", "register", "human_explanations_available",
+                  "residual_detail"}
+
+REMOVE_KIND_RE = re.compile(r"REMOVE")
+COMBINATION_TOKEN_RE = re.compile(r"^SR:CMB:(FULL|PARTIAL|WRONG):(\S+)$")
+
+# fonte única para SR-*, categoria e severidade quando uma inferência proibida (PRO-SR-*) é casada
+# no texto canônico: cada entrada é um caminho de detecção A MAIS para o mesmo lock que já a cita
+# (seção 15.2). Ausente do mapa = mantém o comportamento genérico do Slice 2 (UNKNOWN_AS_FACT /
+# RUMOR_AS_WORLD_TRUTH).
+PRO_MAP = {
+    "PRO-SR-SUPERNATURAL-CAUSE": ("SR-NH-03", "SUPERNATURAL_CONFIRMATION", "BLOCKER"),
+    "PRO-SR-PULL-FORCE": ("SR-PUL-02", "SUPERNATURAL_CONFIRMATION", "BLOCKER"),
+    "PRO-SR-SELKA-CROSSOVER": ("SR-SEL-03", "SELKA_ONTOLOGY_LEAK", "BLOCKER"),
+    "PRO-SR-SELKA-IS-THE-KEY": ("SR-SEL-02", "SELKA_AS_THE_KEY", "BLOCKER"),
+    "PRO-SR-MANFRED-DID-IT": ("SR-MAN-02", "MANFRED_UNIVERSAL_CAUSALITY", "MEDIUM"),
+    "PRO-SR-REDMUR-SOVEREIGN": ("SR-JUR-03", "SOVEREIGNTY_ASSUMED", "BLOCKER"),
+    "PRO-SR-OMNISCIENT-AI": ("SR-TEC-02", "FORBIDDEN_TECHNOLOGY_PRESENT", "BLOCKER"),
+    "PRO-SR-GLOBAL-PURGE": ("SR-CIV-06", "EXTERNAL_PURGE_ASSUMED", "HIGH"),
+    "PRO-SR-COMBINATION-REMOVES": ("SR-CMB-01", "COMBINATION_AS_REMOVAL_AUTHORITY", "BLOCKER"),
+    "PRO-SR-UNIVERSAL-COMBINATION": ("SR-CMB-03", "UNIVERSAL_COMBINATION", "BLOCKER"),
+}
 
 # kind por prefixo; statuses e campos por kind
 KIND_BY_PREFIX = [
@@ -240,8 +301,40 @@ RULE_COUNTS = {
 }
 RULE_CATALOG = {f"SR-{fam}-{n:02d}": FAMILY_SLICE[fam] for fam, count in RULE_COUNTS.items()
                 for n in range(1, count + 1)}
-IMPLEMENTED_SLICE = 2
 SR_RULE_RE = re.compile(r"^SR-([A-Z0-9]+)-(\d{2})$")
+
+# Cobertura real, código a código — nunca por corte de número de slice (uma família parcialmente
+# implementada não pode "passar" inteira: ver D-SR-* do SDD, seção 66). Cada entrada aqui tem uma
+# função (ou um caminho lexical via PRO_MAP) que a produz; o resto do catálogo, mesmo de famílias
+# já iniciadas, fica `SR-planned` até ganhar código.
+IMPLEMENTED_RULES = frozenset({
+    # Slice 1
+    "SR-SRC-01", "SR-SRC-02",
+    "SR-CR-01", "SR-CR-02", "SR-CR-03", "SR-CR-04", "SR-CR-05", "SR-CR-06", "SR-CR-07", "SR-CR-08",
+    "SR-CR-10", "SR-CR-11",
+    "SR-PV-01", "SR-PV-05", "SR-HL-02", "SR-HL-03", "SR-ST-04",
+    # Slice 2
+    "SR-CR-09", "SR-PV-02", "SR-ST-01", "SR-ST-03",
+    "SR-MYS-01", "SR-MYS-02", "SR-MYS-03", "SR-RUM-01", "SR-RUM-02", "SR-RUM-03",
+    "SR-KN-01", "SR-KN-02", "SR-KN-03", "SR-KN-04", "SR-RD-01", "SR-RD-02",
+    # Slice 3 — firewalls de rosto, cofre, combinação, cível, tatuagem, 1% não humano, Manfred/Selka
+    "SR-FACE-01", "SR-FACE-02", "SR-FACE-03", "SR-FACE-04", "SR-FACE-05",
+    "SR-FRC-01", "SR-FRC-02",
+    "SR-SFE-01", "SR-SFE-02", "SR-SFE-03", "SR-SFE-04", "SR-SFE-05",
+    "SR-EXT-02",
+    "SR-CMB-01", "SR-CMB-02", "SR-CMB-03", "SR-CMB-04", "SR-CMB-05", "SR-CMB-07",
+    "SR-TAT-01", "SR-TAT-02",
+    "SR-CIV-01", "SR-CIV-06",
+    "SR-JUR-02", "SR-JUR-03",
+    "SR-TEC-02", "SR-TEC-04",
+    "SR-COF-05", "SR-COF-07",
+    "SR-IDS-03",
+    "SR-MAN-01", "SR-MAN-02",
+    "SR-SEL-01", "SR-SEL-02", "SR-SEL-03",
+    "SR-NH-01", "SR-NH-02", "SR-NH-03", "SR-NH-04",
+    "SR-PUL-01", "SR-PUL-02",
+    "SR-CPR-01", "SR-CPR-04",
+})
 
 SECTION_RE = re.compile(r"^(#{1,2})\s+(\d+(?:\.\d+)?)[.\s]")
 LOCATION_RE = re.compile(r"§(\d+(?:\.\d+)?)")
@@ -360,6 +453,11 @@ class Context:
         self.gate_ids: set[str] = set()
         self.mysteries: dict[str, dict] = {}
         self.rumors: dict[str, dict] = {}
+        self.lexicon: dict[str, list[str]] = {}
+        self.combinations: dict[str, dict] = {}
+        self.face_fragments: dict[str, dict] = {}
+        self.sealed_evidence: dict[str, dict] = {}
+        self.tattoos: dict[str, dict] = {}
         self.coverage: dict = {}
         self.map_ids = cartography_ids(cartography_dir)
         self.agents = engine_agent_names()
@@ -440,6 +538,56 @@ def load_seeds(ctx: Context) -> None:
             ctx.add("SR-CR-07", "HIDDEN_ANSWER_PRESENT", "BLOCKER", where,
                     "Chave de resposta em seed de canon: nenhum arquivo guarda resposta (DP-03, AD-02).",
                     "Remover a chave; verdade decidida entra como registro por proposta humana.")
+
+
+def index_lexicon(ctx: Context) -> None:
+    doc = ctx.seeds.get("LEXICON.seed.yaml") or {}
+    lex = doc.get("lexicon") or {}
+    if not isinstance(lex, dict):
+        ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", "LEXICON.lexicon", "Esperado mapa de listas.", "Corrigir.")
+        return
+    for family, patterns in lex.items():
+        if not isinstance(patterns, list) or not all(isinstance(p, str) for p in patterns):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", f"LEXICON.{family}", "Esperado lista de textos.", "Corrigir.")
+            continue
+        ctx.lexicon[family] = [norm_text(p) for p in patterns]
+
+
+def lexical_scan(ctx: Context, family: str, texts: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """[(where, matched_pattern)] — texts já normalizados na chamada (norm_text aplicado aqui)."""
+    patterns = ctx.lexicon.get(family) or []
+    hits = []
+    for where, text in texts:
+        low = norm_text(text)
+        for pat in patterns:
+            if pat and pat in low:
+                hits.append((where, pat))
+    return hits
+
+
+def world_truth_texts(ledger: dict) -> list[tuple[str, str]]:
+    """Só `facts`: o que o MUNDO afirma como verdade (a fala de um personagem, via
+    `evidence_to_reader`, nunca é `facts` — REUSE do princípio do ledger). É aqui, e só aqui,
+    que uma inferência proibida vira UNKNOWN_AS_FACT/RUMOR_AS_WORLD_TRUTH — nunca quando é um
+    personagem falando (SDD seção 19: rumor voz de personagem é permitido)."""
+    out = []
+    for ev in ledger.get("events") or []:
+        where = f"cap. {ev.get('chapter')}: {ev.get('id')}"
+        for fact in as_list(ev.get("facts")):
+            out.append((f"{where}.facts", fact))
+    return out
+
+
+def reader_facing_texts(ledger: dict) -> list[tuple[str, str]]:
+    """`facts` + `evidence_to_reader`: tudo que a página mostra, seja fato do mundo ou fala de
+    personagem — para pré-filtros sobre o que o LEITOR recebe (rosto, mecânica de cofre,
+    tecnologia, jurisdição), onde a origem da frase não muda o risco."""
+    out = list(world_truth_texts(ledger))
+    for ev in ledger.get("events") or []:
+        where = f"cap. {ev.get('chapter')}: {ev.get('id')}"
+        for line in as_list(ev.get("evidence_to_reader")):
+            out.append((f"{where}.evidence_to_reader", line))
+    return out
 
 
 def check_approvals(ctx: Context) -> None:
@@ -629,7 +777,7 @@ def check_detector(ctx: Context, owner: str, det) -> str:
             ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{owner}.detectors", f"Regra '{text}' fora do catálogo.",
                     "Citar regra do SDD (seção 66).")
             return "INVALID"
-        return "SR-implemented" if RULE_CATALOG[text] <= IMPLEMENTED_SLICE else "SR-planned"
+        return "SR-implemented" if text in IMPLEMENTED_RULES else "SR-planned"
     m = DETECTOR_ENGINE_RE.match(text)
     if m:
         if m.group(1) not in ENGINE_VALIDATORS:
@@ -696,8 +844,8 @@ def check_locks(ctx: Context) -> dict:
             coverage["judgment_only"].append(lid)
     if coverage["planned_only"]:
         ctx.add("SR-HL-03", "LOCK_DETECTORS_PLANNED", "INFO", ", ".join(coverage["planned_only"]),
-                f"Detectores estruturais destes locks são de slices futuros (hoje implementado: Slice {IMPLEMENTED_SLICE}); "
-                "até lá o lock vale como item de checklist do revisor.", "Nada a fazer neste slice.")
+                "Nenhum detector citado por estes locks tem código ainda (ver IMPLEMENTED_RULES); "
+                "até lá o lock vale como item de checklist do revisor.", "Implementar em slice futuro.")
     return coverage
 
 
@@ -1022,6 +1170,11 @@ def check_runtime_knowledge(ctx: Context, ledger: dict, deltas: list[dict], book
                             f"{base} é incógnita ({rec.get('source', {}).get('location')}): não há o que aprender; "
                             "nenhum conhecedor aprende uma incógnita, em nenhuma modalidade.",
                             "Remover; hipótese de personagem é THEORY-*/evidência, nunca UNK-*.")
+                    if base in {"UNK-SR-SIX-MONTH-CONTENTS", "UNK-SR-CHILD-FACILITY-LOCATION"}:
+                        ctx.add("SR-CPR-01", cat, "BLOCKER", where,
+                                "FACILITY_VISIBILITY ≠ PROTOCOL_TRANSPARENCY: o prédio pode ser visível; o que "
+                                "ocorre dentro/onde ele fica continua incógnita (R4, HL-25).",
+                                "Remover; ver o prédio não ensina o conteúdo do protocolo.")
                     continue
                 if kind == "PROHIBITED_INFERENCE" and modality == "KNOWS":
                     ctx.add("SR-ST-01", "UNKNOWN_AS_FACT", "BLOCKER", where,
@@ -1078,24 +1231,31 @@ def check_rumor_as_fact(ctx: Context, ledger: dict, interpretive: dict | None) -
                 patterns.append((rid, norm_text(m)))
     if not patterns:
         return
-    texts = []
-    for ev in ledger.get("events") or []:
-        for fact in as_list(ev.get("facts")):
-            texts.append((f"cap. {ev.get('chapter')}: {ev.get('id')}.facts", fact))
+    texts = list(world_truth_texts(ledger))
     for evd in as_list((interpretive or {}).get("evidence")):
         if evd.get("source") == "NARRATOR":
             texts.append((f"{evd.get('id')}.observable", evd.get("observable")))
+    seen_rule_where: set[tuple[str, str]] = set()
     for where, text in texts:
         low = norm_text(text)
         for pid, pat in patterns:
-            if pat and pat in low:
-                if pid in rumor_pro:
-                    ctx.add("SR-RUM-01", "RUMOR_AS_WORLD_TRUTH", "HIGH", where,
-                            f"O texto canônico afirma o conteúdo de {rumor_pro[pid]} ({pid}).",
-                            "Atribuir a fala a um personagem (evidência source: CHR-*) ou remover.")
-                else:
-                    ctx.add("SR-ST-01", "UNKNOWN_AS_FACT", "BLOCKER", where,
-                            f"O texto canônico afirma a inferência proibida {pid}.", "Remover.")
+            if not pat or pat not in low:
+                continue
+            if pid in PRO_MAP:
+                rule, category, severity = PRO_MAP[pid]
+                if (rule, where) in seen_rule_where:
+                    continue
+                seen_rule_where.add((rule, where))
+                ctx.add(rule, category, severity, where,
+                        f"O texto canônico casa a inferência proibida {pid} ({category}).",
+                        "Remover a afirmação, ou atribuí-la como fala/crença de um personagem (source: CHR-*).")
+            elif pid in rumor_pro:
+                ctx.add("SR-RUM-01", "RUMOR_AS_WORLD_TRUTH", "HIGH", where,
+                        f"O texto canônico afirma o conteúdo de {rumor_pro[pid]} ({pid}).",
+                        "Atribuir a fala a um personagem (evidência source: CHR-*) ou remover.")
+            else:
+                ctx.add("SR-ST-01", "UNKNOWN_AS_FACT", "BLOCKER", where,
+                        f"O texto canônico afirma a inferência proibida {pid}.", "Remover.")
 
 
 def mystery_state(ctx: Context, mid: str, ledger: dict, interpretive: dict | None,
@@ -1138,6 +1298,363 @@ def check_runtime_mysteries(ctx: Context, ledger: dict, interpretive: dict | Non
                         f"Estado projetado {state} acima do teto {ceiling} no {book}.", "Rever a revelação.")
 
 
+def age_of(ledger: dict, char_id: str):
+    for ch in ledger.get("characters") or []:
+        if ch.get("id") == char_id:
+            return ch.get("age")
+    return None
+
+
+def is_minor_or_unknown(age) -> bool:
+    return age is None or (isinstance(age, int) and age < 18)
+
+
+def index_state_registries(ctx: Context, rt: dict) -> None:
+    doc = rt.get("deltas_doc") or {}
+    for key, table, fields, id_re in (
+        ("combinations", ctx.combinations, CMB_FIELDS, re.compile(r"^CMB-\d+$")),
+        ("face_fragments", ctx.face_fragments, FRG_FIELDS, re.compile(r"^FRG-\d+$")),
+        ("sealed_evidence", ctx.sealed_evidence, SFE_FIELDS, re.compile(r"^SFE-\d+$")),
+        ("tattoos", ctx.tattoos, TAT_FIELDS, re.compile(r"^TAT-\d+$")),
+    ):
+        for item in as_list(doc.get(key)):
+            iid = item.get("id") if isinstance(item, dict) else None
+            if not iid or not id_re.match(str(iid)):
+                ctx.add("SR-CR-03", "ID_MALFORMED", "HIGH", f"{key}:{iid}", "Id fora do padrão.", "Renomear.")
+                continue
+            if iid in table:
+                ctx.add("SR-CR-02", "DUPLICATE_ID", "HIGH", iid, "Id duplicado.", "Um id por item.")
+                continue
+            for k in sorted(set(item) - fields):
+                ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{iid}.{k}", "Campo desconhecido.", "Remover.")
+            table[iid] = item
+
+
+def check_combinations(ctx: Context) -> None:
+    for cid, cmb in ctx.combinations.items():
+        coffer = cmb.get("coffer")
+        if isinstance(coffer, list) or coffer in (None, ""):
+            ctx.add("SR-CMB-03", "UNIVERSAL_COMBINATION", "BLOCKER", f"{cid}.coffer",
+                    f"'{coffer}': uma combinação pertence a exatamente um cofre (HL-23).",
+                    "Um CMB-* por cofre; nenhuma combinação com escopo > 1.")
+        if cmb.get("value_status") not in CMB_VALUE_STATUSES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{cid}.value_status", f"'{cmb.get('value_status')}'.",
+                    f"{sorted(CMB_VALUE_STATUSES)}.")
+        if cmb.get("value_status") == "REVEALED_TO_READER" and not (isinstance(cmb.get("value_ref"), dict)
+                                                                     and str(cmb["value_ref"].get("approved_by", "")).startswith("APPROVAL:")):
+            ctx.add("SR-CMB-04", "COMBINATION_REVEALED_FOR_CONVENIENCE", "HIGH", f"{cid}.value_status",
+                    "Valor revelado ao leitor sem aprovação humana registrada.",
+                    "Registrar decisão humana em value_ref.approved_by, ou voltar a UNDEFINED/DEFINED_ENGINE_ONLY.")
+        if cmb.get("value_status") == "UNDEFINED" and cmb.get("value_ref") is not None:
+            ctx.add("SR-CMB-07", "IMPROVISED_CANON", "BLOCKER", f"{cid}.value_ref",
+                    "Combinação sem valor definido (UNDEFINED) mas com value_ref preenchido.",
+                    "O valor só existe por proposta aprovada (CR-P0-R1).")
+
+
+def check_face_fragments(ctx: Context) -> None:
+    for fid, frg in ctx.face_fragments.items():
+        if frg.get("class") not in RECONSTRUCTIBILITY_CLASSES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{fid}.class", f"'{frg.get('class')}'.",
+                    f"{sorted(RECONSTRUCTIBILITY_CLASSES)}.")
+        for ref in as_list(frg.get("combinable_with")):
+            if ref not in ctx.face_fragments:
+                ctx.add("SR-FRC-01", "SYSTEM_CAPABILITY_AS_INSTANCE", "BLOCKER", f"{fid}.combinable_with",
+                        f"'{ref}' não existe: Composite Reconstructibility é capacidade, não canoniza o conjunto (§23.3).",
+                        "Remover a referência, ou registrar o fragmento por proposta.")
+        combined = frg.get("combined_class")
+        if combined is not None:
+            if combined not in RECONSTRUCTIBILITY_CLASSES:
+                ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{fid}.combined_class", f"'{combined}'.",
+                        f"{sorted(RECONSTRUCTIBILITY_CLASSES)}.")
+            elif combined == "RECONSTRUCTIBLE_FACE":
+                members = [fid] + [r for r in as_list(frg.get("combinable_with")) if r in ctx.face_fragments]
+                for mid in members:
+                    if ctx.face_fragments[mid].get("reader_visibility", "NONE") != "NONE":
+                        ctx.add("SR-FRC-02", "FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER", f"{fid}.combined_class",
+                                f"Conjunto marcado RECONSTRUCTIBLE_FACE inclui '{mid}', visível ao leitor.",
+                                "Nenhum membro de um conjunto reconstruível pode ter reader_visibility além de NONE (HL-04).")
+
+
+def check_tattoos(ctx: Context) -> None:
+    for tid, tat in ctx.tattoos.items():
+        if tat.get("encodes_digits"):
+            ctx.add("SR-TAT-01", "TATTOO_NUMERIC_COMBINATION", "BLOCKER", f"{tid}.encodes_digits",
+                    "Tatuagem codifica dígitos explícitos de combinação (HL-19, §10.3).",
+                    "Combinação sugerida por símbolo/lua/animal/objeto/padrão, nunca número explícito.")
+        if tat.get("depicts_face"):
+            ctx.add("SR-TAT-02", "FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER", f"{tid}.depicts_face",
+                    "Tatuagem representa rosto humano individualizado/reconstruível (HL-19, HL-04).",
+                    "Nenhuma tatuagem pode depictar rosto reconstruível.")
+
+
+def sfe_incomplete_reasons(sfe: dict) -> list[str]:
+    reasons = []
+    if not sfe.get("necessity"):
+        reasons.append("necessity")
+    if sfe.get("minimum_necessary_exposure") is not True:
+        reasons.append("minimum_necessary_exposure")
+    if not sfe.get("capturing_authority"):
+        reasons.append("capturing_authority")
+    if not sfe.get("purpose_limitation"):
+        reasons.append("purpose_limitation")
+    if not as_list(sfe.get("custody")):
+        reasons.append("custody")
+    if sfe.get("access_log") is None:
+        reasons.append("access_log")
+    return reasons
+
+
+def check_sealed_evidence(ctx: Context) -> None:
+    for sid, sfe in ctx.sealed_evidence.items():
+        if sfe.get("context") is not None and sfe["context"] not in SFE_CONTEXTS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{sid}.context", f"'{sfe['context']}'.", f"{sorted(SFE_CONTEXTS)}.")
+        missing = sfe_incomplete_reasons(sfe)
+        if missing:
+            ctx.add("SR-SFE-01", "SEALED_EVIDENCE_INCOMPLETE", "BLOCKER", sid,
+                    f"Requisitos ausentes: {missing} (dossiê §3.5 exige os sete).", "Preencher os sete requisitos.")
+        for log in as_list(sfe.get("access_log")):
+            if isinstance(log, dict) and log.get("authorized") is False:
+                ctx.add("SR-SFE-02", "SEALED_EVIDENCE_PUBLIC", "BLOCKER", f"{sid}.access_log",
+                        "Acesso registrado como não autorizado a Sealed Facial Evidence.",
+                        "Sealed Facial Evidence não admite acesso público/não autorizado (HL-12).")
+        authority = sfe.get("capturing_authority")
+        if authority in {"INST-OCP", "INST-CONSTABULARY"} and not sfe.get("procedure"):
+            ctx.add("SR-SFE-03", "FACIAL_AUTHORITY_UNBOUNDED", "BLOCKER", f"{sid}.capturing_authority",
+                    f"'{authority}' como captura geral, sem procedimento específico (§3.5: 'uso geral da OCP para captura facial' é proibido).",
+                    "Declarar procedure específico e autoridade nomeada, não a instituição em geral.")
+        for copy_id in as_list(sfe.get("derived_copies")):
+            if copy_id not in ctx.sealed_evidence:
+                ctx.add("SR-SFE-04", "DERIVED_COPY_UNPROTECTED", "HIGH", f"{sid}.derived_copies",
+                        f"Cópia derivada '{copy_id}' sem classificação própria de SFE-*.",
+                        "Toda cópia derivada herda a classificação protegida (§3.5).")
+        custody_events = {c.get("from_event") for c in as_list(sfe.get("custody")) if isinstance(c, dict)}
+        logged_events = {log.get("event") for log in as_list(sfe.get("access_log")) if isinstance(log, dict)}
+        for ev_id in custody_events - logged_events:
+            ctx.add("SR-SFE-05", "SEALED_ACCESS_UNLOGGED", "HIGH", f"{sid}.custody",
+                    f"Transferência de custódia no evento '{ev_id}' sem linha correspondente em access_log.",
+                    "Toda transferência de custódia é logada (§3.5).")
+
+
+def check_face_events(ctx: Context, ledger: dict, deltas: list[dict], book: str) -> None:
+    ledger_char_age = {ch.get("id"): ch.get("age") for ch in ledger.get("characters") or []}
+    for d in deltas:
+        if d.get("type") != "FACE_EVENT":
+            continue
+        did = d.get("id")
+        for k in sorted(set(d) - FACE_EVENT_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{did}.{k}", "Campo desconhecido.", "Remover.")
+        if d.get("kind") not in FACE_EVENT_KINDS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.kind", f"'{d.get('kind')}'.", f"{sorted(FACE_EVENT_KINDS)}.")
+        if d.get("setting") is not None and d["setting"] not in FACE_EVENT_SETTINGS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.setting", f"'{d['setting']}'.", f"{sorted(FACE_EVENT_SETTINGS)}.")
+        reader_vis = d.get("reader_visibility")
+        if reader_vis not in READER_VISIBILITY_VALUES:
+            ctx.add("SR-FACE-01", "FACE_REVEAL_VIOLATION", "BLOCKER", f"{did}.reader_visibility",
+                    f"'{reader_vis}' fora de {sorted(READER_VISIBILITY_VALUES)} — RECONSTRUCTIBLE não é valor representável (HL-04).",
+                    "reader_visibility ∈ {NONE, NON_RECONSTRUCTIBLE}.")
+        deliberate = d.get("deliberate") or {}
+        if d.get("kind") == "SELF_VIEWING" and deliberate.get("subject") is True:
+            ctx.add("SR-FACE-01", "SELF_FACE_VIOLATION", "BLOCKER", f"{did}.deliberate.subject",
+                    "NO_DELIBERATE_SELF_VIEWING: personagem vê o próprio rosto deliberadamente (R8, HL-11).",
+                    "Marcar como acidental (deliberate.subject: false), ou remover — salvo proposta aprovada.")
+        reconstructibility = d.get("reconstructibility")
+        if reconstructibility is not None and reconstructibility not in RECONSTRUCTIBILITY_CLASSES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.reconstructibility", f"'{reconstructibility}'.",
+                    f"{sorted(RECONSTRUCTIBILITY_CLASSES)}.")
+        elif reconstructibility == "RECONSTRUCTIBLE_FACE" and reader_vis not in (None, "NONE"):
+            ctx.add("SR-FACE-02", "FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER", f"{did}.reconstructibility",
+                    "Registro RECONSTRUCTIBLE_FACE com reader_visibility além de NONE.", "reader_visibility: NONE.")
+        viewers = as_list(d.get("viewers"))
+        if viewers and not d.get("consent_ref") and d.get("setting") not in CLINICAL_SETTINGS:
+            ctx.add("SR-FACE-03", "NONCONSENSUAL_EXPOSURE_UNMARKED", "HIGH", f"{did}.viewers",
+                    "Exposição facial a terceiro sem grant de consentimento e sem contexto autorizado (médico/forense/manutenção).",
+                    "Declarar consent_ref, ou marcar o evento como violação/transgressão com consequência (não como payoff).")
+        if d.get("record") is not None and not d.get("authorization"):
+            ctx.add("SR-FACE-04", "FACIAL_RECORD_UNCLASSIFIED", "HIGH", f"{did}.record",
+                    "Registro facial preservado sem classificação de autorização.",
+                    "authorization: SFE-* (Sealed Facial Evidence) ou marcar como UNAUTHORIZED_RECONSTRUCTIBLE_FACIAL_RECORD (ofensa).")
+        record = d.get("record")
+        if isinstance(record, dict):
+            for field in ("external_lawful", "local_possession_status", "local_exposure_status"):
+                if field not in record:
+                    ctx.add("SR-EXT-02", "EXTERNAL_LEGALITY_COLLAPSED", "HIGH", f"{did}.record.{field}",
+                            "Campo ausente: LAWFUL_EXTERNAL_EXISTENCE, LAWFUL_LOCAL_POSSESSION e LAWFUL_LOCAL_EXPOSURE "
+                            "são três campos distintos (R7); um não pode ser inferido do outro.",
+                            "Declarar os três campos separadamente.")
+                    break
+        if d.get("authorization") and d["authorization"] not in ctx.sealed_evidence:
+            ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{did}.authorization", f"'{d['authorization']}'.",
+                    "Corrigir; deve resolver para um SFE-* declarado.")
+        subject_age = ledger_char_age.get(d.get("subject"))
+        if book == "B1" and is_minor_or_unknown(subject_age) and d.get("kind") in {"EXPOSURE", "CAPTURE"} \
+                and d.get("legal_reading") == "EXPOSURE" and d.get("setting") not in CLINICAL_SETTINGS | {"PROTECTIVE"}:
+            ctx.add("SR-CPR-04", "PEDIATRIC_EROTICIZATION", "BLOCKER", f"{did}.subject",
+                    f"Evento facial ({d.get('kind')}) sobre '{d.get('subject')}' (idade {subject_age!r}) tratado como "
+                    "exposição adulta fora de contexto clínico/protetivo.",
+                    "PEDIATRIC_ACCESS = CLINICAL/PROTECTIVE/FUNCTIONAL (R5, R11); nunca semântica adulta.")
+
+    for where, _pat in lexical_scan(ctx, "face_features", reader_facing_texts(ledger)):
+        ctx.add("SR-FACE-05", "FACE_DESCRIPTION_SUSPECTED", "MEDIUM", where,
+                "Vocabulário de expressão facial em texto que chega ao leitor: só é permitido se o POV tem acesso "
+                "facial declarado (FACE_EVENT) ou for FEEL/INFER marcado.",
+                "Confirmar acesso (FACE_EVENT.viewers) ou reformular como FEEL/INFER (§15.1); Warden decide.")
+
+
+def check_recognition(ctx: Context, deltas: list[dict]) -> None:
+    for d in deltas:
+        if d.get("type") != "RECOGNITION":
+            continue
+        did = d.get("id")
+        for k in sorted(set(d) - RECOGNITION_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{did}.{k}", "Campo desconhecido.", "Remover.")
+        if d.get("level") not in RECOGNITION_LEVELS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.level", f"'{d.get('level')}'.", f"{sorted(RECOGNITION_LEVELS)}.")
+        used_as = d.get("used_as")
+        if used_as is not None and used_as not in RECOGNITION_USES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.used_as", f"'{used_as}'.", f"{sorted(RECOGNITION_USES)}.")
+        if used_as == "PROOF" and d.get("level") == "SOCIAL_RECOGNITION":
+            ctx.add("SR-IDS-03", "SIGNATURE_AS_PROOF", "HIGH", did,
+                    "Reconhecimento social usado como prova (acusação/identificação formal): "
+                    "PEOPLE RECOGNIZE; só FORENSICS PROVE (§10).",
+                    "Reclassificar como suspeita, ou obter CIVIC_VERIFICATION/FORENSIC_VERIFICATION.")
+            if set(as_list(d.get("channels_used"))) == {"COFFER"}:
+                ctx.add("SR-COF-05", "SIGNATURE_AS_PROOF", "HIGH", did,
+                        "Cofre usado como única prova de identidade: COFFER_IDENTITY ≠ PERSON_IDENTITY (HL-24).",
+                        "O cofre não prova identidade sozinho (§2.6, §10.1).")
+
+
+def check_anomalies(ctx: Context, deltas: list[dict]) -> None:
+    density: dict[int, int] = {}
+    for d in deltas:
+        if d.get("type") != "ANOMALY":
+            continue
+        did = d.get("id")
+        for k in sorted(set(d) - ANOMALY_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{did}.{k}", "Campo desconhecido.", "Remover.")
+        register = d.get("register")
+        if register not in ANOMALY_REGISTERS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.register", f"'{register}'.", f"{sorted(ANOMALY_REGISTERS)}.")
+            continue
+        explanations = as_list(d.get("human_explanations_available"))
+        if register == "RESIDUAL" and not explanations:
+            ctx.add("SR-NH-01", "RESIDUAL_WITHOUT_RATIONAL_PATH", "HIGH", did,
+                    "RESIDUAL sem nenhuma explicação humana parcial disponível: RESIDUAL ≠ SUPERNATURAL exige um "
+                    "caminho racional, mesmo que incompleto (§14.1).",
+                    "Declarar ≥1 explicação humana parcial em human_explanations_available.")
+        elif register == "AMBIGUOUS" and len(explanations) < 2:
+            ctx.add("SR-NH-02", "AMBIGUITY_UNGROUNDED", "MEDIUM", did,
+                    "AMBIGUOUS com menos de duas explicações humanas concorrentes.",
+                    "Declarar ≥2 explicações, ou reclassificar como RESIDUAL/RATIONAL.")
+        if register != "RATIONAL":
+            density[d.get("chapter")] = density.get(d.get("chapter"), 0) + 1
+    if len(density) >= 3:
+        ctx.add("SR-NH-04", "NON_HUMAN_OVERUSE", "MEDIUM", "ANOMALY",
+                f"Anomalias não-racionais em {len(density)} capítulos distintos: '1% não humano' não deve aparecer "
+                "em toda cena (§14.1).", "Reservar o registro RESIDUAL/AMBIGUOUS para poucos momentos.")
+
+
+def check_civic_transitions(ctx: Context, deltas: list[dict]) -> None:
+    by_event: dict[str, list[dict]] = {}
+    for d in deltas:
+        if d.get("type") != "CIVIC_TRANSITION":
+            continue
+        did = d.get("id")
+        for k in sorted(set(d) - CIVIC_TRANSITION_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{did}.{k}", "Campo desconhecido.", "Remover.")
+        if d.get("axis") not in CIVIC_AXES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.axis", f"'{d.get('axis')}'.", f"{sorted(CIVIC_AXES)}.")
+        by_event.setdefault(d.get("event"), []).append(d)
+    for event_id, group in by_event.items():
+        axes = {g.get("axis"): g for g in group}
+        civic = axes.get("civic_link")
+        presence = axes.get("presence")
+        if civic and civic.get("to") in {"ACTIVE", "REACTIVATION_IN_PROCESS"} and presence \
+                and presence.get("to") == "INSIDE" and "ACCEPTANCE" not in as_list(civic.get("preconditions_met")):
+            ctx.add("SR-CIV-01", "PHYSICAL_RETURN_AS_REACTIVATION", "BLOCKER", f"{civic.get('id')}",
+                    f"Evento {event_id}: presença muda para INSIDE e civic_link para {civic.get('to')} sem ACCEPTANCE "
+                    "em preconditions_met — PHYSICAL_PRESENCE ≠ AUTOMATIC_RETURNER_ACTIVE_STATUS (R2, HL-09).",
+                    "A reativação depende de processo institucional; a fronteira não a ativa sozinha.")
+
+
+def check_manfred_and_selka_structural(ctx: Context, ledger: dict, book: str) -> None:
+    for ev in ledger.get("events") or []:
+        chapter, eid = ev.get("chapter"), ev.get("id")
+        participants = set(as_list(ev.get("participants"))) | {ev.get("actor")}
+        if "FAM-MANFRED" in participants or ev.get("actor") == "FAM-MANFRED":
+            ctx.add("SR-MAN-01", "MANFRED_UNIVERSAL_CAUSALITY", "BLOCKER", f"cap. {chapter}: {eid}",
+                    "A família Manfred (FAM-MANFRED) como ator/participante de evento: MANFRED ≠ MANFREDS — "
+                    "causa precisa nomear qual Manfred, com que evidência (§13.1, §13.3).",
+                    "Substituir por um CHR-* individual da família, com evidência.")
+        if book == "B1" and ev.get("kind") and "ENT-SELKA" in participants:
+            if set(as_list(ev.get("kind"))) & {"FIND_GRAVE", "FIND_BODY", "FIND_COFFER", "READ_TATTOOS_DIRECT",
+                                               "RESOLVE_DEATH", "LOCATE_GRAVE"}:
+                ctx.add("SR-SEL-01", "BOOK1_HISTORY_LOCK_VIOLATION", "BLOCKER", f"cap. {chapter}: {eid}",
+                        f"Evento {ev.get('kind')} sobre ENT-SELKA no Livro 1: proibido (§14.9).",
+                        "RUMOR → FRAGMENTO → CONTRADIÇÃO → PISTA → TEORIA; nunca resolução direta no B1.")
+        selka_tokens, other_mysteries = set(), set()
+        for kd in ev.get("knowledge_delta") or []:
+            if kd.get("knower") != "READER":
+                continue
+            for tok in kd.get("learns") or []:
+                _, base = parse_token(tok)
+                for mid, mys in ctx.mysteries.items():
+                    related = {mid} | set(as_list(mys.get("records"))) | set(as_list(mys.get("unknown_refs")))
+                    if base in related:
+                        (selka_tokens if mid == "MYS-SELKA" else other_mysteries).add(mid)
+        if selka_tokens and len(other_mysteries - {"MYS-SELKA"}) >= 2:
+            ctx.add("SR-SEL-02", "SELKA_AS_THE_KEY", "BLOCKER", f"cap. {chapter}: {eid}",
+                    f"Um único evento resolve MYS-SELKA e mais {len(other_mysteries)} mistérios reservados "
+                    f"({sorted(other_mysteries)}): SELKA IS A KEY, NEVER THE KEY (§14.9).",
+                    "Selka não pode ser o elo que explica todos os mistérios de uma vez.")
+
+    for where, _pat in lexical_scan(ctx, "extraterritorial_enforcement", reader_facing_texts(ledger)):
+        ctx.add("SR-JUR-02", "EXTRATERRITORIAL_POWER", "BLOCKER", where,
+                "Vocabulário de poder policial de Redmur fora de seus limites (HL-10).",
+                "ELIGIBILITY_RULE ≠ EXTRATERRITORIAL_POLICE_POWER (R3, §7).")
+    for where, _pat in lexical_scan(ctx, "coffer_mechanics_violation", reader_facing_texts(ledger)):
+        ctx.add("SR-COF-07", "COFFER_MECHANICS_VIOLATION", "MEDIUM", where,
+                "THE HEAD IS INSIDE THE COFFER. THE HEAD DOES NOT CARRY THE COFFER (§2.1).",
+                "Warden confirma; corrigir a mecânica descrita.")
+    for where, _pat in lexical_scan(ctx, "tech_survival_violation", reader_facing_texts(ledger)):
+        ctx.add("SR-TEC-04", "TECHNOLOGY_CREEP", "HIGH", where,
+                "Sobrevivência retratada como dependente só de eletrônica/bateria (§2.1, §9.1).",
+                "A segurança fundamental não depende exclusivamente de eletrônica.")
+
+
+def check_combination_events(ctx: Context, ledger: dict) -> None:
+    for ev in ledger.get("events") or []:
+        chapter, eid = ev.get("chapter"), ev.get("id")
+        acts_on = as_list(ev.get("acts_on_knowledge"))
+        cmb_tokens = [t for t in acts_on if isinstance(t, str) and COMBINATION_TOKEN_RE.match(t)]
+        kinds = set(as_list(ev.get("kind")))
+        if not cmb_tokens:
+            continue
+        if any(REMOVE_KIND_RE.search(k) for k in kinds) and not ev.get("removal_authority"):
+            ctx.add("SR-CMB-01", "COMBINATION_AS_REMOVAL_AUTHORITY", "BLOCKER", f"cap. {chapter}: {eid}",
+                    f"Remoção de cofre agindo só sobre {cmb_tokens}, sem `removal_authority: true` declarado.",
+                    "KNOWING_COMBINATION ≠ REMOVAL_AUTHORITY (R1, HL-07); declarar autoridade institucional própria.")
+        if kinds & {"LOCK_MANIPULATION", "FACIAL_EXPOSURE"} and not ev.get("consent"):
+            ctx.add("SR-CMB-02", "CONSENT_INFERENCE_VIOLATION", "BLOCKER", f"cap. {chapter}: {eid}",
+                    f"{kinds} justificado só por {cmb_tokens}, sem bloco consent.",
+                    "Conhecer a combinação não é consentimento para manipular o lock ou expor o rosto (HL-07, HL-08).")
+        for tok in acts_on:
+            m = COMBINATION_TOKEN_RE.match(str(tok))
+            if m and m.group(1) != "FULL":
+                ctx.add("SR-CMB-05", "CHARACTER_KNOWLEDGE_LEAK", "HIGH", f"cap. {chapter}: {eid}",
+                        f"Ato sobre '{tok}' ({m.group(1)}): personagem age como se conhecesse o valor completo.",
+                        "Só SR:CMB:FULL: habilita abrir o lock com o valor certo.")
+
+
+def check_pull_causality(ctx: Context, ledger: dict) -> None:
+    for ev in ledger.get("events") or []:
+        kinds = set(as_list(ev.get("kind")))
+        if kinds & {"STAY", "REMAIN", "CHOOSE_TO_STAY"} and not as_list(ev.get("caused_by")):
+            ctx.add("SR-PUL-01", "MAGICAL_CAUSALITY", "BLOCKER", f"cap. {ev.get('chapter')}: {ev.get('id')}",
+                    "Decisão de ficar/permanecer sem causa humana (caused_by vazio): The Pull é multicausal, "
+                    "nunca força mágica (§8, HL-02).",
+                    "Declarar caused_by com GT-*/EV-* humano; opcionalmente etiquetar PULL_FACTORS.")
+
+
 def load_runtime(runtime: Path) -> dict:
     canon = runtime / "canon"
     out = {"ledger": None, "registry": None, "deltas": [], "interpretive": None}
@@ -1151,6 +1668,8 @@ def load_runtime(runtime: Path) -> dict:
         doc = load_yaml(path) or {}
         out["deltas_doc"] = doc
         out["deltas"] = as_list(doc.get("deltas"))
+    else:
+        out["deltas_doc"] = None
     return out
 
 
@@ -1192,10 +1711,22 @@ def validate(canon_dir: Path | str = DEFAULT_CANON, cartography_dir: Path | str 
             ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", "canon/CAUSAL_LEDGER.yaml",
                     "Modo plan exige o ledger causal do runtime.", "Rodar depois de T018.")
         else:
+            index_state_registries(ctx, rt)
             check_runtime_knowledge(ctx, rt["ledger"], rt["deltas"], book)
             check_rumor_as_fact(ctx, rt["ledger"], rt["interpretive"])
             check_runtime_mysteries(ctx, rt["ledger"], rt["interpretive"], book)
             check_state_deltas(ctx, rt, rt["ledger"])
+            check_combinations(ctx)
+            check_face_fragments(ctx)
+            check_sealed_evidence(ctx)
+            check_tattoos(ctx)
+            check_face_events(ctx, rt["ledger"], rt["deltas"], book)
+            check_recognition(ctx, rt["deltas"])
+            check_anomalies(ctx, rt["deltas"])
+            check_civic_transitions(ctx, rt["deltas"])
+            check_manfred_and_selka_structural(ctx, rt["ledger"], book)
+            check_combination_events(ctx, rt["ledger"])
+            check_pull_causality(ctx, rt["ledger"])
         if rt["registry"] is not None:
             check_registry_sync(ctx, rt["registry"])
         rt_summary = {"events": len((rt["ledger"] or {}).get("events") or []), "deltas": len(rt["deltas"])}
@@ -1208,7 +1739,7 @@ def validate(canon_dir: Path | str = DEFAULT_CANON, cartography_dir: Path | str 
         "gates": len(ctx.gate_ids), "mysteries": len(ctx.mysteries), "rumors": len(ctx.rumors),
         "lock_coverage": {k: len(v) for k, v in ctx.coverage.items()},
         "dossier_sections": len(ctx.dossier["sections"]) if ctx.dossier else 0,
-        "hidden_keys_source": HIDDEN_KEYS_SOURCE, "implemented_slice": IMPLEMENTED_SLICE,
+        "hidden_keys_source": HIDDEN_KEYS_SOURCE, "implemented_rules": len(IMPLEMENTED_RULES),
         "runtime": rt_summary,
     }
     return ctx.findings, summary
@@ -1221,6 +1752,7 @@ def build_context(canon_dir, cartography_dir="default") -> Context:
     ctx = Context(canon_dir, Path(cartography_dir) if cartography_dir else None)
     check_sources(ctx)
     load_seeds(ctx)
+    index_lexicon(ctx)
     index_locks(ctx)
     check_records(ctx)
     ctx.coverage = check_locks(ctx)

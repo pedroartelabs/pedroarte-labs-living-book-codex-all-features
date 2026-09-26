@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Status | **E0 — PROPOSTA; Slices 0, 1 e 2 concluídos (2026-09-21 a 2026-09-26).** S0: dossiê pinado, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). S1: seeds `CANON_RECORDS`/`HARD_LOCKS`/`BOOK_GATES` e validador `--mode package` (seção 79.1). S2: seeds `MYSTERIES`/`RUMORS`, modo `plan --runtime` (conhecimento, rumor-como-fato, teto de mistério, sincronia de registry) e as consultas `--is-true`/`--who-knows`/`--reader-at`/`--mystery` (seção 79.2). Nenhum comportamento do motor alterado. Próximo: Slice 3. |
+| Status | **E0 — PROPOSTA; Slices 0–3 concluídos (2026-09-21 a 2026-09-26).** S0: dossiê pinado, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). S1: seeds `CANON_RECORDS`/`HARD_LOCKS`/`BOOK_GATES` e validador `--mode package` (seção 79.1). S2: seeds `MYSTERIES`/`RUMORS`, modo `plan --runtime` e as consultas `--is-true`/`--who-knows`/`--reader-at`/`--mystery` (seção 79.2). S3: seed `LEXICON`; firewalls de rosto, reconstrutibilidade, Sealed Facial Evidence, registros externos, combinação, cível, tatuagem, 1% não humano, The Pull, Manfred, Selka, jurisdição e tecnologia — 26 das 28 travas absolutas agora têm detector estrutural/lexical real (seção 79.3). Nenhum comportamento do motor alterado. Próximo: Slice 4. |
 | Data | 2026-09-21 |
 | Obra | **SEM ROSTO** — autoria **Bea Halden** — gênero DEDR (*Distopic Enigma Dark Romance*) |
 | Papel | **Fundação canônica narrativa** da obra (2 de 2). A outra é `REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md` (espacial). Este SDD é o "Story Truth Ledger" que a cartografia referencia por contrato (cartografia §22.4). |
@@ -3329,7 +3329,7 @@ S0 ─▶ S1 ─▶ S2 ─▶ S3 ─▶ S4 ─┬─▶ S5 (integração no paco
 | **S0** Decisões e pinagem — **CONCLUÍDO 2026-09-21** | freeze, versionar dossiê | `books/sem-rosto/canon/sources/{REDMUR_CANON_RESOLUTION_DOSSIER_FINAL.md, SOURCES.yaml}`, `approvals/CANON_FREEZE_0001.md` (humano), README do pacote | hash conferido; OQ-SR-01/02 decididas | S |
 | **S1** Registros, locks, gates — **CONCLUÍDO 2026-09-21** | contrato e integridade | `canon/seeds/{CANON_RECORDS, HARD_LOCKS, BOOK_GATES}.seed.yaml`, `canon/templates/*`, `validators/check_sem_rosto_canon.py` (`--mode package`), `tests/test_sem_rosto_canon.py`, fixture | SR-SRC, SR-CR, SR-ST, SR-PV, SR-HL-02/03; `git diff --stat engine/` vazio | M |
 | **S2** Mistérios, rumores, conhecimento — **CONCLUÍDO 2026-09-26** | projeções | seeds `MYSTERIES`, `RUMORS`; `--mode plan --runtime`; `--emit-registry-fragment`; `--is-true`, `--who-knows`, `--reader-at`, `--mystery` | TEST 03, 05, 06, 10; `REGISTRY_DRIFT` | M |
-| **S3** Firewalls | estado dinâmico e regras | seeds `COFFERS`, `CIVIC`, `JURISDICTION`, `LEXICON`; template `STATE_DELTAS`; famílias FACE/FRC/SFE/EXT/CMB/TCH/CNS/AGE/CIV/JUR/TEC/TAT/MAN/SEL/NH | TEST 01, 02, 04, 07–09, 15–25, 30 | L |
+| **S3** Firewalls — **CONCLUÍDO 2026-09-26** | estado dinâmico e regras | seed `LEXICON`; registros `combinations`/`face_fragments`/`sealed_evidence`/`tattoos` + deltas `FACE_EVENT`/`CIVIC_TRANSITION`/`RECOGNITION`/`ANOMALY` em `SEM_ROSTO_STATE_DELTAS.yaml`; famílias FACE/FRC/SFE/EXT/CMB/CIV/JUR/TEC/TAT/MAN/SEL/NH/PUL/COF/IDS/CPR (seção 79.3) | TEST 01, 02, 07–09, 15, 16, 19–25, 30 | L |
 | **S4** Pack, contrato, pós-cena, crime | escrita guiada | `--pack`, Scene Generation Contract, `POST_SCENE_REPORT`, schemas; crime/fair-play/double-edge/irreversibilidade/promessas; `--mode wave/final/regression`; snapshots | TEST 11–14, 26–29; `--verdict` | L |
 | **S5** Integração no pacote | pacote compõe com o sistema | `BOOK_SPEC`/`BOOK_GRAPH` de SEM ROSTO (quando existir), `agents/redmur_canon_warden.toml`, `text_quality.yaml`, tarefas `T018S`, `T1NNS`, `T2NNS`; cartografia: D-SR-11 | compose em diretório temporário; `validate-gate GATE_CANON`; goldens idênticos | M |
 | **S6** Piloto (opcional, pago) | 2–3 capítulos em `DRAFT` | runtime real | humano responde "sim" à pergunta de aceite (seção 80) para as cenas do piloto e o relatório concorda | — |
@@ -3402,6 +3402,67 @@ Desvios do texto do SDD, deliberados:
 | 20.1 | três camadas (série/incógnita/teoria ativa) sempre presentes | mistérios reservados do Livro 1 não têm camada de teoria ativa (nenhum `interpretive_question`) | OQ-SR-04: evita criar teses concorrentes que o dossiê não define |
 | 21.2, passo 9 | classes epistêmicas completas (`ALLOW_AS_RUMOR`/`ALLOW_AS_THEORY`/`ALLOW_AS_PARTIAL`) | Slice 2 implementa só o binário ALLOW/BLOCK sobre conhecimento; as classes finas do `MYSTERY_DISCLOSURE_GATE` (passo 9 completo) ficam para o Slice 3, junto do pack de cena | o gate completo precisa do pack e do contrato de cena (seção 60), ainda não implementados |
 | 60.3, 65 | `--mode scene`/pack por cena | não implementado neste slice | escopo do Slice 3 |
+
+### 79.3 Estado do Slice 3 (2026-09-26)
+
+**Escopo real (revisado):** o texto original desta seção previa 15 famílias inteiras (~130 regras).
+Executado: implementar pelo menos **um detector estrutural ou lexical real por trava ainda
+`planned_only`** — critério objetivo, medido pela própria seção 15.2 do validador
+(`check_locks`: uma trava conta como implementada assim que qualquer um dos seus detectores
+citados resolve para código real). Resultado: **26 das 28 travas saem de `planned_only`**
+(restam `HL-17`/`HL-18`, do Livro 1/crime, escopo do Slice 4). As famílias completas (todas as
+regras de TCH/CNS/AGE/VIS/ECO/BG/CHR/40Y/ARC/DA/TMP/EVI/IDN, e o restante de FACE/CMB/SFE/MAN/SEL)
+continuam parcialmente implementadas — cada regra ainda não codificada aparece como `SR-planned`
+em qualquer consulta, nunca como falso-implementada (ver `IMPLEMENTED_RULES`, substituindo o corte
+por número de slice que o texto original desta seção usava).
+
+Entregue:
+
+- `books/sem-rosto/canon/seeds/LEXICON.seed.yaml` — 5 famílias de pré-filtro lexical
+  (`face_features`, `extraterritorial_enforcement`, `coffer_mechanics_violation`,
+  `tech_survival_violation`, `mirror_common`); nunca bloqueia sozinho (seção 15.1).
+- `SEM_ROSTO_STATE_DELTAS.yaml` ganhou 4 tipos de delta novos (`FACE_EVENT`, `CIVIC_TRANSITION`,
+  `RECOGNITION`, `ANOMALY`) e 4 registros irmãos de `deltas` (`combinations` `CMB-*`,
+  `face_fragments` `FRG-*`, `sealed_evidence` `SFE-*`, `tattoos` `TAT-*` — seções 23.3, 25.2, 29.2,
+  30.2, 41).
+- `check_sem_rosto_canon.py`: `IMPLEMENTED_RULES` (whitelist explícita, código a código) substitui
+  o corte por slice; `PRO_MAP` liga 10 inferências proibidas já existentes (Slice 1) a uma regra
+  nomeada da taxonomia quando casadas no texto do mundo — o mesmo casamento lexical do Slice 2
+  (`check_rumor_as_fact`) passa a alimentar `SR-NH-03`, `SR-PUL-02`, `SR-SEL-02/03`, `SR-MAN-02`,
+  `SR-JUR-03`, `SR-TEC-02`, `SR-CIV-06`, `SR-CMB-01/03`, sem duplicar o scanner.
+  Novas funções estruturais: `check_face_events` (SR-FACE-01..05, `SR-CPR-04`), `check_face_fragments`
+  (SR-FRC-01/02), `check_sealed_evidence` (SR-SFE-01..05), `check_tattoos` (SR-TAT-01/02),
+  `check_combinations`/`check_combination_events` (SR-CMB-01..05/07), `check_civic_transitions`
+  (SR-CIV-01), `check_recognition` (SR-IDS-03, SR-COF-05), `check_anomalies` (SR-NH-01/02/04),
+  `check_manfred_and_selka_structural` (SR-MAN-01, SR-SEL-01/02 + lexicais JUR-02/COF-07/TEC-04),
+  `check_pull_causality` (SR-PUL-01); `SR-CPR-01` reaproveita o vazamento de conhecimento do
+  Slice 2, apenas rotulando especificamente `UNK-SR-SIX-MONTH-CONTENTS`/`-CHILD-FACILITY-LOCATION`.
+- Correção durante o slice: o refactor inicial de `check_rumor_as_fact` passou a escanear
+  `evidence_to_reader` (fala de personagem) além de `facts` (verdade do mundo) — quebrava a
+  distinção do Slice 2 entre "o mundo afirma" e "um personagem diz" (dossiê §19). Corrigido com
+  duas funções: `world_truth_texts` (só `facts`, usada por `check_rumor_as_fact`/`PRO_MAP`) e
+  `reader_facing_texts` (`facts` + `evidence_to_reader`, usada só pelos pré-filtros de leitura —
+  FACE-05, JUR-02, COF-07, TEC-04 — onde a origem da frase não muda o risco).
+- Fixture estendida: `CHR-FX-C` (Returner) e `EV-05..EV-07` (evento facial, reativação cívica,
+  decisão de ficar), todos formando um **cenário PASS** completo — a mesma fixture prova que o
+  sistema não gera falso positivo quando tudo está correto. 48 testes novos (126 no total): 9
+  cobrem TEST 01, 02, 07–09, 15, 16, 19–25, 30 do catálogo (seção 76.3); os demais, uma mutação
+  por regra nova.
+
+Resultado no pacote real: `PASS_WITH_WARNINGS` — 6 `SEED_UNAPPROVED` (LEXICON somado aos 5
+anteriores) + `LOCK_DETECTORS_PLANNED` (`HL-17`, `HL-18` apenas). Resultado no runtime de fixture
+(`--mode plan`): idêntico, 0 bloqueantes — cenário PASS íntegro.
+
+Desvios do texto do SDD, deliberados:
+
+| Onde | SDD dizia | Implementado | Por quê |
+|---|---|---|---|
+| 22.5 | `SR-FACE-06` (integração com canon visual) e `SR-FACE-07`/75.3 (`face_consistency_required`) | não implementados | dependem de `VISUAL_NARRATIVE_CANON`/`BOOK_SPEC`, que só existem quando o pacote completo existir (S5) |
+| 26 | `SR-EXT-01` nomeado | não atribuído | o texto original só nomeava `SR-EXT-02`; nenhuma trava cita `SR-EXT-01`, e o caso de uso (dispositivo de visitante) ficou coberto por `SR-CIV-06`/`DEVICE_PURGE_ASSUMED` textual (seção 35), sem código próprio ainda |
+| 29.1/29.3 | seed `COFFERS.seed.yaml` e `CIVIC.seed.yaml` próprios | registros `combinations`/estado dinâmico direto em `SEM_ROSTO_STATE_DELTAS.yaml`; sem seeds de canon estático novos | os cofres já têm componentes/classes em `CANON_RECORDS` (Slice 1); o que faltava era só o estado por instância, que é dinâmico |
+| 30.1 | valor de combinação sempre engine-only por padrão | `check_combinations` aceita `REVEALED_TO_READER` com aprovação humana registrada (`value_ref.approved_by`) | a seção 13.4 já previa essa via; faltava a regra que a exige |
+| 41 | tatuagem com contrato completo (`readings[]` como evidência) | `readings`/`clue_ref` aceitos sem validação cruzada com `EVD-*` | cruzar com o canon interpretativo é natural do Slice 4 (pack/evidência) |
+| 76.3 | TEST 03–06, 10–14, 17, 18, 26–29 no Slice 3 | continuam nos Slices 2 (03,05,06,10 — já feitos) e 4 (11–14,17,18,26–29 — crime, cartografia, irreversibilidade) | eram sempre de outros slices; a tabela do Slice 3 nesta seção corrige a lista |
 
 Pré-condição de S5: pacote completo de SEM ROSTO (hoje parcial — só
 cartografia; DEDR S6) e working tree de outras frentes versionado (D-CART-16).

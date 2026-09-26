@@ -25,6 +25,12 @@ characters:
       - {id: SM-FX-B-01, statement: "B acha que só está conversando.", diverges_from: [GT-FX-B-01]}
     social_persona:
       - {id: SP-FX-B-01, statement: "B parece prestativa.", conceals: [GT-FX-B-01]}
+  - id: CHR-FX-C
+    major: false
+    age: 40
+    age_source: fixture
+    ground_truth:
+      - {id: GT-FX-C-01, kind: CONSCIOUS_WANT, statement: "C decidiu aceitar a reativação cívica."}
 
 relationships: []
 loops: []
@@ -79,6 +85,33 @@ events:
     caused_by: [EV-03]
     knowledge_delta:
       - {knower: CHR-FX-A, learns: ["SR:TOLD:CR-P0-R1"]}
+  - id: EV-05
+    status: PLANNED
+    chapter: 8
+    structural: false
+    kind: [SERVICE_COWL_ACCESS]
+    actor: CHR-FX-B
+    participants: [CHR-FX-B, CHR-FX-A]
+    facts: ["B descobre o próprio rosto diante de A, em privado, sob o Service Cowl."]
+    caused_by: [EV-04]
+  - id: EV-06
+    status: PLANNED
+    chapter: 9
+    structural: false
+    kind: [CIVIC_REACTIVATION]
+    actor: CHR-FX-C
+    participants: [CHR-FX-C]
+    facts: ["C aceita formalmente o processo de reativação cívica e é instalado com cofre individual."]
+    caused_by: [GT-FX-C-01]
+  - id: EV-07
+    status: PLANNED
+    chapter: 10
+    structural: false
+    kind: [STAY]
+    actor: CHR-FX-A
+    participants: [CHR-FX-A]
+    facts: ["A decide continuar em Redmur, por enraizamento social."]
+    caused_by: [GT-FX-A-01]
 
 mutation_log:
   - {version: 0.1.0, task: fixture, owner: CANON_GUARDIAN, action: "Fixture do Slice 2."}

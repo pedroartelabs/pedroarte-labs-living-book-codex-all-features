@@ -47,7 +47,7 @@ class RealData(unittest.TestCase):
 
     def test_only_expected_warnings(self):
         self.assertEqual(sorted(categories(self.findings)),
-                         ["LOCK_DETECTORS_PLANNED"] + ["SEED_UNAPPROVED"] * 5)
+                         ["LOCK_DETECTORS_PLANNED"] + ["SEED_UNAPPROVED"] * 6)
 
     def test_dossier_is_pinned_and_frozen(self):
         path = CANON / "sources" / "REDMUR_CANON_RESOLUTION_DOSSIER_FINAL.md"
@@ -275,7 +275,7 @@ class Mutations(unittest.TestCase):
         sha = hashlib.sha256((self.canon / "seeds" / "CANON_RECORDS.seed.yaml").read_bytes()).hexdigest()
         (self.canon / "approvals" / "CANON_SEEDS_9998.md").write_text(f"subject_sha256: {sha}\n", encoding="utf-8")
         unapproved = [f for f in self.run_validator() if f["category"] == "SEED_UNAPPROVED"]
-        self.assertEqual(len(unapproved), 4)
+        self.assertEqual(len(unapproved), 5)
 
     # gates
     def test_writing_gate_coverage(self):
@@ -345,7 +345,7 @@ class Slice2RealData(unittest.TestCase):
         self.assertEqual([f for f in ccl.validate(ledger) if f["severity"] in {"HIGH", "BLOCKER"}], [])
         findings, summary = sr.validate(CANON, CARTO, FIXTURE_RT)
         self.assertEqual([f for f in findings if f["severity"] in sr.BLOCKING], [])
-        self.assertEqual(summary["runtime"], {"events": 4, "deltas": 8})
+        self.assertEqual(summary["runtime"], {"events": 7, "deltas": 14})
 
     def test_registry_fragment_matches_fixture_registry(self):
         frag = sr.registry_fragment(sr.build_context(CANON, CARTO))
@@ -580,7 +580,7 @@ class Slice2Mutations(unittest.TestCase):
         led = self.load(self.ledger_path())
         self.event(led, "EV-01")["facts"].append("A maldição de Redmur prende A.")
         self.dump(self.ledger_path(), led)
-        self.assertCategory("UNKNOWN_AS_FACT", "BLOCKER")
+        self.assertCategory("SUPERNATURAL_CONFIRMATION", "BLOCKER")   # PRO-SR-PULL-FORCE -> SR-PUL-02 (Slice 3)
 
     def test_rumor_voiced_by_character_is_allowed(self):
         doc = self.load(self.seed_path("CANON_RECORDS.seed.yaml"))
@@ -626,6 +626,410 @@ class Slice2Mutations(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as out:
             sr.main(["--canon", str(self.canon), "--is-true", "UNK-SR-SELKA-DEATH"])
         self.assertIn("CANON_UNKNOWN", out.getvalue())
+
+
+class Slice3Mutations(unittest.TestCase):
+    """Uma mutação por teste sobre a cópia do runtime real (7 eventos, 14 deltas, cenário PASS)."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="sr_s3_"))
+        self.canon = self.tmp / "canon"
+        self.rt = self.tmp / "rt"
+        shutil.copytree(CANON, self.canon)
+        shutil.copytree(FIXTURE_RT, self.rt)
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def load(self, path):
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+    def dump(self, path, doc):
+        path.write_text(yaml.safe_dump(doc, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
+    def seed_path(self, name):
+        return self.canon / "seeds" / name
+
+    def ledger_path(self):
+        return self.rt / "canon" / "CAUSAL_LEDGER.yaml"
+
+    def deltas_path(self):
+        return self.rt / "canon" / "SEM_ROSTO_STATE_DELTAS.yaml"
+
+    def event(self, ledger, eid):
+        return next(e for e in ledger["events"] if e["id"] == eid)
+
+    def sd(self, deltas, did):
+        return next(d for d in deltas["deltas"] if d["id"] == did)
+
+    def findings(self):
+        return sr.validate(self.canon, CARTO, self.rt)[0]
+
+    def assertCategory(self, category, severity=None):
+        found = self.findings()
+        hits = [f for f in found if f["category"] == category and (severity is None or f["severity"] == severity)]
+        self.assertTrue(hits, f"{category} não encontrado em {categories(found)}")
+        return hits
+
+    def assertNoBlocking(self):
+        self.assertEqual([f for f in self.findings() if f["severity"] in sr.BLOCKING], [])
+
+    # --- FACE (TEST 01, 02, 22)
+    def test_face_reveal_invalid_visibility(self):
+        d = self.load(self.deltas_path())
+        self.sd(d, "SD-0009")["reader_visibility"] = "RECONSTRUCTIBLE"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACE_REVEAL_VIOLATION", "BLOCKER")
+
+    def test_face_reveal_pass_baseline(self):
+        self.assertNoBlocking()
+
+    def test_facial_reconstructibility_violation(self):
+        d = self.load(self.deltas_path())
+        sd9 = self.sd(d, "SD-0009")
+        sd9["reconstructibility"] = "RECONSTRUCTIBLE_FACE"
+        sd9["reader_visibility"] = "NON_RECONSTRUCTIBLE"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER")
+
+    def test_self_face_violation(self):   # TEST 22
+        d = self.load(self.deltas_path())
+        sd9 = self.sd(d, "SD-0009")
+        sd9["kind"] = "SELF_VIEWING"
+        sd9["subject"] = "CHR-FX-A"
+        sd9["deliberate"] = {"subject": True, "viewers": []}
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("SELF_FACE_VIOLATION", "BLOCKER")
+
+    def test_nonconsensual_exposure_unmarked(self):
+        d = self.load(self.deltas_path())
+        sd9 = self.sd(d, "SD-0009")
+        sd9["consent_ref"] = None
+        sd9["setting"] = "PUBLIC"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("NONCONSENSUAL_EXPOSURE_UNMARKED", "HIGH")
+
+    def test_facial_record_unclassified(self):
+        d = self.load(self.deltas_path())
+        self.sd(d, "SD-0009")["record"] = {"id": "ITM-FX-01", "external_lawful": True,
+                                            "local_possession_status": "LAWFUL", "local_exposure_status": "UNLAWFUL"}
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACIAL_RECORD_UNCLASSIFIED", "HIGH")
+
+    def test_external_legality_collapsed(self):
+        d = self.load(self.deltas_path())
+        self.sd(d, "SD-0009")["record"] = {"id": "ITM-FX-01", "external_lawful": True}
+        self.sd(d, "SD-0009")["authorization"] = "SFE-0001"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("EXTERNAL_LEGALITY_COLLAPSED", "HIGH")
+
+    def test_face_description_suspected(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-02")["evidence_to_reader"] = ["B sorriu para A antes de contar o rumor."]
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("FACE_DESCRIPTION_SUSPECTED", "MEDIUM")
+
+    def test_pediatric_eroticization(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-01")["participants"] = ["CHR-FX-A", "CHR-FX-D"]
+        led["characters"].append({"id": "CHR-FX-D", "major": False, "age": 9, "age_source": "fixture",
+                                  "ground_truth": [{"id": "GT-FX-D-01", "kind": "FEAR", "statement": "x"}]})
+        self.dump(self.ledger_path(), led)
+        d = self.load(self.deltas_path())
+        sd9 = self.sd(d, "SD-0009")
+        sd9["event"], sd9["subject"], sd9["kind"] = "EV-01", "CHR-FX-D", "EXPOSURE"
+        sd9["setting"], sd9["legal_reading"] = "PUBLIC", "EXPOSURE"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("PEDIATRIC_EROTICIZATION", "BLOCKER")
+
+    # --- FRC (TEST 23, 24, 25)
+    def test_frc_fragment_cited_without_existing(self):
+        d = self.load(self.deltas_path())
+        d["face_fragments"][0]["combinable_with"] = ["FRG-9999"]
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("SYSTEM_CAPABILITY_AS_INSTANCE", "BLOCKER")
+
+    def test_frc_composite_reader_visible(self):
+        d = self.load(self.deltas_path())
+        d["face_fragments"].append({"id": "FRG-0002", "subject": "CHR-FX-B", "carrier": "EV-05",
+                                    "class": "PARTIALLY_FACIAL", "combinable_with": [], "combined_class": None,
+                                    "reader_visibility": "NON_RECONSTRUCTIBLE"})
+        d["face_fragments"][0]["combinable_with"] = ["FRG-0002"]
+        d["face_fragments"][0]["combined_class"] = "RECONSTRUCTIBLE_FACE"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER")
+
+    def test_frc_composite_engine_only_passes(self):   # TEST 24
+        d = self.load(self.deltas_path())
+        d["face_fragments"].append({"id": "FRG-0002", "subject": "CHR-FX-B", "carrier": "EV-05",
+                                    "class": "PARTIALLY_FACIAL", "combinable_with": [], "combined_class": None,
+                                    "reader_visibility": "NONE"})
+        d["face_fragments"][0]["combinable_with"] = ["FRG-0002"]
+        d["face_fragments"][0]["combined_class"] = "RECONSTRUCTIBLE_FACE"
+        self.dump(self.deltas_path(), d)
+        self.assertNoBlocking()
+
+    # --- SFE (TEST 19, 20)
+    def test_sfe_incomplete(self):
+        d = self.load(self.deltas_path())
+        del d["sealed_evidence"][0]["necessity"]
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("SEALED_EVIDENCE_INCOMPLETE", "BLOCKER")
+
+    def test_sfe_public_access(self):   # TEST 20
+        d = self.load(self.deltas_path())
+        d["sealed_evidence"][0]["access_log"][0]["authorized"] = False
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("SEALED_EVIDENCE_PUBLIC", "BLOCKER")
+
+    def test_sfe_unbounded_authority(self):   # TEST 19
+        d = self.load(self.deltas_path())
+        d["sealed_evidence"][0]["capturing_authority"] = "INST-OCP"
+        del d["sealed_evidence"][0]["procedure"]
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACIAL_AUTHORITY_UNBOUNDED", "BLOCKER")
+
+    def test_sfe_derived_copy_unprotected(self):
+        d = self.load(self.deltas_path())
+        d["sealed_evidence"][0]["derived_copies"] = ["SFE-9999"]
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("DERIVED_COPY_UNPROTECTED", "HIGH")
+
+    def test_sfe_access_unlogged(self):
+        d = self.load(self.deltas_path())
+        d["sealed_evidence"][0]["access_log"] = []
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("SEALED_ACCESS_UNLOGGED", "HIGH")
+
+    # --- Tattoo (HL-19)
+    def test_tattoo_numeric_combination(self):
+        d = self.load(self.deltas_path())
+        d["tattoos"][0]["encodes_digits"] = True
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("TATTOO_NUMERIC_COMBINATION", "BLOCKER")
+
+    def test_tattoo_depicts_face(self):
+        d = self.load(self.deltas_path())
+        d["tattoos"][0]["depicts_face"] = True
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("FACIAL_RECONSTRUCTIBILITY_VIOLATION", "BLOCKER")
+
+    # --- Combination (TEST 15; HL-07, HL-23)
+    def test_universal_combination(self):
+        d = self.load(self.deltas_path())
+        d["combinations"][0]["coffer"] = ["COF-FX-0001", "COF-FX-0002"]
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("UNIVERSAL_COMBINATION", "BLOCKER")
+
+    def test_combination_revealed_for_convenience(self):
+        d = self.load(self.deltas_path())
+        d["combinations"][0]["value_status"] = "REVEALED_TO_READER"
+        d["combinations"][0]["value_ref"] = "1234"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("COMBINATION_REVEALED_FOR_CONVENIENCE", "HIGH")
+
+    def test_combination_value_without_proposal(self):
+        d = self.load(self.deltas_path())
+        d["combinations"][0]["value_ref"] = "1234"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("IMPROVISED_CANON", "BLOCKER")
+
+    def test_combination_as_removal_authority(self):   # TEST 15
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["REMOVE_COFFER"], "actor": "CHR-FX-A", "participants": ["CHR-FX-A", "CHR-FX-B"],
+                              "facts": ["A remove o cofre de B."], "caused_by": ["EV-05"],
+                              "acts_on_knowledge": ["SR:CMB:FULL:CMB-0001"]})
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("COMBINATION_AS_REMOVAL_AUTHORITY", "BLOCKER")
+
+    def test_combination_removal_with_authority_passes(self):
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["REMOVE_COFFER"], "actor": "CHR-FX-A", "participants": ["CHR-FX-A", "CHR-FX-B"],
+                              "facts": ["A remove o cofre de B, com autorização institucional dupla."],
+                              "caused_by": ["EV-05"], "acts_on_knowledge": ["SR:CMB:FULL:CMB-0001"],
+                              "removal_authority": True})
+        self.dump(self.ledger_path(), led)
+        self.assertNotIn("COMBINATION_AS_REMOVAL_AUTHORITY", categories(self.findings()))
+
+    def test_consent_inference_violation_lock_manipulation(self):   # TEST 16
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["LOCK_MANIPULATION"], "actor": "CHR-FX-A", "participants": ["CHR-FX-A", "CHR-FX-B"],
+                              "facts": ["A manipula o lock do cofre de B."], "caused_by": ["EV-05"],
+                              "acts_on_knowledge": ["SR:CMB:PARTIAL:CMB-0001"]})
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("CONSENT_INFERENCE_VIOLATION", "BLOCKER")
+
+    def test_character_knowledge_leak_partial_combination(self):
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["LOCK_MANIPULATION"], "actor": "CHR-FX-A", "participants": ["CHR-FX-A", "CHR-FX-B"],
+                              "facts": ["A tenta com um valor incompleto."], "caused_by": ["EV-05"],
+                              "acts_on_knowledge": ["SR:CMB:PARTIAL:CMB-0001"],
+                              "consent": {"canonical": "CONSENSUAL", "manipulation_present": False,
+                                          "power_imbalance_present": False, "ability_to_refuse": "FULL",
+                                          "boundary_state": "NEGOTIATED", "perceived": {}}})
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("CHARACTER_KNOWLEDGE_LEAK", "HIGH")
+
+    # --- Civic (HL-09)
+    def test_physical_return_as_reactivation(self):   # HL-09
+        d = self.load(self.deltas_path())
+        for delta in d["deltas"]:
+            if delta["id"] in ("SD-0011", "SD-0012"):
+                delta["preconditions_met"] = []
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("PHYSICAL_RETURN_AS_REACTIVATION", "BLOCKER")
+
+    # --- Recognition / identity (HL-24)
+    def test_signature_as_proof(self):
+        d = self.load(self.deltas_path())
+        rec = self.sd(d, "SD-0014")
+        rec["used_as"] = "PROOF"
+        self.dump(self.deltas_path(), d)
+        cats = categories(self.findings())
+        self.assertIn("SIGNATURE_AS_PROOF", cats)
+
+    def test_coffer_signature_as_proof(self):
+        d = self.load(self.deltas_path())
+        rec = self.sd(d, "SD-0014")
+        rec["used_as"] = "PROOF"
+        rec["channels_used"] = ["COFFER"]
+        self.dump(self.deltas_path(), d)
+        found = self.findings()
+        self.assertTrue(any(f["rule"] == "SR-COF-05" for f in found))
+        self.assertTrue(any(f["rule"] == "SR-IDS-03" for f in found))
+
+    # --- Non-human (TEST 08, 09)
+    def test_residual_without_rational_path(self):
+        d = self.load(self.deltas_path())
+        self.sd(d, "SD-0013")["human_explanations_available"] = []
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("RESIDUAL_WITHOUT_RATIONAL_PATH", "HIGH")
+
+    def test_residual_with_explanation_passes(self):   # TEST 09
+        self.assertNotIn("RESIDUAL_WITHOUT_RATIONAL_PATH", categories(self.findings()))
+
+    def test_ambiguity_ungrounded(self):
+        d = self.load(self.deltas_path())
+        self.sd(d, "SD-0013")["register"] = "AMBIGUOUS"
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("AMBIGUITY_UNGROUNDED", "MEDIUM")
+
+    def test_supernatural_confirmation(self):   # TEST 08
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-07")["facts"].append("Foi um fantasma que a guiou de volta.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("SUPERNATURAL_CONFIRMATION", "BLOCKER")
+
+    def test_non_human_overuse(self):
+        d = self.load(self.deltas_path())
+        for i, ch in enumerate((11, 12), start=15):
+            d["deltas"].append({"id": f"SD-{i:04d}", "event": "EV-07", "type": "ANOMALY", "status": "PLANNED",
+                                "chapter": ch, "register": "RESIDUAL", "human_explanations_available": ["GT-FX-A-01"],
+                                "residual_detail": "x"})
+        self.dump(self.deltas_path(), d)
+        self.assertCategory("NON_HUMAN_OVERUSE", "MEDIUM")
+
+    # --- The Pull (HL-02, extra structural)
+    def test_pull_magical_causality(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-07")["caused_by"] = []
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("MAGICAL_CAUSALITY", "BLOCKER")
+
+    # --- Manfred / Selka (TEST 07, 30)
+    def test_manfred_universal_causality(self):   # TEST 07
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["REVELATION"], "actor": "FAM-MANFRED", "participants": ["FAM-MANFRED"],
+                              "facts": ["Os Manfred apagaram os registros."], "caused_by": ["EV-03"]})
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("MANFRED_UNIVERSAL_CAUSALITY", "BLOCKER")
+
+    def test_manfred_lexical_suspected(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-03")["facts"].append("Os Manfred apagaram os quarenta anos.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("MANFRED_UNIVERSAL_CAUSALITY", "MEDIUM")
+
+    def test_selka_book1_history_lock(self):
+        led = self.load(self.ledger_path())
+        led["events"].append({"id": "EV-08", "status": "PLANNED", "chapter": 11, "structural": False,
+                              "kind": ["FIND_GRAVE"], "actor": "CHR-FX-A", "participants": ["CHR-FX-A", "ENT-SELKA"],
+                              "facts": ["A encontra o túmulo de Selka."], "caused_by": ["EV-03"]})
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("BOOK1_HISTORY_LOCK_VIOLATION", "BLOCKER")
+
+    def test_selka_as_the_key(self):   # TEST 30
+        led = self.load(self.ledger_path())
+        # um único evento ensina ao leitor um registro de MYS-SELKA (CR-P12-03) e registros de
+        # DUAS outras mysteries reservadas (CR-P10-02 -> MYS-FORTY-YEARS, CR-P11-04 -> MYS-MANFRED-ROLE)
+        self.event(led, "EV-03")["knowledge_delta"] = [
+            {"knower": "READER", "learns": ["CR-P12-03", "CR-P10-02", "CR-P11-04"]}]
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("SELKA_AS_THE_KEY", "BLOCKER")
+
+    def test_selka_ontology_leak(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-02")["facts"].append("A alma de Selka age agora sobre A, vinda do inferno.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("SELKA_ONTOLOGY_LEAK", "BLOCKER")
+
+    # --- Jurisdiction / technology / coffer lexical
+    def test_extraterritorial_power(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-04")["facts"].append("A OCP prendeu fora de Redmur.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("EXTRATERRITORIAL_POWER", "BLOCKER")
+
+    def test_sovereignty_assumed(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-04")["facts"].append("Redmur é um Estado soberano e independente.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("SOVEREIGNTY_ASSUMED", "BLOCKER")
+
+    def test_forbidden_technology_present(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-01")["facts"].append("Uma IA central onisciente vigiava todos os rostos.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("FORBIDDEN_TECHNOLOGY_PRESENT", "BLOCKER")
+
+    def test_external_purge_assumed(self):   # TEST 21
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-04")["facts"].append("A OCP apagou o registro facial dela em Glasgow.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("EXTERNAL_PURGE_ASSUMED", "HIGH")
+
+    def test_coffer_mechanics_violation(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-05")["evidence_to_reader"] = ["O pescoço sustentava todo o peso do cofre."]
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("COFFER_MECHANICS_VIOLATION", "MEDIUM")
+
+    def test_technology_creep_battery_only(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-05")["facts"].append("Ela sobrevivia apenas com a bateria do cofre.")
+        self.dump(self.ledger_path(), led)
+        self.assertCategory("TECHNOLOGY_CREEP", "HIGH")
+
+    # --- Child protocol relabel (HL-25)
+    def test_cpr_relabels_six_month_leak(self):
+        led = self.load(self.ledger_path())
+        self.event(led, "EV-03")["knowledge_delta"].append({"knower": "CHR-FX-A", "learns": ["UNK-SR-SIX-MONTH-CONTENTS"]})
+        self.dump(self.ledger_path(), led)
+        found = self.findings()
+        self.assertTrue(any(f["rule"] == "SR-CPR-01" for f in found))
+        self.assertTrue(any(f["rule"] == "SR-KN-03" for f in found))
+
+    # --- Lock coverage regression: package mode should have ~26/28 implemented
+    def test_lock_coverage_near_complete(self):
+        _, summary = sr.validate(self.canon, CARTO)
+        self.assertGreaterEqual(summary["lock_coverage"]["implemented"], 26)
+        self.assertLessEqual(summary["lock_coverage"]["planned_only"], 2)
+
 
 
 if __name__ == "__main__":

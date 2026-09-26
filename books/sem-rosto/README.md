@@ -13,8 +13,8 @@ da obra é decisão futura (DEDR SDD, Slice 6).
 | `cartography/approvals/` | decisões fundacionais da autora, com `subject_sha256` |
 | `canon/sources/` | dossiê narrativo canônico (`REDMUR_CANON_RESOLUTION_DOSSIER_FINAL.md`, FROZEN, sha256 pinado) |
 | `canon/approvals/` | freeze do cânone e decisões do Canonical Story System, com `subject_sha256` |
-| `canon/seeds/` | registros canônicos, travas absolutas, gates de livro, mistérios de série e rumores/teorias (apontam para o dossiê por §) |
-| `validators/check_sem_rosto_canon.py` | validador do canon narrativo (`--mode package`/`plan`; consultas `--is-true`/`--who-knows`/`--reader-at`/`--mystery`) |
+| `canon/seeds/` | registros canônicos, travas absolutas, gates de livro, mistérios de série, rumores/teorias e léxico de pré-filtro (apontam para o dossiê por §) |
+| `validators/check_sem_rosto_canon.py` | validador do canon narrativo (`--mode package`/`plan`; firewalls de rosto/cofre/combinação/cível/tatuagem/Manfred/Selka/1% não humano; consultas `--is-true`/`--who-knows`/`--reader-at`/`--mystery`) |
 
 Especificação espacial: `docs/sdd/REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md`
 (status E0; Slice 0 registrado aqui).

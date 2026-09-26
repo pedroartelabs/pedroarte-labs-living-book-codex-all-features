@@ -10,3 +10,97 @@ deltas:
   - {id: SD-0006, event: EV-03, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 3, knower: CHR-FX-A, token: CR-P10-02, source: EV-03, confidence: PARTIAL}
   - {id: SD-0007, event: EV-03, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 3, knower: READER, token: CR-P10-02, source: EV-03, confidence: PARTIAL}
   - {id: SD-0008, event: EV-04, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 5, knower: CHR-FX-A, token: "SR:TOLD:CR-P0-R1", source: CHR-FX-B, confidence: FULL}
+  # ---- Slice 3: cenário PASS (nenhum destes dispara achado bloqueante) ----
+  - id: SD-0009
+    event: EV-05
+    type: FACE_EVENT
+    status: PLANNED
+    chapter: 8
+    subject: CHR-FX-B
+    kind: UNCOVERING
+    setting: SERVICE_COWL
+    uncovered: true
+    viewers: [CHR-FX-A]
+    deliberate: {subject: true, viewers: [CHR-FX-A]}
+    reconstructibility: NON_RECONSTRUCTIBLE
+    record: null
+    authorization: null
+    consent_ref: SD-0010
+    legal_reading: AUTHORIZED
+    reader_visibility: NONE
+  - id: SD-0010
+    event: EV-05
+    type: CONSENT_GRANT
+    status: PLANNED
+    chapter: 8
+    knower: CHR-FX-B
+    token: "CONSENT_TO_FACIAL_EXPOSURE"
+    source: EV-05
+    confidence: FULL
+  - id: SD-0011
+    event: EV-06
+    type: CIVIC_TRANSITION
+    status: PLANNED
+    chapter: 9
+    person: CHR-FX-C
+    axis: civic_link
+    from: ELIGIBLE
+    to: REACTIVATION_IN_PROCESS
+    preconditions_met: [ACCEPTANCE]
+    documents: []
+    authorities: [INST-OCP]
+  - id: SD-0012
+    event: EV-06
+    type: CIVIC_TRANSITION
+    status: PLANNED
+    chapter: 9
+    person: CHR-FX-C
+    axis: presence
+    from: OUTSIDE
+    to: INSIDE
+    preconditions_met: [ACCEPTANCE]
+    documents: []
+    authorities: []
+  - id: SD-0013
+    event: EV-07
+    type: ANOMALY
+    status: PLANNED
+    chapter: 10
+    register: RESIDUAL
+    human_explanations_available: [GT-FX-A-01]
+    residual_detail: "A não sabe explicar por que voltou àquela rua específica."
+  - id: SD-0014
+    event: EV-05
+    type: RECOGNITION
+    status: PLANNED
+    chapter: 8
+    observer: CHR-FX-A
+    claimed_identity: CHR-FX-B
+    actual: CHR-FX-B
+    channels_used: [VOICE, COFFER]
+    level: SOCIAL_RECOGNITION
+    confidence: FULL
+    used_as: CASUAL
+
+combinations:
+  - {id: CMB-0001, coffer: COF-FX-0001, value_status: UNDEFINED, value_ref: null, truth_status: FACT}
+
+face_fragments:
+  - {id: FRG-0001, subject: CHR-FX-B, carrier: EV-05, class: NON_RECONSTRUCTIBLE, combinable_with: [], combined_class: null, reader_visibility: NONE}
+
+sealed_evidence:
+  - id: SFE-0001
+    capability: CAP-SEALED-FACIAL-EVIDENCE
+    context: MEDICAL
+    necessity: "confirmar identidade em atendimento clínico de emergência"
+    minimum_necessary_exposure: true
+    capturing_authority: ENT-VILLAGE-CLINIC-FX
+    procedure: "protocolo clínico de emergência, fixture"
+    purpose_limitation: "uso exclusivo do atendimento"
+    custody: [{holder: ENT-VILLAGE-CLINIC-FX, from_event: EV-05}]
+    access_log: [{by: ENT-VILLAGE-CLINIC-FX, event: EV-05, authorized: true}]
+    derived_copies: []
+    item: FRG-0001
+
+tattoos:
+  - {id: TAT-0001, bearer: CHR-FX-B, placement: "antebraço", motifs: [MOON_PHASE], encodes_digits: false, depicts_face: false, readings: [], clue_ref: null}

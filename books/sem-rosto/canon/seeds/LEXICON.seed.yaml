@@ -1,0 +1,55 @@
+# LEXICON — pré-filtros lexicais para as travas que não têm sinal estrutural puro
+# (SDD seção 15.1: modo LEXICAL_PREFILTER; achado nunca bloqueia sozinho — vira WARNING
+# até o REDMUR_CANON_WARDEN confirmar). Padrões sem acento, minúsculos, casados por substring
+# no texto normalizado de `facts`/`evidence_to_reader` do ledger (mesma técnica de PRO-SR-*.match).
+#
+# Isto NÃO é um dicionário "gesto X = emoção Y" (proibido pelo dossiê §15.2/§15.4): cada lista
+# aqui vigia um HARD LOCK específico, nunca atribui significado a um gesto.
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoLexicon
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  approval: null
+
+lexicon:
+  # HL-04/HL-11 — Faceless Expression Language (seção 27.2): verbo de expressão facial em texto
+  # que chega ao leitor é suspeito por padrão; o Warden decide se o POV tinha acesso (FACE_EVENT).
+  face_features:
+    - sorriu
+    - sorrindo
+    - franziu a testa
+    - franziu as sobrancelhas
+    - arqueou a sobrancelha
+    - piscou os olhos
+    - corou
+    - mordeu o lábio
+    - seus olhos se estreitaram
+    - seu rosto se contorceu
+    - sua expressão
+
+  # HL-10 — Palimpsest Jurisdiction (§4.7, §7): poder policial fora de Redmur.
+  extraterritorial_enforcement:
+    - prendeu fora de redmur
+    - poder policial internacional
+    - jurisdição fora da escócia
+    - a ocp agiu fora de redmur
+    - autoridade global de redmur
+
+  # HL-21 — Coffer mechanics (§2.1): a cabeça carrega o cofre, em vez de o cofre distribuir carga.
+  coffer_mechanics_violation:
+    - o pescoco sustentava o peso do cofre
+    - o pescoco sustentava todo o peso
+    - a cabeca carregava o cofre
+
+  # HL-21/HL-27 — sobrevivência dependente só de eletrônica/bateria (§2.1, §9.1).
+  tech_survival_violation:
+    - sobrevivia apenas com a bateria
+    - sem eletricidade ela morreria em minutos
+    - dependia inteiramente da energia eletrica para respirar
+
+  # HL-11/R8 — espelho comum reconstrutor dentro de Redmur (§3.7); nunca bloqueia sozinho.
+  mirror_common:
+    - espelho comum
+    - se olhou no espelho e viu o proprio rosto nitido
