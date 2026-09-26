@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Status | **E0 — PROPOSTA; Slices 0 e 1 concluídos (2026-09-21).** S0: dossiê pinado, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). S1: seeds `CANON_RECORDS`/`HARD_LOCKS`/`BOOK_GATES` e validador `--mode package` (seção 79.1). Nenhum comportamento do motor alterado. Próximo: Slice 2. |
+| Status | **E0 — PROPOSTA; Slices 0, 1 e 2 concluídos (2026-09-21 a 2026-09-26).** S0: dossiê pinado, freeze aprovado, OQ-SR-01/02/04/05 decididas (tabela abaixo). S1: seeds `CANON_RECORDS`/`HARD_LOCKS`/`BOOK_GATES` e validador `--mode package` (seção 79.1). S2: seeds `MYSTERIES`/`RUMORS`, modo `plan --runtime` (conhecimento, rumor-como-fato, teto de mistério, sincronia de registry) e as consultas `--is-true`/`--who-knows`/`--reader-at`/`--mystery` (seção 79.2). Nenhum comportamento do motor alterado. Próximo: Slice 3. |
 | Data | 2026-09-21 |
 | Obra | **SEM ROSTO** — autoria **Bea Halden** — gênero DEDR (*Distopic Enigma Dark Romance*) |
 | Papel | **Fundação canônica narrativa** da obra (2 de 2). A outra é `REDMUR_CANONICAL_CARTOGRAPHY_GRAPH_SDD_v0.1.md` (espacial). Este SDD é o "Story Truth Ledger" que a cartografia referencia por contrato (cartografia §22.4). |
@@ -3328,7 +3328,7 @@ S0 ─▶ S1 ─▶ S2 ─▶ S3 ─▶ S4 ─┬─▶ S5 (integração no paco
 |---|---|---|---|---|
 | **S0** Decisões e pinagem — **CONCLUÍDO 2026-09-21** | freeze, versionar dossiê | `books/sem-rosto/canon/sources/{REDMUR_CANON_RESOLUTION_DOSSIER_FINAL.md, SOURCES.yaml}`, `approvals/CANON_FREEZE_0001.md` (humano), README do pacote | hash conferido; OQ-SR-01/02 decididas | S |
 | **S1** Registros, locks, gates — **CONCLUÍDO 2026-09-21** | contrato e integridade | `canon/seeds/{CANON_RECORDS, HARD_LOCKS, BOOK_GATES}.seed.yaml`, `canon/templates/*`, `validators/check_sem_rosto_canon.py` (`--mode package`), `tests/test_sem_rosto_canon.py`, fixture | SR-SRC, SR-CR, SR-ST, SR-PV, SR-HL-02/03; `git diff --stat engine/` vazio | M |
-| **S2** Mistérios, rumores, conhecimento | projeções | seeds `MYSTERIES`, `RUMORS`; `--emit-registry-fragment`; `--is-true`, `--who-knows`, `--reader-at`, `--mystery` | TEST 03, 05, 06, 10; `REGISTRY_DRIFT` | M |
+| **S2** Mistérios, rumores, conhecimento — **CONCLUÍDO 2026-09-26** | projeções | seeds `MYSTERIES`, `RUMORS`; `--mode plan --runtime`; `--emit-registry-fragment`; `--is-true`, `--who-knows`, `--reader-at`, `--mystery` | TEST 03, 05, 06, 10; `REGISTRY_DRIFT` | M |
 | **S3** Firewalls | estado dinâmico e regras | seeds `COFFERS`, `CIVIC`, `JURISDICTION`, `LEXICON`; template `STATE_DELTAS`; famílias FACE/FRC/SFE/EXT/CMB/TCH/CNS/AGE/CIV/JUR/TEC/TAT/MAN/SEL/NH | TEST 01, 02, 04, 07–09, 15–25, 30 | L |
 | **S4** Pack, contrato, pós-cena, crime | escrita guiada | `--pack`, Scene Generation Contract, `POST_SCENE_REPORT`, schemas; crime/fair-play/double-edge/irreversibilidade/promessas; `--mode wave/final/regression`; snapshots | TEST 11–14, 26–29; `--verdict` | L |
 | **S5** Integração no pacote | pacote compõe com o sistema | `BOOK_SPEC`/`BOOK_GRAPH` de SEM ROSTO (quando existir), `agents/redmur_canon_warden.toml`, `text_quality.yaml`, tarefas `T018S`, `T1NNS`, `T2NNS`; cartografia: D-SR-11 | compose em diretório temporário; `validate-gate GATE_CANON`; goldens idênticos | M |
@@ -3338,11 +3338,11 @@ S0 ─▶ S1 ─▶ S2 ─▶ S3 ─▶ S4 ─┬─▶ S5 (integração no paco
 
 Entregue:
 
-- `books/sem-rosto/canon/seeds/CANON_RECORDS.seed.yaml` — 136 registros: 82 `CR-*`, 5 `CAP-*` (todos com
-  `instances: []`), 30 `UNK-SR-*` (um por item do dossiê §17 — 24 — mais 6 citados por locks/gates e pelas
-  decisões OQ-SR-05), 12 `PRO-SR-*`, 7 entidades (`ENT-SELKA`, `FAM-MANFRED`, `ENT-FLARRY` `UNSPECIFIED`,
-  `INST-OCP`, `INST-CONSTABULARY`, Police Scotland, COPFS). Todo registro cita `§N[.N]` existente no dossiê
-  pinado ou um item de aprovação humana.
+- `books/sem-rosto/canon/seeds/CANON_RECORDS.seed.yaml` — 136 registros (141 após o Slice 2, seção 79.2):
+  82 `CR-*`, 5 `CAP-*` (todos com `instances: []`), 30 `UNK-SR-*` (um por item do dossiê §17 — 24 — mais
+  6 citados por locks/gates e pelas decisões OQ-SR-05), 12 `PRO-SR-*`, 7 entidades (`ENT-SELKA`,
+  `FAM-MANFRED`, `ENT-FLARRY` `UNSPECIFIED`, `INST-OCP`, `INST-CONSTABULARY`, Police Scotland, COPFS).
+  Todo registro cita `§N[.N]` existente no dossiê pinado ou um item de aprovação humana.
 - `HARD_LOCKS.seed.yaml` — os 28 locks da seção 15.2, com detectores `SR-*`, `ENGINE:<validador>:<regra>`
   ou `JUDGMENT:<agente>`.
 - `BOOK_GATES.seed.yaml` — Livro 1: 11 `REQUIRED`, 4 `PARTIAL`, 21 `FORBIDDEN`, os 16 gates de escrita do
@@ -3365,6 +3365,43 @@ Desvios do texto do SDD, deliberados:
 | 12.6 | templates separados em `canon/templates/` | os próprios seeds + testes de mutação são o contrato executável | um template a mais duplicaria 136 registros sem ganho; o contrato está em `FIELDS_BY_KIND`/`REQUIRED_BY_KIND` do validador |
 | 13, 66 | regras SR-CR sem numeração | SR-CR-01..11 (contrato, duplicado, id, enum, referência, UNK com conteúdo, resposta escondida, cobertura, registry drift [S2], seed não aprovado, seed editado) e SR-SRC-02 `FREEZE_NOT_APPROVED`; SR-B1-01..11 = verificação final de cada `BG1-R-*` (S4) | os locks precisam citar regras por id |
 | 12.2 | `THEORY-*`, `RUM-*`, `MYS-*` em `CANON_RECORDS` | ficam para o Slice 2 (`RUMORS`, `MYSTERIES`) | escopo do slice |
+
+### 79.2 Estado do Slice 2 (2026-09-26)
+
+Entregue:
+
+- `books/sem-rosto/canon/seeds/MYSTERIES.seed.yaml` — 21 mistérios: 15 correspondem, um a um, ao dossiê
+  §18 (`dossier_item` 1–15); 6 fora de §18 cobrem os bloqueios citados por `HARD_LOCKS`/`BOOK_GATES`
+  (`MYS-TRUE-CHRONOLOGY`, `MYS-COFFER-ORIGIN`, `MYS-SIX-MONTH`, `MYS-BODY-GAP`, `MYS-SELF-FACE-TABOO`,
+  `MYS-CRIME-B1`). Todo mistério reservado tem teto `EXPANDING` no Livro 1 (nunca `PARTIALLY_RESOLVED`);
+  nenhum tem `interpretive_question` (decisão OQ-SR-04: nenhum mistério reservado vira `Q-*` do LTE).
+- `RUMORS.seed.yaml` — 6 rumores/teorias com existência canônica; toda `THEORY-*` tem
+  `prohibited_as_fact` apontando uma nova `PRO-SR-*` (5 acrescentadas a `CANON_RECORDS`, total 141).
+- `check_sem_rosto_canon.py --mode plan --runtime <rt>` (novo modo, sobre o ledger causal do runtime):
+  `SR-KN-01..06` (conhecimento de personagem; REUSE de `check_causal_ledger.check_information_leak`),
+  `SR-RD-01/02` (conhecimento do leitor; REUSE de `check_reader_omniscience`), `SR-ST-01/03/04`
+  (incógnita/rumor/capacidade nunca viram fato), `SR-MYS-01..03` (teto do mistério, mistério sem
+  world_truth, pergunta reservada nunca resolvível), `SR-PV-02` (delta de estado sem causa),
+  `SR-CR-09` (`REGISTRY_DRIFT`: fragmento gerado ⇔ `CANON_REGISTRY.yaml` do runtime).
+- Tokens de conhecimento por modalidade (`SR:BELIEVES:`/`SUSPECTS:`/`MISREMEMBERS:`/`TOLD:` + id puro
+  para "sabe"), exatamente como projetado na seção 17.2 — zero mudança no ledger, que já aceita
+  qualquer id em `learns`.
+- Consultas: `--is-true`, `--who-knows`, `--reader-at`, `--mystery`, `--emit-registry-fragment`
+  (seção 73), todas em visão padrão (nunca `world_truth`, nunca conteúdo de `UNK-*`).
+- Fixture `tests/fixtures/sem_rosto_canon/runtime_min/` (personagens `CHR-FX-*`, 4 eventos, 8 deltas
+  de estado) — passa em `check_causal_ledger.validate` **e** no modo `plan`; usada pelas 39 novas
+  asserções (9 dados reais + 7 consultas + 23 mutações), total 78 testes na suíte.
+
+Resultado no pacote real (`--mode plan --runtime <fixture>`): `PASS_WITH_WARNINGS`, mesmos 5 avisos do
+Slice 1 (4 seeds aguardando aprovação + `LOCK_DETECTORS_PLANNED`), nenhum achado bloqueante.
+
+Desvios do texto do SDD, deliberados:
+
+| Onde | SDD dizia | Implementado | Por quê |
+|---|---|---|---|
+| 20.1 | três camadas (série/incógnita/teoria ativa) sempre presentes | mistérios reservados do Livro 1 não têm camada de teoria ativa (nenhum `interpretive_question`) | OQ-SR-04: evita criar teses concorrentes que o dossiê não define |
+| 21.2, passo 9 | classes epistêmicas completas (`ALLOW_AS_RUMOR`/`ALLOW_AS_THEORY`/`ALLOW_AS_PARTIAL`) | Slice 2 implementa só o binário ALLOW/BLOCK sobre conhecimento; as classes finas do `MYSTERY_DISCLOSURE_GATE` (passo 9 completo) ficam para o Slice 3, junto do pack de cena | o gate completo precisa do pack e do contrato de cena (seção 60), ainda não implementados |
+| 60.3, 65 | `--mode scene`/pack por cena | não implementado neste slice | escopo do Slice 3 |
 
 Pré-condição de S5: pacote completo de SEM ROSTO (hoje parcial — só
 cartografia; DEDR S6) e working tree de outras frentes versionado (D-CART-16).

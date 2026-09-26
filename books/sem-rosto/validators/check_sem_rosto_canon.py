@@ -12,12 +12,34 @@ Slice 1 — modo `package`: integridade dos seeds de books/sem-rosto/canon/.
 - SR-PV    proveniência: toda âncora §N[.N] existe no dossiê; nenhuma fonte improvisada
 - SR-HL    locks com detectores resolvíveis; lock editado depois de aprovado
 
-O validador não lê prosa neste slice e não guarda resposta de nada. Modos `plan`, `scene`,
-`wave`, `final` e `regression` chegam nos Slices 2–4; as regras deles já estão no catálogo
-(RULE_CATALOG) para que os locks possam citá-las, e o relatório diz quais ainda são planejadas.
+Slice 2 — mistérios, rumores e conhecimento:
+
+- package: contratos de MYSTERIES/RUMORS, cobertura do dossiê §18, consistência incógnita ↔ mistério
+- plan --runtime R: sobre o ledger causal do runtime (REUSE `check_causal_ledger`)
+    SR-KN   personagem não conhece o que não aprendeu; incógnita nunca é aprendida; proveniência
+    SR-RD   leitor idem (READER é conhecedor do ledger)
+    SR-RUM  rumor/teoria nunca é fato canônico (inferências proibidas casadas em `facts`)
+    SR-MYS  estado projetado do mistério ≤ teto do livro; mistério reservado nunca resolvível
+    SR-CR-09 registry do runtime em sincronia com as incógnitas/inferências da obra
+- consultas: --is-true, --who-knows, --reader-at, --mystery, --emit-registry-fragment
+
+Conhecimento é token em `knowledge_delta.learns` (o ledger aceita qualquer id): id puro = sabe;
+`SR:BELIEVES:<id>`, `SR:SUSPECTS:<id>`, `SR:MISREMEMBERS:<id>`, `SR:TOLD:<id>` = modalidades (SDD 17.2).
+Saber que um rumor existe (`RUM-*` puro) é permitido; crer nele (`SR:BELIEVES:RUM-*`) também; o que o
+sistema bloqueia é o conteúdo virar fato ou uma incógnita ser aprendida.
+
+O validador não lê prosa nestes slices e não guarda resposta de nada. Modos `scene`, `wave`,
+`final` e `regression` chegam nos Slices 3–4; as regras deles já estão no catálogo (RULE_CATALOG)
+para que os locks possam citá-las, e o relatório diz quais ainda são planejadas.
 
 Uso:
     python books/sem-rosto/validators/check_sem_rosto_canon.py --mode package [--canon books/sem-rosto/canon] [--json]
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --mode plan --runtime <rt> [--book B1]
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --is-true "<id|texto>"
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --runtime <rt> --who-knows <token> [--at-chapter N]
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --runtime <rt> --reader-at N
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --mystery MYS-* [--runtime <rt> --at-chapter N]
+    python books/sem-rosto/validators/check_sem_rosto_canon.py --emit-registry-fragment
 
 Sem dependências novas: biblioteca padrão + PyYAML (+ o validador do canon interpretativo do motor,
 de onde vem a lista de chaves de resposta proibidas).
@@ -74,14 +96,18 @@ SEED_KINDS = {
     "CANON_RECORDS.seed.yaml": "SemRostoCanonRecords",
     "HARD_LOCKS.seed.yaml": "SemRostoHardLocks",
     "BOOK_GATES.seed.yaml": "SemRostoBookGates",
+    "MYSTERIES.seed.yaml": "SemRostoMysteries",
+    "RUMORS.seed.yaml": "SemRostoRumors",
 }
 SEED_ROOT_FIELDS = {
     "SemRostoCanonRecords": {"apiVersion", "kind", "metadata", "records"},
     "SemRostoHardLocks": {"apiVersion", "kind", "metadata", "locks"},
     "SemRostoBookGates": {"apiVersion", "kind", "metadata", "book_gates", "series"},
+    "SemRostoMysteries": {"apiVersion", "kind", "metadata", "mysteries"},
+    "SemRostoRumors": {"apiVersion", "kind", "metadata", "rumors"},
 }
 METADATA_FIELDS = {"project_id", "version", "owner", "source", "approval"}
-LOCK_SEEDS = {"HARD_LOCKS.seed.yaml", "BOOK_GATES.seed.yaml"}   # edição após aprovação = BLOCKER
+LOCK_SEEDS = {"HARD_LOCKS.seed.yaml", "BOOK_GATES.seed.yaml", "MYSTERIES.seed.yaml"}   # edição após aprovação = BLOCKER
 
 # --- vocabulário fechado (SDD seções 12–13) ---------------------------------------------
 
@@ -108,6 +134,33 @@ LOCK_SCOPES = {"SERIES", "B1"}
 LOCK_MODES = {"STRUCTURAL", "LEXICAL_PREFILTER", "JUDGMENT"}
 CEILINGS = {"UNOPENED", "OPEN", "EXPANDING", "THEORY", "PARTIALLY_RESOLVED"}
 EARLIEST_REVEALS = {"B2", "B3", "FUTURE"}
+
+MYSTERY_STATUSES = {"UNOPENED", "OPEN", "EXPANDING", "PARTIALLY_RESOLVED", "RESOLVED", "PERMANENTLY_AMBIGUOUS",
+                    "RESERVED", "CANON_PROPOSAL_REQUIRED"}
+STATE_RANK = {"UNOPENED": 0, "OPEN": 1, "EXPANDING": 2, "PARTIALLY_RESOLVED": 3, "RESOLVED": 4}
+MINIMUM_BOOKS = {"B1", "B2", "B3", "FUTURE", "NEVER"}
+MYSTERY_FIELDS = {"id", "question", "scope", "dossier_item", "status", "minimum_book", "full_explanation",
+                  "unknown_refs", "prohibited_refs", "records", "forbidden_gates", "interpretive_question",
+                  "by_book", "source", "notes", "human_approval_required", "resolution_contract"}
+MYSTERY_BOOK_FIELDS = {"state_ceiling", "required", "partial_gate", "allowed"}
+MYS_ID_RE = re.compile(r"^MYS-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+RUMOR_ID_RE = re.compile(r"^(RUM|THEORY)-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+RUMOR_FIELDS = {"id", "statement_neutral", "status", "epistemic_class", "archive", "origin", "origin_confidence",
+                "truth_relation", "unknown_refs", "prohibited_as_fact", "mysteries", "versions", "beneficiaries",
+                "must_coexist_with_alternatives", "source", "notes"}
+RUMOR_VERSION_FIELDS = {"id", "carrier", "first_heard", "differs_from", "elements", "source"}
+ARCHIVES = {"PAPER", "STONE", "BODY", "VOICE"}
+
+# tokens de conhecimento (SDD 17.2)
+MODALITIES = {"BELIEVES", "SUSPECTS", "MISREMEMBERS", "TOLD"}
+TOKEN_RE = re.compile(r"^SR:(BELIEVES|SUSPECTS|MISREMEMBERS|TOLD):(\S+)$")
+SR_NAMESPACE_RE = re.compile(r"^(CR|CAP|UNK-SR|PRO-SR|ENT|INST|FAM|MYS|RUM|THEORY|ITM)-")
+PROVENANCE_SOURCE_RE = re.compile(r"^(EV|EVD|ITM|CHR|STG)-\S+$")
+STATE_DELTA_TYPES = {"KNOWLEDGE_PROVENANCE", "FACE_EVENT", "COFFER_STATE", "COFFER_TOUCH", "CONSENT_GRANT",
+                     "CONSENT_REVOKE", "CIVIC_TRANSITION", "RECOGNITION", "ITEM_CUSTODY", "ANOMALY",
+                     "IRREVERSIBLE", "INJURY", "PULL_FACTORS"}
+STATE_DELTA_TYPES_IMPLEMENTED = {"KNOWLEDGE_PROVENANCE"}
+CONFIDENCES = {"FULL", "PARTIAL", "MISREAD"}
 
 # kind por prefixo; statuses e campos por kind
 KIND_BY_PREFIX = [
@@ -187,7 +240,7 @@ RULE_COUNTS = {
 }
 RULE_CATALOG = {f"SR-{fam}-{n:02d}": FAMILY_SLICE[fam] for fam, count in RULE_COUNTS.items()
                 for n in range(1, count + 1)}
-IMPLEMENTED_SLICE = 1
+IMPLEMENTED_SLICE = 2
 SR_RULE_RE = re.compile(r"^SR-([A-Z0-9]+)-(\d{2})$")
 
 SECTION_RE = re.compile(r"^(#{1,2})\s+(\d+(?:\.\d+)?)[.\s]")
@@ -246,7 +299,14 @@ def parse_dossier(text: str) -> dict:
 
     unknown_items = [ln for ln in body("17") if ln.startswith("- ")]
     writing_gates = [ln for ln in body("21") if re.match(r"^\d+\.\s", ln)]
-    return {"sections": sections, "unknown_items": unknown_items, "writing_gates": writing_gates}
+    reserved_items = []
+    for ln in body("18"):
+        if ln.startswith("- "):
+            reserved_items.append(ln)
+        elif reserved_items and ln.strip():
+            break                      # só a primeira lista de §18 (os mistérios reservados)
+    return {"sections": sections, "unknown_items": unknown_items, "writing_gates": writing_gates,
+            "reserved_items": reserved_items}
 
 
 def scan_hidden_keys(node, path: str, out: list[str]) -> None:
@@ -298,6 +358,9 @@ class Context:
         self.records: dict[str, dict] = {}
         self.locks: dict[str, dict] = {}
         self.gate_ids: set[str] = set()
+        self.mysteries: dict[str, dict] = {}
+        self.rumors: dict[str, dict] = {}
+        self.coverage: dict = {}
         self.map_ids = cartography_ids(cartography_dir)
         self.agents = engine_agent_names()
 
@@ -706,7 +769,452 @@ def check_gates(ctx: Context) -> None:
                 "Gates do Livro 2 só por decisão humana; o seed os mantém UNDEFINED (SDD 70).", "Reverter.")
 
 
-def validate(canon_dir: Path | str = DEFAULT_CANON, cartography_dir: Path | str | None = "default") -> tuple[list[dict], dict]:
+def index_mysteries_and_rumors(ctx: Context) -> None:
+    for seed, table, key, id_re in (("MYSTERIES.seed.yaml", ctx.mysteries, "mysteries", MYS_ID_RE),
+                                    ("RUMORS.seed.yaml", ctx.rumors, "rumors", RUMOR_ID_RE)):
+        for item in as_list((ctx.seeds.get(seed) or {}).get(key)):
+            iid = item.get("id") if isinstance(item, dict) else None
+            if not iid or not id_re.match(str(iid)):
+                ctx.add("SR-CR-03", "ID_MALFORMED", "HIGH", f"{seed}:{iid}", "Id fora do padrão.", "Renomear.")
+                continue
+            if iid in table or iid in ctx.records:
+                ctx.add("SR-CR-02", "DUPLICATE_ID", "HIGH", iid, "Id duplicado.", "Um id por item.")
+                continue
+            table[iid] = item
+
+
+def check_mysteries(ctx: Context) -> None:
+    for mid, mys in ctx.mysteries.items():
+        for key in sorted(set(mys) - MYSTERY_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{mid}.{key}", "Campo desconhecido.", "Remover.")
+        for key in ("question", "status", "minimum_book", "source", "by_book"):
+            if mys.get(key) in (None, "", {}):
+                ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", f"{mid}.{key}", "Campo obrigatório.", "Preencher.")
+        if mys.get("status") not in MYSTERY_STATUSES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{mid}.status", f"'{mys.get('status')}'.", f"{sorted(MYSTERY_STATUSES)}.")
+        if mys.get("minimum_book") not in MINIMUM_BOOKS:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{mid}.minimum_book", f"'{mys.get('minimum_book')}'.", f"{sorted(MINIMUM_BOOKS)}.")
+        check_source_ref(ctx, mid, mys.get("source"))
+        check_refs(ctx, mid, "unknown_refs", mys.get("unknown_refs"), {"UNKNOWN"})
+        check_refs(ctx, mid, "prohibited_refs", mys.get("prohibited_refs"), {"PROHIBITED_INFERENCE"})
+        check_refs(ctx, mid, "records", mys.get("records"))
+        for gid in as_list(mys.get("forbidden_gates")):
+            if gid not in ctx.gate_ids:
+                ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{mid}.forbidden_gates", f"'{gid}'.", "Corrigir.")
+        reserved = mys.get("status") == "RESERVED" or mys.get("minimum_book") in {"B2", "B3", "FUTURE", "NEVER"}
+        for book, spec in (mys.get("by_book") or {}).items():
+            if book not in BOOK_SCOPES - {"SERIES"} or not isinstance(spec, dict):
+                ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{mid}.by_book.{book}", "Livro inválido.", "B1|B2|B3.")
+                continue
+            for key in sorted(set(spec) - MYSTERY_BOOK_FIELDS):
+                ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{mid}.by_book.{book}.{key}", "Campo desconhecido.", "Remover.")
+            ceiling = spec.get("state_ceiling")
+            if ceiling not in STATE_RANK:
+                ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{mid}.by_book.{book}.state_ceiling", f"'{ceiling}'.", f"{sorted(STATE_RANK)}.")
+            elif reserved and STATE_RANK[ceiling] > STATE_RANK["EXPANDING"]:
+                ctx.add("SR-MYS-01", "PREMATURE_RESOLUTION", "BLOCKER", f"{mid}.by_book.{book}.state_ceiling",
+                        f"Mistério reservado com teto {ceiling}: o livro poderia resolvê-lo.",
+                        "Teto ≤ EXPANDING até decisão humana que libere o mistério para este livro.")
+            for gid in as_list(spec.get("required")) + as_list(spec.get("partial_gate")):
+                if gid not in ctx.gate_ids:
+                    ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{mid}.by_book.{book}", f"'{gid}'.", "Corrigir.")
+        if mys.get("interpretive_question") and not re.match(r"^Q-[A-Z0-9_-]+$", str(mys["interpretive_question"])):
+            ctx.add("SR-CR-03", "ID_MALFORMED", "HIGH", f"{mid}.interpretive_question", "Esperado Q-*.", "Corrigir.")
+        for key in mys:
+            if normalize_key(key) in {"world_truth", "solution", "resolution"} or normalize_key(key) in HIDDEN_ANSWER_KEYS:
+                ctx.add("SR-MYS-02", "HIDDEN_ANSWER_PRESENT", "BLOCKER", f"{mid}.{key}",
+                        "Mistério com campo de resposta: world_truth não é campo (SDD 20.2).", "Remover.")
+        if mys.get("status") == "CANON_PROPOSAL_REQUIRED" and mys.get("unknown_refs"):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", mid, "Slot de proposta com incógnitas declaradas.", "Revisar.")
+
+    # cobertura do dossiê §18 (mistérios reservados), um MYS por item
+    if ctx.dossier is not None:
+        expected = len(ctx.dossier["reserved_items"])
+        seen: dict = {}
+        for mid, mys in ctx.mysteries.items():
+            if mys.get("dossier_item") is not None:
+                seen.setdefault(mys["dossier_item"], []).append(mid)
+        missing = [i for i in range(1, expected + 1) if i not in seen]
+        dupes = {i: ids for i, ids in seen.items() if len(ids) > 1}
+        if missing or dupes or any(not (isinstance(i, int) and 1 <= i <= expected) for i in seen):
+            ctx.add("SR-CR-08", "COVERAGE_GAP", "HIGH", "dossiê §18",
+                    f"§18 tem {expected} mistérios reservados; faltando {missing}, duplicados {dupes}.",
+                    "Um MYS-* por item de §18 (dossier_item = posição).")
+
+    # toda incógnita bloqueada no Livro 1 pertence a algum mistério (senão é incógnita solta)
+    owned = {u for mys in ctx.mysteries.values() for u in as_list(mys.get("unknown_refs"))}
+    for rid, rec in ctx.records.items():
+        if record_kind(rid) == "UNKNOWN" and rec.get("unlock") == "B1_LOCKED" and rid not in owned:
+            ctx.add("SR-MYS-02", "UNKNOWN_WITHOUT_MYSTERY", "MEDIUM", rid,
+                    "Incógnita bloqueada no Livro 1 que nenhum MYS-* declara: o gate de revelação não a enxerga.",
+                    "Acrescentar a incógnita ao unknown_refs do mistério correspondente.")
+
+
+def check_rumors(ctx: Context) -> None:
+    for rid, rum in ctx.rumors.items():
+        for key in sorted(set(rum) - RUMOR_FIELDS):
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "MEDIUM", f"{rid}.{key}", "Campo desconhecido.", "Remover.")
+        for key in ("statement_neutral", "status", "epistemic_class", "source", "truth_relation"):
+            if rum.get(key) in (None, ""):
+                ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", f"{rid}.{key}", "Campo obrigatório.", "Preencher.")
+        expected_class = "THEORY" if rid.startswith("THEORY-") else "RUMOR"
+        if rum.get("epistemic_class") != expected_class:
+            ctx.add("SR-ST-03", "RUMOR_PROMOTED_TO_FACT", "BLOCKER", f"{rid}.epistemic_class",
+                    f"'{rum.get('epistemic_class')}': o conteúdo de {rid} só pode ser {expected_class}.",
+                    "A existência do rumor é canon; o conteúdo nunca é fato (SDD 13.3).")
+        if rum.get("status") != "CANON_APPROVED":
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{rid}.status", f"'{rum.get('status')}'.", "CANON_APPROVED.")
+        truth = rum.get("truth_relation")
+        if truth != "UNCONFIRMED" and not (isinstance(truth, str) and truth in ctx.records
+                                           and (ctx.records[truth].get("epistemic_class") == "FACT")):
+            ctx.add("SR-ST-03", "RUMOR_PROMOTED_TO_FACT", "BLOCKER", f"{rid}.truth_relation",
+                    f"'{truth}': relação de verdade só é UNCONFIRMED ou um CR-* FACT aprovado por humano.",
+                    "Voltar a UNCONFIRMED; confirmar exige decisão humana que cria novo registro.")
+        if rum.get("archive") is not None and rum["archive"] not in ARCHIVES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{rid}.archive", f"'{rum['archive']}'.", f"{sorted(ARCHIVES)}.")
+        origin = rum.get("origin", "UNKNOWN")
+        if origin != "UNKNOWN" and origin not in ctx.records:
+            ctx.add("SR-RUM-03", "RUMOR_ORIGIN_INVENTED", "HIGH", f"{rid}.origin",
+                    f"Origem '{origin}' sem canon.", "UNKNOWN até decisão da autora.")
+        for ben in as_list(rum.get("beneficiaries")):
+            if ben not in ctx.records:
+                ctx.add("SR-RUM-03", "RUMOR_ORIGIN_INVENTED", "HIGH", f"{rid}.beneficiaries",
+                        f"Beneficiário '{ben}' sem canon.", "Remover; beneficiário nunca é inferido.")
+        if rum.get("prohibited_as_fact"):
+            check_refs(ctx, rid, "prohibited_as_fact", rum["prohibited_as_fact"], {"PROHIBITED_INFERENCE"})
+        elif expected_class == "THEORY":
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", f"{rid}.prohibited_as_fact",
+                    "Teoria sem inferência proibida que a impeça de virar fato.", "Declarar PRO-SR-*.")
+        check_refs(ctx, rid, "unknown_refs", rum.get("unknown_refs"), {"UNKNOWN"})
+        for mid in as_list(rum.get("mysteries")):
+            if mid not in ctx.mysteries:
+                ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{rid}.mysteries", f"'{mid}'.", "Corrigir.")
+        check_source_ref(ctx, rid, rum.get("source"))
+        seen_versions = set()
+        for ver in as_list(rum.get("versions")):
+            vid = ver.get("id") if isinstance(ver, dict) else None
+            if not vid or vid in seen_versions:
+                ctx.add("SR-CR-02", "DUPLICATE_ID", "HIGH", f"{rid}.versions", f"Versão sem id ou duplicada: {vid}.", "Corrigir.")
+            seen_versions.add(vid)
+            if isinstance(ver, dict):
+                for key in sorted(set(ver) - RUMOR_VERSION_FIELDS):
+                    ctx.add("SR-RUM-02", "RUMOR_NORMALIZED", "HIGH", f"{rid}.{vid}.{key}",
+                            "Versão de rumor com campo fora do contrato (versões nunca são marcadas verdadeiras).",
+                            "Remover; versões são preservadas lado a lado.")
+                check_source_ref(ctx, f"{rid}.{vid}", ver.get("source"))
+
+
+# --- registry do runtime (REUSE do contrato do LTE: unknown_ref = CANON:UNK-*) --------------
+
+def registry_fragment(ctx: Context) -> dict:
+    unknowns, prohibited = [], []
+    for rid, rec in ctx.records.items():
+        kind = record_kind(rid)
+        if kind == "UNKNOWN" and rec.get("status") == "CANON_UNKNOWN":
+            unknowns.append({"id": rid, "status": "MUST_REMAIN_UNKNOWN", "question": rec.get("question")})
+        elif kind == "PROHIBITED_INFERENCE" and rec.get("status") == "CANON_APPROVED":
+            entry = {"id": rid, "statement": rec.get("statement")}
+            if rec.get("match"):
+                entry["match"] = as_list(rec["match"])
+            prohibited.append(entry)
+    return {"unknowns": unknowns, "prohibited_inferences": prohibited}
+
+
+def check_registry_sync(ctx: Context, registry: dict) -> None:
+    frag = registry_fragment(ctx)
+    for block, prefix in (("unknowns", "UNK-SR-"), ("prohibited_inferences", "PRO-SR-")):
+        want = {e["id"]: e for e in frag[block]}
+        have = {e.get("id"): e for e in as_list(registry.get(block)) if str(e.get("id", "")).startswith(prefix)}
+        for missing in sorted(set(want) - set(have)):
+            ctx.add("SR-CR-09", "REGISTRY_DRIFT", "HIGH", f"CANON_REGISTRY.{block}.{missing}",
+                    "Ausente do registry do runtime.", "Incluir o fragmento gerado por --emit-registry-fragment (T018).")
+        for extra in sorted(set(have) - set(want)):
+            ctx.add("SR-CR-09", "REGISTRY_DRIFT", "HIGH", f"CANON_REGISTRY.{block}.{extra}",
+                    "No registry mas não no canon da obra.", "Remover do registry ou registrar por proposta.")
+        for uid in sorted(set(want) & set(have)):
+            if block == "unknowns" and have[uid].get("status") != "MUST_REMAIN_UNKNOWN":
+                ctx.add("SR-CR-09", "REGISTRY_DRIFT", "HIGH", f"CANON_REGISTRY.unknowns.{uid}.status",
+                        f"'{have[uid].get('status')}'.", "MUST_REMAIN_UNKNOWN.")
+
+
+# --- conhecimento no runtime (REUSE do ledger causal) ---------------------------------------
+
+def parse_token(token) -> tuple[str, str]:
+    """(modalidade, id base). Modalidade 'KNOWS' para id puro."""
+    text = str(token)
+    m = TOKEN_RE.match(text)
+    if m:
+        return m.group(1), m.group(2)
+    return "KNOWS", text
+
+
+def is_sr_id(token_id: str) -> bool:
+    return bool(SR_NAMESPACE_RE.match(token_id))
+
+
+def norm_text(text) -> str:
+    stripped = "".join(c for c in unicodedata.normalize("NFKD", str(text)) if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", stripped.lower()).strip()
+
+
+def events_sorted(ledger: dict) -> list[dict]:
+    return [ev for _, ev in sorted(enumerate(ledger.get("events") or []),
+                                   key=lambda pair: (pair[1].get("chapter", 0), pair[0]))]
+
+
+def knowledge_of(ledger: dict, knower: str, at_chapter: int | None = None) -> list[tuple[str, str, str, int]]:
+    """[(token, modalidade, id base, capítulo)] em ordem de aquisição — o mesmo fold de
+    `check_causal_ledger.knowledge_state`, com capítulo e modalidade."""
+    out, seen = [], set()
+    for ev in events_sorted(ledger):
+        if at_chapter is not None and ev.get("chapter", 0) > at_chapter:
+            break
+        for kd in ev.get("knowledge_delta") or []:
+            if kd.get("knower") != knower:
+                continue
+            for tok in kd.get("learns") or []:
+                if tok not in seen:
+                    seen.add(tok)
+                    modality, base = parse_token(tok)
+                    out.append((str(tok), modality, base, ev.get("chapter", 0)))
+    return out
+
+
+def check_runtime_knowledge(ctx: Context, ledger: dict, deltas: list[dict], book: str) -> None:
+    import check_causal_ledger as ccl   # REUSE: INV-12 (leitor) e INV-13 (personagem)
+    idx, _ = ccl.build_indices(ledger)
+    for f in ccl.check_reader_omniscience(ledger, idx):
+        ctx.add("SR-RD-01", "READER_KNOWLEDGE_LEAK", f["severity"], f"cap. {f['chapter']}: {f['evidence']}",
+                f["detail"], f["recommended_action"])
+    for f in ccl.check_information_leak(ledger, idx):
+        ctx.add("SR-KN-01", "CHARACTER_KNOWLEDGE_LEAK", f["severity"], f"cap. {f['chapter']}: {f['evidence']}",
+                f["detail"], f["recommended_action"])
+
+    provenance = {(d.get("event"), d.get("knower"), d.get("token")): d for d in deltas
+                  if d.get("type") == "KNOWLEDGE_PROVENANCE"}
+    all_ids = set(ctx.records) | set(ctx.mysteries) | set(ctx.rumors)
+    learned: dict[str, set[str]] = {}
+    for ev in events_sorted(ledger):
+        eid, chapter = ev.get("id"), ev.get("chapter")
+        for kd in ev.get("knowledge_delta") or []:
+            knower = kd.get("knower")
+            reader = knower == "READER"
+            for tok in kd.get("learns") or []:
+                modality, base = parse_token(tok)
+                if not is_sr_id(base):
+                    continue           # GT-*, EV-*, CART:* … são do ledger e da cartografia
+                where = f"cap. {chapter}: {eid} {knower} learns {tok}"
+                if base.startswith("ITM-"):
+                    pass               # itens físicos: Slice 3
+                elif base not in all_ids:
+                    ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", where,
+                            "Conhecimento de id que não existe no canon da obra.",
+                            "Corrigir o id; fato novo entra por proposta, nunca por knowledge_delta.")
+                    continue
+                kind = record_kind(base)
+                if kind == "UNKNOWN":
+                    rec = ctx.records[base]
+                    if book == "B1" and rec.get("unlock") == "B1_LOCKED":
+                        cat, rule = "BOOK1_HISTORY_LOCK_VIOLATION", "SR-KN-03"
+                    else:
+                        cat, rule = ("READER_KNOWLEDGE_LEAK", "SR-RD-02") if reader else ("PREMATURE_MYSTERY_REVEAL", "SR-KN-03")
+                    ctx.add(rule, cat, "BLOCKER", where,
+                            f"{base} é incógnita ({rec.get('source', {}).get('location')}): não há o que aprender; "
+                            "nenhum conhecedor aprende uma incógnita, em nenhuma modalidade.",
+                            "Remover; hipótese de personagem é THEORY-*/evidência, nunca UNK-*.")
+                    continue
+                if kind == "PROHIBITED_INFERENCE" and modality == "KNOWS":
+                    ctx.add("SR-ST-01", "UNKNOWN_AS_FACT", "BLOCKER", where,
+                            f"{base} é inferência proibida: pode ser crida, suspeitada ou contada, nunca sabida.",
+                            "Usar SR:BELIEVES:/SR:SUSPECTS:/SR:TOLD: ou remover.")
+                    continue
+                reveal = (ctx.records.get(base) or {}).get("reveal") or {}
+                minimum = reveal.get("minimum_book")
+                if minimum and minimum in BOOK_SCOPES and minimum != book and book < minimum:
+                    ctx.add("SR-KN-03", "READER_KNOWLEDGE_LEAK" if reader else "PREMATURE_MYSTERY_REVEAL", "BLOCKER",
+                            where, f"{base} só pode ser revelado a partir de {minimum}.", "Remover ou mover.")
+                prov = provenance.get((eid, knower, tok))
+                if prov is None:
+                    ctx.add("SR-KN-02", "KNOWLEDGE_WITHOUT_PROVENANCE", "HIGH", where,
+                            "Aquisição de conhecimento de canon sem linha KNOWLEDGE_PROVENANCE (fonte, confiança).",
+                            "Declarar em SEM_ROSTO_STATE_DELTAS.yaml de onde o conhecedor aprendeu (SDD 17.5).")
+                else:
+                    src = str(prov.get("source", ""))
+                    if not (PROVENANCE_SOURCE_RE.match(src) or src in all_ids):
+                        ctx.add("SR-KN-02", "KNOWLEDGE_WITHOUT_PROVENANCE", "HIGH", f"{prov.get('id')}.source",
+                                f"Fonte '{src}' não é EV/EVD/ITM/CHR/STG nem id do canon.", "Corrigir a fonte.")
+                    if prov.get("confidence") not in CONFIDENCES:
+                        ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{prov.get('id')}.confidence",
+                                f"'{prov.get('confidence')}'.", f"{sorted(CONFIDENCES)}.")
+                learned.setdefault(knower, set()).add(str(tok))
+        # SR-KN-04: agir sobre o que só foi contado
+        actor = ev.get("actor")
+        for tok in ev.get("acts_on_knowledge") or []:
+            modality, base = parse_token(tok)
+            have = learned.get(actor, set())
+            if modality == "KNOWS" and is_sr_id(base) and tok not in have and f"SR:TOLD:{base}" in have \
+                    and f"SR:BELIEVES:{base}" not in have:
+                ctx.add("SR-KN-04", "TOLD_AS_KNOWN", "MEDIUM", f"cap. {chapter}: {eid} {actor} acts on {tok}",
+                        "O personagem só foi informado (SR:TOLD:), não sabe nem crê.",
+                        "Agir sobre SR:TOLD:/SR:BELIEVES:, ou registrar o aprendizado.")
+
+    # proveniência órfã (linha sem knowledge_delta correspondente)
+    learned_triples = {(ev.get("id"), kd.get("knower"), str(tok)) for ev in ledger.get("events") or []
+                       for kd in ev.get("knowledge_delta") or [] for tok in kd.get("learns") or []}
+    for key, prov in provenance.items():
+        if key not in learned_triples:
+            ctx.add("SR-PV-02", "STATE_WITHOUT_CAUSE", "HIGH", str(prov.get("id")),
+                    "KNOWLEDGE_PROVENANCE sem knowledge_delta correspondente no ledger.", "Corrigir evento/conhecedor/token.")
+
+
+def check_rumor_as_fact(ctx: Context, ledger: dict, interpretive: dict | None) -> None:
+    """Uma inferência proibida (com `match`) casada no texto canônico do mundo: `facts` dos eventos do
+    ledger e evidência observada pelo NARRADOR. Personagens podem dizer; o mundo não pode afirmar."""
+    rumor_pro = {r.get("prohibited_as_fact"): rid for rid, r in ctx.rumors.items() if r.get("prohibited_as_fact")}
+    patterns = []
+    for rid, rec in ctx.records.items():
+        if record_kind(rid) == "PROHIBITED_INFERENCE":
+            for m in as_list(rec.get("match")):
+                patterns.append((rid, norm_text(m)))
+    if not patterns:
+        return
+    texts = []
+    for ev in ledger.get("events") or []:
+        for fact in as_list(ev.get("facts")):
+            texts.append((f"cap. {ev.get('chapter')}: {ev.get('id')}.facts", fact))
+    for evd in as_list((interpretive or {}).get("evidence")):
+        if evd.get("source") == "NARRATOR":
+            texts.append((f"{evd.get('id')}.observable", evd.get("observable")))
+    for where, text in texts:
+        low = norm_text(text)
+        for pid, pat in patterns:
+            if pat and pat in low:
+                if pid in rumor_pro:
+                    ctx.add("SR-RUM-01", "RUMOR_AS_WORLD_TRUTH", "HIGH", where,
+                            f"O texto canônico afirma o conteúdo de {rumor_pro[pid]} ({pid}).",
+                            "Atribuir a fala a um personagem (evidência source: CHR-*) ou remover.")
+                else:
+                    ctx.add("SR-ST-01", "UNKNOWN_AS_FACT", "BLOCKER", where,
+                            f"O texto canônico afirma a inferência proibida {pid}.", "Remover.")
+
+
+def mystery_state(ctx: Context, mid: str, ledger: dict, interpretive: dict | None,
+                  at_chapter: int | None = None) -> str:
+    mys = ctx.mysteries[mid]
+    q = mys.get("interpretive_question")
+    if q and interpretive:
+        question = next((x for x in as_list(interpretive.get("questions")) if x.get("id") == q), None)
+        if question and question.get("resolution_policy") == "RESOLVED_AT":
+            return "RESOLVED"
+        if question and question.get("resolution_policy") == "LATE_PARTIAL":
+            return "PARTIALLY_RESOLVED"
+    related = {mid} | set(as_list(mys.get("records"))) | \
+              {rid for rid, r in ctx.rumors.items() if mid in as_list(r.get("mysteries"))}
+    chapters = {ch for _, _, base, ch in knowledge_of(ledger, "READER", at_chapter) if base in related}
+    if not chapters:
+        return "UNOPENED"
+    return "EXPANDING" if len(chapters) >= 2 else "OPEN"
+
+
+def check_runtime_mysteries(ctx: Context, ledger: dict, interpretive: dict | None, book: str) -> None:
+    for mid, mys in ctx.mysteries.items():
+        spec = (mys.get("by_book") or {}).get(book) or {}
+        ceiling = spec.get("state_ceiling")
+        q = mys.get("interpretive_question")
+        if q and interpretive is not None:
+            question = next((x for x in as_list(interpretive.get("questions")) if x.get("id") == q), None)
+            reserved = mys.get("status") == "RESERVED"
+            if question is None:
+                ctx.add("SR-CR-05", "UNKNOWN_REFERENCE", "HIGH", f"{mid}.interpretive_question",
+                        f"'{q}' não existe no canon interpretativo.", "Corrigir.")
+            elif reserved and question.get("resolution_policy") != "NEVER":
+                ctx.add("SR-MYS-03", "RESERVED_NOT_NEVER_IN_BOOK", "BLOCKER", f"{mid} → {q}",
+                        f"Pergunta de mistério reservado com resolution_policy {question.get('resolution_policy')}.",
+                        "NEVER dentro do livro (D-SR-03).")
+        if ceiling in STATE_RANK:
+            state = mystery_state(ctx, mid, ledger, interpretive)
+            if STATE_RANK[state] > STATE_RANK[ceiling]:
+                ctx.add("SR-MYS-01", "PREMATURE_RESOLUTION", "BLOCKER", mid,
+                        f"Estado projetado {state} acima do teto {ceiling} no {book}.", "Rever a revelação.")
+
+
+def load_runtime(runtime: Path) -> dict:
+    canon = runtime / "canon"
+    out = {"ledger": None, "registry": None, "deltas": [], "interpretive": None}
+    for key, name in (("ledger", "CAUSAL_LEDGER.yaml"), ("registry", "CANON_REGISTRY.yaml"),
+                      ("interpretive", "INTERPRETIVE_CANON.yaml")):
+        path = canon / name
+        if path.is_file():
+            out[key] = load_yaml(path) or {}
+    path = canon / "SEM_ROSTO_STATE_DELTAS.yaml"
+    if path.is_file():
+        doc = load_yaml(path) or {}
+        out["deltas_doc"] = doc
+        out["deltas"] = as_list(doc.get("deltas"))
+    return out
+
+
+def check_state_deltas(ctx: Context, rt: dict, ledger: dict) -> None:
+    doc = rt.get("deltas_doc")
+    if doc is None:
+        return
+    if doc.get("apiVersion") != API_VERSION or doc.get("kind") != "SemRostoStateDeltas":
+        ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", "SEM_ROSTO_STATE_DELTAS.kind",
+                "Esperado kind SemRostoStateDeltas.", "Corrigir o cabeçalho.")
+    events = {ev.get("id"): ev for ev in ledger.get("events") or []}
+    seen = set()
+    for d in rt["deltas"]:
+        did = d.get("id")
+        if not did or not re.match(r"^SD-\d+$", str(did)) or did in seen:
+            ctx.add("SR-CR-03", "ID_MALFORMED", "HIGH", str(did), "Delta sem id SD-NNNN ou duplicado.", "Corrigir.")
+        seen.add(did)
+        if d.get("type") not in STATE_DELTA_TYPES:
+            ctx.add("SR-CR-04", "INVALID_ENUM", "HIGH", f"{did}.type", f"'{d.get('type')}'.", f"{sorted(STATE_DELTA_TYPES)}.")
+        elif d.get("type") not in STATE_DELTA_TYPES_IMPLEMENTED:
+            ctx.add("SR-CR-01", "STATE_DELTA_TYPE_PLANNED", "INFO", f"{did}.type",
+                    f"Tipo {d.get('type')} ainda sem regras (Slice 3); aceito sem verificação.", "Nada a fazer.")
+        ev = events.get(d.get("event"))
+        if ev is None:
+            ctx.add("SR-PV-02", "STATE_WITHOUT_CAUSE", "HIGH", f"{did}.event", f"Evento '{d.get('event')}' inexistente no ledger.",
+                    "Todo delta de estado tem causa num EV-* (SDD 14.2).")
+        elif d.get("status") == "REALIZED" and ev.get("status") != "REALIZED":
+            ctx.add("SR-PV-02", "STATE_WITHOUT_CAUSE", "HIGH", f"{did}.status",
+                    f"Delta REALIZED sobre evento {ev.get('status')}.", "Promover o evento ou voltar o delta a PLANNED.")
+
+
+def validate(canon_dir: Path | str = DEFAULT_CANON, cartography_dir: Path | str | None = "default",
+             runtime: Path | str | None = None, book: str = "B1") -> tuple[list[dict], dict]:
+    ctx = build_context(canon_dir, cartography_dir)
+    rt_summary = None
+    if runtime is not None:
+        rt = load_runtime(Path(runtime))
+        if rt["ledger"] is None:
+            ctx.add("SR-CR-01", "CONTRACT_INVALID", "HIGH", "canon/CAUSAL_LEDGER.yaml",
+                    "Modo plan exige o ledger causal do runtime.", "Rodar depois de T018.")
+        else:
+            check_runtime_knowledge(ctx, rt["ledger"], rt["deltas"], book)
+            check_rumor_as_fact(ctx, rt["ledger"], rt["interpretive"])
+            check_runtime_mysteries(ctx, rt["ledger"], rt["interpretive"], book)
+            check_state_deltas(ctx, rt, rt["ledger"])
+        if rt["registry"] is not None:
+            check_registry_sync(ctx, rt["registry"])
+        rt_summary = {"events": len((rt["ledger"] or {}).get("events") or []), "deltas": len(rt["deltas"])}
+    ctx.findings.sort(key=lambda f: (-SEVERITY_ORDER.index(f["severity"]), f["rule"], f["evidence"]))
+    kinds: dict[str, int] = {}
+    for rid in ctx.records:
+        kinds[record_kind(rid)] = kinds.get(record_kind(rid), 0) + 1
+    summary = {
+        "records": len(ctx.records), "records_by_kind": dict(sorted(kinds.items())), "locks": len(ctx.locks),
+        "gates": len(ctx.gate_ids), "mysteries": len(ctx.mysteries), "rumors": len(ctx.rumors),
+        "lock_coverage": {k: len(v) for k, v in ctx.coverage.items()},
+        "dossier_sections": len(ctx.dossier["sections"]) if ctx.dossier else 0,
+        "hidden_keys_source": HIDDEN_KEYS_SOURCE, "implemented_slice": IMPLEMENTED_SLICE,
+        "runtime": rt_summary,
+    }
+    return ctx.findings, summary
+
+
+def build_context(canon_dir, cartography_dir="default") -> Context:
     canon_dir = Path(canon_dir)
     if cartography_dir == "default":
         cartography_dir = canon_dir.parent / "cartography" / "seeds"
@@ -715,33 +1223,108 @@ def validate(canon_dir: Path | str = DEFAULT_CANON, cartography_dir: Path | str 
     load_seeds(ctx)
     index_locks(ctx)
     check_records(ctx)
-    coverage = check_locks(ctx)
+    ctx.coverage = check_locks(ctx)
     check_gates(ctx)
+    index_mysteries_and_rumors(ctx)
+    check_mysteries(ctx)
+    check_rumors(ctx)
     check_approvals(ctx)
-    ctx.findings.sort(key=lambda f: (-SEVERITY_ORDER.index(f["severity"]), f["rule"], f["evidence"]))
-    kinds: dict[str, int] = {}
-    for rid in ctx.records:
-        kinds[record_kind(rid)] = kinds.get(record_kind(rid), 0) + 1
-    summary = {
-        "records": len(ctx.records), "records_by_kind": dict(sorted(kinds.items())), "locks": len(ctx.locks),
-        "gates": len(ctx.gate_ids), "lock_coverage": {k: len(v) for k, v in coverage.items()},
-        "dossier_sections": len(ctx.dossier["sections"]) if ctx.dossier else 0,
-        "hidden_keys_source": HIDDEN_KEYS_SOURCE, "implemented_slice": IMPLEMENTED_SLICE,
-    }
-    return ctx.findings, summary
+    return ctx
+
+
+# --- consultas (SDD seção 73) — visão padrão: ids e enunciados, nunca conteúdo engine-only ---------
+
+def query_is_true(ctx: Context, needle: str) -> dict:
+    def answer(kind, ident, verdict, extra=None):
+        rec = ctx.records.get(ident) or ctx.rumors.get(ident) or ctx.mysteries.get(ident) or {}
+        out = {"query": needle, "answer": verdict, "id": ident, "kind": kind,
+               "source": (rec.get("source") or {}).get("location")}
+        out.update(extra or {})
+        return out
+
+    ident = needle.strip()
+    if ident in ctx.records:
+        rec, kind = ctx.records[ident], record_kind(ident)
+        if kind == "UNKNOWN":
+            return answer(kind, ident, "CANON_UNKNOWN", {"question": rec.get("question")})
+        if kind == "CAPABILITY":
+            return answer(kind, ident, "CAPABILITY_ONLY", {"statement": rec.get("statement"), "instances": rec.get("instances")})
+        if kind == "PROHIBITED_INFERENCE":
+            return answer(kind, ident, "FALSE", {"statement": rec.get("statement")})
+        return answer(kind, ident, f"TRUE ({rec.get('epistemic_class', 'FACT')})", {"statement": rec.get("statement")})
+    if ident in ctx.rumors:
+        rum = ctx.rumors[ident]
+        return answer("RUMOR", ident, f"CLAIMED_AS ({rum.get('epistemic_class')})",
+                      {"statement": rum.get("statement_neutral"), "truth_relation": rum.get("truth_relation")})
+    if ident in ctx.mysteries:
+        return answer("MYSTERY", ident, "OPEN_QUESTION", {"question": ctx.mysteries[ident].get("question")})
+    low = norm_text(needle)
+    for rid, rec in ctx.records.items():
+        if record_kind(rid) == "PROHIBITED_INFERENCE":
+            pats = [norm_text(m) for m in as_list(rec.get("match"))] + [norm_text(rec.get("statement", ""))]
+            if any(p and p in low for p in pats) or low == norm_text(rec.get("statement", "")):
+                return answer("PROHIBITED_INFERENCE", rid, "FALSE", {"statement": rec.get("statement")})
+        if norm_text(rec.get("title", "")) == low:
+            return query_is_true(ctx, rid)
+    return {"query": needle, "answer": "NOT_IN_CANON", "next": "CANON_PROPOSAL_REQUIRED",
+            "note": "O sistema não adivinha por similaridade: nada no canon resolve este texto."}
+
+
+def query_who_knows(ctx: Context, ledger: dict, token: str, at_chapter: int | None) -> list[dict]:
+    knowers = {kd.get("knower") for ev in ledger.get("events") or [] for kd in ev.get("knowledge_delta") or []}
+    out = []
+    for knower in sorted(k for k in knowers if k):
+        for tok, modality, base, chapter in knowledge_of(ledger, knower, at_chapter):
+            if tok == token or base == token:
+                out.append({"knower": knower, "modality": modality, "token": tok, "since_chapter": chapter})
+    return out
+
+
+def query_reader_at(ctx: Context, ledger: dict, chapter: int) -> dict:
+    facts, rumors, beliefs, other = [], [], [], []
+    for tok, modality, base, ch in knowledge_of(ledger, "READER", chapter):
+        if base in ctx.rumors:
+            (rumors if modality == "KNOWS" else beliefs).append(tok)
+        elif is_sr_id(base) and modality == "KNOWS":
+            facts.append(tok)
+        elif is_sr_id(base):
+            beliefs.append(tok)
+        else:
+            other.append(tok)
+    blocked = sorted(rid for rid in ctx.records if record_kind(rid) == "UNKNOWN")
+    return {"chapter": chapter, "facts_seen": facts, "rumors_seen": rumors, "beliefs_supported": beliefs,
+            "ledger_tokens": other, "cannot_know": len(blocked),
+            "note": "Visão padrão: sem conteúdo engine-only (GT, crenças com truth)."}
+
+
+def query_mystery(ctx: Context, mid: str, ledger: dict | None, interpretive: dict | None, at_chapter: int | None) -> dict:
+    mys = ctx.mysteries.get(mid)
+    if mys is None:
+        return {"mystery": mid, "error": "inexistente"}
+    out = {"mystery": mid, "question": mys.get("question"), "status": mys.get("status"),
+           "minimum_book": mys.get("minimum_book"),
+           "b1_ceiling": ((mys.get("by_book") or {}).get("B1") or {}).get("state_ceiling"),
+           "unknowns": as_list(mys.get("unknown_refs")), "forbidden_gates": as_list(mys.get("forbidden_gates")),
+           "source": (mys.get("source") or {}).get("location")}
+    if ledger is not None:
+        out["projected_state"] = mystery_state(ctx, mid, ledger, interpretive, at_chapter)
+    return out
 
 
 def render(findings: list[dict], summary: dict, canon_dir: Path) -> str:
     counts = {s: sum(1 for f in findings if f["severity"] == s) for s in SEVERITY_ORDER}
     blocked = counts["HIGH"] + counts["BLOCKER"]
     lines = [
-        "# SEM ROSTO — relatório de canon (modo package)",
+        f"# SEM ROSTO — relatório de canon (modo {'plan' if summary.get('runtime') else 'package'})",
         "",
         f"- canon: `{canon_dir}`",
         f"- registros: {summary['records']} {summary['records_by_kind']}",
         f"- locks: {summary['locks']} (com detector implementado/motor: {summary['lock_coverage']['implemented']}, "
         f"só planejado: {summary['lock_coverage']['planned_only']}, só julgamento: {summary['lock_coverage']['judgment_only']})",
-        f"- gates: {summary['gates']} · seções do dossiê indexadas: {summary['dossier_sections']}",
+        f"- gates: {summary['gates']} · mistérios: {summary['mysteries']} · rumores/teorias: {summary['rumors']} · "
+        f"seções do dossiê indexadas: {summary['dossier_sections']}",
+        *( [f"- runtime: {summary['runtime']['events']} eventos, {summary['runtime']['deltas']} deltas de estado"]
+           if summary.get("runtime") else [] ),
         f"- achados: " + ", ".join(f"{s} {counts[s]}" for s in reversed(SEVERITY_ORDER)),
         f"- resultado: **{'FAIL' if blocked else ('PASS_WITH_WARNINGS' if findings else 'PASS')}**",
         "",
@@ -752,14 +1335,46 @@ def render(findings: list[dict], summary: dict, canon_dir: Path) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--mode", default="package", choices=["package"])
+    parser = argparse.ArgumentParser(description=__doc__.split(chr(10) * 2)[0])
+    parser.add_argument("--mode", default="package", choices=["package", "plan"])
     parser.add_argument("--canon", default=str(DEFAULT_CANON))
     parser.add_argument("--cartography", default="default",
                         help="seeds da cartografia para conferir map_refs (padrão: <canon>/../cartography/seeds)")
+    parser.add_argument("--runtime", default=None, help="runtime com canon/CAUSAL_LEDGER.yaml (modo plan e consultas)")
+    parser.add_argument("--book", default="B1", choices=sorted(BOOK_SCOPES - {"SERIES"}))
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--is-true", dest="is_true")
+    parser.add_argument("--who-knows", dest="who_knows")
+    parser.add_argument("--reader-at", dest="reader_at", type=int)
+    parser.add_argument("--mystery")
+    parser.add_argument("--at-chapter", dest="at_chapter", type=int)
+    parser.add_argument("--emit-registry-fragment", dest="emit_fragment", action="store_true")
     args = parser.parse_args(argv)
-    findings, summary = validate(args.canon, args.cartography)
+
+    queries = (args.is_true, args.who_knows, args.reader_at, args.mystery, args.emit_fragment)
+    if any(q not in (None, False) for q in queries):
+        ctx = build_context(args.canon, args.cartography)
+        rt = load_runtime(Path(args.runtime)) if args.runtime else None
+        ledger = (rt or {}).get("ledger")
+        if args.emit_fragment:
+            print(yaml.safe_dump(registry_fragment(ctx), allow_unicode=True, sort_keys=False), end="")
+            return 0
+        if args.is_true is not None:
+            result = query_is_true(ctx, args.is_true)
+        elif args.mystery:
+            result = query_mystery(ctx, args.mystery, ledger, (rt or {}).get("interpretive"), args.at_chapter)
+        else:
+            if ledger is None:
+                print("consulta exige --runtime com canon/CAUSAL_LEDGER.yaml", file=sys.stderr)
+                return 2
+            result = (query_who_knows(ctx, ledger, args.who_knows, args.at_chapter) if args.who_knows
+                      else query_reader_at(ctx, ledger, args.reader_at))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+
+    if args.mode == "plan" and not args.runtime:
+        parser.error("--mode plan exige --runtime")
+    findings, summary = validate(args.canon, args.cartography, args.runtime if args.mode == "plan" else None, args.book)
     if args.json:
         print(json.dumps({"summary": summary, "findings": findings}, ensure_ascii=False, indent=2))
     else:

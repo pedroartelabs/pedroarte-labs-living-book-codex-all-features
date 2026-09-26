@@ -1,0 +1,84 @@
+# Ledger mínimo de fixture para o Slice 2 do SEM_ROSTO_CANONICAL_STORY_SYSTEM.
+# Personagens de FIXTURE (CHR-FX-*), não personagens de SEM ROSTO. Nenhuma prosa.
+apiVersion: pedroarte.livingbooks/v1
+kind: CausalLedger
+metadata: {project_id: sem-rosto-fixture, version: 0.1.0, owner: CANON_GUARDIAN}
+
+characters:
+  - id: CHR-FX-A
+    major: true
+    age: 34
+    age_source: fixture
+    ground_truth:
+      - {id: GT-FX-A-01, kind: CONSCIOUS_WANT, statement: "A quer entender a cidade onde acabou de chegar."}
+    self_model:
+      - {id: SM-FX-A-01, statement: "A se vê como alguém de passagem.", diverges_from: [GT-FX-A-01]}
+    social_persona:
+      - {id: SP-FX-A-01, statement: "A parece indiferente.", conceals: [GT-FX-A-01]}
+  - id: CHR-FX-B
+    major: true
+    age: 31
+    age_source: fixture
+    ground_truth:
+      - {id: GT-FX-B-01, kind: MOTIVE, statement: "B quer testar o que A faz com um rumor."}
+    self_model:
+      - {id: SM-FX-B-01, statement: "B acha que só está conversando.", diverges_from: [GT-FX-B-01]}
+    social_persona:
+      - {id: SP-FX-B-01, statement: "B parece prestativa.", conceals: [GT-FX-B-01]}
+
+relationships: []
+loops: []
+beliefs: []
+
+events:
+  - id: EV-01
+    status: PLANNED
+    chapter: 1
+    structural: false
+    kind: [ARRIVAL]
+    actor: CHR-FX-A
+    participants: [CHR-FX-A]
+    facts: ["A chega e aprende que expor o rosto a terceiros é crime."]
+    caused_by: [GT-FX-A-01]
+    knowledge_delta:
+      - {knower: CHR-FX-A, learns: [CR-P1-02]}
+      - {knower: READER, learns: [CR-P1-02]}
+  - id: EV-02
+    status: PLANNED
+    chapter: 2
+    structural: false
+    kind: [CONVERSATION]
+    actor: CHR-FX-B
+    participants: [CHR-FX-B, CHR-FX-A]
+    facts: ["B repete a A o que se diz sobre o enterro de Selka."]
+    caused_by: [GT-FX-B-01]
+    knowledge_delta:
+      - {knower: CHR-FX-A, learns: [RUM-SELKA-COFFER, "SR:BELIEVES:RUM-SELKA-COFFER"]}
+      - {knower: READER, learns: [RUM-SELKA-COFFER]}
+  - id: EV-03
+    status: PLANNED
+    chapter: 3
+    structural: false
+    kind: [SEARCH]
+    actor: CHR-FX-A
+    participants: [CHR-FX-A]
+    facts: ["A procura registros antigos e percebe que as datas não se encaixam."]
+    caused_by: [EV-02]
+    acts_on_knowledge: [RUM-SELKA-COFFER]
+    knowledge_delta:
+      - {knower: CHR-FX-A, learns: [CR-P10-02]}
+      - {knower: READER, learns: [CR-P10-02]}
+  - id: EV-04
+    status: PLANNED
+    chapter: 5
+    structural: false
+    kind: [CONVERSATION]
+    actor: CHR-FX-B
+    participants: [CHR-FX-B, CHR-FX-A]
+    facts: ["B diz a A que conhecer uma combinação não dá direito a abrir o cofre."]
+    caused_by: [EV-03]
+    knowledge_delta:
+      - {knower: CHR-FX-A, learns: ["SR:TOLD:CR-P0-R1"]}
+
+mutation_log:
+  - {version: 0.1.0, task: fixture, owner: CANON_GUARDIAN, action: "Fixture do Slice 2."}

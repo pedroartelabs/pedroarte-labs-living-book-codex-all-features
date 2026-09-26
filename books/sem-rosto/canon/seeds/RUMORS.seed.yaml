@@ -1,0 +1,95 @@
+# RUMORS — rumores e teorias que EXISTEM no mundo de SEM ROSTO (SDD seções 13.3 e 19).
+#
+# status CANON_APPROVED = é canon que o rumor/teoria circula. O CONTEÚDO não é fato: epistemic_class
+# RUMOR ou THEORY, `truth_relation: UNCONFIRMED`, e uma inferência proibida (`prohibited_as_fact`)
+# impede a narração de afirmá-lo.
+#
+# Projetados, nunca escritos à mão: believers, repeaters, skeptics, known_liars, reader_seen,
+# first_appearance, last_reinforced. `versions` e `beneficiaries` só por decisão da autora.
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoRumors
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  approval: null
+
+rumors:
+  - id: RUM-SELKA-COFFER
+    statement_neutral: "Circula que Selka foi enterrada com o cofre."
+    status: CANON_APPROVED
+    epistemic_class: RUMOR
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-SELKA-COFFER-MODEL]
+    prohibited_as_fact: PRO-SR-SELKA-COFFER-FACT
+    mysteries: [MYS-SELKA]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§14.7"}
+  - id: RUM-LOST-GRAVE
+    statement_neutral: "Há uma tradição persistente sobre o túmulo perdido de Selka."
+    status: CANON_APPROVED
+    epistemic_class: RUMOR
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-SELKA-GRAVE-LOCATION]
+    mysteries: [MYS-SELKA]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§14.4"}
+  - id: THEORY-MISSING-GRAVE-IS-SELKA
+    statement_neutral: "Há quem sustente que A Sepultura Que Falta é a de Selka."
+    status: CANON_APPROVED
+    epistemic_class: THEORY
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-SELKA-GRAVE-LOCATION]
+    prohibited_as_fact: PRO-SR-MISSING-GRAVE-IS-SELKA
+    mysteries: [MYS-MISSING-GRAVE, MYS-SELKA]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§14.5"}
+  - id: RUM-TEN-RELICS
+    statement_neutral: "Circulam listas das 10 Relíquias Mais Valiosas e Perigosas de Redmur; o Túmulo de Selka aparece em versões importantes."
+    status: CANON_APPROVED
+    epistemic_class: RUMOR
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-TEN-RELICS]
+    prohibited_as_fact: PRO-SR-TEN-RELICS-LIST
+    mysteries: [MYS-TEN-RELICS, MYS-SELKA]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§14.6"}
+  - id: THEORY-CHILD-SUBSTITUTION
+    statement_neutral: "Nasce a pergunta: como os pais sabem que receberam a própria criança?"
+    status: CANON_APPROVED
+    epistemic_class: THEORY
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-SIX-MONTH-CONTENTS]
+    prohibited_as_fact: PRO-SR-CHILD-SUBSTITUTION-FACT
+    mysteries: [MYS-SIX-MONTH]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§4.5"}
+  - id: THEORY-MANFRED-ERASED-40Y
+    statement_neutral: "A hipótese de que os Manfred apagaram os quarenta anos."
+    status: CANON_APPROVED
+    epistemic_class: THEORY
+    archive: VOICE
+    origin: UNKNOWN
+    truth_relation: UNCONFIRMED
+    unknown_refs: [UNK-SR-40Y-DELIBERATE, UNK-SR-40Y-SINGLE-ACTOR, UNK-SR-MANFRED-ROLE]
+    prohibited_as_fact: PRO-SR-MANFRED-ERASED-40Y-FACT
+    must_coexist_with_alternatives: true      # §13.3: preservação, disputa interna, vitimização, associação confundida com causalidade
+    mysteries: [MYS-FORTY-YEARS, MYS-MANFRED-ROLE]
+    versions: []
+    beneficiaries: []
+    source: {id: SRC-DOSSIER, location: "§13.3"}

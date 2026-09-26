@@ -1,0 +1,12 @@
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoStateDeltas
+metadata: {project_id: sem-rosto-fixture, version: 0.1.0, owner: CANON_GUARDIAN}
+deltas:
+  - {id: SD-0001, event: EV-01, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 1, knower: CHR-FX-A, token: CR-P1-02, source: EV-01, confidence: FULL}
+  - {id: SD-0002, event: EV-01, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 1, knower: READER, token: CR-P1-02, source: EV-01, confidence: FULL}
+  - {id: SD-0003, event: EV-02, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 2, knower: CHR-FX-A, token: RUM-SELKA-COFFER, source: CHR-FX-B, confidence: FULL}
+  - {id: SD-0004, event: EV-02, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 2, knower: CHR-FX-A, token: "SR:BELIEVES:RUM-SELKA-COFFER", source: CHR-FX-B, confidence: PARTIAL}
+  - {id: SD-0005, event: EV-02, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 2, knower: READER, token: RUM-SELKA-COFFER, source: EV-02, confidence: FULL}
+  - {id: SD-0006, event: EV-03, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 3, knower: CHR-FX-A, token: CR-P10-02, source: EV-03, confidence: PARTIAL}
+  - {id: SD-0007, event: EV-03, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 3, knower: READER, token: CR-P10-02, source: EV-03, confidence: PARTIAL}
+  - {id: SD-0008, event: EV-04, type: KNOWLEDGE_PROVENANCE, status: PLANNED, chapter: 5, knower: CHR-FX-A, token: "SR:TOLD:CR-P0-R1", source: CHR-FX-B, confidence: FULL}

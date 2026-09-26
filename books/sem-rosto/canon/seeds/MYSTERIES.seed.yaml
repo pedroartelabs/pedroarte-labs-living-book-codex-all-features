@@ -1,0 +1,229 @@
+# MYSTERIES — mistérios de série com escopo de livro (SDD seção 20).
+#
+# Guarda a PERGUNTA, o escopo, o teto por livro e as incógnitas que a compõem. Nunca resposta,
+# hipótese privilegiada ou "world_truth". A verdade de um mistério reservado não existe em arquivo;
+# a do crime do Livro 1 morará no ledger (GT engine-only) quando a autora decidir o crime.
+#
+# state_ceiling (teto do estado projetado no livro): UNOPENED < OPEN < EXPANDING < PARTIALLY_RESOLVED < RESOLVED.
+# O dossiê §12.4 permite no Livro 1 citar, provocar, mostrar datas, contradizer documentos, apresentar
+# símbolos, revelar consequências e demonstrar incompatibilidades para toda a história bloqueada: por isso
+# os reservados têm teto EXPANDING. O que nunca ocorre é ensinar uma incógnita a qualquer conhecedor.
+#
+# `dossier_item` = posição no dossiê §18 (RESERVED MYSTERIES). A autoria dos mapas (Q-MAP-AUTHOR)
+# pertence à cartografia e não é repetida aqui.
+apiVersion: pedroarte.livingbooks/v1
+kind: SemRostoMysteries
+metadata:
+  project_id: sem-rosto
+  version: 0.1.0
+  owner: CANON_GUARDIAN
+  approval: null
+
+mysteries:
+  # ------------------------------------------------ §18, na ordem
+  - id: MYS-AQUELE-DIA
+    question: "O que foi Aquele Dia?"
+    dossier_item: 1
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-AQUELE-DIA]
+    forbidden_gates: [BG1-F-AQUELE-DIA-CAUSE]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.1, §12.4, §18"}
+  - id: MYS-LUA-SANGRENTA
+    question: "O que é a Lua Sangrenta?"
+    dossier_item: 2
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: []
+    notes: "O dossiê só a lista como mistério reservado; nenhuma incógnita específica foi declarada."
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§18"}
+  - id: MYS-FLARRY
+    question: "Qual o papel de Flarry?"
+    dossier_item: 3
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-FLARRY-ROLE]
+    records: [ENT-FLARRY]
+    forbidden_gates: [BG1-F-FLARRY-ROLE]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.4, §18"}
+  - id: MYS-LOST-CHILD
+    question: "O que aconteceu com a criança perdida dos Manfred?"
+    dossier_item: 4
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-LOST-CHILD]
+    forbidden_gates: [BG1-F-LOST-CHILD]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.4, §17, §18"}
+  - id: MYS-FORTY-YEARS
+    question: "O que ocorreu nos Missing Forty Years?"
+    dossier_item: 5
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-40Y-CAUSE, UNK-SR-40Y-DELIBERATE, UNK-SR-40Y-SINGLE-ACTOR]
+    prohibited_refs: [PRO-SR-40Y-EXPLAINED-B1, PRO-SR-40Y-EMPTY, PRO-SR-MANFRED-ERASED-40Y-FACT]
+    records: [CR-P10-02]
+    forbidden_gates: [BG1-F-40Y, BG1-F-40Y-VIA-EXHUMATION, BG1-F-40Y-VIA-SELKA]
+    by_book: {B1: {state_ceiling: EXPANDING, required: [BG1-R-40Y-REAL]}}
+    source: {id: SRC-DOSSIER, location: "§12.1, §12.4, §16.8, §18"}
+  - id: MYS-THE-PULL
+    question: "Por que as pessoas tendem a não deixar Redmur?"
+    dossier_item: 6
+    status: RESERVED
+    minimum_book: FUTURE
+    full_explanation: NEVER
+    unknown_refs: [UNK-SR-PULL-COMPLETE]
+    prohibited_refs: [PRO-SR-PULL-FORCE]
+    records: [CR-P6-01, CR-P4-05]
+    forbidden_gates: [BG1-F-PULL]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§6.5, §8, §18"}
+  - id: MYS-FOUR-ARCHIVES
+    question: "Como se relacionam Paper, Stone, Body e Voice?"
+    dossier_item: 7
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: []
+    records: [CR-P10-03]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.2, §18"}
+  - id: MYS-DEAD-ARCHIVE
+    question: "O que os mortos de Redmur preservam?"
+    dossier_item: 8
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: []
+    records: [CAP-DEAD-ARCHIVE]
+    forbidden_gates: [BG1-F-40Y-VIA-EXHUMATION]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.3, §18"}
+  - id: MYS-HISTORICAL-RECORDS
+    question: "Qual foi o destino dos registros históricos?"
+    dossier_item: 9
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-40Y-DELIBERATE]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.1, §18"}
+  - id: MYS-MANFRED-ROLE
+    question: "Qual a verdadeira extensão do poder Manfred?"
+    dossier_item: 10
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-MANFRED-ROLE]
+    prohibited_refs: [PRO-SR-MANFRED-DID-IT, PRO-SR-MANFRED-ERASED-40Y-FACT]
+    records: [CR-P11-01, CR-P11-04, FAM-MANFRED]
+    forbidden_gates: [BG1-F-MANFRED-ROLE]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.4, §13, §18"}
+  - id: MYS-SELKA
+    question: "Quem foi Madre Selka e o que aconteceu com ela?"
+    dossier_item: 11
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-SELKA-DEATH, UNK-SR-SELKA-GRAVE-LOCATION, UNK-SR-SELKA-COFFER-MODEL,
+                   UNK-SR-SELKA-TATTOO-MEANING, UNK-SR-SELKA-TATTOO-COUNT, UNK-SR-SELKA-PRIVATE-LIFE,
+                   UNK-SR-PRAYER-ORIGIN]
+    prohibited_refs: [PRO-SR-SELKA-CROSSOVER, PRO-SR-SELKA-IS-THE-KEY, PRO-SR-SELKA-COFFER-FACT]
+    records: [ENT-SELKA, CR-P12-03]
+    forbidden_gates: [BG1-F-SELKA-GRAVE, BG1-F-SELKA-BODY, BG1-F-SELKA-COFFER, BG1-F-SELKA-TATTOOS-DIRECT,
+                      BG1-F-SELKA-DEATH, BG1-F-40Y-VIA-SELKA]
+    by_book: {B1: {state_ceiling: EXPANDING, partial_gate: BG1-P-SELKA}}
+    source: {id: SRC-DOSSIER, location: "§14.2, §14.9, §18"}
+  - id: MYS-MISSING-GRAVE
+    question: "Por que os sepultamentos registrados não se reconciliam com as sepulturas?"
+    dossier_item: 12
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-SELKA-GRAVE-LOCATION]
+    prohibited_refs: [PRO-SR-MISSING-GRAVE-IS-SELKA]
+    records: [CR-P12-02]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§14.5, §18"}
+  - id: MYS-TEN-RELICS
+    question: "Quais são as 10 Relíquias mais valiosas e perigosas de Redmur?"
+    dossier_item: 13
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-TEN-RELICS]
+    prohibited_refs: [PRO-SR-TEN-RELICS-LIST]
+    records: [CR-P12-02]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§14.6, §18"}
+  - id: MYS-UK-VS-PRESERVATION
+    question: "Por que o Reino Unido moderno e a Preservation Redmur coexistem?"
+    dossier_item: 14
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-ACT-MOTIVE, UNK-SR-SAVINGS-CLAUSES-WHY, UNK-SR-ANOMALY-MAINTENANCE]
+    prohibited_refs: [PRO-SR-REDMUR-SOVEREIGN]
+    records: [CR-P5-01, CR-P5-SAVINGS]
+    forbidden_gates: [BG1-F-ACT-MOTIVE, BG1-F-SAVINGS-MOTIVE]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§7, §7.3, §18"}
+  - id: MYS-WHY-STAY
+    question: "Quais razões psicológicas, sociais e institucionais fazem alguém permanecer em Redmur?"
+    dossier_item: 15
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-PULL-COMPLETE]
+    records: [CR-P6-01]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§8, §18"}
+
+  # ------------------------------------------------ fora de §18 (bloqueios do Livro 1 e incógnitas de §17)
+  - id: MYS-TRUE-CHRONOLOGY
+    question: "Qual é a verdadeira cronologia de Redmur?"
+    status: RESERVED
+    minimum_book: B2
+    unknown_refs: [UNK-SR-TRUE-CHRONOLOGY]
+    records: [CR-P10-01]
+    forbidden_gates: [BG1-F-TRUE-CHRONOLOGY]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12, §12.4"}
+  - id: MYS-COFFER-ORIGIN
+    question: "Por que existem os cofres e a proibição facial?"
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-COFFER-ORIGIN, UNK-SR-FACE-BAN-ORIGIN]
+    forbidden_gates: [BG1-F-COFFER-ORIGIN]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§12.4, §17"}
+  - id: MYS-SIX-MONTH
+    question: "O que ocorre durante os seis meses, e por que o protocolo existe?"
+    status: RESERVED
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-SIX-MONTH-CONTENTS, UNK-SR-SIX-MONTH-ORIGIN, UNK-SR-CHILD-FACILITY-LOCATION]
+    prohibited_refs: [PRO-SR-CHILD-SUBSTITUTION-FACT]
+    records: [CR-P2-02, CR-P2-R4, CR-P5-STATE-KNOWS]
+    forbidden_gates: [BG1-F-SIX-MONTH-ORIGIN]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§4.5, §7.5, §12.4, §17"}
+  - id: MYS-BODY-GAP
+    question: "Por que a distribuição dos corpos em Redmur é tão desigual?"
+    status: OPEN
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-BODY-GAP]
+    records: [CR-P9-BODYGAP]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§11.5"}
+  - id: MYS-SELF-FACE-TABOO
+    question: "Por que a proibição protege a pessoa do próprio rosto?"
+    status: OPEN
+    minimum_book: FUTURE
+    unknown_refs: [UNK-SR-SELF-FACE-ORIGIN]
+    records: [CR-R8-01]
+    by_book: {B1: {state_ceiling: EXPANDING}}
+    source: {id: SRC-DOSSIER, location: "§3.7, §17"}
+  - id: MYS-CRIME-B1
+    question: "O crime do Livro 1 (a definir pela autora)."
+    scope: B1
+    status: CANON_PROPOSAL_REQUIRED
+    minimum_book: B1
+    unknown_refs: []
+    records: [CR-P14-01]
+    by_book: {B1: {state_ceiling: RESOLVED, required: [BG1-R-CRIME, BG1-R-FAIRPLAY, BG1-R-DOUBLE-EDGE]}}
+    source: {id: SRC-DOSSIER, location: "§16.1"}

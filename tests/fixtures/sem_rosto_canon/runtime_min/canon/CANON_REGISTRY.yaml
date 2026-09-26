@@ -1,0 +1,137 @@
+# Registry de fixture: bloco da obra gerado por --emit-registry-fragment (REUSE do contrato do LTE).
+apiVersion: pedroarte.livingbooks/v1
+kind: CanonRegistry
+metadata: {project_id: sem-rosto-fixture, version: 0.1.0, owner: CANON_GUARDIAN}
+unknowns:
+- id: UNK-SR-COFFER-ORIGIN
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a origem verdadeira dos cofres?
+- id: UNK-SR-FACE-BAN-ORIGIN
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a origem real da proibição facial?
+- id: UNK-SR-SELF-FACE-ORIGIN
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o propósito profundo de proteger alguém do próprio rosto?
+- id: UNK-SR-AQUELE-DIA
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a causa e a natureza completa de Aquele Dia?
+- id: UNK-SR-TRUE-CHRONOLOGY
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual é a True Chronology de Redmur?
+- id: UNK-SR-40Y-CAUSE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a causalidade dos Missing Forty Years?
+- id: UNK-SR-40Y-DELIBERATE
+  status: MUST_REMAIN_UNKNOWN
+  question: Houve apagamento deliberado?
+- id: UNK-SR-40Y-SINGLE-ACTOR
+  status: MUST_REMAIN_UNKNOWN
+  question: Houve ator único?
+- id: UNK-SR-LOST-CHILD
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a verdade integral da criança perdida dos Manfred?
+- id: UNK-SR-FLARRY-ROLE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o papel completo de Flarry?
+- id: UNK-SR-ACT-MOTIVE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o motivo final do Redmur Preservation Act?
+- id: UNK-SR-SAVINGS-CLAUSES-WHY
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o motivo final das Savings Clauses?
+- id: UNK-SR-ANOMALY-MAINTENANCE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a razão completa para a manutenção institucional da anomalia?
+- id: UNK-SR-SIX-MONTH-CONTENTS
+  status: MUST_REMAIN_UNKNOWN
+  question: O que ocorre integralmente durante os seis meses das crianças?
+- id: UNK-SR-CHILD-FACILITY-LOCATION
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual lugar da cartografia existente é o local do Six-Month Protocol, e
+    qual seu uso narrativo final?
+- id: UNK-SR-PULL-COMPLETE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a razão completa de The Pull?
+- id: UNK-SR-BODY-GAP
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a explicação total do Body Gap?
+- id: UNK-SR-SELKA-DEATH
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a causa da morte de Madre Selka?
+- id: UNK-SR-SELKA-GRAVE-LOCATION
+  status: MUST_REMAIN_UNKNOWN
+  question: Onde fica o túmulo de Selka?
+- id: UNK-SR-SELKA-COFFER-MODEL
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o modelo e o conteúdo do cofre de Selka?
+- id: UNK-SR-SELKA-TATTOO-MEANING
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o significado das tatuagens de Selka?
+- id: UNK-SR-TEN-RELICS
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a lista objetiva das 10 Relíquias?
+- id: UNK-SR-PRAYER-ORIGIN
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a origem da frase 'Aqui ninguém termina a oração.'?
+- id: UNK-SR-HISTORICAL-FACIAL-RECORD
+  status: MUST_REMAIN_UNKNOWN
+  question: Existe algum Facial Record histórico específico?
+- id: UNK-SR-SIX-MONTH-ORIGIN
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual a origem definitiva do Six-Month Protocol?
+- id: UNK-SR-MANFRED-ROLE
+  status: MUST_REMAIN_UNKNOWN
+  question: Qual o papel causal definitivo dos Manfred?
+- id: UNK-SR-SELKA-PRIVATE-LIFE
+  status: MUST_REMAIN_UNKNOWN
+  question: Quais os detalhes completos da vida clandestina de Selka?
+- id: UNK-SR-SELKA-TATTOO-COUNT
+  status: MUST_REMAIN_UNKNOWN
+  question: Quantas tatuagens Selka tinha?
+- id: UNK-SR-VEIL-HOUSE-LOCATION
+  status: MUST_REMAIN_UNKNOWN
+  question: Onde fica fisicamente a Veil House?
+- id: UNK-SR-TRANSFER-ZONE-LOCATION
+  status: MUST_REMAIN_UNKNOWN
+  question: Onde fica fisicamente a Transfer Zone?
+prohibited_inferences:
+- id: PRO-SR-SUPERNATURAL-CAUSE
+  statement: Um fenômeno de Redmur tem causa sobrenatural confirmada (fantasma, maldição,
+    entidade, portal, força mágica).
+- id: PRO-SR-PULL-FORCE
+  statement: The Pull é uma força, maldição, hipnose, campo ou entidade que impede
+    as pessoas de sair.
+- id: PRO-SR-SELKA-CROSSOVER
+  statement: O destino pós-morte de Selka em outra obra explica ou age em Redmur.
+- id: PRO-SR-SELKA-IS-THE-KEY
+  statement: Selka é a chave que explica Redmur ou os Missing Forty Years.
+- id: PRO-SR-COMBINATION-REMOVES
+  statement: Conhecer a combinação de um cofre basta para removê-lo, tocá-lo, manipular
+    o lock ou expor o rosto.
+- id: PRO-SR-UNIVERSAL-COMBINATION
+  statement: Existe uma combinação que abre todos os cofres.
+- id: PRO-SR-MANFRED-DID-IT
+  statement: Os Manfred, como família, causaram algo sem indicação de qual Manfred,
+    quando e com que evidência.
+- id: PRO-SR-40Y-EXPLAINED-B1
+  statement: O Livro 1 estabelece o que aconteceu nos Missing Forty Years.
+- id: PRO-SR-40Y-EMPTY
+  statement: Os quarenta anos não deixaram documentos.
+- id: PRO-SR-REDMUR-SOVEREIGN
+  statement: Redmur é Estado soberano, tem fronteira internacional ou poder policial
+    fora de seus limites.
+- id: PRO-SR-GLOBAL-PURGE
+  statement: Uma autoridade de Redmur apaga registros faciais fora de Redmur.
+- id: PRO-SR-OMNISCIENT-AI
+  statement: Redmur é governada ou vigiada por uma IA central onisciente ou por vigilância
+    facial indiscriminada.
+- id: PRO-SR-SELKA-COFFER-FACT
+  statement: Selka foi enterrada com o cofre (narrado como fato).
+- id: PRO-SR-MISSING-GRAVE-IS-SELKA
+  statement: A Sepultura Que Falta é a de Selka (narrado como fato).
+- id: PRO-SR-TEN-RELICS-LIST
+  statement: Uma lista das 10 Relíquias apresentada como a lista objetiva.
+- id: PRO-SR-CHILD-SUBSTITUTION-FACT
+  statement: Crianças são trocadas durante o Six-Month Protocol (narrado como fato).
+- id: PRO-SR-MANFRED-ERASED-40Y-FACT
+  statement: Os Manfred apagaram os quarenta anos (narrado como fato).
