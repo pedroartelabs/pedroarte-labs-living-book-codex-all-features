@@ -492,6 +492,44 @@ locations:
     px: [1190, 550]
   - source: SRC-MAP-A
     px: [1210, 570]
+  - source: SRC-MAP-B
+    px: [930, 378]
+  - source: SRC-MAP-B
+    px: [951, 396]
+  - source: SRC-MAP-B
+    px: [964, 396]
+  - source: SRC-MAP-B
+    px: [986, 418]
+  - source: SRC-MAP-B
+    px: [986, 428]
+  - source: SRC-MAP-B
+    px: [1014, 450]
+  - source: SRC-MAP-B
+    px: [1024, 450]
+  - source: SRC-MAP-B
+    px: [1033, 458]
+  - source: SRC-MAP-B
+    px: [1033, 464]
+  - source: SRC-MAP-B
+    px: [1024, 472]
+  - source: SRC-MAP-B
+    px: [1015, 472]
+  - source: SRC-MAP-B
+    px: [978, 492]
+  - source: SRC-MAP-B
+    px: [978, 504]
+  - source: SRC-MAP-B
+    px: [991, 520]
+  - source: SRC-MAP-B
+    px: [996, 538]
+  - source: SRC-MAP-B
+    px: [1050, 578]
+  - source: SRC-MAP-B
+    px: [1083, 579]
+  - source: SRC-MAP-B
+    px: [1093, 589]
+  - source: SRC-MAP-B
+    px: [1145, 596]
   polyline_px_B:
   - [970, 380]
   - [985, 512]

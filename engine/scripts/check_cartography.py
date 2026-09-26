@@ -75,6 +75,10 @@ ANOMALY_CLASSES = {"UNDECIDED", "INTENTIONAL_ARTIFACT", "RENDER_ERROR"}
 BOUNDARY_KINDS = {"UNCERTAIN_LIMIT", "ADMINISTRATIVE", "RESTRICTED_ZONE", "NATURAL", "MAP_FRAME"}
 ARTIFACT_KINDS = {"MAP", "TEXT", "FIGURE", "GLYPH_SET", "MARKER", "ORNAMENT", "REGISTER"}
 ORDERING_SIGNIFICANCE = {"UNKNOWN", "ADMINISTRATIVE", "CHRONOLOGICAL", "CARTOGRAPHIC", "ENCRYPTED", "DECOY"}
+# TO_DIGITIZE: falta digitalizar; ENDS_BEFORE_FRAME: a via desenhada termina antes da moldura (a continuação é desconhecida)
+# feições de terreno (rótulo de montanha, charco, lago): existem no mapa, não são pontos de uma rede viária
+TERRAIN_FEATURES = {"MOUNTAIN", "MARSH", "LAKE", "RESERVOIR", "FOREST", "MOOR", "FIELD"}
+EXIT_FRAME_STATUS = {"TO_DIGITIZE", "ENDS_BEFORE_FRAME"}
 REGISTER_PLACEMENTS = {"ON_MAP", "NOT_ON_MAP", "NO_STANDALONE_LABEL"}
 INSTITUTIONAL_LAYERS = {"LYR-MODERN-OFFICIAL", "LYR-EARLY-PRESERVATION"}
 
@@ -522,7 +526,8 @@ def check_orphans(model: dict) -> list[dict]:
                and "JUNCTION" not in as_list(l.get("type"))
                and l.get("geometry", "POINT") == "POINT"
                and l.get("source") != "AUTHOR_DECLARED"
-               and "OFF_MAP_DESTINATION" not in as_list(l.get("type"))]
+               and "OFF_MAP_DESTINATION" not in as_list(l.get("type"))
+               and not set(as_list(l.get("type"))) & TERRAIN_FEATURES]
     hard = [l["id"] for l in orphans if digitized(l.get("layer"))]
     soft = [l["id"] for l in orphans if not digitized(l.get("layer"))]
     out = []
@@ -618,9 +623,9 @@ def check_exits(model: dict) -> list[dict]:
                 out.append(finding("CG-01 EDGE_DANGLING", "BLOCKER", None, f"{xid}.frame_portal={fp}", "Frame portal inexistente.", "Corrigir."))
             elif "FRAME_PORTAL" not in as_list(ids[fp][1].get("type")):
                 out.append(finding("CG-04 UNKNOWN_TYPE", "HIGH", None, f"{xid}.frame_portal={fp}", "Precisa ser type FRAME_PORTAL.", "Corrigir."))
-        elif ex.get("frame_status") != "TO_DIGITIZE":
+        elif ex.get("frame_status") not in EXIT_FRAME_STATUS:
             out.append(finding("EXIT_FRAME_MISSING", "MEDIUM", None, xid,
-                               "Saída sem frame_portal e sem `frame_status: TO_DIGITIZE`.", "Digitalizar ou marcar."))
+                               f"Saída sem frame_portal e sem `frame_status` ∈ {sorted(EXIT_FRAME_STATUS)}.", "Digitalizar ou marcar."))
         phys = ex.get("physical") or {}
         if phys.get("beyond_frame") != "OFF_MAP":
             out.append(finding("MY-02 TRUE_EXIT_ASSERTED", "BLOCKER", None, f"{xid}.physical.beyond_frame={phys.get('beyond_frame')!r}",

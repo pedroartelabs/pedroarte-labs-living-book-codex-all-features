@@ -53,8 +53,7 @@ class SeedState(unittest.TestCase):
         self.assertEqual(cc.check_hideouts(copy.deepcopy(MODEL)), [])
 
     def test_validator_is_still_clean_with_the_new_rules(self):
-        f = cc.validate(copy.deepcopy(MODEL))
-        self.assertEqual([(x["category"], x["severity"]) for x in f], [("CG-10 ORPHAN_NODE", "INFO")])
+        self.assertEqual(cc.validate(copy.deepcopy(MODEL)), [])
 
 
 class Q4Visibility(unittest.TestCase):

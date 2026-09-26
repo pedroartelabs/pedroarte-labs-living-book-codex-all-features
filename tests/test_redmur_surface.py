@@ -101,14 +101,13 @@ class SurfaceDigitization(unittest.TestCase):
                         and "FRAME_PORTAL" not in cc.as_list(l["type"])]
         self.assertEqual([i for i in urban_points if i not in seen], [])
 
-    def test_regional_layer_is_not_digitized_and_says_so(self):
+    def test_regional_layer_is_digitized_at_the_schematic_scale(self):   # Slice 6 (Mapa B; ver test_redmur_regional)
         flag = MODEL["manifest"]["metadata"]["edges_digitized"]
-        self.assertEqual(flag, {"URBAN": True, "SUBTERRANEAN": True, "REGIONAL": False})
-        self.assertFalse([e for e in MODEL["edges"] if LOCS[e["from"]]["layer"] == "REGIONAL" or LOCS[e["to"]]["layer"] == "REGIONAL"])
+        self.assertEqual(flag, {"URBAN": True, "SUBTERRANEAN": True, "REGIONAL": True})
+        self.assertTrue([e for e in MODEL["edges"] if LOCS[e["from"]]["layer"] == "REGIONAL" or LOCS[e["to"]]["layer"] == "REGIONAL"])
 
-    def test_validator_reports_only_the_regional_gap(self):
-        f = cc.validate(fresh())
-        self.assertEqual([(x["category"], x["severity"]) for x in f], [("CG-10 ORPHAN_NODE", "INFO")])
+    def test_validator_reports_nothing(self):
+        self.assertEqual(cc.validate(fresh()), [])
 
 
 class WaterAndClosure(unittest.TestCase):
@@ -141,7 +140,8 @@ class WaterAndClosure(unittest.TestCase):
         self.assertIn("EDG-U-033", r["edges"])
 
     def test_rowan_cottage_is_reached_only_by_the_drawn_route(self):
-        self.assertEqual([e["id"] for e in MODEL["edges"] if "RM-URB-ROW" in (e["from"], e["to"])], ["EDG-U-R2"])
+        # na escala do Mapa A só a R2 chega ao Rowan Cottage; a outra aresta é a ligação de escala (mesmo lugar no Mapa B)
+        self.assertEqual([e["id"] for e in MODEL["edges"] if "RM-URB-ROW" in (e["from"], e["to"]) and e["edge_type"] != "FRAME_LINK"], ["EDG-U-R2"])
 
 
 class MissionQuestions(unittest.TestCase):

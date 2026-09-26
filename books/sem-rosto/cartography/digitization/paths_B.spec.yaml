@@ -1,0 +1,365 @@
+# GERADO por build_regional_seed.py — não editar à mão. Pontos-chave (pixels do Mapa B) de cada via.
+paths:
+- id: BBR-BTC
+  via:
+  - [985, 512]
+  - [960, 570]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: BBR-ERC
+  via:
+  - [985, 512]
+  - [1037, 538]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: BBR-S1
+  via:
+  - [985, 512]
+  - [690, 650]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: BTC-FSG
+  via:
+  - [960, 570]
+  - [1115, 625]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CHP-OPC
+  via:
+  - [518, 457]
+  - [505, 525]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRB-GLN
+  via:
+  - [553, 230]
+  - [855, 190]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRE-BRF
+  via:
+  - [400, 355]
+  - [265, 400]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRE-CHP
+  via:
+  - [400, 355]
+  - [518, 457]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRE-MCR
+  via:
+  - [400, 355]
+  - [355, 265]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRG-MFF
+  via:
+  - [170, 640]
+  - [268, 480]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRH-BTC
+  via:
+  - [850, 640]
+  - [960, 570]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRV-OPC
+  via:
+  - [470, 640]
+  - [505, 525]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRV-STW
+  via:
+  - [470, 640]
+  - [340, 695]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: ELG-MFF
+  via:
+  - [110, 540]
+  - [268, 480]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: ELG-X_SW1
+  via:
+  - [110, 540]
+  - [160, 810]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: ERC-PMP
+  via:
+  - [1037, 538]
+  - [1080, 487]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: FLE-CRB
+  via:
+  - [485, 290]
+  - [553, 230]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: FLE-CRE
+  via:
+  - [485, 290]
+  - [400, 355]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: FLE-SBO
+  via:
+  - [485, 290]
+  - [690, 310]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: GLN-KLB
+  via:
+  - [855, 190]
+  - [1115, 170]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: GRF-THB
+  via:
+  - [555, 835]
+  - [262, 830]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: H-MNF
+  via:
+  - [665, 535]
+  - [800, 405]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: H-S1
+  via:
+  - [665, 535]
+  - [690, 650]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: KRK-MFF
+  via:
+  - [140, 445]
+  - [268, 480]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: KRK-X_W
+  via:
+  - [140, 445]
+  - [48, 680]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MFF-CHP
+  via:
+  - [268, 480]
+  - [518, 457]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MNF-BBR
+  via:
+  - [800, 405]
+  - [985, 512]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MNF-ROW
+  via:
+  - [800, 405]
+  - [1050, 345]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MNF-SBO
+  via:
+  - [800, 405]
+  - [690, 310]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: OML-GRF
+  via:
+  - [722, 790]
+  - [555, 835]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: OQY-CHP
+  via:
+  - [580, 425]
+  - [518, 457]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: OQY-S1
+  via:
+  - [580, 425]
+  - [690, 650]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: OQY-SBO
+  via:
+  - [580, 425]
+  - [690, 310]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: RVH-MSG
+  via:
+  - [850, 855]
+  - [1030, 825]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: S1-GRF
+  via:
+  - [690, 650]
+  - [555, 835]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: S1-OPC
+  via:
+  - [690, 650]
+  - [505, 525]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: S1-RVH
+  via:
+  - [690, 650]
+  - [850, 855]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: SBO-CRB
+  via:
+  - [690, 310]
+  - [553, 230]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: STW-SBA
+  via:
+  - [340, 695]
+  - [245, 620]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: WLF-CRH
+  via:
+  - [1020, 700]
+  - [850, 640]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: WLF-FSG
+  via:
+  - [1020, 700]
+  - [1115, 625]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: ROW-X_NE
+  via:
+  - [1050, 345]
+  - [1375, 222]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: KLB-X_NE
+  via:
+  - [1115, 170]
+  - [1375, 222]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MSG-X_SE2
+  via:
+  - [1030, 825]
+  - [1005, 880]
+  - [1040, 935]
+  - [1133, 955]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: MSG-X_SE1
+  via:
+  - [1030, 825]
+  - [1147, 870]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: THB-X_SW2
+  via:
+  - [262, 830]
+  - [243, 875]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: THB-X_SW1
+  via:
+  - [262, 830]
+  - [160, 810]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: CRG-X_W
+  via:
+  - [170, 640]
+  - [48, 680]
+  mode: thin
+  snap: 10
+  margin: 90
+- id: RTE-B-R3-STR
+  mode: red
+  via:
+  - [710, 301]
+  - [1017, 326]
+- id: RTE-B-R3-GLN
+  mode: red
+  via:
+  - [774, 221]
+  - [795, 154]
+- id: RTE-B-QM
+  mode: red
+  via:
+  - [619, 440]
+  - [731, 428]
+- id: RTE-B-CHP
+  mode: red
+  via:
+  - [536, 513]
+  - [588, 531]
+- id: RTE-B-R17
+  mode: red
+  via:
+  - [380, 785]
+  - [616, 726]

@@ -125,14 +125,19 @@ def check_water_crossings(model) -> list[dict]:
     out = []
     locs = cc.index_by_id(model["locations"])
     proj = cc.project_all(model)
-    water = {}
+    water = {}          # id da água -> {fonte: pontos}: cada mapa desenha o rio na sua própria escala (SDD 7.4)
     scales = cc.source_scales(model)
     for l in model["locations"]:
         if l.get("geometry") == "LINE" and set(cc.as_list(l.get("type"))) & {"BURN", "RIVER"}:
-            pts = [cc.project_px(scales, p.get("source"), p.get("px")) for p in cc.as_list(l.get("polyline_px")) if isinstance(p, dict)]
-            pts = [p for p in pts if p]
-            if len(pts) >= 2:
-                water[l["id"]] = pts
+            by_src = {}
+            for p in cc.as_list(l.get("polyline_px")):
+                if isinstance(p, dict):
+                    xy = cc.project_px(scales, p.get("source"), p.get("px"))
+                    if xy:
+                        by_src.setdefault(p.get("source"), []).append(xy)
+            by_src = {k: v for k, v in by_src.items() if len(v) >= 2}
+            if by_src:
+                water[l["id"]] = by_src
     if not water:
         return out
     for e in model["edges"]:
@@ -142,7 +147,11 @@ def check_water_crossings(model) -> list[dict]:
         if not poly:
             continue
         declared = {c.get("water"): c.get("via") for c in cc.as_list(e.get("crossings")) if isinstance(c, dict)}
-        for wid, wpts in water.items():
+        esrc = (e.get("source_polyline_px") or {}).get("source")
+        for wid, by_src in water.items():
+            wpts = by_src.get(esrc)
+            if wpts is None:        # a água não está desenhada na fonte desta via: nada a comparar (nunca misturar escalas)
+                continue
             for x in polyline_intersections(poly, wpts):
                 ok = False
                 candidates = [e.get("from"), e.get("to"), declared.get(wid)]
@@ -180,6 +189,17 @@ def edge_state(model, edge, chapter, mutations=None):
             if ef.get("edge") == edge.get("id"):
                 state = ef.get("new_state", state)
         if m.get("target") == edge.get("id") and m.get("field") == "state":
+            state = m.get("new_state", state)
+    return state
+
+
+def place_state(model, loc, chapter):
+    """Estado do lugar no capítulo: `status` do seed, sobrescrito pela última mutação aprovada (`field: status`) com efeito ≤ capítulo."""
+    ch = chapter if chapter is not None else 10 ** 9
+    state = loc.get("status")
+    for m in sorted(cc.as_list(model["manifest"].get("mutations")), key=lambda x: x.get("chapter", 0)):
+        eff = (m.get("canon_effective_from") or {}).get("chapter", m.get("chapter", 0))
+        if m.get("target") == loc.get("id") and m.get("field") == "status" and eff <= ch:
             state = m.get("new_state", state)
     return state
 
@@ -301,6 +321,13 @@ class Graph:
             return False, f"BLOCKED:{st}", None
         if st == "RESTRICTED" and not ctx["access_actions"]:
             return False, "CLOSED_WITHOUT_ACTION", None
+        if e.get("edge_type") == "FRAME_LINK":
+            # o mesmo lugar em duas escalas: se ele deixa de existir (ponte destruída, passagem selada), a ligação de escala também
+            # não passa — senão o mapa de outra escala viraria um desvio ao redor da mutação (o mundo é um só)
+            for end in (e.get("from"), e.get("to")):
+                loc = self.locs.get(end)
+                if loc and place_state(self.model, loc, ctx["chapter"]) in BLOCKING_STATES:
+                    return False, f"BLOCKED:{place_state(self.model, loc, ctx['chapter'])}", None
         if ctx["view"] == "ACTOR":
             kn = ctx["knowledge"]
             if kn is not None and not kn.knows_edge(e):

@@ -12,7 +12,7 @@
 | Base | `engine/ENGINE_GRAPH.yaml` `1.1.0`, branch `slice-1/interpretive-canon-model`, commit `98a2f5c` + working tree (LTE Slices 1–2, DEDR, RI, UNSEEN, HDR, RELICS **não commitados** — não tocados por esta SDD) |
 | SDDs irmãs | `DYSTOPIC_ENIGMA_DARK_ROMANCE_SDD_v0.1.md` (SEM ROSTO como caso-modelo, §33), `DARK_ROMANCE_CANON_ARCHITECT_SDD_v0.1.md` (ledger causal), `LIVING_THEORY_ENGINE_SDD_v0.1.md` (canon interpretativo), `NARCISO_CANONICAL_SDD_v0.1.md` (padrão de canon por obra) |
 | Fontes canônicas | **MAPA A** `redmur_map.png` — sha256 `98123fee45ea70b220c46bef719d2644729231d0f8df5d1ac00d90f6f9525f36` — 1448×1086 RGB · **MAPA B** `redmur_arredores_map.png` — sha256 `36cf98babb4864d0913847c845364641d55120836d8960e8e88cb4373a43b9f3` — 1448×1086 RGB · hoje em `~/Downloads/SEM ROSTO/` (fora do repositório; ver D-CART-01) |
-| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21; Mapa B pendente, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6); S5 concluído (2026-09-23, seção 36.7); S6 preparado (2026-09-23, seção 36.8): uso real aguarda a autora**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
+| Implementação | **S0 e S1 concluídos (2026-09-20); S2 concluído para o Mapa A (2026-09-21, seção 36.4); S3 concluído (2026-09-22, seção 36.5); S4 concluído (2026-09-23, seção 36.6); S5 concluído (2026-09-23, seção 36.7); S6 preparado (2026-09-23, seção 36.8); Mapa B digitalizado (2026-09-26, seção 36.9): uso real aguarda a autora**. S0–S1: `engine/scripts/check_cartography.py`, `engine/contracts/CARTOGRAPHY.schema.json`, `engine/templates/CARTOGRAPHY_TEMPLATE.yaml`, fixture neutra `tests/fixtures/cartography/`, seeds de SEM ROSTO em `books/sem-rosto/cartography/seeds/`, `tests/test_cartography.py` e `tests/test_redmur_cartography.py`. Desvios do plano: a topologia subterrânea (nós, 11 arestas, 7 portais) foi entregue no S1 e não no S2 (é transcrição, não digitalização); `livingbook.py` não foi tocado. Pendente do S1: conferência humana do inventário contra os mapas. |
 | Regras aplicadas | `REUSE > EXTEND > CREATE`; `SIMPLICIDADE SEMPRE`; texto em PT-BR, identificadores em inglês; **geometria é fato, anotação é alegação** (seção 5.3) |
 
 ## Decisões da autora (registradas em 2026-09-19)
@@ -2741,11 +2741,8 @@ conferência (`render_overlay.py` → `overlay_A.png`).
 
 **Pendente:**
 
-- **Mapa B (regional):** as vias regionais **não** foram digitalizadas (`edges_digitized.REGIONAL: false`). São ≈ 30
-  vilarejos e uma malha densa; o método é o mesmo (tabela de pontos-chave + rastreador + conferência), mas o trabalho
-  é de outra ordem de grandeza. Até lá, `reachable` entre lugares regionais responde "sem ligação", e as saídas
-  `EXT-*` continuam sem `frame_portal` digitalizado (`frame_status: TO_DIGITIZE`).
-- **Conferência humana** das 49 arestas (imagem `overlay_A.png`); nada está `CONFIRMED_VISUAL`.
+- **Mapa B (regional):** digitalizado no Slice 6 — ver seção 36.9.
+- **Conferência humana** das arestas dos dois mapas (`overlay_A.png`, `overlay_B.png`); nada está `CONFIRMED_VISUAL`.
 - **CN-07** (mutação retroativa a uma cena já realizada) e **AC-02** (horário de funcionamento): dependem de
   stagings realizados e de horários canônicos; ficam para o Slice 3/5.
 
@@ -2881,6 +2878,49 @@ foi entregue é o que não exige essa decisão:
 - **`books/sem-rosto/cartography/approvals/CART_OPEN_DECISIONS.md`**: folha de decisões (7 que destravam respostas, 5 de método, 3 técnicas). É pedido, não aprovação.
 
 **Recalibração de limiares:** não feita, de propósito: não há uso real para calibrar. Os limiares aprovados (`OQ-CART-14`) e o único parâmetro meu (`walk_brisk_mps = 1,8`) ficam como estão até a primeira wave real.
+
+### 36.9 Mapa B digitalizado (2026-09-26)
+
+**Método (estende 36.3):** as ligações entre nós regionais não foram desenhadas à mão. Para todo par de nós a ≤ 360 px o
+rastreador (`trace_map_paths.py`, novo modo `thin`: contraste local por blur gaussiano, porque as vias do Mapa B são finas
+e escuras — luminância absoluta sozinha não bastava) segue a via desenhada; regiões que não são terreno (título, legenda,
+registro, molduras ornamentais) são bloqueadas (`block()`) para o rastreador não atravessá-las. Só entraram no seed as
+ligações **diretas** (o traçado não passa perto de um terceiro nó — descarta compostas/redundantes), com ≥ 70 % dos pixels
+sobre via clara (`road_fraction`, medido no caminho bruto, não na corda simplificada) e desvio ≤ 1,7× a distância reta. O
+resultado (`books/sem-rosto/cartography/digitization/build_regional_seed.py` → `REGIONAL.seed.yaml`) é reprodutível a
+partir de uma tabela de pixels congelada; nada foi digitado à mão além dos pontos-chave e da seleção.
+
+**Entregue:**
+
+- 64 arestas regionais e de ligação: vias entre os ~30 vilarejos/marcos do Mapa B, os 5 trechos desenhados das rotas
+  contestadas (R3×2, "GLY-B-09", capela-cemitério, R17 — sempre com `continuation_beyond_drawn: UNKNOWN`, nunca
+  interpretados), e 7 saídas regionais com `frame_portal` agora digitalizado (`EXT-03..08, 10`); só `EXT-09`
+  permanece `frame_status: ENDS_BEFORE_FRAME` (a R3 termina desenhada antes da moldura) e `EXT-02` idem (a East Road
+  termina na zona restrita no Mapa B).
+- **Escala e junção entre mapas (SDD 7.4).** O núcleo do Mapa B é esquemático: cada lugar presente nos dois mapas ganha um
+  nó-junção regional próprio, ligado ao lugar urbano por `FRAME_LINK` de comprimento zero (`EDG-L-*`, sempre `UNCERTAIN`
+  — identidade entre escalas, não medição). `edge_state`/`Graph.usable` passam a barrar um `FRAME_LINK` cujo lugar do
+  outro lado está num estado bloqueante (ponte destruída, passagem selada): sem essa regra uma mutação urbana vazaria por
+  um desvio via Mapa B.
+- **Ash Burn no Mapa B**, rastreado (`mode: water`) e anexado a `WAT-ASH.polyline_px` ao lado do traçado do Mapa A —
+  **nunca** comparados entre si: `check_water_crossings` agora agrupa a água por fonte e só cruza uma via com o curso
+  desenhado na mesma fonte da via (`CX-01` continua verde: Burn Bridge é o único ponto de travessia em ambos os mapas).
+- **`CG-10`** ganhou a exceção `TERRAIN_FEATURES` (montanha, charco, lago, floresta, campo, charneca): rótulos de
+  paisagem do Mapa B não são nós de uma rede viária e não pedem aresta.
+- **`overlay_B.png`** (conferência humana; `render_overlay.py --map A|B`), `paths_B.spec.yaml` (pontos-chave gerados).
+
+**Resultado:** `edges_digitized.REGIONAL: true`; validador limpo (zero achados) pela primeira vez desde o S1. Todos os
+vilarejos regionais alcançáveis a partir de Saint Morrow Cross; viagem regional agora responde em horas, não minutos
+(Red Stag Pub → Mossgate: ≈ 33 km, esperado > 5 h). `reader_map` no capítulo 0 passa de 163 para 249+ ids `SEEN_ON_MAP`
+sem tocar os 3 que ficam de fora desde o S4.
+
+**Não feito (por decisão):**
+
+- **Conferência humana** de nenhuma das duas imagens: nada é `CONFIRMED_VISUAL`; tudo é `PROBABLE`/`UNCERTAIN`.
+- **Nomes/classes de via regionais** (`road_class: UNCLASSIFIED`): o mapa não diferencia visualmente estrada principal de
+  secundária fora do núcleo; atribuir classe seria inventar.
+- **`RTE-B-R4/R7/R13`** continuam `TO_DIGITIZE`: os marcadores foram lidos (36.4/S1), mas nenhuma linha vermelha
+  contígua e inequívoca foi encontrada perto deles nesta passagem; digitalizar errado seria pior que não digitalizar.
 
 ---
 

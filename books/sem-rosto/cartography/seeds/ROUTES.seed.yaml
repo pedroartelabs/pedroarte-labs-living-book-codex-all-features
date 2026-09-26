@@ -50,8 +50,8 @@ routes:
   label: R3
   source: SRC-MAP-B
   legend_class: CONTESTED
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-R-047]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R3
@@ -64,8 +64,8 @@ routes:
   label: R3
   source: SRC-MAP-B
   legend_class: CONTESTED
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-R-048]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R3
@@ -79,8 +79,8 @@ routes:
   label: GLY-B-09
   source: SRC-MAP-B
   legend_class: CONTESTED
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-R-049]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R3
@@ -93,8 +93,8 @@ routes:
   label: sem rótulo
   source: SRC-MAP-B
   legend_class: CONTESTED
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-R-050]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   drawn_endpoints:
@@ -145,8 +145,8 @@ routes:
   label: R17
   source: SRC-MAP-B
   legend_class: CONTESTED
-  edges: []
-  trace_status: TO_DIGITIZE
+  edges: [EDG-R-051]
+  trace_status: DIGITIZED
   continuation_beyond_drawn: UNKNOWN
   epistemic_status: FACT
   mystery: RMY-R17

@@ -1,0 +1,2229 @@
+# Vias do Mapa B (regional, Slice 6). GERADO por books/sem-rosto/cartography/digitization/build_regional_seed.py.
+# Polilinhas em pixels da fonte (55,86 m/px, linear, a confirmar). Núcleo esquemático; confiança PROBABLE/UNCERTAIN até a conferência humana.
+locations:
+- id: RM-JCT-B-RDM
+  canonical_name: Redmur (núcleo esquemático no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [665, 535]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-OQY
+  canonical_name: Old Quarry (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [580, 425]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-FLE
+  canonical_name: Flarry Estate (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [485, 290]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-SBO
+  canonical_name: Shepherd's Bothy (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [690, 310]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-MNF
+  canonical_name: Manfred Farm (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [800, 405]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-ROW
+  canonical_name: Rowan Cottage (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1050, 345]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-BBR
+  canonical_name: Burn Bridge (no Mapa B)
+  type: [JUNCTION, BRIDGE]
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [985, 512]
+    anchor: ICON
+  crosses: [WAT-ASH]
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-ERC
+  canonical_name: East Road, ponto de bloqueio (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1037, 538]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-PMP
+  canonical_name: Pumping Station (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1080, 487]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-CHP
+  canonical_name: Saint Morrow Chapel (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [518, 457]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-OPC
+  canonical_name: Old Parish Cemetery (no Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [505, 525]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-SGR
+  canonical_name: 'South Gate Road: saída do núcleo (no Mapa B)'
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [690, 650]
+    anchor: ICON
+  note: nó-junção do Mapa B; o lugar urbano correspondente é ligado por FRAME_LINK de comprimento zero (mesmo lugar, escala diferente)
+- id: RM-JCT-B-R3-STR-A
+  canonical_name: ponta inicial desenhada da rota RTE-B-R3-STR (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [710, 301]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-R3-STR-B
+  canonical_name: ponta final desenhada da rota RTE-B-R3-STR (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [1017, 326]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-R3-GLN-A
+  canonical_name: ponta inicial desenhada da rota RTE-B-R3-GLN (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [774, 221]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-R3-GLN-B
+  canonical_name: ponta final desenhada da rota RTE-B-R3-GLN (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [795, 154]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-QM-A
+  canonical_name: ponta inicial desenhada da rota RTE-B-QM (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [619, 440]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-QM-B
+  canonical_name: ponta final desenhada da rota RTE-B-QM (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [731, 428]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-CHP-A
+  canonical_name: ponta inicial desenhada da rota RTE-B-CHP (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [536, 513]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-CHP-B
+  canonical_name: ponta final desenhada da rota RTE-B-CHP (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [588, 531]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-R17-A
+  canonical_name: ponta inicial desenhada da rota RTE-B-R17 (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [380, 785]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+- id: RM-JCT-B-R17-B
+  canonical_name: ponta final desenhada da rota RTE-B-R17 (Mapa B)
+  type: JUNCTION
+  layer: REGIONAL
+  geometry: POINT
+  source_px:
+  - source: SRC-MAP-B
+    px: [616, 726]
+    anchor: ICON
+  note: ponta do trecho vermelho desenhado; a continuação é UNKNOWN
+edges:
+- id: EDG-R-001
+  from: RM-JCT-B-BBR
+  to: RM-REG-BTC
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [985, 511]
+    - [991, 511]
+    - [984, 515]
+    - [987, 524]
+    - [981, 530]
+    - [984, 547]
+    - [981, 551]
+    - [969, 549]
+    - [967, 554]
+    - [960, 555]
+    - [955, 562]
+    - [957, 571]
+  distance_meters: {nominal: 5404, min: 4864, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.71, detour_ratio: 1.55}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-002
+  from: RM-JCT-B-BBR
+  to: RM-JCT-B-SGR
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [985, 511]
+    - [976, 518]
+    - [960, 524]
+    - [929, 523]
+    - [920, 526]
+    - [860, 557]
+    - [851, 565]
+    - [815, 557]
+    - [765, 556]
+    - [754, 552]
+    - [744, 561]
+    - [742, 569]
+    - [723, 590]
+    - [716, 590]
+    - [707, 596]
+    - [675, 600]
+    - [692, 641]
+    - [692, 648]
+    - [689, 649]
+  distance_meters: {nominal: 22444, min: 20200, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.96, detour_ratio: 1.3}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-003
+  from: RM-REG-BTC
+  to: RM-REG-FSG
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [957, 571]
+    - [956, 574]
+    - [951, 574]
+    - [951, 577]
+    - [959, 590]
+    - [966, 591]
+    - [968, 609]
+    - [1027, 610]
+    - [1031, 622]
+    - [1035, 625]
+    - [1035, 634]
+    - [1064, 635]
+    - [1079, 642]
+    - [1085, 627]
+    - [1104, 628]
+    - [1109, 620]
+  distance_meters: {nominal: 12705, min: 11435, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.78, detour_ratio: 1.49}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-004
+  from: RM-JCT-B-CHP
+  to: RM-JCT-B-OPC
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [517, 460]
+    - [512, 460]
+    - [512, 468]
+    - [507, 473]
+    - [504, 484]
+    - [496, 489]
+    - [496, 500]
+    - [493, 505]
+    - [503, 525]
+  distance_meters: {nominal: 4474, min: 4027, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.91, detour_ratio: 1.28}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-005
+  from: RM-REG-CRB
+  to: RM-REG-GLN
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [550, 233]
+    - [547, 228]
+    - [552, 222]
+    - [579, 220]
+    - [580, 208]
+    - [584, 211]
+    - [590, 208]
+    - [666, 208]
+    - [668, 184]
+    - [678, 182]
+    - [684, 187]
+    - [709, 186]
+    - [712, 190]
+    - [728, 195]
+    - [741, 212]
+    - [748, 214]
+    - [768, 212]
+    - [768, 206]
+    - [774, 202]
+    - [803, 203]
+    - [814, 199]
+    - [818, 192]
+    - [832, 193]
+    - [844, 185]
+    - [852, 186]
+    - [855, 192]
+  distance_meters: {nominal: 21414, min: 19272, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.8, detour_ratio: 1.33}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-006
+  from: RM-REG-CRE
+  to: RM-REG-BRF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [399, 357]
+    - [403, 358]
+    - [403, 362]
+    - [396, 367]
+    - [396, 372]
+    - [388, 378]
+    - [377, 379]
+    - [374, 383]
+    - [376, 389]
+    - [350, 391]
+    - [337, 398]
+    - [309, 400]
+    - [293, 409]
+    - [261, 407]
+    - [260, 404]
+    - [264, 400]
+  distance_meters: {nominal: 10180, min: 9162, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.89, detour_ratio: 1.38}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-007
+  from: RM-REG-CRE
+  to: RM-JCT-B-CHP
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [399, 357]
+    - [403, 358]
+    - [403, 362]
+    - [389, 377]
+    - [390, 392]
+    - [399, 404]
+    - [419, 405]
+    - [426, 409]
+    - [453, 414]
+    - [458, 418]
+    - [472, 420]
+    - [482, 432]
+    - [516, 439]
+    - [517, 460]
+  distance_meters: {nominal: 11514, min: 10363, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.87, detour_ratio: 1.43}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-008
+  from: RM-REG-CRE
+  to: RM-REG-MCR
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [399, 357]
+    - [396, 354]
+    - [399, 336]
+    - [390, 327]
+    - [393, 323]
+    - [392, 313]
+    - [385, 310]
+    - [389, 306]
+    - [389, 292]
+    - [357, 290]
+    - [357, 262]
+  distance_meters: {nominal: 7687, min: 6918, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.85, detour_ratio: 1.42}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-009
+  from: RM-REG-CRG
+  to: RM-REG-MFF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [171, 632]
+    - [174, 599]
+    - [164, 580]
+    - [169, 573]
+    - [169, 566]
+    - [186, 555]
+    - [197, 553]
+    - [210, 543]
+    - [219, 541]
+    - [230, 530]
+    - [230, 499]
+    - [234, 493]
+    - [245, 486]
+    - [267, 486]
+    - [265, 477]
+  distance_meters: {nominal: 12584, min: 11326, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.77, detour_ratio: 1.33}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-010
+  from: RM-REG-CRH
+  to: RM-REG-BTC
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [851, 644]
+    - [877, 644]
+    - [881, 630]
+    - [902, 633]
+    - [905, 629]
+    - [903, 610]
+    - [917, 603]
+    - [919, 599]
+    - [927, 599]
+    - [930, 595]
+    - [937, 594]
+    - [939, 590]
+    - [951, 590]
+    - [951, 574]
+    - [956, 574]
+    - [957, 571]
+  distance_meters: {nominal: 9312, min: 8381, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.76, detour_ratio: 1.38}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-011
+  from: RM-REG-CRV
+  to: RM-JCT-B-OPC
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [464, 648]
+    - [457, 632]
+    - [459, 623]
+    - [480, 602]
+    - [512, 588]
+    - [520, 581]
+    - [517, 564]
+    - [503, 552]
+    - [500, 543]
+    - [490, 535]
+    - [491, 525]
+    - [503, 525]
+  distance_meters: {nominal: 10166, min: 9149, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.89, detour_ratio: 1.51}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-012
+  from: RM-REG-CRV
+  to: RM-REG-STW
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [464, 648]
+    - [457, 632]
+    - [459, 629]
+    - [453, 628]
+    - [441, 638]
+    - [428, 657]
+    - [406, 660]
+    - [381, 669]
+    - [353, 685]
+    - [331, 688]
+    - [331, 692]
+    - [340, 695]
+  distance_meters: {nominal: 10195, min: 9175, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.86, detour_ratio: 1.5}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-013
+  from: RM-REG-ELG
+  to: RM-REG-MFF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [109, 537]
+    - [110, 529]
+    - [130, 527]
+    - [142, 522]
+    - [148, 523]
+    - [151, 519]
+    - [175, 515]
+    - [186, 504]
+    - [189, 505]
+    - [197, 499]
+    - [216, 496]
+    - [218, 493]
+    - [227, 494]
+    - [230, 498]
+    - [238, 489]
+    - [245, 486]
+    - [267, 486]
+    - [265, 477]
+  distance_meters: {nominal: 10785, min: 9706, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.79, detour_ratio: 1.23}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-014
+  from: RM-REG-ELG
+  to: RM-FRM-B-SW1
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [109, 537]
+    - [105, 538]
+    - [101, 546]
+    - [92, 547]
+    - [92, 562]
+    - [135, 564]
+    - [133, 582]
+    - [138, 587]
+    - [120, 604]
+    - [108, 608]
+    - [96, 622]
+    - [96, 629]
+    - [106, 648]
+    - [121, 664]
+    - [129, 679]
+    - [125, 684]
+    - [111, 687]
+    - [111, 690]
+    - [99, 699]
+    - [99, 714]
+    - [101, 723]
+    - [105, 725]
+    - [113, 740]
+    - [132, 756]
+    - [132, 762]
+    - [145, 774]
+    - [146, 783]
+    - [133, 797]
+    - [142, 808]
+    - [154, 807]
+    - [159, 810]
+    - [160, 806]
+  distance_meters: {nominal: 23792, min: 21412, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.7, detour_ratio: 1.65}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-015
+  from: RM-JCT-B-FLE
+  to: RM-REG-CRB
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [487, 290]
+    - [479, 277]
+    - [482, 271]
+    - [479, 268]
+    - [482, 257]
+    - [503, 249]
+    - [526, 248]
+    - [542, 243]
+    - [547, 241]
+    - [547, 233]
+    - [550, 233]
+  distance_meters: {nominal: 6494, min: 5845, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.81, detour_ratio: 1.5}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-016
+  from: RM-JCT-B-FLE
+  to: RM-REG-CRE
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [487, 290]
+    - [485, 296]
+    - [488, 300]
+    - [467, 307]
+    - [448, 306]
+    - [413, 332]
+    - [406, 328]
+    - [397, 330]
+    - [399, 340]
+    - [396, 354]
+    - [399, 357]
+  distance_meters: {nominal: 7939, min: 7145, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.82, detour_ratio: 1.42}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-017
+  from: RM-JCT-B-FLE
+  to: RM-JCT-B-SBO
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [487, 290]
+    - [485, 296]
+    - [489, 299]
+    - [483, 301]
+    - [483, 304]
+    - [505, 303]
+    - [507, 306]
+    - [518, 306]
+    - [520, 303]
+    - [543, 300]
+    - [560, 308]
+    - [590, 311]
+    - [601, 320]
+    - [613, 309]
+    - [632, 305]
+    - [648, 307]
+    - [654, 302]
+    - [671, 307]
+    - [688, 304]
+    - [696, 312]
+  distance_meters: {nominal: 14141, min: 12727, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.82, detour_ratio: 1.29}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-018
+  from: RM-REG-GLN
+  to: RM-REG-KLB
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [855, 192]
+    - [866, 215]
+    - [865, 221]
+    - [893, 221]
+    - [928, 214]
+    - [937, 216]
+    - [941, 211]
+    - [976, 195]
+    - [996, 177]
+    - [996, 174]
+    - [1017, 163]
+    - [1040, 161]
+    - [1070, 151]
+    - [1074, 160]
+    - [1083, 160]
+    - [1082, 170]
+    - [1086, 174]
+    - [1095, 173]
+    - [1098, 180]
+    - [1106, 179]
+    - [1109, 168]
+  distance_meters: {nominal: 18344, min: 16510, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.82, detour_ratio: 1.37}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-019
+  from: RM-REG-GRF
+  to: RM-REG-THB
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [554, 835]
+    - [553, 825]
+    - [525, 838]
+    - [481, 837]
+    - [455, 822]
+    - [436, 816]
+    - [417, 800]
+    - [393, 791]
+    - [384, 778]
+    - [364, 780]
+    - [350, 787]
+    - [311, 795]
+    - [291, 805]
+    - [258, 813]
+    - [247, 818]
+    - [237, 828]
+    - [243, 840]
+    - [253, 849]
+    - [255, 839]
+    - [259, 837]
+    - [258, 832]
+  distance_meters: {nominal: 22674, min: 20406, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.95, detour_ratio: 1.47}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-020
+  from: RM-JCT-B-RDM
+  to: RM-JCT-B-MNF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [663, 538]
+    - [661, 531]
+    - [679, 517]
+    - [683, 500]
+    - [707, 481]
+    - [726, 459]
+    - [730, 447]
+    - [742, 432]
+    - [756, 423]
+    - [778, 400]
+    - [792, 397]
+    - [797, 405]
+  distance_meters: {nominal: 11804, min: 10623, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.84, detour_ratio: 1.19}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-021
+  from: RM-JCT-B-RDM
+  to: RM-JCT-B-SGR
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [663, 538]
+    - [661, 532]
+    - [653, 536]
+    - [661, 556]
+    - [653, 560]
+    - [648, 571]
+    - [678, 611]
+    - [692, 641]
+    - [692, 648]
+    - [689, 649]
+  distance_meters: {nominal: 8441, min: 7597, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.92, detour_ratio: 1.41}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-022
+  from: RM-REG-KRK
+  to: RM-REG-MFF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [134, 441]
+    - [132, 444]
+    - [137, 448]
+    - [137, 458]
+    - [145, 471]
+    - [175, 471]
+    - [186, 475]
+    - [192, 474]
+    - [200, 464]
+    - [209, 476]
+    - [218, 474]
+    - [236, 489]
+    - [245, 486]
+    - [267, 486]
+    - [265, 477]
+  distance_meters: {nominal: 10291, min: 9262, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.82, detour_ratio: 1.46}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-023
+  from: RM-REG-KRK
+  to: RM-FRM-B-W
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [134, 441]
+    - [132, 444]
+    - [137, 448]
+    - [137, 458]
+    - [145, 471]
+    - [175, 471]
+    - [180, 476]
+    - [177, 481]
+    - [180, 485]
+    - [164, 497]
+    - [178, 508]
+    - [175, 521]
+    - [183, 528]
+    - [183, 539]
+    - [192, 542]
+    - [195, 553]
+    - [173, 562]
+    - [165, 579]
+    - [133, 590]
+    - [120, 604]
+    - [108, 608]
+    - [97, 618]
+    - [72, 632]
+    - [62, 634]
+    - [58, 670]
+    - [56, 676]
+    - [47, 680]
+    - [45, 685]
+  distance_meters: {nominal: 22148, min: 19933, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.8, detour_ratio: 1.64}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-024
+  from: RM-REG-MFF
+  to: RM-JCT-B-CHP
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [265, 477]
+    - [268, 486]
+    - [300, 486]
+    - [303, 489]
+    - [303, 504]
+    - [314, 505]
+    - [325, 504]
+    - [342, 497]
+    - [369, 496]
+    - [379, 488]
+    - [384, 474]
+    - [389, 469]
+    - [411, 458]
+    - [435, 455]
+    - [454, 448]
+    - [458, 451]
+    - [454, 464]
+    - [464, 476]
+    - [505, 476]
+    - [512, 468]
+    - [512, 460]
+    - [517, 460]
+  distance_meters: {nominal: 18481, min: 16633, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.91, detour_ratio: 1.39}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-025
+  from: RM-JCT-B-MNF
+  to: RM-JCT-B-BBR
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [797, 405]
+    - [804, 419]
+    - [816, 418]
+    - [819, 415]
+    - [824, 418]
+    - [866, 416]
+    - [881, 429]
+    - [887, 440]
+    - [900, 441]
+    - [905, 448]
+    - [922, 447]
+    - [927, 452]
+    - [944, 457]
+    - [951, 464]
+    - [951, 478]
+    - [967, 491]
+    - [980, 510]
+    - [985, 511]
+  distance_meters: {nominal: 13870, min: 12483, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.9, detour_ratio: 1.23}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-026
+  from: RM-JCT-B-MNF
+  to: RM-JCT-B-ROW
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [797, 405]
+    - [804, 419]
+    - [816, 418]
+    - [819, 415]
+    - [824, 418]
+    - [866, 416]
+    - [897, 424]
+    - [900, 411]
+    - [908, 406]
+    - [923, 405]
+    - [928, 400]
+    - [930, 394]
+    - [923, 388]
+    - [922, 382]
+    - [934, 371]
+    - [964, 365]
+    - [985, 351]
+    - [992, 357]
+    - [998, 356]
+    - [1005, 363]
+    - [1011, 360]
+    - [1043, 360]
+    - [1046, 355]
+    - [1054, 352]
+  distance_meters: {nominal: 18363, min: 16527, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.89, detour_ratio: 1.34}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-027
+  from: RM-JCT-B-MNF
+  to: RM-JCT-B-SBO
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [797, 405]
+    - [792, 397]
+    - [778, 400]
+    - [778, 385]
+    - [762, 377]
+    - [766, 373]
+    - [761, 357]
+    - [744, 339]
+    - [747, 336]
+    - [747, 323]
+    - [744, 320]
+    - [722, 320]
+    - [696, 312]
+  distance_meters: {nominal: 9748, min: 8773, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.93, detour_ratio: 1.37}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-028
+  from: RM-REG-OML
+  to: RM-REG-GRF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [718, 796]
+    - [716, 800]
+    - [714, 797]
+    - [699, 797]
+    - [692, 793]
+    - [684, 793]
+    - [676, 787]
+    - [674, 792]
+    - [665, 794]
+    - [653, 803]
+    - [653, 821]
+    - [645, 829]
+    - [633, 833]
+    - [628, 833]
+    - [625, 828]
+    - [609, 833]
+    - [603, 829]
+    - [593, 840]
+    - [582, 844]
+    - [570, 841]
+    - [562, 845]
+    - [559, 843]
+    - [560, 835]
+    - [554, 835]
+  distance_meters: {nominal: 12349, min: 11114, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.74, detour_ratio: 1.42}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-029
+  from: RM-JCT-B-OQY
+  to: RM-JCT-B-CHP
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [576, 422]
+    - [574, 430]
+    - [551, 430]
+    - [547, 433]
+    - [542, 429]
+    - [535, 442]
+    - [517, 440]
+    - [517, 460]
+  distance_meters: {nominal: 5336, min: 4802, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.77, detour_ratio: 1.46}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-030
+  from: RM-JCT-B-OQY
+  to: RM-JCT-B-SGR
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [576, 422]
+    - [574, 430]
+    - [549, 432]
+    - [548, 447]
+    - [540, 449]
+    - [541, 465]
+    - [563, 482]
+    - [571, 481]
+    - [592, 499]
+    - [600, 513]
+    - [588, 522]
+    - [588, 530]
+    - [595, 536]
+    - [608, 539]
+    - [612, 546]
+    - [611, 559]
+    - [620, 570]
+    - [643, 570]
+    - [665, 592]
+    - [690, 636]
+    - [692, 648]
+    - [689, 649]
+  distance_meters: {nominal: 19730, min: 17757, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.92, detour_ratio: 1.49}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-031
+  from: RM-JCT-B-OQY
+  to: RM-JCT-B-SBO
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [576, 422]
+    - [585, 412]
+    - [583, 404]
+    - [575, 399]
+    - [576, 387]
+    - [590, 383]
+    - [609, 356]
+    - [618, 355]
+    - [638, 333]
+    - [647, 335]
+    - [652, 321]
+    - [667, 320]
+    - [670, 312]
+    - [680, 312]
+    - [685, 304]
+    - [696, 312]
+  distance_meters: {nominal: 11744, min: 10569, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.73, detour_ratio: 1.39}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-032
+  from: RM-REG-RVH
+  to: RM-REG-MSG
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [847, 855]
+    - [844, 862]
+    - [841, 850]
+    - [846, 829]
+    - [853, 825]
+    - [851, 815]
+    - [853, 802]
+    - [857, 798]
+    - [882, 804]
+    - [903, 805]
+    - [906, 808]
+    - [958, 808]
+    - [997, 847]
+    - [1010, 850]
+    - [1012, 838]
+    - [1016, 834]
+    - [1028, 834]
+    - [1033, 827]
+  distance_meters: {nominal: 16118, min: 14506, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.85, detour_ratio: 1.63}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-033
+  from: RM-JCT-B-SGR
+  to: RM-REG-GRF
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [689, 649]
+    - [692, 648]
+    - [692, 642]
+    - [668, 644]
+    - [661, 665]
+    - [666, 670]
+    - [673, 670]
+    - [673, 676]
+    - [619, 733]
+    - [610, 755]
+    - [601, 765]
+    - [603, 778]
+    - [608, 783]
+    - [613, 797]
+    - [606, 825]
+    - [593, 840]
+    - [582, 844]
+    - [570, 841]
+    - [562, 845]
+    - [559, 843]
+    - [560, 835]
+    - [554, 835]
+  distance_meters: {nominal: 18193, min: 16373, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.87, detour_ratio: 1.51}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-034
+  from: RM-JCT-B-SGR
+  to: RM-JCT-B-OPC
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [689, 649]
+    - [692, 648]
+    - [692, 642]
+    - [672, 640]
+    - [659, 611]
+    - [631, 612]
+    - [602, 607]
+    - [563, 607]
+    - [533, 592]
+    - [522, 582]
+    - [520, 567]
+    - [503, 552]
+    - [500, 543]
+    - [490, 535]
+    - [491, 525]
+    - [503, 525]
+  distance_meters: {nominal: 16090, min: 14481, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.97, detour_ratio: 1.35}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-035
+  from: RM-JCT-B-SGR
+  to: RM-REG-RVH
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [689, 649]
+    - [695, 650]
+    - [697, 670]
+    - [717, 670]
+    - [722, 677]
+    - [726, 698]
+    - [717, 724]
+    - [732, 742]
+    - [844, 794]
+    - [846, 812]
+    - [853, 823]
+    - [846, 829]
+    - [841, 850]
+    - [844, 862]
+    - [847, 855]
+  distance_meters: {nominal: 18575, min: 16718, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.88, detour_ratio: 1.37}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-036
+  from: RM-JCT-B-SBO
+  to: RM-REG-CRB
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [696, 312]
+    - [696, 292]
+    - [661, 279]
+    - [652, 269]
+    - [648, 255]
+    - [641, 248]
+    - [607, 240]
+    - [587, 252]
+    - [583, 251]
+    - [577, 255]
+    - [572, 252]
+    - [564, 254]
+    - [549, 244]
+    - [546, 236]
+    - [550, 233]
+  distance_meters: {nominal: 11758, min: 10582, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.89, detour_ratio: 1.38}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-037
+  from: RM-REG-STW
+  to: RM-REG-SBA
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [340, 695]
+    - [329, 690]
+    - [312, 690]
+    - [308, 686]
+    - [302, 687]
+    - [299, 683]
+    - [287, 684]
+    - [257, 678]
+    - [251, 668]
+    - [255, 660]
+    - [252, 657]
+    - [254, 618]
+  distance_meters: {nominal: 8511, min: 7660, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.77, detour_ratio: 1.42}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-038
+  from: RM-REG-WLF
+  to: RM-REG-CRH
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1016, 697]
+    - [1009, 696]
+    - [1009, 690]
+    - [1002, 685]
+    - [996, 691]
+    - [996, 699]
+    - [986, 698]
+    - [963, 675]
+    - [960, 664]
+    - [949, 649]
+    - [940, 642]
+    - [919, 635]
+    - [906, 627]
+    - [902, 633]
+    - [897, 634]
+    - [881, 630]
+    - [877, 644]
+    - [851, 644]
+  distance_meters: {nominal: 12787, min: 11508, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: PROBABLE
+  digitization: {road_fraction: 0.87, detour_ratio: 1.41}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-039
+  from: RM-REG-WLF
+  to: RM-REG-FSG
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1016, 697]
+    - [1021, 701]
+    - [1032, 699]
+    - [1039, 692]
+    - [1046, 691]
+    - [1051, 683]
+    - [1065, 677]
+    - [1070, 669]
+    - [1082, 666]
+    - [1081, 657]
+    - [1084, 650]
+    - [1079, 648]
+    - [1082, 630]
+    - [1087, 626]
+    - [1104, 628]
+    - [1109, 620]
+  distance_meters: {nominal: 8618, min: 7756, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.7, detour_ratio: 1.36}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+- id: EDG-R-040
+  from: RM-JCT-B-ROW
+  to: RM-FRM-B-NE
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1054, 352]
+    - [1046, 360]
+    - [1087, 360]
+    - [1090, 362]
+    - [1092, 373]
+    - [1109, 365]
+    - [1122, 352]
+    - [1124, 341]
+    - [1120, 334]
+    - [1125, 330]
+    - [1124, 325]
+    - [1134, 310]
+    - [1134, 300]
+    - [1128, 294]
+    - [1111, 288]
+    - [1109, 284]
+    - [1118, 272]
+    - [1131, 264]
+    - [1164, 264]
+    - [1189, 274]
+    - [1213, 279]
+    - [1220, 272]
+    - [1233, 268]
+    - [1237, 262]
+    - [1249, 262]
+    - [1270, 246]
+    - [1286, 244]
+    - [1291, 249]
+    - [1298, 249]
+    - [1301, 244]
+    - [1310, 246]
+    - [1316, 242]
+    - [1317, 233]
+    - [1346, 215]
+    - [1352, 215]
+    - [1358, 225]
+    - [1376, 221]
+  distance_meters: {nominal: 28466, min: 25619, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.8, detour_ratio: 1.57}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-03); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-E13
+- id: EDG-R-041
+  from: RM-REG-KLB
+  to: RM-FRM-B-NE
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1109, 168]
+    - [1110, 180]
+    - [1144, 178]
+    - [1150, 181]
+    - [1166, 177]
+    - [1202, 200]
+    - [1209, 210]
+    - [1232, 208]
+    - [1232, 215]
+    - [1272, 224]
+    - [1292, 233]
+    - [1298, 242]
+    - [1306, 246]
+    - [1316, 242]
+    - [1317, 233]
+    - [1346, 215]
+    - [1352, 215]
+    - [1358, 225]
+    - [1376, 221]
+  distance_meters: {nominal: 18270, min: 16443, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.65, detour_ratio: 1.31}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-10); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-KEL
+- id: EDG-R-042
+  from: RM-REG-MSG
+  to: RM-FRM-B-SE2
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1033, 827]
+    - [1028, 834]
+    - [1016, 834]
+    - [1012, 838]
+    - [1012, 851]
+    - [1028, 853]
+    - [1031, 860]
+    - [1005, 875]
+    - [1005, 880]
+    - [1004, 877]
+    - [997, 880]
+    - [996, 890]
+    - [1011, 906]
+    - [1030, 910]
+    - [1037, 917]
+    - [1044, 917]
+    - [1055, 926]
+    - [1040, 935]
+    - [1050, 927]
+    - [1059, 926]
+    - [1087, 934]
+    - [1114, 951]
+    - [1125, 952]
+    - [1125, 957]
+    - [1130, 955]
+  distance_meters: {nominal: 17491, min: 15742, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.76, detour_ratio: 1.54}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-08); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-SE2
+- id: EDG-R-043
+  from: RM-REG-MSG
+  to: RM-FRM-B-SE1
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [1033, 827]
+    - [1031, 821]
+    - [1035, 815]
+    - [1034, 806]
+    - [1046, 809]
+    - [1054, 807]
+    - [1084, 822]
+    - [1097, 821]
+    - [1099, 824]
+    - [1129, 827]
+    - [1161, 850]
+    - [1156, 859]
+    - [1146, 866]
+    - [1146, 872]
+  distance_meters: {nominal: 10694, min: 9625, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.85, detour_ratio: 1.7}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-07); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-R13
+- id: EDG-R-044
+  from: RM-REG-THB
+  to: RM-FRM-B-SW2
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [258, 832]
+    - [259, 837]
+    - [253, 845]
+    - [258, 853]
+    - [248, 872]
+    - [245, 872]
+  distance_meters: {nominal: 2737, min: 2464, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.55, detour_ratio: 1.28}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-06); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-SW2
+- id: EDG-R-045
+  from: RM-REG-THB
+  to: RM-FRM-B-SW1
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [258, 832]
+    - [259, 837]
+    - [255, 839]
+    - [254, 849]
+    - [234, 830]
+    - [216, 835]
+    - [206, 842]
+    - [179, 843]
+    - [178, 826]
+    - [173, 813]
+    - [166, 810]
+    - [165, 806]
+    - [160, 806]
+  distance_meters: {nominal: 8536, min: 7682, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.69, detour_ratio: 1.64}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-05); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-SW1
+- id: EDG-R-046
+  from: RM-REG-CRG
+  to: RM-FRM-B-W
+  edge_type: ROAD
+  road_class: UNCLASSIFIED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [171, 632]
+    - [151, 634]
+    - [149, 650]
+    - [143, 654]
+    - [134, 679]
+    - [125, 684]
+    - [88, 690]
+    - [82, 695]
+    - [70, 691]
+    - [57, 701]
+    - [51, 699]
+    - [45, 685]
+  distance_meters: {nominal: 9843, min: 8858, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  digitization: {road_fraction: 0.63, detour_ratio: 1.4}
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: via de saída (EXT-04); a moldura do Mapa B termina a via, o que há além é OFF_MAP
+  road: ROAD-B-W
+- id: EDG-R-047
+  from: RM-JCT-B-R3-STR-A
+  to: RM-JCT-B-R3-STR-B
+  edge_type: TRAIL
+  road_class: CONTESTED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [710, 301]
+    - [751, 301]
+    - [762, 307]
+    - [781, 311]
+    - [794, 324]
+    - [811, 324]
+    - [814, 337]
+    - [828, 334]
+    - [849, 351]
+    - [879, 356]
+    - [885, 361]
+    - [898, 361]
+    - [907, 354]
+    - [937, 341]
+    - [960, 340]
+    - [973, 334]
+    - [1017, 326]
+  distance_meters: {nominal: 19014, min: 17113, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  route_membership: [RTE-B-R3-STR]
+  legend_class: CONTESTED_ROUTE
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: traçado da linha vermelha RTE-B-R3-STR (rota do mapa); o desenho é o único fato, a continuação é UNKNOWN
+- id: EDG-R-048
+  from: RM-JCT-B-R3-GLN-A
+  to: RM-JCT-B-R3-GLN-B
+  edge_type: TRAIL
+  road_class: CONTESTED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [774, 221]
+    - [797, 221]
+    - [800, 218]
+    - [800, 207]
+    - [808, 201]
+    - [820, 184]
+    - [818, 174]
+    - [809, 162]
+    - [795, 154]
+  distance_meters: {nominal: 6165, min: 5549, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  route_membership: [RTE-B-R3-GLN]
+  legend_class: CONTESTED_ROUTE
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: traçado da linha vermelha RTE-B-R3-GLN (rota do mapa); o desenho é o único fato, a continuação é UNKNOWN
+  road: ROAD-B-R3N
+- id: EDG-R-049
+  from: RM-JCT-B-QM-A
+  to: RM-JCT-B-QM-B
+  edge_type: TRAIL
+  road_class: CONTESTED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [619, 440]
+    - [642, 424]
+    - [658, 419]
+    - [692, 426]
+    - [731, 428]
+  distance_meters: {nominal: 6622, min: 5960, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  route_membership: [RTE-B-QM]
+  legend_class: CONTESTED_ROUTE
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: traçado da linha vermelha RTE-B-QM (rota do mapa); o desenho é o único fato, a continuação é UNKNOWN
+- id: EDG-R-050
+  from: RM-JCT-B-CHP-A
+  to: RM-JCT-B-CHP-B
+  edge_type: TRAIL
+  road_class: CONTESTED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [536, 513]
+    - [560, 519]
+    - [588, 531]
+  distance_meters: {nominal: 3084, min: 2775, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  route_membership: [RTE-B-CHP]
+  legend_class: CONTESTED_ROUTE
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: traçado da linha vermelha RTE-B-CHP (rota do mapa); o desenho é o único fato, a continuação é UNKNOWN
+- id: EDG-R-051
+  from: RM-JCT-B-R17-A
+  to: RM-JCT-B-R17-B
+  edge_type: TRAIL
+  road_class: CONTESTED
+  directionality: BOTH
+  source_polyline_px:
+    source: SRC-MAP-B
+    points:
+    - [380, 785]
+    - [388, 773]
+    - [406, 756]
+    - [440, 737]
+    - [474, 730]
+    - [511, 729]
+    - [518, 732]
+    - [519, 739]
+    - [543, 739]
+    - [546, 730]
+    - [587, 725]
+    - [616, 726]
+  distance_meters: {nominal: 14990, min: 13491, basis: DIGITIZED_SCHEMATIC}
+  terrain: TRACK
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  route_membership: [RTE-B-R17]
+  legend_class: CONTESTED_ROUTE
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: traçado da linha vermelha RTE-B-R17 (rota do mapa); o desenho é o único fato, a continuação é UNKNOWN
+- id: EDG-L-001
+  from: RM-JCT-B-RDM
+  to: RM-CEN-SMC
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-002
+  from: RM-JCT-B-OQY
+  to: RM-URB-OQY
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-003
+  from: RM-JCT-B-FLE
+  to: RM-URB-FLE
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-004
+  from: RM-JCT-B-SBO
+  to: RM-URB-SBO
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-005
+  from: RM-JCT-B-MNF
+  to: RM-URB-MNF
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-006
+  from: RM-JCT-B-ROW
+  to: RM-URB-ROW
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-007
+  from: RM-JCT-B-BBR
+  to: RM-URB-BBR
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-008
+  from: RM-JCT-B-ERC
+  to: RM-URB-ERC
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-009
+  from: RM-JCT-B-PMP
+  to: RM-URB-PMP
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-010
+  from: RM-JCT-B-CHP
+  to: RM-CEN-CHP
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-011
+  from: RM-JCT-B-OPC
+  to: RM-URB-OPC
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-012
+  from: RM-JCT-B-SGR
+  to: RM-FRM-A-S
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: identidade entre escalas (o lugar é o mesmo); o núcleo do Mapa B é esquemático (SDD 7.4)
+- id: EDG-L-013
+  from: RM-REG-RDM
+  to: RM-JCT-B-RDM
+  edge_type: FRAME_LINK
+  directionality: BOTH
+  distance_meters: {nominal: 0, min: 0, basis: SCALE_TRANSITION}
+  visibility: OPEN
+  public_knowledge: PUBLIC
+  secret_level: NONE
+  canon_status: CANONICAL
+  confidence: UNCERTAIN
+  state_timeline:
+  - {from_chapter: 0, state: OPEN}
+  note: Redmur (verbete do registro) = núcleo do Mapa B

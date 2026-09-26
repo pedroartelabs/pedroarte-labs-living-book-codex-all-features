@@ -30,9 +30,9 @@ exits:
   exit_classes: [APPARENT_EXIT, CLOSED_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
-  frame_status: TO_DIGITIZE
+  frame_status: ENDS_BEFORE_FRAME
   confidence: PROBABLE
-  note: Barreira física no X; a alegação 'fechada' é do artefato.
+  note: No Mapa B a East Road termina na zona restrita (X); não há via desenhada além dela.
 - id: EXT-03
   road: ROAD-E13
   frame_portal: RM-FRM-B-NE
@@ -43,6 +43,7 @@ exits:
   exit_classes: [APPARENT_EXIT, DISPUTED_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
+  edges: [EDG-R-040]
 - id: EXT-04
   road: ROAD-B-W
   frame_portal: RM-FRM-B-W
@@ -53,6 +54,7 @@ exits:
   truth_ref: null
   first_allowed_reveal: OPEN
   note: Linha pontilhada entre 'trilha' e 'limite incerto' (ANM-B-14).
+  edges: [EDG-R-046]
 - id: EXT-05
   road: ROAD-B-SW1
   frame_portal: RM-FRM-B-SW1
@@ -62,6 +64,7 @@ exits:
   exit_classes: [APPARENT_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
+  edges: [EDG-R-045]
 - id: EXT-06
   road: ROAD-B-SW2
   frame_portal: RM-FRM-B-SW2
@@ -71,6 +74,7 @@ exits:
   exit_classes: [APPARENT_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
+  edges: [EDG-R-044]
 - id: EXT-07
   road: ROAD-B-R13
   frame_portal: RM-FRM-B-SE1
@@ -81,6 +85,7 @@ exits:
   truth_ref: null
   first_allowed_reveal: OPEN
   related_route: RTE-B-R13
+  edges: [EDG-R-043]
 - id: EXT-08
   road: ROAD-B-SE2
   frame_portal: RM-FRM-B-SE2
@@ -91,6 +96,7 @@ exits:
   truth_ref: null
   first_allowed_reveal: OPEN
   note: Segunda placa idêntica a EXT-07 (ANM-B-04).
+  edges: [EDG-R-042]
 - id: EXT-09
   road: ROAD-B-R3N
   frame_portal: null
@@ -100,16 +106,19 @@ exits:
   exit_classes: [UNKNOWN_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
-  frame_status: TO_DIGITIZE
+  frame_status: ENDS_BEFORE_FRAME
   related_route: RTE-B-R3-GLN
+  edges: [EDG-R-048]
+  note: A linha vermelha R3 sobe a cordilheira e termina desenhada antes da moldura; a continuação é UNKNOWN.
 - id: EXT-10
   road: ROAD-B-KEL
-  frame_portal: null
+  frame_portal: RM-FRM-B-NE
   physical: {drawn_to: FRAME, beyond_frame: OFF_MAP, passable_to_frame: UNKNOWN}
   claims:
   - {class: CLOSED_EXIT, text: Estrada bloqueada (símbolo da legenda), source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
   exit_classes: [APPARENT_EXIT, CLOSED_EXIT]
   truth_ref: null
   first_allowed_reveal: OPEN
-  frame_status: TO_DIGITIZE
   confidence: PROBABLE
+  edges: [EDG-R-041]
+  note: 'As linhas vermelhas desta via chegam à moldura NE junto da Estrada 13 (EXT-03): mesmo portal de moldura, duas vias desenhadas.'

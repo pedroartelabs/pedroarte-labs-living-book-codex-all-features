@@ -213,7 +213,7 @@ def main():
     mdata = yaml.safe_load(mtext)
     if "SURFACE" not in mdata["includes"]:
         mdata["includes"].insert(mdata["includes"].index("SUBTERRANEAN") + 1, "SURFACE")
-    mdata["metadata"]["edges_digitized"] = {"URBAN": True, "SUBTERRANEAN": True, "REGIONAL": False}
+    mdata["metadata"].setdefault("edges_digitized", {"REGIONAL": False}).update({"URBAN": True, "SUBTERRANEAN": True})
     mhead = "".join(line for line in mtext.splitlines(keepends=True) if line.startswith("#"))
     mp.write_text(mhead + yaml.safe_dump(mdata, allow_unicode=True, sort_keys=False, default_flow_style=None, width=140), encoding="utf-8")
     print(f"{len(edges)} arestas de superfície; {len(locations)} cruzamentos; rio com {len(traced['WAT-ASH']['points'])} pontos")

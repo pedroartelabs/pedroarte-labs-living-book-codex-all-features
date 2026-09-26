@@ -23,42 +23,42 @@ roads:
   names:
   - {name: Estrada 13 Em Disputa, kind: MAP_B_LABEL}
   road_class: MAIN
-  edges: []
+  edges: [EDG-R-040]
   claims:
   - {text: Em Disputa, source: SRC-MAP-B, epistemic_status: OFFICIAL_CLAIM}
 - id: ROAD-B-W
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-046]
   note: trilha a oeste rumo à placa Dunsgate
 - id: ROAD-B-SW1
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-045]
   note: estrada SO junto a Loch Calder
 - id: ROAD-B-SW2
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-044]
   note: estrada SO abaixo de Thistlebank
 - id: ROAD-B-R13
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-043]
   note: estrada E–SE (R13)
 - id: ROAD-B-SE2
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-042]
   note: trilha vermelha ao sul de Mossgate
 - id: ROAD-B-R3N
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-048]
   note: trilha R3 que sobe a cordilheira
 - id: ROAD-B-KEL
   names: []
   road_class: UNKNOWN
-  edges: []
+  edges: [EDG-R-041]
   note: via NE com trechos de 'estrada bloqueada' perto de Kellburne
 edges: []

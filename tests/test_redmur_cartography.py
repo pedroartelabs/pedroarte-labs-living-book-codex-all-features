@@ -42,10 +42,8 @@ class Validator(unittest.TestCase):
         blocking = [f for f in cc.validate(copy.deepcopy(MODEL)) if f["severity"] in cc.BLOCKING]
         self.assertEqual(blocking, [])
 
-    def test_only_expected_info_remains(self):
-        findings = cc.validate(copy.deepcopy(MODEL))
-        self.assertEqual([f["category"] for f in findings], ["CG-10 ORPHAN_NODE"])
-        self.assertEqual(findings[0]["severity"], "INFO")   # arestas de superfície: Slice 2
+    def test_validator_is_clean_once_both_maps_are_digitized(self):
+        self.assertEqual(cc.validate(copy.deepcopy(MODEL)), [])   # Slice 2 (Mapa A) + Slice 6 (Mapa B)
 
 
 class Sources(unittest.TestCase):

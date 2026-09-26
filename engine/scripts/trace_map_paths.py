@@ -24,15 +24,37 @@ import sys
 from pathlib import Path
 
 import yaml
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
+
+
+def _local_contrast(rgb: Image.Image, radius: int = 5):
+    """Luminância menos a média local: realça linhas finas claras sobre fundo escuro (mapas de baixa exposição)."""
+    lum = rgb.convert("L")
+    blur = lum.filter(ImageFilter.GaussianBlur(radius))
+    return lum.load(), blur.load()
 
 
 def cost_grid(img: Image.Image, mode: str = "road"):
-    """Custo por pixel. mode=road: pixels claros (vias). mode=red: vermelho (rotas). mode=water: azulado (cursos d'água)."""
+    """Custo por pixel. mode=road: pixels claros (vias). mode=thin: linhas finas claras por contraste local
+    (vias de mapa escuro). mode=red: vermelho (rotas). mode=water: azulado (cursos d'água)."""
     w, h = img.size
     rgb = img.convert("RGB")
     px = rgb.load()
     cost = [[1.0] * w for _ in range(h)]
+    if mode == "thin":
+        lp, bp = _local_contrast(rgb)
+        for y in range(h):
+            row = cost[y]
+            for x in range(w):
+                r, g, b = px[x, y]
+                if r - max(g, b) > 60:               # vermelho de rota não é via desenhada
+                    row[x] = 40.0
+                    continue
+                contrast = max(0.0, (lp[x, y] - bp[x, y]) / 38.0)
+                absolute = max(0.0, (lp[x, y] - 70.0) / 110.0)
+                score = min(1.0, 0.65 * min(1.0, contrast) + 0.35 * min(1.0, absolute))
+                row[x] = 1.0 + 40.0 * (1.0 - score) ** 2
+        return cost
     for y in range(h):
         row = cost[y]
         for x in range(w):
@@ -85,6 +107,43 @@ def astar(cost, start, goal, margin=60):
     return None
 
 
+def block(cost, rects, value=80.0):
+    """Regiões que não são terreno (painéis, título, legenda, moldura ornamental): custo altíssimo para o rastreador."""
+    for x0, y0, x1, y1 in rects or []:
+        for y in range(max(0, y0), min(len(cost), y1 + 1)):
+            row = cost[y]
+            for x in range(max(0, x0), min(len(row), x1 + 1)):
+                row[x] = value
+    return cost
+
+
+def road_fraction(cost, points, limit=8.0):
+    """Fração dos pixels da polilinha com custo baixo (sobre via desenhada). Medida de confiança, não de verdade."""
+    tot = on = 0
+    for (x0, y0), (x1, y1) in zip(points, points[1:]):
+        n = int(math.hypot(x1 - x0, y1 - y0)) + 1
+        for i in range(n):
+            tot += 1
+            on += cost[int(y0 + (y1 - y0) * i / n)][int(x0 + (x1 - x0) * i / n)] < limit
+    return on / max(1, tot)
+
+
+def snap(cost, pt, radius):
+    """Move o ponto-chave para o pixel de menor custo num raio (ícones ficam ao lado da via, não sobre ela)."""
+    if not radius:
+        return tuple(pt)
+    x0, y0 = int(pt[0]), int(pt[1])
+    best, arg = None, (x0, y0)
+    for y in range(max(0, y0 - radius), min(len(cost), y0 + radius + 1)):
+        for x in range(max(0, x0 - radius), min(len(cost[0]), x0 + radius + 1)):
+            if math.hypot(x - x0, y - y0) > radius:
+                continue
+            c = cost[y][x] + 0.15 * math.hypot(x - x0, y - y0)
+            if best is None or c < best:
+                best, arg = c, (x, y)
+    return arg
+
+
 def simplify(points, tol):
     """Douglas-Peucker."""
     if len(points) < 3:
@@ -106,16 +165,19 @@ def simplify(points, tol):
     return [points[0], points[-1]]
 
 
-def trace(img_path: Path, specs, default_tol=2.0):
+def trace(img_path: Path, specs, default_tol=2.0, blocks=None):
     img = Image.open(img_path)
     grids = {}
     out = []
     for spec in specs:
         mode = spec.get("mode", "road")
         if mode not in grids:
-            grids[mode] = cost_grid(img, mode)
+            grids[mode] = block(cost_grid(img, mode), blocks) if blocks else cost_grid(img, mode)
         cost = grids[mode]
         via = [tuple(p) for p in spec["via"]]
+        rad = spec.get("snap", 0)
+        if rad:   # encaixa só as pontas nas vias; pontos intermediários são do operador
+            via[0], via[-1] = snap(cost, via[0], rad), snap(cost, via[-1], rad)
         full = []
         failed = False
         for a, b in zip(via, via[1:]):
@@ -131,7 +193,8 @@ def trace(img_path: Path, specs, default_tol=2.0):
         length = sum(math.hypot(q[0] - p[0], q[1] - p[1]) for p, q in zip(full, full[1:]))
         straight = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(via, via[1:]))
         out.append({"id": spec["id"], "points": [list(p) for p in pts], "length_px": round(length, 1),
-                    "detour_ratio": round(length / straight, 2) if straight else 1.0})
+                    "detour_ratio": round(length / straight, 2) if straight else 1.0,
+                    "road_fraction": round(road_fraction(cost, full), 2)})   # sobre o caminho completo, não sobre as cordas simplificadas
     return out
 
 

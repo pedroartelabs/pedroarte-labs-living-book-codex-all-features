@@ -1,6 +1,6 @@
 """Renderiza a imagem de conferência humana: o Mapa A com as vias digitalizadas por cima.
 
-    python books/sem-rosto/cartography/digitization/render_overlay.py [--scale 2] [--out overlay_A.png]
+    python books/sem-rosto/cartography/digitization/render_overlay.py [--map A|B] [--scale 2] [--out overlay_A.png]
 
 Verde = PROBABLE · laranja = UNCERTAIN · vermelho = linha de rota desenhada · azul = Ash Burn ·
 amarelo = cruzamentos · ciano = lugares. A conferência humana aceita, corrige ou rebaixa cada via.
@@ -23,21 +23,25 @@ PKG = ROOT / "books" / "sem-rosto" / "cartography"
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scale", type=float, default=2.0)
-    ap.add_argument("--out", type=Path, default=PKG / "digitization" / "overlay_A.png")
+    ap.add_argument("--map", choices=["A", "B"], default="A")
+    ap.add_argument("--out", type=Path)
     args = ap.parse_args()
+    src = f"SRC-MAP-{args.map}"
+    image = "MAP_A_redmur_map.png" if args.map == "A" else "MAP_B_redmur_arredores_map.png"
+    args.out = args.out or PKG / "digitization" / f"overlay_{args.map}.png"
     model = cc.load_model(PKG / "seeds")
-    img = Image.open(PKG / "sources" / "MAP_A_redmur_map.png").convert("RGB")
+    img = Image.open(PKG / "sources" / image).convert("RGB")
     sc = args.scale
     img = img.resize((int(img.width * sc), int(img.height * sc)), Image.LANCZOS)
     d = ImageDraw.Draw(img)
     col = {"PROBABLE": (60, 255, 90), "UNCERTAIN": (255, 160, 30)}
     for l in model["locations"]:
         if l.get("id") == "WAT-ASH":
-            pts = [(p["px"][0] * sc, p["px"][1] * sc) for p in l["polyline_px"] if p.get("source") == "SRC-MAP-A"]
+            pts = [(p["px"][0] * sc, p["px"][1] * sc) for p in l["polyline_px"] if p.get("source") == src]
             d.line(pts, fill=(70, 170, 255), width=3)
     for e in model["edges"]:
         poly = (e.get("source_polyline_px") or {}).get("points")
-        if not poly or e["source_polyline_px"].get("source") != "SRC-MAP-A":
+        if not poly or e["source_polyline_px"].get("source") != src:
             continue
         pts = [(x * sc, y * sc) for x, y in poly]
         c = (255, 40, 40) if e.get("route_membership") else col.get(e.get("confidence"), (255, 255, 255))
@@ -46,7 +50,7 @@ def main():
         d.text((mx + 3, my - 11), e["id"].replace("EDG-U-", "U"), fill=(255, 255, 255))
     for l in model["locations"]:
         for e in cc.as_list(l.get("source_px")):
-            if e.get("source") == "SRC-MAP-A" and e.get("anchor") != "SCHEMATIC" and l.get("layer") == "URBAN":
+            if e.get("source") == src and e.get("anchor") != "SCHEMATIC" and (l.get("layer") == "URBAN" if args.map == "A" else True):
                 x, y = e["px"][0] * sc, e["px"][1] * sc
                 jct = "JUNCTION" in cc.as_list(l.get("type"))
                 r = 4
